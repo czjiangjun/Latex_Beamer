@@ -1,0 +1,738 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+ <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+ 
+ 
+  <title> NAMD - Scalable Molecular Dynamics </title> 
+ 
+
+ <meta name="description" content="NAMD is a parallel molecular dynamics
+  code for large biomolecular systems.  NAMD is free with source code.">
+
+<style type="text/css">
+<!--
+@import url("/include/home.css");
+@import url("/include/level2b.css");
+@import url("/include/tcb.css");
+@import url("/include/dropdownstyles.css");
+-->
+</style>
+
+<script async="" src="NAMD%20-%20Scalable%20Molecular%20Dynamics_files/analytics.js"></script><script type="text/javascript" src="NAMD%20-%20Scalable%20Molecular%20Dynamics_files/jquery-latest.js"></script>
+<script type="text/javascript" src="NAMD%20-%20Scalable%20Molecular%20Dynamics_files/scrollingbackground.js"></script>
+<script type="text/javascript" src="NAMD%20-%20Scalable%20Molecular%20Dynamics_files/jScrollPane.js"></script>
+
+<script type="text/javascript">
+ var blank = new Image();
+ blank.src = '/include/images/template_images_2010/blank.gif';
+ 
+ $(document).ready(function() {
+   var badBrowser = (/MSIE ((5\.5)|6)/.test(navigator.userAgent) && navigator.platform == "Win32");
+   if (badBrowser) {
+     // get all pngs on page
+     $('img[src$=.png]').each(function() {
+       if (!this.complete) {
+         this.onload = function() { fixPng(this) };
+       } else {
+         fixPng(this);
+       }
+     });
+   }
+ });
+ 
+ function fixPng(png) {
+   // get src
+   var src = png.src;
+   // set width and height
+   if (!png.style.width) { png.style.width = $(png).width(); }
+   if (!png.style.height) { png.style.height = $(png).height(); }
+   // replace by blank image
+   png.onload = function() { };
+   png.src = blank.src;
+   // set filter (display original image)
+   png.runtimeStyle.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='" + src + "',sizingMethod='scale')";
+ }
+ 
+ 
+	jQuery(function()
+	{ 
+	jQuery('#scrollpane').jScrollPane({showArrows:true, dragMinHeight:7,dragMaxHeight:7,scrollbarWidth:17});
+	});
+
+
+
+ </script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-40575643-1', 'uiuc.edu');  
+  ga('send', 'pageview');
+</script>
+
+</head>
+<body>
+
+<div id="container">
+  <div id="header" style="background-position: 50% 491.2px;">
+  
+  
+  
+  
+  
+  
+
+  
+  <div id="nihuiuc">
+  
+   <nobr>
+  <table width="100%" cellspacing="0" cellpadding="0">
+  <tbody><tr valign="middle"><td>
+  <a href="http://www.nigms.nih.gov/About/Overview/BBCB/BiomedicalTechnology/BiomedicalTechnologyResearchCenters.htm" class="nih">NIH Center for Macromolecular Modeling &amp; Bioinformatics</a>
+  <a href="http://illinois.edu/" class="uiuc">University of Illinois at Urbana-Champaign</a>
+  </td>
+  
+  <td>
+<!-- Search Google -->
+<div id="searchform">
+  <form method="GET" action="http://www.google.com/search">
+      
+     <input name="sitesearch" value="www.ks.uiuc.edu" type="hidden">
+      
+
+     <input class="btninput" name="q" maxlength="255" value="Type Keywords" onfocus="this.value=''" type="text">
+     <input class="btnG" name="btnG" value="" type="submit">
+  </form>
+</div>
+<!-- End Google Search -->
+
+  </td>
+  
+  </tr>
+  </tbody></table>
+    </nobr>
+
+  </div>
+  
+
+  
+    <div id="logo">
+   <a title="Theoretical Biophysics Group" class="clear" href="http://www.ks.uiuc.edu/"><img style="margin-top: 18px; margin-left: 20px;" src="NAMD%20-%20Scalable%20Molecular%20Dynamics_files/logo.png" alt="Theoretical and Computational Biophysics Group" border="0"></a>
+    </div>
+  </div>
+
+
+
+    
+
+
+
+
+
+
+
+<ul class="pureCssMenu pureCssMenum">
+<!-- Home -->
+  <li><a href="http://www.ks.uiuc.edu/" class="menulink">Home</a></li>
+
+<!-- Research ########################################################## -->
+  <li><a href="http://www.ks.uiuc.edu/Research/Categories/" class="menulink">Research<!--[if gt IE 6]--></a><!--[endif]--><!--[if lte IE 6]><table><tr><td><![endif]-->
+    <ul>
+      <li><a href="http://www.ks.uiuc.edu/Research/dbps/">Driving Projects</a></li>
+      <li><a href="http://www.ks.uiuc.edu/Research/Collaborations/">Collaborations</a></li>
+      <li><a href="http://www.ks.uiuc.edu/Highlights/">Highlights</a></li>
+      <li><a href="http://www.ks.uiuc.edu/Research/Categories/viruses/">Viruses</a></li>
+      <li><a href="http://www.ks.uiuc.edu/Research/Categories/symbiontBacteria/">Symbiont Bacteria</a></li>
+      <li><a href="http://www.ks.uiuc.edu/Research/Categories/molecularMotors/">Molecular Motors</a></li>
+      <li><a href="http://www.ks.uiuc.edu/Research/Categories/neuronsSynapses/">Neurons and Synapses</a></li>
+      <li><a href="http://www.ks.uiuc.edu/Research/Categories/bioenergeticMembranes/">Bioenergetic Membranes</a></li>
+      <li><a href="http://www.ks.uiuc.edu/Research/Categories/nanosensors/">Nanosensors</a></li>
+      <li><a href="http://www.ks.uiuc.edu/Research/Categories/ribosome/">Ribosome</a></li>
+      <li><a href="http://www.ks.uiuc.edu/Research/Categories/mechanosensing/">Mechanosensing</a></li>
+      <li><a href="http://www.ks.uiuc.edu/Research/Categories/proteinFolding/">Protein Folding</a></li>
+      <li><a href="http://www.ks.uiuc.edu/Research/mdff/">Integrative Modeling</a></li>
+      <li><a href="http://www.ks.uiuc.edu/Research/Categories/more/">More Topics</a></li>
+    </ul><!--[if lte IE 6]></td></tr></table></a><![endif]-->
+  </li>
+<!-- Publications ###################################################### -->
+  <li><a href="http://www.ks.uiuc.edu/Publications/" class="menulink">Publications<!--[if gt IE 6]--></a><!--[endif]--><!--[if lte IE 6]><table><tr><td><![endif]-->
+    <ul>
+      <li><a href="http://www.ks.uiuc.edu/Publications/Papers/">Papers</a></li>
+      <li><a href="http://www.ks.uiuc.edu/Publications/HighlyCited/">Highly&nbsp;Cited</a></li>
+      <li><a href="http://www.ks.uiuc.edu/Publications/Papers/representative/">Representative</a></li>
+      <li><a href="http://www.ks.uiuc.edu/Publications/Covers/">Covers</a></li>
+    </ul><!--[if lte IE 6]></td></tr></table></a><![endif]-->
+  </li>
+  <!-- Software ########################################################### -->
+  <li><a href="http://www.ks.uiuc.edu/Development/" class="menulink">Software<!--[if gt IE 6]--></a><!--[endif]--><!--[if lte IE 6]><table><tr><td><![endif]-->
+    <ul>
+      <li><a href="http://www.ks.uiuc.edu/Research/namd/">NAMD<!--[if gt IE 6]--></a><!--[endif]--><!--[if lte IE 6]><table><tr><td><![endif]-->
+        <ul>
+          <li><a href="http://www.ks.uiuc.edu/Development/Download/download.cgi?PackageName=NAMD">Download</a></li>
+          <li><a href="http://www.ks.uiuc.edu/Research/namd/current/ug/">User's&nbsp;Guide</a></li>
+          <li><a href="http://www.ks.uiuc.edu/Research/namd/mailing_list/">Mailing&nbsp;List</a></li>
+        </ul><!--[if lte IE 6]></td></tr></table></a><![endif]-->
+      </li>
+      <li><a href="http://www.ks.uiuc.edu/Research/vmd/">VMD<!--[if gt IE 6]--></a><!--[endif]--><!--[if lte IE 6]><table><tr><td><![endif]-->
+        <ul>
+          <li><a href="http://www.ks.uiuc.edu/Development/Download/download.cgi?PackageName=VMD">Download</a></li>
+          <li><a href="http://www.ks.uiuc.edu/Research/vmd/plugins/">Plugins</a></li>
+          <li><a href="http://www.ks.uiuc.edu/Research/vmd/current/ug/">User's&nbsp;Guide</a></li>
+          <li><a href="http://www.ks.uiuc.edu/Research/vmd/mailing_list/vmd-l/">Mailing&nbsp;List</a></li>
+        </ul><!--[if lte IE 6]></td></tr></table></a><![endif]-->
+      </li>
+      <li><a href="http://www.ks.uiuc.edu/Research/gpu/">GPU&nbsp;Computing</a></li>
+      <li><a href="http://www.scs.illinois.edu/schulten/lm/">Lattice&nbsp;Microbes</a></li>
+      <li><a href="http://bionano.physics.illinois.edu/arbd">Atomic&nbsp;Resolution<br>Brownian&nbsp;Dynamics<br></a></li>
+<!--      <li><a href="/Research/biocore/">BioCoRE</a></li> -->
+      <li><a href="http://www.ks.uiuc.edu/Research/mdff/">MDFF</a></li>
+      <li><a href="http://www.ks.uiuc.edu/Research/qwikmd/">QwikMD</a></li>
+      <li><a href="http://www.ks.uiuc.edu/Development/OtherSoft/">Other</a></li>
+    </ul><!--[if lte IE 6]></td></tr></table></a><![endif]-->
+  </li>
+<!-- Instruction ##################################################### -->
+  <li><a href="http://www.ks.uiuc.edu/Outreach/" class="menulink">Instruction<!--[if gt IE 6]--></a><!--[endif]--><!--[if lte IE 6]><table><tr><td><![endif]-->
+    <ul>
+      <li><a href="http://www.ks.uiuc.edu/Training/">Training</a></li>  
+      <li><a href="http://www.ks.uiuc.edu/Training/Workshop/">Workshops</a></li>
+      <li><a href="http://www.ks.uiuc.edu/Training/Tutorials/">Tutorials</a></li>
+      <li><a href="http://www.ks.uiuc.edu/Training/CaseStudies/">Case&nbsp;Studies</a></li>
+      <li><a href="http://www.ks.uiuc.edu/Training/multimedia/">Multimedia&nbsp;Lectures</a></li>
+      <li><a href="http://www.ks.uiuc.edu/Gallery/Brochure/">Brochures</a></li>   
+      <li><a href="http://www.ks.uiuc.edu/Services/Class/">Classes</a></li>
+    </ul><!--[if lte IE 6]></td></tr></table></a><![endif]-->
+  </li>
+<!-- News ############################################################# -->  
+  <li><a href="http://www.ks.uiuc.edu/Publications/stories.cgi" class="menulink">News</a></li>
+<!-- Media ############################################################# -->
+  <li><a href="http://www.ks.uiuc.edu/Gallery/" class="menulink">Galleries<!--[if gt IE 6]--></a><!--[endif]--><!--[if lte IE 6]><table><tr><td><![endif]-->
+    <ul>
+      <li><a href="http://www.ks.uiuc.edu/Gallery/Science-New/">Images</a></li>
+      <li><a href="http://www.ks.uiuc.edu/Gallery/Movies/">Movies</a></li>
+      <li><a href="http://www.ks.uiuc.edu/Gallery/Posters/">Posters</a></li>
+      <li><a href="http://www.ks.uiuc.edu/Gallery/Brochure/">Brochures</a></li>
+      <li><a href="http://www.ks.uiuc.edu/Gallery/Photos/">Photos</a></li>
+    </ul><!--[if lte IE 6]></td></tr></table></a><![endif]-->
+  </li>
+<!-- Facilities ###################################################### -->
+  <li><a href="http://www.ks.uiuc.edu/Development/Computers/spotlight.cgi" class="menulink">Facilities<!--[if gt IE 6]--></a><!--[endif]--><!--[if lte IE 6]><table><tr><td><![endif]-->
+    <ul>
+      <li><a href="http://www.ks.uiuc.edu/Development/Computers/">Computational</a></li>
+      <li><a href="http://www.ks.uiuc.edu/Outreach/VisitorFacilities/">Visitor</a></li>
+    </ul><!--[if lte IE 6]></td></tr></table></a><![endif]-->
+  </li>
+<!-- About Us ####################################################### -->
+  <li><a href="http://www.ks.uiuc.edu/" class="menulink">About&nbsp;Us<!--[if gt IE 6]--></a><!--[endif]--><!--[if lte IE 6]><table><tr><td><![endif]-->
+    <ul>
+      <li><a href="http://www.ks.uiuc.edu/Overview/People/">Center&nbsp;Members</a></li>
+      <li><a href="http://www.ks.uiuc.edu/Overview/">Mission</a></li>
+      <li><a href="http://www.ks.uiuc.edu/Gallery/Brochure/">Brochures</a></li>
+      <li><a href="http://www.ks.uiuc.edu/Overview/reach.html">Contact&nbsp;Us</a></li>
+      <li><a href="http://www.ks.uiuc.edu/Overview/acknowledge.html">Acknowledge&nbsp;Us</a></li>
+    </ul><!--[if lte IE 6]></td></tr></table></a><![endif]-->
+  </li>
+  <div class="clear"></div>
+</ul>
+<!-- End Drop Down Menu ************************************************* -->
+
+
+  <div class="clear"></div>
+
+
+
+
+  <div id="main">
+ 
+     <div id="sidenav">
+
+  
+    <ul>
+  <li> <h2><a href="http://www.ks.uiuc.edu/">Home</a></h2></li>
+  <li> <h2><a href="http://www.ks.uiuc.edu/Overview/">Overview</a></h2></li>
+  <li> <h2><a href="http://www.ks.uiuc.edu/Publications/">Publications</a></h2></li>
+  <li> <h2><a href="http://www.ks.uiuc.edu/Research/Categories/">Research</a></h2></li>
+<!--
+  <li> <h3><a href="/Research/Categories/Ongoing/">Ongoing Projects</a></h3></li>
+  <li> <h3><a href="/Research/Categories/All/" 
+       		   >All Research Projects</a></h3></li>
+-->
+  <li id="active"> <h2><a href="http://www.ks.uiuc.edu/Development/">Software</a></h2></li>
+
+  <li> <h3><a href="http://www.ks.uiuc.edu/Research/namd/">NAMD</a></h3></li>
+  <li> <h3><a href="http://www.ks.uiuc.edu/Research/vmd/">VMD</a></h3></li>
+  <li> <h3><a href="http://www.ks.uiuc.edu/Research/gpu/">GPU Computing</a></h3></li>
+  <li> <h3><a href="http://www.scs.illinois.edu/schulten/lm/">Lattice Microbes</a></h3></li>
+  <li> <h3><a href="http://bionano.physics.illinois.edu/arbd">Atomic Resolution Brownian Dynamics</a></h3></li>
+  <!-- <li> <h3><a href="/Research/biocore/"
+			   >BioCoRE</a></h3></li> -->
+  <li> <h3><a href="http://www.ks.uiuc.edu/Research/mdff/">MDFF</a></h3></li>
+  <li> <h3><a href="http://www.ks.uiuc.edu/Research/qwikmd/">QwikMD</a></h3></li>
+  <li> <h3><a href="http://www.ks.uiuc.edu/Development/OtherSoft/">Other</a></h3></li>
+
+  <li> <h2><a href="http://www.ks.uiuc.edu/Outreach/">Outreach</a></h2></li>
+</ul>
+
+  
+
+  <div id="sidetext">
+   
+   
+    <p> &nbsp; </p> 
+    <p> </p><div align="center">
+  <br><br><br><a href="http://www.ks.uiuc.edu/Development/Download/download.cgi?PackageName=NAMD">Download NAMD</a>
+  <br><br><br><a href="http://www.ks.uiuc.edu/Development/Download/download.cgi?PackageName=VMD">Download VMD</a>
+  <br><br><br><a href="http://charm.cs.illinois.edu/">Parallel Programming Laboratory</a>
+</div> <p></p>
+    <p> &nbsp; </p> 
+   
+  </div>
+
+  <div id="sidenav">
+   
+     <!-- No search bar if we have a sidebar! -->
+   
+  </div>
+
+ </div>
+
+    <div id="text">
+      <h2 class="navinfo"><img src="NAMD%20-%20Scalable%20Molecular%20Dynamics_files/namd_logo_left.gif" alt="NAMD - Scalable Molecular Dynamics" width="315" height="48" border="0"></h2>
+    
+
+
+      <!-- End Headers -->
+
+
+
+<div>
+
+<p>
+NAMD, recipient of a <a href="http://www.supercomp.org/sc2002/news_nrp_conclude.html">2002 Gordon Bell Award</a> and a
+<a href="http://engineering.illinois.edu/news/2012/10/09/two-engineering-illinois-professors-receive-2012-ieee-computer-society-sidney-fernba">2012 Sidney Fernbach Award</a>, is a
+parallel molecular dynamics code designed for
+high-performance simulation of large biomolecular systems.  Based on
+<a href="http://charm.cs.illinois.edu/">Charm++ parallel objects</a>, NAMD
+<a href="http://www.ks.uiuc.edu/Research/namd/performance.html">scales</a>
+to hundreds of cores for typical simulations and
+<a href="http://charm.cs.illinois.edu/papers/14-17">beyond 500,000 cores</a>
+for the largest simulations.
+NAMD uses the popular molecular graphics program <a href="http://www.ks.uiuc.edu/Research/vmd/">VMD</a>
+for simulation setup and trajectory analysis, but is also file-compatible
+with AMBER, CHARMM, and X-PLOR.
+NAMD is distributed <a href="http://www.ks.uiuc.edu/Research/namd/license.html">free of charge</a> with source code.
+You can <a href="http://www.ks.uiuc.edu/Research/namd/development.html">build</a> NAMD yourself or download
+<a href="http://www.ks.uiuc.edu/Development/Download/download.cgi?PackageName=NAMD">binaries</a>
+for a wide variety of platforms.
+Our <a href="http://www.ks.uiuc.edu/Training/Tutorials/">tutorials</a> show
+you how to use NAMD and <a href="http://www.ks.uiuc.edu/Research/vmd/">VMD</a> for biomolecular modeling.
+</p>
+
+<p>
+The 2005 reference paper
+<a href="http://onlinelibrary.wiley.com/doi/10.1002/jcc.20289/abstract">
+Scalable molecular dynamics with NAMD</a> has over <a href="http://www.ks.uiuc.edu/Research/namd/6000cites.html">6,000 citations</a> as of October 2016.
+       <img src="NAMD%20-%20Scalable%20Molecular%20Dynamics_files/new.gif" align="top">
+</p>
+
+<p>
+<a href="http://news.illinois.edu/news/13/0529HIVcapsid_KlausSchulten.html">Wit, grit and a supercomputer yield chemical structure of HIV capsid</a>
+(article referring to NAMD simulations on <a href="http://www.ncsa.illinois.edu/BlueWaters/">Blue Waters</a> reported in <a href="http://www.nature.com/nature/journal/v497/n7451/full/nature12162.html">Zhao <em>et al.</em>, <em>Nature</em>, 497:643-646, 2013</a>.)
+</p>
+
+<p>
+  <a href="http://onlinelibrary.wiley.com/doi/10.1002/jcc.23422/abstract">Rapid parameterization of small molecules using the force field toolkit</a>, JCC, 2013.
+</p>
+
+<p>
+  <a href="http://www.ncsa.illinois.edu/news/story/ncsa_receives_honors_in_2013_hpcwire_readers_and_editors_choice_awards">HPCwire Editors' Choice Award: Best use of HPC in life sciences</a>
+</p>
+
+<p>
+        <a href="https://itunes.apple.com/us/app/molecules-by-theodore-gray/id923383841">NAMD Powers <em>Molecules by Theodore Gray</em> App for iPhone and iPad</a>
+</p>
+
+<p>
+<a href="http://pubs.acs.org/doi/full/10.1021/ct5009075">Multilevel Summation Method for Electrostatic Force Evaluation</a>, JCTC, 2014.
+</p>
+
+<p>
+<a href="http://www.nature.com/articles/srep26536"> QwikMD - integrative molecular dynamics toolkit for novices and experts</a>, <em>Scientific Reports</em>, 2016.
+       <img src="NAMD%20-%20Scalable%20Molecular%20Dynamics_files/new.gif" align="top">
+</p>
+
+<!--
+<p>
+Want to make NAMD and VMD better?  <strong>Join our <a href="/Overview/People/">team</a>!</strong>  We are hiring a 
+<a href="https://jobs.illinois.edu/academic-job-board/job-details?jobID=54685">computer systems engineer</a>.  <font color="darkgreen">Apply by November 30.</font>
+       <img align=top src="/images/new.gif">
+</p>
+-->
+
+<!--
+<p>
+       <img align=top src="/images/new.gif">
+<a href="http://linkinghub.elsevier.com/retrieve/pii/S104784770600308X">
+High performance computing in biology: Multimillion atom simulations of nanoscale systems.</a>
+K.Y.&nbsp;Sanbonmatsu and C.-S.&nbsp;Tung.
+<em>Journal of Structural Biology</em>, 157:470-480, 2007.
+</p>
+
+<p>
+<img align=top src="/images/new.gif">
+<a href="http://www.sdsc.edu/News%20Items/PR032207_febs.html">
+Supercomputer Simulations May Pinpoint Causes of Parkinson's,
+Alzheimer's Diseases</a>
+(SDSC article referring to NAMD simulations on Blue Gene/L reported in <a href="http://content.febsjournal.org/cgi/content/full/274/7/1862">Tsigelny <em>et al.</em>,
+<em>FEBS Journal</em>, 274:1862-1877, 2007</a>.)
+</p>
+-->
+
+<form method="GET" action="http://www.google.com/search">
+<p>
+       <strong>Search all NAMD resources:</strong>
+ <input name="sitesearch" value="www.ks.uiuc.edu" type="hidden">
+ <input name="hq" value="site:www.ks.uiuc.edu/Research/namd OR site:www.ks.uiuc.edu/Training/Tutorials/" type="hidden">
+ <input name="q" size="40" maxlength="255" value="Search NAMD web site and tutorials" onfocus="this.value=''" type="text">
+  <input name="btnG" value="Google" type="submit">
+</p>
+</form>
+
+
+</div>
+<!-- <div> -->
+
+<div style="float: right"><a href="http://www.ks.uiuc.edu/Research/namd/spotlight/">Other Spotlights</a>&nbsp;</div>
+<h3 class="headarea">Spotlight: Photosynthetic Membrane (June 2014)</h3>
+<div style="float: right">
+
+<a class="clear" href="http://www.ks.uiuc.edu/images/ofmonth/2014-06a/CHAN2014-square.png">
+<img src="NAMD%20-%20Scalable%20Molecular%20Dynamics_files/CHAN2014-square-thumb.png" alt="chromatophore membrane" width="240" border="0"></a>
+
+<p>image size: 
+ 1.8MB
+
+<!--<br/>see also <a href="http://www.ks.uiuc.edu/images/ofmonth/2014-06a/AFMpatch-800x600-nofade.mpg">movie</a>-->
+<br>see also <a href="http://www.ks.uiuc.edu/images/ofmonth/2014-06a/AFMpatch-800x600-nofade-mp4-3kbps.mp4">movie</a>
+
+<br>made with <a href="http://www.ks.uiuc.edu/Research/vmd/">VMD</a>
+</p>
+<p></p>
+
+
+</div>
+<div>
+<p>
+Atomic force microscopy (AFM) gives us a low-resolution glimpse of life 
+at the nanometer scale.  Now scientists can bring microscopy images to 
+life by combining the microscopy data with atomic-detail structures to 
+re-create the imaged system on the computer.  As <a href="http://www.ks.uiuc.edu/Publications/Papers/paper.cgi?tbcode=CHAN2014">recently reported</a>,
+ Center scientists constructed an atomic-resolution model of a 
+photosynthetic membrane based on AFM data showing the locations of the 
+many light-harvesting proteins that inhabit the membrane.  After using <a href="http://www.ks.uiuc.edu/Research/namd/">NAMD</a>
+ on petascale computers, like Blue Waters and Titan, to relax the 
+20-million atom membrane, Center scientists used the model to study the 
+migration of energy among the light-harvesting complexes, as well as the
+ mobility of quinone molecules in the membrane.  The photosynthetic 
+membrane patch was found to have a very high (90%) light-harvesting 
+efficiency; further, it was found that the light-harvesting proteins 
+could be considerably less tightly packed in the membrane with minimal 
+loss of efficiency.  Read more on our <a href="http://www.ks.uiuc.edu/Research/chromatophore-patch/">website</a>.</p>
+</div>
+
+
+<!-- </div> -->
+
+<div style="clear: right; float: left; width: 49%">
+
+<h3 class="headarea">Overview</h3>
+<p>
+        <a href="http://www.ks.uiuc.edu/Research/namd/bugreport.html">Having Problems with NAMD?</a>
+  <br> <a href="http://www.ks.uiuc.edu/Research/namd/motivation">Why NAMD?</a> (in pictures)
+  <br> <a href="http://www.ks.uiuc.edu/Research/mdff/">Molecular Dynamics Flexible Fitting</a>
+  <br> <a href="http://www.ks.uiuc.edu/Research/smd_imd/">Steered Molecular Dynamics</a>
+  <br> <a href="http://www.ks.uiuc.edu/Research/vmd/imd/">Interactive Molecular Dynamics</a>
+  <br> <a href="http://www.ks.uiuc.edu/Research/namd/features.html">Features and Capabilities</a>
+  <br> <a href="http://www.ks.uiuc.edu/Research/namd/performance.html">Performance Benchmarks</a>
+  <br> <a href="http://www.ks.uiuc.edu/Research/namd/papers.html">Publications</a> and
+        <a href="http://www.ks.uiuc.edu/Research/namd/papers.html#cites">Citations</a>
+<!--
+       <img align=top src="/images/new.gif">
+-->
+  <br> <a href="http://www.ks.uiuc.edu/Research/namd/credits.html">Credits and Development Team</a>
+</p>
+
+<h3 class="headarea">Availability</h3>
+<p>
+       <a href="http://www.ks.uiuc.edu/Research/namd/license.html">Read the License</a>
+  <br> <a href="http://www.ks.uiuc.edu/Development/Download/download.cgi?PackageName=NAMD">Download NAMD Binaries</a>
+    (also <a href="http://www.ks.uiuc.edu/Development/Download/download.cgi?PackageName=VMD">VMD</a>)
+  <br> <a href="http://www.ks.uiuc.edu/Research/namd/development.html">Build from Source Code</a>
+  <font color="darkgreen">- Git access now available</font> <img src="NAMD%20-%20Scalable%20Molecular%20Dynamics_files/new.gif" align="top">
+  <br> Run at <a href="http://www.ks.uiuc.edu/Research/namd/wiki/index.cgi?NamdAtNCSA">NCSA</a>, <a href="http://www.ks.uiuc.edu/Research/namd/wiki/index.cgi?NamdAtSDSC">SDSC</a>, <a href="http://www.ks.uiuc.edu/Research/namd/wiki/index.cgi?NamdAtNICS">NICS</a>, or <a href="http://www.ks.uiuc.edu/Research/namd/wiki/index.cgi?NamdAtTexas">Texas</a>
+  <!-- <br/> <a href="http://www.nvidia.com/MD_Test_Drive">Free GPU Test Drive from NVIDIA Partners</a> -->
+  <!--<br/> <a href="http://www.scienomics.com/">NAMD in Scienomics Software</a>-->
+</p>
+
+<h3 class="headarea">Training</h3>
+<p>
+   <!-- <br/>&nbsp;&nbsp;&nbsp;&nbsp;<font color="darkgreen">Apply by May 8.</font> <img align=top src="/images/new.gif"> -->
+        <a href="http://www.ks.uiuc.edu/Training/Workshop/Pittsburgh2017/">"Hands-On" Workshop in Pittsburgh</a> (May 30-June 2, 2017)
+  <br> <a href="http://www.ks.uiuc.edu/Training/Workshop/Chicago2017/">NAMD Developer Workshop in Chicago</a> (May 22-23, 2017)
+  <br> <a href="http://charm.cs.illinois.edu/workshops/charmWorkshop2017/">Charm++ Workshop in Urbana</a> (April 17-19, 2017)
+  <br> <a href="http://www.ks.uiuc.edu/Training/Workshop/Urbana2017a/">"Hands-On" Workshop in Urbana</a> (April 17-21, 2017)
+  <br> <a href="https://events.prace-ri.eu/event/502/">PRACE School on HPC for Life Sciences</a> (April 10-13, 2017)
+  <br> <a href="http://www.ks.uiuc.edu/Training/Workshop/SanFrancisco2016/">"Hands-On" Workshop in San Francisco</a> (Dec 12-16, 2016)
+  <br> <a href="http://www.ks.uiuc.edu/Training/Workshop/Atlanta2016/">"Hands-On" Workshop in Atlanta</a> (Nov 14-18, 2016)
+  <br> <a href="http://www.ks.uiuc.edu/Training/Workshop/Urbana2016/">"Hands-On" Workshop in Urbana</a> (Oct 17-21, 2016)
+  <br> <a href="http://www.ks.uiuc.edu/Training/Workshop/Juelich2016/">"Hands-On" Workshop in Jülich</a> (Aug 15-19, 2016)
+   <!-- <br/>&nbsp;&nbsp;&nbsp;&nbsp;<font color="darkgreen">Apply by July 18.</font> <img align=top src="/images/new.gif"> -->
+  <br> <a href="http://www.ks.uiuc.edu/Training/Workshop/Pittsburgh2016/">"Hands-On" Workshop in Pittsburgh</a> (June 6-10, 2016)
+  <br> <a href="http://www.ks.uiuc.edu/Training/Workshop/Chicago2016/">NAMD Developer Workshop in Chicago</a> (May 26-27, 2016)
+  <br> <a href="http://charm.cs.illinois.edu/workshops/charmWorkshop2016/">Charm++ Workshop in Urbana</a> (April 19-20, 2016)
+  <br> <a href="http://www.ks.uiuc.edu/Training/Workshop/">Older "Hands-On" Workshops</a>
+</p>
+
+<h3 class="headarea">Support</h3>
+<form method="GET" action="http://www.google.com/search">
+        <a href="http://www.ks.uiuc.edu/Research/namd/bugreport.html">Having Problems with NAMD?</a>
+  <br>
+  <br> <a href="http://www.ks.uiuc.edu/Research/namd/wiki/">NAMD Wiki</a> (<a href="http://www.ks.uiuc.edu/Research/namd/wiki/?RecentChanges">Recent Changes</a>)
+ <br>&nbsp;&nbsp;<input name="sitesearch" value="www.ks.uiuc.edu/Research/namd/wiki/" type="hidden">
+ <input name="hq" value="site:www.ks.uiuc.edu/Research/namd/wiki/" type="hidden">
+ <input name="q" size="30" maxlength="255" value="Search NAMD Wiki" onfocus="this.value=''" type="text">
+ <input name="btnG" value="Google" type="submit">
+</form>
+<form method="GET" action="http://www.google.com/search">
+        <a href="http://www.ks.uiuc.edu/Research/namd/mailing_list/">NAMD-L Mailing List</a>
+       (<a href="http://www.ks.uiuc.edu/Research/namd/mailing_list/namd-l/">Archive</a>)
+ <br>&nbsp;&nbsp;<input name="sitesearch" value="www.ks.uiuc.edu/Research/namd/mailing_list/namd-l/" type="hidden">
+ <input name="hq" value="site:www.ks.uiuc.edu/Research/namd/mailing_list/namd-l/" type="hidden">
+ <input name="q" size="30" maxlength="255" value="Search NAMD-L Archive" onfocus="this.value=''" type="text">
+ <input name="btnG" value="Google" type="submit">
+</form>
+<form method="GET" action="http://www.google.com/search">
+        <a href="http://www.ks.uiuc.edu/Training/Tutorials/mailing_list/">Tutorial-L Mailing List</a>
+       (<a href="http://www.ks.uiuc.edu/Training/Tutorials/mailing_list/tutorial-l/">Archive</a>)
+ <br>&nbsp;&nbsp;<input name="sitesearch" value="www.ks.uiuc.edu/Training/Tutorials/mailing_list/tutorial-l/" type="hidden">
+ <input name="hq" value="site:www.ks.uiuc.edu/Training/Tutorials/mailing_list/tutorial-l/" type="hidden">
+ <input name="q" size="30" maxlength="255" value="Search Tutorial-L Archive" onfocus="this.value=''" type="text">
+ <input name="btnG" value="Google" type="submit">
+</form>
+  <br> <a href="http://www.theregister.co.uk/2014/04/08/yahoo_breaks_every_mailing_list_in_the_world_says_email_guru/">Mailing List Issues for Yahoo.com Addresses</a>
+<!--
+<FORM method=GET action="http://www.google.com/search">
+        <a href="/mailman/listinfo/cluster-l/">Cluster-L Mailing List</a>
+       (<a href="/pipermail/cluster-l/">Archive</a>)
+ <br/>&nbsp;&nbsp;<input type=hidden name=sitesearch value="www.ks.uiuc.edu/pipermail/cluster-l/">
+ <input type=hidden name=hq value="site:www.ks.uiuc.edu/pipermail/cluster-l/">
+ <INPUT TYPE=text name=q size=30 maxlength=255 value="Search Cluster-L Archive"
+  onfocus="this.value=''">
+ <INPUT type=submit name=btnG VALUE="Google">
+</FORM>
+-->
+
+</div>
+<div style="float: right; width: 49%">
+<h3 class="headarea">Announcements</h3>
+<!--
+<p>
+  <a href="https://jobs.illinois.edu/academic-job-board/job-details?jobID=37670">Research Programmer Position</a>
+       <img align=top src="/images/new.gif">
+      <br/>&nbsp;&nbsp;&nbsp; <font color="darkgreen">Apply by Dec 19.</font>
+-->
+        <a href="http://www.ks.uiuc.edu/Research/namd/2.13/features.html">NAMD 2.13 New Features</a> 
+       <img src="NAMD%20-%20Scalable%20Molecular%20Dynamics_files/new.gif" align="top">
+  <br> <a href="http://www.ks.uiuc.edu/Research/cloud/">One-click NAMD/VMD in the cloud</a>
+       <img src="NAMD%20-%20Scalable%20Molecular%20Dynamics_files/new.gif" align="top">
+  <br> <a href="http://www.ks.uiuc.edu/Research/qmmm/">QM/MM Interface to MOPAC and ORCA</a> 
+       <img src="NAMD%20-%20Scalable%20Molecular%20Dynamics_files/new.gif" align="top">
+  <br> <a href="http://www.ks.uiuc.edu/Research/qwikmd">QwikMD GUI Released in VMD 1.9.3</a> 
+       <img src="NAMD%20-%20Scalable%20Molecular%20Dynamics_files/new.gif" align="top">
+  <br> <a href="http://www.ks.uiuc.edu/Research/namd/2.12/features.html">NAMD 2.12 New Features</a> 
+  <br> <a href="http://www.ks.uiuc.edu/Research/namd/2.12/announce.html">NAMD 2.12</a> (Dec 2016)
+  <br> <a href="http://www.ks.uiuc.edu/Research/namd/survey/">2016 User Survey Report</a>
+  <br> <a href="http://www.ks.uiuc.edu/Research/namd/2.11/features.html">NAMD 2.11 New Features</a> 
+  <br> <a href="http://www.ks.uiuc.edu/Research/namd/2.11/announce.html">NAMD 2.11</a> (Dec 2015)
+  <br> <a href="http://www.ks.uiuc.edu/Research/namd/2.10/features.html">NAMD 2.10 New Features</a> 
+  <br> <a href="http://www.ks.uiuc.edu/Research/namd/2.10/announce.html">NAMD 2.10</a> (Dec 2014)
+  <br> <a href="http://www.ks.uiuc.edu/Research/namd/2.9/features.html">NAMD 2.9 New Features</a> 
+  <br> <a href="http://www.ks.uiuc.edu/Research/namd/2.9/announce.html">NAMD 2.9</a> (April 2012)
+  <br> <a href="http://www.ks.uiuc.edu/Research/namd/survey/">2011 User Survey Report</a>
+  <br> <a href="http://www.ks.uiuc.edu/Research/namd/2.8/features.html">NAMD 2.8 New Features</a> 
+  <br> <a href="http://www.ks.uiuc.edu/Research/namd/2.8/announce.html">NAMD 2.8</a> (May 2011)
+  <br> <a href="http://www.ks.uiuc.edu/Research/namd/2.7/features.html">NAMD 2.7 New Features</a> 
+  <br> <a href="http://www.ks.uiuc.edu/Research/namd/2.7/announce.html">NAMD 2.7</a> (Oct 2010)
+  <!-- <br/> <a href="http://www.nvidia.com/MD_Test_Drive">Free GPU Test Drive</a> (July 2010) -->
+<!--
+  <br/> <a href="2.6/announce.html">NAMD 2.6</a> (August 2006)
+  <br/> <a href="survey/NAMD_2005_Survey_Report.pdf">2005 User Survey Report</a>
+  <br/> <a href="2.5/announce.html">NAMD 2.5</a> (Sept. 2003)
+  <br/> <a href="2.4/announce.html">NAMD 2.4</a> (Mar. 2002)
+-->
+  <br> <a href="http://www.ks.uiuc.edu/Research/namd/papers.html">How to Cite NAMD</a>
+  <br> <a href="http://www.ks.uiuc.edu/Research/namd/announcements.html">Previous Announcements</a>
+<p></p>
+
+<h3 class="headarea">Documentation</h3>
+  
+
+<form method="GET" action="/Research/namd/ug_search/namazu.cgi">
+  <a href="http://www.ks.uiuc.edu/Research/namd/current/ug/">NAMD 2.12 User's Guide</a>
+    <br>&nbsp;&nbsp;&nbsp;<input name="query" size="30" value="Search User's Guide" onfocus="this.value=''" type="text">
+    <br>&nbsp;&nbsp;(also
+    <a href="http://www.ks.uiuc.edu/Research/namd/current/ug.tar.gz"> 773k HTML</a> or
+    <a href="http://www.ks.uiuc.edu/Research/namd/current/ug.pdf"> 1.1M PDF</a>)
+  <br> <a href="http://www.ks.uiuc.edu/Research/namd/current/notes.html">NAMD 2.12 Release Notes</a>
+  <br> <a href="http://charm.cs.illinois.edu/manuals/html/charm++/C.html">Running Charm++ Programs</a> (including NAMD)
+  <br> <a href="http://www.nvidia.com/object/gpu-accelerated-applications-namd-running-jobs.html">Running GPU-Accelerated NAMD</a> (from NVIDIA)
+  <br> <a href="http://www.ks.uiuc.edu/Research/namd/wiki/index.cgi?Namd211Release">Post-Release Updates on NAMD Wiki</a>
+  <br> <a href="http://www.ks.uiuc.edu/Training/Tutorials/index-all.html#namd">Introductory NAMD Tutorials</a>
+  <br> <a href="http://www.ks.uiuc.edu/Training/Tutorials/index-all.html#vmd">Introductory VMD Tutorials</a>
+  <br> <a href="http://www.ks.uiuc.edu/Training/Tutorials/index-all.html#freeenergymethods">Free Energy Tutorials</a>
+  <br> <a href="http://www.ks.uiuc.edu/Training/Tutorials/index-all.html#specializedtopics">Specialized Topic Tutorials</a>
+  <br> <a href="http://www.ks.uiuc.edu/Training/Tutorials/index-all.html#bionanotechnology">Bionanotechnology Tutorials</a>
+</form>
+<form method="GET" action="http://www.google.com/search">
+        <a href="http://www.ks.uiuc.edu/Training/Tutorials/">All NAMD &amp; VMD Tutorials</a>
+ <br>&nbsp;&nbsp;<input name="sitesearch" value="www.ks.uiuc.edu/Training/Tutorials/" type="hidden">
+ <input name="hq" value="site:www.ks.uiuc.edu/Training/Tutorials/" type="hidden">
+ <input name="q" size="30" maxlength="255" value="Search Tutorials" onfocus="this.value=''" type="text">
+ <input name="btnG" value="Google" type="submit">
+</form>
+<p>
+        <a href="http://www.edam.uhp-nancy.fr/ABF/">Adaptive Biasing Force Website</a>
+  <br> <a href="http://www.ks.uiuc.edu/Research/vmd/imd/tutorial/">Interactive Molecular Dynamics Tutorial</a>
+  <br> <a href="http://www.ks.uiuc.edu/Research/namd/utilities/">Related Codes, Scripts, and Examples</a>
+  <br> <a href="http://www.ks.uiuc.edu/Research/namd/wiki/">NAMD Wiki</a> (<a href="http://www.ks.uiuc.edu/Research/namd/wiki/?RecentChanges">Recent Changes</a>)
+  <br> <a href="http://www.ks.uiuc.edu/Research/namd/documentation.html">Older Documentation</a>
+</p>
+
+<h3 class="headarea">News</h3>
+<p>
+        <a href="https://www.olcf.ornl.gov/2017/05/09/assembling-lifes-molecular-motor/">Assembling Life's Molecular Motor</a>
+       <img src="NAMD%20-%20Scalable%20Molecular%20Dynamics_files/new.gif" align="top">
+  <br> <a href="https://www.alcf.anl.gov/articles/early-science-projects-aurora-supercomputer-announced">Roux Early Science Project on ANL Aurora</a>
+  <br> <a href="http://www.ncsa.illinois.edu/news/story/blue_waters_simulates_largest_membrane_channel_made_of_dna_origami">Membrane Channel Made of DNA Origami</a>
+  <br> <a href="http://www.ks.uiuc.edu/Research/namd/6000cites.html">NAMD Paper Has 6000 Citations</a>
+  <br> <a href="http://www.ncsa.illinois.edu/news/story/tiny_terrors_researcher_works_to_uncover_how_bacteria_develop_antibiotic_re">Antibiotic Resistance Through Efflux Pumps</a>
+  <br> <a href="http://www.alcf.anl.gov/articles/multiyear-simulation-study-provides-breakthrough-membrane-protein-research">Membrane Protein Breakthrough</a>
+  <br> <a href="http://www.ncsa.illinois.edu/news/story/blue_waters_enables_massive_flu_simulations">Massive Flu Virus Simulations</a>
+  <br> <a href="http://www.ncsa.illinois.edu/news/story/better_understanding_of_voltage_gated_like_ion_channels_may_spark_improveme">Ion Channels in General Anesthesia</a>
+  <br> <a href="https://news.illinois.edu/blog/view/6367/335013">How HIV Defeats Cellular Defender</a>
+  <br> <a href="https://news.illinois.edu/blog/view/6367/290048">Key Component in Bacterial Decisions</a>
+  <br> <a href="http://www.ks.uiuc.edu/events/sc2015/">TCBG Papers and Presentations at SC15</a>
+  <br> <a href="http://charm.cs.illinois.edu/supercomputing/">Charm++-Related Events at SC15</a>
+  <br> <a href="http://www.ks.uiuc.edu/Announcements/Fortieth/">TCBG Reaches Milestone 40th Workshop</a>
+  <br> <a href="http://www.ks.uiuc.edu/Research/namd/5000cites.html">NAMD Paper Has 5000 Citations</a>
+  <br> <a href="http://beckman.illinois.edu/news/2015/09/tajkhorshid-molecular-world">Transport Cycle in Atomic Detail</a>
+  <br> <a href="http://beckman.illinois.edu/news/2015/08/immature-retrovirus-structure">Atomic Model of Immature Retrovirus</a>
+  <br> <a href="http://www.alcf.anl.gov/articles/alcf-selects-projects-theta-early-science-program">ANL Supercomputer Early Science Program</a>
+  <br> <a href="http://www.scientificcomputing.com/articles/2015/07/cellulosomes-one-lifes-strongest-biomolecular-bonds-discovered-use-supercomputers">Cellulosomes: One of Life's Strongest Bonds</a>
+  <br> <a href="https://www.olcf.ornl.gov/2015/04/15/olcf-selects-application-readiness-projects-to-prepare-for-next-generation-summit-supercomputer/">ORNL Supercomputer Readiness Program</a>
+  <br> <a href="https://www.tacc.utexas.edu/-/supercomputers-help-solve-puzzle-like-bond-for-biofuels">Solving Puzzle-Like Bond for Biofuels</a>
+  <br> <a href="https://www.tacc.utexas.edu/-/real-science-using-stampede-s-xeon-phi">Real Science Using Stampede's Xeon Phi</a>
+  <br> <a href="http://beckman.illinois.edu/news/2014/12/molecules-for-the-masses">App Puts Chemistry at the Tips of Users' Fingers</a>
+  <br> <a href="https://itunes.apple.com/us/app/molecules-by-theodore-gray/id923383841">NAMD Powers <em>Molecules by Theodore Gray</em></a>
+  <br> <a href="https://www.youtube.com/watch?v=_0J919cm6fY">Big Ten Network "Computing a Virus" Feature</a>
+  <br> <a href="http://www.ks.uiuc.edu/Research/namd/4000cites.html">NAMD Paper Has 4000 Citations</a>
+  <br> <a href="http://www.hpcwire.com/2014/07/31/bolstering-extreme-scale-computational-biology/">Bolstering Extreme Scale Computational Biology</a>
+  <br> <a href="http://blogs.nvidia.com/blog/2014/03/27/researchers-win-third-annual-cuda-achievement-award-three-new-cuda-fellows-named/">CUDA Achievment Award for Fighting HIV</a>
+  <br><a href="http://news.illinois.edu/news/13/1202membrane_transport_EmadTajkhorshid.html">Team learns how membrane transporter moves</a>
+  <br> <a href="http://www.hpcwire.com/2013/11/18/extreme-computational-biology-sc13-interview-dr-klaus-schulten/">Extreme Computational Biology at SC13</a>
+  <br> <a href="http://www.ncsa.illinois.edu/news/story/ncsa_receives_honors_in_2013_hpcwire_readers_and_editors_choice_awards">Editors' Choice: Best use of HPC in life sciences</a>
+  <br> <a href="http://onlinelibrary.wiley.com/doi/10.1002/jcc.23422/abstract">Rapid parameterization of small molecules</a>
+  <br> <a href="http://www.ks.uiuc.edu/Research/namd/3000cites.html">NAMD Paper Has 3000 Citations</a>
+  <br> <a href="http://ascr-discovery.science.doe.gov/synchronized/namd1.shtml">Code cracks HIV capsid, opens drug possibilities</a>
+  <br> <a href="http://news.illinois.edu/news/13/0529HIVcapsid_KlausSchulten.html">HIV-1 Capsid Structure Determined</a>
+  <br> <a href="http://www.vidrl.org.au/publications/supercomputer_simulations/polio/sc_polio_idx.htm">Poliovirus Simulated on BlueGene/Q</a>
+  <br> <a href="http://www.ncsa.illinois.edu/News/Stories/RHDV/">Virus Structure Determined with Blue Waters</a>
+  <br> <a href="http://www.ks.uiuc.edu/History/NAMD/">Fashioning NAMD: A History of Risk and Reward</a>
+  <br> <a href="http://engineering.illinois.edu/news/2012/10/09/two-engineering-illinois-professors-receive-2012-ieee-computer-society-sidney-fernba">Kale, Schulten Receive Fernback Award</a>
+  <br> <a href="http://www.ncsa.illinois.edu/News/Stories/ESShistory/">Making History on Blue Waters</a>
+  <br> <a href="http://www.olcf.ornl.gov/2011/11/09/researchers-show-how-proteins-help-dna-replicate-past-a-damaged-site/">Proteins Help DNA Replicate Past Damage</a>
+  <br> <a href="http://www.ncsa.illinois.edu/News/Video/2011/sc11_bohm.html">SC11: Scaling to 100 Million Atoms</a>
+  <br> <a href="http://news.ncsu.edu/releases/tp-rose/">Copper Folds Parkinson's Plaques</a>
+  <br> <a href="http://news.illinois.edu/news/11/0418proteins_KlausSchulten_RolandBeckmann.html">Mechanics of Membrane Proteins</a>
+  <br> <a href="http://news.illinois.edu/news/11/0531-blood-clottiing_JamesMorrissey.html">Molecular Mystery of Blood Clotting</a>
+  <br> <a href="http://www.osc.edu/press/releases/2010/alzheimer.shtml">Alzheimer's Misfolding Simulated</a>
+  <br> <a href="http://www.psc.edu/science/2010/cellularbones/">When Cellular Bones Soften</a>
+  <br> <a href="http://www.ncsa.illinois.edu/News/Stories/nucleosomes/">Getting the Rabbit in the Hat</a>
+  <br> <a href="http://www.ncsa.illinois.edu/News/Stories/deaf/">Insights Into Deafness</a>
+  <br> <a href="http://www.nccs.gov/2010/06/24/supercomputers-simulate-molecular-machines-replicate-repair-dna/">Molecular Machines Replicate and Repair DNA</a>
+  <br> <a href="http://www.tacc.utexas.edu/news/feature-stories/2010/sound-science/">Sound Science</a>
+  <br> <a href="http://www.tacc.utexas.edu/news/feature-stories/2010/blueprint-for-the-affordable-genome/">Blueprint for the Affordable Genome</a>
+  <br> <a href="http://mcb.harvard.edu/NewsEvents/News/gaudet7_4-15-10.html">Mechanics of Hearing and Deafness</a>
+  <br> <a href="http://www.ks.uiuc.edu/Research/namd/1000cites.html">NAMD Paper Has 1000 Citations</a>
+  <br> <a href="http://www.ncsa.illinois.edu/News/Stories/Gaps/">Closing the Gaps</a>
+  <br> <a href="http://www.tacc.utexas.edu/documents/13601/88789/InsideTheSwineFlu.pdf">Inside the Swine Flu Virus</a>
+  <br> <a href="http://www.ks.uiuc.edu/Research/namd/announcements.html">Older News Items</a>
+</p>
+
+</div>
+
+<!-- the last item on the page should not be a float -->
+<div class="cleardiv"></div>
+
+   </div>
+   
+   
+   <div class="clear"></div></div>
+   
+   
+   
+   <div class="clear"></div>
+
+  	 
+  	
+  	<div id="footercontainer">
+  	
+  	<div id="footerlogos">
+  		<a href="http://www.ks.uiuc.edu/Research/nihresources/">
+      <div>Funded by a grant from<br>
+      the National Institute of <br>
+      General Medical Sciences <br>
+      of the National Institutes<br>
+      of Health</div></a>
+  		<a href="http://www.nsf.gov/"><img src="NAMD%20-%20Scalable%20Molecular%20Dynamics_files/nsf.gif" alt=""></a>
+  		<a href="http://www.cplc.illinois.edu/"><img src="NAMD%20-%20Scalable%20Molecular%20Dynamics_files/centerphysicslivingcells.jpg" alt=""></a>
+  	</div>
+
+  	<div id="footerlogos2">
+  	<a href="http://illinois.edu/"><img src="NAMD%20-%20Scalable%20Molecular%20Dynamics_files/uclogo_horz_bold.gif" alt=""></a>
+  	</div>
+  	
+    <div id="footer">
+      <a href="http://www.beckman.uiuc.edu/">Beckman Institute for Advanced 
+	Science and Technology</a> 
+      // <a href="http://www.nih.gov/">National Institutes of Health</a>
+      // <a href="http://www.nsf.gov/">National Science Foundation</a>
+      // <a href="http://www.physics.uiuc.edu/">Physics</a>, 
+         <a href="http://www.cs.uiuc.edu/">Computer Science</a>, and
+         <a href="http://www.life.uiuc.edu/biophysics/">Biophysics</a>
+	  at <a href="http://illinois.edu/">University of Illinois at Urbana-Champaign</a> 
+	  
+	  <div class="morepadding">
+      <a href="http://www.ks.uiuc.edu/Overview/reach.html">Contact Us</a> //
+      Material on this page is <a href="http://www.ks.uiuc.edu/copyright.html">copyrighted</a>;
+       contact <a href="mailto:webserver@ks.uiuc.edu">Webmaster</a> for more 
+       information. //
+      Document last modified on 15 May 2017 //
+      1750710 accesses since 20 Mar 2006
+.
+      </div>
+    </div>
+    
+    <div class="clear"></div>
+    
+  </div>
+  
+</div>
+
+
+
+
+
+
+</body></html>
