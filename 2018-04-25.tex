@@ -2529,299 +2529,86 @@ $$\chi_{L,\vec k}^{\mathrm{MTO}}(\varepsilon,0,\vec r)=\sum_{\vec T}\mathrm{e}^{
 \end{figure}
 }
 
-\section{自洽密度迭代和矩阵对角化算法简介}
-\subsection{方程求解与函数优化}
+\section{第一原理分子动力学的基本思想}
 \frame
 {
-	\frametitle{非线性方程的\rm{Newton~}法求根}
-\begin{figure}[h!]
-\centering
-\animategraphics[autoplay, loop, height=2.7in]{1}{Figures/OP_Newton_}{0}{17}
-\label{Equation_Newon}
-\end{figure}
+	\frametitle{能量泛函的直接优化}
+	根据\textrm{Car-Parrinello~}定义的经典\textrm{Lagrangian~}量
+	{\fontsize{9.0pt}{5.2pt}\selectfont
+	\begin{displaymath}
+		L(\{\psi_k\},\{\vec R_n\})=\frac{\mu}2\sum_k\dot{\psi}_k^2+\sum_n\frac{M_n}2\dot{\vec R}_n^2-E_{\mathrm{tot}}(\{\psi_k\},\{\vec R_n\})+\sum_{kl}\Lambda_{kl}\langle\psi_k|\psi_l\rangle
+	\end{displaymath}}
+	多粒子体系的\textrm{Euler-Lagrange~}运动方程可以表示为
+	\begin{displaymath}
+		\begin{aligned}
+			\mu\ddot{\psi}_k=&-\dfrac{\partial E_{\mathrm{tot}}}{\partial\psi_k}+2\sum_i\Lambda_{kl}\psi_l(\vec r)\\
+			M_n\ddot{\vec R}_n&=-\dfrac{\partial E_{\mathrm{tot}}}{\partial\vec R_n}+\sum_{kl}\Lambda_{kl}\dfrac{\partial\langle\psi_k|\psi_l\rangle}{\partial\vec R_n}
+		\end{aligned}
+	\end{displaymath}
+	\textcolor{purple}{电子基态可以通过求解\textrm{Verlet~}运动方程得到}\\
+	在\textrm{DFT~}框架下，有
+	{\fontsize{9.0pt}{5.2pt}\selectfont
+	\begin{displaymath}
+		\psi_k(t+h)=2\psi_k(t)-\psi_k(t-h)-\dfrac{2h^2}{\mu}(H\psi_k-\sum_l\Lambda_{kl}\psi_l)
+	\end{displaymath}}
+%	该方程表明:~\textcolor{blue}{电子基态也可通过各种优化方法直接求解}
+	每个时间步$t$，\textrm{Car-Parrinello~}采用\textrm{SHAKE~}算法迭代确定$\psi_k(t)$
 }
 
 \frame
 {
-	\frametitle{迭代优化基本思想}
-	对于给定函数$f$，在极值点，函数的梯度满足
+	\frametitle{波函数正交与\rm{SHAKE~}迭代算法}
+	为确保电子轨道波函数正交，
+	{\fontsize{9.0pt}{5.2pt}\selectfont
 	\begin{displaymath}
-		\nabla f=0
-	\end{displaymath}
-	可将函数极值问题转化成方程求根问题
-\begin{figure}[h!]
-\centering
-\includegraphics[height=1.68in,width=1.95in,viewport=30 0 450 360,clip]{Figures/OP_mini-1.png}
-\hskip 0.1in
-\includegraphics[height=1.68in,width=1.95in,viewport=150 20 560 390,clip]{Figures/OP_mini-2.png}
-\label{OP_mini}
-\end{figure}
+		|\tilde\psi_k(t+h)\rangle=2|\psi_k(t)\rangle-|\psi_k(t-h)\rangle-\dfrac{2h^2}{\mu}H|\psi_k(t)\rangle
+	\end{displaymath}}
+	为计算\textrm{Langrage}乘子，可有
+	{\fontsize{9.0pt}{5.2pt}\selectfont
+	\begin{displaymath}
+		|\psi_k(t+h)\rangle=|\tilde\psi_k(t+h)\rangle+\sum_lX_{kl}|\psi_l(t)\rangle
+	\end{displaymath}}
+	其中，{\fontsize{9.0pt}{5.2pt}\selectfont$X_{kl}=\dfrac{2h^2}{\mu}\Lambda_{kl}$}，由此$|\psi_k(t+h)\rangle$正交\\
+	$X_{ij}$要求关于$\mathbf{X}$的矩阵方程
+	{\fontsize{9.0pt}{5.2pt}\selectfont
+	\begin{displaymath}
+		\mathbf{X}\mathbf{X}^{\dag}+\mathbf{X}\mathbf{B}+\mathbf{B}^{\dag}\mathbf{X}^{\dag}=\mathbf{I}-\mathbf{A}
+	\end{displaymath}}
+	能通过以下迭代快速收敛，这里{\fontsize{9.0pt}{5.2pt}\selectfont$A_{kl}=\langle\tilde\psi_k(t+h)|\tilde\psi_l(t+h)\rangle$}，{\fontsize{9.0pt}{5.2pt}\selectfont$B_{kl}=\langle\psi_k(t)|\tilde\psi_l(t+h)\rangle$}
+	{\fontsize{9.0pt}{5.2pt}\selectfont
+	\begin{displaymath}
+		\mathbf{X}^{(n+1)}=\frac12[\mathbf{I}-\mathbf{A}+\mathbf{X}^{(n)}(\mathbf{I}-\mathbf{B})+\mathbf{X}^{(n)}(\mathbf{I}-\mathbf{B}^{\dag})-\mathbf{X}^{n}\mathbf{X}^{(n){\dag}}]
+		\end{displaymath}}
+	取初始{\fontsize{9.0pt}{5.2pt}\selectfont$\mathbf{X}=\frac12(\mathbf{I}-\mathbf{A})$}
 }
 
+\subsection{电子态能量的最小化}
 \frame
 {
-	\frametitle{\textrm{Method of steepest descent}}
-	对于函数$f(\mathbf{x}_0)$当前位置$\mathbf{x}_0$的负梯度方向$\mathbf{g}_0$满足
-	\begin{displaymath}
-		\mathbf{g}_0=-\nabla f(\mathbf{x}_0)
-	\end{displaymath}
-	用$\mathbf{g}_0$方向作为搜索方向，
-	\begin{displaymath}
-		\mathbf{x}=\mathbf{x}_0+\lambda\mathbf{g}_0,\qquad \lambda>0
-	\end{displaymath}
-	因为负的梯度方向为当前位置的最快下降方向，所以被称为“\textcolor{blue}{最陡下降法}”\\
-	对函数$f$最小化参数$\lambda$，可确定下一步$\mathbf{x}_1$，可有
-	\begin{displaymath}
-		\dfrac{\mathrm{d}}{\mathrm{d}\lambda}f(\mathbf{x}_0+\lambda\mathbf{g})_0=\mathbf{g}_0\cdot\nabla f(\mathbf{x}_1)=\mathbf{g}_0\cdot\mathbf{g}_1=0
-	\end{displaymath}
-	因此\textcolor{red}{最速下降法最近邻两步的梯度彼此相互垂直}\\
-	\textcolor{purple}{最陡下降法的收敛:~}\\靠近极小值时收敛速度减慢，越接近目标，步长越小，前进越慢
-}
-
-\frame
-{
-	\frametitle{\textrm{Conjugate gradient}}
-	假设函数在接近极值附件，近似有二次函数的形式
-	\begin{displaymath}
-		f(\mathbf{x})=f_0+\frac12\mathbf{x}\cdot\mathbf{H}{\mathbf{x}}+\cdots
-	\end{displaymath}
-	其中$\mathbf{H}$是\textcolor{blue}{\textrm{Hessian}矩阵}，定义为
-	\begin{displaymath}
-		H_{ij}=\dfrac{\partial^2f(\mathbf{x})}{\partial x_i\partial x_j}
-	\end{displaymath}
-	当$f$的偏导连续，则$\mathbf{H}$是对称矩阵，并且一般要求$\mathbf{H}$是正定的
-	\vskip 20pt
-	设从点$\mathbf{x}_i$出发沿方向$\mathbf{h}_i$(\textcolor{blue}{不再限于梯度$\mathbf{g}_i$方向})，前进到点$\mathbf{x}_{i+1}$，由根据最小化要求
-	\begin{displaymath}
-		\mathbf{h}_i\cdot\nabla f(\mathbf{x}_{i+1})=0
-	\end{displaymath}
-	为确定$\mathbf{x_{i+1}}$点的继续前进方向$\mathbf{h}_{i+1}$，设$\mathbf{x}_{i+1}$可由$\mathbf{x}_i+\lambda\mathbf{h}_{i+1}$得到，因此$\mathbf{x}_{i+1}$的梯度
-	\begin{displaymath}
-		\mathbf{g}_{i+1}=\nabla f(\mathbf{x}_{i+1})=-\mathbf{H}\mathbf{x}_{i+1}=-\mathbf{H}(\mathbf{x}_{i}+\lambda\mathbf{h}_{i+1})
-	\end{displaymath}
-}
-
-\frame
-{
-	\frametitle{\textrm{Conjugate gradient}}
-	与方向$\mathbf{h}_i$相比，梯度的改变为
-	\begin{displaymath}
-		\Delta\mathbf{g}=-\lambda\mathbf{H}\mathbf{h}_{i+1}
-	\end{displaymath}
-
-	根据最小化要求，梯度的改变与$\mathbf{h}_i$方向正交
-	\begin{displaymath}
-		\mathbf{h}_i\cdot\mathbf{H}\mathbf{h}_{i+1}=0
-	\end{displaymath}
-	共轭梯度法算法:对于给定函数
+	\frametitle{电子态能量最小化}
+	\textrm{Car-Parinello~}方法基本思想
 	\begin{itemize}
-		\item 已知初值$\mathbf{x}_0$和梯度$\mathbf{g}_0$，取初始方向$\mathbf{h_0}=\mathbf{g}_0$(\textcolor{blue}{最陡下降})
-		\item 根据递推关系确定
-			\begin{displaymath}
-				\begin{aligned}
-					\mathbf{g}_{i_+1}=&\mathbf{g}_{i_+1}-\lambda_i\mathbf{H}\mathbf{h}_{i}\qquad \lambda_i=\dfrac{\mathbf{g}_i\cdot\mathbf{g}_i}{\mathbf{g}_i\cdot\mathbf{H}\mathbf{h}_i}\\	
-					\mathbf{h}_{i_+1}=&\mathbf{g}_{i_+1}+\gamma_i\mathbf{h}_{i}\qquad \gamma_i=-\dfrac{\mathbf{g}_{i+1}\cdot\mathbf{H}\mathbf{h}_i}{\mathbf{h}_i\cdot\mathbf{H}\mathbf{h}_i}\\	
-					\mathbf{x}_{i_+1}=&\mathbf{x}_{i}+\lambda_i\mathbf{h}_{i}
-				\end{aligned}
-			\end{displaymath}
+		\item 只对原子核位置考虑受力$-\dfrac{\partial E_{\mathrm{tot}}}{\partial\vec R_n}$作用
+		\item 电子结构是通过某种最小化方法确定能量泛函$E_{\mathrm{tot}}[\rho(\vec r)]$的极值得到，而非\textrm{Born-Oppenheimer}近似下的自洽迭代
+		\item \textrm{Verlet}算法确定核位移过程中，并不要求在每一步核位移时，电子步充分弛豫到当前结构的基态
 	\end{itemize}
-	\textcolor{purple}{共轭梯度法:~步收敛性，稳定性高，不需要任何外来参数}
-}
-
-\frame
-{
-	\frametitle{最陡下降与共轭梯度}
-\begin{figure}[h!]
-\centering
-\includegraphics[height=2.0in,width=3.5in,viewport=0 0 950 590,clip]{Figures/OP_descent_CG.png}
-\label{decent_CG}
-\caption{\small \textrm{Schematic illustration of minimization of a function in two dimensions. The steps 1,2,3,$\cdots$ denote the steepest descent steps and the point $2^{\ast}$ denote the conjugate gradient path that reaches the exact solution after two steps if the functional is quadratic.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\end{figure}
-}
-
-\frame
-{
-	\frametitle{\textrm{Quasi-Newton Methods}}
-	求解方程
-	\begin{displaymath}
-		f(\mathbf{x})=\mathbf{x}
-	\end{displaymath}
-	$\mathbf{x}$是函数$f(\mathbf{x})$的\textcolor{red}{不动点}
-	
-	对这类问题的求解，可以利用迭代关系
-	\begin{displaymath}
-		\mathbf{x}_{i+1}=f(\mathbf{x}_i)\qquad (i=1,2,3,\cdots)
-	\end{displaymath}
-	这称为\textcolor{blue}{不动点迭代法}
-
-	另一种求解策略是定义残量
-	\begin{displaymath}
-		R[\mathbf{x}]=f(\mathbf{x})-\mathbf{x}
-	\end{displaymath}
-	最小化残量的模$|R[\mathbf{x}]|$，特别是当残量$R[\mathbf{x}]$近似是$\mathbf{x}$的线性函数，可有\textcolor{purple}{Jacobian}矩阵
-	\begin{displaymath}
-		\mathbf{J}=\dfrac{\delta R[\mathbf{x}]}{\delta\mathbf{x}}
-	\end{displaymath}
-	可通过迭代关系求解原方程的解
-	\begin{displaymath}
-		\mathbf{x}_{i+1}=\mathbf{x}_{i}-\mathbf{J}^{-1}R[\mathbf{x}_{i}]
-	\end{displaymath}
-}
-
-\subsection{自洽密度迭代算法简介}
-\frame
-{
-	\frametitle{\textrm{Broyden Jacobian update Method}}
-	\textrm{Broyden~}方法:~\textcolor{blue}{设计迭代方案求\textrm{Jacobian~}矩阵的逆}
-	\begin{itemize}
-		\item 给定初始的\textrm{Jacobian~}矩阵逆$\mathbf{J}_0^{-1}$(如$\mathbf{J}_0^{-1}=\alpha\mathbf{I}$)
-		\item 根据线性近似
-			\begin{displaymath}
-				\delta\mathbf{x}_{i}=-\mathbf{J}_i^{-1}\delta R[\mathbf{x}_{i}]
-			\end{displaymath}
-		得到\textrm{Jacobian~}矩阵逆的递推关系
-			\begin{displaymath}
-				\mathbf{J}_{i}^{-1}=\mathbf{J}_{i-1}^{-1}\dfrac{(\delta\mathbf{x}_i-\mathbf{J}_{i-1}^{-1}\delta R[\mathbf{x}_{i}])\delta R[\mathbf{x}_{i}]}{\langle\delta R[\mathbf{x}_{i}]|\delta R[\mathbf{x}_{i}]\rangle}
-			\end{displaymath}
-		\item 在电荷数守恒约束下，最小化模量$Q=\left\|\mathbf{J}_i^{-1}-\mathbf{J}_{i-1}^{-1}\right\|$
-	\end{itemize}
-	\textcolor{purple}{\textrm{Broyde~}方案最小化只考虑了最近邻两次迭代间的\textrm{Jacobian~}矩阵}\\
-	一个全面考虑迭代过程的改进\textrm{Broyde~}方案，将最小化模量定义为
-	\begin{displaymath}
-		Q^{\mathrm{modified}}=\sum_{j=1}^{i}w_j|\delta\mathbf{x}_j-\mathbf{J}_i^{-1}\delta\mathbf{R}_j|^2+w_0\left\|\mathbf{J}_i^{-1}-\mathbf{J}_{0}^{-1}\right\|
-	\end{displaymath}
-}
-
-\frame
-{
-	\frametitle{\textrm{Pulay DIIS full-subspace Method}}
-	\textrm{DIIS(Direct inversion in the iterative subspace)}的基本思想:~\\
-	\textcolor{blue}{迭代中，将此前每一步迭代得到的$\mathbf{x}_i$组合，实现当前残量最小化}
-	\begin{displaymath}
-		\mathbf{x}_{i+1}=\sum_{j=0}^ia_j\mathbf{x}_{j}=c_0\mathbf{x}_0+\sum_{j=1}^ic_j\delta\mathbf{x}_{j}
-	\end{displaymath}
-	假设残量可以线性化表示
-	\begin{displaymath}
-		R[\mathbf{x}_{i+1}]=R[\sum_{j=0}^ia_j\mathbf{x}_{j}]=\sum_{j=0}^ia_jR[\mathbf{x}_{j}]
-	\end{displaymath}
-	最小化残量模的平方
-	\begin{displaymath}
-		\langle R[\mathbf{x}_{i+1}]|R[\mathbf{x}_{i+1}]\rangle=\sum_{j,k}a_ja_k\langle R[\mathbf{x}_{j}]|R[\mathbf{x}_{k}]\rangle
-	\end{displaymath}
-}
-
-\frame
-{
-	\frametitle{}
-	电子密度迭代过程中，残量模的平方最小化约束条件
+	在\textrm{Car-Parinello}方法中，电子结构的计算变成经典的优化问题:~电子密度迭代过程中，约束条件下最小化问题
 	\begin{itemize}
 		\item 电子本征态波函数彼此正交
 		\item 电荷密度混合过程中，电荷数守恒，即$\sum\limits_{j=0}^i a_j=1$
 	\end{itemize}
-	因此电荷密度迭代收敛过程中
-	\begin{displaymath}
-		a_i=\sum_j\dfrac{\sum\limits_{j}A_{j,i}^{-1}}{\sum\limits_{j,k}a_ja_kA_{j,k}^{-1}}\qquad A_{j,k}=\langle R[\mathbf{x}_{j}]|R[\mathbf{x}_{k}]\rangle
-	\end{displaymath}
-	该迭代过程与改进\textrm{Broyden~}方法相当，本质上等效于\textrm{Jacobian~}矩阵的迭代
 }
 
-\subsection{矩阵对角化算法}
-%\subsubsection{矩阵直接对角化算法}
-\frame
-{
-	\frametitle{相似矩阵}
-\textcolor{blue}{相似矩阵}:~设$\mathbf{A}$，$\mathbf{B}$都是\textrm{n}阶矩阵，若有可逆矩阵$\mathbf{P}$，使得
-	\begin{displaymath}
-		\mathbf{P}^{-1}\mathbf{A}\mathbf{P}=\mathbf{B}
-	\end{displaymath}
-	则称$\mathbf{B}$是$\mathbf{A}$的相似矩阵，或说$\mathbf{A}$和$\mathbf{B}$相似
-	\begin{itemize}
-		\item 相似矩阵具有\textcolor{red}{相同的}\textcolor{blue}{本征向量}和\textcolor{blue}{本征值}
-		\item 若$\mathbf{A}$相似于\textcolor{brown}{对角矩阵}$\boldsymbol{\Lambda}$，则$\boldsymbol{\Lambda}$主对线上元素是$\mathbf{A}$的\textrm{n}个本征值
-		\item \textrm{n}阶方阵$\mathbf{A}$能与对角矩阵$\boldsymbol{\Lambda}$相似的充分必要条件:~$\mathbf{A}$有\textrm{n}个\textcolor{magenta}{线性无关}的本征向量
-		\item 实对称矩阵的特征值为实数
-		\item \textcolor{purple}{实对称矩阵不同的本征值所对应的本征向量线性无关}
-	\end{itemize}
-}
-
-\frame
-{
-	\frametitle{\textrm{QR}分解与矩阵的对角化}
-	\textrm{QR~}方法本质上是一种变换方法，是计算一般矩阵(中小型矩阵)的全部本征值的最有效方法之一
-\vskip 5pt
-	所谓\textrm{QR}分解，就是将一个矩阵(以实对称方针为例)分解成一个\textcolor{blue}{正交矩阵}和一个\textcolor{blue}{上三角矩阵}。即
-	\begin{displaymath}
-		\mathbf{A}=\mathbf{Q}\mathbf{R}
-	\end{displaymath}
-	其中$\mathbf{Q}$是正交矩阵，即$\mathbf{Q}$中的列向量互相正交，即
-	\begin{displaymath}
-		\mathbf{Q}^{-1}\mathbf{Q}=\mathbf{I} 
-	\end{displaymath}
-	$\mathbf{R}$是上三角矩阵，可得到新矩阵$\mathbf{B}$
-	\begin{displaymath}
-		\mathbf{B}=\mathbf{R}\mathbf{Q}=\mathbf{Q}^{-1}\mathbf{A}\mathbf{Q}
-	\end{displaymath}
-	$\mathbf{B}$与$\mathbf{A}$是相似矩阵，可以再对$\mathbf{B}$进行\textrm{QR~}分解\\
-	\textcolor{red}{当$\mathbf{A}$为非奇异矩阵时，这个分解是唯一的}
-	\begin{itemize}
-		\item 实现\textrm{QR}分解的算法有多种，包括\textrm{Gram–Schmidt~}正交化，\textrm{Householder~}变换，以及\textrm{Givens~}旋转等
-	\end{itemize}
-}
-
-%\subsubsection{矩阵迭代对角化算法}
-\frame
-{
-	\frametitle{矩阵的迭代对角化}
-	\begin{itemize}
-		\item 矩阵的直接对角化 $O(N^3)$
-		\item 矩阵的迭代对角化 $O(N_0^2\times N\ln N)\quad N_0\ll N$
-	\end{itemize}
-	\textcolor{blue}{迭代求本征值的思想是\textrm{Jacobian~}于\textrm{1846~}年提出的}\upcite{Crelle30-51_1846}\\
-	其基本思想是
-	\begin{displaymath}
-		(H-\varepsilon^n)|\psi^n\rangle=|R[\psi^n]\rangle
-	\end{displaymath}
-	这里$n$是迭代步数，$|\psi^n\rangle$和$\varepsilon^n$分别是本征态和本征值，$|R[\psi^n]\rangle$是残矢量
-	\vskip 10pt
-	在电子态计算过程中，选择适当的基函数，可以使\textrm{Schr\"odinger~}方程的矩阵接近对角阵，因此可有
-	\begin{displaymath}
-		|\psi\rangle=\mathbf{D}^{-1}(\mathbf{H}-\varepsilon)|\psi\rangle+|\psi\rangle
-	\end{displaymath}
-	这里$\mathbf{D}$是非奇异矩阵，与$\mathbf{H}$矩阵有关，可根据需要选取多种形式
-}
-
-\frame
-{
-	\frametitle{矩阵的迭代对角化}
-	根据迭代求本征值的基本思想，有
-	\begin{displaymath}
-		\begin{aligned}
-			\varepsilon^n=&\dfrac{\langle\psi^n|\mathbf{H}|\psi^n\rangle}{\langle\psi^n|\psi^n\rangle}\\
-			\delta\psi^{n+1}=&\mathbf{D}^{-1}(\mathbf{H}-\varepsilon^n)\psi^n\\
-			\psi^{n+1}=&\psi^n+\delta\psi^{n+1}
-		\end{aligned}
-	\end{displaymath}
-		因此可有
-		\begin{displaymath}
-			\mathbf{D}\delta\psi^{n+1}=\mathbf{R}^{n}\quad \mathrm{or}\quad \psi^{n+1}=\mathbf{D}^{-1}\mathbf{R}^n\equiv\mathbf{K}\mathbf{R}^n
-		\end{displaymath}
-		这里$\mathbf{R}^n$是$n$次迭代后的残矢量，$\mathbf{K}\equiv\mathbf{D}^{-1}$
-		\begin{itemize}
-			\item \textcolor{purple}{矩阵$\mathbf{D}$求逆应该比原始矩阵$(\mathbf{H}-\varepsilon)$求逆更容易}
-			\item 矩阵$\mathbf{D}$能使$\psi^{n+1}$比$\psi^{n}$更逼近真实的本征态
-		\end{itemize}
-		\textcolor{blue}{由微扰的角度:~}如果$\mathbf{H}$已接近对角元，\textcolor{red}{$\mathbf{D}$可以选成$\mathbf{H}$的对角元}
-}
-
+\subsection{\rm{Fock~}矩阵迭代对角化与电荷密度混合算法}
 \frame
 {
 	\frametitle{\textrm{Preconditioning}}
-	引入矩阵$\mathbf{D}$，应该使\textcolor{red}{函数(泛函)对变量的依赖趋于“同质”(\textrm{isotropic})}，即函数曲线与不同变量的依赖关系趋同
+	迭代对角化中引入的矩阵$\mathbf{D}$，应该使\textcolor{red}{函数(泛函)对变量的依赖趋于“同质”(\textrm{isotropic})}，即函数曲线与不同变量的依赖关系趋同
 
 	具体到电子结构求解:~
 	\begin{itemize}
 		\item \textcolor{blue}{平面波基}\\
-			基函数$\mathrm{e}^{\mathrm{i}\vec G_m\cdot\vec r}$对波函数$\psi_{\vec k_i+\vec G}^n(\vec r)$的贡献为$c_{i,m}^n(\vec k)$，在能量泛函表达式中，高频(大的$\vec G_m$)部分比低频(小的$\vec G_m$)贡献大得多，\textrm{preconditioning}\textcolor{blue}{要使不同频率对能量泛函贡献趋同}，取
+			基函数$\mathrm{e}^{\mathrm{i}\vec G_m\cdot\vec r}$对波函数$\psi_{\vec k_i+\vec G}^n(\vec r)$的贡献为$c_{i,m}^n(\vec k)$，在能量泛函表达式中，高频(大的$\vec G_m$)部分比低频(小的$\vec G_m$)贡献大得多，\textrm{preconditioning}\textcolor{blue}{要使不同频率对能量泛函贡献趋同}:~\textcolor{red}{不同本征矢的修正项趋同，而与相应的能量本征值无关。}取
 	\begin{displaymath}
 		K(x)=\dfrac{27+18x+12x^2+8x^3}{27+18x+12x^2+8x^3+16x^4}
 	\end{displaymath}
@@ -2848,58 +2635,30 @@ $$\chi_{L,\vec k}^{\mathrm{MTO}}(\varepsilon,0,\vec r)=\sum_{\vec T}\mathrm{e}^{
 	\begin{displaymath}
 		\psi^{n+1}\equiv\mathbf{K}\mathbf{R}^n
 	\end{displaymath}
-	可根据残矢量$\mathbf{R}^n$选择方式的不同，将\textcolor{blue}{\textrm{SD}、\textrm{CG}}、\textcolor{blue}{\textrm{DIIS-RMM}}等多种算法应用于矩阵迭代对角化计算
+	可根据残矢量$\mathbf{R}^n$选择方式的不同，将\textcolor{blue}{\textrm{SD}、\textrm{CG}}、\textcolor{blue}{\textrm{RMM-DIIS}}等多种算法应用于矩阵迭代对角化计算
 }
 
 \frame
 {
-	\frametitle{能量泛函的直接优化}
-	根据\textrm{Car-Parrinello~}定义的经典\textrm{Lagranian~}量
-	{\fontsize{9.0pt}{5.2pt}\selectfont
+	\frametitle{电荷密度混合收敛算法}
+%	类似地，电荷密度混合的关键是\textrm{Preconditioning~}函数的选择
+	\begin{itemize}
+		\item \textrm{Kerker~}混合方法:~倒空间中取\textrm{Preconditioning~}函数选为
+			\begin{displaymath}
+				G_q^1=A\dfrac{q^2}{q^2+q_0^2}\quad\mbox{一般取$A=0.8$，$q_0$根据体系优化}
+			\end{displaymath}
+		\item \textrm{Broyden~}混合方法\\
+			电荷密度迭代收敛过程中，取
 	\begin{displaymath}
-		L(\{\psi_k\},\{\vec R_n\})=\frac{\mu}2\sum_k\dot{\psi}_k^2+\sum_n\frac{M_n}2\dot{\vec R}_n^2-E_{\mathrm{tot}}(\{\psi_k\},\{\vec R_n\})+\sum_{kl}\Lambda_{kl}\langle\psi_k|\psi_l\rangle
-	\end{displaymath}}
-	多粒子体系的\textrm{Euler-Lagrange~}运动方程可以表示为
-	\begin{displaymath}
-		\begin{aligned}
-			\mu\ddot{\psi}_k=&-\dfrac{\partial E_{\mathrm{tot}}}{\partial\psi_k}+2\sum_i\Lambda_{kl}\psi_l(\vec r)\\
-			M_n\ddot{\vec R}_n&=-\dfrac{\partial E_{\mathrm{tot}}}{\partial\vec R_n}+\sum_{kl}\Lambda_{kl}\dfrac{\partial\langle\psi_k|\psi_l\rangle}{\partial\vec R_n}
-		\end{aligned}
+		a_i=\sum_j\dfrac{\sum\limits_{j}A_{j,i}^{-1}}{\sum\limits_{j,k}a_ja_kA_{j,k}^{-1}}\qquad A_{j,k}=\langle R[\mathbf{x}_{j}]|R[\mathbf{x}_{k}]\rangle
 	\end{displaymath}
-	\textcolor{purple}{电子基态可以通过求解\textrm{Verlet~}运动方程得到}\\
-	在\textrm{DFT~}框架下，有
-	{\fontsize{9.0pt}{5.2pt}\selectfont
-	\begin{displaymath}
-		\psi_k(t+h)=2\psi_k(t)-\psi_k(t-h)-\dfrac{2h^2}{\mu}(H\psi_k-\sum_l\Lambda_{kl}\psi_l)
-	\end{displaymath}}
-	该方程表明:~\textcolor{blue}{电子基态也可通过各种优化方法直接求解}
-}
-
-\frame
-{
-	\frametitle{能量泛函的直接优化}
-	为确保电子轨道波函数正交，
-	{\fontsize{9.0pt}{5.2pt}\selectfont
-	\begin{displaymath}
-		|\tilde\psi_k(t+h)\rangle=2|\psi_k(t)\rangle-|\psi_k(t-h)\rangle-\dfrac{2h^2}{\mu}H|\psi_k(t)\rangle
-	\end{displaymath}}
-	为计算\textrm{Langrage}乘子，可有
-	{\fontsize{9.0pt}{5.2pt}\selectfont
-	\begin{displaymath}
-		|\psi_k(t+h)\rangle=|\tilde\psi_k(t+h)\rangle+\sum_lX_{kl}|\psi_l(t)\rangle
-	\end{displaymath}}
-	其中，{\fontsize{9.0pt}{5.2pt}\selectfont$X_{kl}=\dfrac{2h^2}{\mu}\Lambda_{kl}$}，由此$|\psi_k(t+h)\rangle$正交\\
-	$X_{ij}$要求关于$\mathbf{X}$的矩阵方程
-	{\fontsize{9.0pt}{5.2pt}\selectfont
-	\begin{displaymath}
-		\mathbf{X}\mathbf{X}^{\dag}+\mathbf{X}\mathbf{B}+\mathbf{B}^{\dag}\mathbf{X}^{\dag}=\mathbf{I}-\mathbf{A}
-	\end{displaymath}}
-	能通过以下迭代快速收敛，这里{\fontsize{9.0pt}{5.2pt}\selectfont$A_{kl}=\langle\tilde\psi_k(t+h)|\tilde\psi_l(t+h)\rangle$}，{\fontsize{9.0pt}{5.2pt}\selectfont$B_{kl}=\langle\psi_k(t)|\tilde\psi_l(t+h)\rangle$}
-	{\fontsize{9.0pt}{5.2pt}\selectfont
-	\begin{displaymath}
-		\mathbf{X}^{(n+1)}=\frac12[\mathbf{I}-\mathbf{A}+\mathbf{X}^{(n)}(\mathbf{I}-\mathbf{B})+\mathbf{X}^{(n)}(\mathbf{I}-\mathbf{B}^{\dag})-\mathbf{X}^{n}\mathbf{X}^{(n){\dag}}]
-		\end{displaymath}}
-	取初始{\fontsize{9.0pt}{5.2pt}\selectfont$\mathbf{X}=\frac12(\mathbf{I}-\mathbf{A})$}
+	该迭代过程本质上等效于\textrm{Jacobian~}矩阵的迭代
+		\item \textrm{RM-DIIS~}迭代方法
+			\begin{displaymath}
+				\langle R_n|R_n\rangle=\langle\psi_n(\mathbf{H}−\varepsilon)|(\mathbf{H}−\varepsilon)\psi_n \rangle
+			\end{displaymath}
+			优化过程通过选择\textrm{Preconditioning~}函数，作用于波函数$\psi_n$，使得电荷密度残量模最小化
+	\end{itemize}
 }
 
 \section{$\vec k$~空间布点与积分}
@@ -5670,7 +5429,8 @@ $$U=E(d^{n+1})+E(d^{n-1})-2E(d^n)$$
 	\frametitle{\textrm{spin-spirals}}
 	如果自旋方向随晶格周期也有周期性变化，这种自旋进动(\textrm{spin-spiral})引起体系具有额外的\textcolor{red}{自旋旋进周期性}，因此自旋磁矩可以表示为
 	\begin{displaymath}
-		\vec m(\vec r+\vec R)=\left(\begin{matrix}
+		\vec m(\vec r+\vec R)=
+		\left(\begin{matrix}
 			m_x(\vec r)\cos(\vec q\cdot\vec R)-m_y(\vec r)\sin(\vec q\cdot\vec R)\\
 			m_x(\vec r)\sin(\vec q\cdot\vec R)+m_y(\vec r)\cos(\vec q\cdot\vec R)\\
 			m_z(\vec r)
@@ -6170,8 +5930,273 @@ $$\Sigma(\vec r_1,\vec r_2;\omega)=\dfrac{\mathrm i}{2\pi}\int \mathrm e^{\mathr
 %------------------------------------------------------------------------------------------------------------------------------------------------------------------------------%
 
 \end{thebibliography}
+\section{附录1:~方程迭代求解与函数优化}
+\frame
+{
+	\frametitle{非线性方程的\rm{Newton~}法求根}
+\begin{figure}[h!]
+\centering
+\animategraphics[autoplay, loop, height=2.7in]{1}{Figures/OP_Newton_}{0}{17}
+\label{Equation_Newon}
+\end{figure}
+}
 
-\section{附录1:~赝势\rm{Data set}的生成}
+\frame
+{
+	\frametitle{迭代优化基本思想}
+	对于给定函数$f$，在极值点，函数的梯度满足
+	\begin{displaymath}
+		\nabla f=0
+	\end{displaymath}
+	可将函数极值问题转化成方程求根问题
+\begin{figure}[h!]
+\centering
+\includegraphics[height=1.68in,width=1.95in,viewport=30 0 450 360,clip]{Figures/OP_mini-1.png}
+\hskip 0.1in
+\includegraphics[height=1.68in,width=1.95in,viewport=150 20 560 390,clip]{Figures/OP_mini-2.png}
+\label{OP_mini}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{Method of steepest descent}}
+	对于函数$f(\mathbf{x}_0)$当前位置$\mathbf{x}_0$的负梯度方向$\mathbf{g}_0$满足
+	\begin{displaymath}
+		\mathbf{g}_0=-\nabla f(\mathbf{x}_0)
+	\end{displaymath}
+	用$\mathbf{g}_0$方向作为搜索方向，
+	\begin{displaymath}
+		\mathbf{x}=\mathbf{x}_0+\lambda\mathbf{g}_0,\qquad \lambda>0
+	\end{displaymath}
+	因为负的梯度方向为当前位置的最快下降方向，所以被称为“\textcolor{blue}{最陡下降法}”\\
+	对函数$f$最小化参数$\lambda$，可确定下一步$\mathbf{x}_1$，可有
+	\begin{displaymath}
+		\dfrac{\mathrm{d}}{\mathrm{d}\lambda}f(\mathbf{x}_0+\lambda\mathbf{g})_0=\mathbf{g}_0\cdot\nabla f(\mathbf{x}_1)=\mathbf{g}_0\cdot\mathbf{g}_1=0
+	\end{displaymath}
+	因此\textcolor{red}{最速下降法最近邻两步的梯度彼此相互垂直}\\
+	\textcolor{purple}{最陡下降法的收敛:~}\\靠近极小值时收敛速度减慢，越接近目标，步长越小，前进越慢
+}
+
+\frame
+{
+	\frametitle{\textrm{Conjugate gradient}}
+	假设函数在接近极值附件，近似有二次函数的形式
+	\begin{displaymath}
+		f(\mathbf{x})=f_0+\frac12\mathbf{x}\cdot\mathbf{H}{\mathbf{x}}+\cdots
+	\end{displaymath}
+	其中$\mathbf{H}$是\textcolor{blue}{\textrm{Hessian}矩阵}，定义为
+	\begin{displaymath}
+		H_{ij}=\dfrac{\partial^2f(\mathbf{x})}{\partial x_i\partial x_j}
+	\end{displaymath}
+	当$f$的偏导连续，则$\mathbf{H}$是对称矩阵，并且一般要求$\mathbf{H}$是正定的
+	\vskip 20pt
+	设从点$\mathbf{x}_i$出发沿方向$\mathbf{h}_i$(\textcolor{blue}{不再限于梯度$\mathbf{g}_i$方向})，前进到点$\mathbf{x}_{i+1}$，由根据最小化要求
+	\begin{displaymath}
+		\mathbf{h}_i\cdot\nabla f(\mathbf{x}_{i+1})=0
+	\end{displaymath}
+	为确定$\mathbf{x_{i+1}}$点的继续前进方向$\mathbf{h}_{i+1}$，设$\mathbf{x}_{i+1}$可由$\mathbf{x}_i+\lambda\mathbf{h}_{i+1}$得到，因此$\mathbf{x}_{i+1}$的梯度
+	\begin{displaymath}
+		\mathbf{g}_{i+1}=\nabla f(\mathbf{x}_{i+1})=-\mathbf{H}\mathbf{x}_{i+1}=-\mathbf{H}(\mathbf{x}_{i}+\lambda\mathbf{h}_{i+1})
+	\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{\textrm{Conjugate gradient}}
+	与方向$\mathbf{h}_i$相比，梯度的改变为
+	\begin{displaymath}
+		\Delta\mathbf{g}=-\lambda\mathbf{H}\mathbf{h}_{i+1}
+	\end{displaymath}
+
+	根据最小化要求，梯度的改变与$\mathbf{h}_i$方向正交
+	\begin{displaymath}
+		\mathbf{h}_i\cdot\mathbf{H}\mathbf{h}_{i+1}=0
+	\end{displaymath}
+	共轭梯度法算法:对于给定函数
+	\begin{itemize}
+		\item 已知初值$\mathbf{x}_0$和梯度$\mathbf{g}_0$，取初始方向$\mathbf{h_0}=\mathbf{g}_0$(\textcolor{blue}{最陡下降})
+		\item 根据递推关系确定
+			\begin{displaymath}
+				\begin{aligned}
+					\mathbf{g}_{i_+1}=&\mathbf{g}_{i_+1}-\lambda_i\mathbf{H}\mathbf{h}_{i}\qquad \lambda_i=\dfrac{\mathbf{g}_i\cdot\mathbf{g}_i}{\mathbf{g}_i\cdot\mathbf{H}\mathbf{h}_i}\\	
+					\mathbf{h}_{i_+1}=&\mathbf{g}_{i_+1}+\gamma_i\mathbf{h}_{i}\qquad \gamma_i=-\dfrac{\mathbf{g}_{i+1}\cdot\mathbf{H}\mathbf{h}_i}{\mathbf{h}_i\cdot\mathbf{H}\mathbf{h}_i}\\	
+					\mathbf{x}_{i_+1}=&\mathbf{x}_{i}+\lambda_i\mathbf{h}_{i}
+				\end{aligned}
+			\end{displaymath}
+	\end{itemize}
+	\textcolor{purple}{共轭梯度法:~步收敛性，稳定性高，不需要任何外来参数}
+}
+
+\frame
+{
+	\frametitle{最陡下降与共轭梯度}
+\begin{figure}[h!]
+\centering
+\includegraphics[height=2.0in,width=3.5in,viewport=0 0 950 590,clip]{Figures/OP_descent_CG.png}
+\label{decent_CG}
+\caption{\small \textrm{Schematic illustration of minimization of a function in two dimensions. The steps 1,2,3,$\cdots$ denote the steepest descent steps and the point $2^{\ast}$ denote the conjugate gradient path that reaches the exact solution after two steps if the functional is quadratic.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{Quasi-Newton Methods}}
+	求解方程
+	\begin{displaymath}
+		f(\mathbf{x})=\mathbf{x}
+	\end{displaymath}
+	$\mathbf{x}$是函数$f(\mathbf{x})$的\textcolor{red}{不动点}
+	
+	对这类问题的求解，可以利用迭代关系
+	\begin{displaymath}
+		\mathbf{x}_{i+1}=f(\mathbf{x}_i)\qquad (i=1,2,3,\cdots)
+	\end{displaymath}
+	这称为\textcolor{blue}{不动点迭代法}
+
+	另一种求解策略是定义残量
+	\begin{displaymath}
+		R[\mathbf{x}]=f(\mathbf{x})-\mathbf{x}
+	\end{displaymath}
+	最小化残量的模$|R[\mathbf{x}]|$，特别是当残量$R[\mathbf{x}]$近似是$\mathbf{x}$的线性函数，可有\textcolor{purple}{Jacobian}矩阵
+	\begin{displaymath}
+		\mathbf{J}=\dfrac{\delta R[\mathbf{x}]}{\delta\mathbf{x}}
+	\end{displaymath}
+	可通过迭代关系求解原方程的解
+	\begin{displaymath}
+		\mathbf{x}_{i+1}=\mathbf{x}_{i}-\mathbf{J}^{-1}R[\mathbf{x}_{i}]
+	\end{displaymath}
+}
+
+\section{附录2:~矩阵直接对角化与迭代对角化}
+%\subsubsection{矩阵直接对角化算法}
+\frame
+{
+	\frametitle{相似矩阵}
+\textcolor{blue}{相似矩阵}:~设$\mathbf{A}$，$\mathbf{B}$都是\textrm{n}阶矩阵，若有可逆矩阵$\mathbf{P}$，使得
+	\begin{displaymath}
+		\mathbf{P}^{-1}\mathbf{A}\mathbf{P}=\mathbf{B}
+	\end{displaymath}
+	则称$\mathbf{B}$是$\mathbf{A}$的相似矩阵，或说$\mathbf{A}$和$\mathbf{B}$相似
+	\begin{itemize}
+		\item 相似矩阵具有\textcolor{red}{相同的}\textcolor{blue}{本征向量}和\textcolor{blue}{本征值}
+		\item 若$\mathbf{A}$相似于\textcolor{brown}{对角矩阵}$\boldsymbol{\Lambda}$，则$\boldsymbol{\Lambda}$主对线上元素是$\mathbf{A}$的\textrm{n}个本征值
+		\item \textrm{n}阶方阵$\mathbf{A}$能与对角矩阵$\boldsymbol{\Lambda}$相似的充分必要条件:~$\mathbf{A}$有\textrm{n}个\textcolor{magenta}{线性无关}的本征向量
+		\item 实对称矩阵的特征值为实数
+		\item \textcolor{purple}{实对称矩阵不同的本征值所对应的本征向量线性无关}
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{\textrm{QR}分解与矩阵的对角化}
+	\textrm{QR~}方法本质上是一种变换方法，是计算一般矩阵(中小型矩阵)的全部本征值的最有效方法之一
+\vskip 5pt
+	所谓\textrm{QR}分解，就是将一个矩阵(以实对称方针为例)分解成一个\textcolor{blue}{正交矩阵}和一个\textcolor{blue}{上三角矩阵}。即
+	\begin{displaymath}
+		\mathbf{A}=\mathbf{Q}\mathbf{R}
+	\end{displaymath}
+	其中$\mathbf{Q}$是正交矩阵，即$\mathbf{Q}$中的列向量互相正交，即
+	\begin{displaymath}
+		\mathbf{Q}^{-1}\mathbf{Q}=\mathbf{I} 
+	\end{displaymath}
+	$\mathbf{R}$是上三角矩阵，可得到新矩阵$\mathbf{B}$
+	\begin{displaymath}
+		\mathbf{B}=\mathbf{R}\mathbf{Q}=\mathbf{Q}^{-1}\mathbf{A}\mathbf{Q}
+	\end{displaymath}
+	$\mathbf{B}$与$\mathbf{A}$是相似矩阵，可以再对$\mathbf{B}$进行\textrm{QR~}分解\\
+	\textcolor{red}{当$\mathbf{A}$为非奇异矩阵时，这个分解是唯一的}
+	\begin{itemize}
+		\item 实现\textrm{QR}分解的算法有多种，包括\textrm{Gram–Schmidt~}正交化，\textrm{Householder~}变换，以及\textrm{Givens~}旋转等
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{矩阵的迭代对角化}
+	\begin{itemize}
+		\item 矩阵的直接对角化计算量 $O(N^3)$
+		\item 矩阵的迭代对角化 $O(N_0^2\times N\ln N)\quad N_0\ll N$
+	\end{itemize}
+	\textcolor{blue}{迭代求本征值的思想是\textrm{Jacobian~}于\textrm{1846~}年提出的}\upcite{Crelle30-51_1846}\\
+	其基本思想是
+	\begin{displaymath}
+		(H-\varepsilon^n)|\psi^n\rangle=|R[\psi^n]\rangle
+	\end{displaymath}
+	这里$n$是迭代步数，$|\psi^n\rangle$和$\varepsilon^n$分别是本征态和本征值，$|R[\psi^n]\rangle$是残矢量
+	\vskip 10pt
+	在电子态计算过程中，选择适当的基函数，可以使\textrm{Schr\"odinger~}方程的矩阵接近对角阵，因此可有
+	\begin{displaymath}
+		|\psi\rangle=\mathbf{D}^{-1}(\mathbf{H}-\varepsilon)|\psi\rangle+|\psi\rangle
+	\end{displaymath}
+	这里$\mathbf{D}$是非奇异矩阵，与$\mathbf{H}$矩阵有关，可根据需要选取多种形式
+}
+
+\frame
+{
+	\frametitle{矩阵的迭代对角化}
+	根据迭代求本征值的基本思想，有
+	\begin{displaymath}
+		\begin{aligned}
+			\varepsilon^n=&\dfrac{\langle\psi^n|\mathbf{H}|\psi^n\rangle}{\langle\psi^n|\psi^n\rangle}\\
+			\delta\psi^{n+1}=&\mathbf{D}^{-1}(\mathbf{H}-\varepsilon^n)\psi^n\\
+			\psi^{n+1}=&\psi^n+\delta\psi^{n+1}
+		\end{aligned}
+	\end{displaymath}
+		因此可有
+		\begin{displaymath}
+			\mathbf{D}\delta\psi^{n+1}=\mathbf{R}^{n}\quad \mathrm{or}\quad \psi^{n+1}=\mathbf{D}^{-1}\mathbf{R}^n\equiv\mathbf{K}\mathbf{R}^n
+		\end{displaymath}
+		这里$\mathbf{R}^n$是$n$次迭代后的残矢量，$\mathbf{K}\equiv\mathbf{D}^{-1}$
+		\begin{itemize}
+			\item \textcolor{purple}{矩阵$\mathbf{D}$求逆应该比原始矩阵$(\mathbf{H}-\varepsilon)$求逆更容易}
+			\item 矩阵$\mathbf{D}$能使$\psi^{n+1}$比$\psi^{n}$更逼近真实的本征态
+		\end{itemize}
+		\textcolor{blue}{由微扰的角度:~}如果$\mathbf{H}$已接近对角元，\textcolor{red}{$\mathbf{D}$可以选成$\mathbf{H}$的对角元}
+}
+
+\frame
+{
+	\frametitle{\textrm{Broyden Jacobian update Method}}
+	\textrm{Broyden~}方法:~\textcolor{blue}{设计迭代方案求\textrm{Jacobian~}矩阵的逆}
+	\begin{itemize}
+		\item 给定初始的\textrm{Jacobian~}矩阵逆$\mathbf{J}_0^{-1}$(如$\mathbf{J}_0^{-1}=\alpha\mathbf{I}$)
+		\item 根据线性近似
+			\begin{displaymath}
+				\delta\mathbf{x}_{i}=-\mathbf{J}_i^{-1}\delta R[\mathbf{x}_{i}]
+			\end{displaymath}
+		得到\textrm{Jacobian~}矩阵逆的递推关系
+			\begin{displaymath}
+				\mathbf{J}_{i}^{-1}=\mathbf{J}_{i-1}^{-1}\dfrac{(\delta\mathbf{x}_i-\mathbf{J}_{i-1}^{-1}\delta R[\mathbf{x}_{i}])\delta R[\mathbf{x}_{i}]}{\langle\delta R[\mathbf{x}_{i}]|\delta R[\mathbf{x}_{i}]\rangle}
+			\end{displaymath}
+		\item 在电荷数守恒约束下，最小化模量$Q=\left\|\mathbf{J}_i^{-1}-\mathbf{J}_{i-1}^{-1}\right\|$
+	\end{itemize}
+	\textcolor{purple}{\textrm{Broyde~}方案最小化只考虑了最近邻两次迭代间的\textrm{Jacobian~}矩阵}\\
+	一个全面考虑迭代过程的改进\textrm{Broyde~}方案，将最小化模量定义为
+	\begin{displaymath}
+		Q^{\mathrm{modified}}=\sum_{j=1}^{i}w_j|\delta\mathbf{x}_j-\mathbf{J}_i^{-1}\delta\mathbf{R}_j|^2+w_0\left\|\mathbf{J}_i^{-1}-\mathbf{J}_{0}^{-1}\right\|
+	\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{\textrm{Pulay DIIS full-subspace Method}}
+	\textrm{DIIS(Direct inversion in the iterative subspace)}的基本思想:~\\
+	\textcolor{blue}{迭代中，将此前每一步迭代得到的$\mathbf{x}_i$组合，实现当前残量最小化}
+	\begin{displaymath}
+		\mathbf{x}_{i+1}=\sum_{j=0}^ia_j\mathbf{x}_{j}=c_0\mathbf{x}_0+\sum_{j=1}^ic_j\delta\mathbf{x}_{j}
+	\end{displaymath}
+	假设残量可以线性化表示
+	\begin{displaymath}
+		R[\mathbf{x}_{i+1}]=R[\sum_{j=0}^ia_j\mathbf{x}_{j}]=\sum_{j=0}^ia_jR[\mathbf{x}_{j}]
+	\end{displaymath}
+	最小化残量模的平方
+	\begin{displaymath}
+		\langle R[\mathbf{x}_{i+1}]|R[\mathbf{x}_{i+1}]\rangle=\sum_{j,k}a_ja_k\langle R[\mathbf{x}_{j}]|R[\mathbf{x}_{k}]\rangle
+	\end{displaymath}
+}
+
+\section{附录3:~赝势\rm{Data set}的生成}
 %\frame
 %{
 %	\frametitle{\textrm{AtomPAW}程序包简介}
@@ -6410,7 +6435,7 @@ $$\Sigma(\vec r_1,\vec r_2;\omega)=\dfrac{\mathrm i}{2\pi}\int \mathrm e^{\mathr
 	\end{itemize}
 }
 
-\section{附录2:~四面体积分方案的各类权重公式}
+\section{附录4:~四面体积分方案的各类权重公式}
 \frame
 {
 	\frametitle{四面体积分中\textrm{Fermi}面的确定}
