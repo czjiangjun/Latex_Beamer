@@ -1896,6 +1896,161 @@ $n_i$是$\psi_i$上的电子占据数，$\varepsilon_i$是其能量本征值，�
 \end{figure}
 }
 
+\section{第一原理分子动力学的基本思想}
+\frame
+{
+	\frametitle{能量泛函的直接优化}
+	根据\textrm{Car-Parrinello~}定义的经典\textrm{Lagrangian~}量
+	{\fontsize{9.0pt}{5.2pt}\selectfont
+	\begin{displaymath}
+		L(\{\psi_k\},\{\vec R_n\})=\frac{\mu}2\sum_k\dot{\psi}_k^2+\sum_n\frac{M_n}2\dot{\vec R}_n^2-E_{\mathrm{tot}}(\{\psi_k\},\{\vec R_n\})+\sum_{kl}\Lambda_{kl}\langle\psi_k|\psi_l\rangle
+	\end{displaymath}}
+	多粒子体系的\textrm{Euler-Lagrange~}运动方程可以表示为
+	\begin{displaymath}
+		\begin{aligned}
+			\mu\ddot{\psi}_k=&-\dfrac{\partial E_{\mathrm{tot}}}{\partial\psi_k}+2\sum_i\Lambda_{kl}\psi_l(\vec r)\\
+			M_n\ddot{\vec R}_n&=-\dfrac{\partial E_{\mathrm{tot}}}{\partial\vec R_n}+\sum_{kl}\Lambda_{kl}\dfrac{\partial\langle\psi_k|\psi_l\rangle}{\partial\vec R_n}
+		\end{aligned}
+	\end{displaymath}
+	\textcolor{purple}{电子基态可以通过求解\textrm{Verlet~}运动方程得到}\\
+	在\textrm{DFT~}框架下，有
+	{\fontsize{9.0pt}{5.2pt}\selectfont
+	\begin{displaymath}
+		\psi_k(t+h)=2\psi_k(t)-\psi_k(t-h)-\dfrac{2h^2}{\mu}(H\psi_k-\sum_l\Lambda_{kl}\psi_l)
+	\end{displaymath}}
+%	该方程表明:~\textcolor{blue}{电子基态也可通过各种优化方法直接求解}
+	每个时间步$t$，\textrm{Car-Parrinello~}采用\textrm{SHAKE~}算法迭代确定$\psi_k(t)$
+}
+
+\frame
+{
+	\frametitle{波函数正交与\rm{SHAKE~}迭代算法}
+	为确保电子轨道波函数正交，
+	{\fontsize{9.0pt}{5.2pt}\selectfont
+	\begin{displaymath}
+		|\tilde\psi_k(t+h)\rangle=2|\psi_k(t)\rangle-|\psi_k(t-h)\rangle-\dfrac{2h^2}{\mu}H|\psi_k(t)\rangle
+	\end{displaymath}}
+	为计算\textrm{Langrage}乘子，可有
+	{\fontsize{9.0pt}{5.2pt}\selectfont
+	\begin{displaymath}
+		|\psi_k(t+h)\rangle=|\tilde\psi_k(t+h)\rangle+\sum_lX_{kl}|\psi_l(t)\rangle
+	\end{displaymath}}
+	其中，{\fontsize{9.0pt}{5.2pt}\selectfont$X_{kl}=\dfrac{2h^2}{\mu}\Lambda_{kl}$}，由此$|\psi_k(t+h)\rangle$正交\\
+	$X_{ij}$要求关于$\mathbf{X}$的矩阵方程
+	{\fontsize{9.0pt}{5.2pt}\selectfont
+	\begin{displaymath}
+		\mathbf{X}\mathbf{X}^{\dag}+\mathbf{X}\mathbf{B}+\mathbf{B}^{\dag}\mathbf{X}^{\dag}=\mathbf{I}-\mathbf{A}
+	\end{displaymath}}
+	能通过以下迭代快速收敛，这里{\fontsize{9.0pt}{5.2pt}\selectfont$A_{kl}=\langle\tilde\psi_k(t+h)|\tilde\psi_l(t+h)\rangle$}，{\fontsize{9.0pt}{5.2pt}\selectfont$B_{kl}=\langle\psi_k(t)|\tilde\psi_l(t+h)\rangle$}
+	{\fontsize{9.0pt}{5.2pt}\selectfont
+	\begin{displaymath}
+		\mathbf{X}^{(n+1)}=\frac12[\mathbf{I}-\mathbf{A}+\mathbf{X}^{(n)}(\mathbf{I}-\mathbf{B})+\mathbf{X}^{(n)}(\mathbf{I}-\mathbf{B}^{\dag})-\mathbf{X}^{n}\mathbf{X}^{(n){\dag}}]
+		\end{displaymath}}
+	取初始{\fontsize{9.0pt}{5.2pt}\selectfont$\mathbf{X}=\frac12(\mathbf{I}-\mathbf{A})$}
+}
+
+\subsection{电子态能量的最小化}
+\frame
+{
+	\frametitle{电子态能量最小化}
+	\textrm{Car-Parinello~}方法基本思想
+	\begin{itemize}
+		\item 只对原子核位置考虑受力$-\dfrac{\partial E_{\mathrm{tot}}}{\partial\vec R_n}$作用
+		\item 电子结构是通过某种最小化方法确定能量泛函$E_{\mathrm{tot}}[\rho(\vec r)]$的极值得到，而非\textrm{Born-Oppenheimer}近似下的自洽迭代
+		\item \textrm{Verlet}算法确定核位移过程中，并不要求在每一步核位移时，电子步充分弛豫到当前结构的基态
+	\end{itemize}
+	在\textrm{Car-Parinello}方法中，电子结构的计算变成经典的优化问题:~电子密度迭代过程中，约束条件下最小化问题
+	\begin{itemize}
+		\item 电子本征态波函数彼此正交约束下迭代对角化(内循环):\\
+			\textcolor{blue}{子空间旋转}:~不同的正交化方法对迭代计算的影响
+		\item 电荷密度混合过程中电荷数守恒约束(外循环)
+			\begin{displaymath}
+				\sum\limits_{j=0}^i a_j=1
+			\end{displaymath}
+	\end{itemize}
+}
+
+\subsection{\rm{Fock~}矩阵迭代对角化}
+\frame
+{
+	\frametitle{矩阵的迭代对角化}
+	根据迭代求本征值的基本思想，有
+	\begin{displaymath}
+		\begin{aligned}
+			\varepsilon^n=&\dfrac{\langle\psi^n|\mathbf{H}|\psi^n\rangle}{\langle\psi^n|\psi^n\rangle}\\
+			\delta\psi^{n+1}=&\mathbf{D}^{-1}(\mathbf{H}-\varepsilon^n)\psi^n\\
+			\psi^{n+1}=&\psi^n+\delta\psi^{n+1}
+		\end{aligned}
+	\end{displaymath}
+		因此可有
+		\begin{displaymath}
+			\mathbf{D}\delta\psi^{n+1}=\mathbf{R}^{n}\quad \mathrm{or}\quad \psi^{n+1}=\mathbf{D}^{-1}\mathbf{R}^n\equiv\mathbf{K}\mathbf{R}^n
+		\end{displaymath}
+		这里$\mathbf{R}^n$是$n$次迭代后的残矢量，$\mathbf{K}\equiv\mathbf{D}^{-1}$
+		\begin{itemize}
+			\item \textcolor{purple}{矩阵$\mathbf{D}$求逆应该比原始矩阵$(\mathbf{H}-\varepsilon)$求逆更容易}
+			\item 矩阵$\mathbf{D}$能使$\psi^{n+1}$比$\psi^{n}$更逼近真实的本征态
+		\end{itemize}
+		\textcolor{blue}{由微扰的角度:~}如果$\mathbf{H}$已接近对角元，\textcolor{red}{$\mathbf{D}$可以选成$\mathbf{H}$的对角元}
+}
+
+\frame
+{
+	\frametitle{\textrm{Preconditioning}}
+	迭代对角化中引入的矩阵$\mathbf{D}$，应该使\textcolor{red}{函数(泛函)对变量的依赖趋于“同质”(\textrm{isotropic})}，即函数曲线与不同变量的依赖关系趋同
+
+	具体到电子结构求解:~
+	\begin{itemize}
+		\item \textcolor{blue}{平面波基}\\
+			基函数$\mathrm{e}^{\mathrm{i}\vec G_m\cdot\vec r}$对波函数$\psi_{\vec k_i+\vec G}^n(\vec r)$的贡献为$c_{i,m}^n(\vec k)$，在能量泛函表达式中，高频(大的$\vec G_m$)部分比低频(小的$\vec G_m$)贡献大得多，\textrm{preconditioning}\textcolor{blue}{要使不同频率对能量泛函贡献趋同}:~\textcolor{red}{不同本征矢的修正项趋同，而与相应的能量本征值无关。}取
+	\begin{displaymath}
+		K(x)=\dfrac{27+18x+12x^2+8x^3}{27+18x+12x^2+8x^3+16x^4}
+	\end{displaymath}
+	这里定义
+	\begin{displaymath}
+		x_i^n(\vec G_m)=\dfrac12\dfrac{|\vec k+\vec G_m|^2}{E^{\mathrm{kin}}(\mathbf{R}^n)}
+	\end{displaymath}
+	\textcolor{purple}{$x_i^n(\vec G_m)$表示对$n$次迭代后本征态$i$中平面波组分$|\vec k_i+\vec G_m|$动能贡献的调整比例}
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{\textrm{Preconditioning}}
+	\begin{itemize}
+		\item \textcolor{blue}{实空间基}\\
+		与平面波基类似，可以定义
+	\begin{displaymath}
+		x_i^n(\vec r)=A\dfrac12\dfrac{\lambda_i^m-V(\vec r)}{E^{\mathrm{kin}}(\mathbf{R}^n)}
+	\end{displaymath}
+		\textcolor{purple}{$x_i^n(\vec r)$表示对$n$次迭代后本征态$i$中局部动能$|\lambda_i-V(\vec r)|$对总动能贡献的调整比例}
+	\end{itemize}
+	完成\textrm{preconditioning}得到矩阵$\mathbf{K}(x_i^n)$后，由
+	\begin{displaymath}
+		\psi^{n+1}\equiv\mathbf{K}\mathbf{R}^n
+	\end{displaymath}
+	可根据残矢量$\mathbf{R}^n$选择方式的不同，将\textcolor{blue}{\textrm{SD}、\textrm{CG}}、\textcolor{blue}{\textrm{RMM-DIIS}}等多种算法应用于矩阵迭代对角化计算
+}
+
+\subsection{电荷密度混合算法}
+\frame
+{
+	\frametitle{电荷密度混合收敛算法}
+%	类似地，电荷密度混合的关键是\textrm{Preconditioning~}函数的选择
+	\begin{itemize}
+		\item \textrm{Kerker~}混合方法:~倒空间中取\textrm{Preconditioning~}函数选为
+			\begin{displaymath}
+				G_q^1=A\dfrac{q^2}{q^2+q_0^2}\quad\mbox{一般取$A=0.8$，$q_0$根据体系优化}
+			\end{displaymath}
+		\item \textrm{Pulay/Broyden~}混合方法\\
+			电荷密度迭代收敛过程中，取
+	\begin{displaymath}
+		a_i=\sum_j\dfrac{\sum\limits_{j}A_{j,i}^{-1}}{\sum\limits_{j,k}a_ja_kA_{j,k}^{-1}}\qquad A_{j,k}=\langle R[\mathbf{x}_{j}]|R[\mathbf{x}_{k}]\rangle
+	\end{displaymath}
+	该迭代过程本质上等效于\textrm{Jacobian~}矩阵的迭代
+	\end{itemize}
+}
+
 \section{\rm{APW~}方法与\rm{MTO~}方法}
 \subsection{\rm{APW~}与\rm{LAPW~}方法}
 \frame
@@ -2527,138 +2682,6 @@ $$\chi_{L,\vec k}^{\mathrm{MTO}}(\varepsilon,0,\vec r)=\sum_{\vec T}\mathrm{e}^{
 %\caption{\small \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Pseudo-Full_Poential}
 \end{figure}
-}
-
-\section{第一原理分子动力学的基本思想}
-\frame
-{
-	\frametitle{能量泛函的直接优化}
-	根据\textrm{Car-Parrinello~}定义的经典\textrm{Lagrangian~}量
-	{\fontsize{9.0pt}{5.2pt}\selectfont
-	\begin{displaymath}
-		L(\{\psi_k\},\{\vec R_n\})=\frac{\mu}2\sum_k\dot{\psi}_k^2+\sum_n\frac{M_n}2\dot{\vec R}_n^2-E_{\mathrm{tot}}(\{\psi_k\},\{\vec R_n\})+\sum_{kl}\Lambda_{kl}\langle\psi_k|\psi_l\rangle
-	\end{displaymath}}
-	多粒子体系的\textrm{Euler-Lagrange~}运动方程可以表示为
-	\begin{displaymath}
-		\begin{aligned}
-			\mu\ddot{\psi}_k=&-\dfrac{\partial E_{\mathrm{tot}}}{\partial\psi_k}+2\sum_i\Lambda_{kl}\psi_l(\vec r)\\
-			M_n\ddot{\vec R}_n&=-\dfrac{\partial E_{\mathrm{tot}}}{\partial\vec R_n}+\sum_{kl}\Lambda_{kl}\dfrac{\partial\langle\psi_k|\psi_l\rangle}{\partial\vec R_n}
-		\end{aligned}
-	\end{displaymath}
-	\textcolor{purple}{电子基态可以通过求解\textrm{Verlet~}运动方程得到}\\
-	在\textrm{DFT~}框架下，有
-	{\fontsize{9.0pt}{5.2pt}\selectfont
-	\begin{displaymath}
-		\psi_k(t+h)=2\psi_k(t)-\psi_k(t-h)-\dfrac{2h^2}{\mu}(H\psi_k-\sum_l\Lambda_{kl}\psi_l)
-	\end{displaymath}}
-%	该方程表明:~\textcolor{blue}{电子基态也可通过各种优化方法直接求解}
-	每个时间步$t$，\textrm{Car-Parrinello~}采用\textrm{SHAKE~}算法迭代确定$\psi_k(t)$
-}
-
-\frame
-{
-	\frametitle{波函数正交与\rm{SHAKE~}迭代算法}
-	为确保电子轨道波函数正交，
-	{\fontsize{9.0pt}{5.2pt}\selectfont
-	\begin{displaymath}
-		|\tilde\psi_k(t+h)\rangle=2|\psi_k(t)\rangle-|\psi_k(t-h)\rangle-\dfrac{2h^2}{\mu}H|\psi_k(t)\rangle
-	\end{displaymath}}
-	为计算\textrm{Langrage}乘子，可有
-	{\fontsize{9.0pt}{5.2pt}\selectfont
-	\begin{displaymath}
-		|\psi_k(t+h)\rangle=|\tilde\psi_k(t+h)\rangle+\sum_lX_{kl}|\psi_l(t)\rangle
-	\end{displaymath}}
-	其中，{\fontsize{9.0pt}{5.2pt}\selectfont$X_{kl}=\dfrac{2h^2}{\mu}\Lambda_{kl}$}，由此$|\psi_k(t+h)\rangle$正交\\
-	$X_{ij}$要求关于$\mathbf{X}$的矩阵方程
-	{\fontsize{9.0pt}{5.2pt}\selectfont
-	\begin{displaymath}
-		\mathbf{X}\mathbf{X}^{\dag}+\mathbf{X}\mathbf{B}+\mathbf{B}^{\dag}\mathbf{X}^{\dag}=\mathbf{I}-\mathbf{A}
-	\end{displaymath}}
-	能通过以下迭代快速收敛，这里{\fontsize{9.0pt}{5.2pt}\selectfont$A_{kl}=\langle\tilde\psi_k(t+h)|\tilde\psi_l(t+h)\rangle$}，{\fontsize{9.0pt}{5.2pt}\selectfont$B_{kl}=\langle\psi_k(t)|\tilde\psi_l(t+h)\rangle$}
-	{\fontsize{9.0pt}{5.2pt}\selectfont
-	\begin{displaymath}
-		\mathbf{X}^{(n+1)}=\frac12[\mathbf{I}-\mathbf{A}+\mathbf{X}^{(n)}(\mathbf{I}-\mathbf{B})+\mathbf{X}^{(n)}(\mathbf{I}-\mathbf{B}^{\dag})-\mathbf{X}^{n}\mathbf{X}^{(n){\dag}}]
-		\end{displaymath}}
-	取初始{\fontsize{9.0pt}{5.2pt}\selectfont$\mathbf{X}=\frac12(\mathbf{I}-\mathbf{A})$}
-}
-
-\subsection{电子态能量的最小化}
-\frame
-{
-	\frametitle{电子态能量最小化}
-	\textrm{Car-Parinello~}方法基本思想
-	\begin{itemize}
-		\item 只对原子核位置考虑受力$-\dfrac{\partial E_{\mathrm{tot}}}{\partial\vec R_n}$作用
-		\item 电子结构是通过某种最小化方法确定能量泛函$E_{\mathrm{tot}}[\rho(\vec r)]$的极值得到，而非\textrm{Born-Oppenheimer}近似下的自洽迭代
-		\item \textrm{Verlet}算法确定核位移过程中，并不要求在每一步核位移时，电子步充分弛豫到当前结构的基态
-	\end{itemize}
-	在\textrm{Car-Parinello}方法中，电子结构的计算变成经典的优化问题:~电子密度迭代过程中，约束条件下最小化问题
-	\begin{itemize}
-		\item 电子本征态波函数彼此正交
-		\item 电荷密度混合过程中，电荷数守恒，即$\sum\limits_{j=0}^i a_j=1$
-	\end{itemize}
-}
-
-\subsection{\rm{Fock~}矩阵迭代对角化与电荷密度混合算法}
-\frame
-{
-	\frametitle{\textrm{Preconditioning}}
-	迭代对角化中引入的矩阵$\mathbf{D}$，应该使\textcolor{red}{函数(泛函)对变量的依赖趋于“同质”(\textrm{isotropic})}，即函数曲线与不同变量的依赖关系趋同
-
-	具体到电子结构求解:~
-	\begin{itemize}
-		\item \textcolor{blue}{平面波基}\\
-			基函数$\mathrm{e}^{\mathrm{i}\vec G_m\cdot\vec r}$对波函数$\psi_{\vec k_i+\vec G}^n(\vec r)$的贡献为$c_{i,m}^n(\vec k)$，在能量泛函表达式中，高频(大的$\vec G_m$)部分比低频(小的$\vec G_m$)贡献大得多，\textrm{preconditioning}\textcolor{blue}{要使不同频率对能量泛函贡献趋同}:~\textcolor{red}{不同本征矢的修正项趋同，而与相应的能量本征值无关。}取
-	\begin{displaymath}
-		K(x)=\dfrac{27+18x+12x^2+8x^3}{27+18x+12x^2+8x^3+16x^4}
-	\end{displaymath}
-	这里定义
-	\begin{displaymath}
-		x_i^n(\vec G_m)=\dfrac12\dfrac{|\vec k+\vec G_m|^2}{E^{\mathrm{kin}}(\mathbf{R}^n)}
-	\end{displaymath}
-	\textcolor{purple}{$x_i^n(\vec G_m)$表示对$n$次迭代后本征态$i$中平面波组分$|\vec k_i+\vec G_m|$动能贡献的调整比例}
-	\end{itemize}
-}
-
-\frame
-{
-	\frametitle{\textrm{Preconditioning}}
-	\begin{itemize}
-		\item \textcolor{blue}{实空间基}\\
-		与平面波基类似，可以定义
-	\begin{displaymath}
-		x_i^n(\vec r)=A\dfrac12\dfrac{\lambda_i^m-V(\vec r)}{E^{\mathrm{kin}}(\mathbf{R}^n)}
-	\end{displaymath}
-		\textcolor{purple}{$x_i^n(\vec r)$表示对$n$次迭代后本征态$i$中局部动能$|\lambda_i-V(\vec r)|$对总动能贡献的调整比例}
-	\end{itemize}
-	完成\textrm{preconditioning}得到矩阵$\mathbf{K}(x_i^n)$后，由
-	\begin{displaymath}
-		\psi^{n+1}\equiv\mathbf{K}\mathbf{R}^n
-	\end{displaymath}
-	可根据残矢量$\mathbf{R}^n$选择方式的不同，将\textcolor{blue}{\textrm{SD}、\textrm{CG}}、\textcolor{blue}{\textrm{RMM-DIIS}}等多种算法应用于矩阵迭代对角化计算
-}
-
-\frame
-{
-	\frametitle{电荷密度混合收敛算法}
-%	类似地，电荷密度混合的关键是\textrm{Preconditioning~}函数的选择
-	\begin{itemize}
-		\item \textrm{Kerker~}混合方法:~倒空间中取\textrm{Preconditioning~}函数选为
-			\begin{displaymath}
-				G_q^1=A\dfrac{q^2}{q^2+q_0^2}\quad\mbox{一般取$A=0.8$，$q_0$根据体系优化}
-			\end{displaymath}
-		\item \textrm{Broyden~}混合方法\\
-			电荷密度迭代收敛过程中，取
-	\begin{displaymath}
-		a_i=\sum_j\dfrac{\sum\limits_{j}A_{j,i}^{-1}}{\sum\limits_{j,k}a_ja_kA_{j,k}^{-1}}\qquad A_{j,k}=\langle R[\mathbf{x}_{j}]|R[\mathbf{x}_{k}]\rangle
-	\end{displaymath}
-	该迭代过程本质上等效于\textrm{Jacobian~}矩阵的迭代
-		\item \textrm{RM-DIIS~}迭代方法
-			\begin{displaymath}
-				\langle R_n|R_n\rangle=\langle\psi_n(\mathbf{H}−\varepsilon)|(\mathbf{H}−\varepsilon)\psi_n \rangle
-			\end{displaymath}
-			优化过程通过选择\textrm{Preconditioning~}函数，作用于波函数$\psi_n$，使得电荷密度残量模最小化
-	\end{itemize}
 }
 
 \section{$\vec k$~空间布点与积分}
@@ -6134,27 +6157,49 @@ $$\Sigma(\vec r_1,\vec r_2;\omega)=\dfrac{\mathrm i}{2\pi}\int \mathrm e^{\mathr
 
 \frame
 {
-	\frametitle{矩阵的迭代对角化}
-	根据迭代求本征值的基本思想，有
+	\frametitle{稀疏矩阵的\textrm{Lanczos~}算法}
+	对于稀疏矩阵$\mathbf{A}$，取任意矢量$\psi_0$(要求归一),构造矢量$\psi_1$(同样要求归一，并与$\psi_0$正交)，满足
+	\begin{displaymath}
+		\mathbf{A}\psi_0=a_0\psi_0+b_0\psi_1
+	\end{displaymath}
+	由此确定$a_0$、$b_0$、$\psi_1$
 	\begin{displaymath}
 		\begin{aligned}
-			\varepsilon^n=&\dfrac{\langle\psi^n|\mathbf{H}|\psi^n\rangle}{\langle\psi^n|\psi^n\rangle}\\
-			\delta\psi^{n+1}=&\mathbf{D}^{-1}(\mathbf{H}-\varepsilon^n)\psi^n\\
-			\psi^{n+1}=&\psi^n+\delta\psi^{n+1}
+			a_0&=\langle\psi_0|\mathbf{A}|\psi_0\rangle\\
+			b_0\psi_1&=\mathbf{A}\psi_0-a_0\psi_0\\
+			||\psi_1||&=1
 		\end{aligned}
 	\end{displaymath}
-		因此可有
-		\begin{displaymath}
-			\mathbf{D}\delta\psi^{n+1}=\mathbf{R}^{n}\quad \mathrm{or}\quad \psi^{n+1}=\mathbf{D}^{-1}\mathbf{R}^n\equiv\mathbf{K}\mathbf{R}^n
-		\end{displaymath}
-		这里$\mathbf{R}^n$是$n$次迭代后的残矢量，$\mathbf{K}\equiv\mathbf{D}^{-1}$
-		\begin{itemize}
-			\item \textcolor{purple}{矩阵$\mathbf{D}$求逆应该比原始矩阵$(\mathbf{H}-\varepsilon)$求逆更容易}
-			\item 矩阵$\mathbf{D}$能使$\psi^{n+1}$比$\psi^{n}$更逼近真实的本征态
-		\end{itemize}
-		\textcolor{blue}{由微扰的角度:~}如果$\mathbf{H}$已接近对角元，\textcolor{red}{$\mathbf{D}$可以选成$\mathbf{H}$的对角元}
+	进而可构造$\psi_2$:
+	\begin{displaymath}
+		\mathbf{A}\psi_1=c_1\psi_0+a_1\psi_1+b_1\psi_2
+	\end{displaymath}
+	要求$\psi_2$与$\psi_0$、$\psi_1$正交归一条件，确定$\psi_2$，$a_1$，$b_1$，$c_1$
 }
 
+\frame
+{
+	\frametitle{稀疏矩阵的\textrm{Lanczos~}算法}
+	根据递推关系有
+	\begin{displaymath}
+		\mathbf{A}\psi_p=\sum_{q=0}^{p-1}c_p^{(q)}\psi_q+a_q\psi_p+b_p\psi_{p+1}
+	\end{displaymath}
+	这里$\psi_{p+1}$将与所有之前的$\psi_q$(\textrm{processors})正交
+
+	利用矩阵$\mathrm{A}$的\textrm{Hermitian}，因此可有等式
+	\begin{displaymath}
+		c_p^{(q)}=\langle\psi_q|\mathbf{A}\psi_p\rangle=\langle\mathbf{A}\psi_q|\psi_p\rangle=0
+	\end{displaymath}
+	即矢量$\psi_p$垂直于矢量$\mathbf{A}\psi_q$，由此可得
+	\begin{displaymath}
+		c_p^{(p-1)}=\langle\psi_{p-1}|\mathbf{A}\psi_p\rangle=\langle\mathbf{A}\psi_{p-1}|\psi_p\rangle=b_{p-1}
+	\end{displaymath}
+	经过$p$步迭代后
+	\begin{displaymath}
+		\mathbf{A}\psi_p=b_{p-1}\psi_{p-1}+a_p\psi_p+b_p\psi_{p+1}
+	\end{displaymath}
+	这里$\psi_{p+1}$要求与$\psi_p$和$\psi_{p-1}$满足正交归一条件
+}
 \frame
 {
 	\frametitle{\textrm{Broyden Jacobian update Method}}
