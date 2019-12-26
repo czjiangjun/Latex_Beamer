@@ -39,10 +39,6 @@
 \captionsetup{font=footnotesize}
 
 \usepackage{multirow}
-<<<<<<< HEAD
-=======
-
->>>>>>> dev
 \usepackage[dvipdfmx]{movie15_dvipdfmx} %插入视频
 %\usepackage{handoutWithNotes}		%(讲义)在打印PPT的时候会留出给每一页做注释的部分
 %\pgfpagesuselayout{1 on 1 with notes landscape}[a4paper,border shrink=5mm]
@@ -277,8 +273,18 @@
 	\includemovie[poster, controls, mouse, url] {0.8\textwidth}{0.2\textwidth}{Figures/Wu-Pantaohui.mp3}	      %
 \caption{京剧名宿遗留音}											      %
 \end{figure}												      %
-}													      %
+}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\frame<handout:0>
+{
+	\frametitle{}
+\begin{figure}[h!]
+\centering
+\animategraphics[autoplay, loop, height=2.0in]{1}{Figures/vlcsnap-}{01}{10}
+\label{Pro_Liu_gif}
+\end{figure}
+}
 
 %------------------------------------------------------------------------Reference----------------------------------------------------------------------------------------------
 %\begin{thebibliography}{99}
