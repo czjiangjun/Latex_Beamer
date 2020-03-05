@@ -1,0 +1,359 @@
+\documentclass[cjk,slidestop,compress,mathserif,blue]{beamer}
+%\documentclass[cjk,slidestop,handout,compress,mathserif,blue]{beamer}	%打印PPT用,handout(讲义)可去掉过渡效果，如\pause引起的多页显示，为打印时节省纸张
+%handout去掉过渡效果，如\pause引起的多页显示
+%dvipdfm选项是关键,否则编译统统通不过
+%beamer的颜色选项定义的是导航条和标题的颜色(即关键词structure的颜色)
+
+%%%%%%%%%%%%%%%%仅限于XeTeX可使用的宏包%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{fontspec,xunicode,xltxtra,beamerthemesplit}
+%\usepackage{beamerthemesplit}
+\usepackage{xeCJK}
+\setCJKmainfont[BoldFont=黑体, ItalicFont=楷体, BoldItalicFont=仿宋]{黑体}
+%\setsansfont[Mapping=tex-text]{Adobe 黑体 Std}
+%如果装了Adobe Acrobat,可在font.conf中配置Adobe字体的路径以使用其中文字体
+%也可直接使用系统中的中文字体如SimSun,SimHei,微软雅黑 等
+%原来beamer用的字体是sans family;注意Mapping的大小写,不能写错
+
+%%%%%%%%   确定标题和导航条结构的框架     %%%%%%%%%%%%
+\usepackage{beamerthemeshadow}                       %
+%\usepackage{beamerthemeclassic}%导航条色与背景色一致%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbeamerfont{roman title}{size={}}
+%\usepackage{CJK} % CJK 中文支持                                  %
+\usepackage{amsmath,amsthm,amsfonts,amssymb,bm}
+\usepackage{mathrsfs}
+\usepackage{xcolor}                                        %使用默认允许使用颜色
+\usepackage{hyperref} 
+\usepackage{graphicx}
+\usepackage{subfigure}           %图片跨页
+\usepackage{animate}		 %插入动画
+
+\usepackage[dvipdfmx]{movie15_dvipdfmx} %插入视频
+%\usepackage{handoutWithNotes}		%(讲义)在打印PPT的时候会留出给每一页做注释的部分
+%\pgfpagesuselayout{1 on 1 with notes landscape}[a4paper,border shrink=5mm]
+
+%\usepackage[numbers,sort&compress]{natbib} %紧密排列             %
+\usepackage[sectionbib]{chapterbib}        %每章节单独参考文献   %
+\usepackage{hypernat}                                                                         %
+%\usepackage[dvipdfm,bookmarksopen=true,pdfstartview=FitH,CJKbookmarks]{hyperref}		%
+\hypersetup{bookmarksnumbered,colorlinks,linkcolor=brown,citecolor=blue,urlcolor=red}         %
+%参考文献含有超链接引用时需要下列宏包，注意与natbib有冲突        %
+%\usepackage[dvipdfm]{hyperref}                                  %
+%\usepackage{hypernat}                                           %
+\newcommand{\upcite}[1]{\hspace{0ex}\textsuperscript{\cite{#1}}} %
+
+%\useoutertheme{smoothbars}
+\useinnertheme[shadow=true]{rounded}
+\usetheme{Berkeley}                                          %主题式样
+%\usetheme{Luebeck}
+
+\usecolortheme{lily}                                        %颜色主题式样
+
+\usefonttheme{professionalfonts}                           %字体主题样式宏包
+
+%\beamertemplatetransparentcoveredhigh                      %使所有被隐藏的文本高度透明
+\beamertemplatetransparentcovereddynamicmedium             %使所有被隐藏的文本完全透明，动态，动态的范围很小
+\mode<presentation>
+%\beamersetaveragebackground{gray}                          %设置背景颜色(单一色) 
+\beamertemplateshadingbackground{green!10}{red!5}         %设置背景颜色(渐变色)
+
+%i放置单位logo
+%\logo{\includegraphics[width=1.6cm,height=0.35cm]{Figures/BCC_logo-1.png}}	%简单设置logo
+
+%\pgfdeclareimage[width=3.5cm]{logoname}{Figures/BCC_logo-1.png}		%logo置于左侧微调
+%\logo{\pgfuseimage{logoname}{\vspace{0.2cm}\hspace*{-2.0cm}}}
+
+%在指定位置精确放置logo
+\usepackage{tikz}
+\usepackage{beamerfoils}
+\usepackage{pgf}
+%\logo{\pgfputat{\pgfxy(11.68,0.15)}{\includegraphics[height=1.0cm,viewport=0 0 140 120,clip]{Figures/BCC_logo-1.png}}\pgfputat{\pgfxy(10.508,-0.22)}{\includegraphics[height=0.369cm,viewport=140 0 540 120,clip]{Figures/BCC_logo-1.png}}}
+%\MyLogo{
+%	\pgfputat{\pgfxy(-50,-50)}{\pgfbox[right,base]{\includegraphics[height=1cm]{Figures/BCC_logo-1.png}}}
+
+%logo作为背景放置
+%\setbeamertemplate{background}{
+%	\pgfputat{\pgfxy(6.5,-0.5)}{\pgfbox[left,top]{\pgfimage[height=1.1cm]{Figures/BCC_logo-1.png}}}}
+
+%\logo{}									%不显示logo
+
+\begin{document}
+%\begin{CJK*}{GBK}{song}
+%\begin{CJK*}{GBK}{kai}
+%beamer下不能用\songyi、\zihao等命令!
+%\graphicspath{Figures/}
+
+%-------------------------------PPT Title-------------------------------------
+\title{专家与京剧}
+%-----------------------------------------------------------------------------
+
+%----------------------------Author & Date------------------------------------
+\author{姜骏}
+\date{\textrm{2016.08.22}}
+%\date{2013.09.10}
+\frame{\titlepage}
+%-----------------------------------------------------------------------------
+
+%------------------------------------------------------------------------------列出全文 outline ---------------------------------------------------------------------------------
+\section*{}
+\frame[allowframebreaks]
+{
+  \frametitle{Outline}
+%  \frametitle{\textcolor{mycolor}{\secname}}
+  \tableofcontents%[current,currentsection,currentsubsection]
+}
+%在每个section之前列出全部Outline
+%类似的在每个subsection之前列出全部Outline是\AtBeginSubsection[]
+\AtBeginSection[]
+{
+  \frame<handout:0> %讲义(handout)不显示 <handout:0> 讲义显示 <handout:1> / %beamer不显示 <beamer:0> beamer显示 <beamer:1>	
+  {
+    \frametitle{Outline}
+%全部Outline中，本部分加亮
+    \tableofcontents[current,currentsection]
+  }
+}
+
+%------------------------------------------------------------------------------PPT main Body------------------------------------------------------------------------------------
+\small
+\section{“三大贤”及其代表作}
+\frame
+{
+	\frametitle{朱家溍先生}
+\begin{figure}[h!]
+\centering
+\vspace{-0.2in}
+\includegraphics[height=0.64\textwidth,width=0.46\textwidth,viewport=0 0 500 720,clip]{Figures/Zhu_Jiajin.jpg}
+\hskip 5pt
+\includegraphics[height=0.64\textwidth,width=0.46\textwidth,viewport=0 0 400 610,clip]{Figures/Zhu_Tuishilu.jpg}
+\caption{朱家溍先生(1914.8-2003.9.29)}
+\label{Zhu_Jiajin}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{刘曾复先生}
+\begin{figure}[h!]
+\centering
+\vspace{-0.2in}
+\includegraphics[height=0.64\textwidth,width=0.46\textwidth,viewport=0 0 360 520,clip]{Figures/Liu_Zengfu.jpg}
+\hskip 5pt
+\includegraphics[height=0.62\textwidth,width=0.45\textwidth,viewport=100 85 660 875,clip]{Figures/Liu_Xinxu.jpg}
+\caption{刘曾复先生(1914.11.9-2012.6.27)}
+\label{Liu_Zengfu}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{吴小如先生}
+\begin{figure}[h!]
+\centering
+\vspace{-0.2in}
+\includegraphics[height=0.64\textwidth,width=0.46\textwidth,viewport=0 0 360 520,clip]{Figures/Wu_Xiaoru.jpg}
+\hskip 5pt
+\includegraphics[height=0.64\textwidth,width=0.46\textwidth,viewport=39 5 200 235,clip]{Figures/Wu_Wenlu.jpg}
+\caption{吴小如先生(1922.9.7-2014.5.11)}
+\label{Wu_Xiaoru}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{}
+\begin{figure}[h!]
+\centering
+\vspace{-10.5pt}
+\includegraphics[height=0.60\textwidth,width=0.9\textwidth,viewport=0 0 510 350,clip]{Figures/Zhu-Liu.jpg}
+\caption{\textrm{朱家溍先生与刘曾复先生合影}}
+\label{Collect_Wang}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{}
+\begin{figure}[h!]
+\centering
+%\vspace{-10.5pt}
+\includegraphics[height=0.60\textwidth,width=1.0\textwidth,viewport=0 0 500 300,clip]{Figures/Collect_Zhu-Liu-Wu-Wang.jpg}
+\caption{\fontsize{7.3pt}{3.9pt}\selectfont{\textrm{左起:~刘曾先生、朱家溍先生、吴小如先生、王金璐先生(1919-2016.6.1)等合影}}}
+\label{Collect_Wang}
+\end{figure}
+}
+
+\section{吴家与京昆}
+\frame
+{
+	\frametitle{吴氏弟兄}
+\begin{figure}[h!]
+\centering
+\vspace{-10.5pt}
+\includegraphics[height=0.52\textwidth,width=0.9\textwidth,viewport=0 0 225 140,clip]{Figures/Collect_Wus-1.jpg}
+\caption{合影-吴征铠教授(1913-2007)、吴白匋(吴征铸)教授(1906-1992)、吴征鉴研究员(1909-1982)、吴征镒研究员(1916-2013)(从左到右)}
+%\caption{合影-\fbox{吴征铠}教授、\fbox{吴白匋}(吴征铸)教授、\fbox{吴征鉴}研究员、\fbox{吴征镒}研究员(从左到右)}
+%\caption{合影-\frame{吴征铠}教授、\frame{吴白匋}(吴征铸)教授、\frame{吴征鉴}研究员、\frame{吴征镒}研究员(从左到右)}
+\label{Collect_Wu_s-1}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{吴门三院士}
+\begin{figure}[h!]
+\centering
+\vspace{-10.5pt}
+\includegraphics[height=0.57\textwidth,width=0.9\textwidth,viewport=0 0 755 500,clip]{Figures/Collect_Wus-2.jpg}
+\caption{合影-吴征铠教授、吴征鉴研究员、吴征镒研究员}
+%\caption{合影-\fbox{吴征铠}教授、\fbox{吴征鉴}研究员、\fbox{吴征镒}研究员(从左到右)}
+%\caption{合影-\frame{吴征铠}教授、\frame{吴征鉴}研究员、\frame{吴征镒}研究员(从左到右)}
+\label{Collect_Wu_s-2}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{}
+\begin{figure}[h!]
+\centering
+\vspace{-10.5pt}
+\includegraphics[height=0.52\textwidth,width=0.9\textwidth,viewport=0 0 435 250,clip]{Figures/1994_6_5.jpg}
+\caption{1994年6月5日唐敖庆教授(1915-2008)、吴征铠教授、卢嘉锡教授(1915-2001)、徐光宪教授(1920-2015)和高小霞教授(1919-1998)(从左到右)在第七次院士大会上}
+%\caption{1994年6月5日\fbox{唐敖庆}教授、\fbox{吴征铠}教授、\fbox{卢嘉锡}教授、\fbox{徐光宪}教授和\fbox{高小霞}教授(从左到右)在第七次院士大会上}
+%\caption{1994年6月5日\frame{唐敖庆}教授、\frame{吴征铠}教授、\frame{卢嘉锡}教授、\frame{徐光宪}教授和\frame{高小霞}教授(从左到右)在第七次院士大会上}
+\label{Tang_Wu_Lu_Xu}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{吴征镒院士致刘曾复先生函}
+\begin{figure}[h!]
+\centering
+\vspace{-0.2in}
+\includegraphics[height=0.40\textwidth,width=0.60\textwidth,viewport=100 100 1080 660,clip]{Figures/Wu_to_Liu_Letter-1.jpg}\\
+\includegraphics[height=0.33\textwidth,width=0.62\textwidth,viewport=210 200 1100 650,clip]{Figures/Wu_to_Liu_Letter-2.jpg}
+\caption{吴征镒院士致刘曾复先生函}
+\label{Wu_to_Liu-1}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{吴征镒院士致刘曾复先生函}
+\begin{figure}[h!]
+\centering
+\vspace{-0.2in}
+\includegraphics[height=0.62\textwidth,width=0.9\textwidth,viewport=90 210 1050 850,clip]{Figures/Wu_to_Liu_Letter-3.jpg}
+\caption{吴征镒院士致刘曾复先生函}
+\label{Wu_to_Liu-2}
+\end{figure}
+}
+
+%\section{刘曾复先生物理系的同学}
+%\frame
+%{
+%	\frametitle{}
+%\begin{figure}[h!]
+%\centering
+%\vspace{-10.5pt}
+%\includegraphics[height=0.52\textwidth,width=0.9\textwidth,viewport=0 0 920 500,clip]{Figures/Collect_Phys_1936.jpeg}
+%\caption{\textrm{1936}年清华大学物理系第八级毕业生留念:\\{\fontsize{9.3pt}{3.9pt}\selectfont\textrm{前排左起:~王大珩、戴中扆(黄葳)、许孝慰、何泽慧、郁钟正(于光远)\\后排左起:~钱三强、杨镇邦、陈亚伦、杨龙生、谢毓章}}}
+%\label{Tsinghua_Phys_1936}
+%\end{figure}
+%}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  插入音频/视频，使用url 要求视频在指定目录下 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\frame													      %
+{													      %
+	\frametitle{京剧名宿遗音}									      %
+\begin{figure}[ht]											      %
+%	\includemovie[poster, controls, mouse, url] {0.8\textwidth}{0.6\textwidth}{traffic.avi}		      %
+%%	\includemovie[poster, controls, mouse, url] {0.8\textwidth}{0.6\textwidth}{Yuan_Kuocheng.mp4}	      %
+	\includemovie[poster, controls, mouse, url] {0.8\textwidth}{0.2\textwidth}{Figures/Liu-Xiongzhouguan.mp3}     %
+	\includemovie[poster, controls, mouse, url] {0.8\textwidth}{0.2\textwidth}{Figures/Zhu_Liu-Luomahu.mp3}	      %
+%	\includemovie[poster, controls, mouse, url] {0.8\textwidth}{0.2\textwidth}{Figures/Liu-Pantaohui.mp3}	      %
+	\includemovie[poster, controls, mouse, url] {0.8\textwidth}{0.2\textwidth}{Figures/Wu-Pantaohui.mp3}	      %
+\caption{京剧名宿遗留音}											      %
+\end{figure}												      %
+}													      %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%------------------------------------------------------------------------Reference----------------------------------------------------------------------------------------------
+%\begin{thebibliography}{99}
+%-----------------------------------------------------------------------------------------------------------------------------------------------------------------------%
+%\frame
+%{
+%\frametitle{主要参考文献}
+%{\small
+%\bibitem{Singh_Book}\textrm{D. J. Singh. \textit{Plane Wave, PseudoPotential and the LAPW method} (Kluwer Academic, Boston,USA, 1994)}					%
+%  \nocite{*}																				%
+%}
+%}
+%\end{thebibliography}
+\begin{thebibliography}{99}
+\frame
+{
+\frametitle{主要参考文献}
+{\small
+	\bibitem{Zhu_Tuishilu}朱家溍　著, {\textit{故宫退食录}}\;\textrm{({\textit{上、下}})}\:北京出版社, 北京, 1999\\
+朱家溍　著, {\textit{故宫退食录}}\;\textrm{({\textit{上、下}})}\:紫禁城出版社, 北京, 2009
+	\bibitem{Liu_Xinxu}刘曾复　编著、屠楚材　记谱, {\textit{京剧新序}}\:燕山出版社, 北京, 1999\\
+{\fontsize{7.0pt}{3.9pt}\selectfont 刘曾复　编著、屠楚材　记谱，娄悦、何毅　整理, {\textit{京剧新序}}\;\textrm{(修订版)}\:学苑出版社, 北京, 2009}\\
+刘曾复　传述, {\textit{刘曾复说戏剧本集}}\:华东师范大学出版社, 上海, 2015
+	\bibitem{Wu_Wenlu}吴小如　著, {\textit{吴小如戏曲文录}}\:北京大学出版社, 北京, 1995 \\
+	吴小如　著, {\textit{吴小如戏曲随笔集补编}}\:天津古籍出版社, 天津, 2006
+	\bibitem{XQYS1-32_1983}\textrm{刘曾复、王世续、王金彦, 京剧老生把子见闻录\:\textit{戏曲艺术}, \textbf{第一期} (1983), 32}
+	\bibitem{ZGXJ1-57_1993}\textrm{刘曾复, 京剧书文指伪录\:\textit{中国戏剧}, \textbf{第01期} (1993), 57}
+}
+\nocite*{}
+}
+\end{thebibliography}
+%{\small
+%\phantomsection\addcontentsline{toc}{section}{Bibliography}	 %直接调用\addcontentsline命令可能导致超链指向不准确,一般需要在之前调用一次\phantomsection命令加以修正	%
+%\bibliography{Myref}																			%
+%\bibliographystyle{mybib}																		%
+%  \nocite{*}																				%
+%}
+%-----------------------------------------------------------------------------------------------------------------------------------------------------------------------%
+
+
+%-----------------------------------------------------------Beamer下不建议使用bib,因为涉及分页--------------------------------------------------------------------------%
+%{\small
+%\phantomsection\addcontentsline{toc}{section}{Bibliography}	 %直接调用\addcontentsline命令可能导致超链指向不准确,一般需要在之前调用一次\phantomsection命令加以修正	%
+%\bibliography{Myref}																			%
+%\bibliographystyle{mybib}																		%
+%  \nocite{*}																				%
+%}
+
+%------------------------------------------------------------------------------------------------------------------------------------------------------------------------------%
+
+%-------------------------------------------------------------------------Thanks------------------------------------------------------------------------------------------------
+%\section{致谢}
+%\frame
+%{
+%\frametitle{致$\quad$谢}
+%\begin{itemize}
+%    \setlength{\itemsep}{20pt}
+%  \item 感谢本团队高兴誉、吴泉生、宋红州等各位老师参与的讨论
+%  \item 感谢莫所长、宋主任以及软件中心各位老师和同事
+%  \item 感谢王崇愚先生的帮助
+%\end{itemize}
+%}
+\frame
+{
+\vskip 60 pt
+%\hskip 10pt \textcolor{blue}{\Huge 感谢答辩委员会各位老师\,\textrm{!}}\\
+\vskip 35 pt
+\hskip 60pt \textcolor{blue}{\Huge 谢谢大家\:!}
+%\vskip 15 pt
+%\hskip 40pt \textcolor{blue}{\Huge \textrm{for your attention\:!}}
+}
+
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+\clearpage
+%\end{CJK*}
+\end{document}
