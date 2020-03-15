@@ -1,0 +1,379 @@
+\documentclass[CJK]{beamer}
+
+%% Copyright 2004 by Yu Haijun <yhj@math.pku.edu.cn>
+%%
+%% 这个文件的目的使为了给大家提供一个使用beamer的快速模板
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
+
+\mode<article> % 仅应用于article版本
+{
+	  \usepackage{beamerbasearticle}
+	    \usepackage{fullpage}
+	      \usepackage{hyperref}
+      }
+
+      %% 下面的包控制beamer的风格，可以根据自己的爱好修改
+      %\usepackage{beamerthemesplit}   % 使用split风格
+      \usepackage{beamerthemeshadow}  % 使用shadow风格
+      \usepackage[width=2cm,dark,tab]{beamerthemesidebar}
+
+
+      %% 这些包是可能会用到的，不必修改
+      \usepackage{CJK}
+      \usepackage{pgf,pgfarrows,pgfnodes,pgfautomata,pgfheaps}
+      \usepackage{amsmath,amssymb}
+      \usepackage{graphicx}
+      \usepackage{multimedia}
+
+      %% 下面的代码用来读入Logo图象
+      \pgfdeclaremask{logomask}{pku-tower-lake-mask}
+      \pgfdeclareimage[mask=logomask,width=1.8cm]{logo}{pku-tower-lake}
+
+      \pgfdeclaremask{beidamask}{beida-mark-mask}
+      \pgfdeclareimage[mask=beidamask,totalheight=0.25cm]{beida}{beida-mark}
+
+      \pgfdeclaremask{titlemask}{pku-lake2-mask}
+      \pgfdeclareimage[mask=titlemask,height=2.5cm]{title}{pku-lake2}
+      \logo{\vbox{\hbox{\pgfuseimage{logo}\hfill}}} %设置logo图标
+
+      %% 定义一些自选的模板，包括背景、图标、导航条和页脚等，修改要慎重
+      \beamertemplateshadingbackground{red!10}{structure!10}
+      %\beamertemplatesolidbackgroundcolor{white!90!blue}
+      \beamertemplatetransparentcovereddynamic
+      \beamertemplateballitem
+      \beamertemplatenumberedballsectiontoc
+      %\beamertemplatelargetitlepage
+      \beamertemplateboldpartpage
+
+      %% \makeatletter
+      %% \usefoottemplate{ %重新定义页脚，加入作者，单位，单位图标，和文档标题
+      %%   \vbox{\tiny%
+      %%     \hbox{%
+      %%       \setbox\beamer@linebox=\hbox to\paperwidth{%
+      %%         \hbox to.5\paperwidth{\hfill\tiny\color{white}\textbf{\insertshortauthor\quad\insertshortinstitute}\hskip.1cm\lower 0.35em\hbox{\pgfuseimage{beida}}\hskip.3cm}%
+      %%         \hbox to.5\paperwidth{\hskip.3cm\tiny\color{white}\textbf{\insertshorttitle}\hfill}\hfill}%
+      %%       \ht\beamer@linebox=2.625ex%
+      %%       \dp\beamer@linebox=0pt%
+      %%       \setbox\beamer@linebox=\vbox{\box\beamer@linebox\vskip1.125ex}%
+      %%       \color{structure}\hskip-\Gm@lmargin\vrule width.5\paperwidth
+      %%       height\ht\beamer@linebox\color{structure!70}\vrule width.5\paperwidth
+      %%       height\ht\beamer@linebox\hskip-\paperwidth%
+      %%       \hbox{\box\beamer@linebox\hfill}\hfill\hskip-\Gm@rmargin}
+      %%   }
+      %% }
+      %% \makeatother
+
+      %\beamersetuncovermixins% 改变遮挡部分在遮挡前后的透明程度
+      %{\opaqueness<1>{15}\opaqueness<2>{10}\opaqueness<3>{85}\opaqueness<4->{2}}%
+      %{\opaqueness<1->{15}}%
+
+
+
+      %%
+      %% 自己的预定义命令和宏放在这里
+      %%
+
+
+
+      %%
+      %% 文档从这里正式开始
+      %%   使用\part,\section,\subsection等命令组织文档结构
+      %%   使用\frame命令制作幻灯片
+      %%
+
+      \begin{document}
+      \begin{CJK*}{GBK}{fs}
+
+
+	      \defverbatim\beamerEX{
+		      \begin{verbatim}
+		      \documentclass{beamer}
+		      \usepackage{beamerthemesplit}
+		      \title{Example Presentation Created with Beamer}
+		      \author{Till Tantau}
+		      \date{\today}
+		      \begin{document}
+		      \frame{\titlepage}
+		      \section*{Outline}
+		      \frame{\tableofcontents}
+		      \section{Introduction}
+		      \subsection{Overview of the Beamer Class}
+		      \frame {
+			         \frametitle{Features of the Beamer Class}
+				    \begin{itemize}
+						           \item<1-> Normal LaTeX class.
+								          \item<2-> Easy overlays.
+										         \item<3-> No external programs needed.
+												    \end{itemize}
+											    }
+											    \end{document}
+											    \end{verbatim}
+										    }
+
+
+										    %%
+										    %% 填写作者，单位，日期，标题等文档信息
+										    %%
+										    \title{使用Beamer制作Slide入门}
+										    \subtitle{Beamer - The~\LaTeX~Document~Class}
+										    \author{于海军}
+
+										    \institute[DSEC, CCSE, at PKU]{
+											      Department of Science and Engineering Computing\\
+											        School of Mathematics School\\
+												  Peking University
+											  }
+											  \date[ND,2004]{Development in National Day, 2004}
+											  \subject{Computer Tools, TeX, Slide}
+											  \titlegraphic{\pgfuseimage{title}}
+
+											  %%
+											  %% 定义框架页
+											  %%
+											  \AtBeginSection[{                              % 在每个Section前都会加入的Frame
+											    \frame<handout:0>{
+											        \frametitle{框架}
+											    \tableofcontents[current,currentsubsection]
+										      }
+									      }
+									      \AtBeginSubsection[                            % 在每个子段落之前
+									      {
+									        \frame<handout:0>                             % handout:0 表示只在手稿中出现
+									  {
+									      \frametitle{框架}
+								          \tableofcontents[current,currentsubsection] % 显示在目录中加亮的当前章节
+								    }
+							    }
+						    
+						    
+						    
+							    \frame{\titlepage}
+						    
+							    \section*{提纲}               % section后面加*表示不收录到目录中
+						    \frame
+					    {
+					      \frametitle{\secname}
+				        \tableofcontents            % 使用这个命令自动生成目录
+				}
+			
+			
+				\section{Slide的基本概念}
+			
+			\frame{
+			  \frametitle{\secname}
+		    \begin{description}
+			      \item[何谓幻灯片]
+			          所谓Slide就是幻灯片的意思，是一种类似照片底片的透明胶片
+			    \item[幻灯片的作用]
+			        帮助演讲者向听众传达文字、图片甚至动画、声音等信息
+			  \item[幻灯片的优点]
+			      省去演讲者抄写时间\\
+		          表达更准确，更直观\\
+		      采用计算机，能传达更丰富的内容
+	        \end{description}
+	}
+
+	\subsection{Slide的实现方式}
+
+\frame
+{
+  \frametitle{\subsecname}
+    \begin{itemize}
+	      \item<+-> 所见即所得的工具
+	          \begin{enumerate}
+			      \item Powerpoint
+			          \item Magick Point
+				      \end{enumerate}
+			        \item<+-> 基于\TeX 和PDF的实现
+				    \begin{enumerate}[<+->]
+					        \item Beamer
+						    \item Foiltex
+						        \item ConTeXt
+							    \item prosper
+							        \item pdfscreen
+								    \end{enumerate}
+							      \end{itemize}
+						      
+						      }
+					      
+						      \subsection{\TeX Slide实现的特点}
+					      
+						      \frame<1-4>[<+-| alert@+>][label=math]
+					      {
+					        \frametitle{\subsecname}
+					  \begin{enumerate}
+						    \item 基于PDF文件格式，不需要专门放映工具，流通性强
+						      \item<+-| alert@2,5> 使用\TeX,处理数学公式方便
+						          \begin{equation}
+							        \label{eq1}
+							      \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty}e^{- {x^2} \over 2}\,dx = 1
+						          \end{equation}
+						      \only<5>{\hyperlink{jumptofifth}{\beamerreturnbutton{返回}}}
+					        \item 足够用的动态效果
+						  \item 纯文本文件，便于处理和传播
+						    \end{enumerate}
+					    }
+				    
+					    \section{Beamer文件的框架}
+				    
+					    \subsection{逻辑和内容的独立}
+				    
+				    \frame
+			    {
+			      \frametitle{\secname}
+		        \begin{itemize}
+				  \item 使用part,section,subsection等命令组织逻辑结构
+				    \item 使用frame命令组织内容
+				      \end{itemize}
+			      }
+		      
+			      \subsection{内容和显示效果的独立}
+		      
+		      \frame
+	      {
+	        \frametitle{\subsecname}
+	  \begin{itemize}
+		    \item 使用themes,template，logo改变缺省风格
+		      \item 使用overlay选项控制临时效果
+		        \item 通过文档类选项控制输出格式等
+			  \end{itemize}
+		  }
+	  
+		  \section{Beamer效果演示}
+	  
+		  \subsection{逐行显示的实现}
+	  
+	  \frame
+  {
+    \frametitle{\subsecname}
+      \begin{itemize}[<+-|  alert@+>]
+	        \item 这一段在第一个Slide上显示，并被加亮
+		  \item 这一段在第二个Slide上显示，并被加亮
+		    \item 这一段在第三个Slide上显示，并被加亮
+		      \end{itemize}
+	      }
+      
+	      \subsection{字体和色彩的演示}
+      
+      \frame
+      {
+        \frametitle{\subsecname}
+  {\textbf<1> 1. \alt<1>{\CJKfamily{hei}这是黑体在第一张上}%可以为中文的字体变换定义一个宏
+      {\CJKfamily{fs}这是黑体在第一张上} \\}
+        {\textit<2> 2. \CJKfamily{song}这是斜体，在第二张上\\}
+  {\color<3>[rgb]{1,0,0} 3. 这些文字是在第3张幻灯片上是红色的，其它是黑色的。\\}
+    \only<4>{ 4. 仅在第四张出现。\\}
+      \alert<4>{4.alert代表红色\\}
+        \structure<5>{5. structure代表绿色\\}
+  \alt<6>{6. 仅在第6张}{6. 在1－5张上}
+  }
+  
+  \subsection{换页动态效果}
+  
+  \frame[<+->]{
+    \frametitle{\subsecname}
+      \begin{enumerate}
+	        \item 水平出现效果
+		    \transblindshorizontal<1>
+	      \item 竖直出现效果
+	          \transblindsvertical<2>
+	    \item 从中心到四角
+	        \transboxin<3>
+	  \item 从四角到中心
+	      \transboxout<4>
+        \item 溶解效果
+	    \transdissolve<5>
+      \item Glitter
+          \transglitter<6>
+    \item 竖直撕开(向内)
+        \transsplitverticalin<7>
+  \item 竖直撕开(向外)
+      \transsplitverticalout<8>
+        \item 涂抹
+	    \transwipe<9>
+      \item 渐出
+          \transduration<10>{1}
+    \end{enumerate}
+    }
+    
+    \subsection{超级链接的实现}
+    
+    \frame
+    {
+      \frametitle{\subsecname}
+      \hypertarget<1>{jumptofirst}{
+	      \hypertarget<2>{jumptosecond}{
+		      \hypertarget<3>{jumptothird}{
+			      \hypertarget<4>{jumptoforth}{
+				      \hypertarget<5>{jumptofifth}{
+				        \begin{itemize}
+						  \item<1-> 使用 \textbf{hypertarget} 命令添加链接目标
+						      \hyperlinkframestartnext{\beamerskipbutton{略过}}
+					        \item<2-> 使用 \textbf{hyperlink} 命令添加链接跳转
+						  \item<3->
+						      \hyperlink{jumptoforth}{\beamergotobutton{到第4页}}
+					        \item<4->
+						    \beamerbutton{到第公式(\ref{eq1})}
+					      \item<5->
+					          \hyperlink{math<5>}{到数学公式页}
+					    \item<6->
+					        \hyperlink{jumptofirst}{\beamerreturnbutton{回第1页}}
+					  \end{itemize}
+				  }
+			  
+			  
+				  \subsection{包含图象}
+			  \frame{
+			    \frametitle{\subsecname}
+		      \begin{itemize}
+			        \item 使用graphicx包
+				    \begin{figure}
+				          \includegraphics<1->[height=2.5cm,angle=0]{pku-logo.pdf}
+				        \hfill
+				      \includegraphics<2->[height=2cm]{pku-tower.pdf}
+			            \caption{\hfill{博雅塔}}
+			        \end{figure}
+			
+			  \item 使用pgfimage命令 \\
+			      \pgfuseimage<3>{logo}
+		        \end{itemize}
+		}
+	
+		\subsection{包含视频和音频}
+	
+	\frame
+{
+  \frametitle{\subsecname}
+    \begin{itemize}
+	      \item 视频 \\
+	          \movie[externalviewer,label=mymovie,width=1in,height=0.8in,poster]{\pgfuseimage{logo}}{movie.avi}
+	  %    \hyperlinkmovie[play]{mymovie}{Play}
+	    \item 声音 \\
+	        \movie[externalviewer,autostart]{这里有一段mp3}{turky.mp3}
+	  \end{itemize}
+  }
+  
+  
+  \frame
+  {
+    \frametitle{完}
+    \hypertarget{end}{
+    }
+    
+    \appendix
+    
+    \section{附录}
+    
+    \againframe<5>{math}
+    
+    \frame{ % 由于对包含了verbatim的frame换页有问题，所以我们手工加入一页
+      \frametitle{一个Beamer例子文件}
+        \beamerEX
+}
+
+\end{CJK*}
+\end{document}}
