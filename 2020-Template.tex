@@ -185,10 +185,11 @@
 %\includegraphics[height=0.57\textwidth,width=1.1\textwidth,viewport=0 0 2150 1050,clip]{Figures/Solvay_Conference-5-fine.jpg}
 \vspace{-14.5pt}
 \hspace*{-15.5pt}
-\includegraphics[height=0.48\textwidth,width=0.65\textwidth,viewport=150 105 850 710,clip]{Figures/Solvay_Conference-5.jpg}
+\includegraphics[height=0.55\textwidth,width=0.65\textwidth,viewport=150 105 850 710,clip]{Figures/Solvay_Conference-5.jpg}
 \caption{\fontsize{7.5pt}{6.2pt}\selectfont{\textrm{The Fifth Solvay International Conference, Brussels, Belgium, Oct. 1927}}}
 \label{Solvay Conference-5-fine}
 \end{figure}
+\vspace*{-11.5pt}
 \fontsize{4.1pt}{3.9pt}\selectfont{\textrm{\textcolor{blue}{前排左起}:~I.Langmuir(\textcolor{blue}{朗缪尔}) M.Planck(\textcolor{blue}{普朗克}) Marie Curie(\textcolor{blue}{居里夫人}) H.Lorentz(\textcolor{blue}{洛仑兹}) A.Einstein(\textcolor{blue}{爱因斯坦}) P.Langevin(\textcolor{blue}{朗之万}) Ch.E.Guye(\textcolor{blue}{古伊}) C.T.R.Wilson(\textcolor{blue}{威尔逊}) O.W.Richardson(\textcolor{blue}{理查森})\\
 \textcolor{blue}{中排左起}:~P.Debye(\textcolor{blue}{德拜}) M.Knudsen(\textcolor{blue}{克努森}) W.L.Bragg(\textcolor{blue}{布拉格}) H.A.Kramers(\textcolor{blue}{克莱默}) P.A.M.Dirac(\textcolor{blue}{狄拉克}) A.H.Compton(\textcolor{blue}{康普顿}) L.de Broglie(\textcolor{blue}{德布罗意}) M.Born(\textcolor{blue}{玻恩}) N.Bohr(\textcolor{blue}{玻尔})\\
 \textcolor{blue}{后排左起}:~A.Piccard(\textcolor{blue}{皮卡尔德}) E.Henriot(\textcolor{blue}{亨利厄特}) P.Ehrenfest(\textcolor{blue}{埃伦费斯特}) Ed.Herzen(\textcolor{blue}{赫尔岑}) Th.de Donder(\textcolor{blue}{德唐德}) E.Schr\"odinger(\textcolor{blue}{薛定谔}) E.Verschaffelt(\textcolor{blue}{费尔夏费尔特}) W.Pauli(\textcolor{blue}{泡利}) W.Heisenberg(\textcolor{blue}{海森堡}) R.H.Fowler(\textcolor{blue}{富勒}) L.Brillouin(\textcolor{blue}{布里渊})}}
@@ -410,10 +411,10 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 %\end{thebibliography}
 		\frame[allowframebreaks]
 {
-\begin{thebibliography}{99}
 \frametitle{主要参考文献}
+\begin{thebibliography}{99}
 {\tiny
-	\bibitem{Xu_Li_Wang}徐光宪、黎乐民、王德民, {\textit{量子化学——基本原理和从头计算法}}\;\textrm{({\textit{上、中}})}\:科学出版社, 北京, 1980
+%	\bibitem{Xu_Li_Wang}徐光宪、黎乐民、王德民, {\textit{量子化学——基本原理和从头计算法}}\;\textrm{({\textit{上、中}})}\:科学出版社, 北京, 1980
 	\bibitem{Huang_Han}黄昆\:原著、韩汝琦\:改编, {\textit{固体物理学}}\:高等教育出版社, 北京, 1988
 	\bibitem{Xie_Lu}谢希德、陆栋\:主编, {\textit{固体能带理论}}\:复旦大学出版社, 上海, 1998
 	\bibitem{JPC12-4409_1979}\textrm{J. Ihm, A. Zunger and L. Cohen, {\textit{J. Phys. C}} \textbf{12} (1979), 4409}
@@ -447,8 +448,8 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 	\bibitem{JPCSSP13-2675_1980}\textrm{A. H. MacDonald, W. E. Pickett and D. D. Koelling. \textit{J. Phys. C: Solid St. Phys.}, \textbf{13} (1980), 2675}
 	\bibitem{PRB62-11556_2000}\textrm{D. Hobbs, G. Kresse and J. Hafner. \textit{Phys. Rev.} B, \textbf{62} (2000), 11556}
 }
-\nocite*{}
 \end{thebibliography}
+\nocite*{}
 }
 
 %-----------------------------------------------------------Beamer下使用bib，注意文献罗列--------------------------------------------------------------------------%
@@ -459,18 +460,26 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 %%\phantomsection\addcontentsline{toc}{section}{Bibliography}	 %直接调用\addcontentsline命令可能导致超链指向不准确,一般需要在之前调用一次\phantomsection命令加以修正	%
 %%\phantomsection\addcontentsline{toc}{section}{主要参考文献}	 %直接调用\addcontentsline命令可能导致超链指向不准确,一般需要在之前调用一次\phantomsection命令加以修正	%
 \bibliography{Ref_2020-Template}%
-\bibliographystyle{../ref/mybib}%
+%\bibliographystyle{../ref/mybib}%
+\bibliographystyle{../Reference/mybib}%
 }}
 \nocite{*}
 }
 %------------------------------------------------------------------------------------------------------------------------------------------------------------------------------%
 
 %-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-\section{附录与文献引用}
+\section{附录与三种文献引用方式}
 \frame[allowframebreaks]
 {
 	\frametitle{四面体积分权重的确定}
-	文献引用\upcite{Xu_Li_Wang,Xu-Li-I-II,Dai_Qian,Many-Body_Theory,JPC-SSP12-4409_1979,WIEN2K-UG_2001,VASP_manual,PCCP8-3172_2006}
+	文献引用\footnote{%文献在脚注中出现
+		\begin{thebibliography}{99}
+	\fontsize{5.2pt}{1.9pt}\selectfont{
+		\vspace*{-13pt}
+	\bibitem{Xu_Li_Wang}徐光宪、黎乐民、王德民, {\textit{量子化学——基本原理和从头计算法}}\;\textrm{({\textit{上、中}})}\:科学出版社, 北京, 1980}
+\end{thebibliography}
+\nocite*{}}\upcite{Huang_Han,Xie_Lu,Xu-Li-I-II,Dai_Qian,Many-Body_Theory,JPC-SSP12-4409_1979,WIEN2K-UG_2001,VASP_manual,PCCP8-3172_2006}
+
 }
 
 %------------------------------------------------------------------------Reference----------------------------------------------------------------------------------------------
