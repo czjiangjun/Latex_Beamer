@@ -6,14 +6,7 @@
 %%%%%%%%%%%%%%%%仅限于XeTeX可使用的宏包%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{fontspec,xunicode,xltxtra,beamerthemesplit}
 %\usepackage{beamerthemesplit}
-%%%%%%%%%%%%%%%%仅限于XeTeX可使用的宏包%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\usepackage{fontspec,xunicode,xltxtra,beamerthemesplit}
-%\usepackage{beamerthemesplit}
 \usepackage{handoutWithNotes}		%(讲义)在打印PPT的时候会留出给每一页做注释的部分
-
-%%%%%%%%%%%%%%%%仅限于XeTeX可使用的宏包%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\usepackage{fontspec,xunicode,xltxtra,beamerthemesplit}
-%\usepackage{beamerthemesplit}
 \usepackage{xeCJK}
 \setCJKmainfont[BoldFont=黑体, ItalicFont=楷体, BoldItalicFont=仿宋]{黑体}
 %\setsansfont[Mapping=tex-text]{Adobe 黑体 Std}
@@ -123,15 +116,11 @@
 \subject{TEST-2}
 % This is only inserted into the PDF information catalog. Can be left
 % out.
-\frame
+\frame[allowframebreaks]
 {
 %	\frametitle{\fontsize{9.5pt}{5.2pt}\selectfont{\textcolor{orange}{“高通量并发式材料计算算法与软件”年度检查}}}
 \titlepage
 }
-\author{枯石瘦木}
-\date{\textrm{\today}}
-%\date{2013.09.10}
-\frame{\titlepage}
 %-----------------------------------------------------------------------------
 
 %------------------------------------------------------------------------------列出全文 outline ---------------------------------------------------------------------------------
@@ -146,7 +135,7 @@
 %类似的在每个subsection之前列出全部Outline是\AtBeginSubsection[]
 \AtBeginSection[]
 {
-  \frame<handout:0> %讲义(handout)不显示 <handout:0> 讲义显示 <handout:1> / %beamer不显示 <beamer:0> beamer显示 <beamer:1>	
+  \frame<handout:0>%[allowframebreaks]%讲义(handout)不显示 <handout:0> 讲义显示 <handout:1> / %beamer不显示 <beamer:0> beamer显示 <beamer:1>	
   {
     \frametitle{Outline}
 %全部Outline中，本部分加亮
@@ -165,7 +154,10 @@
 \vspace{-15.5pt}
 \hspace*{-15.5pt}
 \includegraphics[height=0.26\textwidth,width=1.1\textwidth,viewport=0 0 2915 700,clip]{Figures/Tongguang_13-1.jpeg}
-\caption{\fontsize{8.0pt}{6.2pt}\selectfont{\textrm{据传由晚清画师沈容圃绘制伶人戏装写真册页合成的“同光十三绝”画卷}}\\
+\caption{\fontsize{8.0pt}{6.2pt}\selectfont{\textrm{据传由晚清画师沈容圃绘制伶人戏装写真册页合成的“同光十三绝”画卷}}}
+\label{Tongguang_13}
+\end{figure}
+\vspace{-5.5pt}
 \fontsize{6.0pt}{3.9pt}\selectfont{\textrm{\textcolor{magenta}{左起:\qquad\;\;后排\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\;\;\;前排}\\
 \qquad\qquad\;郝兰田(\textcolor{blue}{\!《行路训子》\!之\,康氏}) \qquad\qquad\;\;\;\;\;\;\;\;\;\;\;\;张胜奎(\textcolor{blue}{\!《一捧雪》\!之\,莫成}) \\
 \qquad\qquad\;梅巧玲(\textcolor{blue}{\!《雁门关》\!之\,萧太后}) \qquad\qquad\;\;\;\;\;\;\;\;\;\;\;\;刘赶三(\textcolor{blue}{\!《探亲家》\!之\,乡下妈妈}) \\
@@ -173,9 +165,7 @@
 \qquad\qquad\;徐小香(\textcolor{blue}{\!《群英会》\!之\,周瑜}) \qquad\qquad\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\,时小福(\textcolor{blue}{\!《桑园会》\!之\,罗敷}) \\
 \qquad\qquad\;杨鸣玉(\textcolor{blue}{\!《思志诚》\!之\,闵天亮}) \qquad\qquad\;\;\;\;\;\;\;\;\;\;\;\;卢胜奎(\textcolor{blue}{\!《战北原》\!之\,诸葛亮}) \\
 \qquad\qquad\;朱莲芬(\textcolor{blue}{\!《玉簪记$\!\cdot\!$琴挑》\!之\,陈妙常}) \qquad\qquad\;\,谭鑫培(\textcolor{blue}{\!《恶虎村》\!之\,黄天霸}) \\
-\qquad\qquad\;杨月楼(\textcolor{blue}{\!《四郎探母》\!之\,杨延辉})}}}
-\label{Tongguang_13}
-\end{figure}
+\qquad\qquad\;杨月楼(\textcolor{blue}{\!《四郎探母》\!之\,杨延辉})}}
 }
 
 \frame
@@ -338,8 +328,8 @@
 %%\phantomsection\addcontentsline{toc}{section}{Bibliography}	 %直接调用\addcontentsline命令可能导致超链指向不准确,一般需要在之前调用一次\phantomsection命令加以修正	%
 %%\phantomsection\addcontentsline{toc}{section}{主要参考文献}	 %直接调用\addcontentsline命令可能导致超链指向不准确,一般需要在之前调用一次\phantomsection命令加以修正	%
 \bibliography{Peking_Opera}%
-%\bibliographystyle{../ref/mybib}%
-\bibliographystyle{plain}%
+\bibliographystyle{../ref/mybib}%
+%\bibliographystyle{plain}%
 }}
 \nocite{*}
 }
