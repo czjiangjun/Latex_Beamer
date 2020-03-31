@@ -45,6 +45,7 @@
 %\usepackage[numbers,sort&compress]{natbib} %紧密排列             %
 \usepackage[sectionbib]{chapterbib}        %每章节单独参考文献   %
 \usepackage{hypernat}                                                                         %
+\setbeamertemplate{bibliography item}[text] %参考文献前标注[]
 %\usepackage[dvipdfm,bookmarksopen=true,pdfstartview=FitH,CJKbookmarks]{hyperref}		%
 \hypersetup{bookmarksnumbered,colorlinks,linkcolor=brown,citecolor=blue,urlcolor=red}         %
 %参考文献含有超链接引用时需要下列宏包，注意与natbib有冲突        %
@@ -363,34 +364,30 @@ The fundamental laws necessary for the mathematical treatment of a large part of
 %}
 %}
 %\end{thebibliography}
-\begin{thebibliography}{99}
 \frame
 {
+\begin{thebibliography}{99}
 \frametitle{主要参考文献}
 {\small
 	\bibitem{Xu_Li_Wang}徐光宪、黎乐民、王德民, {\textit{量子化学——基本原理和从头计算法}}\;\textrm{({\textit{上、中}})}\:科学出版社, 北京, 1980
 	\bibitem{Elect_Stru}\textrm{Richard. M. Martin. \textit{Electronic Structure: Basic Theory and Practical Methods} (Cambridge University Press, Cambridge, England, 2004)}
 }
 \nocite*{}
-}
 \end{thebibliography}
-%{\small
-%\phantomsection\addcontentsline{toc}{section}{Bibliography}	 %直接调用\addcontentsline命令可能导致超链指向不准确,一般需要在之前调用一次\phantomsection命令加以修正	%
-%\bibliography{Myref}																			%
-%\bibliographystyle{mybib}																		%
-%  \nocite{*}																				%
-%}
-%-----------------------------------------------------------------------------------------------------------------------------------------------------------------------%
-
-
+}
 %-----------------------------------------------------------Beamer下不建议使用bib,因为涉及分页--------------------------------------------------------------------------%
-%{\small
-%\phantomsection\addcontentsline{toc}{section}{Bibliography}	 %直接调用\addcontentsline命令可能导致超链指向不准确,一般需要在之前调用一次\phantomsection命令加以修正	%
-%\bibliography{Myref}																			%
-%\bibliographystyle{mybib}																		%
-%  \nocite{*}																				%
-%}
-
+\frame[allowframebreaks]
+{
+\frametitle{主要参考文献}
+{\tiny\textrm{
+%%\phantomsection\addcontentsline{toc}{section}{Bibliography}	 %直接调用\addcontentsline命令可能导致超链指向不准确,一般需要在之前调用一次\phantomsection命令加以修正	%
+%%\phantomsection\addcontentsline{toc}{section}{主要参考文献}	 %直接调用\addcontentsline命令可能导致超链指向不准确,一般需要在之前调用一次\phantomsection命令加以修正	%
+\bibliography{Peking_Opera}%
+%\bibliographystyle{../ref/mybib}%
+\bibliographystyle{plain}%
+}}
+\nocite{*}
+}
 %------------------------------------------------------------------------------------------------------------------------------------------------------------------------------%
 
 %-------------------------------------------------------------------------Thanks------------------------------------------------------------------------------------------------

@@ -46,6 +46,7 @@
 %\usepackage[numbers,sort&compress]{natbib} %紧密排列             %
 \usepackage[sectionbib]{chapterbib}        %每章节单独参考文献   %
 \usepackage{hypernat}                                                                         %
+\setbeamertemplate{bibliography item}[text] %参考文献前标注[]
 %\usepackage[dvipdfm,bookmarksopen=true,pdfstartview=FitH,CJKbookmarks]{hyperref}		%
 \hypersetup{bookmarksnumbered,colorlinks,linkcolor=brown,citecolor=blue,urlcolor=red}         %
 %参考文献含有超链接引用时需要下列宏包，注意与natbib有冲突        %
@@ -328,9 +329,9 @@
 %}
 %}
 %\end{thebibliography}
-\begin{thebibliography}{99}
 \frame
 {
+\begin{thebibliography}{99}
 \frametitle{主要参考文献}
 {\small
 	\bibitem{Zhu_Tuishilu}朱家溍　著, {\textit{故宫退食录}}\;\textrm{({\textit{上、下}})}\:北京出版社, 北京, 1999\\
@@ -344,16 +345,8 @@
 	\bibitem{ZGXJ1-57_1993}\textrm{刘曾复, 京剧书文指伪录\:\textit{中国戏剧}, \textbf{第01期} (1993), 57}
 }
 \nocite*{}
-}
 \end{thebibliography}
-%{\small
-%\phantomsection\addcontentsline{toc}{section}{Bibliography}	 %直接调用\addcontentsline命令可能导致超链指向不准确,一般需要在之前调用一次\phantomsection命令加以修正	%
-%\bibliography{Myref}																			%
-%\bibliographystyle{mybib}																		%
-%  \nocite{*}																				%
-%}
-%-----------------------------------------------------------------------------------------------------------------------------------------------------------------------%
-
+}
 
 %-----------------------------------------------------------Beamer下不建议使用bib,因为涉及分页--------------------------------------------------------------------------%
 %{\small
@@ -362,6 +355,18 @@
 %\bibliographystyle{mybib}																		%
 %  \nocite{*}																				%
 %}
+\frame[allowframebreaks]
+{
+\frametitle{主要参考文献}
+{\tiny\textrm{
+%%\phantomsection\addcontentsline{toc}{section}{Bibliography}	 %直接调用\addcontentsline命令可能导致超链指向不准确,一般需要在之前调用一次\phantomsection命令加以修正	%
+%%\phantomsection\addcontentsline{toc}{section}{主要参考文献}	 %直接调用\addcontentsline命令可能导致超链指向不准确,一般需要在之前调用一次\phantomsection命令加以修正	%
+\bibliography{Peking_Opera}%
+%\bibliographystyle{../ref/mybib}%
+\bibliographystyle{plain}%
+}}
+\nocite{*}
+}
 
 %------------------------------------------------------------------------------------------------------------------------------------------------------------------------------%
 
