@@ -15,5 +15,5 @@ xelatex $1
 bibtex $1
 xelatex $1
 xelatex $1
-rm -rf $1.*.aux $1.bak $1.log $1.bbl $1-blx.bib $1.dvi $1.blg $1.out $1.nav $1.thm $1.snm $1.toc $1.*.xml $1.*~ .$1.*.swp
+rm -rf $1*aux $1.bak $1.log $1.bbl $1-blx.bib $1.dvi $1.blg $1.out $1.nav $1.thm $1.snm $1.toc $1.*.xml $1.*~ .$1.*.swp
 evince $1.pdf
