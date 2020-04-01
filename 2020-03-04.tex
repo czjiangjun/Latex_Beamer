@@ -120,6 +120,15 @@
 %beamer下不能用\songyi、\zihao等命令!
 %\graphicspath{Figures/}
 
+%\renewcommand{\figurename}{\tiny\CJKfamily{hei} 图.}
+\renewcommand{\figurename}{\tiny{\bf Fig}.}
+%\renewcommand{\tablename}{\tiny\CJKfamily{hei} 表.}
+\renewcommand{\tablename}{\tiny{\bf Tab}.}
+%\renewcommand{\tablename}{\tiny\CJKfamily{hei} 表.}
+%\renewcommand{\thesubfigure}{\roman{subfigure}}  %\makeatletter 子图标记罗马字母
+\renewcommand{\thesubfigure}{\tiny(\alph{subfigure})}  %\makeatletter　子图标记英文字母
+%\renewcommand{\thesubfigure}{}  \makeatletter　%子图无标记
+
 %-------------------------------PPT Title-------------------------------------
 \title{基于\rm{DFT}的第一原理计算方法简介}
 %-----------------------------------------------------------------------------
@@ -181,10 +190,10 @@
 \vspace*{-0.25in}
 \centering
 \includegraphics[height=0.80in,width=4.05in]{Figures/MGE-2.png}
-%\caption{\small \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \vskip 0.05pt
 \includegraphics[height=2.20in,width=3.45in]{Figures/Multi-Scale-6.png}
-%\caption{\small \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Multi-Scale}
 \end{figure}
 }
@@ -196,8 +205,8 @@
 \vspace*{-0.18in}
 \centering
 \includegraphics[height=2.55in,width=4.05in]{Figures/MGE.png}
-%\caption{\small \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-%\caption{\small \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{MGE}
 \end{figure}
 }
@@ -602,7 +611,7 @@ $\varepsilon_X[\rho]$和$\varepsilon_C[\rho]$分别为一个电子的交换能�
 \vspace*{-0.21in}
 \hspace*{-0.1in}
 \includegraphics[height=2.7in,width=4.0in,viewport=2 5 1162 880,clip]{Figures/DFT.png}
-\caption{\small \textrm{The Analysis of Kohn-Sham equation.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\caption{\tiny \textrm{The Analysis of Kohn-Sham equation.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{DFT}
 \end{figure}
 }
@@ -615,7 +624,7 @@ $\varepsilon_X[\rho]$和$\varepsilon_C[\rho]$分别为一个电子的交换能�
 \vspace*{-0.25in}
 \hspace*{-0.80in}
 \includegraphics[height=2.80in,width=4.95in,viewport=5 3 1490 870,clip]{Figures/DFT-SCF_2.png}
-%\caption{\small \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{DFT-SCF-2}
 \end{figure}
 }
@@ -668,7 +677,7 @@ $\varepsilon_X[\rho]$和$\varepsilon_C[\rho]$分别为一个电子的交换能�
 \centering
 \includegraphics[height=0.8in,width=4.in,viewport=41 433 539 546,clip]{Figures/Pseudo_wave.pdf}\\
 \includegraphics[height=0.8in,width=4.in,viewport=41 210 539 339,clip]{Figures/Pseudo_wave.pdf}
-\caption{\small \textrm{The periodic Potential and the wave functions in crystal.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\caption{\tiny \textrm{The periodic Potential and the wave functions in crystal.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Potential-Wave}
 \end{figure}
 }
@@ -681,7 +690,7 @@ $\varepsilon_X[\rho]$和$\varepsilon_C[\rho]$分别为一个电子的交换能�
 %\hspace*{-10pt}
 %\vspace*{-1.1in}
 \includegraphics[height=1.5in,width=2.5in,viewport=5 5 700 450,clip]{Figures/Band_Gap-2.png}
-%\caption{\small \textrm{The Band-structure from free-electron gas.}}%
+%\caption{\tiny \textrm{The Band-structure from free-electron gas.}}%
 \label{Band-Gap-2}
 \end{figure} 
 \begin{displaymath}
@@ -703,7 +712,7 @@ $\varepsilon_X[\rho]$和$\varepsilon_C[\rho]$分别为一个电子的交换能�
 %\hspace*{-10pt}
 %\vspace*{-1.1in}
 \includegraphics[height=1.3in,width=1.4in,viewport=0 5 420 450,clip]{Figures/Band_Gap-1.png}
-%\caption{\small \textrm{The Band-structure from free-electron gas.}}%
+%\caption{\tiny \textrm{The Band-structure from free-electron gas.}}%
 \label{Band-Gap-1}
 \end{figure} 
 \begin{displaymath}
@@ -725,7 +734,7 @@ $\varepsilon_X[\rho]$和$\varepsilon_C[\rho]$分别为一个电子的交换能�
 %\hspace*{-10pt}
 %\vspace*{-1.1in}
 \includegraphics[height=2.1in,width=3.8in,viewport=10 90 570 380,clip]{Figures/Band_Gap.pdf}
-\caption{\small \textrm{The Band-structure from free-electron gas.}}%
+\caption{\tiny \textrm{The Band-structure from free-electron gas.}}%
 \label{Band-Gap-co}
 \end{figure} 
 }
@@ -746,15 +755,15 @@ $\varepsilon_X[\rho]$和$\varepsilon_C[\rho]$分别为一个电子的交换能�
 \includegraphics[height=0.8in,width=1.5in,viewport=30 140 545 480,clip]{Figures/Hydrogen-Mol-Orbital.pdf}}
 \subfigure[分子波函数]{
 \label{fig:Hydrogen-Psi}
-\vspace*{-0.2in}
 \includegraphics[height=0.5in,width=1.4in,viewport=25 218 595 440,clip]{Figures/Hydrogen-Psi.pdf}}\\
+\vspace*{5pt}
 \subfigure[分子轨道与能带]{
 \label{fig:Hydrogen-Band-1D}
 \includegraphics[height=0.6in,width=1.4in,viewport=35 215 575 450,clip]{Figures/Hydrogen-Band-1D.pdf}}
 \subfigure[$d$\,轨道]{
 \label{fig:Hydrogen-d-Band-1D}
 \includegraphics[height=1.0in,width=0.7in,viewport=40 45 330 535,clip]{Figures/Hydrogen-d-Band-1D.pdf}}
-\caption{\small \textrm{The Band-structure from Molecular-orbital.}}%
+\caption{\tiny \textrm{The Band-structure from Molecular-orbital.}}%
 \label{Band-Structure-local-orbit}
 \end{figure} 
 }
@@ -857,7 +866,7 @@ $\varepsilon_X[\rho]$和$\varepsilon_C[\rho]$分别为一个电子的交换能�
 \vspace*{-0.25in}
 \centering
 \includegraphics[height=2.80in,width=4.95in,viewport=5 3 1250 780,clip]{Figures/Method_Procedure.png}
-%\caption{\small \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Method-Procedure}
 \end{figure}
 }
@@ -977,7 +986,7 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 \vspace*{-0.10in}
 \includegraphics[height=1.35in,width=1.40in,viewport=154 100 562 508,clip]{Figures/Pseudo.pdf}
 \includegraphics[height=1.35in,width=2.55in,viewport=1 1 980 500,clip]{Figures/Pseudo-2.png}
-\caption{\small \textrm{The Pseudo wave function and Pseudo potential.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\caption{\tiny \textrm{The Pseudo wave function and Pseudo potential.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Pseudo_Potential-Wave}
 \end{figure}
 }
@@ -999,7 +1008,7 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 \centering
 \vspace*{-0.10in}
 \includegraphics[height=1.60in,width=2.57in,viewport=0 0 980 600,clip]{Figures/Pseudo-model-empty_core.png}
-\caption{\small \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Pseudo_model-empty_core}
 \end{figure}
 }
@@ -1011,7 +1020,7 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 \centering
 \vspace*{-0.10in}
 \includegraphics[height=1.30in,width=4.17in,viewport=0 0 1150 350,clip]{Figures/Pseudo-model.png}
-\caption{\small \textrm{Left:``Empty core'' model potential of Ashcroft in which the potential is zero inside radius $R_c(l)$ which is different for each $l$. Right: Square well model potential with value $A_l$ inside a cut-off radius $R_c$, proposed by Abarenkov and Heine and fit to atomic data by Animalu and Heine. The fact that the potential are weak, zero, or even positive inside cut-off radius $R_c$ is an illustration of the ``cancellation theorem''.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\caption{\tiny \textrm{Left:``Empty core'' model potential of Ashcroft in which the potential is zero inside radius $R_c(l)$ which is different for each $l$. Right: Square well model potential with value $A_l$ inside a cut-off radius $R_c$, proposed by Abarenkov and Heine and fit to atomic data by Animalu and Heine. The fact that the potential are weak, zero, or even positive inside cut-off radius $R_c$ is an illustration of the ``cancellation theorem''.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Pseudo-model}
 \end{figure}
 }
@@ -1055,7 +1064,7 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 \centering
 \vspace*{-0.10in}
 \includegraphics[height=1.30in,width=4.17in,viewport=0 0 1150 350,clip]{Figures/Pseudo-OPW_NCPP.png}
-\caption{\small \textrm{Schematic example of a valence function that has the character of a $3s$ orbital near the nucleus and two examples of smooth functions (dashed lines) that equal the full wave-function outside the core region. Left: the smooth part of the valence function defined by OPW-like equation; Right: a smooth pseudo-function that satisfies the norm-conservation condition.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\caption{\tiny \textrm{Schematic example of a valence function that has the character of a $3s$ orbital near the nucleus and two examples of smooth functions (dashed lines) that equal the full wave-function outside the core region. Left: the smooth part of the valence function defined by OPW-like equation; Right: a smooth pseudo-function that satisfies the norm-conservation condition.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Pseudo-OPW_NCPP}
 \end{figure}
 }
@@ -1080,7 +1089,7 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 \centering
 %\vspace*{-0.10in}
 \includegraphics[height=2.70in,width=3.77in,viewport=70 40 900 610,clip]{Figures/Pseudo-NC.jpg}
-%\caption{\small \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Pseudo-NC}
 \end{figure}
 }
@@ -1101,7 +1110,7 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 \vspace*{-0.10in}
 \centering
 \includegraphics[height=1.35in,width=1.40in,viewport=30 55 415 500,clip]{Figures/Norm-US-wave.pdf}
-\caption{\small \textrm{Oxygen 2} \textit{p} \textrm{radical wave function (solid), NC-pseudo-wave (dottde) and US-pseudo-wave (dashed).}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\caption{\tiny \textrm{Oxygen 2} \textit{p} \textrm{radical wave function (solid), NC-pseudo-wave (dottde) and US-pseudo-wave (dashed).}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Norm-US-wave}
 \end{figure}
 }
@@ -1151,7 +1160,7 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 \vspace*{-0.25in}
 %\hspace*{-0.80in}
 \includegraphics[height=2.80in,width=4.10in,viewport=0 0 1190 875,clip]{Figures/Pseudo_Potential.png}
-%\caption{\small \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Pseudo_Poential}
 \end{figure}
 }
@@ -1181,7 +1190,7 @@ $i$表示原子位置$\vec R$、原子轨道($l,m$)和能级$\epsilon_k$的指�
 \begin{figure}[h!]
 \centering
 \includegraphics[height=1.8in,width=4.in,viewport=30 210 570 440,clip]{Figures/PAW_projector.eps}
-\caption{\small \textrm{The analysis of PAW basic function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\caption{\tiny \textrm{The analysis of PAW basic function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{PAW_baisc}
 \end{figure}
 }
@@ -1339,7 +1348,7 @@ $$\left.\dfrac{\partial E[\tilde\Psi, R]}{\partial\langle\tilde\Psi_n|}\right|_R
 \begin{figure}[h!]
 \centering
 \includegraphics[height=1.2in,width=1.5in,viewport=0 0 570 545,clip]{Figures/PAW-partical.png}
-\caption{\small \textrm{The partical-wave of Fe atom.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\caption{\tiny \textrm{The partical-wave of Fe atom.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{PAW_partical_Fe}
 \end{figure}
 }
@@ -1353,7 +1362,7 @@ $$\left.\dfrac{\partial E[\tilde\Psi, R]}{\partial\langle\tilde\Psi_n|}\right|_R
 \centering
 \vspace*{-0.33in}
 \includegraphics[height=1.2in,width=1.8in,viewport=0 0 1100 745,clip]{Figures/PAW_projector-2.png}
-\caption{\small \textrm{The projector of PAW.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\caption{\tiny \textrm{The projector of PAW.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{PAW_projector}
 \end{figure}
 \end{minipage}
@@ -1400,7 +1409,7 @@ $$\left.\dfrac{\partial E[\tilde\Psi, R]}{\partial\langle\tilde\Psi_n|}\right|_R
 \begin{figure}[h!]
 \centering
 \includegraphics[height=1.0in,width=4.1in,clip]{Figures/Pseudo-Potential.png}
-\caption{\small \textrm{The relation of Pseudo potential and PAW.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\caption{\tiny \textrm{The relation of Pseudo potential and PAW.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Pseudo_Potential_PAW}
 \end{figure}
 }
@@ -1411,7 +1420,7 @@ $$\left.\dfrac{\partial E[\tilde\Psi, R]}{\partial\langle\tilde\Psi_n|}\right|_R
 %\begin{figure}[h!]
 %\centering
 %\includegraphics[height=2.3in,width=4.0in,viewport=0 0 1280 745,clip]{Figures/PAW-baseset.png}
-%\caption{\small \textrm{The Augmentation of PAW.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\caption{\tiny \textrm{The Augmentation of PAW.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 %\label{PAW_basesel}
 %\end{figure}
 %}
@@ -1422,7 +1431,7 @@ $$\left.\dfrac{\partial E[\tilde\Psi, R]}{\partial\langle\tilde\Psi_n|}\right|_R
 %\begin{figure}[h!]
 %\centering
 %\includegraphics[height=2.3in,width=4.0in,viewport=0 0 1100 745,clip]{Figures/PAW-projector.png}
-%\caption{\small \textrm{The projector of PAW.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\caption{\tiny \textrm{The projector of PAW.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 %\label{PAW_projector}
 %\end{figure}
 %}
@@ -1526,6 +1535,18 @@ $n_i$是$\psi_i$上的电子占据数，$\varepsilon_i$是其能量本征值，�
 \frame
 {
 	\frametitle{离子间相互作用的\textrm{Ewald}求和}
+\begin{figure}[h!]
+\centering
+%\vspace*{-0.20in}
+\includegraphics[height=1.5in,width=3.62in,viewport=0 0 1100 455,clip]{Figures/Ewald_method.png}
+\caption{\fontsize{4.5pt}{2.2pt}\selectfont{\textrm{Decomposition of the potential $-e^2/r$ (singular at the origin and of long-range nature) into a contribution $-(e^2/r)\mathrm{erf}(\sqrt{\eta}r)$(regular at the origin of long-range) and a contribution $-(e^2/r)\mathrm{erfc}(\sqrt{\eta}r)$ (singular at the origin and of short-range nature). Here $\sqrt{\eta}=1 (\mathrm{Bohr radius unit})$ is chosen.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Error_Function}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{离子间相互作用的\textrm{Ewald}求和}
 	\begin{displaymath}
 		\begin{aligned}
 			E_{\textrm{Ewald}}=&\dfrac12\sum_{\vec R,s}\sideset{}{^{\prime}}\sum_{\vec R^{\prime},\vec s^{\prime}}\dfrac{Z_sZ_{s^{\prime}}}{|\vec R+\vec r_s-\vec R^{\prime}-\vec r_{s^{\prime}}|}-\lim_{\vec k\rightarrow0}\dfrac12\times\dfrac{4\pi(\sum_sZ_s)^2}{\Omega|\vec k|^2}\\
@@ -1557,7 +1578,7 @@ $n_i$是$\psi_i$上的电子占据数，$\varepsilon_i$是其能量本征值，�
 \centering
 \vspace*{-0.18in}
 \includegraphics[height=1.85in,width=2.2in,viewport=0 0 600 495,clip]{Figures/VASP_Total_ENE.png}
-\caption{\small \textrm{The Total-E calculated by VASP.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\caption{\tiny \textrm{The Total-E calculated by VASP.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{TOTEN_VASP}
 \end{figure}
 }
@@ -1570,7 +1591,7 @@ $n_i$是$\psi_i$上的电子占据数，$\varepsilon_i$是其能量本征值，�
 \begin{figure}[h!]
 \centering
 \includegraphics[height=2.3in,width=4.0in,viewport=0 0 1280 745,clip]{Figures/PAW-baseset.png}
-\caption{\small \textrm{The Augmentation of PAW.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\caption{\tiny \textrm{The Augmentation of PAW.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{PAW_baseset}
 \end{figure}
 }
@@ -1581,7 +1602,7 @@ $n_i$是$\psi_i$上的电子占据数，$\varepsilon_i$是其能量本征值，�
 %\begin{figure}[h!]
 %\centering
 %\includegraphics[height=2.3in,width=4.0in,viewport=0 0 1100 745,clip]{Figures/PAW-projector.png}
-%\caption{\small \textrm{The projector of PAW.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\caption{\tiny \textrm{The projector of PAW.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 %\label{PAW_projector}
 %\end{figure}
 %}
@@ -1794,7 +1815,7 @@ $n_i$是$\psi_i$上的电子占据数，$\varepsilon_i$是其能量本征值，�
 \centering
 %\includegraphics[height=2.7in,width=4.0in,viewport=0 0 1180 875,clip]{Figures/dual_grid.png}
 \includegraphics[height=2.7in,width=4.0in,viewport=0 0 800 600,clip]{Figures/dual_grid-2.png}
-\caption{\small \textrm{The Schematic description of the dual grid technique.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\caption{\tiny \textrm{The Schematic description of the dual grid technique.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{PAW_dualgrid}
 \end{figure} 
 }
@@ -1981,7 +2002,7 @@ $n_i$是$\psi_i$上的电子占据数，$\varepsilon_i$是其能量本征值，�
 %\includegraphics[height=2.1in,width=1.6in,viewport=0 0 480 630,clip]{Figures/VASP_procedure.png}
 %\includegraphics[height=2.1in,width=2.3in,viewport=0 0 740 600,clip]{Figures/Ab-initio-Ene.png}
 \includegraphics[height=2.5in,width=1.8in,viewport=0 0 480 630,clip]{Figures/VASP_procedure.png}
-\caption{\small \textrm{The Flow of calculation for the KS-ground states.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\caption{\tiny \textrm{The Flow of calculation for the KS-ground states.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{PAW_baiseset}
 \end{figure} 
 }
@@ -2068,7 +2089,7 @@ $n_i$是$\psi_i$上的电子占据数，$\varepsilon_i$是其能量本征值，�
 \centering
 %\includegraphics[height=2.7in,width=4.0in,viewport=0 0 1300 960,clip]{Figures/VASP_procedure-full.png}
 \includegraphics[height=2.1in,width=2.7in,viewport=0 0 740 600,clip]{Figures/Ab-initio-Ene.png}
-\caption{\small \textrm{The Flow of calculation for the AIMD.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\caption{\tiny \textrm{The Flow of calculation for the AIMD.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{PAW_AIMD}
 \end{figure} 
 }
@@ -2203,7 +2224,7 @@ $n_i$是$\psi_i$上的电子占据数，$\varepsilon_i$是其能量本征值，�
 \subfigure[\textrm{Division of the unit cell into spheres(I) and into interstitial region(II)}]{
 \label{Semi-local-space}
 \includegraphics[height=1.45in,width=1.92in,viewport=1 20 515 435,clip]{Figures/Muffin-Tin.png}}
-%\caption{\small \textrm{Division of the unit cell into spheres(I) and into interstitial region(II)}}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\caption{\tiny \textrm{Division of the unit cell into spheres(I) and into interstitial region(II)}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Muffin_tin-1}
 \end{figure}
 \textrm{Muffin-tin}近似是\textrm{Johnson}采用$\chi_{\alpha}$方法计算分子体系的交换-相关时，引入多重散射(\textrm{Multiple scattering})理论时提出的%，\textrm{Muffin-tin}直译为“松饼罐头”，意思是把分子中的原子看成堆在一起的圆球罐
@@ -2218,7 +2239,7 @@ $n_i$是$\psi_i$上的电子占据数，$\varepsilon_i$是其能量本征值，�
 \centering
 \includegraphics[height=1.10in,width=1.80in,viewport=40 150 545 465,clip]{Figures/Muffin_tin.pdf}
 \includegraphics[height=1.10in,width=1.45in,viewport=1 20 485 435,clip]{Figures/APW.png}
-\caption{\small \textrm{Partitioning of the unit cell into atomic spheres(I) and an interstitial region(II)}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\caption{\tiny \textrm{Partitioning of the unit cell into atomic spheres(I) and an interstitial region(II)}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Muffin_tin-2}
 \end{figure}
 \begin{displaymath}
@@ -2264,7 +2285,7 @@ $${\hskip -14pt \varphi(\vec k_j,\vec r)=\left\{
 \begin{figure}[h!]
 \centering
 \includegraphics[height=1.20in,width=1.98in,viewport=1 20 585 435,clip]{Figures/WIEN2k-LAPW.png}
-\caption{\small \textrm{Partitioning of the unit cell into atomic spheres(I) and an interstitial region(II)}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\caption{\tiny \textrm{Partitioning of the unit cell into atomic spheres(I) and an interstitial region(II)}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Muffin_tin-3}
 \end{figure}
 }
@@ -2307,7 +2328,7 @@ $$\hskip -10pt \phi_{lm}^{\mathrm{LO}}(\vec r)=\left\{
 \hspace{15pt}
 \includegraphics[height=1.45in,width=1.55in,viewport=50 10 470 415,clip]{Figures/WIEN2k-lo.png}
 \includegraphics[height=1.45in,width=1.45in,viewport=5 1 570 570,clip]{Figures/semi-core.png}
-\caption{\small \textrm{}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\caption{\tiny \textrm{}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Muffin_tin_LO}
 \end{figure}
 }
@@ -2359,7 +2380,7 @@ $$}
 \begin{figure}[h!]
 \centering
 \includegraphics[height=2.70in,width=2.02in,viewport=1 22 507 715,clip]{Figures/MT_FP.png}
-\caption{\small \textrm{From Muffin-tin Potential to Full Potential}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\caption{\tiny \textrm{From Muffin-tin Potential to Full Potential}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Muffin_tin_FP}
 \end{figure}
 }
@@ -2387,7 +2408,7 @@ $$
 \vspace*{-15pt}
 \centering
 \includegraphics[height=1.25in,width=1.32in,viewport=1 22 507 575,clip]{Figures/potential_multipole.jpg}
-%\caption{\small \textrm{From Muffin-tin Potential to Full Potential}}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\caption{\tiny \textrm{From Muffin-tin Potential to Full Potential}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Potential-multipole}
 \end{figure}
 \begin{displaymath}
@@ -2666,7 +2687,7 @@ $$
 \centering
 \includegraphics[height=1.55in,width=1.95in,viewport=0 0 845 635,clip]{Figures/MTO-envelope-1.png}
 \includegraphics[height=1.55in,width=1.95in,viewport=0 0 885 635,clip]{Figures/MTO-envelope-2.png}
-\caption{\small \textrm{The radial function of MTO expressed in different region.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\caption{\tiny \textrm{The radial function of MTO expressed in different region.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{MTO-envelope}
 \end{figure}
 }
@@ -2748,7 +2769,7 @@ $$\chi_{L,\vec k}^{\mathrm{MTO}}(\varepsilon,0,\vec r)=\sum_{\vec T}\mathrm{e}^{
 	\vspace*{-0.7in}
 \centering
 \includegraphics[height=2.55in,width=3.15in,viewport=0 0 845 635,clip]{Figures/MTO-Tail_cancellation.png}
-\caption{\small \textrm{The wavefunction in the spere at the origin is the sum of the ``head function'' in that sphere plus the tails from neighboring spheres. The schematic illustration of the ``tail cancellation'' of the MTO.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\caption{\tiny \textrm{The wavefunction in the spere at the origin is the sum of the ``head function'' in that sphere plus the tails from neighboring spheres. The schematic illustration of the ``tail cancellation'' of the MTO.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{MTO-tail-candellation}
 \end{figure}
 }
@@ -2819,7 +2840,7 @@ $$\chi_{L,\vec k}^{\mathrm{MTO}}(\varepsilon,0,\vec r)=\sum_{\vec T}\mathrm{e}^{
 \vspace*{-0.25in}
 %\hspace*{-0.80in}
 \includegraphics[height=2.80in,width=4.10in,viewport=0 0 1190 876,clip]{Figures/Pseudo-Full_Potential.png}
-%\caption{\small \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Pseudo-Full_Poential}
 \end{figure}
 }
@@ -2877,7 +2898,7 @@ $$\chi_{L,\vec k}^{\mathrm{MTO}}(\varepsilon,0,\vec r)=\sum_{\vec T}\mathrm{e}^{
 %\hspace*{-10pt}
 \vspace*{-0.3in}
 \includegraphics[height=1.5in,width=4.1in,viewport=0 5 1400 500,clip]{Figures/Brillouin-Band.png}
-\caption{\small \textrm{The relation between unfolded-Band and the Brillouin-zone.}}%
+\caption{\tiny \textrm{The relation between unfolded-Band and the Brillouin-zone.}}%
 \label{Brillouin-Band}
 \end{figure} 
 周期体系的\textrm{Fermi~}能级和\textrm{Fermi~}面的确定:\\
@@ -2900,7 +2921,7 @@ $$\chi_{L,\vec k}^{\mathrm{MTO}}(\varepsilon,0,\vec r)=\sum_{\vec T}\mathrm{e}^{
 \includegraphics[height=1.2in,width=1.3in,viewport=0 0 110 100,clip]{Figures/FS-Li.jpg}
 \includegraphics[height=1.2in,width=1.3in,viewport=0 0 110 100,clip]{Figures/FS-Mg.jpg}
 \includegraphics[height=1.2in,width=1.3in,viewport=0 0 110 100,clip]{Figures/FS-Cu.jpg}
-\caption{\small \textrm{The Fermi-surface of Li, Mg, Cu in the first Brillouin-zone.}}%
+\caption{\tiny \textrm{The Fermi-surface of Li, Mg, Cu in the first Brillouin-zone.}}%
 \label{Brillouin-Band-Fermi}
 \end{figure} 
 \textcolor{blue}{\textrm{Fermi~}面的形状}:\\
@@ -2967,7 +2988,7 @@ $$\chi_{L,\vec k}^{\mathrm{MTO}}(\varepsilon,0,\vec r)=\sum_{\vec T}\mathrm{e}^{
 					\vspace*{-0.35in}
 					\hspace*{-0.5in}
 					\includegraphics[height=1.0in,width=1.25in,viewport=0 0 530 500,clip]{Figures/Gaussian-distribution.jpg}
-					\caption{\small \textrm{The Gaussian Distribution.}}%
+					\caption{\tiny \textrm{The Gaussian Distribution.}}%
 					\label{Gaussian-distribution}
 					\end{minipage}
 					%\hspace*{-10pt}
@@ -3012,7 +3033,7 @@ $$\chi_{L,\vec k}^{\mathrm{MTO}}(\varepsilon,0,\vec r)=\sum_{\vec T}\mathrm{e}^{
 \centering
 \vspace*{-0.5in}
 \includegraphics[height=1.8in,width=1.25in,viewport=20 20 530 800,clip]{Figures/Reciprocal-WS.png}
-\caption{\small \textrm{The Wigner-Seitz Cell (Voronoi polyhedron) in the Brillouin-zone.}}%
+\caption{\tiny \textrm{The Wigner-Seitz Cell (Voronoi polyhedron) in the Brillouin-zone.}}%
 \label{Reciprocal-WS}
 \end{minipage}
 %\hspace*{-10pt}
@@ -3050,7 +3071,7 @@ $$\chi_{L,\vec k}^{\mathrm{MTO}}(\varepsilon,0,\vec r)=\sum_{\vec T}\mathrm{e}^{
 %\hspace*{-10pt}
 \vspace*{-0.2in}
 \includegraphics[height=1.1in,width=1.3in,viewport=5 0 960 750,clip]{Figures/Brillouin-k.png}
-\caption{\small \textrm{The mean value and the $\vec k$-point.}}%
+\caption{\tiny \textrm{The mean value and the $\vec k$-point.}}%
 \label{Brillouin-k}
 \end{figure} 
 }
@@ -3111,7 +3132,7 @@ $$\chi_{L,\vec k}^{\mathrm{MTO}}(\varepsilon,0,\vec r)=\sum_{\vec T}\mathrm{e}^{
 %\hspace*{2pt}
 \vspace*{-0.6in}
 \includegraphics[height=1.5in,width=2.05in,viewport=-200 0 850 800,clip]{Figures/Special-points-MP.png}
-\caption{\small \textrm{The generation of special $\vec k$-points in \textrm{Monkhorst-Pack} method.}}%
+\caption{\tiny \textrm{The generation of special $\vec k$-points in \textrm{Monkhorst-Pack} method.}}%
 \label{Special-points-MP}
 \end{minipage}
 \end{figure} 
@@ -3349,7 +3370,7 @@ $$\int\left[S_N(x)-S(x)\right]F(x)\mathrm{d}x\sim\textcolor{red}{\mathrm{e}^{-x^
 \begin{minipage}[t]{0.45\linewidth}
 \centering
 \includegraphics[height=1.25in,width=1.50in,viewport=15 15 250 190,clip]{Figures/Tetrahedron.eps}
-\caption{\small Arrangement of the secant plane of constant energy in the method of tetrahedrons when $\varepsilon_0\leqslant\varepsilon_F\leqslant\varepsilon_1$.}%(与文献\cite{EPJB33-47_2003}图1对比)
+\caption{\tiny Arrangement of the secant plane of constant energy in the method of tetrahedrons when $\varepsilon_0\leqslant\varepsilon_F\leqslant\varepsilon_1$.}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Fig:Tetrahedron}
 \end{minipage}
 \hfill
@@ -3447,7 +3468,7 @@ $$\int\left[S_N(x)-S(x)\right]F(x)\mathrm{d}x\sim\textcolor{red}{\mathrm{e}^{-x^
 \centering
 \vspace*{-0.28in}
 \includegraphics[height=1.25in,width=3.00in,viewport=0 0 1350 705,clip]{Figures/submesh_Tetra.png}
-\caption{\small Breakup of a submesh cell into six tetrahedra.}%(与文献\cite{EPJB33-47_2003}图1对比)
+\caption{\tiny Breakup of a submesh cell into six tetrahedra.}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Fig:Submesh_Tetra}
 \end{figure}
 对每个平行六面体重复上述过程，将第一\textrm{Brillouin-zone}划分为体积相等的若干四面体，每个四面体的顶点可用标识数组中的不可约点标记。将这四个顶点的标号按升序排列，可以方便地确定等价四面体(简并度)\\
@@ -3468,7 +3489,7 @@ $$\int\left[S_N(x)-S(x)\right]F(x)\mathrm{d}x\sim\textcolor{red}{\mathrm{e}^{-x^
 \centering
 \vspace*{-0.28in}
 \includegraphics[height=1.25in,width=1.25in,viewport=0 0 650 650,clip]{Figures/Tetra_error.png}
-\caption{\small Schematic representation of the interpolation error due to line interpolation.}%(与文献\cite{EPJB33-47_2003}图1对比)
+\caption{\tiny Schematic representation of the interpolation error due to line interpolation.}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Fig:Tetra_error}
 \end{figure}
 \textcolor{blue}{对半导体和绝缘体，由于价带被完全填充，用\textrm{Monkhorst-Pack~}布点产生四面体积分方案，可以保证积分误差完全抵消}
@@ -3488,7 +3509,7 @@ $$X(\vec k)=a+\sum_ib_ik_i+\frac12\sum_{ij}k_ic_{ij}k_j$$
 \centering
 \vspace*{-0.3in}
 \includegraphics[height=1.65in,width=1.70in,viewport=15 15 500 550,clip]{Figures/Brillouin-Tetra.eps}
-%\caption{\small .}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\caption{\tiny .}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Fig:Brillouin-Tetrahedron}
 \end{figure}
 }
@@ -3596,7 +3617,7 @@ $$\bar X(\vec s)=\bar a+\sum_i(\bar b_i+\frac12\bar c_{ii})s_i$$
 \centering
 \vspace*{-0.28in}
 \includegraphics[height=1.4in,width=1.55in,viewport=0 0 1000 800,clip]{Figures/Tetra_smearing.png}
-%\caption{\small .}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\caption{\tiny .}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Fig:Tetrahedron-smearing}
 \end{figure}
 \begin{itemize}
@@ -3618,11 +3639,11 @@ $$\bar X(\vec s)=\bar a+\sum_i(\bar b_i+\frac12\bar c_{ii})s_i$$
 \centering
 \begin{minipage}[b]{0.45\linewidth}
 \includegraphics[height=0.65\textheight,width=1.07\textwidth,viewport=70 0 900 700,clip]{Figures/WIEN2k_CaB6-klist.png}
-\caption{\small{\textrm{case.klist}}}
+\caption{\tiny{\textrm{case.klist}}}
 \end{minipage}
 \begin{minipage}[b]{0.45\linewidth}
 \includegraphics[height=0.65\textheight,width=1.0\textwidth,viewport=0 0 670 700,clip]{Figures/WIEN2k_CaB6-kgen.png}
-\caption{\small\textrm{case.kgen}}
+\caption{\tiny\textrm{case.kgen}}
 \end{minipage}
 \end{figure}
 }
@@ -3664,7 +3685,7 @@ $$\bar X(\vec s)=\bar a+\sum_i(\bar b_i+\frac12\bar c_{ii})s_i$$
 %\centering
 %\vspace*{-0.25in}
 %\includegraphics[height=2.75in,width=3.05in,viewport=0 30 565 505,clip]{Figures/dimen_Tetra.pdf}
-%\caption{\small Two-dimensional schematic illustration of the function $w_j(\vec k)$.}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\caption{\tiny Two-dimensional schematic illustration of the function $w_j(\vec k)$.}%(与文献\cite{EPJB33-47_2003}图1对比)
 %\label{Fig:dime_Tetra-2}
 %\end{figure}
 %}
@@ -3767,7 +3788,7 @@ $$\bar X(\vec s)=\bar a+\sum_i(\bar b_i+\frac12\bar c_{ii})s_i$$
 %\hspace*{-10pt}
 \vspace*{-0.4in}
 \includegraphics[height=1.2in,width=1.8in,viewport=0 0 750 600,clip]{Figures/Optic-reflect.png}
-\caption{\small \textrm{Schematic representation of incident, reflected and transmitted electromagnetic wave at the surface.}}%
+\caption{\tiny \textrm{Schematic representation of incident, reflected and transmitted electromagnetic wave at the surface.}}%
 \label{Optic-reflect}
 \end{figure} 
 			\begin{displaymath}
@@ -4122,7 +4143,7 @@ $\varepsilon_2(\omega)$是晶体的光学吸收和能带结构之间的基本关
 %\hspace*{-10pt}
 \vspace*{-0.1in}
 \includegraphics[height=1.in,width=2.in,viewport=0 20 420 250,clip]{Figures/RF_vir.jpg}
-\caption{\small \textrm{Schematic example of vibration model of dimethyl.}}%
+\caption{\tiny \textrm{Schematic example of vibration model of dimethyl.}}%
 \label{virbration_model}
 \end{figure} 
 \textcolor{red}{简谐振动不表示某个原子的振动，表示整个体系所有原子参与的振动。这种体系中所有原子一起参加的共同振动常称为振动模}
@@ -4136,7 +4157,7 @@ $\varepsilon_2(\omega)$是晶体的光学吸收和能带结构之间的基本关
 %\hspace*{-10pt}
 \vspace*{-0.25in}
 \includegraphics[height=1.0in,width=2.8in,viewport=0 0 1400 500,clip]{Figures/virbration.png}
-\caption{\small \textrm{Schematic example of vibration of 1D-atomic chain.}}%
+\caption{\tiny \textrm{Schematic example of vibration of 1D-atomic chain.}}%
 \label{virbration}
 \end{figure} 
 单原子链可以视为最简单的晶格，平衡时相邻原子距离为$\mathbf{a}$，原子限制在沿链方向运动，偏离格点位置用$\cdots,\mathbf{X}_{n-1},\mathbf{X}_{n},\mathbf{X}_{n+1},\cdots$，原子的振动可以表示为
@@ -4158,7 +4179,7 @@ $\varepsilon_2(\omega)$是晶体的光学吸收和能带结构之间的基本关
 %\hspace*{-10pt}
 \vspace*{-0.25in}
 \includegraphics[height=0.7in,width=2.6in,viewport=0 0 1400 400,clip]{Figures/virbration-2.png}
-\caption{\small \textrm{Schematic example of vibration of 1D-diatomic chain.}}%
+\caption{\tiny \textrm{Schematic example of vibration of 1D-diatomic chain.}}%
 \label{virbration-2D}
 \end{figure} 
 一维双原子链是最简单的复式晶格，平衡时相邻原子间距为$\mathbf{a}$，每个原胞含有两个不同原子\textrm{P}和\textrm{Q}质量分别是$m$和$M$，原子现在在沿链方向运动，偏离位移用$\cdots,\mu_{2n},\mu_{2n+1},\cdots$\\原子的运动方程
@@ -4198,7 +4219,7 @@ $\varepsilon_2(\omega)$是晶体的光学吸收和能带结构之间的基本关
 		\item \textcolor{blue}{声学支}:~属于频率$\omega_-$的晶格简谐振动
 	\end{itemize}
 \end{minipage}
-\caption{\small \textrm{The acoustic branch and optical branch.}}%
+\caption{\tiny \textrm{The acoustic branch and optical branch.}}%
 \end{figure} 
 声学支的长波极限($q\rightarrow0$):
 \begin{displaymath}
@@ -4276,7 +4297,7 @@ $\varepsilon_2(\omega)$是晶体的光学吸收和能带结构之间的基本关
 \centering
 \vspace*{-0.35in}
 \includegraphics[height=2.05in,width=3.2in,viewport=0 0 1200 880,clip]{Figures/LDA_U-3.png}
-\caption{\small \textrm{The schematic band structure (a) and DOS (b) of systems including localized electrons calculated based on LDA.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\caption{\tiny \textrm{The schematic band structure (a) and DOS (b) of systems including localized electrons calculated based on LDA.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{LDA_U-3}
 \end{figure}
 }
@@ -4301,7 +4322,7 @@ $\varepsilon_2(\omega)$是晶体的光学吸收和能带结构之间的基本关
 \centering
 \vspace*{-0.4in}
 \includegraphics[height=2.4in,width=2.8in,viewport=0 0 1000 880,clip]{Figures/exact-DFT.png}
-\caption{\small \textrm{The dependence of the total energy on the number of electron is a series of straight-line segments.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\caption{\tiny \textrm{The dependence of the total energy on the number of electron is a series of straight-line segments.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{exact-DFT}
 \end{figure}
 }
@@ -4381,7 +4402,7 @@ $\varepsilon_2(\omega)$是晶体的光学吸收和能带结构之间的基本关
 %\centering
 %\vspace*{-0.05in}
 %\includegraphics[height=0.9in,width=1.8in,viewport=0 0 800 380,clip]{Figures/Mag_Metal-exchange.png}
-%\caption{\small \textrm{The exchange and the splitted band.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\caption{\tiny \textrm{The exchange and the splitted band.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 %\label{Mag_Metal-exchange}
 %\end{figure}
 %	\item $\Delta$的大小与电子间交换作用直接关联
@@ -4399,7 +4420,7 @@ $\varepsilon_2(\omega)$是晶体的光学吸收和能带结构之间的基本关
 %\centering
 %\vspace*{-0.05in}
 %\includegraphics[height=1.0in,width=1.8in,viewport=0 0 800 380,clip]{Figures/Mag_Metal-T0.png}
-%\caption{\small \textrm{The Stoner model.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\caption{\tiny \textrm{The Stoner model.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 %\label{Mag_Metal-T0}
 %\end{figure}
 %		\item 体系的磁性由转变由\textrm{Fermi}面附近能量变化确定
@@ -4436,7 +4457,7 @@ $\varepsilon_2(\omega)$是晶体的光学吸收和能带结构之间的基本关
 \centering
 \includegraphics[height=1.35in,width=0.92in,viewport=1 1 240 375,clip]{Figures/LDA_U-1.png}
 \includegraphics[height=1.35in,width=2.32in,viewport=110 210 545 455,clip]{Figures/LDA_U.pdf}
-\caption{\small \textrm{The meaning of $U$, when the Coulomb-interaction of each electron is taken into account.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\caption{\tiny \textrm{The meaning of $U$, when the Coulomb-interaction of each electron is taken into account.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Tetrahedron_weight}
 \end{figure}
 }
@@ -4475,7 +4496,7 @@ $$U=E(d^{n+1})+E(d^{n-1})-2E(d^n)$$
 \centering
 \vspace*{-0.3in}
 \includegraphics[height=2.0in,width=3.1in,viewport=0 0 1250 880,clip]{Figures/LDA_U-4.png}
-\caption{\small \textrm{The schematic band structure (a) and DOS (b) of systems including localized electrons calculated based on LDA.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\caption{\tiny \textrm{The schematic band structure (a) and DOS (b) of systems including localized electrons calculated based on LDA.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{LDA_U-4}
 \end{figure}
 }
@@ -4738,7 +4759,7 @@ $$U=E(d^{n+1})+E(d^{n-1})-2E(d^n)$$
 %\begin{figure}[h!]
 %\centering
 %\includegraphics[height=1.15in,width=2.45in,viewport=0 0 600 270,clip]{Figures/SOC_cor.png}
-%\caption{\small \textrm{A schematic coordinate for an electron in atom: (a) atomic coordinate system, (b) electron coordinate ones.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\caption{\tiny \textrm{A schematic coordinate for an electron in atom: (a) atomic coordinate system, (b) electron coordinate ones.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 %\label{Muffin_tin}
 %\end{figure}
 %}
@@ -5125,14 +5146,14 @@ $$U=E(d^{n+1})+E(d^{n-1})-2E(d^n)$$
 %\begin{figure}[h!]
 %\centering
 %\includegraphics[height=0.50in,width=2.45in,viewport=10 10 600 150,clip]{Figures/Mag_spinwave-0.png}
-%\caption{\small \textrm{The ground state $|0\rangle$.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\caption{\tiny \textrm{The ground state $|0\rangle$.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 %\label{Mag_spinwave-0}
 %\end{figure}
 %				\item 温度略有升高时，电子自旋有一个发生翻转
 %\begin{figure}[h!]
 %\centering
 %\includegraphics[height=0.50in,width=2.45in,viewport=10 10 680 150,clip]{Figures/Mag_spinwave-1.png}
-%\caption{\small \textrm{The spin flips at $l$:~ $|l\rangle$.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\caption{\tiny \textrm{The spin flips at $l$:~ $|l\rangle$.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 %\label{Mag_spinwave-1}
 %\end{figure}
 %			\end{enumerate}
@@ -5152,7 +5173,7 @@ $$U=E(d^{n+1})+E(d^{n-1})-2E(d^n)$$
 %\begin{figure}[h!]
 %\centering
 %\includegraphics[height=1.15in,width=3.45in,viewport=0 0 830 300,clip]{Figures/Mag_spinwave-2.png}
-%\caption{\small \textrm{The schematic spin-wave.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\caption{\tiny \textrm{The schematic spin-wave.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 %\label{Mag_spinwave-2}
 %\end{figure}
 %}
@@ -5685,7 +5706,7 @@ $$U=E(d^{n+1})+E(d^{n-1})-2E(d^n)$$
 \centering
 \vspace*{-0.05in}
 \includegraphics[height=1.0in,width=1.8in,viewport=0 0 800 380,clip]{Figures/Mag_Metal-T0.png}
-\caption{\small \textrm{The Stoner model.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\caption{\tiny \textrm{The Stoner model.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Mag_Metal-T0}
 \end{figure}
 		\item 体系的磁性由转变由\textrm{Fermi}面附近能量变化确定
@@ -5724,14 +5745,14 @@ $$U=E(d^{n+1})+E(d^{n-1})-2E(d^n)$$
 \begin{figure}[h!]
 \centering
 \includegraphics[height=0.50in,width=2.45in,viewport=10 10 600 150,clip]{Figures/Mag_spinwave-0.png}
-\caption{\small \textrm{The ground state $|0\rangle$.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\caption{\tiny \textrm{The ground state $|0\rangle$.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Mag_spinwave-0}
 \end{figure}
 				\item 温度略有升高时，电子自旋有一个发生翻转
 \begin{figure}[h!]
 \centering
 \includegraphics[height=0.50in,width=2.45in,viewport=10 10 680 150,clip]{Figures/Mag_spinwave-1.png}
-\caption{\small \textrm{The spin flips at $l$:~ $|l\rangle$.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\caption{\tiny \textrm{The spin flips at $l$:~ $|l\rangle$.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Mag_spinwave-1}
 \end{figure}
 			\end{enumerate}
@@ -5751,7 +5772,7 @@ $$U=E(d^{n+1})+E(d^{n-1})-2E(d^n)$$
 \begin{figure}[h!]
 \centering
 \includegraphics[height=1.15in,width=3.45in,viewport=0 0 830 300,clip]{Figures/Mag_spinwave-2.png}
-\caption{\small \textrm{The schematic spin-wave.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\caption{\tiny \textrm{The schematic spin-wave.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Mag_spinwave-2}
 \end{figure}
 }
@@ -5769,7 +5790,7 @@ $$U=E(d^{n+1})+E(d^{n-1})-2E(d^n)$$
 \centering
 \vspace*{-0.10in}
 \includegraphics[height=1.05in,width=2.40in,viewport=10 10 840 370,clip]{Figures/Magnet_spinal_wave.png}
-\caption{\small \textrm{The spiral magnetic structure.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\caption{\tiny \textrm{The spiral magnetic structure.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Mag_spinal-wave}
 \end{figure}
 }
@@ -6007,7 +6028,7 @@ $$U=E(d^{n+1})+E(d^{n-1})-2E(d^n)$$
 %\hspace*{-10pt}
 \vspace*{-0.6in}
 \includegraphics[height=1.8in,width=3.1in,viewport=0 0 1400 1000,clip]{Figures/Wannier_function.png}
-\caption{\small \textrm{Schematic example of Wannier function that correspond to the Bloch function.}}%
+\caption{\tiny \textrm{Schematic example of Wannier function that correspond to the Bloch function.}}%
 \label{Wannier-function}
 \end{figure} 
 	\end{itemize}
@@ -6050,7 +6071,7 @@ $$U=E(d^{n+1})+E(d^{n-1})-2E(d^n)$$
 %\hspace*{-10pt}
 \vspace*{-0.3in}
 \includegraphics[height=1.1in,width=1.8in,viewport=0 0 1100 600,clip]{Figures/Wannier_function-Bondcenter_Si.png}
-\caption{\small \textrm{Bond-centered Wannier function for Si.}}%
+\caption{\tiny \textrm{Bond-centered Wannier function for Si.}}%
 \label{Bond-Centered Wannier function}
 \end{figure} 
 	\end{itemize}
@@ -6097,7 +6118,7 @@ $$U=E(d^{n+1})+E(d^{n-1})-2E(d^n)$$
 %\hspace*{-10pt}
 \vspace*{-0.15in}
 \includegraphics[height=1.8in,width=3.3in,viewport=0 0 1100 650,clip]{Figures/Polarize_metal-2.png}
-\caption{\small \textrm{Schematic of a metal in the static electric field.}}%
+\caption{\tiny \textrm{Schematic of a metal in the static electric field.}}%
 \label{Polarization_metal}
 \end{figure} 
 \textcolor{blue}{金属体相的物理性质不会受外场的影响}
@@ -6135,7 +6156,7 @@ $$U=E(d^{n+1})+E(d^{n-1})-2E(d^n)$$
 %\hspace*{-10pt}
 \vspace*{-0.15in}
 \includegraphics[height=0.9in,width=2.2in,viewport=0 0 1100 550,clip]{Figures/Polarize_insulator.png}
-\caption{\small \textrm{Illustration of finite system for which the total dipole moment is well defined.}}%
+\caption{\tiny \textrm{Illustration of finite system for which the total dipole moment is well defined.}}%
 \label{Polarization_insulator}
 \end{figure} 
 考虑到有限体系外$\vec P(\vec r)=0$，宏观电场极化强度$\vec P$可用偶极矩$\vec d$表示
@@ -6240,7 +6261,7 @@ $$U=E(d^{n+1})+E(d^{n-1})-2E(d^n)$$
 %\hspace*{-10pt}
 \vspace*{-0.12in}
 \includegraphics[height=1.2in,width=1.6in,viewport=0 0 800 540,clip]{Figures/Berry_contour_integration.png}
-\caption{\small \textrm{Schematic figure of region of integration in $(k,\lambda)$ space for calculation of $\Delta P$ using the contour of integration C.}}%
+\caption{\tiny \textrm{Schematic figure of region of integration in $(k,\lambda)$ space for calculation of $\Delta P$ using the contour of integration C.}}%
 \label{Berry_contour_integration}
 \end{figure} 
 	\begin{displaymath}
@@ -6425,7 +6446,7 @@ $n$和$m$遍历全部电子占据的价带
 \centering
 %\includegraphics[height=1.80in,width=1.95in,viewport=5 0 515 495,clip]{Figures/multiple-scattering_theory.png}
 \includegraphics[height=1.70in,width=1.82in,viewport=5 0 515 495,clip]{Figures/multiple-scattering_theory.png}
-\caption{\small \textrm{Central idea of multiple scattering theory:~ decomposition of electronic motion into scattering at atomic sites and free-electron like propagation in between. The bottom of the figure gives a sketch for the potential along the dashed line.}}
+\caption{\tiny \textrm{Central idea of multiple scattering theory:~ decomposition of electronic motion into scattering at atomic sites and free-electron like propagation in between. The bottom of the figure gives a sketch for the potential along the dashed line.}}
 \label{Multi-scattering}
 \end{figure}
 \textcolor{blue}{多重散射:~}入射波是\textcolor{red}{所有来自其他散射中心的出射波叠加}
@@ -6743,7 +6764,7 @@ $$\Sigma(\vec r_1,\vec r_2;\omega)=\dfrac{\mathrm i}{2\pi}\int \mathrm e^{\mathr
 \centering
 \includegraphics[height=2.0in,width=3.5in,viewport=0 0 950 590,clip]{Figures/OP_descent_CG.png}
 \label{decent_CG}
-\caption{\small \textrm{Schematic illustration of minimization of a function in two dimensions. The steps 1,2,3,$\cdots$ denote the steepest descent steps and the point $2^{\ast}$ denote the conjugate gradient path that reaches the exact solution after two steps if the functional is quadratic.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\caption{\tiny \textrm{Schematic illustration of minimization of a function in two dimensions. The steps 1,2,3,$\cdots$ denote the steepest descent steps and the point $2^{\ast}$ denote the conjugate gradient path that reaches the exact solution after two steps if the functional is quadratic.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \end{figure}
 }
 
@@ -6937,7 +6958,7 @@ $$\Sigma(\vec r_1,\vec r_2;\omega)=\dfrac{\mathrm i}{2\pi}\int \mathrm e^{\mathr
 \vspace*{-0.45in}
 %\hspace*{-10pt}
 \includegraphics[height=3.62in,width=2.45in,viewport=160 118 395 755,clip]{Figures/VASP_main_Flow-1.pdf}
-\caption{\small \textrm{Calculation of the K-S ground-states.}}%
+\caption{\tiny \textrm{Calculation of the K-S ground-states.}}%
 \label{VASP_Follow-1}
 \end{figure}
 }
@@ -6950,7 +6971,7 @@ $$\Sigma(\vec r_1,\vec r_2;\omega)=\dfrac{\mathrm i}{2\pi}\int \mathrm e^{\mathr
 \vspace*{-0.65in}
 %\hspace*{-10pt}
 \includegraphics[height=3.62in,width=2.45in,viewport=176 16 416 819,clip]{Figures/VASP_main_Flow-2.pdf}
-\caption{\small \textrm{Calculation of the K-S ground-states.}}%
+\caption{\tiny \textrm{Calculation of the K-S ground-states.}}%
 \label{VASP_Follow-2}
 \end{figure}
 }
@@ -6963,7 +6984,7 @@ $$\Sigma(\vec r_1,\vec r_2;\omega)=\dfrac{\mathrm i}{2\pi}\int \mathrm e^{\mathr
 \vspace*{-0.65in}
 %\hspace*{-10pt}
 \includegraphics[height=3.62in,width=2.45in,viewport=146 173 416 812,clip]{Figures/VASP_main_Flow-3.pdf}
-\caption{\small \textrm{Calculation of the K-S ground-states.}}%
+\caption{\tiny \textrm{Calculation of the K-S ground-states.}}%
 \label{VASP_Follow-3}
 \end{figure}
 }
@@ -6976,7 +6997,7 @@ $$\Sigma(\vec r_1,\vec r_2;\omega)=\dfrac{\mathrm i}{2\pi}\int \mathrm e^{\mathr
 \vspace*{-0.65in}
 %\hspace*{-10pt}
 \includegraphics[height=3.62in,width=2.45in,viewport=177 305 417 813,clip]{Figures/VASP_main_Flow-4.pdf}
-\caption{\small \textrm{Calculation of the K-S ground-states.}}%
+\caption{\tiny \textrm{Calculation of the K-S ground-states.}}%
 \label{VASP_Follow-4}
 \end{figure}
 }
