@@ -46,23 +46,6 @@
 %\usepackage{handoutWithNotes}		%(讲义)在打印PPT的时候会留出给每一页做注释的部分
 %\pgfpagesuselayout{1 on 1 with notes landscape}[a4paper,border shrink=5mm]
 
-%%%%%%%%%%%%%%%%%%%%%%BIBTEX 引用参考文献%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\usepackage{filecontents}
-%\begin{filecontents*}{main.bib}
-%@techreport{2012FracfocusChemical,
-%  author = {FracFocus,},
-%  howpublished = {\url{http://fracfocus.org/water-protection/drilling-usage}},
-%  institution = {The Ground Water Protection Council and Interstate Oil and Gas
-%  Compact Commission},
-%  month = {feb},
-%  title = {{Chemical Use In Hydraulic Fracturing}},
-%  year = {2012}
-%}
-%\end{filecontents*}
-%\usepackage[backend=bibtex,sorting=none]{biblatex}
-%%\usepackage[backend=biber,style=authoryear]{biblatex}
-%\addbibresource{main} %BibTeX数据文件及位置
-
 %\usepackage[numbers,sort&compress]{natbib} %紧密排列             %
 \usepackage[sectionbib]{chapterbib}        %每章节单独参考文献   %
 \usepackage{hypernat}                                                                         %
@@ -73,6 +56,38 @@
 %\usepackage[dvipdfm]{hyperref}                                  %
 %\usepackage{hypernat}                                           %
 \newcommand{\upcite}[1]{\hspace{0ex}\textsuperscript{\cite{#1}}} %
+%%%%%%%%%%%%%%%%%%%%%% BIBTEX 引用参考文献 支持\footfullcite{} 引用 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usepackage{filecontents}
+%\begin{filecontents*}{main.bib}
+%@BOOK{Xu-Li-II,
+%  author = {徐光宪，黎乐民，王德民},
+%  title = {{\textit 量子化学——基本原理和从头计算法}{\rm(中)}},
+%  publisher = {科学出版社},
+%  year = {2001},
+%  address = {北京},
+%  edition = {1st},
+%}
+%
+%@ARTICLE{PRB136-864_1964,
+%  author = {P. Hohenberg and W. Kohn},
+%  title = {Inhomogeneous electron gas.},
+%  journal = {Phys. Rev.},
+%  year = {1964},
+%  volume = {136},
+%  number = {},
+%  pages = {B864},
+%  month = {},
+%  note = {},
+%  otherinfo = {}
+%}
+%\end{filecontents*}
+%\usepackage[backend=bibtex,sorting=none]{biblatex}
+%%\usepackage[backend=bibtex,style=authoryear]{biblatex}
+%\addbibresource{main} %BibTeX数据文件及位置(位置)
+%%\addbibresource{Ref_2020-03-04} %BibTeX数据文件及位置(文件)
+%%\setbeamerfont{footnote}{size=\tiny} %设置footnote字体
+%\setbeamerfont{footnote}{size=\fontsize{5.2pt}{1.9pt}\selectfont}
+%%%%%%%%%%%%%%%%%%%%%%BIBTEX 引用参考文献 支持\footfullcite{} 引用%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %\usepackage{marvosym} %插入各种符号
 
@@ -327,7 +342,7 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 \vskip 20pt
 \begin{enumerate}[<+-|alert@+>]
    \setlength{\itemsep}{10pt}
- \item<1-2>  密度是整体变量:~电子自相互作用抵消不净\\%\quad\textrm{(LDA+U)}方法的校正%(\textrm{LDA+U})
+   \item<1-2>  密度是整体变量:~电子自相互作用抵消不净\\%\quad\textrm{(LDA+U)}方法的校正%(\textrm{LDA+U})
 	 用\textrm{DFT}计算电子数很少的体系，一般都会有较大的误差
  \item<2->  电子相关:~简并和近简并基态的表示不合理\\
 	 基态电子密度用不同的简并轨道计算时，体系能量应保持不变，但现有的近似能量泛函不具有这个性质
@@ -460,26 +475,27 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 %%\phantomsection\addcontentsline{toc}{section}{Bibliography}	 %直接调用\addcontentsline命令可能导致超链指向不准确,一般需要在之前调用一次\phantomsection命令加以修正	%
 %%\phantomsection\addcontentsline{toc}{section}{主要参考文献}	 %直接调用\addcontentsline命令可能导致超链指向不准确,一般需要在之前调用一次\phantomsection命令加以修正	%
 \bibliography{Ref_2020-Template}%
-%\bibliographystyle{../ref/mybib}%
-\bibliographystyle{../Reference/mybib}%
+\bibliographystyle{../ref/mybib}%
+%\bibliographystyle{../Reference/mybib}%
 }}
 \nocite{*}
 }
 %------------------------------------------------------------------------------------------------------------------------------------------------------------------------------%
 
 %-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-\section{附录与三种文献引用方式}
+\section{附录与几种文献引用方式}
 \frame[allowframebreaks]
 {
-	\frametitle{四面体积分权重的确定}
-	文献引用\footnote{%文献在脚注中出现
-		\begin{thebibliography}{99}
+	\frametitle{几种文献引用的方式}
+	文献引用\upcite{Huang_Han,Xie_Lu,Xu-Li-I-II,Dai_Qian,Many-Body_Theory,JPC-SSP12-4409_1979,WIEN2K-UG_2001,VASP_manual,PCCP8-3172_2006,Xu_Li_Wang}
+
+	\textcolor{magenta}{\textrm{Beamer}要使用当页脚注引用参考文献，须使用\textrm{biblatex}包，并用\textbackslash\!footfullcite\{label\}引用\\
+	\textcolor{red}{注意:~}\textrm{biblatex}与\textrm{chapterbib}不兼容}
+\begin{thebibliography}{99}
 	\fontsize{5.2pt}{1.9pt}\selectfont{
-		\vspace*{-13pt}
 	\bibitem{Xu_Li_Wang}徐光宪、黎乐民、王德民, {\textit{量子化学——基本原理和从头计算法}}\;\textrm{({\textit{上、中}})}\:科学出版社, 北京, 1980}
 \end{thebibliography}
-\nocite*{}}\upcite{Huang_Han,Xie_Lu,Xu-Li-I-II,Dai_Qian,Many-Body_Theory,JPC-SSP12-4409_1979,WIEN2K-UG_2001,VASP_manual,PCCP8-3172_2006}
-
+\nocite*{}
 }
 
 %------------------------------------------------------------------------Reference----------------------------------------------------------------------------------------------
