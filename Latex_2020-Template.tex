@@ -44,7 +44,7 @@
 
 \usepackage[numbers,sort&compress]{natbib} %紧密排列             %
 \usepackage[sectionbib]{chapterbib}        %每章节单独参考文献   %
-\usepackage{footbib}			   %脚注列出参考文献　   %
+%\usepackage{footbib}			   %脚注列出参考文献　   %
 \usepackage{hypernat}                                                                         %
 \usepackage[bookmarksopen=true,pdfstartview=FitH,CJKbookmarks]{hyperref}              %
 \hypersetup{bookmarksnumbered,colorlinks,linkcolor=green,citecolor=blue,urlcolor=red}         %
@@ -74,6 +74,9 @@
 \renewcommand{\figurename}{{\bf Fig}.}
 %\renewcommand{\tablename}{\CJKfamily{hei} 表.}
 \renewcommand{\tablename}{{\bf Tab}.}
+%\renewcommand{\thesubfigure}{\roman{subfigure}}  \makeatletter %子图标记罗马字母
+\renewcommand{\thesubfigure}{\tiny(\alph{subfigure})}  \makeatletter　%子图标记英文字母
+%\renewcommand{\thesubfigure}{}  \makeatletter　%子图无标记
 
 %将图表的Caption写成 图(表) Num. 格式
 \makeatletter
@@ -251,6 +254,8 @@
 
 %-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------%
 
+%-------------------------------------------------------------------------Thanks------------------------------------------------------------------------------------------------
+\section{致谢}
 
 %--------------------------------------------------------------------------The Biblography of The Paper-----------------------------------------------------------------%
 %\newpage																				%
