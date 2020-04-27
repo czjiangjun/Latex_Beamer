@@ -1483,24 +1483,28 @@ $n_i$是$\psi_i$上的电子占据数，$\varepsilon_i$是其能量本征值，�
 	\end{displaymath}
 	这里$Z_s$是离子实的电荷数，$\vec R$表示晶格点的位矢，$\vec r_s$代表元胞内原子的相对位矢。
 
-	\textcolor{red}{\textbf{注意}}:~$E_{N-N}$求和包含无穷多项，是发散的；$V_{\mathrm{Coul}}(\vec k=0)$是发散的。
+	\textcolor{red}{\textbf{注意}}:~$E_{N-N}$求和有无穷多项，\textcolor{red}{是发散的};~$V_{\mathrm{Coul}}(\vec k=0)$\textcolor{red}{是发散的}
 	
 	$V_{ext}$在不存在其他外场时，一般只考虑离子-电子的\textrm{Coulomb}相互作用，
 	\begin{displaymath}
-		\begin{aligned}
-			V_{ext}(\vec r)&=\sum_{\vec R,s}\dfrac{-Z_s}{|\vec r-\vec R-\vec r_s|}\\
-			&\equiv\sum_{\vec R,s}v_{ext}^s(\vec r-\vec R-\vec r_s)
-		\end{aligned}
+%		\begin{aligned}
+			V_{ext}(\vec r)&=\sum_{\vec R,s}\dfrac{-Z_s}{|\vec r-\vec R-\vec r_s|}\equiv\sum_{\vec R,s}v_{ext}^s(\vec r-\vec R-\vec r_s)
+%		\end{aligned}
 	\end{displaymath}
+	$V_{ext}$的\textrm{Fourier}分量在$\vec k=0$\textcolor{red}{也是发散的}
 }
 
 \frame
 {
 	\frametitle{晶体总能量计算的奇点排除}
-	$V_{ext}$的\textrm{Fourier}分量在$\vec k=0$\textcolor{red}{也是发散的}。这三项单独都是发散的，但因为整个体系出于电中性，所以这些发散项相互抵消，是一个常数。
-
-	因此求解\textrm{Kohn-Sham}方程时，先将$V_{\mathrm{Coul}}(\vec k=0)$和$V_{ext}(\vec k=0)$同时置为零，这相当于\textcolor{red}{将势能作一平移，或者说重新定义势能零点，而在总能量计算中补偿这一平移。}
-
+这三项单独都是发散的，但因为整个体系出于电中性，所以这些发散项相互抵消，是一个常数。因此求解\textrm{Kohn-Sham}方程时，先将$V_{\mathrm{Coul}}(\vec k=0)$和$V_{ext}(\vec k=0)$同时置为零，这相当于\textcolor{red}{将势能作一平移，或者说重新定义势能零点，而在总能量计算中补偿这一平移。}
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[height=0.65in,width=1.50in,viewport=0 0 1250 565,clip]{Figures/Ewald_method-3.png}
+	\end{center}
+	\caption{\fontsize{5.5pt}{2.2pt}\selectfont{\textrm{A lattice of point charge in a uniform compensating background as considered in the Ewald calculation.}}}
+	\label{fig:Ewald-method-3}
+\end{figure}
 	发散项之和为：
 	\begin{displaymath}
 		\begin{aligned}
@@ -1540,7 +1544,7 @@ $n_i$是$\psi_i$上的电子占据数，$\varepsilon_i$是其能量本征值，�
 \vspace*{-0.20in}
 \includegraphics[height=2.3in,width=4.12in,viewport=0 0 1800 955,clip]{Figures/Ewald_method-2.png}
 \caption{\fontsize{5.5pt}{2.2pt}\selectfont{\textrm{Each charge be screened by a Gaussian charge distribution of opposite sign and equal magnitude: $\rho_i(r)=\dfrac{Z_i\eta^3}{\pi^{3/2}}\mathrm{e}^{-\eta^2r^2}$.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{Error_Function}
+\label{Ewald_method-2}
 \end{figure}
 }
 
