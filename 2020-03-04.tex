@@ -32,6 +32,7 @@
 \usepackage{graphicx}
 \usepackage{subfigure}           %图片跨页
 \usepackage{animate}		 %插入动画
+\usepackage{tikz}		 %绘图工具
 \usepackage{caption}
 \captionsetup{font=footnotesize}
 
@@ -128,6 +129,22 @@
 %\renewcommand{\thesubfigure}{\roman{subfigure}}  %\makeatletter 子图标记罗马字母
 \renewcommand{\thesubfigure}{\tiny(\alph{subfigure})}  %\makeatletter　子图标记英文字母
 %\renewcommand{\thesubfigure}{}  \makeatletter　%子图无标记
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Latex 的 tikz 绘图 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\begin{tikzpicture}
+%    % 引入图片
+%    \node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[width=0.9\textwidth]{Mycena_interrupta.jpg}};
+%
+%    \begin{scope}[x={(image.south east)},y={(image.north west)}]
+%        % 建立相对坐标系
+%        \draw[help lines,xstep=.1,ystep=.1] (0,0) grid (1,1);
+%        \foreach \x in {0,1,...,9} { \node [anchor=north] at (\x/10,0) {0.\x}; }
+%        \foreach \y in {0,1,...,9} { \node [anchor=east] at (0,\y/10) {0.\y}; }
+%        % 作图命令
+%        \draw[red, ultra thick, rounded corners] (0.62,0.65) rectangle (0.78,0.75);
+%    \end{scope}
+%\end{tikzpicture}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %-------------------------------PPT Title-------------------------------------
 \title{基于\rm{DFT}的第一原理计算方法简介}
@@ -2660,6 +2677,17 @@ $$
 
 %		特别地，当能量$\varepsilon<0$，\textrm{Neumannn}函数$n_l$用\textrm{Hankel}函数$h_l$代替$$h_l^{(1)}=j_l+\mathrm{i}\eta_l$$渐近形式为$\frac{\mathrm{i}^{-l}\mathrm{e}^{-|q_0|r}}{|q_0|r}$\\
 %		此时球\textrm{Bessel}是非约束的，这样的轨道不适合做基函数:~因为当能量$\varepsilon<0$，只有当能量$\varepsilon=\varepsilon_{\vec k}$，球\textrm{Bessel}函数的系数为0，基函数才可能是正交归一
+}
+
+\frame
+{
+	\frametitle{多重散射理论}
+\begin{figure}[h!]
+	\vspace{-5pt}
+\centering
+\animategraphics[autoplay, loop, height=1.2in]{1}{Figures/Multi_scattering-}{0}{9}
+\label{Multiple_scattering}
+\end{figure}
 }
 
 \frame
@@ -6458,12 +6486,23 @@ $n$和$m$遍历全部电子占据的价带
 {
 	\frametitle{多重散射与\textrm{Green's function}}
 \begin{figure}[h!]
-	\vspace{-40pt}
 \centering
+	\vspace{-20pt}
 %\includegraphics[height=1.80in,width=1.95in,viewport=5 0 515 495,clip]{Figures/multiple-scattering_theory.png}
-\includegraphics[height=1.70in,width=1.82in,viewport=5 0 515 495,clip]{Figures/multiple-scattering_theory.png}
+\includegraphics[height=2.50in,width=2.64in,viewport=5 0 515 495,clip]{Figures/multiple-scattering_theory.png}
 \caption{\tiny \textrm{Central idea of multiple scattering theory:~ decomposition of electronic motion into scattering at atomic sites and free-electron like propagation in between. The bottom of the figure gives a sketch for the potential along the dashed line.}}
 \label{Multi-scattering}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{多重散射与\textrm{Green's function}}
+\begin{figure}[h!]
+	\vspace{-5pt}
+\centering
+\animategraphics[autoplay, loop, height=1.2in]{1}{Figures/Multi_scattering-}{0}{9}
+\label{Multiple_scattering-0-9}
 \end{figure}
 \textcolor{blue}{多重散射:~}入射波是\textcolor{red}{所有来自其他散射中心的出射波叠加}
 			\begin{displaymath}
