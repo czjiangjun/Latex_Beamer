@@ -38,7 +38,7 @@
 \usepackage{multirow}
 
 \usepackage[dvipdfmx]{movie15_dvipdfmx} %插入视频
-\usepackage{media9} %插入音乐
+%\usepackage{media9} %插入音乐
 %\usepackage{handoutWithNotes}		%(讲义)在打印PPT的时候会留出给每一页做注释的部分
 %\pgfpagesuselayout{1 on 1 with notes landscape}[a4paper,border shrink=5mm]
 
@@ -277,19 +277,18 @@
 }
 
 %\begin{frame}
-%	{frame with sound 
-%\includemedia[ label=my_sound,
-%  width=1ex, height=1ex, transparent,
-%  activate=pageopen, deactivate=onclick,
-%  addresource=Figures/Liu-Xiongzhouguan.mp3,
-%  flashvars={
-%    source=Figures/Liu-Xiongzhouguan.mp3
-%   &autoPlay=true
-%   &hideBar=true
-%  }, ]{}{APlayer.swf}}
+%	\frametitle{frame with sound }
+%\includemedia[ 
+%	label=my_sound,
+%	width=1ex, height=1ex, transparent,
+%	activate=pageopen, deactivate=onclick,
+%	addresource=Figures/Liu-Xiongzhouguan.mp3,
+%	flashvars={source=Figures/Liu-Xiongzhouguan.mp3
+%                  &autoPlay=true
+%                  &hideBar=false}]{}{APlayer.swf}
 %\dots
 %\end{frame}
-
+%
 %\begin{frame}{other frame}
 %\dots
 %\end{frame}
