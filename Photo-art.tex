@@ -38,6 +38,7 @@
 \usepackage{multirow}
 
 \usepackage[dvipdfmx]{movie15_dvipdfmx} %插入视频
+\usepackage{media9} %插入音乐
 %\usepackage{handoutWithNotes}		%(讲义)在打印PPT的时候会留出给每一页做注释的部分
 %\pgfpagesuselayout{1 on 1 with notes landscape}[a4paper,border shrink=5mm]
 
@@ -274,6 +275,34 @@
 \caption{京剧名宿遗留音}											      %
 \end{figure}												      %
 }
+
+%\begin{frame}
+%	{frame with sound 
+%\includemedia[ label=my_sound,
+%  width=1ex, height=1ex, transparent,
+%  activate=pageopen, deactivate=onclick,
+%  addresource=Figures/Liu-Xiongzhouguan.mp3,
+%  flashvars={
+%    source=Figures/Liu-Xiongzhouguan.mp3
+%   &autoPlay=true
+%   &hideBar=true
+%  }, ]{}{APlayer.swf}}
+%\dots
+%\end{frame}
+
+%\begin{frame}{other frame}
+%\dots
+%\end{frame}
+
+%\pdfpageattr{/AA <</O <</S/JavaScript/JS (annotRM['my_sound'].activated=false;)>> >>}
+%\begin{frame}{frame where sound stops}
+%\dots
+%\end{frame}
+
+%\begin{frame}{another dumb frame}
+%\dots
+%\end{frame}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \frame<handout:0>
