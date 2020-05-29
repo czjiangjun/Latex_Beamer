@@ -36,9 +36,10 @@
 \captionsetup{font=footnotesize}
 
 \usepackage{multirow}
-
-\usepackage[dvipdfmx]{movie15_dvipdfmx} %插入视频
-%\usepackage{media9} %插入音乐
+% A LATEX package for embedding interactive Adobe Flash (SWF) and 3D files (Adobe U3D & PRC) as well as video and sound files or streams (FLV, MP4/H.246, MP3) into PDF documents with Adobe Reader-9
+\usepackage[dvipdfmx]{movie15_dvipdfmx} %插入视频之一
+%\usepackage{media9}			%插入视频之一
+%\usepackage{multimedia}			%插入视频之一
 %\usepackage{handoutWithNotes}		%(讲义)在打印PPT的时候会留出给每一页做注释的部分
 %\pgfpagesuselayout{1 on 1 with notes landscape}[a4paper,border shrink=5mm]
 
@@ -266,29 +267,35 @@
 {													      %
 	\frametitle{京剧名宿遗音}									      %
 \begin{figure}[ht]											      %
+%	\includemovie[poster, autostart,controls, mouse, url, text=(xx), repeat] {0.8\textwidth}{0.6\textwidth}{traffic.avi}		      %
 %	\includemovie[poster, controls, mouse, url] {0.8\textwidth}{0.6\textwidth}{traffic.avi}		      %
 	%\includemovie[poster, controls, mouse, url] {0.8\textwidth}{0.6\textwidth}{Yuan_Kuocheng.mp4}	      %
 	\includemovie[poster, controls, mouse, url] {0.8\textwidth}{0.2\textwidth}{Figures/Liu-Xiongzhouguan.mp3}     %
 	\includemovie[poster, controls, mouse, url] {0.8\textwidth}{0.2\textwidth}{Figures/Zhu_Liu-Luomahu.mp3}	      %
 %	\includemovie[poster, controls, mouse, url] {0.8\textwidth}{0.2\textwidth}{Figures/Liu-Pantaohui.mp3}	      %
-	\includemovie[poster, controls, mouse, url] {0.8\textwidth}{0.2\textwidth}{Figures/Wu-Pantaohui.mp3}	      %
+	\includemovie[poster, autostart, mouse, url, repeat] {0.8\textwidth}{0.2\textwidth}{Figures/Wu-Pantaohui.mp3}	      %
 \caption{京剧名宿遗留音}											      %
 \end{figure}												      %
 }
 
 %\begin{frame}
-%	\frametitle{frame with sound }
+%	\frametitle{frame with sound}
+%\dots
 %\includemedia[ 
 %	label=my_sound,
-%	width=1ex, height=1ex, transparent,
-%	activate=pageopen, deactivate=onclick,
+%	width=1ex, height=1ex, 
+%	transparent,
+%	activate=pageopen, 
+%	deactivate=onclick,
 %	addresource=Figures/Liu-Xiongzhouguan.mp3,
 %	flashvars={source=Figures/Liu-Xiongzhouguan.mp3
 %                  &autoPlay=true
-%                  &hideBar=false}]{}{APlayer.swf}
+%                  &loop=true
+%                  &hideBar=false}
+%	  ]{}{APlayer.swf}
 %\dots
 %\end{frame}
-%
+
 %\begin{frame}{other frame}
 %\dots
 %\end{frame}
