@@ -156,10 +156,10 @@
 % - Use the \inst{?} command only if the authors have different
 %   affiliation.
 \institute[BCC]{\inst{}%
- \vskip -30pt 北京市计算中心}
+ \vskip -20pt 北京市计算中心}
 \date[\today] % (optional, should be abbreviation of conference name)
 {	{\fontsize{6.2pt}{4.2pt}\selectfont{\textcolor{blue}{E-mail:~}\url{jiangjun@bcc.ac.cn}}}
-\vskip 45 pt 2020.03
+	\vskip 45 pt \textrm{2020.07}
 %\vskip 5 pt {\fontsize{8.2pt}{6.2pt}\selectfont{清华大学\;\;物理系}}
 }
 
@@ -269,13 +269,14 @@
 
 \frame
 {
-	\frametitle{量子力学基本假设}
+	\frametitle{量子力学基本假设(\textcolor{red}{公理体系})}
 	\begin{itemize}
+		\item 全同粒子假设\\
+			\textcolor{blue}{全同粒子组成的体系中，两个全同粒子相互调换不改变体系的状态}\\ 
+			全同粒子是指\textcolor{red}{内禀性质完全相同的一类微观粒子}:\\例如，所有的电子是全同粒子 
 		\item 波函数假设\\
-			\textcolor{blue}{微观体系的运动状态可由波函数$\Psi$完全描述，波函数可以得到体系的所有性质}\\
+			\textcolor{blue}{微观体系的运动状态可由波函数$\Psi$完全描述，波函数包含体系的所有性质}\\
 			波函数$\Psi$一般要求满足\textcolor{red}{连续}、\textcolor{red}{有限}和\textcolor{red}{单值}三个条件
-		\item 微观体系的运动状态\textcolor{blue}{波函数随时间变化的规律}:\\\textcolor{red}{遵从\textrm{Schr\"odinger}方程}
-			$$\mathrm{i}\hbar\dfrac{\mathrm{d}}{\mathrm{d}t}|\Psi\rangle=\hat{\mathbf H}|\Psi\rangle$$
 		\item 态叠加原理\\
 			如果$\Psi_1$是体系的一个本征态，对应的本征值为$A_1$，$\Psi_2$也是体系的一个本征态，对应的本征值为$A_2$，则\textcolor{blue}{$$\Psi=C_1\Psi_1+C_2\Psi_2$$}\textcolor{red}{也是体系一个可能的存在状态}
 	\end{itemize}
@@ -295,27 +296,26 @@
 
 \frame
 {
-	\frametitle{量子力学基本假设}
+	\frametitle{量子力学基本假设(续)}
 	\begin{itemize}
 		\item 力学量算符假设\\
-			\textcolor{blue}{力学量用线性\textrm{Hermite~}算符表示}\\
-			在经典力学中的力学量，在量子力学中用力学量的算符表示:\\如动量算符 
+			\textcolor{blue}{经典力学中的物理量对应到量子力学中，要用线性\textrm{Hermite~}算符表示}(\textcolor{red}{\textrm{Hermite~}算符的本征函数构成完备空间})\\
+			如动量算符 
 			$$\hat{\mathbf{p}}=-\mathrm{i}\hbar\nabla$$
 			位置算符$$\hat{\mathbf r}=r$$
 			力学量算符之间有确定的对易关系(量子条件)
 			$$[\hat{\mathbf F},\hat{\mathbf G}]=\hat{\mathbf F}\hat{\mathbf G}-\hat{\mathbf G}\hat{\mathbf F}$$ 
-			\textcolor{red}{\textrm{Hermite~}算符的本征函数构成完备空间}
-		\item 全同性原理\\
-			\textcolor{blue}{全同粒子组成的体系中，两个全同粒子相互调换不改变体系的状态}\\ 
-			全同粒子是指\textcolor{red}{内禀性质完全相同的一类微观粒子}:\\例如，所有的电子是全同粒子 
+			
+		\item 微观体系的运动状态\textcolor{blue}{波函数随时间变化的规律}:\\\textcolor{red}{遵从\textrm{Schr\"odinger}方程}
+			$$\mathrm{i}\hbar\dfrac{\mathrm{d}}{\mathrm{d}t}|\Psi\rangle=\hat{\mathbf H}|\Psi\rangle$$
 	\end{itemize}
 }
 
-%\frame
-%{
-%	\frametitle{\rm{Paul Dirac's Commandments}}
-%	\textrm{\textcolor{purple}{The fundamental laws necessary for the mathematical treatment of a large part of physics and the whole of chemistry are thus completely known, and the difficulty lies only in the fact that application of these laws leads to equations that are too complex to be solved.}}
-%}
+\frame
+{
+	\frametitle{\rm{Paul Dirac's Commandments}}
+	\textrm{\textcolor{purple}{The fundamental laws necessary for the mathematical treatment of a large part of physics and the whole of chemistry are thus completely known, and the difficulty lies only in the fact that application of these laws leads to equations that are too complex to be solved.}}
+}
 
 \section{\rm{Hartree-Fock~}方法}
 \frame
@@ -563,29 +563,50 @@
  \item 密度泛函理论的困难：能量密度泛函的精确形式未知
    \end{itemize}
 }
+
 \frame                               %
 {
 \frametitle{密度泛函理论(\textrm{DFT})}
-\textrm{Kohn-Sham}方程\upcite{PR140-A1133_1965}：无相互作用体系+交换-相关能
+\textrm{Kohn-Sham}方程\upcite{PR140-A1133_1965}：无相互作用体系+交换-相关能的贡献
 $$(T_S+V_{e\!f\!f})|\varphi_i\rangle=\varepsilon_i|\varphi_i\rangle,\quad i=1,\cdots,N,\cdots$$
-其中$T_S=-\dfrac12\nabla^2$,~~$V_{e\!f\!f}(\vec r)=v(\vec r)+\displaystyle\int w(\vec r,\vec r\,')\rho(\vec r\,')\mathrm{d}\vec r\,'+\dfrac{\delta E_{XC}}{\delta\rho(\vec r)}$
+其中$T_S=-\dfrac12\nabla^2$~~是无相互作用体系的动能\\
+$V_{e\!f\!f}(\vec r)=V_{ext}(\vec r)+\displaystyle\int w(\vec r,\vec r\,')\rho(\vec r\,')\mathrm{d}\vec r\,'+V_{\mathrm{XC}}[\rho]$
+\vskip 5pt
+$V_{ext}(\vec r)$是电子体系与外部的电荷或磁场相互作用\\
+$V_{\mathrm{XC}}[\rho]=\dfrac{\delta E_{\mathrm{XC}}}{\delta\rho(\vec r)}$称为交换-相关势
 \vskip 10pt
 \textrm{Kohn-Sham}方程是形式上的单粒子方程
-\vskip 10pt
+\vskip 6pt
 \textrm{Kohn-Sham}方程的实质：\\\textcolor{red}{将动能泛函的主要部分分离出来，剩余部分放在交换-相关能中}
+}
+
+\frame
+{
+\frametitle{交换-相关能与交换-相关势}
+实际考虑交换-相关能时，会将交换-相关能表示为交换能和相关能之和:
 \begin{displaymath}
-	E_{XC}^{\mathrm{LDA}}[\rho]=E_X^{\mathrm{LDA}}[\rho]+E_C^{\mathrm{LDA}}[\rho]=\int\varepsilon_X[\rho]\rho(\vec{r}) \textrm{d}^3\vec{r}+\int\varepsilon_C[\rho]\rho(\vec{r}) \textrm{d}^3\vec{r}
+	E_{\mathrm{XC}}[\rho]=E_{\mathrm{X}}[\rho]+E_{\mathrm{C}}[\rho]=\int\varepsilon_{\mathrm{X}}[\rho]\rho(\vec{r}) \textrm{d}^3\vec{r}+\int\varepsilon_{\mathrm{C}}[\rho]\rho(\vec{r}) \textrm{d}^3\vec{r}
 \end{displaymath}
-$\varepsilon_X[\rho]$和$\varepsilon_C[\rho]$分别为一个电子的交换能和相关能
+$\varepsilon_{\mathrm{X}}[\rho]$和$\varepsilon_{\mathrm{C}}[\rho]$可理解为单电子的交换能和相关能
+\vskip 20pt
+交换-相关势通过交换-相关能计算得到:~
+		\begin{displaymath}
+			V_{\mathrm{XC}}^{\sigma}[\rho_{\alpha},\rho_{\beta}]=\dfrac{\delta E_{\mathrm{XC}}[\rho_{\alpha},\rho_{\beta}]}{\delta\rho_{\sigma}}=\dfrac{\delta\{E_{\mathrm{X}}[\rho_{\alpha},\rho_{\beta}]+E_{\mathrm{C}}[\rho_{\alpha},\rho_{\beta}]\}}{\delta\rho_{\sigma}}
+		\end{displaymath}
+		\textcolor{red}{注意}:~由于$E_{\mathrm{XC}}[\rho_{\sigma}]$对$\rho_{\sigma}$是非线性的\\
+		\textcolor{blue}{$V_{\mathrm{XC}}=V_{\mathrm{X}}+V_{\mathrm{C}}$和$\varepsilon_{\mathrm{XC}}=\varepsilon_{\mathrm{X}}+\varepsilon_{\mathrm{C}}$不同，不要混淆这两个量}
 }
 %  \beamertemplateshadingbackground{blue!10}{yellow!10}
 
 \frame                               %
 {
 \frametitle{交换-相关能密度泛函}
-\begin{minipage}[b]{0.72\linewidth}
+\textcolor{blue}{密度泛函理论的核心问题}:\\
+\textrm{Kohn-Sham}方程用于实际计算，必须知道$E_{XC}[\rho]$或者$V_{XC}[\rho]$与$\rho(\vec r)$的泛函关系
+\vskip 15pt
+\begin{minipage}[b]{0.59\textwidth}
  \hspace*{-15pt}
- \begin{itemize}%[+-| alert@+>]
+ {\fontsize{7.5pt}{6.0pt}\selectfont\begin{itemize}%[+-| alert@+>]
 	 \setlength{\itemsep}{10pt}
  \item \textrm{LDA}:泛函只与密度分布的局域值有关
  \item \textrm{GGA}:泛函依赖:局域密度及其梯度
@@ -593,13 +614,13 @@ $\varepsilon_X[\rho]$和$\varepsilon_C[\rho]$分别为一个电子的交换能�
  \item 杂化(\textrm{hybrid})泛函:泛函与占据轨道有关
  \item 其他的交换-相关能泛函
  \item<1-> 完全非局域泛函:理想泛函，不现实
- \end{itemize}
+ \end{itemize}}
 \end{minipage}
 \hfill
-\begin{minipage}[b]{0.26\linewidth}
+\begin{minipage}[b]{0.39\textwidth}
 \hspace*{-10pt}
 \includegraphics[height=1.7in,width=3.18in,viewport=10 5 1380 700,clip]{Figures/Jacobi-ladder.png}\\
-{\small \textcolor{red}{\textrm{Jacob's ladder}}}
+\centering{\textcolor{red}{\textrm{\tiny Jacob's ladder}}}
 \end{minipage}
 % \begin{itemize}%[+-| alert@+>]
 %\item 交换-相关能密度泛函
@@ -2040,6 +2061,58 @@ $n_i$是$\psi_i$上的电子占据数，$\varepsilon_i$是其能量本征值，�
 \end{figure} 
 }
 
+\subsection{\rm{VASP}的主程序结构}
+\frame
+{
+	\frametitle{\textrm{VASP}的主程序}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.45in}
+%\hspace*{-10pt}
+\includegraphics[height=3.62in,width=2.45in,viewport=160 118 395 755,clip]{Figures/VASP_main_Flow-1.pdf}
+\caption{\tiny \textrm{Calculation of the K-S ground-states.}}%
+\label{VASP_Follow-1}
+\end{figure}
+}
+
+\frame
+{
+\frametitle{}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.65in}
+%\hspace*{-10pt}
+\includegraphics[height=3.62in,width=2.45in,viewport=176 16 416 819,clip]{Figures/VASP_main_Flow-2.pdf}
+\caption{\tiny \textrm{Calculation of the K-S ground-states.}}%
+\label{VASP_Follow-2}
+\end{figure}
+}
+
+\frame
+{
+\frametitle{}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.65in}
+%\hspace*{-10pt}
+\includegraphics[height=3.62in,width=2.45in,viewport=146 173 416 812,clip]{Figures/VASP_main_Flow-3.pdf}
+\caption{\tiny \textrm{Calculation of the K-S ground-states.}}%
+\label{VASP_Follow-3}
+\end{figure}
+}
+
+\frame
+{
+\frametitle{}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.65in}
+%\hspace*{-10pt}
+\includegraphics[height=3.62in,width=2.45in,viewport=177 305 417 813,clip]{Figures/VASP_main_Flow-4.pdf}
+\caption{\tiny \textrm{Calculation of the K-S ground-states.}}%
+\label{VASP_Follow-4}
+\end{figure}
+}
 %------------------------------------------------------------------------Reference----------------------------------------------------------------------------------------------
 		\frame[allowframebreaks]
 {
@@ -6711,7 +6784,208 @@ $$\Sigma(\vec r_1,\vec r_2;\omega)=\dfrac{\mathrm i}{2\pi}\int \mathrm e^{\mathr
 }
 
 %-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-\section{附录1:~方程迭代求解与函数优化}
+\section{附录1:~常见泛函的一些形式}
+\frame%[allowframebreaks]
+{
+	\frametitle{\rm{LDA}泛函}
+	\begin{itemize}
+		\item 交换能部分
+	\begin{displaymath}
+		\begin{aligned}
+			\varepsilon_{\mathrm{X}}[\rho,\zeta]=&2^{-1/3}C_{\mathrm{X}}^{\sigma}g(\zeta)\rho^{1/3}(\vec r)\\
+			E_{\mathrm{X}}[\rho,\zeta]=&\int\varepsilon_{\mathrm{X}}[\rho,\zeta]\rho(\vec r)\mathrm{d}\vec r\\
+		\end{aligned}
+	\end{displaymath}
+	{\fontsize{7.5pt}{6.0pt}\selectfont{这里:~$C_{\mathrm{X}}^{\sigma}=\dfrac32\bigg(\dfrac3{4\pi}\bigg)^{1/3}$\\
+		$g(\zeta)=\dfrac12\bigg[(1+\zeta)^{4/3}+(1-\zeta)^{4/3}\bigg]$\\
+		$\zeta(\vec r)=\dfrac{[\rho_{\alpha}(\vec r)-\rho_{\beta}(\vec r)]}{[\rho_{\alpha}(\vec r)+\rho_{\beta}(\vec r)]}$}}
+	\end{itemize}
+}
+
+\frame%[allowframebreaks]
+{
+	\frametitle{\rm{LDA}泛函}
+	\begin{itemize}
+		\item 相关能部分
+			\begin{displaymath}
+				\hspace*{-30pt}	\varepsilon_{\mathrm{C}}^{\mathrm{LDA}}(r_s,\zeta)=\varepsilon_{\mathrm{C}}(r_s,0)+a_{\mathrm{c}}(r_s)\dfrac{f(\zeta)}{f^{\prime\prime}(\zeta)}(1-\zeta^4)+[\varepsilon_{\mathrm{c}}(r_s,1)-\varepsilon_{\mathrm{c}}(r_s,0)]f(\zeta)\zeta^4
+			\end{displaymath}
+			{\fontsize{7.5pt}{6.0pt}\selectfont{这里:~$r_s=\bigg[\dfrac3{4\pi}(\rho_{\alpha}+\rho_{\beta})^{-1}\bigg]^{1/3}$~$f(\zeta)=[(1+\zeta)^{4/3}+(1-\zeta)^{4/3}-2]/(2^{4/3}-2)$\\
+			$\varepsilon_{\mathrm{C}(r_s,0)}$、$\varepsilon_{\mathrm{C}(r_s,1)}$、$a_{\mathrm{C}(r_s)}$由经验公式
+			\begin{displaymath}
+				\begin{aligned}
+					&G(r_s,A,\alpha_1,\beta_1,\beta_2+\beta_3+\beta_4)\\
+					=&-2A(1+\alpha_1r_s)\ln\bigg[1+\dfrac1{2A(\beta_1r_s^{1/2}+\beta_2r_s+\beta_2r_s^{3/2}+\beta_1r_s^2)}\bigg]
+				\end{aligned}
+			\end{displaymath}
+		计算。其中$A$、$\alpha_1$、$\beta_1$、$\beta_2$、$\beta_3$、$\beta_4$是参数，通过拟合实验结果确定}}
+		\begin{displaymath}
+			E_{\mathrm{C}}[\rho]=\int\rho(\vec r)\varepsilon_{\mathrm{C}}(\vec r)\mathrm{d}\vec r
+		\end{displaymath}
+	\end{itemize}
+}
+
+\frame%[allowframebreaks]
+{
+	\frametitle{\rm{GGA}泛函}
+	\begin{itemize}
+		\item 交换能泛函:
+			\begin{itemize}
+				\item \textrm{PW91}
+					\begin{displaymath}
+						\begin{aligned}
+							E_{\mathrm{X}}^{\mathrm{PW91}}[\rho_{\alpha},\rho_{\beta}]=&\dfrac12(E_{\mathrm{X}}^{\mathrm{PW91}}[2\rho_{\alpha}]+E_{\mathrm{X}}^{\mathrm{PW91}}[2\rho_{\beta}])\\
+							E_{\mathrm{X}}^{\mathrm{PW91}}[\rho]=&-\dfrac34\bigg(\dfrac3\pi\bigg)^{1/3}\int\rho^{4/3}(\vec r)F(x)\mathrm{d}\vec r
+						\end{aligned}
+					\end{displaymath}
+					\hspace*{-30 pt}{\fontsize{4.5pt}{4.0pt}\selectfont{这里:~$F(x)=\dfrac{1+0.19645(hx)\sinh^{-1}(7.7956hx)+(hx)^2\{0.2743-0.1508\mathrm{exp}[-100(hx)^2]\}}{1+0.19645(hx)\sinh^{-1}(7.7956hx)+0.004(hx)^4}$}\\
+					$h=(24\pi^2)^{-1/3}$,~~~$x=|\nabla\rho|\rho^{-4/3}$}
+				\item \textrm{PBE}
+			\begin{displaymath}
+				E_{\mathrm{X}}^{\mathrm{PBE}}[\rho,x]=E_{\mathrm{X}}^{\mathrm{LDA}}[\rho,x]-C_{\mathrm{X}}\int a\bigg(1-\dfrac1{bx^2}\bigg)\rho^{4/3}(\vec r)\mathrm{d}\vec r
+			\end{displaymath}
+			{\fontsize{4.5pt}{4.0pt}\selectfont{其中:~$C_{\mathrm{X}}=\dfrac34\bigg(\dfrac3\pi\bigg)^{1/3}$\\$a=0.804$,~~~$b=0.273$~是非经验参数}}
+			\end{itemize}
+	\end{itemize}
+}
+
+\frame%[allowframebreaks]
+{
+	\frametitle{\rm{GGA}泛函}
+	\begin{itemize}
+		\item 相关能泛函:
+			\begin{itemize}
+				\item \textrm{PW91}
+					\begin{displaymath}
+						\begin{aligned}
+							E_{\mathrm{C}}^{\mathrm{PW91}}[\rho_{\alpha},\rho_{\beta}]=&\int\mathrm{d}\vec r\rho(\vec r)[\varepsilon_{\mathrm{C}}^{\mathrm{LSDA}}(r_s,\zeta)]+H(t,r_s,zeta)\\
+							H=&H_0+H_1
+						\end{aligned}
+					\end{displaymath}
+					{\fontsize{4.5pt}{4.0pt}\selectfont{这里:~
+						\begin{displaymath}
+							\begin{aligned}
+								H_0=&f^3(\zeta)\dfrac{\beta^2}{2\alpha}\ln\bigg(1+\dfrac{2\alpha}{\beta}\dfrac{t^2+At^4}{1+At^2+A^2t^4}\bigg)\\
+								A=&\dfrac{2\alpha}{\beta}\dfrac1{\mathrm{exp[-2\alpha\varepsilon_{\mathrm{C}}^{\mathrm{LDA}}(r_s,\zeta)}/f^3(\zeta)\beta^2]-1}\\
+							t=&\dfrac{|\nabla\rho|}{2f(\zeta)k_s\rho}~~~f(\zeta)=\dfrac12\bigg[(1+\zeta)^{2/3}+(1-\zeta)^{2/3}\bigg]\\
+							k_s=&[4(3\pi^{-1}\rho)^{1/3}]^{1/2}
+							\end{aligned}
+						\end{displaymath}
+						参数　$\alpha=0.09$,~~~$\beta=\nu C_{\mathrm{C}}(0)$\\
+						$\nu=(16/\pi)(3\pi^2)^{1/3}$,~~~$C_{\mathrm{C}}(0)=0.004235$
+				}}
+			\end{itemize}
+	\end{itemize}
+}
+
+\frame%[allowframebreaks]
+{
+	\frametitle{\rm{meta-GGA}泛函}
+	\begin{itemize}
+		\item 交换能泛函
+			\begin{itemize}
+				\item \textrm{TPSS}
+					\begin{displaymath}
+						\begin{aligned}
+							E_{\mathrm{X}}^{\mathrm{TPSS}}[\rho]=\int\mathrm{d}\vec r\rho(\vec r)\varepsilon_{\mathrm{X}}^{\mathrm{LSDA}}(\vec r)F_{\mathrm{X}}^{\mathrm{LSDA}}(p,z)\\
+							F_{\mathrm{X}}^{\mathrm{TPSS}}=1+\kappa-\dfrac{\kappa}{1+x/\kappa}
+						\end{aligned}
+					\end{displaymath}
+{\fontsize{4.5pt}{4.0pt}\selectfont{这里:~
+	$\rho(\vec r)=\rho_{\alpha}(\vec r)+\rho_{\beta}({\vec r})$,~~~$\varepsilon_{\mathrm{X}}^{\mathrm{LSDA}}(\vec r)=-\dfrac3{4\pi}[3\pi^2\rho(\vec r)]^{1/3}$
+\\
+\begin{displaymath}
+	\begin{aligned}
+		x=&\left\{\bigg[\dfrac{10}{81}+\dfrac{cz^2}{(1+z^2)^2}\bigg]p+\dfrac{146}{2025}\bar{q}_b^2-\dfrac{73}{405}\bar{q}_b\bigg[\dfrac12\bigg(\dfrac35z\bigg)^2+\dfrac12p^2\bigg]^{1/2}\right.\\
+		&+\left.\dfrac1{\kappa}\bigg(\dfrac{10}{81}\bigg)^2p^2\dfrac{20e^{1/2}}{81}\bigg(\dfrac35z\bigg)^2+e\mu p^3\right\}(1+e^{1/2}p)^{-2}\\
+		p=&\dfrac{|\nabla\rho(\vec r)|^2}{4(3\pi^2)^{2/3}\rho^{8/3}(\vec r)}, ~~~ \bar{q}_b=\dfrac{(9/20)(\alpha-1)}{[1+b\alpha(\alpha-1)]^{1/2}}+2p/3
+	\end{aligned}
+\end{displaymath}
+$z=\tau_w/\tau$,~~~$\tau_w=\dfrac{|\nabla\rho(\vec r)|^2}{8\rho(\vec r)}$,~~~$\tau=\sum\limits_{\sigma}\tau_{\sigma}$\\
+$\alpha=(\tau-\tau_w)/\tau_{\mathrm{unif}}=(5p/3)(z^{-1}-1)$,~~~$\tau_{\mathrm{tiff}}=\dfrac3{10}(3\pi^2)^{2/3}[\rho(\vec r)]^{5/3}$
+}}
+			\end{itemize}
+	\end{itemize}
+}
+
+
+\frame%[allowframebreaks]
+{
+	\frametitle{\rm{meta-GGA}泛函}
+	\begin{itemize}
+		\item 相关能泛函
+			\begin{itemize}
+				\item {\textrm{TPSS}}
+					\begin{displaymath}
+						E_{\mathrm{C}}^{\mathrm{TPSS}}[\rho_{\alpha,\rho_{\beta}}]=\int\mathrm{d}\vec r\rho(\vec r)\varepsilon_{\mathrm{C}}^{\mathrm{TPSS0}}[1+\mathrm{d}\varepsilon_{\mathrm{C}}^{\mathrm{TPSS0}}(\tau_w/\tau)^3]
+					\end{displaymath}
+{\fontsize{4.5pt}{4.0pt}\selectfont{这里:~
+	\begin{displaymath}
+		\begin{aligned}
+			\varepsilon_{\mathrm{C}}^{\mathrm{TPSS0}}=&\varepsilon_{\mathrm{C}}^{\mathrm{PBE}}(\rho_{\alpha},\rho_{\beta},\nabla\rho_{\alpha},\nabla\rho_{\beta})[1+C(\zeta,\xi)(\tau_w/\tau)^2]\\
+			&-\bigg[1+C(\zeta,\xi)(\tau_w/\tau)^2\sum\limits_{\sigma}\dfrac{\rho_{\sigma}(\vec r)}{\rho(\vec r)}\bar{\varepsilon}_{\mathrm{C}}\bigg]\\
+			\bar{\varepsilon}_{\mathrm{C}}=&\max[\varepsilon_{\mathrm{C}}^{\mathrm{PBE}}(\rho_{\alpha},0,\nabla\rho_{\alpha},0),\varepsilon_{\mathrm{C}}^{\mathrm{PBE}}(\rho_{\alpha},\rho_{\beta},\nabla\rho_{\alpha},\nabla\rho_{\beta})]\\
+			C(\zeta,\xi)=&\dfrac{C(\zeta,0)}{\{1+\xi^2[(1+\zeta)^{-4/3}+(1-\zeta)^{-4/3}]/2\}^4}
+		\end{aligned}
+	\end{displaymath}
+	$\xi=\dfrac{|\nabla\zeta|}{2[3\pi^2\rho(\vec r)]^{1/3}}$, ~~~$C(\zeta,0)=0.53+0.87\zeta^2+0.50\zeta^4+2.26\zeta^6$
+}}
+			\end{itemize}
+	\end{itemize}
+	\vskip 5pt
+	\textrm{TPSS}泛函的特点:~\\
+	\vskip 3pt
+	{\fontsize{7.5pt}{6.0pt}\selectfont{不包含依靠实验数据的可调参数，数字系数由精确能量泛函满足的条件确定\\
+		\textcolor{blue}{对电子分布较为均匀的晶体体系和电子分布激烈变化的分子体系都有较高的精度} }}
+}
+
+\frame
+{
+	\frametitle{\rm{hybrid}泛函}
+	体系\textrm{Hamilton}算符表示为
+	\begin{displaymath}
+		\hat{H}_{\lambda}=-\dfrac12\sum_i^N\nabla^2+\sum_i^NV_i(\rho,\lambda)+\dfrac{\lambda}2\sum_i^N\sum_{j(j\neq i)}^N\dfrac1{r_{ij}}
+	\end{displaymath}
+	\textcolor{blue}{$\lambda$表征电子间相互作用程度}\\
+	\begin{displaymath}
+		\begin{aligned}
+			&\lambda=0:~\mbox{无相互作用的参考体系}\\
+			&\lambda=1:~\mbox{存在相互租用的真实体系}
+		\end{aligned}
+	\end{displaymath}
+	交换-相关能表示为
+	\begin{displaymath}
+		\begin{aligned}
+			E_{\mathrm{XC}}^{\lambda}=&\dfrac12\int\mathrm{d}\vec r_1\rho_1^{\lambda}(\vec r_1)\int\dfrac{h_{\mathrm{XC}}^{\lambda}(\vec r_1,\vec r_2)}{\vec r_1-\vec r_2}\mathrm{d}\vec r_2\\
+			E_{\mathrm{XC}}=&\int E_{\mathrm{XC}}^{\lambda}\mathrm{d}\lambda
+		\end{aligned}
+	\end{displaymath}
+	{\fontsize{4.5pt}{4.0pt}\selectfont{这里:~$h_{\mathrm{XC}}(\vec r_1,\vec r_2)=\dfrac{2\rho_2(\vec r_1,\vec r_2)}{\rho(\vec r_1)}-\rho_1(\vec r_2)$}}
+}
+
+\frame
+{
+	\frametitle{\rm{hybrid}泛函}
+	\begin{itemize}
+		\item \textrm{half-to-half}
+			\begin{displaymath}
+				\begin{aligned}
+					E_{\mathrm{XC}}=&\dfrac12(E_{\mathrm{XC}}^0+E_{\mathrm{XC}}^1)=\dfrac12E_{\mathrm{XC}}^{\mathrm{Exact}}+\dfrac12E_{\mathrm{XC}}^1\\
+					\approx&\dfrac12E_{\mathrm{XC}}^{\mathrm{HF}}+\dfrac12E_{\mathrm{XC}}^{\mathrm{LSDA}}
+				\end{aligned}
+			\end{displaymath}
+		\item \textrm{B3LYP}
+			\begin{displaymath}
+			\hspace*{-20pt}	E_{\mathrm{XC}}^{\mathrm{B3LYP}}=(1-a)E_{\mathrm{X}}^{\mathrm{LSDA}}+aE_{\mathrm{X}}^{\mathrm{HF}}+b\Delta E_{\mathrm{X}}^{\mathrm{VB88}}+cE_{\mathrm{C}}^{\mathrm{LYP}}+(1-c)E_{\mathrm{C}}^{\mathrm{LSDA}}
+			\end{displaymath}
+	\end{itemize}
+	\vskip 8pt
+	\textcolor{blue}{电子间的交换能和相关能都是离域的，但长程作用方向相反，很大程度上彼此抵消，剩余部分主要是局域的，所以将交换能和相关能合在一起处理，用局域近似可以比较好地描述电子行为}\\
+	\vskip 5pt
+	\textcolor{red}{采用精确交换能形式，虽然消除了自相互作用的误差，但剩余的相关能主体是离域的，因此局域形式的泛函不再是好的近似，对电子行为的描述效果会变差}
+}
+
+\section{附录2:~方程迭代求解与函数优化}
 \frame
 {
 	\frametitle{非线性方程的\rm{Newton~}法求根}
@@ -6854,7 +7128,7 @@ $$\Sigma(\vec r_1,\vec r_2;\omega)=\dfrac{\mathrm i}{2\pi}\int \mathrm e^{\mathr
 	\textcolor{purple}{准\textrm{Newton}法:~靠近极小值时收敛速快;~初值选择不好，易不收敛}
 }
 
-\section{附录2:~矩阵直接对角化与迭代对角化}
+\section{附录3:~矩阵直接对角化与迭代对角化}
 %\subsubsection{矩阵直接对角化算法}
 \frame
 {
@@ -6916,6 +7190,17 @@ $$\Sigma(\vec r_1,\vec r_2;\omega)=\dfrac{\mathrm i}{2\pi}\int \mathrm e^{\mathr
 		|\psi\rangle=\mathbf{D}^{-1}(\mathbf{H}-\varepsilon)|\psi\rangle+|\psi\rangle
 	\end{displaymath}
 	这里$\mathbf{D}$是非奇异矩阵，与$\mathbf{H}$矩阵有关，可根据需要选取多种形式
+}
+
+\frame
+{
+	\frametitle{稀疏矩阵的\textrm{Lanczos~}算法}
+\begin{figure}[h!]
+\centering
+\includegraphics[height=3.2in,width=4.0in,viewport=0 0 950 590,clip]{Figures/Coordinate_transformation.png}
+\label{decent_CG}
+\caption{\tiny \textrm{Schematic illustration of searching for the eigenvalue of a vector.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\end{figure}
 }
 
 \frame
@@ -7002,59 +7287,6 @@ $$\Sigma(\vec r_1,\vec r_2;\omega)=\dfrac{\mathrm i}{2\pi}\int \mathrm e^{\mathr
 	\begin{displaymath}
 		\langle R[\mathbf{x}_{i+1}]|R[\mathbf{x}_{i+1}]\rangle=\sum_{j,k}a_ja_k\langle R[\mathbf{x}_{j}]|R[\mathbf{x}_{k}]\rangle
 	\end{displaymath}
-}
-
-\section{附录3:~\rm{VASP}的主程序结构}
-\frame
-{
-	\frametitle{\textrm{VASP}的主程序}
-\begin{figure}[h!]
-\centering
-\vspace*{-0.45in}
-%\hspace*{-10pt}
-\includegraphics[height=3.62in,width=2.45in,viewport=160 118 395 755,clip]{Figures/VASP_main_Flow-1.pdf}
-\caption{\tiny \textrm{Calculation of the K-S ground-states.}}%
-\label{VASP_Follow-1}
-\end{figure}
-}
-
-\frame
-{
-\frametitle{}
-\begin{figure}[h!]
-\centering
-\vspace*{-0.65in}
-%\hspace*{-10pt}
-\includegraphics[height=3.62in,width=2.45in,viewport=176 16 416 819,clip]{Figures/VASP_main_Flow-2.pdf}
-\caption{\tiny \textrm{Calculation of the K-S ground-states.}}%
-\label{VASP_Follow-2}
-\end{figure}
-}
-
-\frame
-{
-\frametitle{}
-\begin{figure}[h!]
-\centering
-\vspace*{-0.65in}
-%\hspace*{-10pt}
-\includegraphics[height=3.62in,width=2.45in,viewport=146 173 416 812,clip]{Figures/VASP_main_Flow-3.pdf}
-\caption{\tiny \textrm{Calculation of the K-S ground-states.}}%
-\label{VASP_Follow-3}
-\end{figure}
-}
-
-\frame
-{
-\frametitle{}
-\begin{figure}[h!]
-\centering
-\vspace*{-0.65in}
-%\hspace*{-10pt}
-\includegraphics[height=3.62in,width=2.45in,viewport=177 305 417 813,clip]{Figures/VASP_main_Flow-4.pdf}
-\caption{\tiny \textrm{Calculation of the K-S ground-states.}}%
-\label{VASP_Follow-4}
-\end{figure}
 }
 
 \section{附录4:~赝势\rm{Data set}的生成}
