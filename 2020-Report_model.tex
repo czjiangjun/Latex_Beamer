@@ -63,8 +63,19 @@
 \graphicspath{{Presentation_Beamer/}}                            %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
 \begin{document}
+%%%%%%%%%%%%%%%%%%%%%  % 页眉-页脚设计  %%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagestyle{fancy}
+\lhead{} %页眉左边位置内容，并加粗 \bfseries Result
+\chead{} % 页眉中间位置内容
+\rhead{\includegraphics[scale=0.20]{Figures/BCC_logo-1.png}}%在此处插入logo.pdf图片 图片靠右
+%\lfoot{}  %页脚
+\cfoot{}
+%\rfoot{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\begin{CJK}{UTF8}{}	%针对文字编码为unix
+%\begin{CJK}{GBK}{hei}	%针对文字编码为doc
 %\CJKindent     %在CJK环境中,中文段落起始缩进2个中文字符
 %\indent
 %
@@ -75,7 +86,7 @@
 %\renewcommand{\tablename}{\CJKfamily{hei} 表.}
 \renewcommand{\tablename}{{\bf Tab}.}
 %\renewcommand{\thesubfigure}{\roman{subfigure}}  \makeatletter %子图标记罗马字母
-\renewcommand{\thesubfigure}{\tiny(\alph{subfigure})}  \makeatletter　%子图标记英文字母
+%\renewcommand{\thesubfigure}{\tiny(\alph{subfigure})}  \makeatletter　%子图标记英文字母
 %\renewcommand{\thesubfigure}{}  \makeatletter　%子图无标记
 
 %将图表的Caption写成 图(表) Num. 格式
@@ -106,35 +117,64 @@
 %\addcontentsline{toc}{section}{Bibliography}
 
 %-------------------------------The Title of The Paper-----------------------------------------%
-\title{标题}
-%----------------------------------------------------------------------------------------------%
+%报告题目
+\title{报告题目:~}
+%-----------------------------------------------------------------------------
 
 %----------------------The Authors and the address of The Paper--------------------------------%
 \author{
 \small
-作者
 %Author1, Author2, Author3\footnote{Communication author's E-mail} \\    %Authors' Names	       %
 \small
 %(The Address，City Post code)						%Address	       %
 }
+%\affil[$\dagger$]{清华大学~材料加工研究所~A213}
 \date{}					%if necessary					       %
 %----------------------------------------------------------------------------------------------%
 \maketitle
+\thispagestyle{fancy}   % 首页插入页眉页脚 
 
 %-------------------------------------------------------------------------------The Abstract and the keywords of The Paper----------------------------------------------------------------------------%
-%\begin{abstract}
-The content of the abstract
-%\end{abstract}
+\begin{abstract}
+摘要内容
+%2020-11-24:~中国科学院-力学研究所
+%密度泛函理论自1960年代中旬确立以来，已经成为物理、化学和材料领域电子结构计算的重要工具。相比于传统的波函数理论，密度泛函理论以电子密度作为基本变量，有着更直观、明确的物理内涵，计算效率也更高。通过对密度泛函理论和Kohn-Sham方程的讨论，特别是交换-相关能泛函的改进和发展历史梳理，回顾密度泛函理论的概貌，简单介绍主要软件的基本框架。
+%2020-11-28:~北京理工大学
+%基于密度泛函理论(\textrm{DFT})发展的第一原理计算软件已经成为物理、化学和材料领域电子结构计算的重要工具。\textrm{LAPW}方法和\textrm{PAW}方法是目前材料电子计算的主要方法，围绕两种方法各自的基组构造、势能与总能量计算等问题，讨论基于密度泛函理论的相关软件(如\textrm{WIEN2k}、\textrm{VASP}等)的算法实现和基本框架。
+\end{abstract}
 
-\keywords {Keyword1; Keyword2; Keyword3}
-%-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------%
+%关键词
+%\keywords{\textrm{DFT}, \textrm{LAPW}, \textrm{PAW}, 电子计算}
 
-%----------------------------------------------------------------------------------------The Body Of The Paper----------------------------------------------------------------------------------------%
+%----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------%
+
+%------------------------------------------------------------------------------ main Body------------------------------------------------------------------------------------
 %Introduction
-\section{Introduction}
-导言
-\section{正文章节}
-参考文献的引用方式1\upcite{QCQC_2014}
+%\section{Introduction}
+%报告人简介
+%１.~个人简历
+\textbf{姜骏的个人简历}
+
+\begin{minipage}[b]{0.75\textwidth}
+{\fontsize{11.0pt}{10.0pt}\selectfont{姜骏，北京市计算中心~~副研究员}}
+\vskip 4pt
+2001年毕业于中国纺织大学~(现~东华大学)~染整专业，2008年~北京大学物理化学专业博士研究生毕业。\\
+2008-2012年~北京大学博士后。\\
+2013-2016年~中物院高性能数值模拟软件中心助理研究员，2016年4月起，北京市计算中心副研究员。
+\end{minipage}
+\hskip 15pt
+%2.~个人近照
+\begin{minipage}[b]{0.20\textwidth}
+	\vspace{17pt}
+\includegraphics[height=1.1in]{Figures/Person_Photo.JPG}
+\end{minipage}
+\vskip 12pt
+%3.~个人研究内容与兴趣
+姜骏长年从事第一原理计算方法和软件研究，熟悉密度泛函理论~(\textrm{Density Functional Theory, DFT})~和第一原理计算方法，特别是对赝势~(\textrm{Pseudo-Potential, PP})~方法、线性缀加平面波~(\textrm{Linearised Augmeneted Plane-Wave, LAPW})~方法和投影子缀加波~(\textrm{Projected~Augmented~Wave, PAW})~方法有系统深入的理解。2017年7月起，作为骨干研究人员承担科技部“材料基因工程关键技术与支撑平台”重点专项课题1“研发多尺度集成化高通量计算方法与计算软件”研究任务，从事高通量跨尺度并发式集成计算主体算法与软件开发。近年来的主要工作包括第一原理-分子动力学材料计算软件平台的设计与开发、晶体空间群软件开发和VASP软件的赝势重构等。
+
+%\section{正文章节}
+%参考文献的引用方式1\upcite{QCQC_2014}
+
 %-------------------The Figure Of The Paper------------------
 %\begin{figure}[h!]
 %\centering
@@ -255,7 +295,7 @@ The content of the abstract
 %-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------%
 
 %-------------------------------------------------------------------------Thanks------------------------------------------------------------------------------------------------
-\section{致谢}
+%\section{致谢}
 
 %--------------------------------------------------------------------------The Biblography of The Paper-----------------------------------------------------------------%
 %\newpage																				%
@@ -266,10 +306,10 @@ The content of the abstract
 %	\bibitem{PAW-dataset} \textrm{姜骏}，\textrm{PAW原子数据集的构造与检验}, \textit{中国化学会第十二届全国量子化学会议论文摘要集}，\textbf{太原}，(2014).
 %\end{thebibliography}																			%
 %-----------------------------------------------------------------------------------------------------------------------------------------------------------------------%
-%																					%
-\phantomsection\addcontentsline{toc}{section}{Bibliography}	 %直接调用\addcontentsline命令可能导致超链指向不准确,一般需要在之前调用一次\phantomsection命令加以修正	%
-\bibliography{../ref/Myref_HT}																			%
-\bibliographystyle{../ref/mybib}																		%
+%
+%\phantomsection\addcontentsline{toc}{section}{Bibliography}	 %直接调用\addcontentsline命令可能导致超链指向不准确,一般需要在之前调用一次\phantomsection命令加以修正	%
+%\bibliography{ref/Myref_HT}																			%
+%\bibliographystyle{ref/mybib}																		%
 %%  \nocite{*}																				%
 %-----------------------------------------------------------------------------------------------------------------------------------------------------------------------%
 
