@@ -65,6 +65,18 @@
 
 
 \begin{document}
+%%%%%%%%%%%%%%%%%%%%%  % 页眉-页脚设计  %%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\pagestyle{fancy}    %与文献引用有冲突
+%\lhead{} %页眉左边位置内容，并加粗 \bfseries Result
+%\chead{} % 页眉中间位置内容
+\rhead{\includegraphics[scale=0.20]{Figures/BCC_logo-1.png}}%在此处插入logo.pdf图片 图片靠右
+%\lfoot{}  %页脚
+%\cfoot{}
+%\rfoot{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\begin{CJK}{UTF8}{}	%针对文字编码为unix
+%\begin{CJK}{GBK}{hei}	%针对文字编码为doc
 %\CJKindent     %在CJK环境中,中文段落起始缩进2个中文字符
 %\indent
 %
@@ -75,7 +87,7 @@
 %\renewcommand{\tablename}{\CJKfamily{hei} 表.}
 \renewcommand{\tablename}{{\bf Tab}.}
 %\renewcommand{\thesubfigure}{\roman{subfigure}}  \makeatletter %子图标记罗马字母
-\renewcommand{\thesubfigure}{\tiny(\alph{subfigure})}  \makeatletter　%子图标记英文字母
+%\renewcommand{\thesubfigure}{\tiny(\alph{subfigure})}  \makeatletter　%子图标记英文字母
 %\renewcommand{\thesubfigure}{}  \makeatletter　%子图无标记
 
 %将图表的Caption写成 图(表) Num. 格式
@@ -111,22 +123,23 @@
 
 %----------------------The Authors and the address of The Paper--------------------------------%
 \author{
+%作者:
 \small
-作者
-%Author1, Author2, Author3\footnote{Communication author's E-mail} \\    %Authors' Names	       %
+Author1, Author2, Author3\footnote{Communication author's E-mail} \\    %Authors' Names	       %
 \small
-%(The Address，City Post code)						%Address	       %
+(The Address，City Post code)						%Address	       %
 }
 \date{}					%if necessary					       %
 %----------------------------------------------------------------------------------------------%
 \maketitle
+%\thispagestyle{fancy}   % 首页插入页眉页脚 
 
 %-------------------------------------------------------------------------------The Abstract and the keywords of The Paper----------------------------------------------------------------------------%
-%\begin{abstract}
+\begin{abstract}
 The content of the abstract
-%\end{abstract}
+\end{abstract}
 
-\keywords {Keyword1; Keyword2; Keyword3}
+\keywords{Keyword1; Keyword2; Keyword3}
 %-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------%
 
 %----------------------------------------------------------------------------------------The Body Of The Paper----------------------------------------------------------------------------------------%
@@ -257,8 +270,14 @@ The content of the abstract
 %-------------------------------------------------------------------------Thanks------------------------------------------------------------------------------------------------
 \section{致谢}
 
+% 个人名章
+%\hskip 0.75\textwidth
+%\begin{minipage}[b]{0.20\textwidth}
+%		\includegraphics[scale=0.07]{Figures/signature-seal_Jiang-1.png}
+%\end{minipage}
+
 %--------------------------------------------------------------------------The Biblography of The Paper-----------------------------------------------------------------%
-%\newpage																				%
+\newpage																				%
 %-----------------------------------------------------------------------------------------------------------------------------------------------------------------------%
 %\begin{thebibliography}{99}																		%
 %%\bibitem{PRL58-65_1987}H.Feil, C. Haas, {\it Phys. Rev. Lett.} {\bf 58}, 65 (1987).											%
@@ -268,8 +287,8 @@ The content of the abstract
 %-----------------------------------------------------------------------------------------------------------------------------------------------------------------------%
 %																					%
 \phantomsection\addcontentsline{toc}{section}{Bibliography}	 %直接调用\addcontentsline命令可能导致超链指向不准确,一般需要在之前调用一次\phantomsection命令加以修正	%
-\bibliography{../ref/Myref_HT}																			%
-\bibliographystyle{../ref/mybib}																		%
+\bibliography{ref/Myref_HT}																			%
+\bibliographystyle{ref/mybib}																		%
 %%  \nocite{*}																				%
 %-----------------------------------------------------------------------------------------------------------------------------------------------------------------------%
 
