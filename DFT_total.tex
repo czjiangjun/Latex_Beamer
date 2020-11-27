@@ -2061,6 +2061,40 @@ $n_i$是$\psi_i$上的电子占据数，$\varepsilon_i$是其能量本征值，�
 \end{figure} 
 }
 
+\frame
+{
+	\frametitle{\textrm{VASP}计算的特色}
+	相比于与普通的第一原理计算软件，\textrm{VASP}很好地平衡了计算效率和精度的问题，总的来说，\textrm{VASP}主要通过这几个特色保证了计算的高效能
+	\begin{itemize}
+	     \item 迭代与优化算法的多样性\\
+		     本质上电荷密度迭代 \textrm{\&\&} 体系总能量优化是相同的优化问题，采用了类似的算法\upcite{CMS6-15_1996,PRB54-11169_1996}:\\
+			\textcolor{blue}{\textrm{Pseudo-Newton、Conjugate-Gradient、Broyden~mix、damping-factor、RMM-DIIS}}
+	     \item 尽可能采用局域基(原子轨道基)函数:~\\
+		     \textcolor{blue}{\textrm{LREAL}}=\textcolor{red}{\textrm{.TRUE.}}\\
+			优化的投影函数也尽可能在实空间表示
+	     \item \textrm{PAW}原子数据集:\textcolor{blue}{优异的赝势}\upcite{PRB59-1758_1999}
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{\textrm{VASP}计算的特色}
+	\begin{itemize}
+	     \item \textrm{FFT}网格与计算节点的匹配\\
+		     \textcolor{magenta}{通过子程序\textrm{mgrid.F}生成中间层，实现并行负载与计算节点分配的匹配，减少\textrm{FFT}变换和实空间并行的节点间通信}
+\begin{figure}[h!]
+	\vspace{-0.25in}
+\centering
+%\includegraphics[height=2.7in,width=4.0in,viewport=0 0 1180 875,clip]{Figures/dual_grid.png}
+\includegraphics[height=1.0in,width=4.0in,viewport=0 0 1500 450,clip]{Figures/VASP_FFT-MPI_Reciprocal.png}
+\vskip 0.5pt
+\includegraphics[height=0.7in,width=4.0in,viewport=0 0 730 150,clip]{Figures/VASP_FFT-MPI_Real.png}
+\caption{\tiny \textrm{VASP:~ Reciprocal-Real space layout for grids in MPI.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{MPI-FFT}
+\end{figure} 
+	\end{itemize}
+}
+
 \subsection{\rm{VASP}的主程序结构}
 \frame
 {
@@ -2380,17 +2414,18 @@ $n_i$是$\psi_i$上的电子占据数，$\varepsilon_i$是其能量本征值，�
 %\small\textrm{APW}方法的困难，久期方程不能化成广义本征值方程的形式(久期方程对能量$E$是非线性的)为了克服这一困难，人们提出线性化方法，
 \textrm{O.~K.~Andersen~}提出\textrm{LAPW}方法\upcite{Singh_Book}:将$u_l(r,E)$在某一合适的$E_l$值附近对$E$的一阶微商{$\left.\dfrac{\textrm{d}u_l(r,E)}{\textrm{d}E}\right|_{E_l}\equiv\dot u_l(r,E_l)$}\\代入\textrm{APW}基函数中可得\textrm{LAPW}方法的基函数：
 {\fontsize{7.5pt}{3.3pt}\selectfont
-$${\hskip -14pt \varphi(\vec k_j,\vec r)=\left\{
+$$\hskip -14pt \varphi(\vec k_j,\vec r)=\left\{
   \begin{aligned}
     &\Omega^{-1/2}\exp[i\vec k_j\cdot\vec r],&|\vec r-\vec r_s|>R_{\mathrm{MT}}^s\\
     &\sum_{lm}[A^{\vec k_j}_{lm}u_l(|\vec r-\vec r_s|,E_l)+B^{\vec k_j}_{lm}\dot u_l(|\vec r-\vec r_s|,E_l)]Y_{lm}(\widehat{\vec r-\vec r_s}),&|\vec r-\vec r_s|\leqslant R_{\mathrm{MT}}^s
   \end{aligned}
-\right.}$$}
+\right.$$
 %$$\Psi_{\vec k}(\vec r)=\int_{\Omega}\tilde G_{\vec k}(\vec r-\vec r\,^\prime;E)V(\vec r\,^\prime)\Psi_{\vec k}(\vec r\,^\prime)\textrm{d}\vec r\,^\prime$$
-根据基函数在\textrm{MT}球面上连续到一阶，确定系数$A^{\vec k}_{lm}$，$B^{\vec k}_{lm}$的值。
+根据基函数在\textrm{MT}球面上连续到一阶，确定系数$A^{\vec k}_{lm}$，$B^{\vec k}_{lm}$的值。}
 \begin{figure}[h!]
+	\vskip -3pt
 \centering
-\includegraphics[height=1.20in,width=1.98in,viewport=1 20 585 435,clip]{Figures/WIEN2k-LAPW.png}
+\includegraphics[height=1.10in,width=1.88in,viewport=1 20 585 435,clip]{Figures/WIEN2k-LAPW.png}
 \caption{\tiny \textrm{Partitioning of the unit cell into atomic spheres(I) and an interstitial region(II)}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Muffin_tin-3}
 \end{figure}
@@ -2471,7 +2506,7 @@ $$  \phi_{lm}^{\mathrm{lo}}(\vec r)=\left\{
   \end{aligned}\right.
   \label{eq:solid-63}
 $$}
-这里$L$\,$\equiv$\,$l,m$，$\vec G_n$为倒格矢，$Y_L(\hat{\vec r})$是球谐函数，\textrm{II}为原子间区域。
+这里$L$\,$\equiv$\,$l,m$，$\vec G_n$为倒格矢，$Y_L(\hat{\vec r})$是球谐函数，\textrm{II}为原子间隙
 \begin{itemize}
 	\item 在\textrm{MT}球内靠近原子核，势能具有原子型势能特征
 	\item 在\textrm{MT}球外，要满足\textrm{Bloch}函数边界条件特征。
