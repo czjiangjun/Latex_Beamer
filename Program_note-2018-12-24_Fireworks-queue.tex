@@ -1,10 +1,9 @@
-\documentclass[10pt, oneside, a4paper]{article}      % Specifies the document class
-%\documentclass[10pt, twoside, a4paper]{article}      % Specifies the document class
+\documentclass{article}      % Specifies the document class
 
 %%%%%%%%%%%%%%%%% CJK 中文版面控制  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\usepackage{CJK} % CTEX-CJK 中文支持                            %
 \usepackage{xeCJK} % seperate the english and chinese		 %
-\usepackage{CJKutf8} % Texlive 中文支持                         %
+%\usepackage{CJKutf8} % Texlive 中文支持                         %
 \usepackage{CJKnumb} %中文序号                                   %
 \usepackage{indentfirst} % 中文段落首行缩进                      %
 %\setlength\parindent{22pt}       % 段落起始缩进量               %
@@ -14,7 +13,6 @@
 \setlength{\topmargin}{-1cm}                                     %
 \setlength{\oddsidemargin}{0.1cm}                                %
 \setlength{\evensidemargin}{\oddsidemargin}                      %
-\usepackage{fancyhdr}           %使用页眉-页脚                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \usepackage{amsmath,amsthm,amsfonts,amssymb,bm}          %数学公式
@@ -28,7 +26,6 @@
 \captionsetup{font=footnotesize}
 
 %\usepackage[version=3]{mhchem}		%化学公式
-\usepackage{chemformula}
 \usepackage{chemfig}		%化学公式
 
 \usepackage{fontspec} % use to set font
@@ -40,17 +37,12 @@
 \usepackage{multirow}
 \usepackage{makecell}		%允许单元格内换行
 
-\usepackage{arydshln}
-\newcommand{\adots}{\mathinner{\mkern2mu%
-\raisebox{0.1em}{.}\mkern2mu\raisebox{0.4em}{.}%
-\mkern2mu\raisebox{0.7em}{.}\mkern1mu}}
 %%%%%%%%%%%%%%%%%%%%%%%%%  参考文献引用 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%尽量使用 BibTeX(含有超链接，数据库的条目URL即可)                %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \usepackage[numbers,sort&compress]{natbib} %紧密排列             %
 \usepackage[sectionbib]{chapterbib}        %每章节单独参考文献   %
-%\usepackage{footbib}			   %脚注列出参考文献　   %
 \usepackage{hypernat}                                                                         %
 \usepackage[bookmarksopen=true,pdfstartview=FitH,CJKbookmarks]{hyperref}              %
 \hypersetup{bookmarksnumbered,colorlinks,linkcolor=green,citecolor=blue,urlcolor=red}         %
@@ -64,30 +56,15 @@
 %						   %pdf书签的中文乱码问题		      %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%%%%%%%%%%%%%%%%%  % 插图使用位置  %%%%%%%%%%%%%%%%%%%%%%%%%%%
-\graphicspath{{Presentation_Beamer/}}                            %
+%%%%%%%%%%%%%%%%%%%%%  % EPS 图片支持  %%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{graphicx}                                            %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 \begin{document}
-%%%%%%%%%%%%%%%%%%%%%  % 页眉-页脚设计  %%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\pagestyle{fancy}    %与文献引用超链接style有冲突
-%\lhead{\bfseries Result} %页眉左边位置内容，并加粗 
-%\chead{} % 页眉中间位置内容
-\rhead{\includegraphics[scale=0.20]{Figures/BCC_logo-1.png}}%在此处插入logo.pdf图片 图片靠右
-%\lfoot{}  %页脚
-%\cfoot{}
-%\rfoot{}
-%%%%%%%%%%%%%%%%%  % pagestyleR常用格式  %%%%%%%%%%%%%%%%%%%%%%%%%
-%% empty 无页眉页脚
-%% plain 无页眉，页脚为居中页码
-%% headings 页眉为章节标题，无页脚
-%% myheadings 页眉内容可自定义，无页脚
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%\begin{CJK}{UTF8}{gbsn} %针对文字编码为unix %CJK自带的utf-8简体字体有gbsn(宋体)和gkai(楷体)
-%\begin{CJK}{GBK}{hei}	 %针对文字编码为doc
 %\CJKindent     %在CJK环境中,中文段落起始缩进2个中文字符
 %\indent
+\graphicspath{{Figures/}}
 %
 \renewcommand{\abstractname}{\small{\CJKfamily{hei} 摘\quad 要}} %\CJKfamily{hei} 设置中文字体，字号用\big \small来设
 \renewcommand{\refname}{\centering\CJKfamily{hei} 参考文献}
@@ -95,9 +72,6 @@
 \renewcommand{\figurename}{{\bf Fig}.}
 %\renewcommand{\tablename}{\CJKfamily{hei} 表.}
 \renewcommand{\tablename}{{\bf Tab}.}
-%\renewcommand{\thesubfigure}{\roman{subfigure}}  \makeatletter %子图标记罗马字母
-%\renewcommand{\thesubfigure}{\tiny(\alph{subfigure})}  \makeatletter　%子图标记英文字母
-%\renewcommand{\thesubfigure}{}  \makeatletter　%子图无标记
 
 %将图表的Caption写成 图(表) Num. 格式
 \makeatletter
@@ -127,42 +101,61 @@
 %\addcontentsline{toc}{section}{Bibliography}
 
 %-------------------------------The Title of The Paper-----------------------------------------%
-\title{标题}
+\title{对称性有关的信息}
 %----------------------------------------------------------------------------------------------%
 
 %----------------------The Authors and the address of The Paper--------------------------------%
 \author{
-%作者:
 \small
-Author1, Author2, Author3\footnote{Communication author's E-mail} \\    %Authors' Names	       %
+%Author1, Author2, Author3\footnote{Communication author's E-mail} \\    %Authors' Names	       %
 \small
-(The Address，City Post code)						%Address	       %
+%(The Address，City Post code)						%Address	       %
 }
 \date{}					%if necessary					       %
 %----------------------------------------------------------------------------------------------%
 \maketitle
-%\thispagestyle{fancy}   % 首页插入页眉页脚 
 
 %-------------------------------------------------------------------------------The Abstract and the keywords of The Paper----------------------------------------------------------------------------%
-\begin{abstract}
-The content of the abstract
-\end{abstract}
+%\begin{abstract}
+%The content of the abstract
+%\end{abstract}
 
-\keywords{Keyword1; Keyword2; Keyword3}
-
-%-------------------------------------------------------------------------------The Content of The Paper----------------------------------------------------------------------------------------------%
-\tableofcontents %% 制作目录(目录是根据标题自动生成的)
-
+%\keywords {Keyword1; Keyword2; Keyword3}
 %-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------%
-\newpage	        % 每个新的/newpage 即可有新的\thispagestyle 引领      %
-\thispagestyle{fancy}   % 插入页眉页脚                                        %
+
 %----------------------------------------------------------------------------------------The Body Of The Paper----------------------------------------------------------------------------------------%
 %Introduction
 
-\section{Introduction}
-导言
-\section{正文章节}
-参考文献的引用方式1\upcite{QCQC_2014}
+\section{14种\rm{Bravais~}格子}
+\section{Queue}
+作业管理系统本质上是一个\textbf{Shell~}
+普通的队列(\textrm{Queue})调度模板相当于是一个脚本(\textrm{script})
+\begin{itemize}
+	\item 队列脚本:~启动计算任务
+	\item #lsf脚本的基本格式:~
+	\item #队列名,有系统管理员分配，一般不需要修改
+	\item APP_NAME=para2
+	\item #该参数不建议修改
+	\item NP_PER_NODE=24
+	\item #mpi 的类型，该参数不建议修改
+	\item MY_MPI_TYPE=openmpi
+	\item #mpi 的路径，在系统下，可以通过which mpicc查看
+	\item MY_MPI_HOME=/share/software/program/01_openmpi-1.6.3
+	\item MY_MPI_HOME=/share/software/program/02_openmpi-1.8.4
+
+	\item #任务调用的核心数，为NP_PER_NODE的整数倍将获得更好的计算效率，该参数根据任务计算量大小常调整
+	\item NP=24
+	\item #命令行参数
+	\item RUN="/share/home/czjiangjun/vasp/vasp_std > log"
+	\item #vasp：RUN="vasp"
+	\item #lammps:RUN="lmp_openmpi < relax.in > relax.log"
+	\item #gaussian09:RUN="g09 in.gjf"
+	\item #GMX:RUN="mdrun input.file"
+	\item #fortan:RUN="run.file"
+\end{itemize}
+在模板中指定运行的软件名
+
+\textrm{Fireworks~}中是通过\textrm{Queue}执行\textbf{rlaunch}来启动作业流程数据库(在作业流程数据库中指定了具体计算软件)计算的
 %-------------------The Figure Of The Paper------------------
 %\begin{figure}[h!]
 %\centering
@@ -282,40 +275,20 @@ The content of the abstract
 
 %-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------%
 
-%-------------------------------------------------------------------------Thanks------------------------------------------------------------------------------------------------
-%\newpage %%
-%\newpage %%
-%\thispagestyle{fancy}   % 首页插入页眉页脚 
-\section{致谢}
-致谢内容
-%-----------------------------------------------------------------------------------------------------------------------------------------------------------------------%
 
 %--------------------------------------------------------------------------The Biblography of The Paper-----------------------------------------------------------------%
 %\newpage																				%
 %-----------------------------------------------------------------------------------------------------------------------------------------------------------------------%
 %\begin{thebibliography}{99}																		%
 %%\bibitem{PRL58-65_1987}H.Feil, C. Haas, {\it Phys. Rev. Lett.} {\bf 58}, 65 (1987).											%
-%	\bibitem{kp-method} \textrm{Zhenxi Pan, Yong Pan, Jun Jiang$^{\ast}$, Liutao Zhao}, \textrm{High-Throughput Electronic Band Structure Calculations for Hexaborides}, \textit{Intelligent Computing}, \textbf{Springer}, \textbf{P.386-395}, (2019).%
-%	\bibitem{PAW-dataset} \textrm{姜骏}，\textrm{PAW原子数据集的构造与检验}, \textit{中国化学会第十二届全国量子化学会议论文摘要集}，\textbf{太原}，(2014).
 %\end{thebibliography}																			%
 %-----------------------------------------------------------------------------------------------------------------------------------------------------------------------%
-\phantomsection\addcontentsline{toc}{section}{Bibliography} %直接调用\addcontentsline命令可能导致超链指向不准确,一般需要在之前调用一次\phantomsection命令加以修正%
-\bibliography{../ref/Myref_HT}   %
-\bibliographystyle{../ref/mybib} %% 接近ieeert样式
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%      \bibliographystyle         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%      LaTeX 参考文献标准选项及其样式共有以下8种：                                %%%%%%%%
-% plain，按字母的顺序排列，比较次序为作者、年度和标题.
-% unsrt，样式同plain，只是按照引用的先后排序.
-% alpha，用作者名首字母+年份后两位作标号，以字母顺序排序.
-% abbrv，类似plain，将月份全拼改为缩写，更显紧凑.
-% ieeetr，国际电气电子工程师协会期刊样式.
-% acm，美国计算机学会期刊样式.
-% siam，美国工业和应用数学学会期刊样式.
-% apalike，美国心理学学会期刊样式.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%																					%
+%\phantomsection\addcontentsline{toc}{section}{Bibliography}	 %直接调用\addcontentsline命令可能导致超链指向不准确,一般需要在之前调用一次\phantomsection命令加以修正	%
+%\bibliography{ref/Myref}																			%
+%\bibliographystyle{ref/mybib}																		%
 %  \nocite{*}																				%
 %-----------------------------------------------------------------------------------------------------------------------------------------------------------------------%
 
 \clearpage     %\end{CJK} 前加上\clearpage是CJK的要求
-%\end{CJK*}
 \end{document}
