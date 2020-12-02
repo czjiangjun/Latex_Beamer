@@ -571,7 +571,7 @@ $\varepsilon_{\mathrm{X}}[\rho]$和$\varepsilon_{\mathrm{C}}[\rho]$可理解为�
 \frame
 {
 	\frametitle{赝势去屏蔽与非局域化}
-	第一原理赝势建立了赝波函数与赝势角动量~\textit{l}的一一对应关系，但该赝势包含了电子屏蔽(原子、离子环境)信息，去屏蔽后的赝势“可移植性”更好
+	第一原理赝势建立了赝波函数与赝势角动量~$l$~的一一对应关系，但该赝势包含了电子屏蔽(原子、离子环境)信息，去屏蔽后的赝势“可移植性”更好
 	$$V_{\mathrm{ion},l}^{\mathrm{PP}}(r)=V_{\mathrm{src},l}^{\mathrm{PP}}(r)-V_{\mathrm{H},l}^{\mathrm{PP}}(r)-V_{XC,l}^{\mathrm{PP}}(r)$$
 	去屏蔽过程中，特别需要注意$V_{XC,l}^{\mathrm{PP}}(r)$的处理
 	$$V_{\mathrm{XC}}^{\mathrm{PP}}(r)=V_{\mathrm{XC}}^{\mathrm{PP}}([n^{\mathrm{PP}}],r)+\big[V_{\mathrm{XC},l}^{\mathrm{PP}}([n^{\mathrm{PP}}+n^{core}],r)-V_{\mathrm{XC}}^{\mathrm{PP}}([n^{\mathrm{PP}}],r)\big]$$
@@ -597,7 +597,7 @@ $\varepsilon_{\mathrm{X}}[\rho]$和$\varepsilon_{\mathrm{C}}[\rho]$可理解为�
 \vspace*{-0.10in}
 \centering
 \includegraphics[height=1.35in,width=1.40in,viewport=30 55 415 500,clip]{Figures/Norm-US-wave.pdf}
-\caption{\tiny \textrm{Oxygen 2} \textit{p} \textrm{radical wave function (solid), NC-pseudo-wave (dottde) and US-pseudo-wave (dashed).}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\caption{\tiny \textrm{Oxygen}~$2p$~ \textrm{radical wave function (solid), NC-pseudo-wave (dottde) and US-pseudo-wave (dashed).}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Norm-US-wave}
 \end{figure}
 }
@@ -1010,11 +1010,25 @@ $E=\tilde E+E^1-\tilde E^1$，每一项分别表示为：
 	\end{itemize}
 }
 
+\frame{
+	\frametitle{一维\textrm{FFT}的并行实现}
+\begin{figure}[h!]
+	\vspace{-0.20in}
+\centering
+%\includegraphics[height=2.7in,width=4.0in,viewport=0 0 1180 875,clip]{Figures/dual_grid.png}
+\includegraphics[height=1.6in,width=2.3in,viewport=0 10 795 570,clip]{Figures/FFT_para.png}
+\vskip 0.05pt
+\includegraphics[height=1.1in,width=3.4in,viewport=0 0 1180 550,clip]{Figures/FFT_para-2.png}
+\caption{\tiny \textrm{The Schematic description for 1D-FFT-grids in MPI.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{1D-FFT-MPI}
+\end{figure} 
+}
+
 \frame
 {
-	\frametitle{\textrm{VASP}计算的特色}
+	\frametitle{\textrm{VASP}计算的并行实现}
 	\begin{itemize}
-	     \item \textrm{FFT}网格与计算节点的匹配\\
+	     \item 中间层设计:~\textrm{FFT}网格、实空间基组与计算节点的匹配\\
 		     \textcolor{magenta}{通过子程序\textrm{mgrid.F}生成中间层，实现并行负载与计算节点分配的匹配，减少\textrm{FFT}变换和实空间并行的节点间通信}
 \begin{figure}[h!]
 	\vspace{-0.25in}
