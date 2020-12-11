@@ -1,0 +1,412 @@
+\documentclass[10pt,a4paper]{article}
+
+%%%%%%%%%%%%%%%%% CJK 中文版面控制  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usepackage{CJK} % CTEX-CJK 中文支持                            %
+\usepackage{xeCJK} % seperate the english and chinese		 %
+%\usepackage{CJKutf8} % Texlive 中文支持                          %
+\usepackage{CJKnumb} %中文序号                                   %
+\usepackage{indentfirst} % 中文段落首行缩进                      %
+%\setlength\parindent{22pt}       % 段落起始缩进量               %
+\renewcommand{\baselinestretch}{1.2} % 中文行间距调整            %
+\setlength{\textwidth}{16cm}                                     %
+\setlength{\textheight}{24cm}                                    %
+\setlength{\topmargin}{-1cm}                                     %
+\setlength{\oddsidemargin}{0.1cm}                                %
+\setlength{\evensidemargin}{\oddsidemargin}                      %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{amsmath,amsthm,amsfonts,amssymb,bm}          %数学公式
+\usepackage{mathrsfs}                                    %英文花体
+
+\usepackage{xcolor}                                        %使用默认允许使用颜色
+
+\usepackage{fontspec} % use to set font
+\setCJKmainfont{SimSun}
+\XeTeXlinebreaklocale "zh"  % Auto linebreak for chinese
+\XeTeXlinebreakskip = 0pt plus 1pt % Auto linebreak for chinese
+
+\usepackage{longtable}                                   %使用长表格
+
+%%%%%%%%%%%%%%%%%%%%%%%%%  参考文献引用 %%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%尽量使用 BibTeX(含有超链接，数据库的条目URL即可)                %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[numbers,sort&compress]{natbib} %紧密排列             %
+\usepackage[sectionbib]{chapterbib}        %每章节单独参考文献   %
+\usepackage{hypernat}                                                                         %
+\usepackage[bookmarksopen=true,pdfstartview=FitH,CJKbookmarks]{hyperref}              %
+\hypersetup{bookmarksnumbered,colorlinks,linkcolor=green,citecolor=blue,urlcolor=red}         %
+%参考文献含有超链接引用时需要下列宏包，注意与natbib有冲突        %
+%\usepackage[dvipdfm]{hyperref}                                  %
+%\usepackage{hypernat}                                           %
+\newcommand{\upcite}[1]{\hspace{0ex}\textsuperscript{\cite{#1}}} %
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\AtBeginDvi{\special{pdf:tounicode GBK-EUC-UCS2}} %CTEX用dvipdfmx的话，用该命令可以解决      %
+%						   %pdf书签的中文乱码问题		      %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%  % EPS 图片支持  %%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{graphicx}                                            %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+%\CJKindent     %在CJK环境中,中文段落起始缩进2个中文字符
+\graphicspath{{figure/}}
+%
+\renewcommand{\abstractname}{\small{\CJKfamily{hei} 摘\quad 要}} %\CJKfamily{hei} 设置中文字体，字号用\big \small来设
+\renewcommand{\refname}{\centering\CJKfamily{hei} 参考文献}
+%\renewcommand{\figurename}{\CJKfamily{hei} 图.}
+\renewcommand{\figurename}{{\bf Fig}.}
+%\renewcommand{\tablename}{\CJKfamily{hei} 表.}
+\renewcommand{\tablename}{{\bf Tab}.}
+
+%将图表的Caption写成 图(表) Num. 格式
+\makeatletter
+\long\def\@makecaption#1#2{%
+  \vskip\abovecaptionskip
+  \sbox\@tempboxa{#1. #2}%
+  \ifdim \wd\@tempboxa >\hsize
+    #1. #2\par
+  \else
+    \global \@minipagefalse
+    \hb@xt@\hsize{\hfil\box\@tempboxa\hfil}%
+  \fi
+  \vskip\belowcaptionskip}
+\makeatother
+
+\newcommand{\keywords}[1]{{\hspace{0\ccwd}\small{\CJKfamily{hei} 关键词:}{\hspace{2ex}{#1}}\bigskip}}
+
+%%%%%%%%%%%%%%%%%%中文字体设置%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%默认字体 defalut fonts \TeX 是一种排版工具 \\		%
+%{\bfseries 粗体 bold \TeX 是一种排版工具} \\		%
+%{\CJKfamily{song}宋体 songti \TeX 是一种排版工具} \\	%
+%{\CJKfamily{hei} 黑体 heiti \TeX 是一种排版工具} \\	%
+%{\CJKfamily{kai} 楷书 kaishu \TeX 是一种排版工具} \\	%
+%{\CJKfamily{fs} 仿宋 fangsong \TeX 是一种排版工具} \\	%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\addcontentsline{toc}{section}{Bibliography}
+
+%-------------------------------The Title of The Paper-----------------------------------------%
+\title{Python及Pymatgen软件的安装}
+%----------------------------------------------------------------------------------------------%
+
+%----------------------The Authors and the address of The Paper--------------------------------%
+\author{
+\small
+%Author1, Author2, Author3\footnote{Communication author's E-mail} \\    %Authors' Names	       %
+\small
+%(The Address，City Post code)						%Address	       %
+}
+\date{}					%if necessary					       %
+%----------------------------------------------------------------------------------------------%
+\maketitle
+
+%-------------------------------------------------------------------------------The Abstract and the keywords of The Paper----------------------------------------------------------------------------%
+%\begin{abstract}
+%The content of the abstract
+%\end{abstract}
+
+%\keywords {Keyword1; Keyword2; Keyword3}
+%-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------%
+
+%----------------------------------------------------------------------------------------The Body Of The Paper----------------------------------------------------------------------------------------%
+%Introduction
+\textrm{Pymatgen}的安装需要\textrm{Python}2.7以上版本，需要调用\textrm{Tck/Tk}(要求版本8.6以上)，因此手动安装时配置如下:
+
+\textbf{Tcl/Tk的安装配置}\\
+./configure -\/-prefix=/share/home/jiangjun/Softs/tcl8.6.5 -\/-enable-shared -\/-enable-64bit -\/-enable-symbols\\
+make \&\& make install\\
+./configure -\/-prefix=/share/home/jiangjun/Softs/tk8.6.5 -\/-enable-shared -\/-enable-64bit -\/-enable-symbols\\
+make \&\& make install
+
+\textcolor{blue}{\textrm{lapack}和\textrm{atlas}的安装参见文档}。\textcolor{red}{\textbf{建议:用OpenBlas代替atlas更方便}}\\
+安装\textrm{OpenBlas}非常简单:\;\; \textrm{make CC=gcc FC=gfortran}\\
+
+\textcolor{red}{请注意}:为了让\textrm{lapack}和\textrm{atlas}最后生成动态库函数，编译\textrm{lapack}库时，在\textrm{make.inc}中\textcolor{red}{每个编译选项都加上-fPIC -m64}\\
+如\\
+FORTRAN  = gfortran \\
+OPTS     = -O3 -std=legacy -m64 -fno-second-underscore -fPIC -c\\
+DRVOPTS  = \$(OPTS)\\
+NOOPT    = -O0 -frecursive -fPIC -m64\\
+LOADER   = gfortran \\
+LOADOPTS = -fPIC -m64\\
+\\
+CC = gcc\\
+CFLAGS = -O3 -fPIC -m64\\
+
+在非\textrm{root}权限下，\textrm{atlas}推荐的编译选项:\\
+
+../configure -b 64 -C ic gcc -C if gfortran -Fa alg -fPIC -\/-prefix=指定安装目录 -\/-with-netlib-lapack=静态库函数liblapack.a的绝对路径\\
+
+手工将静态库编译为动态库\\
+gfortran -fPIC -m64 -shared liblapack.a -o liblapack.so\\
+gfortran -fPIC -m64 -shared libblas.a -o libblas.so\\
+
+
+参见文档\textcolor{red}{\textrm{ATLAS\_Numpy\_Scipy\_Theano}的环境搭建.pdf}
+
+
+\textbf{python的源码包安装配置}\\
+./configure CC=gcc -\/-prefix=/share/home/jiangjun/Softs/Python-2.7.11  -\/-enable-universalsdk -\/-with-universal-archs=``64-bit''  -\/-with-cxx-main=g++ -\/-with-tcltk-includes='-I/share/home/jiangjun/lib/tcltk/include' -\/-with-tcltk-libs='/share/home/jiangjun/lib/tcltk/lib/libtcl8.6.so /share/home/jiangjun/lib/tcltk/lib/libtk8.6.so'\\
+make \&\& make install
+
+
+\textbf{setuptools安装} (参见文档 \textcolor{blue}{\textrm{Python}的安装过程(含\textrm{setuptools}).pdf})\\
+python setup.py build\\
+python setup.py install
+
+
+采用\textrm{setuptools}，在可以实现在普通用户账号下安装模块(\textrm{ez\_setup.py}是\textrm{python}官方给出的一个安装\textrm{setuptools}的工具)，如:\\
+/share/software/python-2.7.10/bin/python ez\_setup.py -\/-user jiangjun\\
+\textrm{easy\_install}会被安装在$\sim$/.local/bin/ 目录下)\\\\
+
+在此基础上，通过选项 \textcolor{red}{-d} 可将各种模块安装到普通用户账号下的指定目录:\\
+$\sim$/.local/bin/easy\_install \textcolor{red}{-d} $\sim$/.local/lib/python2.7/site-package \textcolor{blue}{\underline{安装模块}}
+
+在$\sim$/.bashrc 中加入下列变量(即\textrm{PYTHONPATH}包含新增模块目录):\\
+\textcolor{red}{export PYTHONPATH=\$PATHONPATH:$\sim$/.local/lib/python2.7/site-package}\\
+
+有此\textcolor{magenta}{PYTHONPATH}也可以用命令行，将有关模块直接安装到指定环境下\\
+\textcolor{red}{python setup.py install -\/-prefix=$\sim$/.local}
+
+参见文档\\
+\textcolor{blue}{\textrm{Python}环境变量\textrm{PYTHONPATH}设置和\textrm{easy\_install}简单使用.pdf}
+
+可以在配置文件 \textcolor{blue}{$\sim$/.pydistutils.cfg} 中指定下载镜像:\\
+$[$easy\_install$]$\\
+\# index\_url = \url{http://pypi.douban.com/simple/} \\
+\# index\_url = \url{http://e.pypi.python.org/simple} \\
+
+如果采用\textrm{pip}安装模块，建议通过配置文件 \textcolor{blue}{$\sim$/.pip/pip.conf} 中指定有关参数:\\
+$[$global$]$\\
+timeout = 6000\\
+index-url = \url{http://pypi.douban.com/simple/} \\
+$[$install$]$\\
+use-mirrors = true\\
+mirrors = \url{http://pypi.douban.com/simple/} \\
+trusted-host = \url{pypi.douban.com} \\
+\underline{install-option}=-\/-prefix=$\sim$/.local \# \textcolor{red}{指定安装路径选项} \\
+
+\textcolor{violet}{在无法联网的服务器上用\textrm{pip}安装\textrm{Python}模块的一些处理:}\\
+下载安装模块:~ \textrm{\url{https://pypi.python.org/simple/}}模块.tar.gz\:\:\:(\textcolor{red}{无需解压})\\
+\textcolor{purple}{pip install 模块.版本.tar.gz}\\
+
+在此基础上，准备手动安装\textrm{numpy}、\textrm{scipy}等模块，建议指定环境变量\textrm{ATLAS}(版本3.8.4)、\textrm{LAPACK}(版本3.6.0)、\textrm{BLAS}\\
+\textcolor{red}{注意:环境变量要具体到绝对路径(包括文件名)}，如:\\
+\textcolor{blue}{export ATLAS=/share/home/jiangjun/lib/atlas3.8.4/lib/libatlas.so}\\
+\textcolor{blue}{export LAPACK=/share/home/jiangjun/lib/atlas3.8.4/lib/liblapack.so}\\
+\textcolor{blue}{export BLAS=/share/home/jiangjun/lib/atlas3.8.4/lib/libblas.so}\\
+分别进入\textrm{numpy}和\textrm{scipy}目录\\ 
+在文件 site.cfg 中指定有关库函数的参数(\textcolor{red}{注意:写绝对路径})\\
+\textcolor{green}{$[$ALL$]$}\\
+library\_dirs =/share/home/jiangjun/lib/atlas3.8.4/lib \\
+include\_dirs =/share/home/jiangjun/lib/atlas3.8.4/include \\
+src\_dir=/share/home/jiangjun/lib/atlas3.8 \\
+search\_static\_first=0 \\
+\#
+\\
+\# Atlas\\
+\# -\/-\/-\/-\/-\\
+\# Atlas is an open source optimized implementation of the BLAS and Lapack\\
+\# routines. Numpy will try to build against Atlas by default when available in\\
+\# the system library dirs. To build numpy against a custom installation of\\
+\# Atlas you can add an explicit section such as the following. Here we assume\\
+\# that Atlas was configured with ``prefix=/opt/atlas``.\\
+\#\\
+\textcolor{green}{$[$atlas$]$}\\
+library\_dirs = /share/home/jiangjun/lib/atlas3.8.4/lib \\
+include\_dirs = /share/home/jiangjun/lib/atlas3.8.4/include \\
+atlas\_libs=lapack, f77blas, cblas, atlas \\
+\\
+\\
+\textcolor{green}{$[$blas\_opt$]$}\\
+library\_dirs = /share/home/jiangjun/lib/atlas3.8.4/lib \\
+include\_dirs = /share/home/jiangjun/lib/atlas3.8.4/include \\
+blas\_libs=f77blas, cblas, atlas \\
+\\
+\textcolor{green}{$[$lapack\_opt$]$}\\
+library\_dirs = /share/home/jiangjun/lib/atlas3.8.4/lib \\
+include\_dirs = /share/home/jiangjun/lib/atlas3.8.4/include \\
+lapack\_libs=lapack, atlas \\
+\\
+\textcolor{green}{$[$amd$]$}\\
+amd\_libs = amd \\
+\#\\
+\textcolor{green}{$[$umfpack$]$} \\
+umfpack\_libs = umfpack \\
+\\
+\textbf{用Intel\_mkl库支持numpy和scipy}\\
+\textcolor{green}{$[$mkl$]$}\\
+library\_dirs = \$intel编译器安装目录/mkl/lib/intel64/ \\
+include\_dirs = \$intel编译器安装目录/mkl/include \\
+mkl\_libs = \textcolor{red}{mkl\_rt~ mkl\_blas95\_lp64 mkl\_core~ mkl\_intel\_lp64~ mkl\_intel\_thread}\\
+lapack\_libs =\textcolor{red}{mkl\_lapack95\_lp64}\\
+
+\textcolor{blue}{修改\$numpy-目录/numpy/distutils/intelccompiler.py}:\\
+将\textcolor{magenta}{self.cc\_exe(class intel或class intelem里的)}为:\\
+self.cc\_exe = 'icc -O3 -g -fPIC -fp-model strict -fomit-frame-pointer -openmp -xhost'\\
+numpy编译:\\
+\textcolor{blue}{python setup.py config -\/-compiler=intel build\_clib -\/-compiler=intel build\_ext -\/-compiler=intel install}\\
+64位将\textcolor{blue}{intel}改为\textcolor{red}{intelem}\\
+scipy编译:\\
+\textcolor{blue}{python setup.py config -\/-compiler=intel -\/-fcompiler=intel build\_clib -\/-compiler=intel -\/-fcompiler=intel build\_ext -\/-compiler=intel -\/-fcompiler=intel install}\\
+64位同numpy修改命令行\\
+
+
+
+python setup.py build\\
+sudo python setup.py install\\
+\\
+在\textrm{Ubuntu}系统中，如果有超级用户权限，则可以简单处理为:\\
+sudo apt-get install libopenblas-dev liblapack-dev\\
+export BLAS=/usr/lib/libblas.so\\
+export LAPACK=/usr/lib/liblapack.so\\
+\\
+在此基础上完成安装:\\
+pip install numpy\\
+pip install scipy\\
+
+
+
+
+%-------------------The Figure Of The Paper------------------
+%\begin{figure}[h!]
+%\centering
+%\includegraphics[height=3.35in,width=2.85in,viewport=0 0 400 475,clip]{PbTe_Band_SO.eps}
+%\hspace{0.5in}
+%\includegraphics[height=3.35in,width=2.85in,viewport=0 0 400 475,clip]{EuTe_Band_SO.eps}
+%\caption{\small Band Structure of PbTe (a) and EuTe (b).}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\label{Pb:EuTe-Band_struct}
+%\end{figure}
+
+%-------------------The Equation Of The Paper-----------------
+%\begin{equation}
+%\varepsilon_1(\omega)=1+\frac2{\pi}\mathscr P\int_0^{+\infty}\frac{\omega'\varepsilon_2(\omega')}{\omega'^2-\omega^2}d\omega'
+%\label{eq:magno-1}
+%\end{equation}
+
+%\begin{equation} 
+%\begin{split}
+%\varepsilon_2(\omega)&=\frac{e^2}{2\pi m^2\omega^2}\sum_{c,v}\int_{BZ}d{\vec k}\left|\vec e\cdot\vec M_{cv}(\vec k)\right|^2\delta [E_{cv}(\vec k)-\hbar\omega] \\
+% &= \frac{e^2}{2\pi m^2\omega^2}\sum_{c,v}\int_{E_{cv}(\vec k=\hbar\omega)}\left|\vec e\cdot\vec M_{cv}(\vec k)\right|^2\dfrac{dS}{\nabla_{\vec k}E_{cv}(\vec k)}
+% \end{split}
+%\label{eq:magno-2}
+%\end{equation}
+
+%-------------------The Table Of The Paper----------------------
+%\begin{table}[!h]
+%\tabcolsep 0pt \vspace*{-12pt}
+%\caption{The representative $\vec k$ points contributing to $\sigma_2^{xy}$ of interband transition in EuTe around 2.5 eV.}
+%\label{Table-EuTe_Sigma}
+%\begin{minipage}{\textwidth}
+%%\begin{center}
+%\centering
+%\def\temptablewidth{1.01\textwidth}
+%\rule{\temptablewidth}{1pt}
+%\begin{tabular*} {\temptablewidth}{@{\extracolsep{\fill}}cccccc}
+
+%-------------------------------------------------------------------------------------------------------------------------
+%&Peak (eV)  & {$\vec k$}-point            &Band{$_v$} to Band{$_c$}  &Transition Orbital
+%Components\footnote{波函数主要成分后的括号中，$5s$、$5p$和$5p$、$4f$、$5d$分别指碲和铕的原子轨道。} &Gap (eV)   \\ \hline
+%-------------------------------------------------------------------------------------------------------------------------
+%&2.35       &(0,0,0)         &33$\rightarrow$34    &$4f$(31.58)$5p$(38.69)$\rightarrow$$5p$      &2.142   \\% \cline{3-7}
+%&       &(0,0,0)         &33$\rightarrow$34    &$4f$(31.58)$5p$(38.69)$\rightarrow$$5p$      &2.142   \\% \cline{3-7}
+%-------------------------------------------------------------------------------------------------------------------------
+
+%\end{tabular*}
+%\rule{\temptablewidth}{1pt}\\
+%%\end{center}
+%\end{minipage}
+%\end{table}
+
+%-------------------The Long Table Of The Paper--------------------
+%\begin{small}
+%%\begin{minipage}{\textwidth}
+%%\begin{longtable}[l]{|c|c|cc|c|c|} %[c]指定长表格对齐方式
+%\begin{longtable}[c]{|c|c|p{1.9cm}p{4.6cm}|c|c|}
+%\caption{Assignment for the peaks of EuB$_6$}
+%\label{tab:EuB6-1}\\ %\\长表格的caption中换行不可少
+%\hline
+%%
+%--------------------------------------------------------------------------------------------------------------------------------
+%\multicolumn{2}{|c|}{\bfseries$\sigma_1(\omega)$谱峰}&\multicolumn{4}{c|}{\bfseries部分重要能带间电子跃迁\footnotemark}\\ \hline
+%\endfirsthead
+%--------------------------------------------------------------------------------------------------------------------------------
+%%
+%\multicolumn{6}{r}{\it 续表}\\
+%\hline
+%--------------------------------------------------------------------------------------------------------------------------------
+%标记 &峰位(eV) &\multicolumn{2}{c|}{有关电子跃迁} &gap(eV)  &\multicolumn{1}{c|}{经验指认} \\ \hline
+%\endhead
+%--------------------------------------------------------------------------------------------------------------------------------
+%%
+%\multicolumn{6}{r}{\it 续下页}\\
+%\endfoot
+%\hline
+%--------------------------------------------------------------------------------------------------------------------------------
+%%
+%%\hlinewd{0.5$p$t}
+%\endlastfoot
+%--------------------------------------------------------------------------------------------------------------------------------
+%%
+%% Stuff from here to \endlastfoot goes at bottom of last page.
+%%
+%--------------------------------------------------------------------------------------------------------------------------------
+%标记 &峰位(eV)\footnotetext{见正文说明。} &\multicolumn{2}{c|}{有关电子跃迁\footnotemark} &gap(eV) &\multicolumn{1}{c|}{经验指认\upcite{PRB46-12196_1992}}\\ \hline
+%--------------------------------------------------------------------------------------------------------------------------------
+%
+%     &0.07 &\multicolumn{2}{c|}{电子群体激发$\uparrow$} &--- &电子群\\ \cline{2-5}
+%\raisebox{2.3ex}[0pt]{$\omega_f$} &0.1 &\multicolumn{2}{c|}{电子群体激发$\downarrow$} &--- &体激发\\ \hline
+%--------------------------------------------------------------------------------------------------------------------------------
+%
+%     &1.50 &\raisebox{-2ex}[0pt][0pt]{20-22(0,1,4)} &2$p$(10.4)4$f$(74.9)$\rightarrow$ &\raisebox{-2ex}[0pt][0pt]{1.47} &\\%\cline{3-5}
+%     &1.50$^\ast$ & &2$p$(17.5)5$d_{\mathrm E}$(14.0)$\uparrow$ & &4$f$$\rightarrow$5$d_{\mathrm E}$\\ \cline{3-5}
+%     \raisebox{2.3ex}[0pt][0pt]{$a$} &(1.0$^\dagger$) &\raisebox{-2ex}[0pt][0pt]{20-22(1,2,6)} &\raisebox{-2ex}[0pt][0pt]{4$f$(89.9)$\rightarrow$2$p$(18.7)5$d_{\mathrm E}$(13.9)$\uparrow$}\footnotetext{波函数主要成分后的括号中，2$s$、2$p$和5$p$、4$f$、5$d$、6$s$分别指硼和铕的原子轨道；5$d_{\mathrm E}$、5$d_{\mathrm T}$分别指铕的(5$d_{z^2}$，5$d_{x^2-y^2}$和5$d_{xy}$，5$d_{xz}$，5$d_{yz}$)轨道，5$d_{\mathrm{ET}}$(或5$d_{\mathrm{TE}}$)则指5个5$d$轨道成分都有，成分大的用脚标的第一个字母标示；2$ps$(或2$sp$)表示同时含有硼2$s$、2$p$轨道成分，成分大的用第一个字母标示。$\uparrow$和$\downarrow$分别标示$\alpha$和$\beta$自旋电子跃迁。} &\raisebox{-2ex}[0pt][0pt]{1.56} &激子跃迁。 \\%\cline{3-5}
+%     &(1.3$^\dagger$) & & & &\\ \hline
+%--------------------------------------------------------------------------------------------------------------------------------
+
+%     & &\raisebox{-2ex}[0pt][0pt]{19-22(0,0,1)} &2$p$(37.6)5$d_{\mathrm T}$(4.5)4$f$(6.7)$\rightarrow$ & & \\\nopagebreak %\cline{3-5}
+%     & & &2$p$(24.2)5$d_{\mathrm E}$(10.8)4$f$(5.1)$\uparrow$ &\raisebox{2ex}[0pt][0pt]{2.78} &a、b、c峰可能 \\ \cline{3-5}
+%     & &\raisebox{-2ex}[0pt][0pt]{20-29(0,1,1)} &2$p$(35.7)5$d_{\mathrm T}$(4.8)4$f$(10.0)$\rightarrow$ & &包含有复杂的\\ \nopagebreak%\cline{3-5}
+%     &2.90 & &2$p$(23.2)5$d_{\mathrm E}$(13.2)4$f$(3.8)$\uparrow$ &\raisebox{2ex}[0pt][0pt]{2.92} &强激子峰。$^{\ast\ast}$\\ \cline{3-5}
+%$b$  &2.90$^\ast$ &\raisebox{-2ex}[0pt][0pt]{19-22(0,1,1)} &2$p$(33.9)4$f$(15.5)$\rightarrow$ & &B2$s$-2$p$的价带 \\ \nopagebreak%\cline{3-5}
+%     &3.0 & &2$p$(23.2)5$d_{\mathrm E}$(13.2)4$f$(4.8)$\uparrow$ &\raisebox{2ex}[0pt][0pt]{2.94} &顶$\rightarrow$B2$s$-2$p$导\\ \cline{3-5}
+%     & &12-15(0,1,2) &2$p$(39.3)$\rightarrow$2$p$(25.2)5$d_{\mathrm E}$(8.6)$\downarrow$ &2.83 &带底跃迁。\\ \cline{3-5}
+%     & &14-15(1,1,1) &2$p$(42.5)$\rightarrow$2$p$(29.1)5$d_{\mathrm E}$(7.0)$\downarrow$ &2.96 & \\\cline{3-5}
+%     & &13-15(0,1,1) &2$p$(40.4)$\rightarrow$2$p$(28.9)5$d_{\mathrm E}$(6.6)$\downarrow$ &2.98 & \\ \hline
+%--------------------------------------------------------------------------------------------------------------------------------
+%%\hline
+%%\hlinewd{0.5$p$t}
+%\end{longtable}
+%%\end{minipage}{\textwidth}
+%%\setlength{\unitlength}{1cm}
+%%\begin{picture}(0.5,2.0)
+%%  \put(-0.02,1.93){$^{1)}$}
+%%  \put(-0.02,1.43){$^{2)}$}
+%%\put(0.25,1.0){\parbox[h]{14.2cm}{\small{\\}}
+%%\put(-0.25,2.3){\line(1,0){15}}
+%%\end{picture}
+%\end{small}
+
+%-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------%
+
+
+%--------------------------------------------------------------------------The Biblography of The Paper-----------------------------------------------------------------%
+%\newpage																				%
+%-----------------------------------------------------------------------------------------------------------------------------------------------------------------------%
+%\begin{thebibliography}{99}																		%
+%%\bibitem{PRL58-65_1987}H.Feil, C. Haas, {\it Phys. Rev. Lett.} {\bf 58}, 65 (1987).											%
+%\end{thebibliography}																			%
+%-----------------------------------------------------------------------------------------------------------------------------------------------------------------------%
+%																					%
+\phantomsection\addcontentsline{toc}{section}{Bibliography}	 %直接调用\addcontentsline命令可能导致超链指向不准确,一般需要在之前调用一次\phantomsection命令加以修正	%
+\bibliography{ref/Myref}																			%
+\bibliographystyle{ref/mybib}																		%
+%  \nocite{*}																				%
+%-----------------------------------------------------------------------------------------------------------------------------------------------------------------------%
+
+\clearpage     %\end{CJK} 前加上\clearpage是CJK的要求
+\end{document}

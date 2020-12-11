@@ -169,11 +169,31 @@
 \section{编译器和库函数}
 \textcolor{red}{软件的编译与安装是本书的技术特色。}
 \textcolor{blue}{编译的基本过程}:~把用高级程序设计语言书写的源程序，翻译成等价的机器语言格式目标程序。编译过程一般分为四步
+\begin{figure}[h!]
+\centering
+\includegraphics[width=2.0in,height=2.55in,viewport=0 0 490 600,clip]{Figures/compiler_procedure.png}
+\caption{\small \textrm{编译过程的四个步骤}.}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:compiler}
+\end{figure}
 \begin{itemize}
-	\item 预处理，预处理器原本是为协助\textrm{C~}语言工作所设计的
-	\item 将预处理后的文档不转换成汇编语言
-	\item 有汇编变为目标代码(机器代码)生成.o的文档
-	\item 连接目标代码，生成可执行程式
+	\item 预处理，预处理器原本是为协助\textrm{C~}语言工作所设计的，主要完成以下任务:
+		\begin{enumerate}
+			\item 展开头文件\\
+				在写有\textrm{\#~include~ <filename>}或\textrm{\#~include~"filename"}的文件中，将文件\textrm{filename}展开，通俗来说就是将\textrm{fiename}文件中的代码写入到当前文件中；
+			\item 宏替换
+			\item 去掉注释
+			\item 条件编译\\
+				即对\textrm{$\#$~ifndef~\#~define~\#~endif}进行判断检查，也正是在这一步，\textrm{\#~ifndef~\#~define~\#~endif}的作用体现出来，即防止头文件被多次重复引用
+		\end{enumerate}
+	\item 将预处理后的文档转换成汇编语言
+		\begin{enumerate}
+			\item 编译器在每个文件中保存一个函数地址符表，该表中存储着当前文件内包含的各个函数的地址
+			\item 因为这一步要生成汇编代码，即一条一条的指令，而调用函数的代码会被编译成一条\textrm{call}指令，\textrm{call}指令后面跟的是\textrm{jmp}指令的汇编代码地址，而\textrm{jmp}指令后面跟的才是“被调用的函数编译成汇编代码后的第一条指令”的地址，但是给\textrm{call}指令后面补充上地址的工作是在链接的时候做的事情
+		\end{enumerate}
+	\item 由汇编代码变为目标代码(机器代码)生成\textrm{.o}的二进制文档
+	\item 连接目标代码，生成可执行程序\\
+		在这个过程中，编译器做的一个重要的事情是将每个文件中\textrm{call}指令后面的地址补充上(方式是从当前文件的函数地址符表中开始找，如果没有，继续向别的文件的函数地址符表中找，找到后填补在\textrm{call}指令后面，如果找不到，则链接失败)
+
 \end{itemize}
 科学计算的核心计算软件常用高级语言\textrm{C~}或\textrm{Fortran~}编写(也有用\textrm{Matlab~}编写的，但\textrm{Matlab~}程序自带编译器)，本部分分节介绍最常用的编译器和数学库\\
 \textcolor{red}{编译器}
@@ -266,7 +286,7 @@
 		本质上，\textrm{SLURM~}是一个强健的集群管理器(更关注于对功能丰富性的需求方面)，它高度可移植、可伸缩至大型节点集群、容错好，而且更重要的是它是开源的。\textrm{SLURM~}最早是一个开源的资源管理器，由几家公司(包括\textrm{Lawrence Livermore National Laboratory})协作开发。如今，\textrm{SLURM~}已经成为了很多最强大的超级计算机上使用的领先资源管理器
 \begin{figure}[h!]
 \centering
-\includegraphics[height=3.25in,width=5.0in]{Figures/Slurm.png}
+\includegraphics[height=3.25in,width=5.0in]{Figures/Slurm-1.gif}
 \caption{\small \textrm{SLURM~}架构的高级别视图.}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Fig:Slurm}
 \end{figure}

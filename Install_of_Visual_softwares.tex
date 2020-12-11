@@ -1,0 +1,337 @@
+\documentclass{article}      % Specifies the document class
+
+%%%%%%%%%%%%%%%%% CJK 中文版面控制  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usepackage{CJK} % CTEX-CJK 中文支持                            %
+\usepackage{xeCJK} % seperate the english and chinese		 %
+\setCJKmainfont[BoldFont=黑体, ItalicFont=楷体, BoldItalicFont=仿宋]{宋体}
+%\usepackage{CJKutf8} % Texlive 中文支持                         %
+\usepackage{CJKnumb} %中文序号                                   %
+\usepackage{indentfirst} % 中文段落首行缩进                      %
+%\setlength\parindent{22pt}       % 段落起始缩进量               %
+\renewcommand{\baselinestretch}{1.2} % 中文行间距调整            %
+\setlength{\textwidth}{16cm}                                     %
+\setlength{\textheight}{24cm}                                    %
+\setlength{\topmargin}{-1cm}                                     %
+\setlength{\oddsidemargin}{0.1cm}                                %
+\setlength{\evensidemargin}{\oddsidemargin}                      %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{amsmath,amsthm,amsfonts,amssymb,bm}          %数学公式
+\usepackage{mathrsfs}                                    %英文花体
+
+\usepackage{xcolor}                                        %使用默认允许使用颜色
+
+\usepackage{fontspec} % use to set font
+\setCJKmainfont{SimSun}
+\XeTeXlinebreaklocale "zh"  % Auto linebreak for chinese
+\XeTeXlinebreakskip = 0pt plus 1pt % Auto linebreak for chinese
+
+\usepackage{longtable}                                   %使用长表格
+
+%%%%%%%%%%%%%%%%%%%%%%%%%  参考文献引用 %%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%尽量使用 BibTeX(含有超链接，数据库的条目URL即可)                %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[numbers,sort&compress]{natbib} %紧密排列             %
+\usepackage[sectionbib]{chapterbib}        %每章节单独参考文献   %
+\usepackage{hypernat}                                                                         %
+\usepackage[bookmarksopen=true,pdfstartview=FitH,CJKbookmarks]{hyperref}              %
+\hypersetup{bookmarksnumbered,colorlinks,linkcolor=green,citecolor=blue,urlcolor=red}         %
+%参考文献含有超链接引用时需要下列宏包，注意与natbib有冲突        %
+%\usepackage[dvipdfm]{hyperref}                                  %
+%\usepackage{hypernat}                                           %
+\newcommand{\upcite}[1]{\hspace{0ex}\textsuperscript{\cite{#1}}} %
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\AtBeginDvi{\special{pdf:tounicode GBK-EUC-UCS2}} %CTEX用dvipdfmx的话，用该命令可以解决      %
+%						   %pdf书签的中文乱码问题		      %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%  % EPS 图片支持  %%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{graphicx}                                            %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+%\CJKindent     %在CJK环境中,中文段落起始缩进2个中文字符
+\graphicspath{{figure/}}
+%
+\renewcommand{\abstractname}{\small{\CJKfamily{hei} 摘\quad 要}} %\CJKfamily{hei} 设置中文字体，字号用\big \small来设
+\renewcommand{\refname}{\centering\CJKfamily{hei} 参考文献}
+%\renewcommand{\figurename}{\CJKfamily{hei} 图.}
+\renewcommand{\figurename}{{\bf Fig}.}
+%\renewcommand{\tablename}{\CJKfamily{hei} 表.}
+\renewcommand{\tablename}{{\bf Tab}.}
+
+%将图表的Caption写成 图(表) Num. 格式
+\makeatletter
+\long\def\@makecaption#1#2{%
+  \vskip\abovecaptionskip
+  \sbox\@tempboxa{#1. #2}%
+  \ifdim \wd\@tempboxa >\hsize
+    #1. #2\par
+  \else
+    \global \@minipagefalse
+    \hb@xt@\hsize{\hfil\box\@tempboxa\hfil}%
+  \fi
+  \vskip\belowcaptionskip}
+\makeatother
+
+\newcommand{\keywords}[1]{{\hspace{0\ccwd}\small{\CJKfamily{hei} 关键词:}{\hspace{2ex}{#1}}\bigskip}}
+
+%%%%%%%%%%%%%%%%%%中文字体设置%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%默认字体 defalut fonts \TeX 是一种排版工具 \\		%
+%{\bfseries 粗体 bold \TeX 是一种排版工具} \\		%
+%{\CJKfamily{song}宋体 songti \TeX 是一种排版工具} \\	%
+%{\CJKfamily{hei} 黑体 heiti \TeX 是一种排版工具} \\	%
+%{\CJKfamily{kai} 楷书 kaishu \TeX 是一种排版工具} \\	%
+%{\CJKfamily{fs} 仿宋 fangsong \TeX 是一种排版工具} \\	%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\addcontentsline{toc}{section}{Bibliography}
+
+%-------------------------------The Title of The Paper-----------------------------------------%
+\title{可视化软件的安装}
+%----------------------------------------------------------------------------------------------%
+
+%----------------------The Authors and the address of The Paper--------------------------------%
+\author{
+\small
+%Author1, Author2, Author3\footnote{Communication author's E-mail} \\    %Authors' Names	       %
+\small
+%(The Address，City Post code)						%Address	       %
+}
+\date{}					%if necessary					       %
+%----------------------------------------------------------------------------------------------%
+\maketitle
+
+%-------------------------------------------------------------------------------The Abstract and the keywords of The Paper----------------------------------------------------------------------------%
+%\begin{abstract}
+%The content of the abstract
+%\end{abstract}
+
+%\keywords {Keyword1; Keyword2; Keyword3}
+%-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------%
+
+%----------------------------------------------------------------------------------------The Body Of The Paper----------------------------------------------------------------------------------------%
+%Introduction
+\section{Xcrysden}
+\textrm{Xcrysden}是\textrm{WIEN2k}软件常用的可视化工具，这里给的是\textrm{xcrysden-1.5.53-linux\_x86\_64-shared}的安装方案：
+
+由于\textrm{Xcrysden}对\textrm{Tcl/Tk}、\textrm{Mesa}和\textrm{FFTW}库有依赖，如果没有装这些，建议用\textrm{semishared}版，该版在\textrm{external}目录下自带了\textrm{Tcl/Tk}、\textrm{OpenGL}和\textrm{FFTW}库
+\begin{itemize}
+	\item 解压缩 \textcolor{blue}{tar\; -xvzf\; xcrysden-1.5.53-linux\_x86\_64-shared.tar.gz}
+	\item 安装所需数据库\\
+		在\textrm{Ubuntu}环境下，命令为\\
+		\textcolor{blue}{sudo\; apt-get\; install tk}\\
+		\textcolor{blue}{sudo\; apt-get\; install tcl}\\
+		$\star$有关\textrm{OpenGL}的安装见附录 
+	\item 进入目录，运行\textcolor{blue}{./xcrysden}
+\end{itemize}
+
+运行命令后发现有\textrm{fhi\_coord2xcr}提示库函数指向不明，用命令\\
+\textcolor{blue}{ldd\; fhi\_coord2xcr}\\
+提示有缺库\textrm{libgfortran.so}，安装后即可\\
+\textcolor{blue}{sudo\; apt-get\; install\; libgfortran3}
+
+\section{p4vasp}
+\textrm{p4vasp}是\textrm{VASP}软件常用的可视化工具，这里给的是\textrm{p4vasp-0.3.29}的安装方案：
+\begin{itemize}
+	\item 解压缩 \textcolor{blue}{tar\; -xvzf\; p4vasp-0.3.29.tar.gz}
+	\item 根据\textrm{README}提示，在\textrm{Ubuntu}系统中，运行命令：\\
+		\textcolor{blue}{sudo\; apt-get\; install\; python-dev\; g++\; libx11-dev\; mesa-common-dev\; libglu1-mesa-dev\; python-numpy\; python-glade2}
+	\item 进入目录，运行\textcolor{blue}{./install.sh}或\textcolor{blue}{./install\_local.sh}，安装
+	\item 运行命令\textcolor{blue}{p4v}
+	\item 提示有缺库\textrm{libgnome.so}，安装后即可\\
+\textcolor{blue}{sudo\; apt-get\; install\; libgnomeui-dev}
+\end{itemize}
+
+\section{pymatgen}
+\textrm{pymatgen}是\textrm{MIT}开发的强大的进程控制软件，其安装步骤如下：
+
+当前的\textrm{pymatgen}需要\textrm{Python2.7}或\textrm{Python3}及以上版本，因此系统必须装有相应版本的\textrm{Python}
+
+\begin{itemize}
+	\item 运行\textcolor{blue}{pmg\_install.py},安装各种\textrm{Python}工具
+	\item 手动安装\textrm{Python}工具\\
+		\textcolor{blue}{sudo pip install prettyplotlib}\\
+		$\star$\textrm{pymatgen}所需\textrm{Python}工具，详见\textrm{requirements.txt}和\textrm{requirements-optional.txt}所列内容
+	\item 进入目录，运行\textrm{setup.py}完成安装
+\end{itemize}
+\textrm{pymatgen}的可视化(如\textrm{DOS}等)对\textrm{VTK}有依赖，为正常实现可视化，必须安装\textrm{python-vtk}\\
+\textcolor{blue}{sudo\; apt-get\; install\; python-vtk}
+\textcolor{blue}{sudo\; apt-get\; install\; libpng-dev}
+
+此外，\textrm{pymatgen}对\textrm{Matlab}有一定的依赖，有必要安装\textrm{matplotlib}和\textrm{brewer2mpl}
+
+\appendix
+\section{}
+\textbf{Ubuntu}安装\textrm{OpenGL} 
+
+\textrm{OpenGL} 是一套由 \textrm{SGI} 公司发展出来的绘图函式库，它是一组 \textrm{C} 语言的函式，用于 \textrm{2D} 与 \textrm{3D} 图形应用程式的开发上。\textrm{OpenGL} 让程式开发人员不需要考虑到各种显示卡底层运作是否相同的问题，硬体由 \textrm{OpenGL} 核心去沟通，因此只要显示卡支援 \textrm{OpenGL}，那么程式就不需要重新再移植，而程式开发人员也不需要重新学习一组函式库来移植程式。
+
+\begin{itemize}
+	\item 首先不可或缺的就是编译器与基本的函式库，如果系统没有安装的话，依照下面的方式安装：\\ 
+		\textcolor{blue}{sudo\; apt-get\; install\; build-essential}
+	\item 安装\textrm{OpenGL Library}\\
+		\textcolor{blue}{sudo\; apt-get\; install\; libgl1-mesa-dev}
+	\item 安装\textrm{OpenGL Utilities}\\
+		\textcolor{blue}{sudo\; apt-get\; install\; libglu1-mesa-dev}\\
+		\textrm{OpenGL Utilities} 是一组建构于 \textrm{OpenGL Library} 之上的工具组，提供许多很方便的函式，使 \textrm{OpenGL} 更强大且更容易使用。
+	\item 安装\textrm{OpenGL Utility Toolkit}\\
+		\textcolor{blue}{sudo apt-get install libglut-dev}\\
+		\textrm{OpenGL Utility Toolkit} 是建立在 \textrm{OpenGL Utilities} 上面的工具箱，除了强化了 \textrm{OpenGL Utilities} 的不足之外，也增加了 \textrm{OpenGL} 对于视窗介面支援。\\
+		\textcolor{red}{注意}：在这一步的时候，可能会出现以下情况，\textrm{shell}提示：\\ 
+		\textrm{Reading package lists\dots Done}\\
+		\textrm{Building dependency tree}\\
+		\textrm{Reading state information\dots Done}
+		\textrm{E: Unable to locate package libglut-dev}\\
+		将上述\textcolor{red}{sudo\; apt-get\; install\; libglut-dev}命令改成\textcolor{blue}{sudo\; apt-get\; install\; freeglut3-dev}即可。 
+\end{itemize}
+
+
+
+
+
+
+
+
+
+%-------------------The Figure Of The Paper------------------
+%\begin{figure}[h!]
+%\centering
+%\includegraphics[height=3.35in,width=2.85in,viewport=0 0 400 475,clip]{PbTe_Band_SO.eps}
+%\hspace{0.5in}
+%\includegraphics[height=3.35in,width=2.85in,viewport=0 0 400 475,clip]{EuTe_Band_SO.eps}
+%\caption{\small Band Structure of PbTe (a) and EuTe (b).}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\label{Pb:EuTe-Band_struct}
+%\end{figure}
+
+%-------------------The Equation Of The Paper-----------------
+%\begin{equation}
+%\varepsilon_1(\omega)=1+\frac2{\pi}\mathscr P\int_0^{+\infty}\frac{\omega'\varepsilon_2(\omega')}{\omega'^2-\omega^2}d\omega'
+%\label{eq:magno-1}
+%\end{equation}
+
+%\begin{equation} 
+%\begin{split}
+%\varepsilon_2(\omega)&=\frac{e^2}{2\pi m^2\omega^2}\sum_{c,v}\int_{BZ}d{\vec k}\left|\vec e\cdot\vec M_{cv}(\vec k)\right|^2\delta [E_{cv}(\vec k)-\hbar\omega] \\
+% &= \frac{e^2}{2\pi m^2\omega^2}\sum_{c,v}\int_{E_{cv}(\vec k=\hbar\omega)}\left|\vec e\cdot\vec M_{cv}(\vec k)\right|^2\dfrac{dS}{\nabla_{\vec k}E_{cv}(\vec k)}
+% \end{split}
+%\label{eq:magno-2}
+%\end{equation}
+
+%-------------------The Table Of The Paper----------------------
+%\begin{table}[!h]
+%\tabcolsep 0pt \vspace*{-12pt}
+%\caption{The representative $\vec k$ points contributing to $\sigma_2^{xy}$ of interband transition in EuTe around 2.5 eV.}
+%\label{Table-EuTe_Sigma}
+%\begin{minipage}{\textwidth}
+%%\begin{center}
+%\centering
+%\def\temptablewidth{1.01\textwidth}
+%\rule{\temptablewidth}{1pt}
+%\begin{tabular*} {\temptablewidth}{@{\extracolsep{\fill}}cccccc}
+
+%-------------------------------------------------------------------------------------------------------------------------
+%&Peak (eV)  & {$\vec k$}-point            &Band{$_v$} to Band{$_c$}  &Transition Orbital
+%Components\footnote{波函数主要成分后的括号中，$5s$、$5p$和$5p$、$4f$、$5d$分别指碲和铕的原子轨道。} &Gap (eV)   \\ \hline
+%-------------------------------------------------------------------------------------------------------------------------
+%&2.35       &(0,0,0)         &33$\rightarrow$34    &$4f$(31.58)$5p$(38.69)$\rightarrow$$5p$      &2.142   \\% \cline{3-7}
+%&       &(0,0,0)         &33$\rightarrow$34    &$4f$(31.58)$5p$(38.69)$\rightarrow$$5p$      &2.142   \\% \cline{3-7}
+%-------------------------------------------------------------------------------------------------------------------------
+
+%\end{tabular*}
+%\rule{\temptablewidth}{1pt}\\
+%%\end{center}
+%\end{minipage}
+%\end{table}
+
+%-------------------The Long Table Of The Paper--------------------
+%\begin{small}
+%%\begin{minipage}{\textwidth}
+%%\begin{longtable}[l]{|c|c|cc|c|c|} %[c]指定长表格对齐方式
+%\begin{longtable}[c]{|c|c|p{1.9cm}p{4.6cm}|c|c|}
+%\caption{Assignment for the peaks of EuB$_6$}
+%\label{tab:EuB6-1}\\ %\\长表格的caption中换行不可少
+%\hline
+%%
+%--------------------------------------------------------------------------------------------------------------------------------
+%\multicolumn{2}{|c|}{\bfseries$\sigma_1(\omega)$谱峰}&\multicolumn{4}{c|}{\bfseries部分重要能带间电子跃迁\footnotemark}\\ \hline
+%\endfirsthead
+%--------------------------------------------------------------------------------------------------------------------------------
+%%
+%\multicolumn{6}{r}{\it 续表}\\
+%\hline
+%--------------------------------------------------------------------------------------------------------------------------------
+%标记 &峰位(eV) &\multicolumn{2}{c|}{有关电子跃迁} &gap(eV)  &\multicolumn{1}{c|}{经验指认} \\ \hline
+%\endhead
+%--------------------------------------------------------------------------------------------------------------------------------
+%%
+%\multicolumn{6}{r}{\it 续下页}\\
+%\endfoot
+%\hline
+%--------------------------------------------------------------------------------------------------------------------------------
+%%
+%%\hlinewd{0.5$p$t}
+%\endlastfoot
+%--------------------------------------------------------------------------------------------------------------------------------
+%%
+%% Stuff from here to \endlastfoot goes at bottom of last page.
+%%
+%--------------------------------------------------------------------------------------------------------------------------------
+%标记 &峰位(eV)\footnotetext{见正文说明。} &\multicolumn{2}{c|}{有关电子跃迁\footnotemark} &gap(eV) &\multicolumn{1}{c|}{经验指认\upcite{PRB46-12196_1992}}\\ \hline
+%--------------------------------------------------------------------------------------------------------------------------------
+%
+%     &0.07 &\multicolumn{2}{c|}{电子群体激发$\uparrow$} &--- &电子群\\ \cline{2-5}
+%\raisebox{2.3ex}[0pt]{$\omega_f$} &0.1 &\multicolumn{2}{c|}{电子群体激发$\downarrow$} &--- &体激发\\ \hline
+%--------------------------------------------------------------------------------------------------------------------------------
+%
+%     &1.50 &\raisebox{-2ex}[0pt][0pt]{20-22(0,1,4)} &2$p$(10.4)4$f$(74.9)$\rightarrow$ &\raisebox{-2ex}[0pt][0pt]{1.47} &\\%\cline{3-5}
+%     &1.50$^\ast$ & &2$p$(17.5)5$d_{\mathrm E}$(14.0)$\uparrow$ & &4$f$$\rightarrow$5$d_{\mathrm E}$\\ \cline{3-5}
+%     \raisebox{2.3ex}[0pt][0pt]{$a$} &(1.0$^\dagger$) &\raisebox{-2ex}[0pt][0pt]{20-22(1,2,6)} &\raisebox{-2ex}[0pt][0pt]{4$f$(89.9)$\rightarrow$2$p$(18.7)5$d_{\mathrm E}$(13.9)$\uparrow$}\footnotetext{波函数主要成分后的括号中，2$s$、2$p$和5$p$、4$f$、5$d$、6$s$分别指硼和铕的原子轨道；5$d_{\mathrm E}$、5$d_{\mathrm T}$分别指铕的(5$d_{z^2}$，5$d_{x^2-y^2}$和5$d_{xy}$，5$d_{xz}$，5$d_{yz}$)轨道，5$d_{\mathrm{ET}}$(或5$d_{\mathrm{TE}}$)则指5个5$d$轨道成分都有，成分大的用脚标的第一个字母标示；2$ps$(或2$sp$)表示同时含有硼2$s$、2$p$轨道成分，成分大的用第一个字母标示。$\uparrow$和$\downarrow$分别标示$\alpha$和$\beta$自旋电子跃迁。} &\raisebox{-2ex}[0pt][0pt]{1.56} &激子跃迁。 \\%\cline{3-5}
+%     &(1.3$^\dagger$) & & & &\\ \hline
+%--------------------------------------------------------------------------------------------------------------------------------
+
+%     & &\raisebox{-2ex}[0pt][0pt]{19-22(0,0,1)} &2$p$(37.6)5$d_{\mathrm T}$(4.5)4$f$(6.7)$\rightarrow$ & & \\\nopagebreak %\cline{3-5}
+%     & & &2$p$(24.2)5$d_{\mathrm E}$(10.8)4$f$(5.1)$\uparrow$ &\raisebox{2ex}[0pt][0pt]{2.78} &a、b、c峰可能 \\ \cline{3-5}
+%     & &\raisebox{-2ex}[0pt][0pt]{20-29(0,1,1)} &2$p$(35.7)5$d_{\mathrm T}$(4.8)4$f$(10.0)$\rightarrow$ & &包含有复杂的\\ \nopagebreak%\cline{3-5}
+%     &2.90 & &2$p$(23.2)5$d_{\mathrm E}$(13.2)4$f$(3.8)$\uparrow$ &\raisebox{2ex}[0pt][0pt]{2.92} &强激子峰。$^{\ast\ast}$\\ \cline{3-5}
+%$b$  &2.90$^\ast$ &\raisebox{-2ex}[0pt][0pt]{19-22(0,1,1)} &2$p$(33.9)4$f$(15.5)$\rightarrow$ & &B2$s$-2$p$的价带 \\ \nopagebreak%\cline{3-5}
+%     &3.0 & &2$p$(23.2)5$d_{\mathrm E}$(13.2)4$f$(4.8)$\uparrow$ &\raisebox{2ex}[0pt][0pt]{2.94} &顶$\rightarrow$B2$s$-2$p$导\\ \cline{3-5}
+%     & &12-15(0,1,2) &2$p$(39.3)$\rightarrow$2$p$(25.2)5$d_{\mathrm E}$(8.6)$\downarrow$ &2.83 &带底跃迁。\\ \cline{3-5}
+%     & &14-15(1,1,1) &2$p$(42.5)$\rightarrow$2$p$(29.1)5$d_{\mathrm E}$(7.0)$\downarrow$ &2.96 & \\\cline{3-5}
+%     & &13-15(0,1,1) &2$p$(40.4)$\rightarrow$2$p$(28.9)5$d_{\mathrm E}$(6.6)$\downarrow$ &2.98 & \\ \hline
+%--------------------------------------------------------------------------------------------------------------------------------
+%%\hline
+%%\hlinewd{0.5$p$t}
+%\end{longtable}
+%%\end{minipage}{\textwidth}
+%%\setlength{\unitlength}{1cm}
+%%\begin{picture}(0.5,2.0)
+%%  \put(-0.02,1.93){$^{1)}$}
+%%  \put(-0.02,1.43){$^{2)}$}
+%%\put(0.25,1.0){\parbox[h]{14.2cm}{\small{\\}}
+%%\put(-0.25,2.3){\line(1,0){15}}
+%%\end{picture}
+%\end{small}
+
+%-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------%
+
+
+%--------------------------------------------------------------------------The Biblography of The Paper-----------------------------------------------------------------%
+%\newpage																				%
+%-----------------------------------------------------------------------------------------------------------------------------------------------------------------------%
+%\begin{thebibliography}{99}																		%
+%%\bibitem{PRL58-65_1987}H.Feil, C. Haas, {\it Phys. Rev. Lett.} {\bf 58}, 65 (1987).											%
+%\end{thebibliography}																			%
+%-----------------------------------------------------------------------------------------------------------------------------------------------------------------------%
+%																					%
+\phantomsection\addcontentsline{toc}{section}{Bibliography}	 %直接调用\addcontentsline命令可能导致超链指向不准确,一般需要在之前调用一次\phantomsection命令加以修正	%
+\bibliography{ref/Myref}																			%
+\bibliographystyle{ref/mybib}																		%
+%  \nocite{*}																				%
+%-----------------------------------------------------------------------------------------------------------------------------------------------------------------------%
+
+\clearpage     %\end{CJK} 前加上\clearpage是CJK的要求
+\end{document}
