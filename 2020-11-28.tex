@@ -1010,6 +1010,24 @@ $E=\tilde E+E^1-\tilde E^1$，每一项分别表示为：
 	\end{itemize}
 }
 
+
+\frame
+{
+	\frametitle{一维\textrm{FFT}的\textrm{MPI}并行}
+\begin{figure}[h!]
+	\vspace{-0.20in}
+\centering
+%\includegraphics[height=2.7in,width=4.0in,viewport=0 0 1180 875,clip]{Figures/dual_grid.png}
+\includegraphics[height=1.55in,width=2.2in,viewport=0 10 810 580,clip]{Figures/FFT_para.png}
+\vskip 0.5pt
+\includegraphics[height=1.2in,width=3.5in,viewport=0 0 1180 550,clip]{Figures/FFT_para-2.png}
+\caption{\tiny \textrm{The Schematic description for FFT in MPI.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{MPI-FFT}
+\end{figure} 
+}
+
+\frame
+{
 \frame{
 	\frametitle{一维\textrm{FFT}的并行实现}
 \begin{figure}[h!]
@@ -1038,7 +1056,7 @@ $E=\tilde E+E^1-\tilde E^1$，每一项分别表示为：
 \vskip 0.5pt
 \includegraphics[height=0.7in,width=4.0in,viewport=0 0 730 150,clip]{Figures/VASP_FFT-MPI_Real.png}
 \caption{\tiny \textrm{VASP:~ Reciprocal-Real space layout for grids in MPI.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{MPI-FFT}
+\label{MPI-FFT-VASP}
 \end{figure} 
 	\end{itemize}
 }
