@@ -239,6 +239,108 @@
 %\end{figure}
 %}
 
+\frame
+{
+	\frametitle{确定磁结构的方法和困难}
+	\begin{itemize}
+                \setlength{\itemsep}{5pt}
+		\item \textcolor{blue}{确定磁结构的常用方法}
+			\begin{enumerate}
+                                \setlength{\itemsep}{3pt}
+				\item 实验方法:~中子散射
+				\item 理论方法:~人工猜测-计算验证方法
+				\item 理论方法:~拟合磁自由度\textrm{Hamiltonian}-模拟退火
+			\end{enumerate}
+		\item \textcolor{blue}{复杂磁有序结构测定的困难}
+			\begin{enumerate}
+                                \setlength{\itemsep}{3pt}
+				\item 中子散射:~某些实验材料质量欠佳、极端条件
+				\item 人工猜想-计算验证方法:~效率低下，不适合复杂材料
+				\item \textrm{Hamiltonian}-模拟退火:~\textrm{Hamiltonian}拟合困难，精度无法保证
+			\end{enumerate}
+			\textcolor{red}{本质的困难}:~海量潜在的可能结构导致常用方法失效
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{深度神经网络与遗传算法}
+当前的深度神经网络~\textrm{(Deep Learning Neural Network)}~可以包含上百层神经元，通常有上万个参数，再加上超参数，实际的参数空间几乎是无限大的。如何从海量潜在的可能参数中做选择极具挑战性。
+\begin{figure}[h!]
+\vspace*{-0.08in}
+\centering
+\includegraphics[height=1.75in,width=3.75in]{Figures/ANN_Algorithm.png}
+\caption{\tiny \textrm{Deep Learning Neural Network.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:Deep-Learning-NN}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{深度神经网络与遗传算法}
+	\textcolor{blue}{深度神经网络类似问题的解决方案:~遗传算法}
+\begin{minipage}[b]{0.49\textwidth}
+\includegraphics[height=0.4in,width=2.08in,viewport=0 110 1280 350,clip]{Figures/Genetic_Algorithm-2.png}\\
+\centering{\includegraphics[height=1.0in,width=1.08in,viewport=140 50 820 650,clip]{Figures/Genetic_Algorithm-1.png}}\\
+\vskip 0.02pt
+\includegraphics[height=0.7in,width=2.05in]{Figures/Genetic_Algorithm-3.png}\\
+\centering{\textcolor{red}{\textrm{\tiny GACNN:~利用遗传算法训练深度卷积神经网络}}}
+\end{minipage}
+\hfill
+\begin{minipage}[b]{0.49\textwidth}
+\includegraphics[height=1.2in,width=1.9in]{Figures/Genetic_Algorithm-5.png}\\
+\vskip 0.5pt
+\includegraphics[height=0.55in,width=1.95in]{Figures/Genetic_Algorithm-4.png}\\
+\centering{\textcolor{red}{\textrm{\tiny 多智能体强化学习:~神经网络}}}
+\end{minipage}
+}
+
+\frame
+{
+	\frametitle{晶体结构优化的复杂性}
+	\begin{itemize}
+		\item \textcolor{blue}{晶体结构预测与搜索中也遇到类似问题}\\
+		在已知元素种类的条件下，有可能预测或搜索材料晶体的结构;~但是材料的等能面存在无数个局域极小点，因而可能的晶体结构也是无限多的\\
+		这使得晶体结构的预测与搜索极其困难
+\begin{figure}[h!]
+\centering
+\includegraphics[height=1.3in,width=1.3in]{Figures/Struct-predict-3.png}
+\hskip 1.0pt
+\includegraphics[height=1.3in,width=2.25in]{Figures/Total_energy_opt.png}
+\caption{\tiny \textrm{The structure of Perovskite and schematic for the energy minimum searching.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:Structure-optimized}
+\end{figure}
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{晶体结构优化问题的解决}
+	\textcolor{blue}{解决方案:~遗传算法、粒子群方法等}
+\begin{figure}[h!]
+\centering
+\includegraphics[height=1.0in,width=1.7in]{Figures/Struct-predict-1.png}
+\includegraphics[height=1.0in,width=2.2in]{Figures/Struct-predict-2.png}
+\vskip 8.0pt
+\includegraphics[height=0.7in,width=2.2in]{Figures/Logo_USPEX.png}
+\hskip 1.0pt
+\includegraphics[height=1.0in,width=1.8in]{Figures/Logo_Calypso.png}
+%\caption{\tiny \textrm{The structure of Perovskite and schematic for the energy minimum searching.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:Structure-optimized-2}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{磁结构预测}
+鉴于遗传算法在深度学习和晶体结构预测中的成功应用，这种方法在磁结构预测中也大有用武之地。\textrm{MagGene}就是整合遗传算法和常用的第一性原理计算软件预测材料磁结构新型软件。
+\begin{figure}[h!]
+\centering
+\includegraphics[height=2.2in,width=2.2in]{Figures/MagGene-Flow.png}
+\caption{\tiny \textrm{The Flow of MagGene.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:MagGene-Flow}
+\end{figure}
+}
 %-----------------------------------------------------------------------------------------------------------------------------------------------------------------------%
 \appendix
 %------------------------------------------------------------------------Reference----------------------------------------------------------------------------------------------

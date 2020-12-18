@@ -1,0 +1,2212 @@
+\documentclass[cjk,slidestop,compress,mathserif,blue]{beamer}
+%dvipdfm选项是关键,否则编译统统通不过
+%beamer的颜色选项定义的是导航条和标题的颜色(即关键词structure的颜色)
+
+%%%%%%%%%%%%%%%%仅限于XeTeX可使用的宏包%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{fontspec,xunicode,xltxtra,beamerthemesplit}
+%\usepackage{beamerthemesplit}
+\usepackage{xeCJK}
+\setCJKmainfont[BoldFont=黑体, ItalicFont=楷体, BoldItalicFont=仿宋]{黑体}
+%\setsansfont[Mapping=tex-text]{Adobe 黑体 Std}
+%如果装了Adobe Acrobat,可在font.conf中配置Adobe字体的路径以使用其中文字体
+%也可直接使用系统中的中文字体如SimSun,SimHei,微软雅黑 等
+%原来beamer用的字体是sans family;注意Mapping的大小写,不能写错
+
+%%%%%%%%   确定标题和导航条结构的框架     %%%%%%%%%%%%
+\usepackage{beamerthemeshadow}                       %
+%\usepackage{beamerthemeclassic}%导航条色与背景色一致%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbeamerfont{roman title}{size={}}
+%\usepackage{CJK} % CJK 中文支持                                  %
+\usepackage{amsmath,amsthm,amsfonts,amssymb,bm}
+\usepackage{mathrsfs}
+\usepackage{xcolor}                                        %使用默认允许使用颜色
+\usepackage{hyperref} 
+\usepackage{graphicx}
+\usepackage{subfigure}           %图片跨页
+
+%\usepackage[numbers,sort&compress]{natbib} %紧密排列             %
+\usepackage[sectionbib]{chapterbib}        %每章节单独参考文献   %
+\usepackage{hypernat}                                                                         %
+%\usepackage[dvipdfm,bookmarksopen=true,pdfstartview=FitH,CJKbookmarks]{hyperref}		%
+\hypersetup{bookmarksnumbered,colorlinks,linkcolor=brown,citecolor=blue,urlcolor=red}         %
+%参考文献含有超链接引用时需要下列宏包，注意与natbib有冲突        %
+%\usepackage[dvipdfm]{hyperref}                                  %
+%\usepackage{hypernat}                                           %
+\newcommand{\upcite}[1]{\hspace{0ex}\textsuperscript{\cite{#1}}} %
+
+%\useoutertheme{smoothbars}
+\useinnertheme[shadow=true]{rounded}
+\usetheme{Berkeley}                                          %主题式样
+%\usetheme{Luebeck}
+
+\usecolortheme{lily}                                        %颜色主题式样
+
+\usefonttheme{professionalfonts}                           %字体主题样式宏包
+
+%\beamertemplatetransparentcoveredhigh                      %使所有被隐藏的文本高度透明
+\beamertemplatetransparentcovereddynamicmedium             %使所有被隐藏的文本完全透明，动态，动态的范围很小
+\mode<presentation>
+%\beamersetaveragebackground{gray}                          %设置背景颜色(单一色) 
+\beamertemplateshadingbackground{green!10}{red!5}         %设置背景颜色(渐变色)
+
+
+\begin{document}
+%\begin{CJK*}{GBK}{song}
+%\begin{CJK*}{GBK}{kai}
+%beamer下不能用\songyi、\zihao等命令!
+%\graphicspath{Figures/}
+
+%-------------------------------PPT Title-------------------------------------
+\title{固体能带与晶格振动}
+%-----------------------------------------------------------------------------
+
+%----------------------------Author & Date------------------------------------
+\author{格致斯创(北京)科技有限公司\;\;姜骏}
+\date{\textrm{2016.12.18}}
+%\date{2013.09.10}
+\frame{\titlepage}
+%-----------------------------------------------------------------------------
+
+%------------------------------------------------------------------------------列出全文 outline ---------------------------------------------------------------------------------
+\section*{}
+\frame[allowframebreaks]
+{
+  \frametitle{Outline}
+%  \frametitle{\textcolor{mycolor}{\secname}}
+  \tableofcontents%[current,currentsection,currentsubsection]
+}
+%在每个section之前列出全部Outline
+%类似的在每个subsection之前列出全部Outline是\AtBeginSubsection[]
+\AtBeginSection[]
+{
+  \frame<handout:0>
+  {
+    \frametitle{Outline}
+%全部Outline中，本部分加亮
+    \tableofcontents[current,currentsection]
+  }
+}
+
+%------------------------------------------------------------------------------PPT main Body------------------------------------------------------------------------------------
+\small
+\section{量子力学基础}
+%\subsection{量子力学基本假设}
+\frame
+{
+	\frametitle{量子力学基本假设}
+	\begin{itemize}
+		\item 波函数假定\\
+			\textcolor{blue}{微观体系的运动状态可由波函数$\Psi$完全描述，波函数可以得到体系的所有性质}\\
+			波函数$\Psi$一般要求满足\textcolor{red}{连续}、\textcolor{red}{有限}和\textcolor{red}{单值}三个条件
+
+		\item 力学量算符假定\\
+			\textcolor{blue}{力学量用线性\textrm{Hermite~}算符表示}\\
+			在经典力学中的力学量，在量子力学中用力学量的算符表示:\\如动量算符 
+			$$\hat{\mathbf{p}}=-\mathrm{i}\hbar\nabla$$
+			位置算符$$\hat{\mathbf r}=r$$
+			力学量算符\textcolor{red}{有组成完全系的本征函数}
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{量子力学基本假设}
+	\begin{itemize}
+%		\item 力学量算符之间有确定的对易关系(量子条件)
+%			$$[\hat{\mathbf F},\hat{\mathbf G}]=\hat{\mathbf F}\hat{\mathbf G}-\hat{\mathbf G}\hat{\mathbf F}$$ 
+		\item 态叠加原理\\
+			如果$\Psi_1$是体系的一个本征态，对应的本征值为$A_1$，$\Psi_2$也是体系的一个本征态，对应的本征值为$A_2$，则\textcolor{blue}{$$\Psi=C_1\Psi_1+C_2\Psi_2$$}\textcolor{red}{也是体系一个可能的存在状态}
+		\item 微观体系的运动状态\textcolor{blue}{波函数随时间变化的规律}:\\\textcolor{red}{遵从\textrm{Schr\"odinger}方程}
+			$$\mathrm{i}\hbar\dfrac{\mathrm{d}}{\mathrm{d}t}|\Psi\rangle=\hat{\mathbf H}|\Psi\rangle$$
+		\item 全同性原理\\
+			\textcolor{blue}{全同粒子组成的体系中，两个全同粒子相互调换不改变体系的状态}\\ 
+			全同粒子是指\textcolor{red}{内禀性质完全相同的一类微观粒子}:\\例如所有的电子是全同粒子 
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{Schr\"odinger's cat}
+\begin{figure}[h!]
+\centering
+\vspace{-10.5pt}
+\includegraphics[height=0.70\textwidth,width=0.7\textwidth,viewport=0 0 760 750,clip]{Figures/Schrodinger-cat.jpg}
+%\caption{\textrm{ABINIT}的Si.in}
+\label{Schrodinger-cat}
+\end{figure}
+}
+
+\subsection{Hartree-Fock方法}
+\frame
+{
+	\frametitle{Born-Oppenheimer近似}
+	\begin{itemize}
+		\item 由于原子核的质量要比电子大很多(一般要大3-4个数量级)，在同样的相互作用下，原子核的运动比电子也慢得多
+		\item 电子在每一时刻仿佛运动在静止原子核构成的势场中，而原子核运动时则感受不到电子的具体位置，感受到的是运动电子的平均作用力
+		\item 可近似将原子核坐标与电子坐标变量分离，使得求解整个体系的波函数的复杂过程分解为求解电子波函数和求解原子核波函数两个相对简单的过程\\
+			电子运动方程$$\hat{\mathbf H}_{\mathrm e}(\vec r,\vec{\mathbf R})\Psi(\vec r,\vec{\mathbf R})=E_{\mathrm e}(\vec{\mathbf R})\Psi(\vec r,\vec{\mathbf R})$$
+			原子核运动方程$$[\hat{\mathbf T}_{\mathrm{nul}}+E_{\mathrm e}(\vec{\mathbf R})]\chi(\vec{\mathbf R})=E\chi(\vec{\mathbf R})$$
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{独立粒子近似}
+	\textrm{n-}粒子体系中的每个粒子的运动，完全忽略粒子间的瞬时相互作用，认为第$i$个粒子在其余$\mathrm{n}-1$个粒子组成的平均势场中运动
+	$$\Psi(\vec r_1,\vec r_2,\vec r_3,\cdots,\vec r_n)=\psi_1(\vec r_1)\psi_2(\vec r_2)\psi_3(\vec r_3)\cdots\psi_n(\vec r_n)$$
+	$$\hat{\mathbf H}=\sum_{i=1}^N-\dfrac{1}{2}\nabla_i^2+\sum_{i=1}^NV_i(\vec r_i)+\sum_{i,j(j\neq i)}\dfrac{e^2}{|\vec r_i-\vec r_j|}$$
+	粒子$i$的\textrm{Hartree}算符
+	$$\hat{\mathbf h}_i=-\dfrac{1}{2}\nabla_i^2+V_i(r_i)+\sum_{j(j\neq i)}^N\dfrac{e^2}{|\vec r_i-\vec r_j|}$$
+	因此每个粒子的运动方程为:
+	$$\hat{\mathbf h}_i\psi_i(\vec r)=\bigg[-\dfrac{1}{2}\nabla_i^2+V_i(r_i)+\sum_{j(j\neq i)}^N\dfrac{e^2}{|\vec r_i-\vec r_j|}\bigg]\psi_i(\vec r)=\varepsilon\psi_i(\vec r)$$ 
+}
+
+\frame
+{
+	\frametitle{Slater行列式}
+	简单乘积的独立粒子波函数不满足全同粒子置换对称性要求，不能正确表示电子不可辨认的物理属性
+	
+	\textrm{Slater}建议用行列式形式表示具有反对称性的波函数
+	\begin{displaymath}
+		\hspace*{-10pt}\Psi(\vec r_1,\vec r_2,\vec r_3,\cdots,\vec r_n)=\dfrac1{\sqrt{n!}}
+		\left|\begin{array}{ccccc}
+			\psi_1(\vec r_1)&\psi_2(\vec r_1)&\psi_3(\vec r_1)&\cdots&\psi_n(\vec r_1)\\
+			\psi_1(\vec r_2)&\psi_2(\vec r_2)&\psi_3(\vec r_2)&\cdots&\psi_n(\vec r_2)\\
+			\psi_1(\vec r_3)&\psi_2(\vec r_3)&\psi_3(\vec r_3)&\cdots&\psi_n(\vec r_3)\\
+			&&&\cdots&\\
+			\psi_1(\vec r_n)&\psi_2(\vec r_n)&\psi_3(\vec r_n)&\cdots&\psi_n(\vec r_n)
+		\end{array}\right|
+	\end{displaymath}
+	粒子$i$的\textrm{Fock}算符
+	$$\hat{\mathbf F}_i=-\dfrac{1}{2}\nabla_i^2+V_i(r_i)+\hat{\mathbf J}_i-\hat{\mathbf K}_i$$
+	$$\hat{\mathbf J}_i(\vec r_i)=\int\dfrac{\psi_j^{\ast}(\vec r_j)|e^2|\psi_j(\vec r_j)}{|\vec r_i-\vec r_j|}\mathrm{d}\vec r_j$$
+	$$\hat{\mathbf K}_i(\vec r_i)\psi_i(\vec r_i)=\psi_j(\vec r_i)\int\dfrac{\psi_j(\vec r_j)|e^2|\psi_i(\vec r_j)}{|\vec r_i-\vec r_j|}\mathrm{d}\vec r_j$$
+
+}
+
+\frame
+{
+	\frametitle{Hartree-Fock-Roothan方法}
+	实际求解非相对论的\textrm{Schr\"odinger}方程时，
+	$$\hat{\mathbf F}_i\psi_i(\vec r_i)=\varepsilon_i\psi_i(\vec r_i)$$
+	将波函数$\psi_i(\vec r_i)$用一套选定的基函数$\phi_j(\vec r)$展开
+	$$\psi_i(\vec r)=\sum_{j=1}^Nc_{ij}\phi_j(\vec r)$$
+	通过变分原理
+	$$\bar E=\dfrac{\langle\Psi|\hat{\mathbf H}|\Psi\rangle}{\langle\Psi|\Psi\rangle}\geqslant E_0$$
+	改变展开系数$c_{ij}$直到体系的能量最小，确定展开系数
+
+	重复上述流程直至\textrm{Fock}算符$\hat{\mathbf F}$、波函数$\psi(\vec r)$和能量$\varepsilon$自洽，这就是\textrm{Hartree-Fock-Roothan}方法
+}
+
+\frame
+{
+	\frametitle{RHF与UHF} 
+	\begin{itemize}
+		\item \textrm{RHF}:\\
+			针对闭壳层(\textrm{closed shell})体系，占据轨道的电子成对出现，自旋相反，可用一个\textrm{Slater}行列式表示\\
+	%		每对自旋相反的电子有相同的轨道波函数\\
+			对于闭壳层体系，\textrm{Hartree-Fock}方法求解的能量本征值符合\textrm{Koopmans}定理
+			$$E_{ion}^1=-\varepsilon_{\mathrm{HOMO}}$$
+		\item \textrm{UHF}:\\
+			针对开壳层(\textrm{open shell})体系，占据轨道有未成对电子，需要用\textrm{Slater}行列式的线性组合表示\\
+			最低能态用一个\textrm{Slater}行列式，但不同自旋的轨道分别处理
+		$$E_{\mathrm{UHF}}\leqslant E_{\mathrm{RHF}}$$
+			由于\textrm{UHF}包含更多的变分函数，可以处理一些近解离极限的分子体系
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{交换与相关}
+	\begin{itemize}
+		\item \textrm{Fock}算符中的交换算符$\hat{\mathrm K}_i(\vec r_i)$是由\textrm{Slater}行列式引入的，属于量子效应
+	\end{itemize}
+%	\vspace*{-5pt}
+	\begin{displaymath}
+%		\hspace*{-2pt}
+		\text{电子间瞬时相互作用(\textcolor{red}{关联})}
+		\left\{
+			\begin{aligned}
+				&\text{\textcolor{blue}{电子交换}:同自旋电子的关联作用}\\
+				&\text{\textcolor{blue}{电子相关}}
+			\end{aligned}
+			\right.
+	\end{displaymath}
+\begin{figure}[h!]
+\centering
+\vspace{-10.5pt}
+\includegraphics[height=0.42\textwidth,width=0.6\textwidth,viewport=0 0 760 550,clip]{Figures/Post-HF.png}
+%\caption{\textrm{ABINIT}的Si.in}
+\label{Post-HF}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{Post-HF}
+	\textrm{Hartree-Fock}方法精确定义了交换作用，完全没考虑电子相关作用
+	\begin{itemize}
+		\item \textrm{CI (Configuration Interaction)}
+	$$\Psi=\sum_{I=0}C_I\Phi_I=C_0\Phi_0+C_1\Phi_1+C_2\Phi_2+\cdots$$
+		\item \textrm{CC (Couple Cluste)}\\
+			\begin{displaymath}
+				\Psi=\mathrm{e}^{\hat{\mathbf T}}\Phi_0=\mathrm{e}^{(\hat{\mathbf T_1}+\hat{\mathbf T_2}+\hat{\mathbf T_3}+\cdots)}\Phi_0
+			\end{displaymath}
+		\item \textrm{MP}微扰方法
+			\begin{displaymath}
+				\begin{aligned}
+					&\hat{\mathbf H}=\hat{\mathbf H}^{(0)}+\hat{\mathbf V} \\
+					&\hat{\mathbf H}^{(0)}=\sum_i\hat{\mathbf F}_i \qquad \Phi^{(0)}=\Psi_{\mathrm{HF}}\\ 
+					&\hat{\mathbf V}=\sum_{j>i}^{occ}\dfrac{e^2}{r_{ij}}-\sum_{ij}^{occ}\big(\hat{\mathbf J}_{ij}-\dfrac12\hat{\mathbf K}_{ij}\big)
+				\end{aligned}
+			\end{displaymath}
+	\end{itemize}
+}
+
+\subsection{密度泛函理论}       %Bookmark
+\frame
+{
+	\frametitle{\textrm{Thomas-Fermi}模型} 
+	1927年，\textrm{Thomas}和\textrm{Fermi}基于均匀电子气模型上建立\textrm{Thomas-Fermi}模型，\textcolor{blue}{体系能量可用}\textcolor{red}{电子密度}\textcolor{blue}{表示}:
+	\begin{itemize}
+		\item 动能表达式
+			$$T_{\mathrm{TF}}[\rho(\vec r)]=\dfrac3{10}(3\pi^2)^{\frac23}\int\rho^{\frac53}(\vec r)\mathrm{d}\vec r$$
+		\item 外势$V_{ext}(\vec r)$下电子体系的能量泛函表达式为
+			\begin{displaymath}
+				\begin{aligned}
+					E_{\mathrm{TF}}[\rho(\vec r)]=&\dfrac3{10}(3\pi^2)^{\frac23}\int\rho^{\frac53}(\vec r)\mathrm{d}\vec r\\
+					&+\int\rho(\vec r)V_{ext}(\vec r)\mathrm{d}\vec r+\dfrac12\int\int\dfrac{\rho(\vec r_1)\rho(\vec r_2)}{|\vec r_2-\vec r_1|}\mathrm{d}\vec r_1\mathrm{d}\vec r_2
+				\end{aligned}
+			\end{displaymath}
+		\item \textrm{Thomas-Fermi}模型完全没有考虑电子的交换-相关作用
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{\textrm{Thomas-Fermi-Dirac}模型} 
+	1930年，\textrm{Dirac}将\textrm{Thomas-Fermi}模型修正，用局域密度近似考虑电子交换作用
+			\begin{displaymath}
+				\begin{aligned}
+					E_{\mathrm{TFD}}[\rho(\vec r)]=&\dfrac3{10}(3\pi^2)^{\frac23}\int\rho^{\frac53}(\vec r)\mathrm{d}\vec r+\int\rho(\vec r)V_{ext}(\vec r)\mathrm{d}\vec r\\
+					&+\dfrac12\int\int\dfrac{\rho(\vec r_1)\rho(\vec r_2)}{|\vec r_2-\vec r_1|}\mathrm{d}\vec r_1\mathrm{d}\vec r_2-\dfrac34\bigg(\dfrac3{\pi}\bigg)^{\frac13}\int\rho^{\frac43}(\vec r)\mathrm{d}\vec r
+				\end{aligned}
+			\end{displaymath}
+			\begin{itemize}
+				\item 在总电子数守恒约束条件
+					$$\int\rho(\vec r)\mathrm{d}\vec r=N$$
+					下，能量泛函$E_{\mathrm{TFD}[\rho(\vec r)]}$对密度$\rho(\vec r)$的变分极小获得体系的基态密度和基态能量
+			\end{itemize}
+}
+
+\frame
+{
+	\frametitle{\textrm{Thomas-Fermi}模型}
+	\begin{itemize}
+		\item \textrm{Thomas-Fermi}模型用电子密度代替波函数描述问题是极大的简化，但模型过于粗糙:\\
+%			\begin{enumerate}
+%				\item 以均匀电子气的密度得到动能的表达式
+%				\item 完全忽略电子间的交换-相关作用
+%			\end{enumerate}
+			不能正确描述相互作用电子体系的基本特征，如原子的壳层结构
+		\item \textrm{Thomas-Fermi}模型虽不够精确，但可以通过引入修正项校正:
+			\textrm{Dirac}交换泛函 $$E_X[\rho(\vec r)]=-\dfrac34\bigg(\dfrac3{\pi}\bigg)^{\frac13}\int\rho^{\frac43}(\vec r)\mathrm{d}\vec r$$
+			\textrm{Wigner}相关泛函 $$E_C[\rho(\vec r)]=-0.056\int\dfrac{\rho^{\frac43}(\vec r)}{0.079+\rho^{\frac13}(\vec r)}\mathrm{d}\vec r$$
+	\end{itemize}
+	\textrm{Thomas-Fermi}模型为密度泛函理论\textrm{(DFT)}提供了重要的启示
+}
+
+\frame                               %
+{
+\frametitle{密度泛函理论(\textrm{DFT})} %Slide Page Title
+%   \secname
+与传统的量子力学方法不同，密度泛函理论的基本变量是体系的基态电子密度。%通过体系的电子密度而非波函数确定体系的基态能量。
+\begin{itemize}%[+-| alert@+>]
+	\item 密度泛函理论的基石：\textrm{Hohenberg-Kohn}定理\upcite{PR136-B864_1964}
+\vskip 5pt
+\begin{itemize}%[+-| alert@+>]
+   \setlength{\itemsep}{8pt}
+ \item $E[\rho]=F_{\mathrm{HK}}[\rho]+\displaystyle\int\rho(\vec{r})v(\vec{r})\textrm{d}\vec{r}$ \\
+\vskip 5pt 其中$F_{\mathrm{HK}}[\rho]=\underset{\Psi\to\rho}{\mathrm{Min}}\langle\Psi[\rho]|\hat{T}+\hat{W}|\Psi[\rho]\rangle$
+是普适的泛函表达式。%，指明多电子体系的基态性质与基态密度间存在一一对应关系
+     \textrm{\small{第一定理表明多电子体系的性质完全由体系的基态密度决定}}
+   \item 如果$\tilde\Psi\neq\Psi$，
+     $E[\tilde\rho]\geqslant E[\rho_0]$\\
+     \textrm{\small{第二定理指出基态总能量泛函在体系基态电子密度处取极小值}}
+   \end{itemize}
+%\textrm{\small{第二定理指出基态总能量泛函在体系基态电子密度处取极小值}}
+\vskip 8pt
+ \item 密度泛函理论的优越性：用密度($\rho$)代替波函数($\Psi$)描述体系
+\vskip 5pt
+ \item 密度泛函理论的困难：能量密度泛函的精确形式未知
+   \end{itemize}
+}
+\frame                               %
+{
+\frametitle{密度泛函理论(\textrm{DFT})}
+\textrm{Kohn-Sham}方程\upcite{PR140-A1133_1965}：无相互作用体系+交换-相关能
+$$(T_S+V_{e\!f\!f})|\varphi_i\rangle=\varepsilon_i|\varphi_i\rangle,\quad i=1,\cdots,N,\dots$$
+其中$V_{e\!f\!f}(\vec r)=v(\vec r)+\displaystyle\int w(\vec r,\vec r\,')\rho(\vec r\,')\mathrm{d}\vec r+\dfrac{\delta E_{XC}}{\delta\rho(\vec r)}$
+\vskip 10pt
+\textrm{Kohn-Sham}方程是形式上的单粒子方程
+\vskip 20pt
+\textrm{Kohn-Sham}方程的实质：\\将动能泛函的主要部分分离出来，剩余部分放在交换相关能中
+}
+%  \beamertemplateshadingbackground{blue!10}{yellow!10}
+\frame                               %
+{
+\frametitle{交换-相关能密度泛函}
+\begin{minipage}[b]{0.72\linewidth}
+ \hspace*{-15pt}
+ \begin{itemize}%[+-| alert@+>]
+	 \setlength{\itemsep}{10pt}
+ \item \textrm{LDA}:泛函只与密度分布的局域值有关
+ \item \textrm{GGA}:泛函依赖:局域密度及其梯度
+ \item $meta$-\textrm{GGA}:泛函依赖的变量还有动能密度
+ \item 杂化(\textrm{hybrid})泛函:泛函与占据轨道有关
+ \item 其他的交换-相关能泛函
+ \item<1-> 完全非局域泛函:理想泛函，不现实
+ \end{itemize}
+\end{minipage}
+\hfill
+\begin{minipage}[b]{0.26\linewidth}
+\includegraphics[height=1.7in,width=3.18in,viewport=10 5 1380 700,clip]{Figures/Jacobi-ladder.png}\\
+{\small \textcolor{red}{\textrm{Jacob's ladder}}}
+\end{minipage}
+% \begin{itemize}%[+-| alert@+>]
+%\item 交换-相关能密度泛函
+}
+
+\frame                               %
+{
+	\frametitle{近似能量泛函$E_{\mathrm{XC}}[\rho]$的主要问题}
+\vskip 20pt
+\begin{enumerate}%[+-| alert@+>]
+   \setlength{\itemsep}{30pt}
+ \item  密度是整体变量：电子自相互作用抵消不净%\quad\textrm{(LDA+U)}方法的校正%(\textrm{LDA+U})
+ \item  电子相关：简并和近简并基态能量的表示不合理
+ \item  渐近行为：处理弱相互作用体系的误差大
+ \end{enumerate}
+}
+
+\frame                               %
+{
+	\frametitle{\textrm{Kohn-Sham}方程}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.21in}
+\hspace*{-0.1in}
+\includegraphics[height=2.7in,width=4.0in,viewport=2 5 1162 880,clip]{Figures/DFT.png}
+\caption{\small \textrm{The Analysis of Kohn-Sham equation.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{DFT}
+\end{figure}
+}
+
+\section{固体能带理论}       %Bookmark
+\frame
+{
+%\frametitle{The Bloch theorem}
+\frametitle{Bloch定理}
+\begin{itemize}%[+-| alert@+>]
+   \setlength{\itemsep}{8pt}
+   \item 固体能带理论\upcite{Huang_Han}是固体电子理论的基础，形式上是单电子理论：
+    $$\hat H |\psi_i^{\vec k}(\vec r)\rangle=\bigg[-\dfrac{\hbar^2}{2m}\nabla^2+V(\vec r)\bigg]|\psi_i^{\vec k}(\vec r)\rangle=\epsilon_i(\vec k)|\psi_i^{\vec k}(\vec r)\rangle$$
+  \item \textrm{Bloch}定理:
+%   \item \textrm{periodic potential:} $$V(\vec r)=V(\vec r+\vec R_n)$$
+%     \textrm{Here,} $\vec R_n=n\vec R$
+%   \item \textrm{Bloch theorem:}$$\psi_{\vec k}(\vec r)=\textrm{e}^{\textrm i\vec k\cdot\vec r}u_{\vec k}(\vec r)$$
+%     \textrm{Here, $u_{\vec k}(\vec r)$ is a periodic function with the same periodicity as $V(\vec r)$, i.e., $u_{\vec k}(\vec r)=u_{\vec k}(\vec r+\vec R_n)$, then Bloch theorem could reads as:}
+%     $$\psi_{\vec k}(\vec r+\vec R_n)=\textrm{e}^{\textrm i\vec k\cdot\vec R_n}\psi_{\vec k}(\vec r)$$
+具有平移周期性的理想晶体，势能$V(\vec r)$满足$$V(\vec r)=V(\vec r+\vec R_n)$$
+体系的波函数满足\textrm{Bloch}波函数形式:$$\psi_{\vec k}(\vec r)=\textrm{e}^{i\vec k\cdot\vec r}u_{\vec k}(\vec r)$$
+是平面波和周期函数的乘积。$u(\vec r)$与势能有相同的周期。即$$u_{\vec k}(\vec r)=u_{\vec k}(\vec r+\vec R_n)$$
+  \item 能带理论相当于分子轨道理论
+%   \setlength{\itemsep}{30pt}
+\item \textrm{Bloch}函数反映了波函数在周期性势场下的变化规律。
+\end{itemize}
+}
+
+\frame
+{
+\frametitle{周期体系的波函数}
+物质的电子体系，可分为芯层分子和价层电子。芯电子能量低，受周围化学环境影响很小，基本保持原子属性；价层电子相互作用较强，对化学环境较为敏感。一般地，价电子波函数在原子间区域(\textrm{Interstitial}区)的变化平缓，在临近原子核附近区域(\textrm{Muffin-tin}球内)，会出现剧烈振荡(与芯层波函数正交)。
+\begin{figure}[h!]
+\centering
+\includegraphics[height=0.8in,width=4.in,viewport=41 433 539 546,clip]{Figures/Pseudo_wave.pdf}\\
+\includegraphics[height=0.8in,width=4.in,viewport=41 210 539 339,clip]{Figures/Pseudo_wave.pdf}
+\caption{\small \textrm{The periodic Potential and the wave functions in crystal.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Potential-Wave}
+\end{figure}
+}
+
+\frame
+{
+\frametitle{一维自由电子近似微扰}
+\begin{figure}[h!]
+\centering
+%\hspace*{-10pt}
+%\vspace*{-1.1in}
+\includegraphics[height=1.5in,width=2.5in,viewport=5 5 700 450,clip]{Figures/Band_Gap-2.png}
+%\caption{\small \textrm{The Band-structure from free-electron gas.}}%
+\label{Band-Gap-1}
+\end{figure} 
+\begin{displaymath}
+	\begin{aligned}
+		&\hat H_0=-\dfrac{\hbar^2}{2m}\dfrac{\mathrm{d}^2}{\mathrm{d}x^2}+\={V} \longrightarrow \hat H=\hat H_0+\hat H^{\prime}=-\dfrac{\hbar^2}{2m}\dfrac{\mathrm{d}^2}{\mathrm{d}x^2}+\={V}+\underline{V(x)-\={V}}\\
+		&\Psi_k^0(x)=\dfrac1{\sqrt V}\mathrm{e}^{\mathrm{i}k\cdot x} \longrightarrow \Psi_k(x)=\Psi_k^0(x)+\sum_{k^{\prime}\neq k}\dfrac{\langle k^{\prime}|\hat H^{\prime}|k\rangle}{E_k^0-E_{k^{\prime}}^0}\Psi_{k^{\prime}}^0(x)\\
+		&\hat E_k^0=-\dfrac{\hbar^2k^2}{2m}+\={V} \longrightarrow E_k=%E_k^0+E^{\prime}=
+		\dfrac{\hbar^2k^2}{2m}+\={V}+\sum_n{}^{\prime}\dfrac{|V_n|^2}{\frac{\hbar^2}{2m}[k^2-(k+2\pi\frac na)^2]}
+	\end{aligned}
+\end{displaymath}
+}
+
+\frame
+{
+\frametitle{一维自由电子简并微扰}
+在波矢$k=\pm\frac{n\pi}{a}$位置，电子能量出现简并态，必须采用简并态微扰理论处理
+\begin{figure}[h!]
+\centering
+%\hspace*{-10pt}
+%\vspace*{-1.1in}
+\includegraphics[height=1.3in,width=1.4in,viewport=0 5 420 450,clip]{Figures/Band_Gap-1.png}
+%\caption{\small \textrm{The Band-structure from free-electron gas.}}%
+\label{Band-Gap-1}
+\end{figure} 
+\begin{displaymath}
+	E_{\textcolor{red}{\pm}}=\left\{
+	\begin{aligned}
+		&T_n+\={V}\textcolor{red}{+}\Delta^2T_n\bigg(\dfrac{2T_n}{|V_n|}\textcolor{red}{+}1\bigg)\\
+		&T_n+\={V}\textcolor{red}{-}\Delta^2T_n\bigg(\dfrac{2T_n}{|V_n|}\textcolor{red}{-}1\bigg)
+	\end{aligned}\right.
+\end{displaymath}
+这里$T_n=\frac{\hbar^2}{2m}\big(\frac{n\pi}a\big)^2$
+}
+
+\frame
+{
+\frametitle{自由电子气模型}
+简并态微扰理论引起的能带裂分
+\begin{figure}[h!]
+\centering
+%\hspace*{-10pt}
+%\vspace*{-1.1in}
+\includegraphics[height=2.1in,width=3.8in,viewport=10 90 570 380,clip]{Figures/Band_Gap.pdf}
+\caption{\small \textrm{The Band-structure from free-electron gas.}}%
+\label{Band-Structure-1}
+\end{figure} 
+}
+
+\frame
+{
+\frametitle{紧束缚模型}
+从分子轨道到能带
+\begin{figure}[h!]
+\centering
+\hspace*{-0.29in}
+\vspace*{-0.1in}
+\subfigure[一维$\mathrm{H}$原子链]{
+\label{fig:Hydrogen-1D}
+\includegraphics[height=0.25in,width=1.1in,viewport=70 255 570 375,clip]{Figures/Hydrogen-1D.pdf}}
+\subfigure[$\mathrm{H}_n$分子轨道]{
+\label{fig:Hydrogen-2-n}
+\includegraphics[height=0.8in,width=1.5in,viewport=30 140 545 480,clip]{Figures/Hydrogen-Mol-Orbital.pdf}}
+\subfigure[分子波函数]{
+\label{fig:Hydrogen-Psi}
+\vspace*{-0.2in}
+\includegraphics[height=0.5in,width=1.4in,viewport=25 218 595 440,clip]{Figures/Hydrogen-Psi.pdf}}\\
+\subfigure[分子轨道与能带]{
+\label{fig:Hydrogen-Band-1D}
+\includegraphics[height=0.6in,width=1.4in,viewport=35 215 575 450,clip]{Figures/Hydrogen-Band-1D.pdf}}
+\subfigure[$d$\,轨道]{
+\label{fig:Hydrogen-d-Band-1D}
+\includegraphics[height=1.0in,width=0.7in,viewport=40 45 330 535,clip]{Figures/Hydrogen-d-Band-1D.pdf}}
+\caption{\small \textrm{The Band-structure from Molecular-orbital.}}%
+\label{Band-Structure-1}
+\end{figure} 
+}
+
+\subsection{能带、k-空间与~Fermi~面}
+\frame
+{
+	\frametitle{$\vec k$~空间布点与\textrm{Fermi~}面的确定}
+\begin{figure}[h!]
+\centering
+%\hspace*{-10pt}
+\vspace*{-0.3in}
+\includegraphics[height=1.5in,width=4.1in,viewport=0 5 1400 500,clip]{Figures/Brillouin-Band.png}
+\caption{\small \textrm{The relation between unfolded-Band and the Brillouin-zone.}}%
+\label{Brillouin-Band}
+\end{figure} 
+周期体系的\textrm{Fermi~}能级和\textrm{Fermi~}面的确定:\\
+\begin{dislaymath}
+	\left\{
+	\begin{aligned}
+		&\mbox{\textcolor{red}{导体:~}}&\mbox{\textcolor{blue}{价电子在\textrm{Brillouin-zone~}部分填充}}\\
+		&\mbox{\textcolor{red}{半导体-绝缘体:~}}&\mbox{\textcolor{blue}{价电子在\textrm{Brillouin-zone~}完全填充}}
+	\end{aligned}\right.
+\end{dislaymath}
+}
+
+\frame
+{
+	\frametitle{简单立方体系的\textrm{Brillouin}区与能带}
+\vspace{10pt}
+\begin{figure}[h!]
+\centering
+\hspace*{-0.28in}
+\subfigure[\textrm{Brillouin Zone of Cubic lattice}]{
+\label{Brillouin_Zone_Cubic}
+\includegraphics[height=2.1in,width=2.0in,viewport=90 0 550 500,clip]{Figures/Brillouin-Zone_CUB.png}}
+\subfigure[\textrm{Band Structure of SrSnO$_3$}]{
+\label{Band_Gap_SrSnO3}
+\vspace*{-1.00in}
+\includegraphics[height=2.10in,width=1.75in,viewport=0 0 710 550,clip]{Figures/Band-Struct_SrSnO3.png}}
+\label{Band_Gap_CUB_SrSnO3}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{面心立方体系的\textrm{Brillouin}区与能带}
+\vspace{10pt}
+\begin{figure}[h!]
+\centering
+\hspace*{-0.30in}
+\subfigure[\textrm{Brillouin Zone of FCC lattice}]{
+\label{Brillouin_Zone_FCC}
+\includegraphics[height=1.9in,width=1.8in,viewport=75 0 560 520,clip]{Figures/Brillouin-Zone_FCC.png}}
+\subfigure[\textrm{Band structure of CdS}]{
+\label{Band_Gap_CdS}
+\includegraphics[height=2.10in,width=1.75in,viewport=0 0 580 550,clip]{Figures/Band-Struct_CdS.png}}
+\label{Band_Gap_FCC_CdS}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{体心立方体系的\textrm{Brillouin}区与能带}
+\vspace{10pt}
+\begin{figure}[h!]
+\centering
+\hspace*{-0.30in}
+\subfigure[\textrm{Brillouin Zone of BCC lattice}]{
+\label{Brillouin_Zone_BCC}
+\includegraphics[height=2.1in,width=1.9in,viewport=80 0 550 520,clip]{Figures/Brillouin-Zone_BCC.png}}
+\subfigure[\textrm{Band structure of GeF$_4$}]{
+\label{Band_Gap_GeF4}
+\includegraphics[height=2.10in,width=1.75in,viewport=0 0 580 550,clip]{Figures/Band-Struct_GeF4.png}}
+\label{Band_Gap_BCC_GeF4}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{$\vec k$~空间布点与\textrm{Fermi~}面的确定}
+\begin{figure}[h!]
+\centering
+%\hspace*{-10pt}
+\vspace*{-0.3in}
+\includegraphics[height=1.3in,width=1.4in,viewport=0 0 110 100,clip]{Figures/FS-Li.jpg}
+\includegraphics[height=1.3in,width=1.4in,viewport=0 0 110 100,clip]{Figures/FS-Mg.jpg}
+\includegraphics[height=1.3in,width=1.4in,viewport=0 0 110 100,clip]{Figures/FS-Cu.jpg}
+\caption{\small \textrm{The Fermi-surface of Li, Mg, Cu in the first Brillouin-zone.}}%
+\label{Brillouin-Band}
+\end{figure} 
+\textcolor{blue}{\textrm{Fermi~}面的形状}:\\
+\textcolor{red}{最高占据能带折叠到第一\textrm{Brillouin-zone~}围成的区域}
+
+\vspace{10pt}
+要确定\textrm{Fermi~}面的精细结构，\underline{\textcolor{red}{特别是对于金属和导体体系}}，必须在整个\textrm{Brillouin-zone~}取足够多的采样点
+}
+
+\frame
+{
+\frametitle{$\vec k$~空间积分与物理量}
+与\textrm{Fermi~}面的确定类似，周期体系中所有单粒子期望值可表示为整个\textrm{Brillouin-zone~}内占据态的矩阵元的积分\\
+
+一般地，如果已知\textrm{Brillouin-zone~}某点$\vec k$~的能带指标为$n$的波函数本征态$\Psi_n(\vec k)$~和本征值$\epsilon_n(\vec k)$，算符$\mathbf{X}$~的期望值$\langle X \rangle$是矩阵元
+\begin{displaymath}
+	X_n(\vec k)=\langle\Psi_n(\vec k)|\mathbf{X}|\Psi_n(\vec k)\rangle 
+\end{displaymath}
+\textcolor{blue}{在倒空间全部占据能带的求和}
+\begin{displaymath}
+	\langle X\rangle=\dfrac1{\sqrt V_G}\sum_n\int_{V_G}\mathrm{d}^3kX_n(\vec k)f(\varepsilon_n(\vec k))
+\end{displaymath}
+其中$V_G$是第一\textrm{Brillouin-zone}体积，$f(\varepsilon)$~是占据分布函数
+
+实际计算中，\textrm{Brillouin-zone~}的$\vec k$~点数是有限的
+\begin{displaymath}
+	\langle X\rangle=\sum_{j,n}X_n(\vec k_j)w_n^{\vec k_j}
+\end{displaymath} 
+\textcolor{blue}{$\vec k$~点数目决定了电子结构和物理量的的精度与计算量}
+}
+
+\frame
+{
+\frametitle{$\vec k$~空间布点方案}
+\begin{enumerate}
+	\item \textcolor{red}{简单分布函数}\\
+		\begin{itemize}
+			\item 
+				\begin{figure}[h!]
+					\begin{minipage}[t]{0.40\linewidth}
+						\textrm{Fermi-Dirac~}分布函数$$f(\varepsilon)=\dfrac1{\mathrm{e}^{(\varepsilon-\mu)/kT}+1}$$ 
+						其中$\mu$是化学势，$k$~是\textrm{Boltzmann}常数，$T$是温度参数
+					\end{minipage}
+				\hfill
+					\begin{minipage}[t]{0.55\linewidth}
+					\centering
+					\vspace*{-0.35in}
+					\hspace*{-0.5in}
+					\includegraphics[height=1.0in,width=1.25in,viewport=0 0 530 500,clip]{Figures/Fermi-Dirac-distribution.jpg}
+					\caption{\textrm{The Fermi-Dirac Distribution.}}%
+					\label{Fermi-Dirac-distribution}
+					\end{minipage}
+					%\hspace*{-10pt}
+				\end{figure} 
+			\item 
+				\begin{figure}[h!]
+					\begin{minipage}[t]{0.40\linewidth}
+						\textrm{Gaussian~}分布函数$$f(\varepsilon)=\dfrac1{\sigma\sqrt{2\pi}}\mathrm{e}^{-\frac{(\varepsilon-\mu)^2}{2\sigma^2}}$$
+						其中$\mu$是化学势，$\sigma$是展宽参数
+					\end{minipage}
+				\hfill
+					\begin{minipage}[t]{0.55\linewidth}
+					\centering
+					\vspace*{-0.35in}
+					\hspace*{-0.5in}
+					\includegraphics[height=1.0in,width=1.25in,viewport=0 0 530 500,clip]{Figures/Gaussian-distribution.jpg}
+					\caption{\small \textrm{The Gaussian Distribution.}}%
+					\label{Gaussian-distribution}
+					\end{minipage}
+					%\hspace*{-10pt}
+				\end{figure} 
+%			\item \textrm{Lorentz~}分布函数$$L(x)=\frac1{\pi}\frac{\frac12\Gamma}{(x-x_0)^2+\left(\frac12\Gamma\right)^2}$$
+%				这里$x_0$是中心，$\Gamma$是展宽参数
+		\end{itemize}
+\end{enumerate}
+}
+
+\frame
+{
+\frametitle{$\vec k$~空间布点方案}
+\begin{enumerate}
+	\setcounter{enumi}{1}
+\setlength{\itemsep}{10pt}
+	\item \textcolor{red}{特殊点方法\textrm{(Special-point scheme)}}\\这是一种相对高效的积分方法，通过选取少量有代表性的$\vec k$~点，即可获得较高的计算精度，这些$\vec k$~点被称为“平均值点”或“特殊点”\\特殊点方法对导体的收敛性较差
+	\item \textcolor{red}{四面体方法\textrm{(Tetrahedron schemen)}}\\这是一种线性插值方法，将\textrm{Brillouin-zone~}用体积相等的四面体填充，在每个四面体内部，被积函数$X_n(\vec k_j)$和能量$\varepsilon_n^{\vec k_j}$都随$\vec k$~点线性变化\\一般来说，四面体方法对金属和导体的\textrm{Fermi~}面确定更可靠
+\end{enumerate}
+\textcolor{blue}{如何方便地确定每个$\vec k$~点的积分权重$w_n^{\vec k_i}$，精确、高效地完成\textrm{Brillouin-zone~}积分是$\vec k$~空间布点方案的主要研究内容}
+}
+
+\frame
+{
+%\frametitle{The methods on band structure calculation}
+\frametitle{固体能带计算方法}
+%\vskip 10pt
+%\textrm{The mainly difference of all these methods below: the basis sets and the construction of the potential}
+\vskip 10pt
+常用的计算方法
+\begin{itemize}%[+-| alert@+>]
+%\begin{enumerate}%[+-| alert@+>]
+\setlength{\itemsep}{12pt}
+%  \item \textrm{Plane wave and the pseudo-potential}
+	\item	平面波方法
+	\item	正交平面波\textrm{(The orthogonalized plane wave, OPW)}和赝势\textrm{(Pseudo-potential, PP)}方法\upcite{Singh_Book,PRB41-7892_1990,JPCM6-8245_1994}
+	\item	缀加平面波\textrm{(Augmented plane wave, APW)}方法
+	\item	\textrm{MT}轨道\textrm{(Muffin-tin orbitals, MTO)}方法
+	\item	投影子缀加波\textrm{(Projector Augmented Wave, PAW)}方法\upcite{PRB50-17953_1994,PRB59-1758_1999}
+\end{itemize}
+\vskip 5pt 各种方法的\textcolor{red}{主要区别}:~\textcolor{blue}{势函数的处理}与\textcolor{blue}{所选基函数类型}不同
+}
+
+\frame
+{
+	\frametitle{\textrm{DFT-SCF}}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.25in}
+\hspace*{-0.80in}
+\includegraphics[height=2.80in,width=4.95in,viewport=5 3 1490 870,clip]{Figures/DFT-SCF_2.png}
+%\caption{\small \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Pseudo-NC}
+\end{figure}
+}
+
+\section{赝势理论与\rm{PAW}方法}       %Bookmark
+%\section{Induction on DFT and solid-state physics}       %Bookmark
+\subsection{赝势发展概述}       %Bookmark
+\frame
+{
+%\frametitle{The methods on band structure calculation}
+\frametitle{由OPW到赝势}
+%\vskip 10pt
+%\textrm{The mainly difference of all these methods below: the basis sets and the construction of the potential}
+\begin{itemize}
+\setlength{\itemsep}{5pt}
+	\item 完全平面波基组:~少数平面波就可以很好地描述波函数在原子间的行为，近核波函数则需要大量平面波展开。%因此完全平面波基组虽然方便，但求体系本征态对角化的矩阵非常巨大，计算变得异常耗时。
+	\item 正交平面波(\textrm{Orthogonalized plane wave, OPW})方法，价电子用与芯层波函数正交的平面波展开
+		\begin{displaymath}
+			\phi_{OPW}^{\vec k+\vec G}(\vec r)=\phi_{PW}^{\vec k+\vec G}(\vec r)-\sum_c\langle\varphi_c|\phi_{PW}^{\vec k+\vec G}\rangle\varphi_c(\vec r)
+		\end{displaymath}
+		代入\textrm{Schr\"odinger}方程
+		$$\hat H|\phi_{PW}^{\vec k+\vec G}\rangle-\sum_c\langle\varphi_c|\phi_{PW}^{\vec k+\vec G}\rangle\hat H|\varphi_c\rangle=\varepsilon|\phi_{PW}^{\vec k+\vec G}\rangle-\varepsilon\sum_c\langle\varphi_c|\phi_{PW}^{\vec k+\vec G}\rangle|\varphi_c\rangle$$
+		可有$$\hat H|\phi_{PW}^{\vec k+\vec G}\rangle+\textcolor{blue}{V^R}|\phi_{PW}^{\vec k+\vec G}\rangle=\textcolor{blue}{\varepsilon}|\phi_{PW}^{\vec k+\vec G}\rangle$$
+%		这里排斥势是$$V^R(\vec r,\vec r^{\prime})=\sum_c(\varepsilon-\varepsilon_c)|\varphi_c(\vec r^{\prime})\rangle\langle\varphi_c(\vec r)|$$
+\end{itemize}
+}
+
+\frame
+{
+	\frametitle{由OPW到赝势}
+	\textrm{Phillips-Kleinman}指出赝势($V^{eff}$)-赝波函数($\phi_{GW}^{\vec k+\vec G}$)满足\textrm{Schr\"odinger}方程\upcite{PR116_1959}
+	$$\bigg(-\dfrac12\nabla^2+\textcolor{red}{V^{eff}}\bigg)|\phi_{GW}^{\vec k+\vec G}\rangle=\textcolor{blue}{\varepsilon}|\phi_{GW}^{\vec k+\vec G}\rangle$$
+	其中$\textcolor{red}{V^{eff}}=V(\vec r)+\textcolor{blue}{V^R}$
+	\begin{itemize}
+		\item 赝势-赝波函数的本征值$\varepsilon$与真实体系的能量本征值等价
+		\item 赝势$V^{eff}$比$V(\vec r)$平滑得多，并且$V^R$是非局域的排斥势
+			\begin{displaymath}
+				\begin{aligned}
+					V^Rf(\vec r)=&\sum_c(\varepsilon-\varepsilon_c)\varphi_c(\vec r)\int\varphi_c^{\ast}(\vec r^{\prime})f(\vec r^{\prime})\mathrm{d}\vec r^{\prime} \\
+					=&\int V^R(\vec r,\vec r^{\prime})f(\vec r^{\prime})\mathrm{d}\vec r^{\prime}
+				\end{aligned}
+			\end{displaymath}
+			这里$$V^R(\vec r,\vec r^{\prime})=\sum_c(\varepsilon-\varepsilon_c)|\varphi_c(\vec r^{\prime})\rangle\langle\varphi_c(\vec r)|$$
+	\end{itemize}
+}
+
+\frame
+{
+\frametitle{赝势方法}
+赝势(\textrm{Pseudo Potential, PP})方法是在正交平面波的基础上发展起来的，构造出平缓的势函数代替核的强吸引作用和芯层电子的排斥作用，用平缓的函数取代波函数近核时的震荡。
+\begin{itemize}
+\setlength{\itemsep}{5pt}
+	\item 赝势-平面波方法，只需要少量平面波可展开赝波函数，大大提升了计算效率；但是赝波函数不能很好地反映与电子近核行为有关的性质。
+	\item 赝势的构造并不唯一，考核构造赝势的两大指标:~\\“柔软程度”\textrm{(Soft)}与“可移植性”\textrm{(transferability)}
+\end{itemize}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.10in}
+\includegraphics[height=1.35in,width=1.42in,viewport=154 100 562 508,clip]{Figures/Pseudo.pdf}
+\includegraphics[height=1.35in,width=2.57in,viewport=1 1 980 500,clip]{Figures/Pseudo-2.png}
+\caption{\small \textrm{The Pseudo wave function and Pseudo potential.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Pseudo_Potential-Wave}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{传统赝势的构造}
+	直接由实验数据来确定(模型)赝势，常用的实验数据包括离子对电子的散射角度、离子的光谱实验数据等
+		\begin{itemize}
+			\item 构造离子赝势:~可移植性好
+			\item 构造总赝势(包括全部价电子相互作用):~常用于能带描述
+		\end{itemize}
+%	\begin{itemize}
+%		\item 在指定能量范围内，离子对电子散射的散射角
+%		\item 离子的光谱实验数据
+%	\end{itemize}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.10in}
+\includegraphics[height=1.60in,width=2.57in,viewport=0 0 980 600,clip]{Figures/Pseudo-model-empty_core.png}
+\caption{\small \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Pseudo_model-empty_core}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{传统赝势的构造}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.10in}
+\includegraphics[height=1.30in,width=4.17in,viewport=0 0 1150 350,clip]{Figures/Pseudo-model.png}
+\caption{\small \textrm{Left:``Empty core'' model potential of Ashcroft in which the potential is zero inside radius $R_c(l)$ which is different for each $l$. Right: Square well model potential with value $A_l$ inside a cut-off radius $R_c$, proposed by Abarenkov and Heine and fit to atomic data by Animalu and Heine. THe fact that the potential are weak, zero, or even positive inside cut-off radius $R_c$ is an illustration of the ``cancellation theorem''.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Pseudo-model}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{第一原理赝势}
+		由第一原理求解出全电子波函数(径向部分)$P_{n,l}(r)$
+			\begin{displaymath}
+				\bigg[-\dfrac12\dfrac{\mathrm{d}^2}{\mathrm{d}r^2}+\dfrac{l(l+1)}{2r^2}+V(\rho,r)\bigg]P_{n,l}(r)=\varepsilon_{n,l}P_{n,l}(r)
+			\end{displaymath}
+			这里$V(\rho,r)$是自洽单电子势
+			$$V(\rho,r)=-\frac{Z}r+V_{\mathrm H}(\rho,r)+V_{XC}^{\mathrm{LDA}}(\rho(r))$$
+			$V_{\mathrm H}(\rho,r)$是\textrm{Hartree}势，$V_{XC}^{\mathrm{LDA}}(\rho(r))$是交换-相关势
+
+			由此构造赝波函数$P_l^{\mathrm{PP}}(r)$，满足
+			$$P_l^{\mathrm{PP}}(r)=P_l^{\mathrm{AE}}(r),\quad r>r_{cl}$$
+			进而构造赝势$V_{\mathrm{src},l}^{\mathrm{PP}}(r)$
+			$$V_{\mathrm{src},l}^{\mathrm{PP}}(r)=\varepsilon_l-\dfrac{l(l+2)}{2r^2}+\dfrac{1}{2P_l^{\mathrm{PP}}(r)}\dfrac{\mathrm{d}^2}{\mathrm{d}r^2}P_l^{\mathrm{AE}}(r),\quad r>r_{cl}$$
+}
+
+\frame
+{
+	\frametitle{模守恒\textrm{(Norm-conserving)}条件}
+%	构造赝势确定参数的边界(构造条件)
+	\begin{enumerate}
+		\item 价电子赝波函数的能量本征值与对应全电子波函数能量本征值相等:~$\varepsilon_l^{\mathrm{PP}}=\varepsilon_l^{\mathrm{AE}}$
+		\item 价电子赝波函数与真实电子波函数的径向部分在截断半径$r_{c,l}$外相同:~$\psi_l^{\mathrm{PP}}(r)=\psi_l^{\mathrm{AE}}(r),\quad r>r_{cl}$
+		\item 价电子赝波函数与真实电子波函数的对数导数在截断半径$r_{c,l}$处相等:~$D_l^{\mathrm{PP}}(r)=D_l^{\mathrm{AE}}(r),\quad r\geqslant r_{cl}$\\
+		这里$D_l(\varepsilon,r)=r\frac{\psi_l^{\prime}(\varepsilon,r)}{\psi_l(\varepsilon,r)}=r\dfrac{\mathrm{d}}{\mathrm{d}r}\ln\psi_l(\varepsilon,r)$
+		\item 价电子赝波函数与真实电子波函数在截断半径$r_{c,l}$内的积分电荷相等(\textcolor{red}{模守恒条件})
+			$$Q_l=\int_0^{r_{cl}}\mathrm{d}rr^2|\psi_l^{\mathrm{PP}}(r)|^2=\int_0^{r_{cl}}\mathrm{d}rr^2|\psi_l^{\mathrm{AE}}(r)|^2$$
+		\item 价电子赝波函数与真实电子波函数的对数导数一阶能量导数$\mathrm{d}D_l(\varepsilon,r)/\mathrm{d}\varepsilon$在截断半径$r_{c,l}$处及以外相等
+	\end{enumerate}
+}
+
+\frame
+{
+	\frametitle{模守恒\textrm{(Norm-conserving)}条件}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.10in}
+\includegraphics[height=1.30in,width=4.17in,viewport=0 0 1150 350,clip]{Figures/Pseudo-OPW_NCPP.png}
+\caption{\small \textrm{Schematic example of a valence function that has the character of a $3s$ orbital near the nucleus and two examples of smooth functions (dashed lines) that equal the full wave-function outside the core region. Left: the smooth part of the valence function defined by OPW-like equation; Right: a smooth pseudo-function that satisfies the norm-conservation condition.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Pseudo-OPW_NCPP}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{赝势去屏蔽与非局域化}
+	第一原理赝势建立了赝波函数与对应赝势的一一对应关系，但该赝势包含了电子屏蔽(原子、离子环境)信息，去屏蔽后的赝势对环境依赖更低，“可移植性”更好
+	$$V_{\mathrm{ion},l}^{\mathrm{PP}}(r)=V_{\mathrm{src},l}^{\mathrm{PP}}(r)-V_{\mathrm{H},l}^{\mathrm{PP}}(r)-V_{XC,l}^{\mathrm{PP}}(r)$$
+	去屏蔽过程中，特别需要注意$V_{XC,l}^{\mathrm{PP}}(r)$的处理
+	$$V_{XC}^{\mathrm{PP}}(r)=V_{XC}^{\mathrm{PP}}([n^{\mathrm{PP}}],r)+\big[V_{XC,l}^{\mathrm{PP}}([n^{\mathrm{PP}}+n^{core}],r)-V_{XC}^{\mathrm{PP}}([n^{\mathrm{PP}}],r)\big]$$
+	如果定义函数
+	$$\chi_{lm}^{\mathrm{PP}}(\vec r)=\bigg\{\varepsilon_l-\bigg[-\dfrac12\nabla^2+V_{local}^{\mathrm{PP}}(\vec r)\bigg]\bigg\}\psi_{lm}^{\mathrm{PP}}(\vec r)$$
+	赝势可以分解为局域部分与非局域部分之和
+	$$V_{NL}^{\mathrm{PP}}(r)=V_{local}^{\mathrm{PP}}(r)+\dfrac{|\chi_{lm}^{\mathrm{PP}}\rangle\langle\chi_{lm}^{\mathrm{PP}}|}{\langle\chi_{lm}^{\mathrm{PP}}|\psi_{lm}^{\mathrm{PP}}\rangle}=V_{local}^{\mathrm{PP}}(r)+\sum_{lm}\dfrac{|\psi_{lm}^{\mathrm{PP}}\delta V_l\rangle\langle\delta V_l\psi_{lm}^{\mathrm{PP}}|}{\langle\psi_{lm}^{\mathrm{PP}}|\delta V_l|\psi_{lm}^{\mathrm{PP}}\rangle}$$
+}
+
+\frame
+{
+	\frametitle{模守恒赝势构造流程}
+\begin{figure}[h!]
+\centering
+%\vspace*{-0.10in}
+\includegraphics[height=2.70in,width=3.77in,viewport=70 40 900 610,clip]{Figures/Pseudo-NC.jpg}
+%\caption{\small \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Pseudo-NC}
+\end{figure}
+}
+
+\frame
+{
+\frametitle{超软赝势}
+\begin{itemize}
+\setlength{\itemsep}{5pt}
+	\item 赝势构造的模守恒条件
+%		\begin{displaymath}
+%			\int_0^{r_c}\mathrm{d}\vec r\varphi^{\ast PS}(\vec r)\varphi^{PS}(\vec r)=\int_0^{r_c}\mathrm{d}\vec r\varphi^{\ast}(\vec r)\varphi(\vec r)
+%		\end{displaymath}
+	很好地解决了赝势可移植性问题，但对$1s$、$2p$、$3d$等轨道，模守恒方案构造的赝势过于“硬”，所需平面波基组依然非常大
+	\item 超软\textrm{(Ultra-soft)}赝势，解除模守恒条件，实现对第一、第二周期元素的高效计算
+\end{itemize}
+\begin{figure}[h!]
+\vspace*{-0.10in}
+\centering
+\includegraphics[height=1.35in,width=1.40in,viewport=30 55 415 500,clip]{Figures/Norm-US-wave.pdf}
+\caption{\small \textrm{Oxygen 2} \textit{p} \textrm{radical wave function (solid), NC-pseudo-wave (dottde) and US-pseudo-wave (dashed).}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Norm-US-wave}
+\end{figure}
+}
+
+\frame
+{
+\frametitle{超软赝势的构造}
+超软赝势在平缓的局域势函数$V^L(\vec r)$和赝波函数$|\phi_{lmj}(\vec r)\rangle$的基础上，构造函数
+\begin{displaymath}
+	|\chi_{lmj}(\vec r)\rangle=\bigg[\varepsilon_{lj}-\dfrac12\nabla^2-V^L(\vec r)\bigg]|\phi_{lmj}(\vec r)\rangle
+\end{displaymath}
+在此基础上得到矩阵$\mathbf{D}_{ij}=\langle\phi_i|\chi_j\rangle$和局域函数
+\begin{displaymath}
+	|\beta_i\rangle=\sum_j(\mathbf{D}^{-1})_{ji}|\chi_{j}\rangle
+\end{displaymath}
+因此非局域赝势可以表示为
+\begin{displaymath}
+	V_{NL}=\dfrac{|\chi_i\rangle\langle\chi_i|}{\langle\chi_i|\phi_i\rangle}=\sum_{i,j}\mathbf{D}_{ij}|\beta_i\rangle\langle\beta_j|
+\end{displaymath}
+用平缓函数构造赝波函数与真实波函数的电荷密度差
+\begin{displaymath}
+	Q_{nm}(\vec r)=\varphi_n^{\ast}(\vec r)\varphi_m(\vec r)-\tilde\varphi_n^{\ast}(\vec r)\tilde\varphi_m(\vec r)
+\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{超软赝势总能量计算}
+	\begin{displaymath}
+		\begin{aligned}
+			E_{\mathrm{total}}=&\sum_j^{\mathrm{occ}}\langle\phi_{lmj}|\bigg[-\dfrac12\nabla^2+V_{\mathrm{local}}^{\mathrm{ion}}+\sum_{s,s^{\prime}}\mathbf{D}_{s,s^{\prime}}^{\mathrm{ion}}|\beta_s\rangle\langle\beta_{s^{\prime}}|\bigg]|\phi_{lmj}\rangle\\
+			&+E_{H}[n_v]+E_{N-N}+E_{XC}[n_v]
+		\end{aligned}
+	\end{displaymath}
+	其中$n_v(\vec r)=\sum\limits_j^{\mathrm{occ}}\phi_{lmj}^{\ast}(\vec r)\phi_{lmj}(\vec r)+\sum\limits_{s,s^{\prime}}\sum\limits_j^{\mathrm{occ}}\langle\phi_{lmj}|\beta_{s^{\prime}}\rangle\langle\beta_s|\phi_{lmj}\rangle Q_{s,s^{\prime}}(\vec r)$
+	$$V_{\mathrm{local}}^{\mathrm{ion}}=V_{local}-V_{\mathrm H}-V_{XC}$$
+	$$\mathbf{D}_{s,s^{\prime}}^{\mathrm{ion}}=\mathbf{D}_{s,s^{\prime}}-\int\mathrm{d}\vec r\big[V_{\mathrm{H}}(\vec r)+V_{XC}(\vec r)\big]Q_{s,s^{\prime}}(r)$$
+	由此可得广义本征值方程
+	$$\bigg[-\dfrac12\nabla^2+V_{\mathrm{local}}+V_{NL}^{\mathrm{US}}-\varepsilon_i\bigg(\mathbf{1}+\sum_{s,s^{\prime}}Q_{s,s^{\prime}}|\beta_s\rangle\langle\beta_{s^{\prime}}|\bigg)\bigg]|\phi_{lmi}\rangle=0$$
+}
+
+\subsection{基态总能量表达式}
+\frame
+{
+	\frametitle{晶体总能量的一般表示}
+采用赝势方法计算的晶体总能量$E_T$由晶格中的电子能量$E_{e-e}$与离子实排斥能$E_{N-N}$之和：
+	\begin{displaymath}
+		E_T=E_{e-e}+E_{N-N}=T[\rho]+E_{ext}+E_{\mathrm{Coul}}+E_{\mathrm{XC}}+E_{N-N}
+	\end{displaymath}
+根据\textrm{Kohn-Sham}方程，其中动能泛函用单电子能量表示为
+\begin{displaymath}
+	T{\rho}=\sum_in_i\langle\psi_i|\varepsilon_i-V_{\mathrm{KS}}|\psi_i\rangle
+\end{displaymath}
+$n_i$是$\psi_i$上的电子占据数，$\varepsilon_i$是其能量本征值，因此有
+\begin{displaymath}
+	\hspace*{-12.0pt}	E_T=\sum_in_i\varepsilon_i-\dfrac12\int\int\mathrm{d}\vec r\mathrm{d}\vec r\dfrac{\rho(\vec r)\rho(\vec r^{\prime})}{|\vec r-\vec r^{\prime}|}+\int\mathrm{d}\vec r\rho(\vec r)[\epsilon_{\mathrm{XC}}(\vec r)-V_{\mathrm{XC}}(\vec r)]+E_{N-N}
+\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{晶体总能量倒空间的表示}
+周期体系的总能量表达式在动量空间($\vec K$空间)计算更方便
+\begin{displaymath}
+	\hspace*{-18.0pt}	E_T=\sum_in_i\varepsilon_i-\dfrac{\Omega}2\sum_{\vec k\neq 0}\rho^{\ast}(\vec k)V_{\mathrm{Coul}}(\vec k)+\Omega\sum_{\vec k}\rho^{\ast}(\vec k)[\epsilon_{\mathrm{XC}}(\vec k)-V_{\mathrm{XC}}(\vec k)]+E_{N-N}
+\end{displaymath}
+其中$V_{\mathrm{Coul}}(\vec k)$、$\epsilon_{\mathrm{XC}}(\vec k)$与$\rho^{\ast}(\vec k)$分别是\textrm{Coulomb}相互作用、单个电子的交换-相关能、交换-相关势和电子密度的\textrm{Fourier}分量。
+
+由\textrm{Poisson}方程
+\begin{displaymath}
+	\nabla^2V_{\mathrm{Coul}}(\vec r)=-4\pi\rho(\vec r)
+\end{displaymath}
+的\textrm{Fourier}展开有
+\begin{displaymath}
+	V_{\mathrm{Coul}}(\vec k)=\dfrac{4\pi\rho^{\ast}(\vec k)}{|\vec k|^2}
+\end{displaymath}
+交换-相关势和交换-相关能的计算一般先在实空间计算$\epsilon_{\mathrm{XC}}(\vec r)$和$V_{\mathrm{XC}}(\vec r)$后，再通过\textrm{Fourier}变换到动量空间，得到$\epsilon_{\mathrm{XC}}(\vec k)$和$V_{\mathrm{XC}}(\vec k)$
+}
+
+\frame
+{
+	\frametitle{晶体离子相互作用的计算}
+	离子间\textrm{Coulomb}相互作用能之和
+	\begin{displaymath}
+		E_{N-N}=\dfrac12\sum_{\vec R,s}\sideset{}{^{\prime}}\sum_{\vec R^{\prime},\vec s^{\prime}}\dfrac{Z_sZ_{s^{\prime}}}{|\vec R+\vec r_s-\vec R^{\prime}-\vec r_s^{\prime}|}
+	\end{displaymath}
+	这里$Z_s$是离子实的电荷数，$\vec R$表示晶格点的位矢，$\vec r_s$代表元胞内原子的相对位矢。
+
+	\textcolor{red}{\textbf{注意}}：$E_{N-N}$求和包含无穷多项，是发散的；$V_{\mathrm{Coul}}(\vec k=0)$是发散的。
+	
+	$V_{ext}$在不存在其他外场时，一般只考虑离子-电子的\textrm{Coulomb}相互作用，
+	\begin{displaymath}
+		\begin{aligned}
+			V_{ext}(\vec r)&=\sum_{\vec R,s}\dfrac{-Z_s}{|\vec r-\vec R-\vec r_s|}\\
+			&\equiv\sum_{\vec R,s}v_{ext}^s(\vec r-\vec R-\vec r_s)
+		\end{aligned}
+	\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{晶体总能量计算的奇点排除}
+	$V_{ext}$的\textrm{Fourier}分量在$\vec k=0$\textcolor{red}{也是发散的}。这三项单独都是发散的，但因为整个体系出于电中性，所以这些发散项相互抵消，是一个常数。
+
+	因此求解\textrm{Kohn-Sham}方程时，先将$V_{\mathrm{Coul}}(\vec k=0)$和$V_{ext}(\vec k=0)$同时置为零，这相当于\textcolor{red}{将势能作一平移，或者说重新定义势能零点，而在总能量计算中补偿这一平移。}
+
+	发散项之和为：
+	\begin{displaymath}
+		\begin{aligned}
+			\lim_{\vec k\rightarrow0}\Omega&\bigg[\dfrac12V_{\mathrm{Coul}}(\vec k)+\sum_sv_{ext}^s(\vec k)\bigg]\rho^{\ast}(\vec k)+\dfrac12\sum_{\vec R,s}\sideset{}{^{\prime}}\sum_{\vec R^{\prime},\vec s^{\prime}}\dfrac{Z_sZ_{s^{\prime}}}{|\vec R+\vec r_s-\vec R^{\prime}-\vec r_s^{\prime}|}\\
+			=&\sum_s\alpha_s\sum_sZ_s+E_{\mathrm{Ewald}}
+		\end{aligned}
+	\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{发散项的处理}
+	对于形如$Z_s/r$的外场，其\textrm{Fourier}分量在$\vec k=0$附近展开
+	\begin{displaymath}
+		v_{ext}^s(\vec k)=-\dfrac{4\pi Z_s}{\Omega|\vec k|^2}+\alpha_s+O(\vec k)； 
+	\end{displaymath}
+	展开$\rho^{\ast}(\vec k)$，有
+	\begin{displaymath}
+		\lim_{\vec k\rightarrow 0}\rho^{\ast}(\vec k)=\dfrac{\sum_sZ_s}{\Omega}+\beta|\vec k|^2+O(\vec k)
+	\end{displaymath}
+去掉高次项，有
+\begin{displaymath}
+	\begin{aligned}
+		\lim_{\vec k\rightarrow 0}&\bigg[\dfrac{\Omega}2\dfrac{4\pi[\rho^{\ast}(\vec k)]^2}{|\vec k|^2}+\Omega\bigg(-\dfrac{4\pi\sum_sZ_s}{\Omega|\vec k|^2}+\sum_s\alpha_s\bigg)\rho^{\ast}(\vec k)+\dfrac12\dfrac{8\pi(\sum_sZ_s)^2}{\Omega|\vec k|^2}\bigg]\\
+		&+\dfrac12\sum_{\vec R,s}\sideset{}{^{\prime}}\sum_{\vec R^{\prime},\vec s^{\prime}}\dfrac{Z_sZ_{s^{\prime}}}{|\vec R+\vec r_s-\vec R^{\prime}-\vec r_{s^{\prime}}|}-\lim_{\vec k\rightarrow0}\dfrac12\dfrac{4\pi(\sum_sZ_s)^2}{\Omega|\vec k|^2}\\
+		=&\sum_s\alpha_s\sum_sZ_s+E_{\mathrm{Ewald}}
+	\end{aligned}
+\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{离子间相互作用的\textrm{Ewald}求和}
+	\begin{displaymath}
+		\begin{aligned}
+			E_{\textrm{Ewald}}=&\dfrac12\sum_{\vec R,s}\sideset{}{^{\prime}}\sum_{\vec R^{\prime},\vec s^{\prime}}\dfrac{Z_sZ_{s^{\prime}}}{|\vec R+\vec r_s-\vec R^{\prime}-\vec r_{s^{\prime}}|}-\lim_{\vec k\rightarrow0}\dfrac12\times\dfrac{4\pi(\sum_sZ_s)^2}{\Omega|\vec k|^2}\\
+			=&\dfrac12\sum_{\vec R,s}\sideset{}{^{\prime}}\sum_{\vec R^{\prime},\vec s^{\prime}}\dfrac{Z_sZ_{s^{\prime}}}{|\vec R+\vec r_s-\vec R^{\prime}-\vec r_{s^{\prime}}|}-\dfrac1{2\Omega}\sum_{s,s^{\prime}}\int\mathrm{d}\vec r\dfrac{Z_sZ_{s^{\prime}}}r\\
+			=&\sum_{s,s^{\prime}}Z_sZ_{s^{\prime}}\bigg\{\dfrac{2\pi}{\Omega}\sum_{\vec k\neq 0}\cos[\vec k\cdot(\vec r_s-\vec r_{s^{\prime}})]\dfrac{\mathrm{e}^{-|\vec k|^2/4\eta^2}}{|\vec k|^2}\\
+			&-\dfrac{\pi}{2\eta^2\Omega}+\dfrac14\sum_{\vec R}\dfrac{\mathrm{erf}(\eta x)}x\bigg|_{\vec R+\vec r_s-\vec r_s^{\prime}\neq0}-\dfrac{\eta}{\sqrt{\pi}}\delta_{s,s^{\prime}}\bigg\}
+		\end{aligned}
+	\end{displaymath}
+	$\mathrm{erf}(x)$是误差函数，$\eta$原则上是任意参数。$\alpha_s$由$v_{ext}^s(\vec r)$确定：
+	\begin{displaymath}
+		\alpha_s=\lim_{\vec k\rightarrow0}\bigg[v_{ext}^s(\vec k)+\dfrac{4\pi Z_s}{\Omega|\vec k|^2}\bigg]=\dfrac1{\Omega}\int\mathrm{d}\vec r\bigg[v_{ext}^s(\vec r)+\dfrac{Z_s}r\bigg]
+	\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{总能量表达式}
+由此得到的总能量表达式是
+\begin{displaymath}
+	\begin{aligned}
+		E_T=&\sum_i\varepsilon_i-\dfrac{\Omega}2\sum_{\vec k\neq0}\rho^{\ast}(\vec k)V_{\mathrm{Coul}}(\vec k)\\
+		&+\Omega\sum_{\vec k}\rho^{\ast}(\vec k)[\epsilon_{\mathrm{XC}}(\vec k)-V_{\mathrm{XC}}(\vec k)]\\
+		&+\sum_s\alpha_s\sum_sZ_s+E_{\mathrm{Ewald}}
+	\end{aligned}
+\end{displaymath}
+}
+
+\subsection{\rm{PAW}方法概要}
+\frame
+{
+	\frametitle{\textrm{PAW}方法概要}
+\begin{itemize}
+	\item 与芯层态正交的全部价电子构成的\textrm{Hilbert}空间%，价电子彼此的正交使得波函数在\textrm{Muffin-tin}球内振荡
+	\item 作\textcolor{red}{线性空间变换}，全电子波函数$|\Psi\rangle$与赝波函数$|\tilde\Psi\rangle$满足：
+		$$|\Psi\rangle=\mathbf{\tau|}\tilde\Psi\rangle$$
+%	$$\tau=\mathbf{1}+\sum_{\mathrm R}\hat\tau_{\mathrm R}$$
+	\item 在原子核附近的$r_c$范围内，波函数用原子分波函数展开：
+	$$|\Psi\rangle=|\tilde\Psi\rangle+\sum_i(|\phi_i\rangle-|\tilde\phi_i\rangle)\langle\tilde p_i|\tilde\Psi\rangle$$
+	\item 在$r_c$外$|\tilde\Psi\rangle$与$|\Psi\rangle$变换前后保持不变，因此线性变换$\mathbf{\tau}$可表示为：
+	$$\mathbf{\tau}=\mathbf{1}+\sum_i(|\phi_i\rangle-|\tilde\phi_i\rangle)\langle\tilde p_i|$$
+\end{itemize}
+其中$|\tilde p_i\rangle$是\textrm{MT}球内的投影函数\\
+$i$表示原子位置$\vec R$、原子轨道($l,m$)和能级$\epsilon_k$的指标。
+}
+
+\frame
+{
+	\frametitle{\textrm{PAW}方法的基本思想}
+	\vspace{10pt}
+\begin{figure}[h!]
+\centering
+\includegraphics[height=1.8in,width=4.in,viewport=30 210 570 440,clip]{Figures/PAW_projector.eps}
+\caption{\small \textrm{The analysis of PAW basic function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{PAW_baisc}
+\end{figure}
+}
+
+\frame
+{
+\frametitle{\textrm{PAW}方法的基本思想}
+	在赝波函数$|\tilde\Psi\rangle$表象下，算符期望值计算满足$$\langle A \rangle=\langle\Psi|\mathbf{A}|\Psi\rangle=\langle\tilde\Psi|\mathbf{\tau}^{\dag}\mathbf{A}\mathbf{\tau}|\tilde\Psi\rangle=\langle\tilde\Psi|\tilde{\mathrm{A}}|\tilde\Psi\rangle$$
+\begin{itemize}
+	\item 一般赝算符$\tilde A$表示为
+		$$\tilde A=\mathbf{A}+\sum_i|\tilde p_i\rangle(\langle\phi_i|\mathbf{A}|\phi_i\rangle-\langle\tilde\phi_i|\mathbf{A}|\tilde\phi_i\rangle)\langle\tilde p_i|$$
+	\item 赝重叠算符$\tilde O$表示为
+		$$\tilde O=\mathbf{1}+\sum_i|\tilde p_i\rangle(\langle\phi_i|\phi_i\rangle-\langle\tilde\phi_i|\tilde\phi_i\rangle)\langle\tilde p_i|$$
+\end{itemize}
+}
+
+\frame
+{
+\frametitle{\textrm{PAW}方法密度计算}
+在\textrm{PAW}框架下，将密度算符$|\vec r\rangle\langle\vec r|$代入，可知密度表达式为
+$$n(\vec r)=\tilde n(\vec r)+n^1(\vec r)-\tilde n^1(\vec r)$$
+这里
+$$\tilde n(\vec r)=\sum_nf_n\langle\tilde\Psi_n|\vec r\rangle\langle\vec r|\tilde\Psi_n\rangle$$ 
+$$n^1(\vec r)=\sum_{n,(i,j)}f_n\langle\tilde\Psi_n|\tilde p_i\rangle\langle\phi_i|\vec r\rangle\langle\vec r|\phi_j\rangle\langle\tilde p_j|\tilde\Psi_n\rangle$$
+$$\tilde n^1(\vec r)=\sum_{n,(i,j)}f_n\langle\tilde\Psi_n|\tilde p_i\rangle\langle\tilde\phi_i|\vec r\rangle\langle\vec r|\tilde\phi_j\rangle\langle\tilde p_j|\tilde\Psi_n\rangle$$
+}
+
+\frame
+{
+\frametitle{\textrm{PAW}方法总能量的计算}
+总能量泛函
+%\begin{displaymath}
+%	\begin{aligned}
+%		E&=\sum_nf_n\langle\Psi_n|-\dfrac12\nabla^2|\Psi_n\rangle\\
+%		 &+\dfrac12\int\mathrm{d}\vec r\int\mathrm{d}\vec r^{\prime}\dfrac{(n+n^Z)(n+n^Z)}{|\vec r-\vec r^{\prime}|}+\int\mathrm{d}\vec r n\epsilon_{\mathrm{XC}}(n)
+%	\end{aligned}
+%\end{displaymath}
+$E=\tilde E+E^1-\tilde E^1$，每一项分别表示为：
+\begin{displaymath}
+	\begin{aligned}
+		\tilde E&=\sum_nf_n\langle\tilde\Psi_n|-\dfrac12\nabla^2|\tilde\Psi_n\rangle\\
+		 &+\dfrac12\int\mathrm{d}\vec r\int\mathrm{d}\vec r^{\prime}\dfrac{(\tilde n+\hat n)(\tilde n+\hat n)}{|\vec r-\vec r^{\prime}|}+\int\mathrm{d}\vec r \tilde n\bar v+\int\mathrm{d}\vec r \tilde n\epsilon_{\mathrm{XC}}(\tilde n)
+ 	\end{aligned}
+\end{displaymath}
+\begin{displaymath}
+	\begin{aligned}
+		E^1&=\sum_{n,(i,j)}f_n\langle\tilde\Psi_n|\tilde p_i\rangle\langle\phi_i|-\dfrac12\nabla^2|\phi_j\rangle\langle\tilde p_j|\tilde\Psi_n\rangle\\
+		 &+\dfrac12\int\mathrm{d}\vec r\int\mathrm{d}\vec r^{\prime}\dfrac{(n^1+n^Z)(n^1+n^Z)}{|\vec r-\vec r^{\prime}|}+\int\mathrm{d}\vec r n^1\epsilon_{\mathrm{XC}}(n^1)
+ 	\end{aligned}
+\end{displaymath}
+\begin{displaymath}
+	\begin{aligned}
+		\tilde E^1&=\sum_{n,(i,j)}f_n\langle\tilde\Psi_n|\tilde p_i\rangle\langle\tilde\phi_i|-\dfrac12\nabla^2|\tilde\phi_j\rangle\langle\tilde p_j|\tilde\Psi_n\rangle\\
+		 &+\dfrac12\int\mathrm{d}\vec r\int\mathrm{d}\vec r^{\prime}\dfrac{(\tilde n^1+\hat n)(\tilde n^1+\hat n)}{|\vec r-\vec r^{\prime}|}+\int\mathrm{d}\vec r \tilde n^1\bar v+\int\mathrm{d}\vec r \tilde n^1\epsilon_{\mathrm{XC}}(\tilde n^1)
+ 	\end{aligned}
+\end{displaymath}
+}
+
+\section{晶格振动与声子}
+\subsection{绝热近似}
+\frame
+{
+	\frametitle{绝热近似}
+	绝热近似(\textrm{Born-Oppenheimer~}近似)下，忽略原子核动能的运动，电子的本征态(本征值$E_i\{\mathbf{R}\}$，波函数$\Psi_i(\{\mathbf{r}\}:\{\mathbf{R}\})$)中原子核坐标是$\{\mathbf{R}\}$参数
+
+	如果考虑核与电子体系，\textrm{Hamiltonian~}算符可以写成
+	\begin{displaymath}
+		\hat H=\hat T_N+\hat T_e+\hat U
+	\end{displaymath}
+	$U$是全部相互作用，可由\textcolor{blue}{电子坐标$\{\mathbf{r}\}$}和\textcolor{blue}{原子核坐标$\{\mathbf{R}\}$}表示
+
+	核与电子耦合体系的完全解是
+	\begin{displaymath}
+		\hat H\Psi_s(\{\mathbf{r},\mathbf{R}\})=E_s\Psi_s(\{\mathbf{r},\mathbf{R}\})
+	\end{displaymath}
+	这里$s=1,2,3,\cdots$
+
+	如果对于原子核位于$\{\mathbf{R}\}$的电子态是$\Psi_i(\{\mathbf{r}\}:\{\mathbf{R}\})$
+	\begin{displaymath}
+		\Psi(\{\mathbf{r},\mathbf{R}\})=\sum_i\chi_{si}(\{\mathbf{R}\})\Psi_i(\{\mathbf{r}\}:\{\mathbf{R}\})
+	\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{绝热近似}
+	包含电子-原子核耦合的$\chi_{si}(\{\mathbf{R}\})$运动方程
+	\begin{displaymath}
+		[T_N+E_i(\{\mathbf{R}\})-E_s]\chi_{si}(\{\mathbf{R}\})=-\sum_{ii^{\prime}}C_{ii^{\prime}}\chi_{si}(\{\mathbf{R}\})
+	\end{displaymath}
+	这里$T_n=-\frac12(\sum\limits_J\nabla_J^2/M_J)$，矩阵元$C_{ii^{\prime}}=A_{ii^{\prime}}+B_{ii^{\prime}}$
+	\begin{displaymath}
+		\begin{aligned}
+			A_{ii^{\prime}}(\{\mathbf{R}\})=&\sum_J\frac1{M_J}\langle\Psi_i(\{\mathbf{r}\}:\{\mathbf{R}\})|\nabla_J|\Psi_{i^{\prime}}(\{\mathbf{r}\}:\{\mathbf{R}\})\rangle\nabla_J\\
+			B_{ii^{\prime}}(\{\mathbf{R}\})=&\sum_J\frac1{2M_J}\langle\Psi_i(\{\mathbf{r}\}:\{\mathbf{R}\})|\nabla_J^2|\Psi_{i^{\prime}}(\{\mathbf{r}\}:\{\mathbf{R}\})\rangle\\
+		\end{aligned}
+	\end{displaymath}
+	这里$\langle\Psi_i(\{\mathbf{r}\}:\{\mathbf{R}\})|\hat O|\Psi_{i^{\prime}}(\{\mathbf{r}\}:\{\mathbf{R}\})\rangle$表示对电子变量$\{\mathbf{r}\}$的积分
+}
+
+\frame
+{
+	\frametitle{绝热近似}
+	绝热近似下，\textcolor{red}{将忽略矩阵$C_{ii^{\prime}}$的全部非对角元}，可有
+	\begin{itemize}
+		\item \textcolor{blue}{电子能及时响应原子核的运动}
+		\item \textcolor{blue}{电子由态$i\rightarrow i^{\prime}$的激发，不会影响原子核位置变量${\{\mathbf{R}\}}$}
+		\item $A_{ii^{\prime}}=0$(波函数归一化要求)
+		\item 核运动的势函数$U_i(\{\mathbf{R}\})=E_i(\{\mathbf{R}\})+B_{ii}(\{\mathbf{R}\})$
+	\end{itemize}
+	核运动方程运动方程
+	\begin{displaymath}
+		\left[ -\sum_J\frac1{2M_J}\nabla_J^2+U_i(\{\mathbf{R}\})-E_{ni} \right]\chi_{ni}(\{\mathbf{R}\})=0
+	\end{displaymath}
+这里$n=1,2,3,\cdots$
+
+如果忽略$B_{ii}$的贡献，即冻声子近似(\textrm{frozen phonon})或微扰方法
+}
+
+\frame
+{
+	\frametitle{电-声耦合}
+	电子-声子的来源:~\textcolor{blue}{$C_{ii^{\prime}}$的非对角元部分}
+	\begin{itemize}
+		\item $C_{ii^{\prime}}$的非对角元部分描述了\textcolor{red}{原子核运动(振动)引起电子在不同态间跃迁}
+		\item $C_{ii^{\prime}}$的非对角元部分主要来自$A_{ii^{\prime}}$
+			\begin{enumerate}
+				\item 电子波函数$\Psi_i(\{\mathbf{r}\}:\{\mathbf{R}\})$对原子核位置$\{\mathbf{Rj}\}$的梯度
+				\item 梯度算符对声子波函数$\chi_{si}(\{\mathbf{R}\})$的贡献
+			\end{enumerate}
+		\item 电子在态$i\rightarrow i^{\prime}$跃迁将会激发或吸收一个声子
+	\end{itemize}
+	线性近似下有
+	\begin{displaymath}
+		\hspace*{-15pt}
+		\langle\Psi_i(\{\mathbf{r}\}:\{\mathbf{R}\})|\nabla_J|\Psi_i^{\prime}(\{\mathbf{r}\}:\{\mathbf{R}\})\rangle=\frac{\langle\Psi_i(\{\mathbf{r}\}:\{\mathbf{R}\})|\tfrac{\nabla_V}{\nabla_{\mathbf{R}_J}}|\Psi_{i^{\prime}}(\{\mathbf{r}\}:\{\mathbf{R}\})\rangle}{E_{i^{\prime}}(\{\mathbf{R}\})-E_i(\{\mathbf{R}\})}
+	\end{displaymath}
+}
+
+\subsection{晶格振动与简谐振动}
+\frame
+{
+	\frametitle{简谐近似}
+	\begin{itemize}
+		\item 晶体中的格点表示原子的平衡位置，晶格振动是原子在格点附近的振动
+		\item 红外、Raman光谱、中子衍射谱，热容、热导，电阻、超导和电-声耦合等都与晶格振动有关
+		\item 绝热近似(\textrm{Born-Oppenheimer}近似)下，原子核是在电子总能量$E(\mathbf{R})$形成的势能面上运动
+	\end{itemize}
+	含有$N$个原子，平衡位置是$\mathbf{R}_i^0$，偏移位置矢量$\mathbf{\mu}_i(t)$，体系的势能函数在平衡位置作\textrm{Taylor~}级数展开
+	\begin{displaymath}
+%		\begin{aligned}
+		V=V_0+\sum_{i=1}^{3N}\left( \frac{\partial V}{\partial \mu_i} \right)_0\mu_i+\underline{\textcolor{red}{\frac12\sum_{i,j=1}^{3N}\left( \frac{\partial^2V}{\partial\mu_i\partial\mu_j} \right)_0\mu_i\mu_j}}+\mbox{高阶项}
+%		\end{aligned}
+	\end{displaymath}
+	平衡位置$\left( \frac{\partial V}{\partial\mu_i} \right)_0=0$，\textcolor{blue}{简谐近似}保留到$\mu_i$的二次项
+}
+
+\frame
+{
+	\frametitle{简正坐标与简谐振动}
+	$N$原子体系的动能函数
+	\begin{displaymath}
+		T=\frac12\sum_{i=1}^{3N}m_i\dot{\mu}_i^2
+	\end{displaymath}
+	引入简正坐标，\textcolor{blue}{与原子位移坐标$\mu_i$正交变换}
+	\begin{displaymath}
+		\sqrt{m_i}\mu_i=\sum_{j=1}^{3N}a_{ij}Q_j
+	\end{displaymath}
+	\textcolor{red}{目的}:~系统的势能函数与动能函数有简单形式(只有平方项)
+	\begin{displaymath}
+%		\begin{aligned}
+			T=\frac12\sum_{i=1}^{3N}\dot{Q}_i^2\quad
+			V=\frac12\sum_{i=1}^{3N}\omega_i^2Q_i^2
+%		\end{aligned}
+	\end{displaymath}
+	由此可得谐振方程
+	\begin{displaymath}
+		\ddot{Q}_i+\omega_i^2Q_i=0\quad i=1,2,3,\cdots,3N
+	\end{displaymath}
+
+}
+
+\frame
+{
+	\frametitle{简谐振动与振动模式}
+	任意简正坐标解
+	\begin{displaymath}
+		Q_i=A\sin(\omega_it+\delta)
+	\end{displaymath}
+	由此得到原子位移坐标
+	\begin{displaymath}
+		\mu_i=\frac{a_{ij}}{\sqrt{m_i}}A\sin(\omega_it+\delta)
+	\end{displaymath}
+\begin{figure}[h!]
+\centering
+%\hspace*{-10pt}
+\vspace*{-0.1in}
+\includegraphics[height=1.in,width=2.in,viewport=0 20 420 250,clip]{Figures/RF_vir.jpg}
+\caption{\small \textrm{Schematic example of vibration model of dimethyl.}}%
+\label{virbration_model}
+\end{figure} 
+\textcolor{red}{简谐振动不表示某个原子的振动，表示整个体系所有原子参与的振动。这种体系中所有原子一起参加的共同振动常称为振动模}
+}
+
+\frame
+{
+	\frametitle{一维单原子链}
+\begin{figure}[h!]
+\centering
+%\hspace*{-10pt}
+\vspace*{-0.25in}
+\includegraphics[height=1.0in,width=2.8in,viewport=0 0 1400 500,clip]{Figures/virbration.png}
+\caption{\small \textrm{Schematic example of vibration of 1D-atomic chain.}}%
+\label{virbration}
+\end{figure} 
+单原子链可以视为最简单的晶格，平衡时相邻原子距离为$\mathbf{a}$，原子限制在沿链方向运动，偏离格点位置用$\cdots,\mathbf{X}_{n-1},\mathbf{X}_{n},\mathbf{X}_{n+1},\cdots$，原子的振动可以表示为
+\begin{displaymath}
+	\mu_{nq}=A\mathrm{e}^{\mathrm{i}(\omega t-qx)}
+\end{displaymath}
+其中振幅$A$是常数，$\omega$是圆频率，$q=\tfrac{2\pi}{\lambda}$是波数，$\lambda$是波长\\
+\textcolor{blue}{根据量子理论，每种简谐振动的能量是量子化的，可以用声子表示}
+\begin{displaymath}
+	\varepsilon_{nq}=\left( n+\frac12 \right)\hbar\omega_q
+\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{双原子链与光学支和声学支}
+\begin{figure}[h!]
+\centering
+%\hspace*{-10pt}
+\vspace*{-0.25in}
+\includegraphics[height=0.7in,width=2.6in,viewport=0 0 1400 400,clip]{Figures/virbration-2.png}
+\caption{\small \textrm{Schematic example of vibration of 1D-diatomic chain.}}%
+\label{virbration-2D}
+\end{figure} 
+一维双原子链是最简单的复式晶格，平衡时相邻原子间距为$\mathbf{a}$，每个原胞含有两个不同原子\textrm{P}和\textrm{Q}质量分别是$m$和$M$，原子现在在沿链方向运动，偏离位移用$\cdots,\mu_{2n},\mu_{2n+1},\cdots$\\原子的运动方程
+\begin{displaymath}
+	\begin{aligned}
+		&\mbox{\textrm{P}原子:~}m\ddot{\mu}_{2n}=-\beta(2\mu_{2n}-\mu_{2n+1}-\mu_{2n-1})\\
+		&\mbox{\textrm{Q}原子:~}M\ddot{\mu}_{2n+1}=-\beta(2\mu_{2n+1}-\mu_{2n+2}-\mu_{2n})
+	\end{aligned}
+\end{displaymath}
+可得关于振动频率$\omega$的两组解
+\begin{displaymath}
+	\omega^2\left.
+	\begin{aligned}
+		&\nearrow\omega_+^2\\
+		&\searrow\omega_-^2
+	\end{aligned}\right\}
+	=\beta\frac{m+M}{mM}\left\{ 1\pm\left[ 1-\frac{4mM}{(m+M)^2}\sin^2aq \right]^{1/2} \right\}
+\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{光学支和声学支的长波极限}
+\begin{figure}[h!]
+\begin{minipage}[t]{0.3\linewidth}
+\centering
+\vspace*{-0.3in}
+%\hspace*{-10pt}
+\includegraphics[height=1.in,width=1.in,viewport=0 0 700 800,clip]{Figures/Optic-Acous.png}
+\label{optic_acous}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.67\linewidth}
+%\vspace*{-0.3in}
+	\begin{itemize}
+		\item \textcolor{blue}{光学支}:~属于频率$\omega_+$的晶格简谐振动
+		\item \textcolor{blue}{声学支}:~属于频率$\omega_-$的晶格简谐振动
+	\end{itemize}
+\end{minipage}
+\caption{\small \textrm{The acoustic branch and optical branch.}}%
+\end{figure} 
+声学支的长波极限($q\rightarrow0$):
+\begin{displaymath}
+	\omega_-\approx a\sqrt{\frac{2\beta}{m+M}}q\quad\mbox{\textcolor{blue}{一维链看成连续介质的弹性波}}
+\end{displaymath}
+光学支的长波极限($q\rightarrow0$):
+\begin{displaymath}
+	\omega_+\approx a\sqrt{\frac{2\beta}{\left( \frac{mM}{m+M} \right)}}\quad\mbox{\textcolor{blue}{两种原子具有相反的相位，质心保持不动}}
+\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{经典三维振动模式}
+			位于$\mathbf{R}_I(t)$的原子核运动的经典力学描述
+			\begin{displaymath}
+				M_I\frac{\partial^2\mathbf{R}_I}{\partial t^2}=\vec F_I(\mathbf{R})=-\frac{\partial}{\partial\mathbf{R}_I}E(\mathbf{R})
+			\end{displaymath}
+			晶格平衡位置$\{\mathbf{R}_I^0\}=\mathbf R^0$由原子核受力平衡确定
+			\begin{displaymath}
+				\vec F_I(\mathbf R^0)=0
+			\end{displaymath}
+			\textcolor{blue}{对平衡位置偏移的受力方程为}
+			\begin{displaymath}
+				C_{I,\alpha;J,\beta}=\frac{\partial^2E(\mathbf{R})}{\partial\mathbf{R}_{I,\alpha}\partial\mathbf{R}_{J,\beta}}
+			\end{displaymath}
+			其中$\alpha,\beta\cdots$是\textrm{cartesian}坐标
+
+			\textcolor{blue}{谐振子近似下}，频率为$\omega$的谐振模式下，晶格对平移位置的偏移为
+			\begin{displaymath}
+				\mathbf{u}_I(t)=\mathbf{R}_I(t)-\mathbf{R}_I^0\equiv\mathbf{u}_I\mathrm{e}^{\mathrm{i}\omega t}
+			\end{displaymath}
+			对位于$I$的原子核(质量为$M_I$)，有
+			\begin{displaymath}
+				-\omega^2M_Iu_{I\alpha}=-\sum_{J\beta}C_{I,\alpha;J\beta}u_{J\beta}
+			\end{displaymath}
+			因此振动频率$\omega$，由经典谐振方程确定
+			\begin{displaymath}
+				\det\left|\frac1{\sqrt{M_IM_J}}C_{I,\alpha;J\beta}-\omega^2\right|=0
+			\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{晶格振动模式(冻声子方法)}
+	对于周期性的晶格振动，根据\textrm{Bl\"och~}定理，振动引起的位置偏移
+			\begin{displaymath}
+				\mathbf{u}_s(\vec T_n)\equiv\mathbf{R}_s(\vec T_n)-\mathbf{R}_s^0(\vec T_n)=\mathrm{e}^{\mathrm{i}\vec k\cdot\vec T_n}\mathbf{u}_s(\vec k)
+			\end{displaymath}
+			由此得谐振方程
+			\begin{displaymath}
+				\det\left|\frac1{\sqrt{M_sM_{s^{\prime}}}}C_{s,\alpha;s^{\prime}\alpha^{\prime}}-\omega_{i\vec k}^2\right|=0
+			\end{displaymath}
+			这里原子标记$s=1,S$，对应的谐振模式$i=1,3S$
+
+			每个$\vec k$的约化力常数矩阵可表示为
+			\begin{displaymath}
+				\begin{aligned}
+				C_{s,\alpha;s^{\prime}\alpha^{\prime}}(\vec k)=&\sum_{\vec T_n}\mathrm{e}^{\mathrm{i}\vec k\cdot\vec T_n}\frac{\partial^2 E(\mathbf{R})}{\partial\mathbf{R}_{s,\alpha}(0)\partial\mathbf{R}_{s^{\prime},\alpha^{\prime}}(\vec T_n)}\\
+				=&\frac{\partial^2E(\mathbf{R})}{\partial\mathbf{u}_{s,\alpha}(\vec k)\partial\mathbf{u}_{s^{\prime},\alpha^{\prime}}(\vec k)} 
+				\end{aligned}
+			\end{displaymath}
+}
+
+\section{磁性与自旋波}
+\frame
+{
+	\frametitle{磁振子与自旋响应函数}
+	\begin{itemize}
+		\item 凝聚态物质中，体系的磁性态表现为长程的自旋磁矩有序状态
+			\begin{enumerate}
+				\item 由于电子-电子相互作用引起的原子局域磁矩(\textcolor{red}{自旋极化})
+				\item 局域磁矩间交换作用引起长程磁有序(\textcolor{red}{\textrm{Heisenberg~}}交换)
+			\end{enumerate}
+		\item 此外除了局域磁矩交换引起的磁有序结构，还有由于能带中巡游电子引起的磁性，称为能带磁性(或巡游电子磁性)
+	\end{itemize}
+	在能带理论中，磁有序态通过考虑自旋极化，引起\textrm{Hamiltonian~}的改变(\textrm{Zeeman}场强$H_{\mathrm{Zeeman}}$)引入:\\
+	自旋极化磁矩$m=n^{\uparrow}-n^{\downarrow}$，引起的势能改变$V_m=\mu H_{\mathrm{Zeeman}}$
+	\begin{displaymath}
+		\begin{aligned}
+			E=&E(V_m)\equiv E_{total}(V_m)\\
+			m(\vec r)=&-\frac{\mathrm{d}E}{\mathrm{d}V_m(\vec r)}\\
+			\chi(\vec r,\vec r^{\prime})=&-\frac{\mathrm{d}m(\vec r)}{\mathrm{d}V_m(\vec r^{\prime})}=\frac{\mathrm{d}^2E}{\mathrm{d}V_m(\vec r)\mathrm{d}V_m(\vec r^{\prime})}
+		\end{aligned}
+	\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{磁振子与自旋响应函数}
+	\begin{itemize}
+		\item 如果不考虑电子间相互作用，$E-\chi$曲线在尽磁矩为0时有极小值，对应于自旋成对(抗磁态)
+		\item 考虑电子交换作用，自旋有序(磁性态)能量更有利，因此$V_m(\vec r)$将依赖于$m(\vec r^{\prime})$:\\
+			\begin{enumerate}
+				\item 如果基态对应$\bar m>0$，则为铁磁态
+				\item 如果基态对应$\bar m=0$，则为反铁磁态
+			\end{enumerate}
+		\item 平均场理论下，磁化率$\chi$即外加磁场的响应函数，\textrm{Stoner~}首先导出磁化率与电子态密度的关系
+			\begin{displaymath}
+				\chi=\frac{N(0)}{1-IN(0)}
+			\end{displaymath}
+			其中$N(0)$是\textrm{Fermi~}能级的态密度，磁化有关的有效外势$V_m=V_m^{ext}+Im$
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{\textrm{Stoner}模型}
+	\begin{itemize}
+		\item \textrm{Stoner}将金属的磁性考虑为晶格中巡游的$3d$、$4s$\,电子贡献，其相互作用为$I$，\textrm{Fermi}面附近的\textrm{DOS}为$N(E_{\mathrm F}$
+\begin{figure}[h!]
+\centering
+\vspace*{-0.05in}
+\includegraphics[height=1.0in,width=1.8in,viewport=0 0 800 380,clip]{Figures/Mag_Metal-T0.png}
+\caption{\small \textrm{The Stoner model.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Mag_Metal-T0}
+\end{figure}
+		\item 体系的磁性由转变由\textrm{Fermi}面附近能量变化确定
+			\begin{displaymath}
+				\Delta E=N(E_{\mathrm F})\big[1-IN(E_{\mathrm F})\big](\delta E)^2
+			\end{displaymath}
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{自旋波模型}
+	\begin{itemize}
+		\item 作为平均场近似，分子场理论成功描述了强磁性物质的自发磁化行为，但在低温和\textrm{Curie}温度附近，理论与实验存在明显偏差
+		\item 自旋波理论是从体系\textcolor{red}{整体激发}的角度出发，解释自发磁化的低温行为
+			\begin{enumerate}
+				\item 0\textrm{K~}下电子自旋有序排列(系统基态)
+\begin{figure}[h!]
+\centering
+\includegraphics[height=0.50in,width=2.45in,viewport=10 10 600 150,clip]{Figures/Mag_spinwave-0.png}
+\caption{\small \textrm{The ground state $|0\rangle$.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Mag_spinwave-0}
+\end{figure}
+				\item 温度略有升高时，电子自旋有一个发生翻转
+\begin{figure}[h!]
+\centering
+\includegraphics[height=0.50in,width=2.45in,viewport=10 10 680 150,clip]{Figures/Mag_spinwave-1.png}
+\caption{\small \textrm{The spin flips at $l$:~ $|l\rangle$.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Mag_spinwave-1}
+\end{figure}
+			\end{enumerate}
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{自旋波模型}
+	某个格点上出现自旋翻转，\textcolor{blue}{由于相邻格点间存在交换作用，使自旋趋于同向排列}
+	\begin{itemize}
+		\item \textcolor{red}{翻转的自旋将牵动临近格点自旋，使自趋于翻转}
+		\item \textcolor{red}{近邻格点自旋力图驱使翻转的自旋重新翻转过来}
+	\end{itemize}
+	自旋的翻转不会停留在一个格点，而是以波的形式向周围传播:\\
+	\textcolor{blue}{这种自旋翻转在晶体中的传播称为}\textcolor{red}{自旋波(又称磁激子)}
+\begin{figure}[h!]
+\centering
+\includegraphics[height=1.15in,width=3.45in,viewport=0 0 830 300,clip]{Figures/Mag_spinwave-2.png}
+\caption{\small \textrm{The schematic spin-wave.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Mag_spinwave-2}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{非共线磁矩}
+	\begin{itemize}
+		\item 研究磁性体系输运时通常只考虑共线磁结构的情况
+		\item 真实的物理体系中总会出现非共线的磁结构:\\\textcolor{blue}{特别是在铁磁/非磁金属界面上，铁磁性原子磁矩有可能形成非共线排列}
+		\item 最近的研究结果揭示了非共线体系中出现的许多新现象:\\\textcolor{blue}{电流诱导的自旋转矩}\\
+			\textcolor{red}{这些非共线的原子磁矩与电子的自旋之间能够通过交换作用，进而引起电子在输运过程中发生自旋翻转，使得自旋向上和自旋向下的输运通道发生了混合，并且处在超导态的非磁金属还能够在铁磁体一侧诱导出长程的自旋三重态配对超导性}
+		\item 由于非共线磁结构的引入使得问题变得复杂，目前的实验和理论还并不完备
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{\textrm{DFT}框架下处理非共线磁矩}
+	\textrm{J. K\"ubler}等指出\upcite{JAP63-3482_1988}，根据密度泛函理论，当外势是矩阵元为$w^{\alpha\beta}(\vec r)$的$2\times2$矩阵时，令体系的密度矩阵为$\rho^{\alpha\beta}(\vec r)$，则\\
+	\textcolor{blue}{体系的电荷密度可以表示为}
+	\begin{displaymath}
+		Tr[\rho^{\alpha\beta}(r)]\equiv n_{\mathrm{Tr}}(r)=\sum_{\alpha}n^{\alpha\alpha}(\vec r)
+	\end{displaymath}
+	因此总能量可以表示为
+	
+	\begin{displaymath}
+		\begin{aligned}
+			E[\rho^{\alpha\beta}]=&T_0+\sum_{\alpha\beta}\int w^{\alpha\beta}(\vec r)\rho^{\alpha\beta}(\vec r)\mathrm{d}^3r\\
+			+&\iint\frac{n_{\mathrm{Tr}}(\vec r^{\prime})n_{\mathrm{Tr}}(\vec r)}{|\vec r-\vec r^{\prime}|}\mathrm{d}^3r\mathrm{d}^3r^{\prime}+E_{\mathrm{XC}}[\rho^{\alpha\beta}]
+		\end{aligned}
+	\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{\textrm{DFT}框架下处理非共线磁矩}
+	\textrm{D. Hobbs~}等\upcite{PRB62-11556_2000}\textcolor{red}{考虑磁化密度的贡献后，将总电荷密度矩阵表示为}
+	\begin{displaymath}
+		\rho^{\alpha\beta}(\vec r)=\left[n_{\mathrm{Tr}}(\vec r)\delta_{\alpha\beta}+\vec m(\vec r)\vec{\sigma}^{\alpha\beta}\right]/2
+	\end{displaymath}
+	磁化密度的表示为
+	\begin{displaymath}
+		\vec m(\vec r)=\sum_{\alpha\beta}\rho^{\alpha\beta}(\vec r)\cdot\vec{\sigma}^{\alpha\beta}
+	\end{displaymath}
+	其中\textrm{Pauli~}自旋矩阵$\vec{\sigma}=(\sigma_x,\sigma_y,\sigma_z)$定义为
+	\begin{displaymath}
+		\sigma_x=\left( 
+		\begin{matrix}
+			0 &1\\
+			1 &0
+		\end{matrix}
+		\right)\quad
+		\sigma_y=\left( 
+		\begin{matrix}
+			0 &-\mathrm{i}\\
+			\mathrm{i} &0
+		\end{matrix}
+		\right)\quad
+		\sigma_z=\left( 
+		\begin{matrix}
+			1 &0\\
+			0 &-1
+		\end{matrix}
+		\right)
+	\end{displaymath}
+	因此在\textrm{DFT}框架下能量密度泛函可以表示为
+	\begin{displaymath}
+		E=\sum_{\alpha}\sum_{n}f_n\langle\Psi_n^{\alpha}|-\frac12\nabla^2|\Psi_n^{\alpha}\rangle+E_{\mathrm{H}}[\textcolor{blue}{n_{\mathrm{Tr}}}+n_Z]+E_{\mathrm{XC}}[\textcolor{red}{\rho^{\alpha\beta}}]
+	\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{\textrm{DFT}框架下处理非共线磁矩}
+	上述表达式中$f_n$是轨道占据数
+	
+	$E_{\mathrm{H}}[n_{\mathrm{Tr}}+n_Z]$是静电相互作用
+	\begin{displaymath}
+		E_{\mathrm{H}}[\textcolor{brown}{\rho}]=\frac12\iint\frac{\textcolor{brown}{\rho(\vec r)\rho(\vec r^{\prime})}}{|\vec r-\vec r^{\prime}|}\mathrm{d}\vec r\mathrm{d}\vec r^{\prime}
+	\end{displaymath}
+	这里$\textcolor{brown}{\rho}=n_{\mathrm{Tr}}+n_Z$
+
+	在\textrm{LSDA}下，交换-相关能泛函表示为
+	\begin{displaymath}
+		\begin{aligned}
+			E_{\mathrm{XC}}[\textcolor{red}{\rho^{\alpha\beta}}]=&\int\textcolor{blue}{n_{\mathrm{Tr}}(\vec r)}\epsilon_{\mathrm{XC}}[\textcolor{red}{\rho^{\alpha\beta}}]\mathrm{d}\vec r\\
+			=&\int\textcolor{blue}{n_{\mathrm{Tr}}(\vec r)}\epsilon_{\mathrm{XC}}[\textcolor{blue}{n_{\mathrm{Tr}}(\vec r)},|\vec m(\vec r)|]\mathrm{d}\vec r
+		\end{aligned}
+	\end{displaymath}
+}
+
+\section{\rm{Wannier function}}
+\frame
+{
+	\frametitle{\textrm{Wannier~}函数}
+	\begin{itemize}
+		\item \textrm{Wannier}函数是\textcolor{blue}{正交化的局域函数}，\textcolor{red}{要求局域函数空间与能带空间完全相同}
+		\item 紧束缚近似下，能带的电子波函数的\underline{\textcolor{blue}{\textrm{Bloch~}和}}
+			\begin{displaymath}
+				\psi_i^{\vec k}(\vec r)=\frac1{\sqrt N}\sum_m\mathrm{e}^{\mathrm{i}\vec k\cdot\vec R_m}\phi_i(\vec r-\vec R_m)
+			\end{displaymath}
+		\textrm{Bloch~}函数可以写类似形式
+		\begin{displaymath}
+			\psi_i^{\vec k}(\vec r)=\frac1{\sqrt N}\sum_m\mathrm{e}^{\mathrm{i}\vec k\cdot\vec R_m}W_i(\vec r-\vec R_m) 
+		\end{displaymath}
+		这里$W_i(\vec r-\vec R_n)$就是\textrm{Wannier~}函数
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{\textrm{Wannier~}函数}
+	\begin{itemize}
+		\item \textrm{Wannier~}函数是\textrm{Bloch~}函数的\textrm{Fourier}变换，对于格点$\vec T_m$有
+			\begin{displaymath}
+				\begin{aligned}
+					&w_i(\vec r-\vec T_m)=\frac{\Omega_{\mathrm{cell}}}{2\pi^3}\int_{\mathrm{BZ}}\mathrm{d}\vec k\mathrm{e}^{-\mathrm{i}\vec k\cdot\vec T_m}\psi_i^{\vec k}(\vec r)\\
+					=&\frac{\Omega_{\mathrm{cell}}}{2\pi^3}\int_{\mathrm{BZ}}\mathrm{d}\vec k\mathrm{e}^{-\mathrm{i}\vec k\cdot\vec T_m}\mathrm{e}^{-\mathrm{i}\vec k\cdot\vec r}u_i^{\vec k}(\vec r)=\frac{\Omega_{\mathrm{cell}}}{2\pi^3}\int_{\mathrm{BZ}}\mathrm{d}\vec k\mathrm{e}^{\mathrm{i}\vec k\cdot(\vec r-\vec T_m)}u_i^{\vec k}(\vec r)
+				\end{aligned}
+			\end{displaymath}
+\begin{figure}[h!]
+\centering
+%\hspace*{-10pt}
+\vspace*{-0.6in}
+\includegraphics[height=1.8in,width=3.1in,viewport=0 0 1400 1000,clip]{Figures/Wannier_function.png}
+\caption{\small \textrm{Schematic example of Wannier function that correspond to the Bloch function.}}%
+\label{Wannier-function}
+\end{figure} 
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{\textrm{Wannier~}函数}
+	\begin{itemize}
+		\item 一个能带的\textrm{Wannier~}函数完全由同一能带的\textrm{Bloch~}函数定义
+		\item \textrm{Wannier~}函数完全正交
+			\begin{displaymath}
+				\int_{\textcolor{red}{\mathrm{all\; space}}}\mathrm{d}\vec rw_i^{\ast}(\vec r-\vec T_m)w_j(\vec r-\vec T_{m^{\prime}})=\delta_{ij}\delta_{mm^{\prime}}
+			\end{displaymath}
+			\textrm{Wannier~}函数和\textrm{Bloch~}函数一样，构成完备的正交函数集
+		\item \textrm{Wannier~}函数间由幺正矩阵联系
+			\begin{displaymath}
+				u_{i\vec k}=\sum_jU_{ji}^{\vec k}u_{j\vec k}^{(0)}
+			\end{displaymath}
+			\textcolor{blue}{其中$U_{ji}^{\vec k}$是与$\vec k$~关联的幺正矩阵}
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{\textrm{Wannier~}函数的不唯一}
+	\begin{itemize}
+		\item 对于\textrm{Bloch~}函数
+			\begin{displaymath}
+				\psi_i^{\vec k}(\vec r)=\mathrm{e}^{\mathrm{i}\vec k\cdot\vec r}\mathrm{e}^{-\mathrm{i}\vec k\cdot\vec r}u_i^{\vec k}(\vec r)
+			\end{displaymath}
+			\textcolor{red}{可乘以任意相位，而不改变物理量的值}
+			\begin{displaymath}
+				\psi_i^{\vec k}(\vec r)\rightarrow\tilde\psi_i^{\vec k}(\vec r)=\textcolor{red}{\mathrm{e}^{\mathrm{i}\phi_i(\vec k)}}\psi_i^{\vec k}(\vec r)
+			\end{displaymath}
+		\item \textcolor{blue}{\textrm{Wannier~}函数的表示并不唯一}:\\
+必须通过选择特定的相位$\phi_i(\vec k)$(或特定的幺正变换矩阵)，才能得到确定的\textrm{Wannier~}函数 
+\begin{figure}[h!]
+\centering
+%\hspace*{-10pt}
+\vspace*{-0.3in}
+\includegraphics[height=1.1in,width=1.8in,viewport=0 0 1100 600,clip]{Figures/Wannier_function-Bondcenter_Si.png}
+\caption{\small \textrm{Bond-centered Wannier function for Si.}}%
+\label{Bond-Centered Wannier function}
+\end{figure} 
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{\textrm{Wannier~}函数的不唯一}
+\begin{figure}[h!]
+\centering
+\hspace*{-0.35in}
+\subfigure[\textrm{Maximally localized Wannier function}]{
+\label{Brillouin_Zone_Cubic}
+\vspace*{-0.50in}
+\includegraphics[height=1.10in,width=3.20in,viewport=0 0 1000 450,clip]{Figures/Wannier_function-Maxlocal.png}}
+\subfigure[\textrm{Comparison of orthogonal and non-orthogonal maximally locaized orbitals}]{
+\label{Band_Gap_SrSnO3}
+\vspace*{-0.50in}
+\includegraphics[height=1.10in,width=3.00in,viewport=0 0 1200 550,clip]{Figures/Non_orth-Wannier_function.png}}
+\label{Non-local Wannier-function}
+\end{figure}
+}
+%\frame
+%{
+%\frametitle{发展统一理论框架下的材料计算程序}
+%\begin{itemize}
+%	\item
+%\end{itemize}
+%}
+
+%------------------------------------------------------------------------Reference----------------------------------------------------------------------------------------------
+%\begin{thebibliography}{99}
+%-----------------------------------------------------------------------------------------------------------------------------------------------------------------------%
+%\frame
+%{
+%\frametitle{主要参考文献}
+%{\small
+%\bibitem{Singh_Book}\textrm{D. J. Singh. \textit{Plane Wave, PseudoPotential and the LAPW method} (Kluwer Academic, Boston,USA, 1994)}					%
+%  \nocite{*}																				%
+%}
+%}
+%\end{thebibliography}
+\begin{thebibliography}{99}
+\frame
+{
+\frametitle{主要参考文献}
+{\small
+	\bibitem{Xu_Li_Wang}徐光宪、黎乐民、王德民, {\textit{量子化学——基本原理和从头计算法}}\;\textrm{({\textit{上、中}})}\:科学出版社, 北京, 1980
+	\bibitem{Elect_Stru}\textrm{Richard. M. Martin. \textit{Electronic Structure: Basic Theory and Practical Methods} (Cambridge University Press, Cambridge, England, 2004)}
+	\bibitem{PR136-B864_1964}\textrm{P. Hohenberg and W. Kohn \textit{Phys. Rev.} \textbf{136} (1964), B864}
+	\bibitem{PR140-A1133_1965}\textrm{W. Kohn and L.J. Sham \textit{Phys. Rev.} \textbf{140} (1965), A1133}
+	\bibitem{Parr_Yang}\textrm{R.G. Parr and W. Yang. \textit{Density-Functional Theory of Atoms and Molecules} (Oxford University Press, New York, U.S.A., 1989)}
+	\bibitem{PR57-1169_1940}\textrm{C. Herring. \textit{Phys. Rev.}, \textbf{57} (1940), 1169}
+	\bibitem{PR116_1959}\textrm{J. C. Phillips and L. Kleinman. \textit{Phys. Rev.} (1959), 116}
+}
+\nocite*{}
+}
+\end{thebibliography}
+
+\begin{thebibliography}{99}
+\frame
+{
+\frametitle{主要参考文献}
+{\small
+	\bibitem{PRL43-1494_1979}\textrm{D. R. Hamann, M. Schl\"uter and C. Chiang. \textit{Phys. Rev. Lett.} \textbf{43} (1979), 1494}
+\bibitem{Huang_Han}黄昆\:原著、韩汝琦\:改编, {\textit{固体物理学}}\:高等教育出版社, 北京, 1988
+	\bibitem{Xie_Lu}谢希德、陆栋\:主编, {\textit{固体能带理论}}\:复旦大学出版社, 上海, 1998
+\bibitem{Singh_Book}\textrm{D. J. Singh. \textit{Plane Wave, PseudoPotential and the LAPW method} (Kluwer Academic, Boston,USA, 1994)}
+\bibitem{PRB41-7892_1990}\textrm{D. Vanderbilt. \textit{Phys. Rev.} B, \textbf{41} (1990), 7892} 
+\bibitem{JPCM6-8245_1994}\textrm{G. Kresse and J. Hafner. J. Phys: \textit{Condens. Matter}, \textbf{6} (1994), 8245}
+\bibitem{PRB50-17953_1994}\textrm{P. E. Bl\"ochl. \textit{Phys. Rev.} B, \textbf{50} (1994), 17953}
+\bibitem{PRB59-1758_1999}\textrm{G. Kresse and D. Joubert \textit{Phys. Rev.} B, \textbf{59} (1999), 1758}
+\nocite*{}
+}
+%{\small
+%\phantomsection\addcontentsline{toc}{section}{Bibliography}	 %直接调用\addcontentsline命令可能导致超链指向不准确,一般需要在之前调用一次\phantomsection命令加以修正	%
+%\bibliography{Myref}																			%
+%\bibliographystyle{mybib}																		%
+%  \nocite{*}																				%
+%}
+%-----------------------------------------------------------------------------------------------------------------------------------------------------------------------%
+}
+
+\frame
+{
+\frametitle{主要参考文献}
+{\small
+%\bibitem{VASP_UG}\textrm{G. Kresse, M. Marsman, and J\"urgen Furthm\"uller. \textit{VASP the GUIDE}. Computational Physics, Faculty of Physics, Universit\"at Wien, Austria (2012) \\url http://cms.mpi.univie.ac.at/VASP/}
+%\bibitem{SSC114-15_2000}\textrm{E. Sj\"ostedt, L. Nordstr\"om and D. J. Singh. \textit{Solid State Commun.}, \textbf{114} (2000), 15}
+%\bibitem{WIEN2k_UG}\textrm{P. Blaha, K. Schwarz, G. Madsen, D. Kvasnicka and J. Luitz. \textit{User's Guide of WIEN2K, An Augmented Plane Wave Plus Local Orbitals Program for Calculating Crystal Properties}. Vienna University of Technology, Inst. of Physical and Theoretical Chemistry, Vienna, Austria (2012)}
+\bibitem{Comp_Method}\textrm{V. V. Nemoshkalenko and V. N. Antonov. \textit{Computational Methods in Solid State Physics} (Gordon and Breach Science Publisher, Amsterdam, The Netherlands, 1998)}
+%        \bibitem{PRB59-1758_1999}\textrm{G. Kresse and D. Joubert \textit{Phys. Rev.} B, \textbf{59} (1999), 1758}
+	\bibitem{PRB49-16223_1994}\textrm{P. E. Bl\"ochl, O. Jepsen and O. K. Andersen \textit{Phys. Rev.} B, \textbf{49} (1994), 16223}
+        \bibitem{PRB47-10142_1993}\textrm{K. Laasonen, A. Pasquarello, R. Car, C. Lee and D. Vanderbilt \textit{Phys. Rev.} B, \textbf{47} (1993), 10142}
+\nocite{*}																				%
+%}
+%}
+%\end{thebibliography}
+
+%\begin{thebibliography}{99}
+%\frame
+%{
+%\frametitle{主要参考文献}
+%{\small
+%	\bibitem{Huang_Han}黄昆\:原著、韩汝琦\:改编, {\textit{固体物理学}}\:高等教育出版社, 北京, 1988
+%	\bibitem{Xie_Lu}谢希德、陆栋\:主编, {\textit{固体能带理论}}\:复旦大学出版社, 上海, 1998
+%\bibitem{JMP22-2433_1981}\textrm{M. Weiner. \textit{J. Math. Phys.}, \textbf{22} (1981), 2433}
+%\bibitem{PRB26-4571_1982}\textrm{M. Weinert, E. Wimmer and A. J. Freeman. \textit{Phys. Rev.} B, \textbf{26} (1982), 4571}
+%	\bibitem{PRB7-5212_1973}\textrm{A. Baldereschi \textit{Phys. Rev.} B, \textbf{7} (1973), 5212}
+%	\bibitem{PRB8-5747_1973}\textrm{D. J. Chadi and M. L. Cohen \textit{Phys. Rev.} B, \textbf{8} (1973), 5747}
+%	\bibitem{PRB13-5188_1976}\textrm{H. J. Monkhorst and J. D. Pack \textit{Phys. Rev.} B, \textbf{13} (1976), 5188}
+	\bibitem{PRB40-3616_1989}\textrm{M. Methfessel and A. T. Paxton \textit{Phys. Rev.} B, \textbf{40} (1989), 3616}
+\bibitem{PRB49-16233_1994}\textrm{P. E. Bl\"ochl, O. Jepsen and O. K. Andersen. \textit{Phys. Rev.} B, \textbf{49} (1994), 16233}
+%\bibitem{PRB44-943_1991}\textrm{V. I. Anisimov, J. Zaanen and O.K. Andersen. \textit{Phys. Rev.} B, \textbf{44} (1991), 943}
+%}
+%\nocite*{}
+%}
+%\end{thebibliography}
+
+%\begin{thebibliography}{99}
+%\frame
+%{
+%\frametitle{主要参考文献}
+%{\small
+%	\bibitem{Huang_Han}黄昆\:原著、韩汝琦\:改编, {\textit{固体物理学}}\:高等教育出版社, 北京, 1988
+%	\bibitem{Xie_Lu}谢希德、陆栋\:主编, {\textit{固体能带理论}}\:复旦大学出版社, 上海, 1998
+%\bibitem{PRB48-16929_1993}\textrm{V.I. Anisimov, I.V. Solovyev, M.A. Korotin, M.T. Czyzyk and G.A. Sawatzky. \textit{Phys. Rev.} B, \textbf{48} (1993), 16929}
+%	\bibitem{PRB52-R5467_1995}\textrm{A. I. Liechtenstein, V. I. Anisimov and J. Zaanen., \textit{Phys. Rev.} B, \textbf{52} (1995), R5467}
+%	\bibitem{PRB57-1505_1998}\textrm{S. L. Dudarev, G. A. Botton, S. Y. Savrasov, C. J. Humphreys and A. P. Sutton., \textit{Phys. Rev.} B, \textbf{57} (1998), 1505}
+	\bibitem{JAP63-3482_1988}\textrm{J. K\"ubler, K. H. H\"ock and J. Sticht. \textit{J. Appl. Phys.}, \textbf{63} (1988), 3482}
+%	\bibitem{PRL49-1691_1982}\textrm{P. Perdew, R. G. Parr, M. Levy and J. L. Balduz, Jr., \textit{Phys. Rev. Lett.} \textbf{49} (1982), 1691}
+%	\bibitem{Novak}\textrm{P. Nov$\mathrm{\acute a}$k. \textit{Calculation of spin-orbit coupling} (unpublished)}
+	\bibitem{Dai_Qian}戴道生,钱昆明, {\textit{铁磁学}}(上册),\:科学出版社, 北京, 1998
+}
+\nocite*{}
+}
+\end{thebibliography}
+
+%\begin{thebibliography}{99}
+%\frame
+%{
+%\frametitle{主要参考文献}
+%{\small
+%	\bibitem{Huang_Han}黄昆\:原著、韩汝琦\:改编, {\textit{固体物理学}}\:高等教育出版社, 北京, 1988
+%	\bibitem{Xie_Lu}谢希德、陆栋\:主编, {\textit{固体能带理论}}\:复旦大学出版社, 上海, 1998
+%	\bibitem{JPCSSP13-2675_1980}\textrm{A. H. MacDonald, W. E. Pickett and D. D. Koelling. \textit{J. Phys. C: Solid St. Phys.}, \textbf{13} (1980), 2675}
+%	\bibitem{PRB62-11556_2000}\textrm{D. Hobbs, G. Kresse and J. Hafner. \textit{Phys. Rev.} B, \textbf{62} (2000), 11556}
+%}
+%\nocite*{}
+%}
+%\end{thebibliography}
+%-----------------------------------------------------------Beamer下不建议使用bib,因为涉及分页--------------------------------------------------------------------------%
+%{\small
+%\phantomsection\addcontentsline{toc}{section}{Bibliography}	 %直接调用\addcontentsline命令可能导致超链指向不准确,一般需要在之前调用一次\phantomsection命令加以修正	%
+%\bibliography{Myref}																			%
+%\bibliographystyle{mybib}																		%
+%  \nocite{*}																				%
+%}
+
+%------------------------------------------------------------------------------------------------------------------------------------------------------------------------------%
+
+\appendix
+\section*{赝势构造的类型}
+\frame
+{
+	\frametitle{赝势构造的类型}
+	有效赝势的构造方案
+	\begin{itemize}
+		\item \textrm{Troullier-Martin NC} 方案 \\
+	首先构造赝波函数满足
+	\begin{displaymath}
+		\tilde\phi(r)=\left\{
+			\begin{aligned}
+				&r^{L_v+1}\mathrm{e}^{p(r)}\quad &\mathrm{for}\quad r\leqslant r_c \\
+				&\phi(r)\quad &\mathrm{for}\quad r>r_c
+			\end{aligned}
+			\right.
+	\end{displaymath}
+	这里$$p(r)=\sum_{m=0}^6C_mr^{2m}$$
+	可得赝势 
+	$$V_{eff}^{PS}(r)=\epsilon_l+\dfrac{\hbar^2}{2m}\bigg(\dfrac{\mathrm{d}^2p}{\mathrm{d}r^2}+(\dfrac{\mathrm{d}p}{\mathrm{d}r})^2+\dfrac{2(L_v+1)}r\dfrac{\mathrm{d}p}{\mathrm{d}r}\bigg)$$
+	于是赝\textrm{Hamiltonian}是$\tilde H(r)=-\dfrac{\hbar^2}{2m}\nabla^2+V_{eff}^{PS}(r)$
+	\end{itemize}
+}
+\frame
+{
+	\frametitle{赝势构造的类型}
+	有效赝势的构造方案
+	\begin{itemize}
+		\item \textrm{Ultra-soft} 方案 \\
+	构造赝波函数满足
+	\begin{displaymath}
+		\tilde\phi(r)=\left\{
+			\begin{aligned}
+				&r^{L_v+1}\sum_{m=0}^3C_mr^{2m}\quad &\mathrm{for}\quad r\leqslant r_c \\
+				&\phi(r)\quad &\mathrm{for}\quad r>r_c
+			\end{aligned}
+			\right.
+	\end{displaymath}
+	与\textrm{Troullier-Martin NC}方案类似，逆向求解本征方程得到有效赝势
+		\item \textrm{Bessel}方案\\
+			直接构造有效赝势 $V_{eff}^{PS}(r)=\alpha\cdot\dfrac{\sin(q\cdot r)}r$
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{赝势构造的类型}
+	赝分波函数与投影子函数构造
+	\begin{itemize}
+		\item \textrm{Bl\"ochl}方法\\
+			构造截断函数$k(r)$
+	\begin{displaymath}
+		k(r)=\left\{
+			\begin{aligned}
+				&\bigg[\dfrac{\sin({\pi r/r_c})}{(\pi r/r_c)}\bigg]^2\qquad &\mathrm{for}\quad r<r_c \\
+				&0\qquad &\mathrm{for}\quad r\geqslant r_c
+			\end{aligned}
+			\right.
+	\end{displaymath}
+	迭代求解方程
+	$$(\tilde H(\vec r)-\epsilon_i)|\tilde\phi_i^0(\vec r)\rangle=C_ik(r)|\phi_i^0(\vec r)\rangle$$
+	得到初始赝分波$\phi_i^0(\vec r)$\\
+	初始投影子函数$|\tilde p_i^0(\vec r)\rangle=\dfrac{k(r)|\tilde\phi_i^0(\vec r)\rangle}{\langle\phi_i^0|k|\phi_i^0\rangle}$
+	采用\textrm{Gram-Schmidt}正交化方法正交
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{赝势构造的类型}
+	赝分波函数与投影子函数构造
+	\begin{itemize}
+		\item \textrm{Vanderbilt}方法\\
+			用多项式构造赝分波函数
+	\begin{displaymath}
+		\tilde\phi_i(r)=\left\{
+			\begin{aligned}
+				&r^{l+1}\sum_{m=0}^4C_mr^{2m}\qquad &\mathrm{for}\quad r<r_c \\
+				&\phi_l(r)\qquad &\mathrm{for}\quad r\geqslant r_c
+			\end{aligned}
+			\right.
+	\end{displaymath}
+	构造辅助函数
+	$$\chi_l(r)=\bigg(\epsilon_l+\dfrac{\hbar^2}{2m}(\dfrac{\mathrm{d}^2}{\mathrm{d}r^2}-\dfrac{l(l+1)}{r^2}-V_{eff}^{PS}(r)\bigg)\tilde\phi_l(r)$$
+	和变换矩阵\textbf{B}，矩阵元$B_{ij}=\int_0^{r_c}\mathrm{d}r\tilde\phi_i(r)\chi_j(r)$
+	由此得到投影子函数$\tilde p_i(\vec r)=\sum_{j}\chi_j(r)(\mathbf{B^{-1}})_{ji}$
+	\end{itemize}
+}
+
+
+\frame
+{
+	\frametitle{赝势构造的类型}
+	赝分波函数与投影子函数构造
+	\begin{itemize}
+		\item \textrm{RRKJ}方法\\
+		构造赝分波函数
+	\begin{displaymath}
+		\tilde\phi_i=\left\{
+			\begin{aligned}
+				&r\cdot\bigg(\alpha_1^l\cdot j_l(q_1^lr)+\alpha_2^l\cdot j_l(q_2^lr)\bigg) \qquad &\mathrm{for}\quad r<r_c \\
+				&\phi_l(r)\qquad &\mathrm{for}\quad r\geqslant r_c
+			\end{aligned}
+			\right.
+	\end{displaymath}
+	投影子函数的构造与\textrm{Vanderbilt}方法类似
+	\end{itemize}
+}
+
+\section*{声子的密度泛函微扰计算}
+\frame
+{
+	\frametitle{声子与密度响应函数}
+	谐振的力常数是能量的两阶导数，因此最初由响应函数计算声子时，即采用两阶微扰理论
+
+	对于随参数$\lambda_i$变化的外势$V_{ext}(\vec r)$的响应中包含一般表达式
+	\begin{displaymath}
+		\begin{aligned}
+			\frac{\partial E}{\partial\lambda_i}=&\frac{\partial E_{\mathrm{ion}}}{\partial\lambda_i}+\int\frac{\partial V_{ext}(\vec r)}{\partial\lambda_i}n(\vec r)\mathrm{d}\vec r\quad\mbox{\textcolor{red}{即\textrm{Hellmann-Feynman}力}}\\
+			\frac{\partial^2E}{\partial\lambda_i\partial\lambda_j}=&\frac{\partial^2E_{\mathrm{ion}}}{\partial\lambda_i\partial\lambda_j}+\int\frac{\partial^2V_{ext}(\vec r)}{\partial\lambda_i\partial\lambda_j}n(\vec r)\mathrm{d}\vec r+\underline{\int\frac{\partial n(\vec r)}{\partial\lambda_i}\frac{\partial V_{ext}(\vec r)}{\partial\lambda_j}\mathrm{d}\vec r}
+		\end{aligned}
+	\end{displaymath}
+	其中
+	\begin{displaymath}
+		\begin{aligned}
+	\int\frac{\partial n(\vec r)}{\partial\lambda_i}\frac{\partial V_{ext}(\vec r)}{\partial\lambda_j}\mathrm{d}\vec r=&\int\frac{\partial V_{ext}(\vec r^{\prime})}{\partial\lambda_i}\frac{\partial n(\vec r)}{\partial V_{ext}(\vec r^{\prime})}\frac{\partial V_{ext}(\vec r)}{\partial\lambda_j}\mathrm{d}\vec r\mathrm{d}\vec r^{\prime}\\
+		=&\int\frac{\partial V_{ext}(\vec r^{\prime})}{\partial\lambda_i}\chi(\vec r,\vec r^{\prime})\frac{\partial V_{ext}(\vec r)}{\partial\lambda_j}\mathrm{d}\vec r\mathrm{d}\vec r^{\prime}
+		\end{aligned}
+	\end{displaymath}
+	这里\textcolor{red}{$\chi$是密度响应函数}
+}
+
+\frame
+{
+	\frametitle{密度响应函数与\textrm{Green's function}表示}
+	密度响应函数$\chi$可以在$\vec r$空间或$\vec q$空间表示
+	\begin{displaymath}
+		\chi(\vec r,\vec r^{\prime})=\frac{\delta n(\vec r)}{\delta V_{ext}(\vec r^{\prime})}\qquad\chi(\vec q,\vec q^{\prime})=\frac{\delta n(\vec q)}{\delta V_{ext}(\vec q^{\prime})}
+	\end{displaymath}
+	响应函数可表示为
+	\begin{displaymath}
+		\chi=\frac{\delta n}{\delta V_{\mathrm{eff}}}\frac{\delta V_{\mathrm{eff}}}{\delta V_{ext}}=\chi^0\left[1+\frac{\delta V_{int}}{\delta n}\frac{\delta n}{\delta V_{ext}}\right]=\chi^0[1+K\chi]
+	\end{displaymath}
+	其中$\chi^0$是无相互作用的响应函数，$K$是\textrm{kernel~}函数
+	\begin{displaymath}
+		\chi_n^0(\vec r,\vec r^{\prime})=\frac{\delta n(\vec r)}{\delta V_{\mathrm{eff}}(\vec r^{\prime})}=2\sum_{i=1}^{\mathrm{occ}}\sum_j^{\mathrm{empty}}\frac{\psi_i^{\ast}(\vec r)\psi_j(\vec r)\psi_j^{\ast}(\vec r^{\prime})\psi_i(\vec r^{\prime})}{\varepsilon_i-\varepsilon_j}
+	\end{displaymath}
+	可用\textrm{Green's function}表示
+	\begin{displaymath}
+		\chi_n^0(\vec r,\vec r^{\prime})=\sum_{i=1}^{\mathrm{occ}}\psi_i^{\ast}(\vec r)G_0^i(\vec r,\vec r^{\prime})\psi_i(\vec r^{\prime})\qquad G_0^i(\vec r,\vec r^{\prime})=\sum_{j\neq i}^{\infty}\frac{\psi_j(\vec r)\psi_j^{\ast}(\vec r^{\prime})}{\varepsilon_i-\varepsilon_j}
+	\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{密度响应函数的$\vec q$空间表示}
+	注意到$\vec r$空间电荷密度变化
+	\begin{displaymath}
+		\Delta n(\vec r)=\sum_{i=1}^{\mathrm{occ}}\sum_j^{\mathrm{empty}}\psi_i^{\ast}(\vec r)\psi_j(\vec r)\frac{\langle\psi_j|\Delta V_{\mathrm{eff}}|\psi_i\rangle}{\varepsilon_i-\varepsilon_j}+\mathrm{c.c.}
+	\end{displaymath}
+	因此在$\vec q$空间表示中，$\Delta V_{\mathrm{eff}}(\vec r)=\Delta V_{\mathrm{eff}}\mathrm{e}^{\mathrm{i}\vec q\cdot\vec r}$，$n(\vec q^{\prime})=\int\mathrm{d}\vec rn(\vec r)\mathrm{e}^{\mathrm{i}\vec q\cdot\vec r}$，\\可有
+	\begin{displaymath}
+		\chi_n^0(\vec q,\vec q^{\prime})=\frac{\delta n(\vec q^{\prime})}{\delta V_{\mathrm{eff}}(\vec q)}=2\sum_{i=1}^{\mathrm{occ}}\sum_j^{\mathrm{empty}}\frac{M_{ij}^{\ast}(\vec q)M_{ij}(\vec q^{\prime})}{\varepsilon_i-\varepsilon_j}
+	\end{displaymath}
+	这里$M_{ij}(\vec q)=\langle\psi_i|\mathrm{e}^{\mathrm{i}\vec q\cdot\vec r}|\psi_j\rangle$\\
+	\vspace{10pt}
+	\textcolor{blue}{显然对于周期体系，$\chi_n^0$在$\vec q$空间表示更方便}
+	
+	对于均匀电子气，只有$\vec q=\vec q^{\prime}$，$\chi_n^0(\vec q,\vec q^{\prime})\neq0$
+}
+
+\frame
+{
+	\frametitle{密度响应函数与声子}
+	\textrm{kernel~}函数$K$的表达式
+	\begin{displaymath}
+		K(\vec q,\vec q^{\prime})=\frac{\delta V_{ini}(\vec q)}{\delta n(\vec q^{\prime})}=\frac{4\pi}{q^2}\delta_{\vec q,\vec q^{\prime}}+\frac{\delta^2 E_{\mathrm{XC}}[n]}{\delta n(\vec q)\delta n(\vec q^{\prime})}\equiv V_C(q)\delta_{\vec q,\vec q^{\prime}}+f_{\mathrm{XC}}(\vec q,\vec q^{\prime})
+	\end{displaymath}
+	\textcolor{red}{注意}:~当$f_\mathrm{XC}=0$即无规相近似(\textrm{random phase approximation, RPA})\\
+	由此可得
+	\begin{displaymath}
+		\chi=\chi^0[1-\chi^0K]^{-1}\qquad\chi^{-1}=[\chi^0]^{-1}-K
+	\end{displaymath}
+介电函数也可以用响应函数表示
+	\begin{displaymath}
+		\epsilon^{-1}=1+V_\mathrm{C}\chi
+	\end{displaymath}
+	因此对于\textit{sp}-型金属，$\chi$可以用均匀电子气模型表示(\textrm{Lindhard}介电函数$\epsilon^{-1}(|\vec q|)$)，但是对于一般材料介电函数$\epsilon^{-1}(\vec q,\vec q^{\prime})$变成很大的矩阵$\epsilon_{\vec G\vec G^{\prime}}^{-1}(\vec k)$，计算非常困难
+}
+
+\frame
+{
+	\frametitle{\textrm{Green's function~}方法}
+	\begin{itemize}
+		\item 利用标准微扰理论，计算介电函数矩阵倒数$\epsilon_{\vec G\vec G^{\prime}}^{-1}(\vec k)$虽然\textcolor{blue}{能给出全部可能微扰的响应}，但涉及\textcolor{red}{对全部未占据态的求和}，计算效率很低
+		\item 近年来发展的密度泛函微扰理论\textrm{(density functional perturbation theory, DFPT)}只关注\textcolor{blue}{特定微扰的响应}，因此\textcolor{red}{计算中只需要对占据态的求和}，大大提高计算效率
+			\begin{enumerate}
+				\item 响应函数的自洽方程用波函数改变表示\\
+					电荷密度的一阶改变
+					\begin{displaymath}
+						\Delta n(\vec r)=2\mathrm{Re}\sum_{\i=1}^N\psi_i(\vec r)\Delta\psi_i(\vec r)
+					\end{displaymath}
+					其中$\Delta\psi_i(\vec r)$由一阶微扰计算
+					\begin{displaymath}
+						(H_{\mathrm{KS}}-\varepsilon_i)|\Delta\psi_i\rangle=-(\Delta V_{\mathrm{KS}}-\Delta\varepsilon_i)|\psi_i\rangle
+					\end{displaymath}
+			\end{enumerate}
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{\textrm{Green's function~}方法}
+	$\Delta\varepsilon_i=\langle\psi_i|\Delta V_{\mathrm{KS}}|\psi_i\rangle$，因此有效势的改变可用电荷密度的变化表示
+	\begin{displaymath}
+		\begin{aligned}
+			\Delta V_{\mathrm{KS}}(\vec r)=&\Delta V_{ext}(\vec r)+e^2\int\mathrm{d}\vec r^{\prime}\frac{\Delta n(\vec r^{\prime})}{|\vec r-\vec r^{\prime}|}+\int\mathrm{d}\vec r^{\prime}\frac{\mathrm{d}V_{\mathrm{XC}}(\vec r)}{\mathrm{d}n(\vec r^{\prime})}\Delta n(\vec r^{\prime})\\
+			\equiv&\Delta V_{ext}(\vec r)+\int\mathrm{d}r^{\prime}K(\vec r,\vec r^{\prime})\Delta n(\vec r)
+		\end{aligned}
+	\end{displaymath}
+	根据\textrm{kernel~}函数的定义，其中交换-相关部分贡献的一阶近似为$f_{\mathrm{XC}}(\vec r,\vec r^{\prime})=\tfrac{\mathrm{d}V_{\mathrm{XC}}(\vec r)}{\mathrm{d}n(\vec r^{\prime})}$
+	\begin{itemize}
+		\item \textcolor{blue}{根据标准微扰理论，由于电荷密度的变化遍及全部占据态($i\leqslant N$)和未占据态($j>N$)求和，因此计算效率不高}
+		\item \textcolor{red}{更有效的办法是将密度和有效势的变化$\Delta n$、$\Delta V_{\mathrm{KS}}$看做为外势变化$\Delta V_{ext}$的自洽响应}\\
+定义投影算符
+\begin{displaymath}
+%	\begin{aligned}
+		\hat P_{\mathrm{occ}}=\sum_{i=1}^N|\psi_i\rangle\langle\psi_i|\quad\mbox{(占据态)}\quad%\\
+		\hat P_{\mathrm{empty}}=1-\hat P_{\mathrm{occ}}\quad\mbox{(未占据态)}
+%	\end{aligned}
+\end{displaymath}
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{\textrm{Green's function~}方法}
+因此对于占据轨道的修正
+					\begin{displaymath}
+						(H_{\mathrm{KS}}-\varepsilon_i)|\Delta\psi_i\rangle=-\hat P_{\mathrm{empty}}\Delta V_{\mathrm{KS}}|\psi_i\rangle
+					\end{displaymath}
+					在\textrm{DFPT}框架下即可用上述方程的迭代构成
+
+					\begin{enumerate}
+						\setcounter{enumi}{1}
+						\item 响应函数的变分表达
+							\begin{displaymath}
+								\begin{aligned}
+									E^{(2)}[V_{ext},n]=&E[V_{ext}^0,n^0]+\int\mathrm{d}\vec rn^0(\mathrm{d}\vec r)\Delta V_{ext}(\vec r)\\
+									+&\frac12\int\mathrm{d}\vec r\mathrm{d}\vec r^{\prime}\left[ \frac{\delta^2E}{\delta V_{ext}(\vec r)\Delta n(\vec r^{\prime})} \right]\Delta V_{ext}(\vec r)\Delta n(\vec r^{\prime})\\
+									+&\frac12\int\mathrm{d}\vec r\mathrm{d}\vec r^{\prime}\left[ \frac{\delta^2E}{\delta n(\vec r)\delta n(\vec r^{\prime})} \right]\Delta n(\vec r)\Delta n(\vec r^{\prime})
+								\end{aligned}
+							\end{displaymath}
+					\end{enumerate}
+}
+
+\frame
+{
+	\frametitle{\textrm{Green's function~}方法}
+	用波函数作为基本变量
+							\begin{displaymath}
+								\begin{aligned}
+									E^{(2)}[V_{ext},\psi_i]=&E[V_{ext}^0,\psi_i^0]\\
+									+&\frac12\sum_i\int\mathrm{d}\vec r\mathrm{d}\vec r^{\prime}\left[ \frac{\delta^2E}{\delta V_{ext}(\vec r)\delta\psi_i(\vec r^{\prime})} \right]\Delta V_{ext}(\vec r)\Delta\psi_i(\vec r^{\prime})\\
+									+&\frac12\sum_{ij}\int\mathrm{d}\vec r\mathrm{d}\vec r^{\prime}\left[ \frac{\delta^2E}{\delta\psi_i(\vec r)\delta\psi_j(\vec r^{\prime})} \right]\Delta\psi_i(\vec r)\Delta\psi_i(\vec r^{\prime})
+								\end{aligned}
+							\end{displaymath}
+							其中
+							\begin{displaymath}
+								\begin{aligned}
+									\frac{\delta^2E}{\delta V_{ext}(\vec r)\delta\psi_i(\vec r^{\prime})}=&\psi_i^0(\vec r)\delta(\vec r-\vec r^{\prime})\\
+									\frac{\delta^2E}{\delta V_{ext}(\vec r)\delta\psi_i(\vec r^{\prime})}=&H_{\mathrm{KS}}^0(\vec r,\vec r^{\prime})+K(\vec r,\vec r^{\prime})\Delta\psi_i(\vec r)\Delta\psi_j(\vec r^{\prime})\Delta\psi_i(\vec r)\Delta\psi_j(\vec r^{\prime})
+								\end{aligned}
+							\end{displaymath}
+
+}
+
+\frame
+{
+	\frametitle{\textrm{Green's function~}方法}
+	由约束条件
+	\begin{displaymath}
+		\langle\psi_i^0+\Delta\psi_i|\psi_j^0+\Delta\psi_j\rangle=\delta_{ij}
+	\end{displaymath}
+	可有
+	\begin{displaymath}
+		H_{\mathrm{KS}}^0\Delta\psi_i-\sum_j\Lambda_{ij}\Delta\psi_j=-(\Delta V_{\mathrm{eff}}-\varepsilon_i)\psi_i+\sum_j\Lambda_{ij}\Delta\psi_j
+	\end{displaymath}
+	\begin{enumerate}
+		\setcounter{enumi}{2}
+	\item 对于周期体系，由声子波矢$\vec k_p$产生的微扰，用\textrm{DFPT}可以极大简化
+		\begin{displaymath}
+			\hspace*{-37pt}
+			\begin{aligned}
+					\Delta V_{ext}(\vec r)=\Delta v_{ext}^{\vec k_p}(\vec r)\mathrm{e}^{\mathrm{i}\vec k_p\cdot\vec r}=&\sum_{\vec T}\frac{V_s[\vec r-\mathbf{R}_s(\vec T)]}{\partial\mathbf{R}_s(\vec T)}\mathrm{e}^{-\mathrm{i}\vec k_p\cdot(\vec r-\mathbf{R}_s(\vec T))}\mathbf{u}_s(\vec k_p)\mathrm{e}^{\mathrm{i}\vec k_p\cdot\vec r}\\
+				\Delta V_{\mathrm{KS}}(\vec r)=&\Delta v_{\mathrm{KS}}^{\vec k_p}(\vec r)\mathrm{e}^{\mathrm{i}\vec k_p\cdot\vec r}\\
+				\Delta n(\vec r)=&\Delta n^{\vec k_p}(\vec r)\mathrm{e}^{\mathrm{i}\vec k_p\cdot\vec r}
+			\end{aligned}
+		\end{displaymath}
+	\end{enumerate}
+}
+
+\frame
+{
+	\frametitle{\textrm{Green's function~}方法}
+	由此引起的电子波矢$\vec k_e$的改变为$\vec k_e+\vec k_p$
+	\begin{displaymath}
+		(H_{\mathrm{KS}}^{\vec k_e}-\varepsilon_i^{\vec k_e})|\Delta\psi_i^{\vec k_e+\vec k_p}\rangle=-[1-\hat P_{\mathrm{occ}}^{\vec k_e+\vec k_p}]\Delta V_{\mathrm{KS}}^{\vec k_p}|\psi_i^{\vec k_e}\rangle
+	\end{displaymath}
+	密度的线性响应
+	\begin{displaymath}
+		\Delta n^{\vec k_p}(\vec r)=2\sum_{\vec k_e,i}u_{\vec k_e,i}^{\ast}(\vec r)\Delta u_{(\vec k_e+\vec k_{p}),i}(\vec r)
+	\end{displaymath}
+	\textrm{Kohn-Sham~}势
+	\begin{displaymath}
+		\Delta v_{\mathrm{KS}}^{\vec k_p}(\vec r)=\Delta v_{ext}^{\vec k_p}(\vec r)+\int\mathrm{d}\vec r^{\prime}\left[ \frac1{|\vec r-\vec r^{\prime}|}+f_{\mathrm{XC}}(\vec r,\vec r^{\prime}) \right]\Delta n^{\vec k_p}(\vec r)
+	\end{displaymath}
+
+}
+
+\frame
+{
+\vskip 60 pt
+%\hskip 10pt \textcolor{blue}{\Huge 感谢答辩委员会各位老师\,\textrm{!}}\\
+\vskip 35 pt
+\hskip 60pt \textcolor{blue}{\Huge 谢谢大家\:!}
+%\vskip 15 pt
+%\hskip 40pt \textcolor{blue}{\Huge \textrm{for your attention\:!}}
+}
+
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+\clearpage
+%\end{CJK*}
+\end{document}
