@@ -238,7 +238,52 @@
 %\label{MGE}
 %\end{figure}
 %}
+\section{复杂磁性结构}
+\frame
+{
+	\frametitle{简单磁结构~\textrm{.VS.}~复杂磁结构}
+\begin{figure}[h!]
+\vspace*{-0.08in}
+\centering
+\includegraphics[height=1.05in,width=0.75in]{Figures/Magnet-simple.png}
+\caption{\tiny \textrm{Simple Magnetic structure:~Ferromagnetism, Anti-Ferromagnetism, Ferrimagnetism}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:Simple-Magnet}
+\end{figure}
+\begin{figure}[h!]
+\vspace*{-0.08in}
+\centering
+\includegraphics[height=1.05in,width=1.35in]{Figures/Magnet-complex.png}
+\includegraphics[height=1.05in,width=2.35in]{Figures/Magnet-complex-compound.png}
+\caption{\tiny \textrm{Complex Magnetic structure:~Spiral magnet, All-in-all-out, 3k-ordered}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:Simple-Magnet}
+\end{figure}
+}
 
+\frame
+{
+	\frametitle{复杂磁结构的两大起源}
+	\begin{itemize}
+		\item 强磁阻挫:~\textrm{Kagome}晶格
+\begin{figure}[h!]
+\vspace*{-0.08in}
+\centering
+\includegraphics[height=0.8in,width=1.7in]{Figures/Magnet-Kagome-lattice.png}
+\caption{\tiny \textrm{The Kagome lattice}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:Magnet-Kamoge}
+\end{figure}
+		\item 强自旋-轨道耦合:~稀土、锕系元素，核材料
+\begin{figure}[h!]
+\vspace*{-0.08in}
+\centering
+\includegraphics[height=0.75in,width=1.4in]{Figures/Magnet-Strong-SOC.png}
+\includegraphics[height=0.75in,width=1.4in]{Figures/Nuclear-Power.png}
+\caption{\tiny \textrm{Strong spin-orbit coupling and nuclear materials.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:Magnet-SOC}
+\end{figure}
+	\end{itemize}
+}
+
+\section{遗传算法与结构预测}
 \frame
 {
 	\frametitle{确定磁结构的方法和困难}
@@ -306,7 +351,7 @@
 \centering
 \includegraphics[height=1.3in,width=1.3in]{Figures/Struct-predict-3.png}
 \hskip 1.0pt
-\includegraphics[height=1.3in,width=2.25in]{Figures/Total_energy_opt.png}
+\includegraphics[height=1.2in,width=2.25in]{Figures/Total_energy_opt.png}
 \caption{\tiny \textrm{The structure of Perovskite and schematic for the energy minimum searching.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Fig:Structure-optimized}
 \end{figure}
@@ -332,15 +377,84 @@
 
 \frame
 {
-	\frametitle{磁结构预测}
+	\frametitle{磁结构遗传算法预测软件\textrm{MagGene}}
 鉴于遗传算法在深度学习和晶体结构预测中的成功应用，这种方法在磁结构预测中也大有用武之地。\textrm{MagGene}就是整合遗传算法和常用的第一性原理计算软件预测材料磁结构新型软件。
 \begin{figure}[h!]
 \centering
 \includegraphics[height=2.2in,width=2.2in]{Figures/MagGene-Flow.png}
-\caption{\tiny \textrm{The Flow of MagGene.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\caption{\tiny \textrm{The flow of MagGene.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Fig:MagGene-Flow}
 \end{figure}
 }
+
+\frame
+{
+	\frametitle{\textrm{MagGene}的主要功能}
+	\begin{itemize}
+                \setlength{\itemsep}{15pt}
+		\item \textcolor{blue}{\textrm{MagGene}的主要功能}:
+			\begin{enumerate}
+                                \setlength{\itemsep}{10pt}
+				\item 自动产生可能的磁结构
+				\item 自动生成第一性原理程序的输入文件
+				\item 自动分析第一性原理程序的计算结果
+				\item 筛选并优化磁结构，反复迭代，直至最终得到基态磁结构
+			\end{enumerate}
+		\item \textcolor{blue}{程序语言}:~\textrm{Fortran~95}
+		\item \textcolor{blue}{第一原理计算程序}:~\textrm{VASP}
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{\textrm{MagGene}的主要文件}
+	\begin{itemize}
+		\item \textcolor{blue}{主输入文件:~\textrm{input.dat}}
+\begin{figure}[h!]
+	\vspace{-0.10in}
+\centering
+\includegraphics[height=1.0in,width=1.3in, viewport=0 20 400 290, clip]{Figures/MagGene-input.png}
+%\caption{\tiny \textrm{The main input file for MagGene.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:MagGene-input}
+\end{figure}
+\item \textcolor{blue}{第一性原理程序调用脚本:~\textrm{submit.sh}}
+\begin{figure}[h!]
+	\vspace{-0.08in}
+\centering
+\includegraphics[height=0.3in,width=1.8in, viewport=0 0 320 60, clip]{Figures/MagGene-submit-VASP.png}
+%\caption{\tiny \textrm{The script for VASP in MagGene.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:MagGene-script-VASP}
+\end{figure}
+\item \textcolor{blue}{第一原理程序输入文件:}\\
+	\vspace{0.08in}
+	\textcolor{magenta}{\textbf{INCAR, POSCAR, KPOINTS, POTCAR}}
+	\end{itemize}
+}
+
+\frame[allowframebreaks]
+{
+	\frametitle{\textrm{MagGene}的主要输入参数}
+	\begin{itemize}
+                \setlength{\itemsep}{12pt}
+		\item \textcolor{purple}{\textrm{noncollinear}}:~ 0~或~1;~指定是否在非共线磁有序中搜索基态
+		\item \textcolor{purple}{\textrm{restart}}:~ 0~或~1;~指定当前计算是否是续算
+		\item \textcolor{purple}{\textrm{m\_atom\_list}}:~ 整数序列;~指定哪些原子带有磁性
+		\item \textcolor{purple}{\textrm{generation}}:~ 整数;~指定最大遗传算法代数
+		\item \textcolor{purple}{\textrm{population}}:~ 整数;~指定一代中的结构数
+		\item \textcolor{purple}{\textrm{similarity\_criteria}}: 实数;~指定两个结构是否相同的判定标准
+		\item \textcolor{purple}{\textrm{pop\_best}}:~ 整数;~指定每代中保留的最佳结构数
+		\item \textcolor{purple}{\textrm{n\_random}}:~ 整数;~在每代中随机生成的结构数
+		\item \textcolor{purple}{ \textrm{n\_mutation}}:~ 整数;~在没代中引入的变异结构数
+		\item \textcolor{purple}{\textrm{delta\_mutation}}:~ 整数;~变异程度
+		\item \textcolor{purple}{\textrm{norm\_mag}}:~ 实数序列;~指定每个原子的磁矩大小
+		\item \textcolor{purple}{\textrm{fixm}}:~ 一个或三个实数;~限定系统总磁矩大小
+		\item \textcolor{purple}{\textrm{afm}}:~ 0或1;~是否进行反铁磁结构搜索
+		\item \textcolor{purple}{\textrm{dft\_coverage}}:~ 0或1;~是否抛掉密度泛函计算中未收敛的结构
+	\end{itemize}
+}
+
+\section{\rm{MagGene}应用算例}
+
 %-----------------------------------------------------------------------------------------------------------------------------------------------------------------------%
 \appendix
 %------------------------------------------------------------------------Reference----------------------------------------------------------------------------------------------
@@ -356,17 +470,17 @@
 %}
 
 %-----------------------------------------------------------Beamer下不建议使用bib,因为涉及分页--------------------------------------------------------------------------%
-\frame[allowframebreaks]
-{
-\frametitle{主要参考文献}
-{\tiny\textrm{
-%\phantomsection\addcontentsline{toc}{section}{Bibliography}	 %直接调用\addcontentsline命令可能导致超链指向不准确,一般需要在之前调用一次\phantomsection命令加以修正	%
-%\phantomsection\addcontentsline{toc}{section}{主要参考文献}	 %直接调用\addcontentsline命令可能导致超链指向不准确,一般需要在之前调用一次\phantomsection命令加以修正	%
-\bibliography{Ref_2020-11-28}%
-\bibliographystyle{../ref/mybib}%
-}}
-\nocite{*}%
-}
+%\frame[allowframebreaks]
+%{
+%\frametitle{主要参考文献}
+%{\tiny\textrm{
+%%\phantomsection\addcontentsline{toc}{section}{Bibliography}	 %直接调用\addcontentsline命令可能导致超链指向不准确,一般需要在之前调用一次\phantomsection命令加以修正	%
+%%\phantomsection\addcontentsline{toc}{section}{主要参考文献}	 %直接调用\addcontentsline命令可能导致超链指向不准确,一般需要在之前调用一次\phantomsection命令加以修正	%
+%\bibliography{Ref_2020-11-28}%
+%\bibliographystyle{../ref/mybib}%
+%}}
+%\nocite{*}%
+%}
 %------------------------------------------------------------------------------------------------------------------------------------------------------------------------------%
 
 %------------------------------------------------------------------------Reference----------------------------------------------------------------------------------------------
