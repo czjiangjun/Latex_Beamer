@@ -102,8 +102,8 @@
 \usepackage{tikz}
 \usepackage{beamerfoils}
 \usepackage{pgf}
-\logo{\pgfputat{\pgfxy(11.68,0.15)}{\includegraphics[height=1.01cm,viewport=0 0 140 120,clip]{Figures/BCC_logo-1.png}}\pgfputat{\pgfxy(10.502,-0.218)}{\includegraphics[height=0.369cm,viewport=140 0 540 120,clip]{Figures/BCC_logo-1.png}}}
-%\logo{\pgfputat{\pgfxy(11.68,0.15)}{\includegraphics[height=0.95cm,viewport=0 0 510 360,clip]{Figures/Logo_Gainstrong.png}}\pgfputat{\pgfxy(10.333,-0.195)}{\includegraphics[height=0.35cm,viewport=530 70 1100 218,clip]{Figures/Logo_Gainstrong.png}}}
+%\logo{\pgfputat{\pgfxy(11.68,0.15)}{\includegraphics[height=1.01cm,viewport=0 0 140 120,clip]{Figures/BCC_logo-1.png}}\pgfputat{\pgfxy(10.502,-0.218)}{\includegraphics[height=0.369cm,viewport=140 0 540 120,clip]{Figures/BCC_logo-1.png}}}
+\logo{\pgfputat{\pgfxy(11.68,0.15)}{\includegraphics[height=0.95cm,viewport=0 0 510 360,clip]{Figures/Logo_Gainstrong.png}}\pgfputat{\pgfxy(10.333,-0.195)}{\includegraphics[height=0.35cm,viewport=530 70 1100 218,clip]{Figures/Logo_Gainstrong.png}}}
 %\logo{\pgfputat{\pgfxy(10.28,0.00)}{\includegraphics[height=0.95cm,viewport=0 0 1100 360,clip]{Figures/Logo_Gainstrong.png}}}
 %\logo{\pgfputat{\pgfxy(11.68,0.15)}{\includegraphics[height=0.95cm,viewport=0 0 510 360,clip]{Figures/Logo_Gainstrong.png}}\pgfputat{\pgfxy(10.333,-0.195)}{\includegraphics[height=0.35cm,viewport=530 70 1100 218,clip]{Figures/Logo_Gainstrong.png}}}
 %\MyLogo{
@@ -151,16 +151,17 @@
 %-----------------------------------------------------------------------------
 
 %----------------------------Author & Date------------------------------------
-\author[\textrm{Jun\_Jiang}]{姜\;\;骏\inst{}} %[]{} (optional, use only with lots of authors)
+%\author[\textrm{Jun\_Jiang}]{姜\;\;骏\inst{}} %[]{} (optional, use only with lots of authors)
 % - Give the names in the same order as the appear in the paper.
 % - Use the \inst{?} command only if the authors have different
 %   affiliation.
 \institute[BCC]{\inst{}%
- \vskip -20pt 北京市计算中心}
+% \vskip -20pt 北京市计算中心}
+ \vskip 45pt 格致斯创(北京)科技有限公司}
 \date[\today] % (optional, should be abbreviation of conference name)
 {	%{\fontsize{6.2pt}{4.2pt}\selectfont{\textcolor{blue}{E-mail:~}\url{jiangjun@bcc.ac.cn}}}
-\vskip 45 pt {\fontsize{8.2pt}{6.2pt}\selectfont{%北京理工大学%报告地点
-	\vskip 5 pt \textrm{2020.11.28}}}
+\vskip 1 pt {\fontsize{8.2pt}{6.2pt}\selectfont{%北京理工大学%报告地点
+	\vskip 2 pt \textrm{2020.11.28}}}
 }
 
 % - Either use conference name or its abbreviation
@@ -238,6 +239,105 @@
 %\label{MGE}
 %\end{figure}
 %}
+\section{研究背景}
+\frame
+{
+	\frametitle{磁随机存储器\textrm{(MRAM)}}
+磁性材料的核心问题：材料自旋磁结构的构筑、调控与设计
+\begin{figure}[h!]
+%\vspace*{-0.08in}
+\centering
+\includegraphics[height=1.85in,width=4.05in]{Figures/MRAM-Devices.png}
+%\caption{\tiny \textrm{Simple Magnetic structure:~Ferromagnetism, Anti-Ferromagnetism, Ferrimagnetism}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:MRAM-Devices}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{磁随机存储器\textrm{(MRAM)}}
+	\begin{itemize}
+		\item {\tiny \textrm{日本东北大学的科研团队成功开发出存储密度达128\textrm{Mb}的\textrm{STT-MRAM}，写入速度达14\textrm{ns}，可作为物联网和人工智能中用到的缓存使用}}
+\begin{figure}[h!]
+\vspace*{-0.08in}
+\centering
+\includegraphics[height=1.05in,width=1.75in]{Figures/Si-crystal-Surface.png}
+%\caption%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:Si-crystal-surface}
+\end{figure}
+\item {\tiny \textrm{韩国\textrm{Samsung}公司宣布已在一条基于28\textrm{nm~FD-SOI}工艺的生产线上，开始大规模生产和商业运输嵌入式\textrm{MRAM(eMRAM)}解决方案}}
+\begin{figure}[h!]
+\vspace*{-0.08in}
+\centering
+\includegraphics[height=1.05in,width=1.65in]{Figures/Samsung-cell.png}
+%\caption%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:Samsung-cell}
+\end{figure}
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{反铁磁存储}
+	\begin{itemize}
+		\item {\tiny \textrm{美国西北大学和意大利墨西拿大学的电气工程师们联合开发出一种新型的小巧但功能强大的存储设备，该设备使用创新的反铁磁\textrm{(AFM)}材料，而所需的耗电量之低创记录}}
+\begin{figure}[h!]
+\vspace*{-0.08in}
+\centering
+\includegraphics[height=0.95in,width=1.95in]{Figures/AFM-device.png}
+%\caption{\tiny \textrm{}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:AFM-device}
+\end{figure}
+\item {\tiny \textrm{德国美因茨大学物理学家在反铁磁体中读出和写入信息，未来有望实现超高速、稳定的磁存储器}}
+\begin{figure}[h!]
+\vspace*{-0.04in}
+\centering
+\includegraphics[height=1.05in,width=1.55in]{Figures/AFM-Memory.png}
+%\caption{\tiny \textrm{}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:AFM-Memory}
+\end{figure}
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{拓扑绝缘体}
+	\begin{itemize}
+		\item {\tiny \textrm{美国明尼苏达大学研究人员研究出一种涉及磁阻效应的新型拓扑绝缘体，有望应用于改善计算与存储}}
+\begin{figure}[h!]
+\vspace*{-0.04in}
+\centering
+\includegraphics[height=0.95in,width=1.95in]{Figures/Topological-Insulator.png}
+%\caption{\tiny \textrm{}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:Topological-Insulator}
+\end{figure}
+\item {\tiny \textrm{美国华盛顿大学研究人员采用仅有几个原子层厚度的二维磁性材料\ch{CrI3}来编码信息，有望实现更高密度的数据存储，并提高能量效率，从而革新计算技术和电子设备}}
+\begin{figure}[h!]
+\vspace*{-0.04in}
+\centering
+\includegraphics[height=1.05in,width=1.55in]{Figures/CrI3-Layer.png}
+%\caption{\tiny \textrm{}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:CrI3-Layer}
+\end{figure}
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{\textcolor{red}{开发\textrm{MRAM}技术瓶颈问题}}
+	\begin{itemize}
+		\item 如何构建一套具有范式意义的技术方法，使得我们能够\textcolor{red}{快速、精准地预测各类磁性材料的磁结构及磁参数}\\
+			对加速开发\textrm{MRAM}具有至关重要的作用，目前属于国际空白
+\begin{figure}[h!]
+\vspace*{-0.04in}
+\centering
+\includegraphics[height=2.15in,width=3.25in]{Figures/Magnet-skyrmion.png}
+%\caption{\tiny \textrm{}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:Magnet-skyrmion}
+\end{figure}
+	\end{itemize}
+}
+
 \section{复杂磁性结构}
 \frame
 {
@@ -252,8 +352,9 @@
 \begin{figure}[h!]
 \vspace*{-0.08in}
 \centering
-\includegraphics[height=1.05in,width=1.35in]{Figures/Magnet-complex.png}
 \includegraphics[height=1.05in,width=2.35in]{Figures/Magnet-complex-compound.png}
+\hskip 0.5pt
+\includegraphics[height=1.05in,width=1.35in]{Figures/Magnet-complex.png}
 \caption{\tiny \textrm{Complex Magnetic structure:~Spiral magnet, All-in-all-out, 3k-ordered}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Fig:Simple-Magnet}
 \end{figure}
@@ -267,7 +368,7 @@
 \begin{figure}[h!]
 \vspace*{-0.08in}
 \centering
-\includegraphics[height=0.8in,width=1.7in]{Figures/Magnet-Kagome-lattice.png}
+\includegraphics[height=0.7in,width=1.5in]{Figures/Magnet-Kagome-lattice.png}
 \caption{\tiny \textrm{The Kagome lattice}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Fig:Magnet-Kamoge}
 \end{figure}
@@ -275,8 +376,8 @@
 \begin{figure}[h!]
 \vspace*{-0.08in}
 \centering
-\includegraphics[height=0.75in,width=1.4in]{Figures/Magnet-Strong-SOC.png}
-\includegraphics[height=0.75in,width=1.4in]{Figures/Nuclear-Power.png}
+\includegraphics[height=0.85in,width=1.4in]{Figures/Magnet-Strong-SOC.png}
+\includegraphics[height=0.85in,width=1.4in]{Figures/Nuclear-Power.png}
 \caption{\tiny \textrm{Strong spin-orbit coupling and nuclear materials.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Fig:Magnet-SOC}
 \end{figure}
@@ -351,7 +452,7 @@
 \centering
 \includegraphics[height=1.3in,width=1.3in]{Figures/Struct-predict-3.png}
 \hskip 1.0pt
-\includegraphics[height=1.2in,width=2.25in]{Figures/Total_energy_opt.png}
+\includegraphics[height=1.1in,width=2.25in]{Figures/Total_energy_opt.png}
 \caption{\tiny \textrm{The structure of Perovskite and schematic for the energy minimum searching.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Fig:Structure-optimized}
 \end{figure}
@@ -372,6 +473,19 @@
 \includegraphics[height=1.0in,width=1.8in]{Figures/Logo_Calypso.png}
 %\caption{\tiny \textrm{The structure of Perovskite and schematic for the energy minimum searching.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Fig:Structure-optimized-2}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{磁结构遗传算法预测软件\textrm{MagGene}}
+\begin{figure}[h!]
+\centering
+\includegraphics[height=2.5in,width=1.8in]{Figures/MagGene-copyright.png}
+\hspace*{0.1in}
+\includegraphics[height=2.5in,width=1.8in]{Figures/MagGene-Patent-inv.png}
+%\caption{\tiny \textrm{The flow of MagGene.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:MagGenea-Patent}
 \end{figure}
 }
 
@@ -454,6 +568,47 @@
 }
 
 \section{\rm{MagGene}应用算例}
+\frame
+{
+	\frametitle{块体\ch{FeSe}}
+\ch{FeSe}具有非常复杂的磁有序结构
+	\begin{itemize}
+		\item 块体\ch{FeSe}:~具有超导电性$\mathrm{T_c}\sim8\mathrm{K}$
+\begin{figure}[h!]
+%\vspace*{-0.08in}
+\centering
+\includegraphics[height=1.25in,width=1.80in]{Figures/FeSe-struct-2.png}
+\hskip 0.5pt
+\includegraphics[height=1.25in,width=1.80in]{Figures/FeSe-Mag-Tc.png}
+\caption{\tiny \textrm{The bulk-structure of \ch{FeSe}. and hysteresis loop. }}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:Mag-bulk-FeSe}
+\end{figure}
+\textrm{F-C. Hsu, \textit{et al}. PNAS \textbf{23}, 14262~(2008)}
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{单层\ch{FeSe}}
+	\begin{itemize}
+\item 单层\ch{FeSe}具有更高的转变温度$\mathrm{T_c}\sim65\mathrm{K}$
+\begin{figure}[h!]
+\vspace*{-0.08in}
+\centering
+\includegraphics[height=1.85in,width=1.20in]{Figures/FeSe-struct-1.png}
+\hskip 0.5pt
+\includegraphics[height=1.25in,width=2.40in]{Figures/FeSe-single-Mag-Tc.png}
+\caption{\tiny \textrm{The monolayer-structure of \ch{FeSe}. and $\mathrm{T_C}$. }}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:Mag-surface-FeSe}
+\end{figure}
+\textrm{S. He, \textit{et al}.  Nat. Mater. \textbf{12}, 605~(2013)}
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{\ch{FeSe}磁结构的预测}
+}
 
 %-----------------------------------------------------------------------------------------------------------------------------------------------------------------------%
 \appendix
