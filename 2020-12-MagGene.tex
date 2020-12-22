@@ -570,17 +570,15 @@
 \section{\rm{MagGene}应用算例}
 \frame
 {
-	\frametitle{块体\ch{FeSe}}
-\ch{FeSe}具有非常复杂的磁有序结构
+	\frametitle{块体\textrm{\ch{FeSe}}}
+	\textrm{\ch{FeSe}}具有非常复杂的磁有序结构
 	\begin{itemize}
-		\item 块体\ch{FeSe}:~具有超导电性$\mathrm{T_c}\sim8\mathrm{K}$
+		\item 块体\textrm{\ch{FeSe}}:~具有超导电性$\mathrm{T_c}\sim8\mathrm{K}$
 \begin{figure}[h!]
 %\vspace*{-0.08in}
 \centering
-\includegraphics[height=1.25in,width=1.80in]{Figures/FeSe-struct-2.png}
-\hskip 0.5pt
-\includegraphics[height=1.25in,width=1.80in]{Figures/FeSe-Mag-Tc.png}
-\caption{\tiny \textrm{The bulk-structure of \ch{FeSe}. and hysteresis loop. }}%(与文献\cite{EPJB33-47_2003}图1对比)
+\includegraphics[height=1.6in,width=2.20in]{Figures/FeSe-Mag-Tc.png}
+\caption{\tiny \textrm{The hysteresis loop of \ch{FeSe} (bulk-structure). }}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Fig:Mag-bulk-FeSe}
 \end{figure}
 \textrm{F-C. Hsu, \textit{et al}. PNAS \textbf{23}, 14262~(2008)}
@@ -589,16 +587,14 @@
 
 \frame
 {
-	\frametitle{单层\ch{FeSe}}
+	\frametitle{单层\textrm{\ch{FeSe}}}
 	\begin{itemize}
-\item 单层\ch{FeSe}具有更高的转变温度$\mathrm{T_c}\sim65\mathrm{K}$
+		\item 单层\textrm{\ch{FeSe}}具有更高的转变温度$\mathrm{T_c}\sim65\mathrm{K}$
 \begin{figure}[h!]
 \vspace*{-0.08in}
 \centering
-\includegraphics[height=1.85in,width=1.20in]{Figures/FeSe-struct-1.png}
-\hskip 0.5pt
-\includegraphics[height=1.25in,width=2.40in]{Figures/FeSe-single-Mag-Tc.png}
-\caption{\tiny \textrm{The monolayer-structure of \ch{FeSe}. and $\mathrm{T_C}$. }}%(与文献\cite{EPJB33-47_2003}图1对比)
+\includegraphics[height=1.5in,width=2.80in]{Figures/FeSe-single-Mag-Tc.png}
+\caption{\tiny \textrm{The  $\mathrm{T_C}$ for the monolayer-structure \ch{FeSe}.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Fig:Mag-surface-FeSe}
 \end{figure}
 \textrm{S. He, \textit{et al}.  Nat. Mater. \textbf{12}, 605~(2013)}
@@ -607,9 +603,158 @@
 
 \frame
 {
-	\frametitle{\ch{FeSe}磁结构的预测}
+	\frametitle{\textrm{\ch{FeSe}}磁结构的预测}
+	计算使用包含32个原子的超元胞\\
+\begin{figure}[h!]
+\vspace*{-0.08in}
+\centering
+\includegraphics[height=2.35in,width=1.45in]{Figures/FeSe-struct-1.png}
+\hskip 0.2in
+\includegraphics[height=1.40in,width=1.80in]{Figures/FeSe-struct-2.png}
+\caption{\tiny \textrm{The monolayer- and bulk-structure of \ch{FeSe} for calculated. }}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:FeSe-Structure}
+\end{figure}
 }
 
+\frame
+{
+	\frametitle{\textrm{\ch{FeSe}}磁结构的预测}
+	单层\textrm{\ch{FeSe}}在第四代找到了最稳定的磁结构\\
+	块体\textrm{\ch{FeSe}}在第十代找到了最稳定的磁结构
+\begin{figure}[h!]
+\vspace*{-0.08in}
+\centering
+\includegraphics[height=1.25in,width=1.60in]{Figures/FeSe-Generation-1.png}
+\hskip 0.5pt
+\includegraphics[height=1.25in,width=1.60in]{Figures/FeSe-Generation-2.png}
+%\caption{\tiny \textrm{The monolayer-structure of \ch{FeSe}. and $\mathrm{T_C}$. }}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:FeSe-Generation}
+\end{figure}
+\centering
+计算参数\textrm{input.data}文件设置:\\
+\fbox{%
+		\parbox{0.7\textwidth}{%
+
+	\tiny{	\textrm{\textcolor{magenta}{noncollinear}=0}:~ \#共线磁结构搜索\\
+		\textrm{\textcolor{magenta}{afm}=1}:~ \#搜索反铁磁结构\\
+\textrm{\textcolor{magenta}{generation}=30}:~ \#演化30代\\
+\textrm{\textcolor{magenta}{population}=30}:~ \#每一代计算30个结构\\
+\textrm{\textcolor{magenta}{pop\_best}=8}:~ \#保留8个最优结构\\
+\textrm{\textcolor{magenta}{n\_random}=10}:~ \#每一代包含10个随机结构 }}
+}
+}
+
+\frame
+{
+	\frametitle{单层\textrm{\ch{CrI3}}}
+	\begin{itemize}
+		\item 单层\textrm{\ch{CrI3}}在不同条件下具有不同的磁结构
+\begin{figure}[h!]
+\vspace*{-0.08in}
+\centering
+\includegraphics[height=1.85in,width=1.45in]{Figures/CrI3-magnet-struct-1.png}
+\caption{\tiny \textrm{The different magnetic structure of monolayer-structure \ch{FeSe}.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:Mono-layere-CrI3}
+\end{figure}
+\textrm{F. Zheng, \textit{et al}.  Nanoscale. \textbf{10}, 14298~(2018)}
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{单层\textrm{\ch{CrI3}}}
+	\begin{itemize}
+		\item \textrm{\ch{CrI3}}层间也有复杂的磁耦合行为
+\begin{figure}[h!]
+\vspace*{-0.08in}
+\centering
+\includegraphics[height=1.85in,width=2.05in]{Figures/CrI3-magnet-struct-2.png}
+\caption{\tiny \textrm{The inter-layer magnet-coupling of \ch{FeSe}.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:Inter-layer-CrI3}
+\end{figure}
+\textrm{B. Huang, \textit{et al}.  Nat. Nanotech. \textbf{13}, 544~(2018)}
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{单层\ch{CrI3}磁结构的预测}
+	晶格常数为6.3\textrm{\AA}、7\textrm{\AA}和8\textrm{\AA}的单层\textrm{\ch{CrI3}}在第21、6和10代找到了最稳定的磁结构，分别是面内反铁磁、面外铁磁和面内铁磁。
+\begin{figure}[h!]
+\vspace*{-0.08in}
+\centering
+\includegraphics[height=1.15in,width=1.45in]{Figures/CrI3-struct.png}\\
+\includegraphics[height=1.00in,width=1.22in]{Figures/CrI3-Generation-6.png}
+\hskip 0.5pt
+\includegraphics[height=1.00in,width=1.22in]{Figures/CrI3-Generation-7.png}
+\hskip 0.5pt
+\includegraphics[height=1.00in,width=1.22in]{Figures/CrI3-Generation-8.png}
+\caption{\tiny \textrm{Atomic structure of \ch{CrI3} single layer and the MagGene calculation results for single layer with lattice parameters 6.3\AA, 7.0\AA, and 8.0\AA respectively.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:FeSe-Generation}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{单层\textrm{\ch{CrI3}}磁结构的预测}
+\centering
+计算参数\textrm{input.data}文件设置:\\
+\vskip 0.3in
+\fbox{%
+		\parbox{0.7\textwidth}{%
+
+		\textrm{\textcolor{magenta}{noncollinear}=1}:~ \#非共线磁结构搜索\\
+		\textrm{\textcolor{magenta}{afm}=0}:~ \#不限于搜索反铁磁结构\\
+\textrm{\textcolor{magenta}{generation}=30}:~ \#演化30代\\
+\textrm{\textcolor{magenta}{population}=30}:~ \#每一代计算30个结构\\
+\textrm{\textcolor{magenta}{pop\_best}=8}:~ \#保留8个最优结构\\
+\textrm{\textcolor{magenta}{n\_random}=10}:~ \#每一代包含10个随机结构 }}
+}
+
+\frame
+{
+	\frametitle{\textrm{\ch{UO2}}晶体}
+	\begin{itemize}
+		\item \textrm{\ch{UO2}}具有非常复杂的磁有序结构
+\begin{figure}[h!]
+\vspace*{-0.08in}
+\centering
+\includegraphics[height=1.85in,width=3.25in]{Figures/UO2-complex-struct.png}
+\caption{\tiny \textrm{The complexed magnetic-ordered structure of \ch{UO2}.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:Inter-layer-CrI3}
+\end{figure}
+\textrm{J. T. Pegg, \textit{et al}.  Phys. Chem. Chem. Phys. \textbf{21}, 760~(2019)}
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{\textrm{\ch{UO2}}磁结构的预测}
+	计算程序在第13代演化中找到\textrm{\ch{UO2}}正确的磁结构:~\textrm{3k}反铁磁
+\begin{figure}[h!]
+\vspace*{-0.08in}
+\centering
+\includegraphics[height=1.45in,width=1.20in]{Figures/UO2-struct.png}
+\hskip 0.5pt
+\includegraphics[height=1.45in,width=1.50in]{Figures/UO2-Generation.png}
+%\caption{\tiny \textrm{The monolayer-structure of \ch{FeSe}. and $\mathrm{T_C}$. }}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:FeSe-Generation}
+\end{figure}
+\textcolor{red}{\tiny{计算中使用了描述关联性之更好的\textrm{Meta-GGA}泛函\textrm{SCAN}来研究\textrm{\ch{UO2}}}}\\
+\vskip 0.08in
+\centering
+计算参数\textrm{input.data}文件设置:\\
+\fbox{%
+		\parbox{0.7\textwidth}{%
+
+	\tiny{	\textrm{\textcolor{magenta}{noncollinear}=1}:~ \#非共线磁结构搜索\\
+		\textrm{\textcolor{magenta}{afm}=1}:~ \#搜索反铁磁结构\\
+\textrm{\textcolor{magenta}{generation}=30}:~ \#演化30代\\
+\textrm{\textcolor{magenta}{population}=30}:~ \#每一代计算30个结构\\
+\textrm{\textcolor{magenta}{pop\_best}=8}:~ \#保留8个最优结构\\
+\textrm{\textcolor{magenta}{n\_random}=3}:~ \#每一代包含3个随机结构 }}
+}
+}
 %-----------------------------------------------------------------------------------------------------------------------------------------------------------------------%
 \appendix
 %------------------------------------------------------------------------Reference----------------------------------------------------------------------------------------------
