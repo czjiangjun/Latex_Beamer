@@ -269,8 +269,135 @@ export LAPACK=/usr/lib/liblapack.so\\
 pip install numpy\\
 pip install scipy\\
 
+\section{关于\textrm{MongoDB}的启动}
+\textrm{MongoDB}可以通过控制文件(如文件名为\textrm{mongodb.config})来控制启动，\textrm{mongodb.config}中指定各种参数:\\
+\fbox{
+	\parbox{\textwidth}{
+\textrm{fork = true\\
+dbpath = /home/jun\_jiang/WORKS/TEST/TEST\_mongo/Data\_Base\\
+logpath = /home/jun\_jiang/WORKS/TEST/TEST\_mongo/mongo.log\\
+logappend =true\\
+journal = true\\
+\# repair = true\\
+bind\_ip = 127.0.0.1,192.168.113.42\#这里的\textrm{IP(192.168.113.42)}为数据库服务器的内部\textrm{IP}(即\textrm{ifconfig}命令查询到的本机\textrm{IP})\\
+port = 27017}}}
+
+如果需要在同一地点启动多个数据库，只需要修改\textrm{dbpath}即可\\
+
+如\textrm{mongodb\_atomate.config}:\\
+\fbox{
+	\parbox{\textwidth}{
+\textrm{fork = true\\
+dbpath = /home/jun\_jiang/WORKS/TEST/TEST\_mongo/Data\_Base\_Atomate\\
+logpath = /home/jun\_jiang/WORKS/TEST/TEST\_mongo/mongo.log\\
+logappend =true\\
+journal = true\\
+\# repair = true\\
+bind\_ip = 127.0.0.1,192.168.113.42\#这里的\textrm{IP(192.168.113.42)}为数据库服务器的内部\textrm{IP}(即\textrm{ifconfig}命令查询到的本机\textrm{IP})\\
+port = 27017}}}
+
+如\textrm{mongodb\_firework.config}:\\
+\fbox{
+	\parbox{\textwidth}{
+\textrm{fork = true\\
+dbpath = /home/jun\_jiang/WORKS/TEST/TEST\_mongo/Data\_Base\_Firework\\
+logpath = /home/jun\_jiang/WORKS/TEST/TEST\_mongo/mongo.log\\
+logappend =true\\
+journal = true\\
+\# repair = true\\
+bind\_ip = 127.0.0.1,192.168.113.42\#这里的\textrm{IP(192.168.113.42)}为数据库服务器的内部\textrm{IP}(即\textrm{ifconfig}命令查询到的本机\textrm{IP})\\
+port = 27017}}}
+
+启动数据库的命令为:~\textrm{\textcolor{red}{mongod~-f~mongodb\_XXXX.config}}\\
+
+进入数据库的命令为:~\textrm{\textcolor{red}{mongo}}，然后用\textrm{help}检查\textrm{MongoDB}的各种命令
 
 
+
+%-------------------The Figure Of The Paper------------------
+%\begin{figure}[h!]
+%\centering
+%\includegraphics[height=3.35in,width=2.85in,viewport=0 0 400 475,clip]{PbTe_Band_SO.eps}
+%\hspace{0.5in}
+%\includegraphics[height=3.35in,width=2.85in,viewport=0 0 400 475,clip]{EuTe_Band_SO.eps}
+%\caption{\small Band Structure of PbTe (a) and EuTe (b).}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\label{Pb:EuTe-Band_struct}
+%\end{figure}
+
+%-------------------The Equation Of The Paper-----------------
+%\begin{equation}
+%\varepsilon_1(\omega)=1+\frac2{\pi}\mathscr P\int_0^{+\infty}\frac{\omega'\varepsilon_2(\omega')}{\omega'^2-\omega^2}d\omega'
+%\label{eq:magno-1}
+%\end{equation}
+
+%\begin{equation} 
+%\begin{split}
+%\varepsilon_2(\omega)&=\frac{e^2}{2\pi m^2\omega^2}\sum_{c,v}\int_{BZ}d{\vec k}\left|\vec e\cdot\vec M_{cv}(\vec k)\right|^2\delta [E_{cv}(\vec k)-\hbar\omega] \\
+% &= \frac{e^2}{2\pi m^2\omega^2}\sum_{c,v}\int_{E_{cv}(\vec k=\hbar\omega)}\left|\vec e\cdot\vec M_{cv}(\vec k)\right|^2\dfrac{dS}{\nabla_{\vec k}E_{cv}(\vec k)}
+% \end{split}
+%\label{eq:magno-2}
+%\end{equation}
+
+%-------------------The Table Of The Paper----------------------
+%\begin{table}[!h]
+%\tabcolsep 0pt \vspace*{-12pt}
+%\caption{The representative $\vec k$ points contributing to $\sigma_2^{xy}$ of interband transition in EuTe around 2.5 eV.}
+%\label{Table-EuTe_Sigma}
+%\begin{minipage}{\textwidth}
+%%\begin{center}
+%\centering
+%\def\temptablewidth{1.01\textwidth}
+%\rule{\temptablewidth}{1pt}
+%\begin{tabular*} {\temptablewidth}{@{\extracolsep{\fill}}cccccc}
+
+%-------------------------------------------------------------------------------------------------------------------------
+%&Peak (eV)  & {$\vec k$}-point            &Band{$_v$} to Band{$_c$}  &Transition Orbital
+%Components\footnote{波函数主要成分后的括号中，$5s$、$5p$和$5p$、$4f$、$5d$分别指碲和铕的原子轨道。} &Gap (eV)   \\ \hline
+%-------------------------------------------------------------------------------------------------------------------------
+%&2.35       &(0,0,0)         &33$\rightarrow$34    &$4f$(31.58)$5p$(38.69)$\rightarrow$$5p$      &2.142   \\% \cline{3-7}
+%&       &(0,0,0)         &33$\rightarrow$34    &$4f$(31.58)$5p$(38.69)$\rightarrow$$5p$      &2.142   \\% \cline{3-7}
+%-------------------------------------------------------------------------------------------------------------------------
+
+%\end{tabular*}
+%\rule{\temptablewidth}{1pt}\\
+%%\end{center}
+%\end{minipage}
+%\end{table}
+
+%-------------------The Long Table Of The Paper--------------------
+%\begin{small}
+%%\begin{minipage}{\textwidth}
+%%\begin{longtable}[l]{|c|c|cc|c|c|} %[c]指定长表格对齐方式
+%\begin{longtable}[c]{|c|c|p{1.9cm}p{4.6cm}|c|c|}
+%\caption{Assignment for the peaks of EuB$_6$}
+%\label{tab:EuB6-1}\\ %\\长表格的caption中换行不可少
+%\hline
+%%
+%--------------------------------------------------------------------------------------------------------------------------------
+%\multicolumn{2}{|c|}{\bfseries$\sigma_1(\omega)$谱峰}&\multicolumn{4}{c|}{\bfseries部分重要能带间电子跃迁\footnotemark}\\ \hline
+%\endfirsthead
+%--------------------------------------------------------------------------------------------------------------------------------
+%%
+%\multicolumn{6}{r}{\it 续表}\\
+%\hline
+%--------------------------------------------------------------------------------------------------------------------------------
+%标记 &峰位(eV) &\multicolumn{2}{c|}{有关电子跃迁} &gap(eV)  &\multicolumn{1}{c|}{经验指认} \\ \hline
+%\endhead
+%--------------------------------------------------------------------------------------------------------------------------------
+%%
+%\multicolumn{6}{r}{\it 续下页}\\
+%\endfoot
+%\hline
+%--------------------------------------------------------------------------------------------------------------------------------
+%%
+%%\hlinewd{0.5$p$t}
+%\endlastfoot
+%--------------------------------------------------------------------------------------------------------------------------------
+%%
+%% Stuff from here to \endlastfoot goes at bottom of last page.
+%%
+%--------------------------------------------------------------------------------------------------------------------------------
+%标记 &峰位(eV)\footnotetext{见正文说明。} &\multicolumn{2}{c|}{有关电子跃迁\footnotemark} &gap(eV) &\multicolumn{1}{c|}{经验指认\upcite{PRB46-12196_1992}}\\ \hline
 
 %-------------------The Figure Of The Paper------------------
 %\begin{figure}[h!]
