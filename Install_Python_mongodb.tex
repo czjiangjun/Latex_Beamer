@@ -194,7 +194,35 @@ trusted-host = \url{pypi.douban.com} \\
 下载安装模块:~ \textrm{\url{https://pypi.python.org/simple/}}模块.tar.gz\:\:\:(\textcolor{red}{无需解压})\\
 \textcolor{purple}{pip install 模块.版本.tar.gz}\\
 
-在此基础上，准备手动安装\textrm{numpy}、\textrm{scipy}等模块，建议指定环境变量\textrm{ATLAS}(版本3.8.4)、\textrm{LAPACK}(版本3.6.0)、\textrm{BLAS}\\
+
+\textrm{Python}运行\textrm{pip}时，如果提示\textcolor{red}{\underline{\textrm{Can't connect to HTTPS URL because the SSL module is not available.-skipping}}}，就需要安装\textrm{openssl}(1.1或1.02版)或\textrm{libressl}的2.6.4版本:
+\begin{itemize}
+	\item \textrm{wget~\url{http://www.openssl.org/source/openssl-xxx.tar.gz}}
+	\item \textrm{tar~xvzf~openssl-xxx.tar.gz}
+	\item \textrm{./config~~-prefix=/usr/local/openssl-xxx~~--openssldir=/usr/local/openssl-xxx/openssl~~no-zlib} ~~~\#建议加上\textrm{no-zlib}~否则会出现\textrm{undefined symbol:~SSL\_CTX\_get0\_param}错误
+	\item \textrm{make~\&\&~make~install}
+	\item \textrm{echo~``/usr/local/openssl-xxx/lib''~>>~/etc/ld.so.conf}
+	\item \textrm{ldconfig -v}
+\end{itemize}
+重新编译和安装\textrm{Python}，记得修改\textrm{Module/Setup}文件:~
+\begin{itemize}
+	\item \textrm{vim~/root/Python-XXXX/Modules/Setup}
+	\item 修改结果如下:\\
+		\fbox{
+			\parbox{0.9\textwidth}{
+   \textrm{\#~Socket module helper for socket(2)\\ 
+    \_socket socketmodule.c timemodule.c\\ 
+    \#~Socket module helper for SSL support; you must comment out the other\\
+    \#~socket line above, and possibly edit the SSL variable: \\
+    SSL=/usr/local/openssl-xxx \\
+    \_ssl~\_ssl.c \ \\
+    -DUSE\_SSL~~-I\$(SSL)/include ~~-I\$(SSL)/include/openssl \\ 
+    -L\$(SSL)/lib -lssl -lcrypto }}}
+    \item 运行\textrm{python}
+    \item \textrm{import~~ssl}测试正常即可
+\end{itemize}
+
+在此基础上，准备手动安装\textrm{numpy}、\textrm{scipy}等模块，建议指定环境变量\textrm{ATLAS}(版本3.8.4)、\textrm{LAPACK}(版本3.6.0)、\textrm{BLAS}\\ 
 \textcolor{red}{注意:环境变量要具体到绝对路径(包括文件名)}，如:\\
 \textcolor{blue}{export ATLAS=/share/home/jiangjun/lib/atlas3.8.4/lib/libatlas.so}\\
 \textcolor{blue}{export LAPACK=/share/home/jiangjun/lib/atlas3.8.4/lib/liblapack.so}\\
