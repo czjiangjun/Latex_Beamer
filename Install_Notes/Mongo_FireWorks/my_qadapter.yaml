@@ -1,0 +1,25 @@
+_fw_name: CommonAdapter
+# _fw_q_type: PBS #SLURM
+_fw_q_type: LoadSharingFacility
+# _fw_template_file: /share/home/czjiangjun/WORKS/TEST_ATOMATE/LSF_template_custom.txt
+rocket_launch: rlaunch -w /home/jun-jiang/WORKS/FireWorks/my_fworker.yaml -l /home/jun-iang/WORKS/FireWorks/my_launchpad.yaml rapidfire #singleshot 
+# rocket_launch: rlaunch -c /share/home/czjiangjun/WORKS/TEST_FireWorks singleshot #rapidfire
+# rocket_launch: rlaunch -c /share/home/czjiangjun/WORKS/TEST_FireWorks singleshot 
+# rocket_launch: bsub  ./stand.lsf
+nodes: 4
+ntasks_per_node: 2
+# walltime: 24:00:00
+queue: para2
+# account: czjiangjun
+job_name: VASP_Cal
+pre_rocket: null
+post_rocket: null
+# NP_PER_NODE: 12 #（一个节点跑n个进程，不指定系统按照资源使用情况自主决定）
+MPI_TYPE: openmpi #（选择mpi的类型）
+MPI_HOME: /home/jun-jiang/Softswares/openmpi-1.8.4 #（mpi的路径）
+RUN: RAW
+# OMP_NUM_THREADS=4 （如果使用OpenMP或者是单节点启动多个进程，需要通过该参数修正资源的分配，该值表示一个进程中运行了4个线程）
+_q_commands_override:
+    submit_cmd: bsub
+#    submit_cmd: ./
+#    status_cmd: bstatus
