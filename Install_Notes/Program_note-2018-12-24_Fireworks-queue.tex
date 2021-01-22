@@ -126,7 +126,6 @@
 %----------------------------------------------------------------------------------------The Body Of The Paper----------------------------------------------------------------------------------------%
 %Introduction
 
-\section{14种\rm{Bravais~}格子}
 \section{Queue}
 作业管理系统本质上是一个\textbf{Shell~}
 普通的队列(\textrm{Queue})调度模板相当于是一个脚本(\textrm{script})
@@ -134,21 +133,21 @@
 	\item 队列脚本:~启动计算任务
 	\item #lsf脚本的基本格式:~
 	\item #队列名,有系统管理员分配，一般不需要修改
-	\item APP_NAME=para2
+	\item APP\_NAME=para2
 	\item #该参数不建议修改
-	\item NP_PER_NODE=24
+	\item NP\_PER\_NODE=24
 	\item #mpi 的类型，该参数不建议修改
-	\item MY_MPI_TYPE=openmpi
+	\item MY\_MPI\_TYPE=openmpi
 	\item #mpi 的路径，在系统下，可以通过which mpicc查看
-	\item MY_MPI_HOME=/share/software/program/01_openmpi-1.6.3
-	\item MY_MPI_HOME=/share/software/program/02_openmpi-1.8.4
+	\item MY\_MPI\_HOME=/share/software/program/01\_openmpi-1.6.3
+	\item MY\_MPI\_HOME=/share/software/program/02\_openmpi-1.8.4
 
-	\item #任务调用的核心数，为NP_PER_NODE的整数倍将获得更好的计算效率，该参数根据任务计算量大小常调整
+	\item #任务调用的核心数，为NP\_PER\_NODE的整数倍将获得更好的计算效率，该参数根据任务计算量大小常调整
 	\item NP=24
 	\item #命令行参数
-	\item RUN="/share/home/czjiangjun/vasp/vasp_std > log"
+	\item RUN="/share/home/czjiangjun/vasp/vasp\_std > log"
 	\item #vasp：RUN="vasp"
-	\item #lammps:RUN="lmp_openmpi < relax.in > relax.log"
+	\item #lammps:RUN="lmp\_openmpi < relax.in > relax.log"
 	\item #gaussian09:RUN="g09 in.gjf"
 	\item #GMX:RUN="mdrun input.file"
 	\item #fortan:RUN="run.file"
