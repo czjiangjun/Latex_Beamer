@@ -1,7 +1,0 @@
-name: mgo-test
-category: ''
-query: '{}'
-env:
-        db_file: /home/jun-jiang/WORKS/FireWorks/db.json
-        vasp_cmd: mpirun -np 2 /home/jun-jiang/Softwares/vasp.5.4.1/bin/vasp_std
-        scratch_dir: null
