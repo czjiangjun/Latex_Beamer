@@ -573,9 +573,13 @@
 \frametitle{密度泛函理论(\textrm{DFT})}
 \textrm{Kohn-Sham}方程\upcite{PR140-A1133_1965}：无相互作用体系+交换-相关能的贡献
 $$(T_S+V_{e\!f\!f})|\varphi_i\rangle=\varepsilon_i|\varphi_i\rangle,\quad i=1,\cdots,N,\cdots$$
-其中$T_S=-\dfrac12\nabla^2$~~是无相互作用体系的动能\\
-$V_{e\!f\!f}(\vec r)=V_{ext}(\vec r)+\displaystyle\int w(\vec r,\vec r\,')\rho(\vec r\,')\mathrm{d}\vec r\,'+V_{\mathrm{XC}}[\rho]$
-\vskip 5pt
+其中$T_S=-\dfrac12\nabla^2$~~是无相互作用体系的动能
+\begin{displaymath}
+	\begin{aligned}
+		V_{e\!f\!f}(\vec r)=&V_{ext}(\vec r)+\displaystyle\int w(\vec r,\vec r\,')\rho(\vec r\,')\mathrm{d}\vec r\,'+V_{\mathrm{XC}}[\rho]\\
+=&\displaystyle\int\dfrac{\rho(\vec r\,')}{|\vec r-\vec r^{\prime}|}\mathrm{d}\vec r\,'+V_{ext}(\vec r)+V_{\mathrm{XC}}[\rho]
+	\end{aligned}
+\end{displaymath}
 $V_{ext}(\vec r)$是电子体系与外部的电荷或磁场相互作用\\
 $V_{\mathrm{XC}}[\rho]=\dfrac{\delta E_{\mathrm{XC}}}{\delta\rho(\vec r)}$称为交换-相关势
 \vskip 10pt
@@ -2094,21 +2098,21 @@ $n_i$是$\psi_i$上的电子占据数，$\varepsilon_i$是其能量本征值，�
 \end{figure} 
 }
 
-\frame
-{
-	\frametitle{一维\textrm{FFT}的\textrm{MPI}并行}
-\begin{figure}[h!]
-	\vspace{-0.20in}
-\centering
-%\includegraphics[height=2.7in,width=4.0in,viewport=0 0 1180 875,clip]{Figures/dual_grid.png}
-\includegraphics[height=1.55in,width=2.2in,viewport=0 10 810 580,clip]{Figures/FFT_para.png}
-\vskip 0.5pt
-\includegraphics[height=1.2in,width=3.5in,viewport=0 0 1180 550,clip]{Figures/FFT_para-2.png}
-\caption{\tiny \textrm{The Schematic description for FFT in MPI.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{MPI-FFT}
-\end{figure} 
-}
-
+%\frame
+%{
+%	\frametitle{一维\textrm{FFT}的\textrm{MPI}并行}
+%\begin{figure}[h!]
+%	\vspace{-0.20in}
+%\centering
+%%\includegraphics[height=2.7in,width=4.0in,viewport=0 0 1180 875,clip]{Figures/dual_grid.png}
+%\includegraphics[height=1.55in,width=2.2in,viewport=0 10 810 580,clip]{Figures/FFT_para.png}
+%\vskip 0.5pt
+%\includegraphics[height=1.2in,width=3.5in,viewport=0 0 1180 550,clip]{Figures/FFT_para-2.png}
+%\caption{\tiny \textrm{The Schematic description for FFT in MPI.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\label{MPI-FFT}
+%\end{figure} 
+%}
+%
 \frame
 {
 	\frametitle{\textrm{VASP}计算的并行实现}
