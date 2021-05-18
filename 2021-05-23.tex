@@ -1,0 +1,718 @@
+\documentclass[cjk,slidestop,compress,mathserif,blue]{beamer}
+%dvipdfm选项是关键,否则编译统统通不过
+%beamer的颜色选项定义的是导航条和标题的颜色(即关键词structure的颜色)
+
+%%%%%%%%%%%%%%%%仅限于XeTeX可使用的宏包%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{fontspec,xunicode,xltxtra,beamerthemesplit}
+%\usepackage{beamerthemesplit}
+\usepackage{handoutWithNotes}		%(讲义)在打印PPT的时候会留出给每一页做注释的部分
+\usepackage{xeCJK}
+\setCJKmainfont[BoldFont=黑体, ItalicFont=楷体, BoldItalicFont=仿宋]{黑体}
+%\setsansfont[Mapping=tex-text]{Adobe 黑体 Std}
+%如果装了Adobe Acrobat,可在font.conf中配置Adobe字体的路径以使用其中文字体
+%也可直接使用系统中的中文字体如SimSun,SimHei,微软雅黑 等
+%原来beamer用的字体是sans family;注意Mapping的大小写,不能写错
+
+\usepackage{listings} 
+\lstset{language=Matlab}%代码语言使用的是matlab 
+\lstset{breaklines}%自动将长的代码行换行排版 
+\lstset{extendedchars=false}%解决代码跨页时,章节标\dots
+
+%%%%%%%%   确定标题和导航条结构的框架     %%%%%%%%%%%%
+\usepackage{beamerthemeshadow}                       %
+%\usepackage{beamerthemeclassic}%导航条色与背景色一致%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbeamerfont{roman title}{size={}}
+%\usepackage{CJK} % CJK 中文支持                                  %
+\usepackage{amsmath,amsthm,amsfonts,amssymb,bm}
+\usepackage{bbding}
+\usepackage{mathrsfs}
+\usepackage{xcolor}                                        %使用默认允许使用颜色
+\usepackage{hyperref} 
+\usepackage{graphicx}
+\usepackage{subfigure}           %图片跨页
+\usepackage{animate}		 %插入动画
+\usepackage{tikz}		 %绘图工具
+\usepackage{caption}
+\captionsetup{font=footnotesize}
+
+%\usepackage[version=3]{mhchem}		%化学公式
+\usepackage{chemformula}
+\usepackage{chemfig}		%化学公式
+
+\usepackage{multirow}
+\usepackage{makecell}		%允许单元格内换行
+
+\usepackage[dvipdfmx]{movie15_dvipdfmx} %插入视频
+%\usepackage{handoutWithNotes}		%(讲义)在打印PPT的时候会留出给每一页做注释的部分
+%\pgfpagesuselayout{1 on 1 with notes landscape}[a4paper,border shrink=5mm]
+
+%%%%%%%%%%%%%%%%%%%%%%BIBTEX 引用参考文献%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usepackage{filecontents}
+%\begin{filecontents*}{main.bib}
+%@techreport{2012FracfocusChemical,
+%  author = {FracFocus,},
+%  howpublished = {\url{http://fracfocus.org/water-protection/drilling-usage}},
+%  institution = {The Ground Water Protection Council and Interstate Oil and Gas
+%  Compact Commission},
+%  month = {feb},
+%  title = {{Chemical Use In Hydraulic Fracturing}},
+%  year = {2012}
+%}
+%\end{filecontents*}
+%\usepackage[backend=bibtex,sorting=none]{biblatex}
+%%\usepackage[backend=biber,style=authoryear]{biblatex}
+%\addbibresource{main.bib} %BibTeX数据文件及位置
+
+%\usepackage[numbers,sort&compress]{natbib} %紧密排列             %
+\usepackage[sectionbib]{chapterbib}        %每章节单独参考文献   %
+\usepackage{hypernat}                                                                         %
+\setbeamertemplate{bibliography item}[text] %参考文献前标注[]
+%\usepackage[dvipdfm,bookmarksopen=true,pdfstartview=FitH,CJKbookmarks]{hyperref}		%
+\hypersetup{bookmarksnumbered,colorlinks,linkcolor=brown,citecolor=blue,urlcolor=red}         %
+%参考文献含有超链接引用时需要下列宏包，注意与natbib有冲突        %
+%\usepackage[dvipdfm]{hyperref}                                  %
+%\usepackage{hypernat}                                           %
+\newcommand{\upcite}[1]{\hspace{0ex}\textsuperscript{\cite{#1}}} %
+
+%\usepackage{marvosym} %插入各种符号
+
+%\useoutertheme{smoothbars}
+\useinnertheme[shadow=true]{rounded}
+\usetheme{Berkeley}                                          %主题式样
+%\usetheme{Luebeck}
+
+\usecolortheme{lily}                                        %颜色主题式样
+
+\usefonttheme{professionalfonts}                           %字体主题样式宏包
+
+%\beamertemplatetransparentcoveredhigh                      %使所有被隐藏的文本高度透明
+\beamertemplatetransparentcovereddynamicmedium             %使所有被隐藏的文本完全透明，动态，动态的范围很小
+\mode<presentation>
+%\beamersetaveragebackground{gray}                          %设置背景颜色(单一色) 
+\beamertemplateshadingbackground{green!10}{red!5}         %设置背景颜色(渐变色)
+
+%i放置单位logo
+%\logo{\includegraphics[width=1.6cm,height=0.35cm]{Figures/BCC_logo-1.png}}	%简单设置logo
+
+%\pgfdeclareimage[width=3.5cm]{logoname}{Figures/BCC_logo-1.png}		%logo置于左侧微调
+%\logo{\pgfuseimage{logoname}{\vspace{0.2cm}\hspace*{-2.0cm}}}
+
+%在指定位置精确放置logo
+\usepackage{tikz}
+\usepackage{beamerfoils}
+\usepackage{pgf}
+%\logo{\pgfputat{\pgfxy(9.99,0.00)}{\includegraphics[height=0.75cm,viewport=5 2 520 120,clip]{Figures/BCC_logo-1.png}}}
+%\logo{\pgfputat{\pgfxy(10.45,0.00)}{\includegraphics[height=0.65cm,viewport=6.5 39 264 102,clip]{Figures/BCC_logo-2.jpg}}}
+\logo{\pgfputat{\pgfxy(11.68,0.15)}{\includegraphics[height=1.01cm,viewport=0 0 140 120,clip]{Figures/BCC_logo-1.png}}\pgfputat{\pgfxy(10.502,-0.218)}{\includegraphics[height=0.369cm,viewport=140 0 540 120,clip]{Figures/BCC_logo-1.png}}}
+%\logo{\pgfputat{\pgfxy(11.68,0.15)}{\includegraphics[height=0.95cm,viewport=0 0 510 360,clip]{Figures/Logo_Gainstrong.png}}\pgfputat{\pgfxy(10.333,-0.195)}{\includegraphics[height=0.35cm,viewport=530 70 1100 218,clip]{Figures/Logo_Gainstrong.png}}}
+%\logo{\pgfputat{\pgfxy(10.28,0.00)}{\includegraphics[height=0.95cm,viewport=0 0 1100 360,clip]{Figures/Logo_Gainstrong.png}}}
+%\logo{\pgfputat{\pgfxy(11.68,0.15)}{\includegraphics[height=0.95cm,viewport=0 0 510 360,clip]{Figures/Logo_Gainstrong.png}}\pgfputat{\pgfxy(10.333,-0.195)}{\includegraphics[height=0.35cm,viewport=530 70 1100 218,clip]{Figures/Logo_Gainstrong.png}}}
+%\MyLogo{
+%	\pgfputat{\pgfxy(-50,-50)}{\pgfbox[right,base]{\includegraphics[height=1cm]{Figures/BCC_logo-1.png}}}
+
+%logo作为背景放置
+%\setbeamertemplate{background}{
+%	\pgfputat{\pgfxy(6.5,-0.5)}{\pgfbox[left,top]{\pgfimage[height=1.1cm]{Figures/BCC_logo-1.png}}}}
+
+%\logo{}									%不显示logo
+
+\begin{document}
+%\begin{CJK*}{GBK}{song}
+%\begin{CJK*}{GBK}{kai}
+%beamer下不能用\songyi、\zihao等命令!
+%\graphicspath{Figures/}
+
+%\renewcommand{\figurename}{\tiny\CJKfamily{hei} 图.}
+\renewcommand{\figurename}{\tiny{\bf Fig}.}
+%\renewcommand{\tablename}{\tiny\CJKfamily{hei} 表.}
+\renewcommand{\tablename}{\tiny{\bf Tab}.}
+%\renewcommand{\tablename}{\tiny\CJKfamily{hei} 表.}
+%\renewcommand{\thesubfigure}{\roman{subfigure}}  %\makeatletter 子图标记罗马字母
+\renewcommand{\thesubfigure}{\tiny(\alph{subfigure})}  %\makeatletter　子图标记英文字母
+%\renewcommand{\thesubfigure}{}  \makeatletter　%子图无标记
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Latex 的 tikz 绘图 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\begin{tikzpicture}
+%    % 引入图片
+%    \node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[width=0.9\textwidth]{Mycena_interrupta.jpg}};
+%
+%    \begin{scope}[x={(image.south east)},y={(image.north west)}]
+%        % 建立相对坐标系
+%        \draw[help lines,xstep=.1,ystep=.1] (0,0) grid (1,1);
+%        \foreach \x in {0,1,...,9} { \node [anchor=north] at (\x/10,0) {0.\x}; }
+%        \foreach \y in {0,1,...,9} { \node [anchor=east] at (0,\y/10) {0.\y}; }
+%        % 作图命令
+%        \draw[red, ultra thick, rounded corners] (0.62,0.65) rectangle (0.78,0.75);
+%    \end{scope}
+%\end{tikzpicture}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%-------------------------------PPT Title-------------------------------------
+\title{\rm{VASP}~中的\textrm{PAW}方法和\textrm{POTCAR}的重构}
+%-----------------------------------------------------------------------------
+
+%----------------------------Author & Date------------------------------------
+%\author[\textrm{Jun\_Jiang}]{姜\;\;骏\inst{}} %[]{} (optional, use only with lots of authors)
+\author[]{北京市计算中心\;云平台\:姜骏}
+% - Give the names in the same order as the appear in the paper.
+% - Use the \inst{?} command only if the authors have different
+%   affiliation.
+\institute[BCC]{\inst{}%
+% \vskip -20pt 北京市计算中心
+}
+\date[\today] % (optional, should be abbreviation of conference name)
+{	%{\fontsize{6.2pt}{4.2pt}\selectfont{\textcolor{blue}{E-mail:~}\url{jiangjun@bcc.ac.cn}}}
+\vskip 1 pt {\fontsize{8.2pt}{6.2pt}\selectfont{%北京理工大学%报告地点
+	\vskip 2 pt \textrm{2021-05-24}}}
+}
+
+% - Either use conference name or its abbreviation
+% - Not really information to the audience, more for people (including
+%   yourself) who are reading the slides online
+
+\subject{}
+% This is only inserted into the PDF information catalog. Can be left
+% out.
+\frame
+{
+	\frametitle{\fontsize{9.5pt}{5.2pt}\selectfont{\textcolor{orange}{“第一届材料\&科学青年峰会会议”}}}
+\titlepage
+}
+%-----------------------------------------------------------------------------
+
+%------------------------------------------------------------------------------列出全文 outline ---------------------------------------------------------------------------------
+\section*{}
+\frame[allowframebreaks]
+{
+  \frametitle{Outline}
+%  \frametitle{\textcolor{mycolor}{\secname}}
+  \tableofcontents%[current,currentsection,currentsubsection]
+}
+%在每个section之前列出全部Outline
+%类似的在每个subsection之前列出全部Outline是\AtBeginSubsection[]
+%\AtBeginSection[]
+%{
+%  \frame<handout:0>%[allowframebreaks]
+%  {
+%    \frametitle{Outline}
+%%全部Outline中，本部分加亮
+%    \tableofcontents[current,currentsection]
+%  }
+%}
+
+%------------------------------------------------------------------------------PPT main Body------------------------------------------------------------------------------------
+\small
+%\section{引言}
+\frame
+{
+	\frametitle{科学研究的范式变更}
+\begin{figure}[h!]
+\vspace*{-0.18in}
+\centering
+\includegraphics[width=4.05in]{Figures/Four_Model.png}
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Four_Model}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{材料模拟的基本思想和方法}
+\begin{figure}[h!]
+\vspace*{-0.20in}
+\centering
+\includegraphics[height=2.20in,width=3.45in]{Figures/Multi-Scale-6.png}
+\vskip 0.05pt
+\includegraphics[height=0.80in,width=4.05in]{Figures/MGE-2.png}
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Multi-Scale}
+\end{figure}
+}
+
+%\frame
+%{
+%	\frametitle{材料基因工程}
+%\begin{figure}[h!]
+%\vspace*{-0.18in}
+%\centering
+%\includegraphics[height=2.55in,width=4.05in]{Figures/MGE.png}
+%%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\label{MGE}
+%\end{figure}
+%}
+\section{密度泛函理论}
+%\subsection{密度泛函理论}       %Bookmark
+\frame                               %
+{
+\frametitle{密度泛函理论(\textrm{DFT})} %Slide Page Title
+%   \secname
+与传统的量子力学方法不同，密度泛函理论的基本变量是体系的基态电子密度。%通过体系的电子密度而非波函数确定体系的基态能量。
+\begin{itemize}%[+-| alert@+>]
+	\item 密度泛函理论的基石：\textrm{Hohenberg-Kohn}定理\upcite{PR136-B864_1964}
+\vskip 5pt
+\begin{itemize}%[+-| alert@+>]
+   \setlength{\itemsep}{8pt}
+ \item $E[\rho]=F_{\mathrm{HK}}[\rho]+\displaystyle\int\rho(\vec{r})v(\vec{r})\textrm{d}\vec{r}$ \\
+\vskip 5pt 其中$F_{\mathrm{HK}}[\rho]=\underset{\Psi\to\rho}{\mathrm{Min}}\langle\Psi[\rho]|\hat{T}+\hat{W}|\Psi[\rho]\rangle$
+是普适的泛函表达式。%，指明多电子体系的基态性质与基态密度间存在一一对应关系
+     \textrm{\small{第一定理表明多电子体系的性质完全由体系的基态密度决定}}
+   \item 如果$\tilde\Psi\neq\Psi$，
+     $E[\tilde\rho]\geqslant E[\rho_0]$\\
+     \textrm{\small{第二定理指出基态总能量泛函在体系基态电子密度处取极小值}}
+   \end{itemize}
+%\textrm{\small{第二定理指出基态总能量泛函在体系基态电子密度处取极小值}}
+\vskip 8pt
+ \item 密度泛函理论的优越性：用密度($\rho$)代替波函数($\Psi$)描述体系
+\vskip 5pt
+ \item 密度泛函理论的困难：能量密度泛函的精确形式未知
+   \end{itemize}
+}
+
+\frame                               %
+{
+\frametitle{密度泛函理论(\textrm{DFT})}
+\textrm{Kohn-Sham}方程\upcite{PR140-A1133_1965}：无相互作用体系+交换-相关能的贡献
+$$(T_S+V_{e\!f\!f})|\varphi_i\rangle=\varepsilon_i|\varphi_i\rangle,\quad i=1,\cdots,N,\cdots$$
+其中$T_S=-\dfrac12\nabla^2$~~是无相互作用体系的动能
+\begin{displaymath}
+	\begin{aligned}
+		V_{e\!f\!f}(\vec r)=&V_{ext}(\vec r)+\displaystyle\int w(\vec r,\vec r\,')\rho(\vec r\,')\mathrm{d}\vec r\,'+V_{\mathrm{XC}}[\rho]\\
+=&\displaystyle\int\dfrac{\rho(\vec r\,')}{|\vec r-\vec r^{\prime}|}\mathrm{d}\vec r\,'+V_{ext}(\vec r)+V_{\mathrm{XC}}[\rho]
+	\end{aligned}
+\end{displaymath}
+$V_{ext}(\vec r)$是电子体系与外部的电荷或磁场相互作用\\
+$V_{\mathrm{XC}}[\rho]=\dfrac{\delta E_{\mathrm{XC}}}{\delta\rho(\vec r)}$称为交换-相关势
+\vskip 10pt
+\textrm{Kohn-Sham}方程是形式上的单粒子方程
+\vskip 6pt
+\textrm{Kohn-Sham}方程的实质：\\\textcolor{red}{将动能泛函的主要部分分离出来，剩余部分放在交换-相关能中}
+}
+
+\frame
+{
+	\frametitle{\textrm{DFT-SCF}}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.25in}
+\hspace*{-0.80in}
+\includegraphics[height=2.80in,width=4.95in,viewport=5 3 1490 870,clip]{Figures/DFT-SCF_2.png}
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{DFT-SCF-2}
+\end{figure}
+}
+
+\section{\rm{VASP~}软件中的\rm{PAW~}方法}
+\frame
+{
+%	\frametitle{\textrm{PAW}原子数据集}
+	\frametitle{\textrm{PAW}方法的基本思想}
+\begin{figure}[h!]
+\centering
+\includegraphics[height=2.3in,width=4.0in,viewport=0 0 1280 745,clip]{Figures/PAW-baseset.png}
+\caption{\tiny \textrm{The Augmentation of PAW.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{PAW_baseset}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{VASP}中的电荷密度的分解}
+	\textrm{VASP}的开发者\textrm{G. Kresse}等明确了\textrm{PAW}方法与\textrm{USPP}方法的内在联系\upcite{PRB59-1758_1999}:
+\begin{itemize}
+	\item 芯层电荷与核电荷构成离子实电荷：$n_{Zc}=n_Z+n_c$
+	\item 赝离子实电荷的构造$$\int_{\Omega_c}n_{Zc}(\vec r)\mathrm{d}^3\vec r=\int_{\Omega_c}\tilde n_{Zc}(\vec r)\mathrm{d}^3\vec r$$
+\end{itemize}
+在此基础上，\textrm{Bl\"ochl}方案中的电荷可以分解为：
+\begin{displaymath}
+	\begin{aligned}
+		n_T=n+n_{Zc}\equiv&\underbrace{(\tilde n+\hat n+\tilde n_{Zc})}\\
+				 		&\quad\qquad\tilde n_T\\
+				  &+\underbrace{(n^1+\hat n+n_{Zc})}-\underbrace{(\tilde n^1+\hat n+\tilde n_{Zc})}\\
+				                  &\quad\qquad n_T^1\qquad\qquad\qquad\tilde n_T^1
+	\end{aligned}
+\end{displaymath}
+\textcolor{red}{注意}：\textrm{G. Kresse}方案中补偿电荷$\hat n$局域在每个缀加球内。
+}
+
+\frame
+{
+	\frametitle{总能量表达式}
+	根据总能量表达式$$E=\tilde E+E^1-\tilde E^1$$其中
+	\begin{displaymath}
+		\begin{aligned}
+			\tilde E=&\sum_nf_n\langle\tilde\Psi_n|-\frac12\nabla^2|\tilde\Psi_n\rangle+E_{\mathrm{XC}}[\tilde n+\hat n+\tilde n_c]+E_H[\tilde n+\hat n]\\
+			&+\int v_H[\tilde n_{Zc}][\tilde n(\vec r)+\hat n(\vec r)]\mathrm{d}\vec r+U(\vec R,Z_{\mathrm{ion}})\\
+			\tilde E^1=&\sum_{(i,j)}\rho_{ij}\langle\tilde\phi_i|-\frac12\nabla^2|\tilde\phi_j\rangle+\overline{E_{\mathrm{XC}}[\tilde n^1+\hat n+\tilde n_c]}+\overline{E_H[\tilde n^1+\hat n]}\\
+			&+\int_{\Omega_r}v_H[\tilde n_{Zc}][\tilde n^1(\vec r)+\hat n(\vec r)]\mathrm{d}\vec r
+		\end{aligned}
+	\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{总能量表达式}
+	\begin{displaymath}
+		\begin{aligned}
+			E^1=&\sum_{(i,j)}\rho_{ij}\langle\phi_i|-\frac12\nabla^2|\phi_j\rangle+\overline{E_{\mathrm{XC}}[n^1+n_c]}+\overline{E_H[n^1]}\\
+			&+\int_{\Omega_r}v_H[n_{Zc}]n^1(\vec r)\mathrm{d}\vec r
+		\end{aligned}
+	\end{displaymath}
+	$v_H$是电荷密度$n$产生的静电势
+	$$v_H[n](\vec r)=\int\dfrac{n(\vec r\,^{\prime})}{|\vec r-\vec r\,^{\prime}|}\mathrm{d}\vec r\,^{\prime}$$
+	$E_H[n]$是对应的静电能
+	$$E_H[n]=\dfrac12(n)(n)=\dfrac12\int\mathrm{d}\vec r\mathrm{d}\vec r\,^{\prime}\dfrac{n(\vec r)n(\vec r\,^{\prime})}{|\vec r-\vec r\,^{\prime}|}$$ 
+	$U(\vec R,Z_{\mathrm{ion}})$\textcolor{blue}{由\textrm{Ewald}求和计算}
+}
+
+\frame
+{
+\frametitle{交换-相关能泛函的处理}
+由于交换-相关能泛函是非线性的，\textrm{G. Kresse}方案中电荷密度分解为
+\begin{displaymath}
+	n_c+n=(\tilde n+\hat n+\tilde n_c)+(n^1+n_c)-(\tilde n^1+\hat n+\tilde n_c)
+\end{displaymath}
+原始的\textrm{Bl\"ochl}方案中电荷分解为
+\begin{displaymath}
+	n_c+n=(\tilde n)+(n^1+n_c)-(\tilde n^1)
+\end{displaymath}
+\textcolor{blue}{两种不同的电荷密度分解方案根源}：\\\textrm{G. Kresse}方案中赝离子实电荷$\tilde n_{Zc}$与\textrm{Bl\"ochl}方案中$\tilde n_c$的约束条件不同！
+\begin{displaymath}
+	E_{\mathrm{XC}}[\tilde n+\hat n+\tilde n_c]+\overline{E_{\mathrm{XC}}[n^1+n_c]}-\overline{E_{\mathrm{XC}}[\tilde n^1+\hat n+\tilde n_c]}
+\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{计算流程}
+\begin{figure}[h!]
+	\vspace{-0.2in}
+\centering
+%\includegraphics[height=2.7in,width=4.0in,viewport=0 0 1300 960,clip]{Figures/VASP_procedure-full.png}
+%\includegraphics[height=2.1in,width=1.6in,viewport=0 0 480 630,clip]{Figures/VASP_procedure.png}
+%\includegraphics[height=2.1in,width=2.3in,viewport=0 0 740 600,clip]{Figures/Ab-initio-Ene.png}
+\includegraphics[height=2.5in,width=1.8in,viewport=0 0 480 630,clip]{Figures/VASP_procedure.png}
+\caption{\tiny \textrm{The Flow of calculation for the KS-ground states.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{PAW_baiseset}
+\end{figure} 
+}
+
+%\frame
+%{
+%	\frametitle{\textrm{PAW Augmentation}}
+%\begin{figure}[h!]
+%\centering
+%\includegraphics[height=2.3in,width=4.0in,viewport=0 0 1100 745,clip]{Figures/PAW-projector.png}
+%\caption{\tiny \textrm{The projector of PAW.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\label{PAW_projector}
+%\end{figure}
+%}
+%\frame
+%{
+%	\frametitle{赝势-\textrm{PAW}方法}
+%\begin{figure}[h!]
+%\centering
+%%\hspace*{-0.80in}
+%\includegraphics[height=1.0in,width=4.1in,clip]{Figures/Pseudo-Potential.png}
+%\caption{\tiny \textrm{The relation of Pseudo potential and PAW.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\label{Pseudo_Poential}
+%\end{figure}
+%}
+%
+\section{\rm{POTCAR}的重构}
+\frame
+{
+	\frametitle{\textrm{VASP}计算的原子数据基础}
+	\textrm{POTCAR}提供了\textrm{VASP}计算所需的原子数据，也是实现\textrm{PAW}方法的主要基础
+	\begin{itemize}
+		\item \textrm{POTCAR}是\textrm{VASP}实现材料精确计算的重要保证\\
+			同样都应用\textrm{PAW}方法，\textcolor{blue}{公认\textrm{VASP}较\textrm{QE}、\textrm{ABINIT}等软件的计算精度要高}
+		\item \textrm{POTCAR}数据生成依赖较多的可调参数\\
+			包括能量参数$\varepsilon_l$、多种截断半径$r_c$、$r_{\mathrm{vloc}}$、$r_{\mathrm{shape}}$、$r_{\mathrm{core}}$
+		\item \textcolor{red}{\textrm{POTCAR}数据生成代码是\textrm{VASP}中唯一没有公开的}
+		\item 用\textrm{VASP}模拟极端条件下材料物性的能力，受到\textrm{POTCAR}数据的制约
+	\end{itemize}
+	%文献\cite{PRB59-1758_1999}介绍了\textrm{POTCAR}的主要实现思想
+
+当前研究主要尝试基于开源的\textrm{PAW}赝势生成软件(\textrm{atomPAW})，开发能生成\textrm{POTCAR}原子数据的功能
+}
+
+\frame
+{
+	\frametitle{\textrm{PAW}原子数据集:~\textrm{wave~function}}
+	平滑赝原子分波函数
+	\begin{displaymath}
+		\tilde\phi_{i=Lk}(\vec r)=Y_L(\widehat{\vec r-\vec R})\tilde\phi_{lk}(|\vec r-\vec R|)
+	\end{displaymath}
+	根据\textrm{RRKJ}赝势构造的思想，赝分波函数由球\textrm{Bessel}函数线性组合\upcite{JPCM6-8245_1994}
+	\begin{displaymath}
+		\tilde\phi_{lk}(r)=\left\{
+		\begin{aligned}
+			&\sum_{i=1}^2\alpha_ij_l(q_ir)\quad &r<r_c^l\\
+			&\phi_{lk}(r)\quad&r>r_c^l
+		\end{aligned}
+		\right.
+	\end{displaymath}
+	调节系数$\alpha_i$和$q_i$赝分波函数$\phi_{lk}(r)$在截断半径$r_c^l$处两阶连续可微
+	投影子波函数$\tilde p_i$由\textrm{Gram-Schmidt}正交条件$\langle\tilde p_i|\tilde\phi_j\rangle=\delta_{ij}$确定
+}
+
+\frame
+{
+	\frametitle{\textrm{PAW}原子数据集:~\textrm{wave~function}}
+\begin{figure}[h!]
+\centering
+\vskip -0.5in
+\includegraphics[width=1.5in,height=2.7in,viewport=0 0 350 550, angle=-90, clip]{Figures/WAE_data.eps}
+\vskip -0.2in
+\includegraphics[height=2.7in,width=1.5in,viewport=0 0 350 550, angle=-90, clip]{Figures/WPS_data.eps}
+\caption{\tiny \textrm{The partial wave function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Wave_Function}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{PAW}原子数据集:~\textrm{core~density}}
+	\textcolor{blue}{构造赝芯电荷密度$\tilde n_c$}:~在截断半径$r_{pc}$内的定义为
+	$$\sum_{i=1,2}B_i\dfrac{\sin(q_ir)}r\quad r<r_{pc}$$
+	调节系数$q_i$和$B_i$使得赝芯电荷密度$\tilde n_c(r)$在截断半径$r_{pc}$处的两阶导数连续
+\begin{figure}[h!]
+\vskip -0.5in
+\centering
+\hspace*{-0.1in}
+\includegraphics[width=1.5in,height=2.5in,viewport=0 0 350 550, angle=-90, clip]{Figures/CORE_data.eps}
+\hspace*{-0.7in}
+\includegraphics[height=2.5in,width=1.5in,viewport=0 0 350 550, angle=-90, clip]{Figures/PCORE_data.eps}
+\caption{\tiny \textrm{The core density.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{core_density_Function}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{PAW}原子数据集:~$\mathrm{v}_{e\!f\!f}(r)$与$\tilde{\mathrm{v}}_{e\!f\!f}(r)$}
+	\textcolor{blue}{原子局域有效势$\mathrm{v}_{e\!f\!f}^a$}
+\begin{figure}[h!]
+\vskip -0.1in
+\centering
+\includegraphics[width=1.3in,height=2.4in,viewport=0 0 700 1200, angle=-90, clip]{Figures/POTAE.eps}
+\caption{\tiny \textrm{The local atomic effective-Potential.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{local_atomic_PP}
+\end{figure}
+	\textcolor{blue}{构造原子局域赝势$\tilde v_{e\!f\!f}^a$}%(\textcolor{red}{为防止\textrm{ghost band}})
+	:%\\
+	(在截断半径$r_{loc}$内的定义)
+	$$\tilde v_{e\!f\!f}^a=A\dfrac{\sin(q_{loc}r)}r\quad r<r_{loc}$$
+	其中$q_{loc}$和$A$要求局域赝势在截断半径$r_{loc}$处连续到一阶导数
+}
+
+\frame
+{
+	\frametitle{\textrm{PAW}原子数据集:~$\mathrm{v}_H[\tilde n_{Zc}]$}
+	局域离子赝势$v_H[\tilde n_{Zc}]$可由原子局域赝势去屏蔽得到
+	$$v_H[\tilde n_{Zc}]=\tilde v_{e\!f\!f}^a-v_H[\tilde n_a^1+\hat n_a]-v_{\mathrm{XC}}[\tilde n_a^1+\hat n_a+\tilde n_c]$$
+\begin{figure}[h!]
+\vskip -0.5in
+\centering
+\hspace*{-0.1in}
+\includegraphics[width=1.5in,height=2.5in,viewport=0 0 350 550, angle=-90, clip]{Figures/POTPS_data.eps}
+\hspace*{-0.7in}
+\includegraphics[height=2.5in,width=1.5in,viewport=0 0 350 550, angle=-90, clip]{Figures/POTPSC_data.eps}
+\caption{\tiny \textrm{The pseudo-potential and local ionic pseudo-potential.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{pseudo_potential}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{PAW}原子数据集:~倒空间$\tilde{\mathrm{v}}_{\mathrm{ion}}^a(G)$}和$\tilde n(G)$
+	由势函数由实空间向倒空间的变换关系
+	\begin{displaymath}
+		\begin{aligned}
+%			\textrm{v}(G)=&e^2\int\dfrac{\mathrm{d}^2r}{\mathrm r}\mathrm{e}^{\mathrm{i}\vec G\cdot\vec r}=2\pi e^2\int_0^{\infty}r\mathrm{d}r\int_{-1}^1\mathrm{d}(\cos\theta)\mathrm{e}^{\mathrm{i}Gr\cos\theta}\\
+%			=&\dfrac{2\pi e^2}{\mathrm{i}G}\int_0^{\infty}\mathrm{d}r(\mathrm{e}^{\mathrm{i}Gr}-\mathrm{e}^{-\mathrm{i}Gr})=\dfrac{4\pi e^2}G\int_0^{\infty}\mathrm{d}r\sin(Gr)
+			\textrm{v}(G)=&\int\mathrm{d}^3r v(r)\mathrm{e}^{\mathrm{i}\vec G\cdot\vec r}=2\pi \int_0^{\infty} v(r)\cdot r~r\mathrm{d}r\int_{-1}^1\mathrm{d}(\cos\theta)\mathrm{e}^{\mathrm{i}Gr\cos\theta}\\
+			=&\dfrac{2\pi}{\mathrm{i}G}\int_0^{\infty}v(r)\cdot r~\mathrm{d}r(\mathrm{e}^{\mathrm{i}Gr}-\mathrm{e}^{-\mathrm{i}Gr})=\dfrac{4\pi}G\int_0^{\infty}\sin(Gr)v(r)\cdot r~\mathrm{d}r
+		\end{aligned}
+	\end{displaymath}
+	可将$\mathrm{v}_H[\tilde n_{Zc}]$和$\tilde n(G)$变换为倒空间表示
+\begin{figure}[h!]
+\vskip -0.12in
+\centering
+\includegraphics[width=2.5in,height=1.4in,viewport=0 0 1200 630, clip]{Figures/PAW_Vloc_G.png}
+\caption{\tiny \textrm{The pseudo-potential in reciprocal space.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{pseudo_potential_G}
+\end{figure}
+}
+
+\section{后续工作}
+\frame
+{
+	\frametitle{后续工作}
+	\begin{itemize}
+		\item 完成\textrm{POTCAR}的全部原子数据的生成
+			\begin{itemize}
+   				\setlength{\itemsep}{10pt}
+				\item 赝电荷密度$\tilde n_v(r)$在倒空间的表示$\tilde n_v(G)$
+				\item 赝芯电荷密度$\tilde n_c(r)$在倒空间的表示$\tilde n_c(G)$
+				\item 投影函数在倒空间$\tilde p_l(G)$和实空间(优化)~$\tilde p_l(r)$的表示
+				\item \textrm{PAW}方法中引入原子赝势后的修正$\Delta D_{\mathrm{ion}}(r)$
+					\begin{displaymath}
+						\hspace*{-50pt}\Delta D_{ij}^{\mathrm{ion}}(r)=\langle\phi_i\left|T+V_{e\!f\!f}^a\right|\phi_j\rangle-\langle\tilde\phi_i\left|T+\tilde V_{e\!f\!f}^a\right|\tilde\phi_j\rangle-\int\hat{Q}_{ij}^{00}(r)\tilde{V}_{e\!f\!f}^a(r)\mathrm{d}r 
+					\end{displaymath}
+			\end{itemize}
+		\item 优化原子生成参数，探索适合极端条件(高压)下\textrm{VASP}计算的原子数据集(\textrm{PAW~DataSet})
+	\end{itemize}
+}
+
+%------------------------------------------------------------------------Reference----------------------------------------------------------------------------------------------
+\frame[allowframebreaks]
+{
+\frametitle{主要参考文献}
+{\tiny\textrm{
+%\phantomsection\addcontentsline{toc}{section}{Bibliography}	 %直接调用\addcontentsline命令可能导致超链指向不准确,一般需要在之前调用一次\phantomsection命令加以修正	%
+%\phantomsection\addcontentsline{toc}{section}{主要参考文献}	 %直接调用\addcontentsline命令可能导致超链指向不准确,一般需要在之前调用一次\phantomsection命令加以修正	%
+\bibliography{Ref_2020-03-04}%
+\bibliographystyle{../ref/mybib}%
+}}
+%\nocite{*}%
+}
+
+%------------------------------------------------------------------------------------------------------------------------------------------------------------------------------%
+%\frame
+%{
+%\frametitle{主要参考文献}
+%\begin{thebibliography}{99}
+%{\small
+%\bibitem{Singh_Book}\textrm{D. J. Singh. \textit{Plane Wave, PseudoPotential and the LAPW method} (Kluwer Academic, Boston,USA, 1994)}					%
+%\end{thebibliography}
+%  \nocite{*}																				%
+%}
+%}
+
+%-------------------------------------------------------------------------Thanks------------------------------------------------------------------------------------------------
+%\section{致谢}
+%\frame
+%{
+%\frametitle{致$\quad$谢}
+%\begin{itemize}
+%    \setlength{\itemsep}{20pt}
+%  \item 感谢本团队高兴誉、吴泉生、宋红州等各位老师参与的讨论
+%  \item 感谢莫所长、宋主任以及软件中心各位老师和同事
+%  \item 感谢王崇愚先生的帮助
+%\end{itemize}
+%}
+
+\logo{}									%不显示logo
+\frame
+{
+\vskip 60 pt
+%\hskip 10pt \textcolor{blue}{\Huge 感谢答辩委员会各位老师\,\textrm{!}}\\
+\vskip 35 pt
+\hskip 60pt \textcolor{blue}{\Huge 谢谢大家\:!}
+%\vskip 15 pt
+%\hskip 40pt \textcolor{blue}{\Huge \textrm{for your attention\:!}}
+}
+
+\appendix
+\frame
+{
+	\frametitle{补偿电荷的构造}
+	根据约束条件
+	\begin{displaymath}
+		\int_{\Omega_c}(n^1-\tilde n^1-\hat n)|\vec r-\vec R|^lY_{lm}^{\ast}(\widehat{\vec r-\vec R})\mathrm{d}\vec r=0
+	\end{displaymath}
+	定义电荷密度差
+	\begin{displaymath}
+		Q_{ij}(\vec r)=\phi_i^{\ast}(\vec r)\phi_j(\vec r)-\tilde\phi_i^{\ast}(\vec r)\tilde\phi_j(\vec r)
+	\end{displaymath}
+	电荷密度差的多极矩为
+	\begin{displaymath}
+		q_{ij}^L(\vec r)=\int_{\Omega_r}Q_{ij}(\vec r)|\vec r-\vec R|^lY_{lm}^{\ast}(\widehat{\vec r-\vec R})\mathrm{d}\vec r
+	\end{displaymath}
+	因此，补充电荷的计算为：
+	\begin{displaymath}
+		\begin{aligned}
+			\hat n=\sum_{(i,j),L}\sum_n f_n\langle\tilde\Psi_n|\tilde p_i\rangle\langle\tilde p_j|\Psi_n\rangle\hat Q_{ij}^L(\vec r)\\
+			\hat Q_{ij}^L(\vec r)=q_{ij}^Lg_l(|\vec r-\vec R|)Y_{lm}(\widehat{\vec r-\vec R})
+		\end{aligned}
+	\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{补偿电荷的构造}
+	在每个原子球内用球\textrm{Bessel}函数构造补偿电荷$g_l(r)$
+	$$g_l(r)=\sum_{i=1}^2\alpha_i^lj_l(q_i^lr)$$
+	调节系数$q_i^l$和$\alpha_i^l$使得补偿电荷$g_l(r)$在截断半径$r_{\mathrm{\mathrm{comp}}}$处的数值和前两阶导数值都是0，因此可以选择$q_i^l$使得多极矩
+	$$\int_0^{r_{\mathrm{comp}}}g_l(r)r^{l+2}\mathrm{d}r=1$$
+	并且有
+	$$\dfrac{\mathrm{d}}{\mathrm{d}r}j_l(q_i^lr)\bigg|_{r_{\mathrm{comp}}}=0$$
+	设置$\alpha_i^l$，因此$g_l(r_{\mathrm{comp}})=0$
+
+	$\ast$各截断半径确定的参考条件\\
+	{\fontsize{6.2pt}{4.2pt}\selectfont{\textcolor{blue}{$r_{\mathrm{rad}}=\max({r_c^l})$,~$r_{pc}\approx r_{\mathrm{rad}}/1.2$,~$r_{loc}<r_{\mathrm{rad}}/1.2$,~$r_{\mathrm{comp}}=r_{\mathrm{rad}}/1.3\sim r_{\mathrm{rad}}/1.2$}}}
+}
+
+\frame
+{
+	\frametitle{双网格技术}
+\begin{figure}[h!]
+	\vspace{-0.2in}
+\centering
+%\includegraphics[height=2.7in,width=4.0in,viewport=0 0 1180 875,clip]{Figures/dual_grid.png}
+\includegraphics[height=2.7in,width=4.0in,viewport=0 0 800 600,clip]{Figures/dual_grid-2.png}
+\caption{\tiny \textrm{The Schematic description of the dual grid technique.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{PAW_dualgrid}
+\end{figure} 
+}
+
+\frame
+{
+	\frametitle{一维\textrm{FFT}的\textrm{MPI}并行}
+\begin{figure}[h!]
+	\vspace{-0.15in}
+\centering
+%\includegraphics[height=2.7in,width=4.0in,viewport=0 0 1180 875,clip]{Figures/dual_grid.png}
+\includegraphics[height=1.55in,width=2.2in,viewport=0 10 810 580,clip]{Figures/FFT_para.png}
+\vskip 0.5pt
+\includegraphics[height=1.2in,width=3.5in,viewport=0 0 1180 550,clip]{Figures/FFT_para-2.png}
+\caption{\tiny \textrm{The Schematic description for FFT in MPI.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{MPI-FFT}
+\end{figure} 
+}
+
+\frame
+{
+	\frametitle{\textrm{VASP}计算的并行实现}
+	\begin{itemize}
+	     \item 中间层设计:~\textrm{FFT}网格、实空间基组与计算节点的匹配\\
+		     \textcolor{magenta}{通过子程序\textrm{mgrid.F}生成中间层，实现并行负载与计算节点分配的匹配，减少\textrm{FFT}变换和实空间并行的节点间通信}
+\begin{figure}[h!]
+		\vspace{-0.25in}
+	\centering
+%\includegraphics[height=2.7in,width=4.0in,viewport=0 0 1180 875,clip]{Figures/dual_grid.png}
+\includegraphics[height=1.0in,width=4.0in,viewport=0 0 1500 450,clip]{Figures/VASP_FFT-MPI_Reciprocal.png}
+\vskip 0.5pt
+\includegraphics[height=0.7in,width=4.0in,viewport=0 0 730 150,clip]{Figures/VASP_FFT-MPI_Real.png}
+\caption{\tiny \textrm{VASP:~ Reciprocal-Real space layout for grids in MPI.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{MPI-FFT}
+\end{figure} 
+	\end{itemize}
+}
+
+%\frame
+%{
+%\begin{figure}[h!]
+%\centering
+%\animategraphics[autoplay, loop, height=2.1in]{1}{Figures/Prof_Liu-}{06}{11}
+%\label{Prof_Liu}
+%\end{figure}
+%}
+%
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+\clearpage
+%\end{CJK*}
+\end{document}
