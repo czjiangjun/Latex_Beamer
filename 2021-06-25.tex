@@ -1,0 +1,1475 @@
+\documentclass[cjk,slidestop,compress,mathserif,blue]{beamer}
+%dvipdfm选项是关键,否则编译统统通不过
+%beamer的颜色选项定义的是导航条和标题的颜色(即关键词structure的颜色)
+
+%%%%%%%%%%%%%%%%仅限于XeTeX可使用的宏包%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{fontspec,xunicode,xltxtra,beamerthemesplit}
+%\usepackage{beamerthemesplit}
+\usepackage{handoutWithNotes}		%(讲义)在打印PPT的时候会留出给每一页做注释的部分
+\usepackage{xeCJK}
+\setCJKmainfont[BoldFont=黑体, ItalicFont=楷体, BoldItalicFont=仿宋]{黑体}
+%\setsansfont[Mapping=tex-text]{Adobe 黑体 Std}
+%如果装了Adobe Acrobat,可在font.conf中配置Adobe字体的路径以使用其中文字体
+%也可直接使用系统中的中文字体如SimSun,SimHei,微软雅黑 等
+%原来beamer用的字体是sans family;注意Mapping的大小写,不能写错
+
+\usepackage{listings} 
+\lstset{language=Matlab}%代码语言使用的是matlab 
+\lstset{breaklines}%自动将长的代码行换行排版 
+\lstset{extendedchars=false}%解决代码跨页时,章节标\dots
+
+%%%%%%%%   确定标题和导航条结构的框架     %%%%%%%%%%%%
+\usepackage{beamerthemeshadow}                       %
+%\usepackage{beamerthemeclassic}%导航条色与背景色一致%
+%\usepackage{authblk}				     %作者地址和E-mail
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbeamerfont{roman title}{size={}}
+%\usepackage{CJK} % CJK 中文支持                                  %
+\usepackage{amsmath,amsthm,amsfonts,amssymb,bm}
+\usepackage{bbding}
+\usepackage{mathrsfs}
+\usepackage{xcolor}                                        %使用默认允许使用颜色
+\usepackage{hyperref} 
+\usepackage{graphicx}
+\usepackage{subfigure}           %图片跨页
+\usepackage{animate}		 %插入动画
+\usepackage{tikz}		 %绘图工具
+\usepackage{caption}
+\captionsetup{font=footnotesize}
+
+%\usepackage[version=3]{mhchem}		%化学公式
+\usepackage{chemformula}
+\usepackage{chemfig}		%化学公式
+
+\usepackage{multirow}
+\usepackage{makecell}		%允许单元格内换行
+
+\usepackage[dvipdfmx]{movie15_dvipdfmx} %插入视频
+%\usepackage{handoutWithNotes}		%(讲义)在打印PPT的时候会留出给每一页做注释的部分
+%\pgfpagesuselayout{1 on 1 with notes landscape}[a4paper,border shrink=5mm]
+
+%%%%%%%%%%%%%%%%%%%%%%BIBTEX 引用参考文献%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usepackage{filecontents}
+%\begin{filecontents*}{main.bib}
+%@techreport{2012FracfocusChemical,
+%  author = {FracFocus,},
+%  howpublished = {\url{http://fracfocus.org/water-protection/drilling-usage}},
+%  institution = {The Ground Water Protection Council and Interstate Oil and Gas
+%  Compact Commission},
+%  month = {feb},
+%  title = {{Chemical Use In Hydraulic Fracturing}},
+%  year = {2012}
+%}
+%\end{filecontents*}
+%\usepackage[backend=bibtex,sorting=none]{biblatex}
+%%\usepackage[backend=biber,style=authoryear]{biblatex}
+%\addbibresource{main.bib} %BibTeX数据文件及位置
+
+%\usepackage[numbers,sort&compress]{natbib} %紧密排列             %
+\usepackage[sectionbib]{chapterbib}        %每章节单独参考文献   %
+\usepackage{hypernat}                                                                         %
+\setbeamertemplate{bibliography item}[text] %参考文献前标注[]
+%\usepackage[dvipdfm,bookmarksopen=true,pdfstartview=FitH,CJKbookmarks]{hyperref}		%
+\hypersetup{bookmarksnumbered,colorlinks,linkcolor=brown,citecolor=blue,urlcolor=red}         %
+%参考文献含有超链接引用时需要下列宏包，注意与natbib有冲突        %
+%\usepackage[dvipdfm]{hyperref}                                  %
+%\usepackage{hypernat}                                           %
+\newcommand{\upcite}[1]{\hspace{0ex}\textsuperscript{\cite{#1}}} %
+
+%\useoutertheme{smoothbars}
+
+\useinnertheme[shadow=true]{rounded}
+\usetheme{Berkeley}                                          %主题式样
+%\usetheme{Luebeck}
+
+\usecolortheme{lily}                                        %颜色主题式样
+
+\usefonttheme{professionalfonts}                           %字体主题样式宏包
+
+%\beamertemplatetransparentcoveredhigh                      %使所有被隐藏的文本高度透明
+\beamertemplatetransparentcovereddynamicmedium             %使所有被隐藏的文本完全透明，动态，动态的范围很小
+\mode<presentation>
+%\beamersetaveragebackground{gray}                          %设置背景颜色(单一色) 
+\beamertemplateshadingbackground{green!10}{red!5}         %设置背景颜色(渐变色)
+
+%i放置单位logo
+%\logo{\includegraphics[width=1.6cm,height=0.35cm]{Figures/BCC_logo-1.png}}	%简单设置logo
+
+%\pgfdeclareimage[width=3.5cm]{logoname}{Figures/BCC_logo-1.png}		%logo置于左侧微调
+%\logo{\pgfuseimage{logoname}{\vspace{0.2cm}\hspace*{-2.0cm}}}
+
+%在指定位置精确放置logo
+\usepackage{tikz}
+\usepackage{beamerfoils}
+\usepackage{pgf}
+\logo{\pgfputat{\pgfxy(11.68,0.15)}{\includegraphics[height=1.01cm,viewport=0 0 140 120,clip]{Figures/BCC_logo-1.png}}\pgfputat{\pgfxy(10.502,-0.218)}{\includegraphics[height=0.369cm,viewport=140 0 540 120,clip]{Figures/BCC_logo-1.png}}}
+%\logo{\pgfputat{\pgfxy(11.68,0.15)}{\includegraphics[height=0.95cm,viewport=0 0 510 360,clip]{Figures/Logo_Gainstrong.png}}\pgfputat{\pgfxy(10.333,-0.195)}{\includegraphics[height=0.35cm,viewport=530 70 1100 218,clip]{Figures/Logo_Gainstrong.png}}}
+%\logo{\pgfputat{\pgfxy(10.28,0.00)}{\includegraphics[height=0.95cm,viewport=0 0 1100 360,clip]{Figures/Logo_Gainstrong.png}}}
+%\logo{\pgfputat{\pgfxy(11.68,0.15)}{\includegraphics[height=0.95cm,viewport=0 0 510 360,clip]{Figures/Logo_Gainstrong.png}}\pgfputat{\pgfxy(10.333,-0.195)}{\includegraphics[height=0.35cm,viewport=530 70 1100 218,clip]{Figures/Logo_Gainstrong.png}}}
+%\MyLogo{
+%	\pgfputat{\pgfxy(-50,-50)}{\pgfbox[right,base]{\includegraphics[height=1cm]{Figures/BCC_logo-1.png}}}
+
+%logo作为背景放置
+%\setbeamertemplate{background}{
+%	\pgfputat{\pgfxy(6.5,-0.5)}{\pgfbox[left,top]{\pgfimage[height=1.1cm]{Figures/BCC_logo-1.png}}}}
+
+%\logo{}									%不显示logo
+
+\begin{document}
+%\begin{CJK*}{GBK}{song}
+%\begin{CJK*}{GBK}{kai}
+%beamer下不能用\songyi、\zihao等命令!
+%\graphicspath{Figures/}
+
+%\renewcommand{\figurename}{\tiny\CJKfamily{hei} 图.}
+\renewcommand{\figurename}{\tiny{\bf Fig}.}
+%\renewcommand{\tablename}{\tiny\CJKfamily{hei} 表.}
+\renewcommand{\tablename}{\tiny{\bf Tab}.}
+%\renewcommand{\tablename}{\tiny\CJKfamily{hei} 表.}
+%\renewcommand{\thesubfigure}{\roman{subfigure}}  %\makeatletter 子图标记罗马字母
+\renewcommand{\thesubfigure}{\tiny(\alph{subfigure})}  %\makeatletter　子图标记英文字母
+%\renewcommand{\thesubfigure}{}  \makeatletter　%子图无标记
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Latex 的 tikz 绘图 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\begin{tikzpicture}
+%    % 引入图片
+%    \node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[width=0.9\textwidth]{Mycena_interrupta.jpg}};
+%
+%    \begin{scope}[x={(image.south east)},y={(image.north west)}]
+%        % 建立相对坐标系
+%        \draw[help lines,xstep=.1,ystep=.1] (0,0) grid (1,1);
+%        \foreach \x in {0,1,...,9} { \node [anchor=north] at (\x/10,0) {0.\x}; }
+%        \foreach \y in {0,1,...,9} { \node [anchor=east] at (0,\y/10) {0.\y}; }
+%        % 作图命令
+%        \draw[red, ultra thick, rounded corners] (0.62,0.65) rectangle (0.78,0.75);
+%    \end{scope}
+%\end{tikzpicture}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  不使用 authblk 包制作标题  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%-------------------------------PPT Title-------------------------------------
+\title{\rm{FP-LAPW}方法和\rm{WIEN2k}软件}
+%-----------------------------------------------------------------------------
+
+%----------------------------Author & Date------------------------------------
+\author[\textrm{Jun\_Jiang}]{姜\;\;骏\inst{}} %[]{} (optional, use only with lots of authors)
+%% - Give the names in the same order as the appear in the paper.
+%% - Use the \inst{?} command only if the authors have different
+%%   affiliation.
+\institute[BCC]{\inst{}%
+ \vskip -20pt 北京市计算中心}
+\date[\today] % (optional, should be abbreviation of conference name)
+{	{\fontsize{6.2pt}{4.2pt}\selectfont{\textcolor{blue}{E-mail:~}\url{jiangjun@bcc.ac.cn}}}
+\vskip 45 pt {\fontsize{8.2pt}{6.2pt}\selectfont{中国科学院\;\;理论物理所% 报告地点
+	\vskip 5 pt \textrm{2021.06.25}}}
+}
+
+%% - Either use conference name or its abbreviation
+%% - Not really information to the audience, more for people (including
+%%   yourself) who are reading the slides onlin%%   yourself) who are reading the slides onlin%%   yourself) who are reading the slides onlineee
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subject{}
+% This is only inserted into the PDF information catalog. Can be left
+% out.
+%\maketitle
+\frame
+{
+%	\frametitle{\fontsize{9.5pt}{5.2pt}\selectfont{\textcolor{orange}{“高通量并发式材料计算算法与软件”年度检查}}}
+\titlepage
+}
+%-----------------------------------------------------------------------------
+
+%------------------------------------------------------------------------------列出全文 outline ---------------------------------------------------------------------------------
+\small
+\frame
+{
+	\frametitle{\textrm{WIEN2k}软件简介}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.2in}
+%\subfigure[\footnotesize{Logo of WIEN2k}]{
+\includegraphics[height=1.5in]{Figures/WIEN2k-Group.png}
+\hskip 0.5pt
+\includegraphics[height=1.5in,width=1.6in,viewport=13 35 475 515,clip]{Figures/logo_WIEN2k.pdf}
+%\caption{\small \textrm{}}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\label{Brillouin_Cube}
+%}
+%\subfigure[\footnotesize{Logo of VASP}]{
+%\includegraphics[height=1.48in,width=2.24in,viewport=55 145 595 455,clip]{logo_VASP.eps}
+%\caption{\small \textrm{}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Logo_of_WIEN2k}
+%}
+\end{figure}
+\textrm{WIEN2k}是由奥地利维也纳技术大学\textrm{(Vienna University of Technology)}开发的高精度第一原理材料计算软件包\upcite{WIEN2K-UG_2001}。%\\\textrm{WIEN2k}；\textrm{VASP}。
+\begin{itemize}
+	\item 采用普适的全势\textrm{(Full-Potential, FP)}方法\\对计算对象的化学环境依赖小
+	\item \textrm{LAPW}基组\\兼备描述波函数邻近原子核和位于原子核间行为的能力
+	\item 计算精度高，结果常作为理论计算的\textrm{Benchmark}
+%	\item \textrm{VASP}：采用\textrm{USPP-PAW}方法，计算效率高，特别擅长计算材料的力学性质\upcite{VASP_UG}
+\end{itemize}
+}
+
+\frame
+{
+	\frametitle{\textrm{WIEN2k}软件简介}
+\begin{minipage}[t]{0.55\textwidth}
+	制约\textrm{WIEN2k}软件应用的主要因素
+	\begin{itemize}
+		\item 高精度计算必须付出的代价\\
+			\textcolor{blue}{计算速度慢，处理体系有限}
+		\item 各计算模块部分独立\\
+			\textcolor{red}{输入控制文件过多}\\
+			\textcolor{red}{输出数据文件分散}
+		\item 采用\textrm{tcsh}脚本串联各部分\\
+			计算中间结果需写入外部存储\\
+			\textcolor{red}{\textrm{I/O}耗时过多}
+		\item 软件的并行环境设置拙劣\\
+			\textcolor{red}{\textrm{mpi}并行效率低下}
+		\item \textcolor{red}{编译安装繁琐}
+	\end{itemize}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.43\textwidth}
+\begin{figure}[h!]
+\centering
+\vspace*{-10pt}
+\includegraphics[height=2.6in,width=1.60in,viewport=60 90 325 500,clip]{Figures/WIEN2k_Program_flow.pdf}
+\caption{\tiny \textrm{Program flow in WIEN2k.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{WIEN2k_program_flow}
+\end{figure}
+\end{minipage}
+}
+
+\section*{}
+\frame[allowframebreaks]
+{
+  \frametitle{Outline}
+%  \frametitle{\textcolor{mycolor}{\secname}}
+  \tableofcontents%[current,currentsection,currentsubsection]
+}
+%在每个section之前列出全部Outline
+%类似的在每个subsection之前列出全部Outline是\AtBeginSubsection[]
+%\AtBeginSection[]
+%{
+%  \frame<handout:0>
+%  {
+%    \frametitle{Outline}
+%%全部Outline中，本部分加亮
+%    \tableofcontents[current,currentsection]
+%  }
+%}
+
+%------------------------------------------------------------------------------PPT main Body------------------------------------------------------------------------------------
+
+\section{密度泛函理论与能带}       %Bookmark
+\frame                               %
+{
+\frametitle{密度泛函理论(\textrm{DFT})} %Slide Page Title
+%   \secname
+与传统的量子力学方法不同，密度泛函理论的基本变量是体系的基态电子密度，其基本思想可以上溯到\textrm{Thosmas-Fermi}模型。%通过体系的电子密度而非波函数确定体系的基态能量。
+\begin{itemize}%[+-| alert@+>]
+	\item 密度泛函理论的基石:~\textrm{Hohenberg-Kohn}定理\upcite{PR136-B864_1964}
+\vskip 5pt
+\begin{itemize}%[+-| alert@+>]
+   \setlength{\itemsep}{5pt}
+ \item \textrm{\small{第一定理表明多电子体系的性质完全由体系的基态密度决定}}
+	 $\Rightarrow E[\rho]=F_{\mathrm{HK}}[\rho]+\displaystyle\int\rho(\vec{r})v(\vec{r})\textrm{d}^{3}\vec{r}$ \\
+	 {\fontsize{7.5pt}{6.2pt}\selectfont{其中$F_{\mathrm{HK}}[\rho]=\underset{\Psi\to\rho}{\mathrm{Min}}\langle\Psi[\rho]|\hat{T}+\hat{W}|\Psi[\rho]\rangle$
+是普适泛函的表达式}}%，指明多电子体系的基态性质与基态密度间存在一一对应关系
+   \item \textrm{\small{第二定理指出基态总能量泛函在体系基态电子密度处取极小值}}
+   $\Rightarrow\mbox{如果}\tilde\Psi\neq\Psi$，
+     $E[\tilde\rho]\geqslant E[\rho_0]$
+   \end{itemize}
+%\textrm{\small{第二定理指出基态总能量泛函在体系基态电子密度处取极小值}}
+\vskip 8pt
+ \item 密度泛函理论的优越性：用密度($\rho$)代替波函数($\Psi$)描述体系
+\vskip 5pt
+ \item 密度泛函理论的困难：能量密度泛函的精确形式未知
+   \end{itemize}
+}
+
+\frame                               %
+{
+\frametitle{密度泛函理论(\textrm{DFT})}
+将相互作用体系能量映射到无相互作用体系+交换-相关能的贡献
+\begin{displaymath}
+	E[\rho]=T_s[\rho]+\int V_{ext}(\vec r)\rho(\vec r)\mathrm{d}\vec r+\iint\dfrac{\rho(\vec r)\rho(\vec r\,')}{|\vec r-\vec r^{\prime}|}\mathrm{d}\vec r\mathrm{d}\vec r\,'+E_{\mathrm{XC}}[\rho]
+\end{displaymath}
+变分极小可得\textrm{Kohn-Sham}方程\upcite{PR140-A1133_1965}:
+$$(T_S+V_{e\!f\!f})|\varphi_i\rangle=\varepsilon_i|\varphi_i\rangle,\quad i=1,\cdots,N,\cdots$$
+其中$T_S=-\dfrac12\nabla^2$~~是无相互作用体系的动能
+\begin{displaymath}
+	\begin{aligned}
+		V_{e\!f\!f}(\vec r)=&V_{ext}(\vec r)+\displaystyle\int w(\vec r,\vec r\,')\rho(\vec r\,')\mathrm{d}\vec r\,'+V_{\mathrm{XC}}[\rho]\\
+=&\displaystyle\int\dfrac{\rho(\vec r\,')}{|\vec r-\vec r^{\prime}|}\mathrm{d}\vec r\,'+V_{ext}(\vec r)+V_{\mathrm{XC}}[\rho]
+	\end{aligned}
+\end{displaymath}
+$V_{ext}(\vec r)$是电子体系与外部的电荷或磁场相互作用\\
+$V_{\mathrm{XC}}[\rho]=\dfrac{\delta E_{\mathrm{XC}}}{\delta\rho(\vec r)}$称为交换-相关势
+\vskip 2pt
+%\textrm{Kohn-Sham}方程是形式上的单粒子方程
+}
+
+\frame                               %
+{
+\frametitle{交换-相关能密度泛函}
+\textrm{Kohn-Sham}方程的实质:\\\textcolor{red}{将动能泛函的主要部分分离出来，剩余部分放在交换-相关能中}
+\vskip 5pt
+\textcolor{blue}{密度泛函理论的核心问题}:\\
+\textrm{Kohn-Sham}方程用于实际计算，必须知道$E_{XC}[\rho]$或者$V_{XC}[\rho]$与$\rho(\vec r)$的泛函关系
+\vskip 6pt
+\begin{minipage}[b]{0.59\textwidth}
+ \hspace*{-12pt}
+ {\fontsize{7.5pt}{6.0pt}\selectfont\begin{itemize}%[+-| alert@+>]
+	 \setlength{\itemsep}{10pt}
+ \item \textrm{LDA}:泛函只与密度分布的局域值有关
+ \item \textrm{GGA}:泛函依赖:局域密度及其梯度
+ \item $meta$-\textrm{GGA}:泛函依赖的变量还有动能密度
+ \item 杂化(\textrm{hybrid})泛函:泛函与占据轨道有关
+ \item 其他的交换-相关能泛函
+ \item<1-> 完全非局域泛函:理想泛函，不现实
+ \end{itemize}}
+\end{minipage}
+\hfill
+\begin{minipage}[b]{0.39\textwidth}
+\hspace*{-10pt}
+\includegraphics[height=1.7in,width=3.18in,viewport=10 5 1380 700,clip]{Figures/Jacobi-ladder.png}\\
+\centering{\textcolor{red}{\textrm{\tiny Jacob's ladder}}}
+\end{minipage}
+% \begin{itemize}%[+-| alert@+>]
+%\item 交换-相关能密度泛函
+}
+
+\frame                               %
+{
+	\frametitle{近似能量泛函$E_{\mathrm{XC}}[\rho]$的主要问题}
+\vskip 20pt
+\begin{enumerate}%[+-| alert@+>]
+   \setlength{\itemsep}{10pt}
+ \item  密度是整体变量:~电子自相互作用抵消不净\\%\quad\textrm{(LDA+U)}方法的校正%(\textrm{LDA+U})
+	 用\textrm{DFT}计算电子数很少的体系，一般都会有较大的误差
+ \item  电子相关:~简并和近简并基态的表示不合理\\
+	 基态电子密度用不同的简并轨道计算时，体系能量应保持不变，但现有的近似能量泛函不具有这个性质
+ \item  渐近行为:~处理弱相互作用体系的误差大\\
+	 如\textrm{Van der Waals}相互作用和现有近似能量泛函本身的计算误差在同一量级
+ \end{enumerate}
+}
+
+\frame
+{
+	\frametitle{\textrm{DFT-SCF}}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.25in}
+\hspace*{-0.80in}
+\includegraphics[height=2.80in,width=4.95in,viewport=5 3 1490 870,clip]{Figures/DFT-SCF_2.png}
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{DFT-SCF-2}
+\end{figure}
+}
+
+%\section{Induction on DFT and solid-state physics}       %Bookmark
+%\section{固体能带与赝势}       %Bookmark
+\frame
+{
+%\frametitle{The Bloch theorem}
+\frametitle{固体能带理论}
+\begin{itemize}%[+-| alert@+>]
+   \setlength{\itemsep}{8pt}
+   \item 固体能带理论\upcite{Huang-Han}是固体电子理论的基础，形式上是\\单电子理论：
+    $$\hat H |\psi_i^{\vec k}(\vec r)\rangle=\bigg[-\dfrac{\hbar^2}{2m}\nabla^2+V(\vec r)\bigg]|\psi_i^{\vec k}(\vec r)\rangle=\epsilon_i(\vec k)|\psi_i^{\vec k}(\vec r)\rangle$$
+  \item \textrm{Bloch}定理:
+%   \item \textrm{periodic potential:} $$V(\vec r)=V(\vec r+\vec R_n)$$
+%     \textrm{Here,} $\vec R_n=n\vec R$
+%   \item \textrm{Bloch theorem:}$$\psi_{\vec k}(\vec r)=\textrm{e}^{\textrm i\vec k\cdot\vec r}u_{\vec k}(\vec r)$$
+%     \textrm{Here, $u_{\vec k}(\vec r)$ is a periodic function with the same periodicity as $V(\vec r)$, i.e., $u_{\vec k}(\vec r)=u_{\vec k}(\vec r+\vec R_n)$, then Bloch theorem could reads as:}
+%     $$\psi_{\vec k}(\vec r+\vec R_n)=\textrm{e}^{\textrm i\vec k\cdot\vec R_n}\psi_{\vec k}(\vec r)$$
+具有平移周期性的理想晶体，势能$V(\vec r)$满足$$V(\vec r)=V(\vec r+\vec R_n)$$
+体系的波函数满足\textrm{Bloch}波函数形式:$$\psi_{\vec k}(\vec r)=\textrm{e}^{i\vec k\cdot\vec r}u_{\vec k}(\vec r)$$
+是平面波和周期函数的乘积。$u(\vec r)$与势能有相同的周期。即$$u_{\vec k}(\vec r)=u_{\vec k}(\vec r+\vec R_n)$$
+  \item 能带理论相当于分子轨道理论
+%   \setlength{\itemsep}{30pt}
+\item \textrm{Bloch}函数反映了波函数在周期性势场下的变化规律。
+\end{itemize}
+}
+
+\frame
+{
+\frametitle{固体能带理论}
+简并态微扰理论引起的能带裂分
+\begin{figure}[h!]
+\centering
+%\hspace*{-10pt}
+%\vspace*{-1.1in}
+\includegraphics[height=2.1in,width=3.8in,viewport=10 90 570 380,clip]{Figures/Band_Gap.pdf}
+\caption{\small \textrm{The Band-structure from free-electron gas.}}%
+\label{Band-Structure-1}
+\end{figure} 
+}
+
+\frame
+{
+%	\frametitle{\textrm{DFT-SCF}}
+\begin{figure}[h!]
+\vspace*{-0.25in}
+\centering
+\includegraphics[height=2.80in,width=4.95in,viewport=5 3 1250 780,clip]{Figures/Method_Procedure.png}
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Method-Procedure}
+\end{figure}
+}
+
+%\frame
+\frame
+{
+\frametitle{周期体系下的势与波函数}
+物质的电子体系，可分为芯层分子和价层电子。芯电子能量低，受周围化学环境影响很小，基本保持原子属性；价层电子相互作用较强，对化学环境较为敏感。一般地，价电子波函数在原子间区域(\textrm{Interstitial}区)的变化平缓，在临近原子核附近区域(\textrm{Muffin-tin}球内)，会出现剧烈振荡(与芯层波函数正交)。
+\begin{figure}[h!]
+\centering
+\includegraphics[height=0.8in,width=4.in,viewport=41 433 539 546,clip]{Figures/Pseudo_wave.pdf}\\
+\includegraphics[height=0.8in,width=4.in,viewport=41 210 539 339,clip]{Figures/Pseudo_wave.pdf}
+\caption{\small \textrm{The periodic Potential and the wave functions in crystal.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Potential-Wave}
+\end{figure}
+}
+
+\frame
+{
+%\frametitle{The methods on band structure calculation}
+\frametitle{固体能带计算方法}
+%\vskip 10pt
+%\textrm{The mainly difference of all these methods below: the basis sets and the construction of the potential}
+\vskip 10pt
+常用的计算方法
+\begin{itemize}%[+-| alert@+>]
+%\begin{enumerate}%[+-| alert@+>]
+\setlength{\itemsep}{15pt}
+%  \item \textrm{Plane wave and the pseudo-potential}
+	\item	平面波方法
+	\item	正交平面波\textrm{(The orthogonalized plane wave, OPW)}和赝势\textrm{(Pseudo-potential, PP)}方法\upcite{Singh,PRB41-7892_1990,JPCM6-8245_1994}
+	\item	缀加平面波\textrm{(Augmented plane wave, APW)}方法\upcite{Singh}
+	\item	\textrm{MT}轨道\textrm{(Muffin-tin orbitals, MTO)}方法\upcite{Skriver}
+	\item	投影子缀加波\textrm{(Projector Augmented Wave, PAW)}方法\upcite{PRB50-17953_1994,PRB59-1758_1999}
+\end{itemize}
+  \vskip 5pt 各种方法的主要区别:~所选的基函数类型不同
+}
+
+\section{FP-LAPW方法}
+\frame
+{
+	\frametitle{\textrm{Muffin-tin}近似}
+\begin{figure}[h!]
+\centering
+\subfigure[\textrm{Muffin-tin Potentional}]{
+\label{Semi-local-potential}
+\includegraphics[height=1.10in,width=1.92in,viewport=1 22 507 295,clip]{Figures/Muffin-tin.png}}
+\subfigure[\textrm{Division of the unit cell into spheres(I) and into interstitial region(II)}]{
+\label{Semi-local-space}
+\includegraphics[height=1.45in,width=1.92in,viewport=1 20 515 435,clip]{Figures/Muffin-Tin.png}}
+%\caption{\tiny \textrm{Division of the unit cell into spheres(I) and into interstitial region(II)}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Muffin_tin-1}
+\end{figure}
+\textrm{Muffin-tin}近似是\textrm{Johnson}采用$\chi_{\alpha}$方法计算分子体系的交换-相关时，引入多重散射(\textrm{Multiple scattering})理论时提出的%，\textrm{Muffin-tin}直译为“松饼罐头”，意思是把分子中的原子看成堆在一起的圆球罐
+
+\textcolor{red}{\textrm{MT}球近似与多重散射理论有密切的关联}
+}
+
+\frame
+{
+\frametitle{\textrm{APW}方法}
+\begin{figure}[h!]
+\centering
+\includegraphics[height=1.10in,width=1.80in,viewport=40 150 545 465,clip]{Figures/Muffin_tin.pdf}
+\includegraphics[height=1.10in,width=1.45in,viewport=1 20 485 435,clip]{Figures/APW.png}
+\caption{\tiny \textrm{Partitioning of the unit cell into atomic spheres(I) and an interstitial region(II)}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Muffin_tin-2}
+\end{figure}
+\begin{displaymath}
+\hskip -28pt\footnotesize \varphi(\vec k_j,\vec r)=\left\{
+  \begin{aligned}
+    &\Omega^{-1/2}\exp[i\vec k_j\cdot\vec r],&|\vec r-\vec r_s|>R_{\mathrm{MT}}^s\\
+    &\sum_{lm}A_{lm}u_l(|\vec r-\vec r_s|,E)Y_{lm}(\widehat{\vec r-\vec r_s}),&|\vec r-\vec r_s|\leqslant R_{\mathrm{MT}}^s
+  \end{aligned}
+\right.
+\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{空间两部分函数在球面上的衔接}
+	根据\textrm{Huygens}原理:\textcolor{blue}{平面波可以在各个原子球中心用球面波展开}:
+	\begin{displaymath}
+		\mathrm{e}^{\mathrm{i}\vec k\cdot\vec r}=4\pi\sum_{l=0}^{\infty}\sum_{m=-l}^l\mathrm{i}^lj_l(|\vec k|r)Y_{lm}^{\ast}(\hat{\vec k})Y_{lm}(\hat{\vec r})
+	\end{displaymath}
+	其中$j_l(|\vec k|r)$是$l$-阶球\textrm{Bessel}函数，$\hat{\vec k}$和$\hat{\vec r}$分别是矢量$\vec k$和$\vec r$与直角坐标$z$-轴的夹角$\theta$和$\varphi$
+
+	要求空间中不同区域函数在球面上连续，可调参数$A_{lm}^{\vec k}$可为下式确定
+\begin{displaymath}
+	A_{lm}^{\vec k}=4\pi\mathrm{e}^{\mathrm{i}\vec k\cdot\vec r_s}\mathrm{i}^lY_{lm}^{\ast}(\hat{\vec k})j_l(|\vec k|R_{MT}^s)/u_l(R_{MT}^s,E)
+\end{displaymath}
+\textrm{APW}的问题:\textcolor{blue}{球面参数$A_{lm}^{\vec k}$对能量$E$依赖，由此构造的久期方程是非线性的}
+}
+
+\frame
+{
+\frametitle{\textrm{LAPW}方法}
+%\small\textrm{APW}方法的困难，久期方程不能化成广义本征值方程的形式(久期方程对能量$E$是非线性的)为了克服这一困难，人们提出线性化方法，
+\textrm{O.~K.~Andersen~}提出\textrm{LAPW}方法\upcite{Singh}:将$u_l(r,E)$在某一合适的$E_l$值附近对$E$的一阶微商{$\left.\dfrac{\textrm{d}u_l(r,E)}{\textrm{d}E}\right|_{E_l}\equiv\dot u_l(r,E_l)$}\\代入\textrm{APW}基函数中可得\textrm{LAPW}方法的基函数：
+{\fontsize{7.5pt}{3.3pt}\selectfont
+$$\hskip -14pt \varphi(\vec k_j,\vec r)=\left\{
+  \begin{aligned}
+    &\Omega^{-1/2}\exp[i\vec k_j\cdot\vec r],&|\vec r-\vec r_s|>R_{\mathrm{MT}}^s\\
+    &\sum_{lm}[A^{\vec k_j}_{lm}u_l(|\vec r-\vec r_s|,E_l)+B^{\vec k_j}_{lm}\dot u_l(|\vec r-\vec r_s|,E_l)]Y_{lm}(\widehat{\vec r-\vec r_s}),&|\vec r-\vec r_s|\leqslant R_{\mathrm{MT}}^s
+  \end{aligned}
+\right.$$
+%$$\Psi_{\vec k}(\vec r)=\int_{\Omega}\tilde G_{\vec k}(\vec r-\vec r\,^\prime;E)V(\vec r\,^\prime)\Psi_{\vec k}(\vec r\,^\prime)\textrm{d}\vec r\,^\prime$$
+根据基函数在\textrm{MT}球面上连续到一阶，确定系数$A^{\vec k}_{lm}$，$B^{\vec k}_{lm}$的值。}
+\begin{figure}[h!]
+	\vskip -3pt
+\centering
+\includegraphics[height=1.10in,width=1.88in,viewport=1 20 585 435,clip]{Figures/WIEN2k-LAPW.png}
+\caption{\tiny \textrm{Partitioning of the unit cell into atomic spheres(I) and an interstitial region(II)}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Muffin_tin-3}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{semi-core}与\textrm{Ghost-band}}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.2in}
+\hspace*{-0.2in}
+\subfigure[\textrm{Windows with a semi-core state}]{
+\label{Semi-local-1}
+\includegraphics[height=1.88in,width=2.35in,viewport=0 0 785 615,clip]{Figures/Ghost-Multi_Windows.png}}
+\subfigure[\textrm{Variation of a semi-core and a valence band with $E_l$}]{
+\label{Semi-local-2}
+\includegraphics[height=1.88in,width=1.54in,viewport=0 0 625 650,clip]{Figures/Ghost-Multi_energy.png}}
+\label{Semi-local}
+\end{figure}
+}
+
+\frame
+{
+\frametitle{\textrm{LO}基函数}
+为提高\textrm{LAPW}方法的变分自由度，在同一能量范围处理半芯态(接近价态的能量较高的芯态)和价态，可添加与$\vec k$无关的基函数，称为局域轨道(\textrm{local orbitals, LO})%。据此构造的基函数称为%包含两个指定能量的径向波函数和其中一个能量导数，这样的基函数即LAPW+
+或\textrm{LO}基函数：
+{
+{\fontsize{8.5pt}{4.5pt}\selectfont
+$$\hskip -10pt \phi_{lm}^{\mathrm{LO}}(\vec r)=\left\{
+  \begin{aligned}
+    &[A_{lm}u_l(r,E_{1,l})+B_{lm}\dot u_l(r,E_{1,l})+C_{lm}u_l(r,E_{2,l})]Y_{lm}(\hat{\vec r})\quad&r\leqslant R_{\mathrm{MT}}^s\\
+    &0 &r>R_{\mathrm{MT}}^s
+\end{aligned}
+\right.$$}}
+
+类似地，根据$\phi_{lm}^{\mathrm{LO}}(\vec r)$在\textrm{MT}球面上的数值为零、一阶导数为零，并且$\phi_{lm}^{\mathrm{LO}}(\vec r)$在\textrm{MT}球内归一化的要求，可以确定系数$A_{lm}$，$B_{lm}$，$C_{lm}$的值。
+\begin{figure}[h!]
+	\vspace{-15pt}
+\centering
+\hspace{15pt}
+\includegraphics[height=1.45in,width=1.55in,viewport=50 10 470 415,clip]{Figures/WIEN2k-lo.png}
+\includegraphics[height=1.45in,width=1.45in,viewport=5 1 570 570,clip]{Figures/semi-core.png}
+\caption{\tiny \textrm{}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Muffin_tin_LO}
+\end{figure}
+}
+
+\frame
+{
+\frametitle{\textrm{APW+lo}基函数}
+\textrm{Sj\"ostedt}等发现上述\textrm{LAPW}方法并非是\textrm{APW}方法线性化的最有效方法。采用指定能量参数$E_l$的\textrm{APW}形式的径向波函数，外加\textrm{APW}型局域轨道(\textrm{local orbit, lo})基函数，是更有效的方案，称为\textrm{APW+lo}方法\upcite{SSC114-15_2000}。
+$$  \varphi(\vec k_j,\vec r)=\left\{
+  \begin{aligned}
+    &\sum_{lm}[A^{\vec k_j}_{lm}u_l(r,E_l)]Y_{lm}(\hat{\vec r})\quad&r\leqslant R_{\mathrm{MT}}^s\\
+    &\Omega^{-1/2}\exp(i\vec k_j\cdot\vec r) &r>R_{\mathrm{MT}}^s
+  \end{aligned}\right.
+  \label{eq:APW-basis}
+$$
+$$  \phi_{lm}^{\mathrm{lo}}(\vec r)=\left\{
+  \begin{aligned}
+  &[A_{lm}u_l(r,E_{1,l})+B_{lm}\dot u_l(r,E_{1,l})]Y_{lm}(\hat{\vec r})\quad&r\leqslant R_{\mathrm{MT}}^s\\
+  &0&r>R_{\mathrm{MT}}^s
+  \end{aligned}
+\right.$$
+\textrm{APW+lo}基函数式形式上与标准\textrm{LAPW}基函数式形式非常相似，但\textrm{APW+lo}基函数是平滑且一阶可微的，在\textrm{MT}球面上有动能对\textrm{Hamiltonian}的贡献需要计算。计算表明，采用\textrm{APW+lo}基组比标准\textrm{LAPW}基组计算效率高。
+}
+
+\frame
+{
+	\frametitle{不同电子轨道的\textrm{LAPW}基函数选择原则}
+\vskip 10pt
+\begin{itemize}
+\setlength{\itemsep}{15pt}
+	\item 对$s$态、$p$态价电子轨道用\textrm{LAPW}基组展开
+	\item 对一般平面波基函数展开收敛缓慢的轨道(如过渡金属的3$d$态波函数)或\textrm{MT}球半径特别小的体系用\textrm{APW+lo}基组展开
+	\item 对半芯层轨道用\textrm{LAPW-LO}基组展开
+\end{itemize}
+这样搭配选择基组，可以同时较好地处理价态和半芯态。
+}
+
+\section{全势与总能量的计算}
+\frame
+{
+\frametitle{全势的基本思想}
+\vspace*{-13pt}
+\begin{figure}[h!]
+\centering
+\includegraphics[height=2.70in,width=2.02in,viewport=1 22 507 715,clip]{Figures/MT_FP.png}
+\caption{\tiny \textrm{From Muffin-tin Potential to Full Potential}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Muffin_tin_FP}
+\end{figure}
+}
+
+\frame
+{
+\frametitle{全势的基本思想}
+全势\textrm{(Full Potential, FP)}是相对于赝势的概念，即\textcolor{blue}{电子运动过程中感受到其它粒子作用的真实效果}。
+实际计算中，构造\textrm{LAPW}基组的\textrm{MT}势换成晶体势函数。一般地，在每个\textrm{MT}球内，势函数用球谐函数(或者是满足晶体对称性)展开，\textrm{MT}球外的势函数用\textrm{Fourier}级数展开：%\upcite{PRB13-5362_1976}
+{\footnotesize$$ V(\vec r)=\left\{
+  \begin{aligned}
+    &\sum_{a,L}V_L^a(r)Y_L(\hat{\vec r})\quad &r\leqslant R_{\mathrm{MT}}^a\\
+    &\sum_{\vec G_n}V_I(\vec G_n)\textrm{e}^{i\vec G_n\cdot\vec r} &\vec r\in\mathrm{II}
+  \end{aligned}\right.
+  \label{eq:solid-63}
+$$}
+这里$L$\,$\equiv$\,$l,m$，$\vec G_n$为倒格矢，$Y_L(\hat{\vec r})$是球谐函数，\textrm{II}为原子间隙
+\begin{itemize}
+	\item 在\textrm{MT}球内靠近原子核，势函数具有原子型势能特征
+	\item 在\textrm{MT}球外，势函数满足\textrm{Bloch}函数边界条件特征。
+	\item 在\textrm{MT}球内外的势函数表示不同，同样要求势能在\textrm{MT}球表面连续。
+\end{itemize}
+}
+
+\frame
+{
+\frametitle{全势方法在$\vec k$空间中的实现}
+根据电动力学定理:\\\textcolor{blue}{如果球\textrm{S}内的电荷密度分布$\rho(\vec r)$，在球外某点$\vec r$产生的势是由电荷密度的多极矩确定}:
+\begin{figure}[h!]
+\vspace*{-15pt}
+\centering
+\includegraphics[height=1.25in,width=1.32in,viewport=1 22 507 575,clip]{Figures/potential_multipole.jpg}
+%\caption{\tiny \textrm{From Muffin-tin Potential to Full Potential}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Potential-multipole}
+\end{figure}
+\begin{displaymath}
+	V(\vec r)=\sum_{l=0}^{\infty}\sum_{m=-l}^{l}\dfrac{4\pi}{2l+1}q_{lm}\dfrac{Y_{lm}(\hat{\vec r})}{r^{l+1}}
+\end{displaymath}
+其中多极矩$q_{lm}$由下式计算
+\begin{displaymath}
+	q_{lm}=\int_SY_{lm}^{\ast}(\hat{\vec r})r^l\rho(\vec r)\mathrm{d}^3r
+\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{全势方法在$\vec k$空间的实现}
+\textrm{Weiner}提出全势计算的实现方法\upcite{JMP22-2433_1981}:~\\
+\begin{itemize}
+	\item 将\textrm{MT}球外的电荷密度$\rho_I(\vec r)$扩展到球内
+	\begin{displaymath}
+		\rho_I(\vec r)=\sum_{\vec K}\rho_I(\vec K)\mathrm{e}^{\mathrm{i}\vec K\cdot\vec r_s}\mathrm{e}^{\mathrm{i}\vec K\cdot(\vec r-\vec r_s)}
+	\end{displaymath}
+	这部分电荷在每个球内的多极矩展开$q_{lm}^{s,PW}$
+	\begin{displaymath}
+		\begin{aligned}
+			q_{lm}^{s,PW}=&\dfrac{\sqrt{4\pi}}3{R_{MT}^s}^3\rho_I^{(\vec K=0)}\delta_{l0}+\sum_{\vec K\neq0}4\pi\mathrm{i}^l\rho_I(\vec K){R_{MT}^s}^{l+3}\\
+			&\times\dfrac{j_{l+1}(|\vec K|R_{MT}^s)}{\vec K\cdot\vec R_{MT}^s}\mathrm{e}^{\mathrm{i}\vec K\cdot\vec r_s}Y_{lm}^{\ast}(\hat{\vec K})
+		\end{aligned}
+	\end{displaymath}
+\end{itemize}
+}
+
+\frame
+{
+	\frametitle{全势方法在$\vec k$空间的实现}
+\begin{itemize}
+	\item 根据\textrm{MT}球内的电荷密度分布，电子密度$\rho_s(\vec r)$在正空间分布的多极矩$q_{lm}^{s,MT}$
+\begin{displaymath}
+	q_{lm}^{s,MT}=\int_0^{R_{MT}^s}Y_{lm}^{\ast}(\hat{\vec r})r^l\rho_s(\vec r)\mathrm{d}^3r
+\end{displaymath}
+由此得到在\textrm{MT}球内，真实电荷密度多极展开多极矩与延伸到球内的平面波电荷多极矩之差
+	\begin{displaymath}
+		\delta q_{lm}^{s,MT}=q_{lm}^{s,MT}-q_{lm}^{s,PW}
+	\end{displaymath}
+\end{itemize}
+}
+
+\frame
+{
+	\frametitle{全势方法在$\vec k$空间的实现}
+\begin{itemize}
+	\item 构造赝电荷密度$\tilde\rho(\vec r)$，要求$\tilde\rho(\vec r)$在空间分布平缓，其多级矩$\tilde q_{lm}^{s,MT}$即为$\delta q_{MT}^s$，由此得到赝电荷密度的\textrm{Flourier}变换为
+	\begin{displaymath}
+		\begin{aligned}
+			\tilde\rho_s(\vec K)=&\dfrac{4\pi}{\Omega}\sum_{lm,s}(-\mathrm{i})^l\left\{\dfrac{(-1)^n\tilde q_{lm}^{s,MT}}{2^nn!a_n{R_{MT}^s}^{2l+2n+3}}\dfrac{(2l+2n+3)!!}{(2l+1)!!}\right\}\\
+			&\times\left\{(-1)^n2^nn!a_n{R_{MT}^s}^{l+2n+3}\dfrac{j_{l+n+1}(|\vec K|R_{MT}^s)}{(\vec K\cdot\vec R_{MT}^s)^{n+1}}\right\}\\
+			&\times\mathrm{e}^{\mathrm{-i}\vec K\cdot\vec r_s}Y_{lm}^{\ast}(\hat{\vec K})
+		\end{aligned}
+	\end{displaymath}
+\end{itemize}
+}
+
+\frame
+{
+	\frametitle{全势方法在$\vec k$空间的实现}
+\begin{itemize}
+	\item 在$\vec k$空间内，用平面波电荷密度$\rho_I(\vec K)$叠加\textrm{MT}球内赝电荷密度$\tilde\rho_s(\vec K)$:
+		\begin{displaymath}
+			\tilde\rho(\vec K)=\tilde\rho_s(\vec K)+\rho_I(\vec K)
+		\end{displaymath}
+		\textcolor{blue}{这样构造的赝电荷密度，在\textrm{MT}球外产生的势与真实电荷密度分布产生的势相等}:~根据\textrm{Coulomb}定理计算得到\textrm{Coulomb}势在间隙区的表达式$V_I(\vec K)$(\textrm{Poisson}方程)
+		\begin{displaymath}
+			V_I(\vec K)=\dfrac{4\pi\tilde\rho(\vec K)}{|\vec K|^2}
+		\end{displaymath}
+\end{itemize}
+}
+
+\frame
+{
+	\frametitle{全势方法在$\vec k$空间的实现}
+\begin{itemize}
+	\item 在\textrm{MT}球面内，根据真实的电荷密度分布$\rho_s(\vec r)$和球面上的电势值(球形\textrm{Dirichlet}边值条件)，计算\textrm{MT}球内电子的\textrm{Coulomb}势$V_s(\vec r)$
+		\begin{displaymath}
+			\begin{aligned}
+				V_s(\vec r)=&\sum_{lm}Y_{lm}(\hat{\vec r})\left[\dfrac{4\pi}{2l+1}\bigg\{\dfrac1{r^l+1}\int_0^r\mathrm{d}r^{\prime}{r^{\prime}}^{l+2}\rho_{lm}(\vec r^{\prime})\right.\\
+					&+r^l\int_r^{R_{MT}^s}\mathrm{d}r^{\prime}(r^{\prime})^{1-l}\rho_{lm}(\vec r^{\prime})\bigg\}\\
+					&+\bigg(\dfrac r{R_{MT}^s}\bigg)^l4\pi\mathrm{i}^l\\
+					&\times\sum_{K\neq0}\left.\dfrac{4\pi}{|\vec K|^2}\tilde\rho_I(\vec K)Y_{lm}^{\ast}(\vec K)\dfrac{\vec K\cdot\vec R_{MT}^sj_{l-1}(|\vec K|R_{MT}^s)}{2l+1}\right]
+			\end{aligned}
+		\end{displaymath}
+\end{itemize}
+}
+
+\frame
+{
+	\frametitle{总能量的计算}
+	\textrm{Weinert}等利用核\textrm{Coulomb}势的发散项与电子动能-势能项发散项解析抵消属性，提出新的总能量计算方法\upcite{PRB26-4571_1982}:
+	根据\textrm{DFT}，体系总能量分解为
+	\begin{displaymath}
+		E[\rho]=T_s[\rho]+U[\rho]+E_{\mathrm{XC}}[\rho]
+	\end{displaymath}
+	其中$U[\rho]$包含全部(经典)电荷相互作用:~
+	\begin{displaymath}
+		U[\rho]=\dfrac12\left[\int\dfrac{\rho(\vec r)\rho(\vec r^{\prime})}{|\vec r-\vec r^{\prime}|}\mathrm{d}\vec r\mathrm{d}\vec r^{\prime}-2\sum_{\alpha}Z_{\alpha}\int\dfrac{\rho(\vec r)\mathrm{d}\vec r}{|\vec r-\vec R_{\alpha}|}+\sum_{\alpha,\beta}{}^{\prime}\dfrac{Z_{\alpha}Z_{\beta}}{|\vec R_{\alpha}-\vec R_{\beta}|}\right]
+	\end{displaymath}
+	这里$Z_{\alpha}$是位于$R_{\alpha}$的核电荷
+}
+
+\frame
+{
+	\frametitle{总能量的计算}
+	记经典\textrm{Coulomb}势
+	\begin{displaymath}
+		V_c(\vec r)=\int\dfrac{\rho(\vec r^{\prime})}{|\vec r-\vec r^{\prime}|}\mathrm{d}\vec r^{\prime}-\sum_{\alpha}\dfrac{Z_{\alpha}}{|\vec r-\vec R_{\alpha}|}
+	\end{displaymath}
+	定义\underline{\textcolor{red}{广义的\textrm{Madelung}势}}
+	\begin{displaymath}
+		V_M(\gamma_{\nu})=\int\dfrac{\rho(\vec r)\mathrm{d}\vec r}{|\vec r-\vec \gamma_{\nu}|}-\sum_{\alpha}{}^{\prime}\dfrac{Z_{\alpha}}{|R_{\alpha}-\gamma_{\nu}|}
+	\end{displaymath}
+	\textcolor{red}{注意}:~\textcolor{blue}{位于\textrm{$\gamma_{\nu}$的\textrm{Madelung}势是晶体中除该点核电荷$Z_{\nu}$之外，所有其他电荷在该点产生电势之和}}
+
+	如果体积为$\Omega$的晶体包含$N$个原胞，则$U$表示为
+	\begin{displaymath}
+		U=\dfrac N2\left[\int_{\Omega}\rho(\vec r)V_c(\vec r)\mathrm{d}\vec r-\sum_{\nu}Z_{\nu}V_M(\vec \gamma_{\nu})\right]
+	\end{displaymath}
+	其中对$\nu$的求和遍历原胞中所有的核位置$\gamma_{\nu}$
+}
+
+\frame
+{
+	\frametitle{总能量的计算}
+	假设已知晶体中全部电荷产生\textrm{Coulomb}势，并设原点$\gamma_{\nu}$半径为$R_{\nu}$的球面上的球平均势是$S_0(R_{\nu})$，则除了球面上除核电荷$Z_{\nu}$外的平均势为
+	\begin{displaymath}
+		S(R_{\nu})=S_0(R_{\nu})+Z_{\nu}/R_{\nu}
+	\end{displaymath}
+	根据球形\textrm{Dirichlet}边值条件，$\gamma_{\nu}$处的\textrm{Coulomb}势，可由球内电荷密度分布$\rho(\vec r)$和$S(R_{\nu})$确定。
+
+	球内的电荷密度用球谐函数展开
+	\begin{displaymath}
+		\rho(\vec r_{\nu})=\sum_{lm}\rho_{lm(r_{\nu})}Y_{lm}(\hat{\vec r}_{\nu})
+	\end{displaymath}
+	并记球内电子电荷为$Q_{\nu}$，由此可得
+	\begin{displaymath}
+		\begin{aligned}
+			V_M(\gamma_{\nu})=&\dfrac1{R_{\nu}}\big[R_{\nu}S_0(R_{\nu})+Z_{\nu}-Q_{\nu}\big]+\sqrt{4\pi}\int_0^{R_{\nu}}\mathrm{d}rr\rho_{00}(r_{\nu})\\
+			=&\dfrac1{R_{\nu}}\big[R_{\nu}S_0(R_{\nu})+Z_{\nu}-Q_{\nu}\big]+\left\langle\dfrac1r\rho(\vec r)\right\rangle_{\nu}
+		\end{aligned}
+	\end{displaymath}
+}
+
+\frame
+{
+\frametitle{总能量的计算}
+原胞内的电子动能为
+\begin{displaymath}
+	\hspace*{-10pt}
+	T_s[\rho]=\sum_i\varepsilon_i-\int_{\Omega}V_{e\!f\!f}(\vec r)\mathrm{d}\vec r=\sum_i\varepsilon_i-\int_{\Omega}V_c(\vec r)\rho(\vec r)\mathrm{d}\vec r-\int_{\Omega}\mu_{\mathrm{XC}}(\vec r)\rho(\vec r)\mathrm{d}\vec r
+\end{displaymath}
+由此可得\textrm{WS}原胞内的总能量的表达式
+{\fontsize{9.5pt}{5.2pt}\selectfont
+\begin{displaymath}
+\begin{split}
+	E_T=&\sum_i\varepsilon_i-\frac12\int_{\Omega}\underline{\textcolor{blue}{\rho(\vec r)}}[\underline{\textcolor{blue}{V_c(\vec r)}}+2\mu_{XC}(\vec r)]\mathrm{d}\vec r-\frac12\sum_{\nu}\underline{\textcolor{blue}{Z_{\nu}V_M(\vec r_{\nu})}}+E_{\mathrm{XC}}[\rho] \\
+	=&\sum_i\varepsilon_i-\frac12\left(\underline{\textcolor{blue}{\int_{\Omega}\rho(\vec r)V_c(\vec r)\mathrm{d}\vec r}}+\underline{\textcolor{blue}{\sum_{\nu}Z_{\nu}\bigg\langle\frac1r\rho(\vec r)\bigg\rangle_{\nu}}}\right)-%\dfrac12
+   \int_{\Omega}\rho(\vec r)\mu_{\mathrm{XC}}(\vec r)\mathrm{d}\vec r \\
+   &-\frac12\underline{\textcolor{blue}{\sum_{\nu}\frac{Z_{\nu}}{R_{\nu}}[R_{\nu}S_0(R_{\nu})+Z_{\nu}-Q_{\nu}]}}+E_{\mathrm{XC}}[\rho]
+\end{split}
+\end{displaymath}
+}
+这里$V_c(\vec r)\!=\!\displaystyle\int\dfrac{\rho(\vec r\,^\prime)}{|\vec r-{\vec r}\,^\prime|}\mathrm{d}\vec r\,^\prime-\sum\limits_{\alpha}\dfrac{Z_{\alpha}}{|\vec r-\vec r_{\alpha}|}$，$\mu_{\mathrm{XC}}$为交换-相关势。
+}
+
+\frame
+{
+\frametitle{原子核位置能量奇点排除}
+核吸引势和\textrm{Coulomb}势在原子核位置都存在奇点，单独求和，总能量是发散的。
+
+为排除奇点，将\textrm{Coulomb}势能和电荷密度在各原子核附近用球谐函数展开，在原子核附近，有
+{\fontsize{9.0pt}{5.2pt}\selectfont
+\begin{displaymath}
+  \begin{split}
+    &\int_{\Omega}\rho(\vec r)V_c(\vec r)\mathrm{d}\vec r+Z_{\nu}\sqrt{4\pi}\int_0^{R_{\nu}}\mathrm{d}rr^2\frac{\rho_{00}(r)}r\\
+    =&\sqrt{4\pi}\int_0^{R_{\nu}}\mathrm{d}rr^2\rho_{00}(\vec r)\left(\textcolor{red}{\dfrac1{\sqrt{4\pi}}V_{00}(r)}+\textcolor{red}{\frac{Z_{\nu}}r}\right)+\sum_{lm>0}\int_0^{R_{nu}}\mathrm{d}rr^2\rho_{lm}(r)V_{lm}(r)
+  \end{split}
+\end{displaymath}
+}
+\textcolor{blue}{\textrm{Coulomb}势的奇点只出现在$V_{00}(r)$中，将$V_{00}(r)$写成核的点电荷势与源于电子的平缓的势$\hat V_{00}(r)$两部分之和}:~
+\textcolor{red}{$$V_{00}(r)=-\sqrt{4\pi}\frac{Z_{\nu}}r+\textcolor{red}{\hat V_{00}(r)}$$}
+可以看出\textrm{Coulomb}势的奇点被消去了。\\有必要指出的是，这样方式可以将总能量中的奇点排除，但是\textcolor{red}{单独每一项在原子核位置仍然是发散的}。
+}
+
+\frame
+{
+	\frametitle{\textrm{LDA~}近似下的总能量表达式}
+\begin{itemize}
+	\item 间隙区的电荷密度用平面波展开：{$\rho(\vec r)=\sum\limits_{\vec G}\rho(\vec G)\mathrm{e}^{i\vec G\cdot\vec r}$}
+	\item 在\textrm{MT}球内，电荷密度用球谐函数展开，在动量空间中的展开形式为：{$\bar\rho_{lm}(r_{\nu})=4\pi i^l\sum\limits_{\vec G}\rho(\vec G)\mathrm{e}^{i\vec G\cdot\vec r_{\nu}}j_l(\vec G\cdot\vec r_{\nu})Y_{lm}^{\ast}(\vec G)$}
+\end{itemize}
+\textrm{LDA}近似下，{\fontsize{7.5pt}{4.2pt}\selectfont$$E_{\mathrm{XC}}[\rho]\approx\int_{\Omega}\rho(\vec r)\varepsilon_{\mathrm{XC}}(\vec r)\textrm{d}\vec r$$}
+因此\textrm{WS}原胞内的晶体总能量可以写成：
+{\fontsize{7.5pt}{4.2pt}\selectfont
+\begin{displaymath}
+  \begin{split}
+\hskip -10pt	  E=&\sum_i\varepsilon_i-\Omega\sum_{\vec G}\rho(\vec G)\tilde V^{\ast}(\vec G)-\frac12\sum_{\nu}\dfrac{Z_{\nu}}{R_{\nu}}[Z_{\nu}-Q_{\nu}+R_{\nu}S_0(R_{\nu})]\\
+    &-\sum_{\nu}\sum_{lm}\int_0^{R_{\nu}}\mathrm{d}rr^2\left[\rho_{lm}(r_{\nu})\left(\tilde V_{lm}^{\ast}(r_{\nu})+\dfrac{\sqrt{4\pi}}{2r_{\nu}}Z_{\nu}\delta_{l0}\right)-\bar\rho_{lm}(\vec r_{\nu})\bar V_{lm}^{\ast}(\vec r_{\nu})\right]
+  \end{split}
+  \label{eq:solid-83}
+\end{displaymath}}
+这里$\tilde V(\vec r)$和$\bar V_{lm}(\vec r)$根据都按下式计算：
+{\fontsize{7.5pt}{4.2pt}\selectfont$$\tilde V(\vec r)=\frac12V_c(\vec r)-\varepsilon_{\mathrm{XC}}(\vec r)+\mu_{\mathrm{XC}}(\vec r)$$}
+}
+
+\section{$\vec k$空间积分与布点}
+\frame
+{
+	\frametitle{$\vec k$~空间布点与\textrm{Fermi~}面的确定}
+\begin{figure}[h!]
+\centering
+\hspace*{-0.35in}
+\subfigure[\textrm{Brillouin Zone of Cubic lattice}]{
+\label{Brillouin_Zone_Cubic-2}
+\vspace*{-0.50in}
+\includegraphics[height=2.10in,width=2.00in,viewport=90 0 550 500,clip]{Figures/Brillouin-Zone_CUB.png}}
+\subfigure[\textrm{Band Structure of SrSnO$_3$}]{
+\label{Band_Gap_SrSnO3-2}
+\vspace*{-0.50in}
+\includegraphics[height=2.10in,width=1.95in,viewport=0 0 710 550,clip]{Figures/Band-Struct_SrSnO3.png}}
+\label{Band_Gap_CUB_SrSnO3}
+\end{figure}
+在固体能带理论中，能量色散关系$\varepsilon(\vec k)$~表示能量在倒空间中分布，其中量子数$\vec k$~(晶体动量)描述平移对称性
+%\textcolor{blue}{能带图表示能量在\textrm{Brillouin-zone~}特定方向的色散关系}
+}
+
+\frame
+{
+	\frametitle{$\vec k$~空间布点与\textrm{Fermi~}面的确定}
+\begin{figure}[h!]
+\centering
+%\hspace*{-10pt}
+\vspace*{-0.3in}
+\includegraphics[height=1.5in,width=4.1in,viewport=0 5 1400 500,clip]{Figures/Brillouin-Band.png}
+\caption{\tiny \textrm{The relation between unfolded-Band and the Brillouin-zone.}}%
+\label{Brillouin-Band}
+\end{figure} 
+周期体系的\textrm{Fermi~}能级和\textrm{Fermi~}面的确定:\\
+\begin{displaymath}
+	\left\{
+	\begin{aligned}
+		&\mbox{\textcolor{red}{导体:~}}&\mbox{\textcolor{blue}{价电子在\textrm{Brillouin-zone~}部分填充}}\\
+		&\mbox{\textcolor{red}{半导体-绝缘体:~}}&\mbox{\textcolor{blue}{价电子在\textrm{Brillouin-zone~}完全填充}}
+	\end{aligned}\right.
+\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{$\vec k$~空间布点与\textrm{Fermi~}面的确定}
+\begin{figure}[h!]
+\centering
+%\hspace*{-10pt}
+\vspace*{-0.3in}
+\includegraphics[height=1.2in,width=1.3in,viewport=0 0 110 100,clip]{Figures/FS-Li.jpg}
+\includegraphics[height=1.2in,width=1.3in,viewport=0 0 110 100,clip]{Figures/FS-Mg.jpg}
+\includegraphics[height=1.2in,width=1.3in,viewport=0 0 110 100,clip]{Figures/FS-Cu.jpg}
+\caption{\tiny \textrm{The Fermi-surface of Li, Mg, Cu in the first Brillouin-zone.}}%
+\label{Brillouin-Band-Fermi}
+\end{figure} 
+\textcolor{blue}{\textrm{Fermi~}面的形状}:\\
+\textcolor{red}{最高占据能带折叠到第一\textrm{Brillouin-zone~}围成的区域}
+
+\vspace{10pt}
+要确定\textrm{Fermi~}面的精细结构，\underline{\textcolor{red}{特别是对于金属和导体体系}}，必须在整个\textrm{Brillouin-zone~}取足够多的采样点
+}
+
+\frame
+{
+\frametitle{$\vec k$~空间积分与物理量计算}
+与\textrm{Fermi~}面的确定类似，周期体系中所有单粒子期望值可表示为整个\textrm{Brillouin-zone~}内占据态的矩阵元的积分\\
+
+一般地，如果已知\textrm{Brillouin-zone~}某点$\vec k$~的能带指标为$n$的波函数本征态$\Psi_n(\vec k)$~和本征值$\epsilon_n(\vec k)$，算符$\mathbf{X}$~的期望值$\langle X \rangle$是矩阵元
+\begin{displaymath}
+	X_n(\vec k)=\langle\Psi_n(\vec k)|\mathbf{X}|\Psi_n(\vec k)\rangle 
+\end{displaymath}
+\textcolor{blue}{在倒空间全部占据能带的求和}
+\begin{displaymath}
+	\langle X\rangle=\dfrac1{\sqrt V_G}\sum_n\int_{V_G}\mathrm{d}^3kX_n(\vec k)f(\varepsilon_n(\vec k))
+\end{displaymath}
+其中$V_G$是第一\textrm{Brillouin-zone}体积，$f(\varepsilon)$~是占据分布函数
+
+实际计算中，\textrm{Brillouin-zone~}的$\vec k$~点数是有限的
+\begin{displaymath}
+	\langle X\rangle=\sum_{j,n}X_n(\vec k_j)w_n^{\vec k_j}
+\end{displaymath} 
+\textcolor{blue}{$\vec k$~点数目决定了电子结构和物理量的的精度与计算量}
+}
+
+\frame
+{
+	\frametitle{四面体布点方案}
+	四面体方法是普适的方法，可用于绝缘体、半导体、金属的期望值计算，也可以计算体系的谱函数(动态响应性质)\upcite{PRB49-16223_1994}
+
+	四面体积分基本思想
+	\begin{enumerate}
+		\item 为了计算$\vec k$~空间积分，四面体方法先将第一\textrm{Brillouin-zone}分割成若干等体积的小四面体
+		\item 计算每个四面体对积分权重的贡献
+		\item 对所有四面体贡献权重求和
+	\end{enumerate}
+	\begin{displaymath}
+		\langle X_n\rangle=\dfrac1{V_G}\int_{V_G}\mathrm{d}\vec kX_n(\vec k)f(\vec k)=\dfrac1{V_G}\sum_{j=1}^{N_{\mathrm{Tet}}}\int_{V_T}\mathrm{d}\vec kX_n(\vec k)f(\varepsilon_n^{\vec k})
+	\end{displaymath}
+	相应地每个\textrm{Brillouin-zone}不可约$\vec k$点积分权重$w_{nj}$
+	\begin{displaymath}
+		w_{nj}=\dfrac1{V_G}\int_{V_G}\mathrm{d}\vec kw_j(\vec k)f(\varepsilon_n^{\vec k})
+	\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{四面体积分权重的确定}
+\begin{figure}[h!]
+\centering
+\subfigure[\textrm{\small Arrangement of the different secant planes of constant energy in the method of tetrahedrons}]{
+\label{Fig:Tetra-equal-ene}
+\vspace*{-0.25in}
+	\includegraphics[height=1.55in,width=2.03in,viewport=40 125 530 465,clip]{Figures/Tetra-equal-ene.eps}}
+	\hfill
+\subfigure[\textrm{\small Two-dimensional schematic illustration of the function $w_j(\vec k)$.}]{
+\label{Fig:dime_Tetra}
+\vspace*{-0.25in}
+\includegraphics[height=1.75in,width=1.75in,viewport=0 30 565 505,clip]{Figures/dimen_Tetra.pdf}}
+\end{figure}
+根据能量范围的不同，可以推导出不能能量区域内的积分权重的表达式%，详见文献\cite{PRB49-16223_1994}的附录
+}
+
+\frame
+{
+	\frametitle{四面体网格的生成}
+%类似地，可以有四面体方法态数目(\textrm{number of states})、态密度(\textrm{Density of States, DOS})$D_T(\varepsilon_i)$的贡献表达式，具体可参见文献\cite{PRB49-16233_1994}。
+	为了减少统计四面体的数目，可以先找出第一\textrm{Brillouin-zone}的不可约部分。但这一策略有副作用，\textcolor{red}{由于不可约部分的不规则性，其中的四面体划分几乎不可避免地要人工干预，不利于编程求解}\\\textrm{Bl\"ochl}提出一个解决方法:\\
+\begin{enumerate}
+	\item 利用\textrm{Monkhorst-Pack}方案\upcite{PRB13-5188_1976}首先在第一\textrm{Brillouin-zone}内生成等体积的平行六面体网格。
+	\item 依次给每个点编号:
+\begin{displaymath}
+	\boxed{N=1+\dfrac{i-i_0}2+(n_1+1)\left[\dfrac{j-j_0}2+(n_2+1)\dfrac{k-k_0}2\right]}
+\end{displaymath}
+其中$i,j,k$分别是该$\vec k$~点沿倒格矢$\mathbf{b}_i(i=1,2,3)$的序数的二倍，$i_0,j_0,k_0$是\textrm{Monkhorst-Pack}方法中点的偏移量，有偏移则为1，否则为0。
+\end{enumerate}
+}
+
+\frame
+{
+	\frametitle{四面体网格的生成}
+\begin{enumerate}
+	\setcounter{enumi}{2}
+	\item 编号之后建立标识数组，其位置与该位置储存的元素值相同，例如，第一个位置存储“$1$”，第二个位置存储“$2$”，依次类推
+	\item 然后从第一个位置开始，利用对称群的操作矩阵对每个点坐标作用，并与数组中其他点的坐标进行比较，如果彼此相同且后者的编号大于前者，即将后者的元素值改为前者\\\textcolor{blue}{对全部数组操作完毕，可以挑出所有不可约$\vec k$~点:\\只有当$\vec k_i$~为不可约$\vec k$~点时，其编号才与其存储位置相同}。
+	\item 为了计算方便，可以对所有这些不可约$\vec k$~点按存储位置的顺序重新编号，即从“$1$”到“$\vec k_{\mathrm{irr}}(\max)$”。数组中的各个元素也相应的改为新的编号。这样整个第一\textrm{Brillouin-zone}中的点都可用不可约点标记。
+\end{enumerate}
+}
+
+\frame
+{
+	\frametitle{四面体的自动划分}
+下一步讨论四面体的自动划分过程
+
+以下八组坐标代表的点构成平行六面体:
+\begin{displaymath}
+	\begin{aligned}
+		&(l,m,n)\rightarrow 1,&(l+1,m,n)\rightarrow 2\\
+		&(l,m+1,n)\rightarrow 3,&(l+1,m+1,n)\rightarrow 4\\
+		&(l,m,n+1)\rightarrow 5,&(l+1,m,n+1)\rightarrow 6\\
+		&(l,m+1,n+1)\rightarrow 7,&(l+1,m+1,n+1)\rightarrow 8
+	\end{aligned}
+\end{displaymath}
+为了尽量减小插值引起的误差，可以取此平行六面体中最短的体对角线作为等体积的六个四面体的公共对角线，设为$3-6$，则可以采用下面6组途径确定这六个四面体的各个顶点：
+\begin{displaymath}
+	\begin{aligned}
+		1\rightarrow2\rightarrow3\rightarrow6\quad&1\rightarrow3\rightarrow5\rightarrow6\quad&2\rightarrow3\rightarrow4\rightarrow6\\
+		3\rightarrow5\rightarrow6\rightarrow7\quad&3\rightarrow4\rightarrow6\rightarrow8\quad&3\rightarrow6\rightarrow7\rightarrow8
+	\end{aligned}
+\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{四面体的自动划分}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.28in}
+\includegraphics[height=1.25in,width=3.00in,viewport=0 0 1350 705,clip]{Figures/submesh_Tetra.png}
+\caption{\tiny Breakup of a submesh cell into six tetrahedra.}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:Submesh_Tetra}
+\end{figure}
+对每个平行六面体重复上述过程，将第一\textrm{Brillouin-zone}划分为体积相等的若干四面体，每个四面体的顶点可用标识数组中的不可约点标记。将这四个顶点的标号按升序排列，可以方便地确定等价四面体(简并度)\\
+这个过程保证了\textcolor{red}{只用不可约点上的信息进行整个第一\textrm{Brillouin}区的积分，无须考虑如何划定其不可约部分}\\
+%上述过程可以避免Kleinman所说的计算误差，而且整个过程可以通过程序自动实现而无须人工干预。
+上述过程可以避免计算误差，而且整个过程可以通过程序自动实现而无须人工干预
+}
+
+\section{\rm{WIEN2k}算例}
+\frame
+{
+	\frametitle{\textrm{WIEN2k}算例:~\textrm{case.structure}}
+\vspace*{-18pt}
+\begin{minipage}[t]{0.39\textwidth}
+\begin{figure}[h!]
+\centering
+\includegraphics[width=1.5in]{Figures/WIEN2k_TiC.png}
+\caption{\tiny \textrm{The structure of TiC.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:WIEN2k_TiC}
+\end{figure}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.59\textwidth}
+\begin{figure}[h!]
+\includegraphics[height=2.95in]{Figures/WIEN2k_TiC-structure.png}
+%\caption{\tiny Breakup of a submesh cell into six tetrahedra.}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:WIEN2k_TiC-structure}
+\end{figure}
+\end{minipage}
+}
+
+\frame
+{
+	\frametitle{\textrm{WIEN2k}算例:~\textrm{case.structure}}
+\vspace*{-17pt}
+\begin{minipage}[t]{0.39\textwidth}
+\begin{figure}[h!]
+\centering
+\includegraphics[width=1.5in]{Figures/WIEN2k_CaB6.png}
+\caption{\tiny \textrm{The structure of \ch{CaB6}.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:WIEN2k_CaB6}
+\end{figure}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.59\textwidth}
+\begin{figure}[h!]
+\includegraphics[height=2.95in]{Figures/WIEN2k_CaB6-structure.png}
+%\caption{\tiny Breakup of a submesh cell into six tetrahedra.}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:WIEN2k_CaB6-structure}
+\end{figure}
+\end{minipage}
+}
+
+\frame
+{
+\frametitle{\textrm{WIEN2k}中自洽迭代的流程组织}
+\begin{figure}[h!]
+\centering
+\hspace*{-10pt}
+\includegraphics[height=1.72in,width=4.2in,viewport=30 165 550 375,clip]{Figures/WIEN2k_Data_flow.pdf}
+\caption{\tiny \textrm{Data flow during a SCF cycle (programX.def, case.struct, case.inX, case.outputX and optional files are omitted).}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{WIEN2k_Data_flow}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{WIEN2k}计算示范:~\textrm{SCF}}
+\vspace*{-13pt}
+\begin{figure}[h!]
+\centering
+\includegraphics[height=2.98in]{Figures/WIEN2k_CaB6-SCF.png}
+%\caption{\tiny \textrm{The structure of TiC.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:WIEN2k_SCF}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{WIEN2k}计算示范:~\ch{\textrm{CaB6}}的总能量}
+\vspace*{-25pt}
+\begin{figure}[h!]
+\centering
+\includegraphics[height=2.98in]{Figures/WIEN2k_CaB6-TotEne.png}
+%\caption{\tiny \textrm{The structure of TiC.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:WIEN2k_TotEne}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{WIEN2k}计算示范:~\ch{\textrm{CaB6}}的能量本征值}
+\vspace*{-14pt}
+\begin{figure}[h!]
+\centering
+\includegraphics[height=2.98in]{Figures/WIEN2k_CaB6-EigVal.png}
+%\caption{\tiny \textrm{The structure of TiC.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:WIEN2k_EigVal}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{WIEN2k}算例:~基函数的选择}
+\begin{figure}[h!]
+	\vspace{-15pt}
+\centering
+\hspace{15pt}
+\includegraphics[height=2.55in,width=3.35in,viewport=10 30 750 605,clip]{Figures/WIEN2k-in1.png}
+\caption{\tiny \textrm{The parameter $\mathrm{E}_l$ in case.in1 for WIEN2k.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{WIEN2k-in1}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{WIEN2k}计算示范:~\ch{\textrm{CaB6}}的\textrm{Fermi}能}
+\vspace*{-25pt}
+\begin{figure}[h!]
+\centering
+\includegraphics[height=2.98in]{Figures/WIEN2k_CaB6-Fermi.png}
+%\caption{\tiny \textrm{The structure of TiC.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:WIEN2k_Fermi}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{WIEN2k}计算示范:~\ch{\textrm{CaB6}}的\textrm{DOS}}
+\vspace*{-15pt}
+\begin{figure}[h!]
+\centering
+\includegraphics[width=2.8in]{Figures/WIEN2k_CaB6-int.png}
+\caption{\tiny \textrm{case.int}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:WIEN2k_int}
+\end{figure}
+\begin{figure}[h!]
+\centering
+\includegraphics[height=1.60in,width=2.60in]{Figures/WIEN2k_CaB6-DOS.png}
+%\caption{\tiny \textrm{The structure of TiC.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:WIEN2k_DOS}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{WIEN2k}算例:~能带计算文件}
+\vspace*{-5pt}
+\begin{minipage}[t]{0.52\textwidth}
+\begin{figure}[h!]
+\centering
+\includegraphics[width=2.0in]{Figures/WIEN2k_CaB6-klist_band.png}
+\caption{\tiny \textrm{case.klist\_band}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:WIEN2k_CaB6-klist_band}
+\end{figure}
+\end{minipage}
+\hskip 0.2pt
+\begin{minipage}[t]{0.46\textwidth}
+\begin{figure}[h!]
+\includegraphics[height=1.9in]{Figures/WIEN2k_CaB6-insp.png}
+\caption{\tiny \textrm{case.insp}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:WIEN2k_CaB6-insp}
+\end{figure}
+\end{minipage}
+}
+
+\frame
+{
+	\frametitle{\textrm{WIEN2k}计算示范:~\ch{\textrm{CaB6}}的能带结构}
+\vspace*{-13pt}
+\begin{figure}[h!]
+\centering
+\includegraphics[height=2.98in, viewport=0 10 730 740,clip]{Figures/WIEN2k_CaB6-Band.png}
+%\caption{\tiny \textrm{The structure of TiC.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:WIEN2k_Band}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{WIEN2k}计算示范:~\ch{\textrm{Cr}}的反铁磁计算}
+\vspace*{-18pt}
+\begin{figure}[h!]
+\centering
+\subfigure[\tiny{\textrm{Structure of Cr}}]{
+\label{Fig:WIEN2k_BCC-Cr}
+	\includegraphics[height=1.20in]{Figures/WIEN2k_BCC_Cr.png}}\\
+\subfigure[\tiny{\textrm{Structure of BCC Cr}}]{
+\label{Fig:WIEN2k_AFM-Cr-1}
+	\includegraphics[height=1.20in]{Figures/WIEN2k_BCC_Cr-2.png}}
+	\subfigure[\tiny{\textrm{Structure of PCC Cr}}]{
+\label{Fig:WIEN2k_AFM-Cr-2}
+	\includegraphics[height=1.20in]{Figures/WIEN2k_AFM_Cr-2.png}}
+%\caption{\tiny \textrm{The structure of TiC.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{WIEN2k}计算示范:~\ch{\textrm{Cr}}的反铁磁计算}
+\vspace*{-12pt}
+\begin{figure}[h!]
+\centering
+\includegraphics[width=3.7in]{Figures/WIEN2k_AFM_Cr-3.png}
+\caption{\tiny \textrm{case.inst}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:WIEN2k_AFM-Cr-3}
+\end{figure}
+\begin{figure}[h!]
+\centering
+\includegraphics[width=3.50in]{Figures/WIEN2k_AFM_Cr-4.png}
+\caption{\tiny \textrm{case.inclmcopy}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:WIEN2k_AFM-Cr-4}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{WIEN2k}计算示范:~\ch{\textrm{Cr}}的反铁磁计算}
+\vspace*{-8pt}
+\begin{figure}[h!]
+\centering
+\includegraphics[width=4.1in]{Figures/WIEN2k_AFM_Cr-6.png}
+%\caption{\tiny \textrm{The structure of TiC.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:WIEN2k_AFM-Cr-6}
+\end{figure}
+$E_{\mathrm{AFM}}$:
+\begin{displaymath}
+	\begin{aligned}
+		&-4203.54307464-2\times(-2101.76951301)\\
+		=&-0.0405~\mathrm{Ry}\\
+		=&-0.11~\mathrm{eV}
+	\end{aligned}
+\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{\textrm{WIEN2k}计算示范:~\ch{\textrm{EuB6}}的\textrm{LDA+$U$}计算}
+\vspace*{-2pt}
+\begin{figure}[h!]
+\centering
+\includegraphics[width=3.7in]{Figures/WIEN2k_EuB6-inorb.png}
+\caption{\tiny \textrm{case.inorb}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:WIEN2k_EuB6-inbor}
+\end{figure}
+\begin{figure}[h!]
+\centering
+\includegraphics[width=3.70in]{Figures/WIEN2k-indm.png}
+\caption{\tiny \textrm{case.indm}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:WIEN2k_indm}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{WIEN2k}计算示范:~\ch{\textrm{EuB6}}的\textrm{LDA+$U$}计算}
+\vspace*{-10pt}
+\begin{figure}[h!]
+\centering
+\subfigure[]{
+\label{Fig:WIEN2k_EuB6-up}
+	\includegraphics[height=2.15in]{Figures/WIEN2k_EuB6-band-up.png}}
+	\subfigure[]{
+\label{Fig:WIEN2k_EuB6-orb-up}
+	\includegraphics[height=2.15in]{Figures/WIEN2k_EuB6-band_orb-up.png}}
+	\caption{\tiny \textrm{The spin-up band-structure of \ch{EuB6}.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{WIEN2k}计算示范:~\ch{\textrm{EuB6}}的\textrm{LDA+$U$}计算}
+\vspace*{-10pt}
+\begin{figure}[h!]
+\centering
+\subfigure[]{
+\label{Fig:WIEN2k_EuB6-dn}
+	\includegraphics[height=2.15in]{Figures/WIEN2k_EuB6-band-dn.png}}
+	\subfigure[]{
+\label{Fig:WIEN2k_EuB6-orb-dn}
+	\includegraphics[height=2.15in]{Figures/WIEN2k_EuB6-band_orb-dn.png}}
+	\caption{\tiny \textrm{The spin-dn band-structure of \ch{EuB6}.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{WIEN2k}计算示范:~\ch{\textrm{EuB6}}的\textrm{SOC}计算}
+\vspace*{-5pt}
+\begin{figure}[h!]
+\centering
+\includegraphics[width=4.15in]{Figures/WIEN2k_EuB6-struct-so.png}
+\caption{\tiny \textrm{The structure of \ch{EuB6}.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:WIEN2k_SOC-struct}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{WIEN2k}计算示范:~\ch{\textrm{EuB6}}的\textrm{SOC}计算}
+\vspace*{-10pt}
+\begin{minipage}[t]{0.39\textwidth}
+\begin{figure}[h!]
+\centering
+\includegraphics[width=1.65in]{Figures/WIEN2k_EuB6-inso.png}
+\caption{\tiny \textrm{case.inso}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:WIEN2k_EuB6-inso}
+\end{figure}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.59\textwidth}
+\begin{figure}[h!]
+\includegraphics[height=2.70in]{Figures/WIEN2k_EuB6-band_orb_so.png}
+%\caption{\tiny Breakup of a submesh cell into six tetrahedra.}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:WIEN2k_EuB6-band-SO}
+\end{figure}
+\end{minipage}
+}
+
+\frame
+{
+	\frametitle{\textrm{WIEN2k}计算示范:~光学性质计算}
+\vspace*{-10pt}
+\begin{figure}[h!]
+\centering
+\subfigure[\tiny{\textrm{case.inop}}]{
+\label{Fig:WIEN2k_inop}
+	\includegraphics[height=1.25in]{Figures/WIEN2k_EuB6-inop.png}}\\
+\subfigure[\tiny{\textrm{case.injoint}}]{
+\label{Fig:WIEN2k_injoint}
+	\includegraphics[height=0.95in]{Figures/WIEN2k_EuB6-injoint.png}}
+	\subfigure[\tiny{\textrm{case.inkram}}]{
+\label{Fig:WIEN2k_inkram}
+	\includegraphics[height=0.26in]{Figures/WIEN2k_EuB6-inkram.png}}
+%\caption{\tiny \textrm{The structure of TiC.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{WIEN2k}计算示范:~光学性质计算}
+\vspace*{-5pt}
+\begin{figure}[h!]
+\centering
+\includegraphics[width=4.15in]{Figures/WIEN2k_EuB6-epsil.png}
+\caption{\tiny \textrm{The dielectric of \ch{EuB6}.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:WIEN2k_EuB6-dielectric}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{WIEN2k}计算示范:~光学性质计算}
+\vspace*{-5pt}
+\begin{figure}[h!]
+\centering
+\includegraphics[width=4.15in]{Figures/WIEN2k_EuB6-Reflect.png}
+\caption{\tiny \textrm{The Reflectivity of \ch{EuB6}.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:WIEN2k_EuB6-Reflectivity}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{WIEN2k}计算示范:~光学性质计算}
+\vspace*{-5pt}
+\begin{figure}[h!]
+\centering
+\includegraphics[width=4.15in]{Figures/WIEN2k_EuB6-Conduct.png}
+\caption{\tiny \textrm{The R-conductivity of \ch{EuB6}.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:WIEN2k_EuB6-conductivity}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{WIEN2k}计算示范:~光学性质计算}
+\vspace*{-5pt}
+\begin{figure}[h!]
+\centering
+\includegraphics[width=4.15in]{Figures/WIEN2k_EuB6-eloss.png}
+\caption{\tiny \textrm{The E-loss function of \ch{EuB6}.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:WIEN2k_EuB6-eloss}
+\end{figure}
+\vskip 5pt
+\tiny{\textcolor{blue}{以上全部算例未作特别说明，均引自文献\cite{Jun_Jiang}}}
+}
+
+\appendix
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+%-----------------------------------------------------------Beamer下不建议使用bib,因为涉及分页--------------------------------------------------------------------------%
+\frame[allowframebreaks]
+{
+\frametitle{主要参考文献}
+{\tiny\textrm{
+%\phantomsection\addcontentsline{toc}{section}{Bibliography}	 %直接调用\addcontentsline命令可能导致超链指向不准确,一般需要在之前调用一次\phantomsection命令加以修正	%
+%\phantomsection\addcontentsline{toc}{section}{主要参考文献}	 %直接调用\addcontentsline命令可能导致超链指向不准确,一般需要在之前调用一次\phantomsection命令加以修正	%
+\bibliography{Ref_2021-06-25}%
+\bibliographystyle{../ref/mybib}%
+}}
+\nocite{*}%
+}
+%------------------------------------------------------------------------------------------------------------------------------------------------------------------------------%
+
+%-------------------------------------------------------------------------Thanks------------------------------------------------------------------------------------------------
+%\section{致谢}
+%\frame
+%{
+%\frametitle{致$\quad$谢}
+%\begin{itemize}
+%    \setlength{\itemsep}{20pt}
+%  \item 感谢本团队高兴誉、吴泉生、宋红州等各位老师参与的讨论
+%  \item 感谢莫所长、宋主任以及软件中心各位老师和同事
+%  \item 感谢王崇愚先生的帮助
+%\end{itemize}
+%}
+\frame
+{
+\vskip 60 pt
+%\hskip 10pt \textcolor{blue}{\Huge 感谢答辩委员会各位老师\,\textrm{!}}\\
+\vskip 35 pt
+\hskip 60pt \textcolor{blue}{\Huge 谢谢大家\:!}
+%\vskip 15 pt
+%\hskip 40pt \textcolor{blue}{\Huge \textrm{for your attention\:!}}
+}
+
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+\clearpage
+%\end{CJK*}
+\end{document}
