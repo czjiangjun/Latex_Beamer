@@ -187,7 +187,7 @@
 	\frametitle{\textrm{WIEN2k}软件简介}
 \begin{figure}[h!]
 \centering
-\vspace*{-0.2in}
+\vspace*{-0.16in}
 %\subfigure[\footnotesize{Logo of WIEN2k}]{
 \includegraphics[height=1.5in]{Figures/WIEN2k-Group.png}
 \hskip 0.5pt
@@ -397,7 +397,7 @@ $V_{\mathrm{XC}}[\rho]=\dfrac{\delta E_{\mathrm{XC}}}{\delta\rho(\vec r)}$称为
 \frame
 {
 \frametitle{固体能带理论}
-简并态微扰理论引起的能带裂分
+周期边界上的简并态微扰，将引起的能带裂分
 \begin{figure}[h!]
 \centering
 %\hspace*{-10pt}
@@ -497,7 +497,7 @@ $V_{\mathrm{XC}}[\rho]=\dfrac{\delta E_{\mathrm{XC}}}{\delta\rho(\vec r)}$称为
 
 \frame
 {
-	\frametitle{空间两部分函数在球面上的衔接}
+	\frametitle{空间分区域函数在界面上的衔接}
 	根据\textrm{Huygens}原理:\textcolor{blue}{平面波可以在各个原子球中心用球面波展开}:
 	\begin{displaymath}
 		\mathrm{e}^{\mathrm{i}\vec k\cdot\vec r}=4\pi\sum_{l=0}^{\infty}\sum_{m=-l}^l\mathrm{i}^lj_l(|\vec k|r)Y_{lm}^{\ast}(\hat{\vec k})Y_{lm}(\hat{\vec r})
@@ -627,7 +627,8 @@ $$  \phi_{lm}^{\mathrm{lo}}(\vec r)=\left\{
 {
 \frametitle{全势的基本思想}
 全势\textrm{(Full Potential, FP)}是相对于赝势的概念，即\textcolor{blue}{电子运动过程中感受到其它粒子作用的真实效果}。
-实际计算中，构造\textrm{LAPW}基组的\textrm{MT}势换成晶体势函数。一般地，在每个\textrm{MT}球内，势函数用球谐函数(或者是满足晶体对称性)展开，\textrm{MT}球外的势函数用\textrm{Fourier}级数展开：%\upcite{PRB13-5362_1976}
+
+实际计算中，根据\textrm{LAPW}基函数特征，在每个\textrm{MT}球内，势函数用球谐函数(或者是满足晶体对称性)展开，\textrm{MT}球外的势函数用\textrm{Fourier}级数展开：%\upcite{PRB13-5362_1976}
 {\footnotesize$$ V(\vec r)=\left\{
   \begin{aligned}
     &\sum_{a,L}V_L^a(r)Y_L(\hat{\vec r})\quad &r\leqslant R_{\mathrm{MT}}^a\\
@@ -746,7 +747,6 @@ $$}
 \frame
 {
 	\frametitle{总能量的计算}
-	\textrm{Weinert}等利用核\textrm{Coulomb}势的发散项与电子动能-势能项发散项解析抵消属性，提出新的总能量计算方法\upcite{PRB26-4571_1982}:
 	根据\textrm{DFT}，体系总能量分解为
 	\begin{displaymath}
 		E[\rho]=T_s[\rho]+U[\rho]+E_{\mathrm{XC}}[\rho]
@@ -756,6 +756,10 @@ $$}
 		U[\rho]=\dfrac12\left[\int\dfrac{\rho(\vec r)\rho(\vec r^{\prime})}{|\vec r-\vec r^{\prime}|}\mathrm{d}\vec r\mathrm{d}\vec r^{\prime}-2\sum_{\alpha}Z_{\alpha}\int\dfrac{\rho(\vec r)\mathrm{d}\vec r}{|\vec r-\vec R_{\alpha}|}+\sum_{\alpha,\beta}{}^{\prime}\dfrac{Z_{\alpha}Z_{\beta}}{|\vec R_{\alpha}-\vec R_{\beta}|}\right]
 	\end{displaymath}
 	这里$Z_{\alpha}$是位于$R_{\alpha}$的核电荷
+\vskip 5pt
+	上述求和存在多个发散项，一般利用周期体系电中性条件下，各发散项间相互抵消的特点， 实现总能计算，其中离子-离子相互作用通常由\textrm{Ewald}方法\upcite{JPC-SSP12-4409_1979}计算得到。
+\vskip 5pt
+	\textrm{Weinert}等基于\textrm{LAPW}方法的特点，提出新的总能量计算方案\upcite{PRB26-4571_1982}:
 }
 
 \frame
@@ -889,7 +893,7 @@ $$}
 \begin{figure}[h!]
 \centering
 %\hspace*{-10pt}
-\vspace*{-0.3in}
+\vspace*{-0.30in}
 \includegraphics[height=1.5in,width=4.1in,viewport=0 5 1400 500,clip]{Figures/Brillouin-Band.png}
 \caption{\tiny \textrm{The relation between unfolded-Band and the Brillouin-zone.}}%
 \label{Brillouin-Band}
@@ -910,7 +914,7 @@ $$}
 \begin{figure}[h!]
 \centering
 %\hspace*{-10pt}
-\vspace*{-0.3in}
+\vspace*{-0.26in}
 \includegraphics[height=1.2in,width=1.3in,viewport=0 0 110 100,clip]{Figures/FS-Li.jpg}
 \includegraphics[height=1.2in,width=1.3in,viewport=0 0 110 100,clip]{Figures/FS-Mg.jpg}
 \includegraphics[height=1.2in,width=1.3in,viewport=0 0 110 100,clip]{Figures/FS-Cu.jpg}
@@ -988,7 +992,11 @@ $$}
 {
 	\frametitle{四面体网格的生成}
 %类似地，可以有四面体方法态数目(\textrm{number of states})、态密度(\textrm{Density of States, DOS})$D_T(\varepsilon_i)$的贡献表达式，具体可参见文献\cite{PRB49-16233_1994}。
-	为了减少统计四面体的数目，可以先找出第一\textrm{Brillouin-zone}的不可约部分。但这一策略有副作用，\textcolor{red}{由于不可约部分的不规则性，其中的四面体划分几乎不可避免地要人工干预，不利于编程求解}\\\textrm{Bl\"ochl}提出一个解决方法:\\
+	为了减少统计四面体的数目，一般考虑先找出第一\textrm{Brillouin-zone}的不可约部分。
+
+	\textcolor{red}{由于不可约部分的不规则性，其中的四面体划分几乎不可避免地要人工干预，非常不利于编程求解}
+
+	\textrm{Bl\"ochl}的解决策略:
 \begin{enumerate}
 	\item 利用\textrm{Monkhorst-Pack}方案\upcite{PRB13-5188_1976}首先在第一\textrm{Brillouin-zone}内生成等体积的平行六面体网格。
 	\item 依次给每个点编号:
@@ -1170,7 +1178,7 @@ $$}
 \frame
 {
 	\frametitle{\textrm{WIEN2k}计算示范:~\ch{\textrm{CaB6}}的\textrm{DOS}}
-\vspace*{-15pt}
+\vspace*{-13pt}
 \begin{figure}[h!]
 \centering
 \includegraphics[width=2.8in]{Figures/WIEN2k_CaB6-int.png}
