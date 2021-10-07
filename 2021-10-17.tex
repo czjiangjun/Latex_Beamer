@@ -203,222 +203,51 @@
 
 %------------------------------------------------------------------------------PPT main Body------------------------------------------------------------------------------------
 \small
-%\section{引言}
+\section{第一原理软件现状}
 \frame
 {
-	\frametitle{科学研究的范式变更}
+	\frametitle{第一原理计算软件现状}
 \begin{figure}[h!]
 \vspace*{-0.18in}
 \centering
-\includegraphics[width=4.05in]{Figures/Four_Model.png}
+\includegraphics[width=4.05in]{Figures/Softwares_logo.png}
 %\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{Four_Model}
+\label{Softwares}
 \end{figure}
 }
 
 \frame
 {
-	\frametitle{材料模拟的基本思想和方法}
+	\frametitle{国产软件现状}
 \begin{figure}[h!]
-\vspace*{-0.20in}
 \centering
-\includegraphics[height=2.20in,width=3.45in]{Figures/Multi-Scale-6.png}
-\vskip 0.05pt
-\includegraphics[height=0.80in,width=4.05in]{Figures/MGE-2.png}
+\includegraphics[width=4.05in]{Figures/Softwares_China-logo.png}
 %\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{Multi-Scale}
+\label{Software-China}
 \end{figure}
 }
 
-%\frame
-%{
-%	\frametitle{材料基因工程}
-%\begin{figure}[h!]
-%\vspace*{-0.18in}
-%\centering
-%\includegraphics[height=2.55in,width=4.05in]{Figures/MGE.png}
-%%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-%\label{MGE}
-%\end{figure}
-%}
-\section{密度泛函理论}
-%\subsection{密度泛函理论}       %Bookmark
-\frame                               %
+\section{国产软件开发的问题}
+\frame
 {
-\frametitle{密度泛函理论(\textrm{DFT})} %Slide Page Title
-%   \secname
-与传统的量子力学方法不同，密度泛函理论的基本变量是体系的基态电子密度。%通过体系的电子密度而非波函数确定体系的基态能量。
-\begin{itemize}%[+-| alert@+>]
-	\item 密度泛函理论的基石：\textrm{Hohenberg-Kohn}定理\upcite{PR136-B864_1964}
-\vskip 5pt
-\begin{itemize}%[+-| alert@+>]
-   \setlength{\itemsep}{8pt}
- \item $E[\rho]=F_{\mathrm{HK}}[\rho]+\displaystyle\int\rho(\vec{r})v(\vec{r})\textrm{d}\vec{r}$ \\
-\vskip 5pt 其中$F_{\mathrm{HK}}[\rho]=\underset{\Psi\to\rho}{\mathrm{Min}}\langle\Psi[\rho]|\hat{T}+\hat{W}|\Psi[\rho]\rangle$
-是普适的泛函表达式。%，指明多电子体系的基态性质与基态密度间存在一一对应关系
-     \textrm{\small{第一定理表明多电子体系的性质完全由体系的基态密度决定}}
-   \item 如果$\tilde\Psi\neq\Psi$，
-     $E[\tilde\rho]\geqslant E[\rho_0]$\\
-     \textrm{\small{第二定理指出基态总能量泛函在体系基态电子密度处取极小值}}
-   \end{itemize}
-%\textrm{\small{第二定理指出基态总能量泛函在体系基态电子密度处取极小值}}
-\vskip 8pt
- \item 密度泛函理论的优越性：用密度($\rho$)代替波函数($\Psi$)描述体系
-\vskip 5pt
- \item 密度泛函理论的困难：能量密度泛函的精确形式未知
-   \end{itemize}
+	\frametitle{软件的核心模块}
 }
 
-\frame                               %
+\section{国产软件的开发建议}
+\frame
 {
-\frametitle{密度泛函理论(\textrm{DFT})}
-\textrm{Kohn-Sham}方程\upcite{PR140-A1133_1965}：无相互作用体系+交换-相关能的贡献
-$$(T_S+V_{e\!f\!f})|\varphi_i\rangle=\varepsilon_i|\varphi_i\rangle,\quad i=1,\cdots,N,\cdots$$
-其中$T_S=-\dfrac12\nabla^2$~~是无相互作用体系的动能
-\begin{displaymath}
-	\begin{aligned}
-		V_{e\!f\!f}(\vec r)=&V_{ext}(\vec r)+\displaystyle\int w(\vec r,\vec r\,')\rho(\vec r\,')\mathrm{d}\vec r\,'+V_{\mathrm{XC}}[\rho]\\
-=&\displaystyle\int\dfrac{\rho(\vec r\,')}{|\vec r-\vec r^{\prime}|}\mathrm{d}\vec r\,'+V_{ext}(\vec r)+V_{\mathrm{XC}}[\rho]
-	\end{aligned}
-\end{displaymath}
-$V_{ext}(\vec r)$是电子体系与外部的电荷或磁场相互作用\\
-$V_{\mathrm{XC}}[\rho]=\dfrac{\delta E_{\mathrm{XC}}}{\delta\rho(\vec r)}$称为交换-相关势
-\vskip 10pt
-\textrm{Kohn-Sham}方程是形式上的单粒子方程
-\vskip 6pt
-\textrm{Kohn-Sham}方程的实质：\\\textcolor{red}{将动能泛函的主要部分分离出来，剩余部分放在交换-相关能中}
+	\frametitle{软件国产化的一些粗浅想法}
+第一原理软件开发本身是系统工程
+	\begin{itemize}
+		\item 
+	\end{itemize}<++>
 }
 
 \frame
 {
-	\frametitle{\textrm{DFT-SCF}}
-\begin{figure}[h!]
-\centering
-\vspace*{-0.25in}
-\hspace*{-0.80in}
-\includegraphics[height=2.80in,width=4.95in,viewport=5 3 1490 870,clip]{Figures/DFT-SCF_2.png}
-%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{DFT-SCF-2}
-\end{figure}
+	\frametitle{}<++>
 }
 
-\section{\rm{VASP~}软件中的\rm{PAW~}方法}
-\frame
-{
-%	\frametitle{\textrm{PAW}原子数据集}
-	\frametitle{\textrm{PAW}方法的基本思想}
-\begin{figure}[h!]
-\centering
-\includegraphics[height=2.3in,width=4.0in,viewport=0 0 1280 745,clip]{Figures/PAW-baseset.png}
-\caption{\tiny \textrm{The Augmentation of PAW.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{PAW_baseset}
-\end{figure}
-}
-
-\frame
-{
-	\frametitle{\textrm{VASP}中的电荷密度的分解}
-	\textrm{VASP}的开发者\textrm{G. Kresse}等明确了\textrm{PAW}方法与\textrm{USPP}方法的内在联系\upcite{PRB59-1758_1999}:
-\begin{itemize}
-	\item 芯层电荷与核电荷构成离子实电荷：$n_{Zc}=n_Z+n_c$
-	\item 赝离子实电荷的构造$$\int_{\Omega_c}n_{Zc}(\vec r)\mathrm{d}^3\vec r=\int_{\Omega_c}\tilde n_{Zc}(\vec r)\mathrm{d}^3\vec r$$
-\end{itemize}
-在此基础上，\textrm{Bl\"ochl}方案中的电荷可以分解为：
-\begin{displaymath}
-	\begin{aligned}
-		n_T=n+n_{Zc}\equiv&\underbrace{(\tilde n+\hat n+\tilde n_{Zc})}\\
-				 		&\quad\qquad\tilde n_T\\
-				  &+\underbrace{(n^1+\hat n+n_{Zc})}-\underbrace{(\tilde n^1+\hat n+\tilde n_{Zc})}\\
-				                  &\quad\qquad n_T^1\qquad\qquad\qquad\tilde n_T^1
-	\end{aligned}
-\end{displaymath}
-\textcolor{red}{注意}：\textrm{G. Kresse}方案中补偿电荷$\hat n$局域在每个缀加球内。
-}
-
-\frame
-{
-	\frametitle{总能量表达式}
-	根据总能量表达式$$E=\tilde E+E^1-\tilde E^1$$其中
-	\begin{displaymath}
-		\begin{aligned}
-			\tilde E=&\sum_nf_n\langle\tilde\Psi_n|-\frac12\nabla^2|\tilde\Psi_n\rangle+E_{\mathrm{XC}}[\tilde n+\hat n+\tilde n_c]+E_H[\tilde n+\hat n]\\
-			&+\int v_H[\tilde n_{Zc}][\tilde n(\vec r)+\hat n(\vec r)]\mathrm{d}\vec r+U(\vec R,Z_{\mathrm{ion}})\\
-			\tilde E^1=&\sum_{(i,j)}\rho_{ij}\langle\tilde\phi_i|-\frac12\nabla^2|\tilde\phi_j\rangle+\overline{E_{\mathrm{XC}}[\tilde n^1+\hat n+\tilde n_c]}+\overline{E_H[\tilde n^1+\hat n]}\\
-			&+\int_{\Omega_r}v_H[\tilde n_{Zc}][\tilde n^1(\vec r)+\hat n(\vec r)]\mathrm{d}\vec r
-		\end{aligned}
-	\end{displaymath}
-}
-
-\frame
-{
-	\frametitle{总能量表达式}
-	\begin{displaymath}
-		\begin{aligned}
-			E^1=&\sum_{(i,j)}\rho_{ij}\langle\phi_i|-\frac12\nabla^2|\phi_j\rangle+\overline{E_{\mathrm{XC}}[n^1+n_c]}+\overline{E_H[n^1]}\\
-			&+\int_{\Omega_r}v_H[n_{Zc}]n^1(\vec r)\mathrm{d}\vec r
-		\end{aligned}
-	\end{displaymath}
-	$v_H$是电荷密度$n$产生的静电势
-	$$v_H[n](\vec r)=\int\dfrac{n(\vec r\,^{\prime})}{|\vec r-\vec r\,^{\prime}|}\mathrm{d}\vec r\,^{\prime}$$
-	$E_H[n]$是对应的静电能
-	$$E_H[n]=\dfrac12(n)(n)=\dfrac12\int\mathrm{d}\vec r\mathrm{d}\vec r\,^{\prime}\dfrac{n(\vec r)n(\vec r\,^{\prime})}{|\vec r-\vec r\,^{\prime}|}$$ 
-	$U(\vec R,Z_{\mathrm{ion}})$\textcolor{blue}{由\textrm{Ewald}求和计算}
-}
-
-\frame
-{
-\frametitle{交换-相关能泛函的处理}
-由于交换-相关能泛函是非线性的，\textrm{G. Kresse}方案中电荷密度分解为
-\begin{displaymath}
-	n_c+n=(\tilde n+\hat n+\tilde n_c)+(n^1+n_c)-(\tilde n^1+\hat n+\tilde n_c)
-\end{displaymath}
-原始的\textrm{Bl\"ochl}方案中电荷分解为
-\begin{displaymath}
-	n_c+n=(\tilde n)+(n^1+n_c)-(\tilde n^1)
-\end{displaymath}
-\textcolor{blue}{两种不同的电荷密度分解方案根源}：\\\textrm{G. Kresse}方案中赝离子实电荷$\tilde n_{Zc}$与\textrm{Bl\"ochl}方案中$\tilde n_c$的约束条件不同！
-\begin{displaymath}
-	E_{\mathrm{XC}}[\tilde n+\hat n+\tilde n_c]+\overline{E_{\mathrm{XC}}[n^1+n_c]}-\overline{E_{\mathrm{XC}}[\tilde n^1+\hat n+\tilde n_c]}
-\end{displaymath}
-}
-
-\frame
-{
-	\frametitle{计算流程}
-\begin{figure}[h!]
-	\vspace{-0.2in}
-\centering
-%\includegraphics[height=2.7in,width=4.0in,viewport=0 0 1300 960,clip]{Figures/VASP_procedure-full.png}
-%\includegraphics[height=2.1in,width=1.6in,viewport=0 0 480 630,clip]{Figures/VASP_procedure.png}
-%\includegraphics[height=2.1in,width=2.3in,viewport=0 0 740 600,clip]{Figures/Ab-initio-Ene.png}
-\includegraphics[height=2.5in,width=1.8in,viewport=0 0 480 630,clip]{Figures/VASP_procedure.png}
-\caption{\tiny \textrm{The Flow of calculation for the KS-ground states.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{PAW_baiseset}
-\end{figure} 
-}
-
-%\frame
-%{
-%	\frametitle{\textrm{PAW Augmentation}}
-%\begin{figure}[h!]
-%\centering
-%\includegraphics[height=2.3in,width=4.0in,viewport=0 0 1100 745,clip]{Figures/PAW-projector.png}
-%\caption{\tiny \textrm{The projector of PAW.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-%\label{PAW_projector}
-%\end{figure}
-%}
-%\frame
-%{
-%	\frametitle{赝势-\textrm{PAW}方法}
-%\begin{figure}[h!]
-%\centering
-%%\hspace*{-0.80in}
-%\includegraphics[height=1.0in,width=4.1in,clip]{Figures/Pseudo-Potential.png}
-%\caption{\tiny \textrm{The relation of Pseudo potential and PAW.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-%\label{Pseudo_Poential}
-%\end{figure}
-%}
-%
 \section{\rm{POTCAR}的重构}
 \frame
 {
