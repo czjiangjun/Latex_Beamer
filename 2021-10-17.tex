@@ -203,10 +203,10 @@
 
 %------------------------------------------------------------------------------PPT main Body------------------------------------------------------------------------------------
 \small
-\section{第一原理软件现状}
+\section{国产第一原理软件现状}
 \frame
 {
-	\frametitle{第一原理计算软件现状}
+	\frametitle{材料计算软件发展现状}
 \begin{figure}[h!]
 \vspace*{-0.18in}
 \centering
@@ -228,25 +228,25 @@
 \end{figure}
 }
 
-\section{国产软件的开发建议}
+\section{国产科学计算软件的研发环境}
 \frame
 {
-	\frametitle{软件国产化的主要问题}
-	以第一原理软件为例，开发国产软件的主要问题和制约因素
+	\frametitle{科学计算软件国产化的主要问题}
+	以第一原理软件为例，科学计算软件研发的主要问题和制约因素
 	\begin{itemize}
 		\item \textcolor{blue}{对核心引擎软件依赖性大}\\
 			多数课题组自主研发的软件，是基于现有引擎软件(如\textrm{VASP}、\textrm{SIESTA}~等)实现功能扩展，很少从计算引擎代码总体结构层面完整掌握第一原理计算的方法和算法
 		\item \textcolor{blue}{缺少稳定的开发和运维团队}\\
 			科学计算软件对开发人员的数理基础要求较高，当前的代码开发和维护主力是课题组研究生，流动性大，迫切需要专业、稳定的软件开发队伍
 		\item \textcolor{blue}{现有的考核评价体系限制}\\
-			科学计算软件开发偏于工程技术问题且周期较长，与应用软件的科学研究成果回报比例差别大
+			科学计算软件开发和维护偏于工程技术问题且周期较长，与应用软件的科学研究相比，投入-回报比例差别大
 	\end{itemize}
 }
 
 \frame
 {
-	\frametitle{}
-	软件开发和运维是系统工程，但与普通商业软件不同，科学计算软件核心开发人员需要有较高的数理背景和较强的计算机编程和应用技能，而科学计算软件的服务范围明确、具体(目标市场小)
+	\frametitle{科学计算软件的开发模式}
+	软件开发和运维是系统工程。与普通商业软件不同，科学计算软件的核心开发人员需要有较好的数理背景和较强的计算机编程和应用技能;~具体到基础科学计算软件，研发成本高，服务对象明确，服务范围有限(目标市场小)，必须探索合适的软件开发模式
 \begin{figure}[h!]
 \vspace*{-0.10in}
 \centering
@@ -258,16 +258,16 @@
 
 \frame
 {
-	\frametitle{软件国产化的必要条件}
+	\frametitle{科学计算软件国产化的必要条件}
 	\begin{itemize}
-		\item \textcolor{magenta}{强有力的核心开发团队}\\
-			队伍保持“少而精”，以第一原理计算软件为例，成员要求熟悉\textrm{DFT}软件的理论、算法和实现的程序细节，有较强的程序推导和软件实现能力
+		\item \textcolor{magenta}{强有力的核心研发团队}\\
+			研发队伍保持“少而精”，以第一原理计算软件为例，成员要求熟悉\textrm{DFT}软件的理论、算法和实现的程序细节，有较强的公式推导和软件实现能力
 		\item \textcolor{magenta}{稳定充足的经费支持}\\
-			科学计算软件的开发和维护成员的知识积累周期长、专业技术程度高，为保持开发队伍的稳定，必须有稳定的经费支持
+			科学计算软件的开发和维护成员的知识积累周期长、专业技术程度高，为保持研发队伍的稳定，必须有稳定的经费支持
 		\item \textcolor{magenta}{规范的运维和管理}\\
-			完整的科学计算软件代码量庞大，必须告别“作坊式”的开发-运维模式，对代码开发的日志、注释和版本实施全程管理
-		\item \textcolor{magenta}{友好的\textrm{UI}界面}\\
-			科学计算软件的功能和易用程度，决定了软件的可被替换程度，特别是服务实验为主的课题组时，软件的友好程度更是不可忽略的因素
+			完整的科学计算软件代码量庞大，必须告别“作坊式”的开发-运维模式，对代码开发和维护的日志、注释和版本实施全程管理
+		\item \textcolor{magenta}{易用友好的用户界面}\\
+			科学计算软件的功能和友好、易用性，决定了软件的可被替换程度，特别是服务实验为主的课题组时，软件的易用友好程度更是培养用户黏度不可忽略的因素
 	\end{itemize}
 }
 
@@ -436,16 +436,16 @@
 	\begin{itemize}
 		\item \textcolor{purple}{由全势(\textrm{Full Potential,~FP})方法出发}\\
 			\textrm{WIEN2k}~软件精度高，但模块结构松散、并行差\\
-			\textcolor{brown}{策略}:~全面改写代码(\textrm{C/C++})，整合各模块，强化并行功能
+			\textcolor{brown}{策略}:~全面改写代码(\textrm{C/C{\fontsize{7.2pt}{5.2pt}\selectfont{++}}})，整合各模块，强化并行功能
 		\item \textcolor{purple}{由赝势(\textrm{Pseudo Potential,~PP})-\textrm{PAW}方法出发}\\
 			\textrm{VASP}的赝势(\textrm{POTCAR})有独到优势，但未公开代码\\
 			\textcolor{brown}{策略}:~探索\textrm{POTCAR}的生成方案，提升开源软件(\textrm{SIESTA}、\textrm{ABINIT}、\textrm{Quantum Espresso})的计算精度
 		\item \textcolor{purple}{独立发展面向全势的\textrm{PAW}软件}\\
 			\textcolor{brown}{策略}:~应用全势方法改进\textrm{PAW}赝势的生成，结合\textrm{PAW}方法的高效性，获得更高性能的国产第一原理计算软件 
 \begin{figure}[h!]
-\vspace*{-0.10in}
+\vspace*{-0.08in}
 \centering
-\includegraphics[height=1.00in,width=2.70in,clip]{Figures/Method_Relation.png}
+\includegraphics[height=0.98in,width=1.70in,clip]{Figures/Method_Relation.png}
 %\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Method-Relation}
 \end{figure}
