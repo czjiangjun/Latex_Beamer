@@ -92,6 +92,17 @@
 %\beamersetaveragebackground{gray}                          %设置背景颜色(单一色) 
 \beamertemplateshadingbackground{green!10}{red!5}         %设置背景颜色(渐变色)
 
+%\usepackage{verbatim}			%Verbatim 宏包重新实现了 Verbatim 环境，并且提供一个命令可以导入一个 ASCII 文件到文档中
+%\verbatiminput{filename}
+
+%在beamer里面使用verbatim环境，可以通过在frame的参数里面添加 containsverbatim / fragile来解决，不过 containsverbatim 会导致pause失效
+%\begin{frame}[containsverbatim] %也可以用 \begin{frame}[fragile]
+%	\begin{verbatim}
+%	\usepackage{xcolor}
+%	TEST
+%	\end{verbatim}
+%\end{frame}
+
 %i放置单位logo
 %\logo{\includegraphics[width=1.6cm,height=0.35cm]{Figures/BCC_logo-1.png}}	%简单设置logo
 
@@ -513,6 +524,7 @@
 %\end{figure}
 %}
 %
+
 %-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 \clearpage
