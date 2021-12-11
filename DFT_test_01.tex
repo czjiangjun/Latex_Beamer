@@ -158,7 +158,7 @@
 %-----------------------------------------------------------------------------
 
 %----------------------------Author & Date------------------------------------
-\author[\textrm{Jun\_Jiang}]{\vskip 20pt 姜\;\;骏\inst{}} %[]{} (optional, use only with lots of authors)
+%\author[\textrm{Jun\_Jiang}]{\vskip 20pt 姜\;\;骏\inst{}} %[]{} (optional, use only with lots of authors)
 %% - Give the names in the same order as the appear in the paper.
 %% - Use the \inst{?} command only if the authors have different
 %%   affiliation.
@@ -230,6 +230,32 @@
 
 \frame
 {
+	\frametitle{能量量子化:~从驻波方程到\rm{Schr\"odinger}方程}
+	\begin{itemize}
+		\item \textrm{L.~de~Brogile}提出物质波的概念
+			\begin{displaymath}
+				\lambda = \hbar/p
+			\end{displaymath}
+		\item \textrm{Schr\"odinger}受到物质波概念的启发提出\textrm{Schr\"odinger}方程
+			\begin{displaymath}
+				-\dfrac{\hbar^2}{2m}\bigg(\dfrac{\partial^2\Psi}{\partial x^2}+\dfrac{\partial^2\Psi}{\partial y^2}+\dfrac{\partial^2\Psi}{\partial z^2}\bigg)+V(x,y,z)\Psi=\mathrm{i}\hbar\dfrac{\partial\Psi}{\partial t}
+			\end{displaymath}
+	\end{itemize}
+\begin{figure}[h!]
+\centering
+\vspace{-10.5pt}
+\includegraphics[height=0.57in,width=0.75in,viewport=0 0 125 76,clip]{Figures/Standing_wave.jpeg}
+\hskip 0.1pt
+\includegraphics[height=0.49in,width=1.75in,viewport=110 170 1890 655,clip]{Figures/Standing_wave_atom.jpeg}
+\hskip 0.1pt
+\includegraphics[height=0.65in,width=1.25in,viewport=0 0 1200 550,clip]{Figures/Standing_wave-energy.jpg}
+\caption{\textrm{The Standing-wave and energy.}}
+\label{Standing_wave}
+\end{figure}
+}
+
+\frame
+{
 	\frametitle{量子力学的奠基人}
 \begin{figure}[h!]
 \centering
@@ -248,6 +274,21 @@
 \textcolor{blue}{后排左起}:~A.Piccard(\textcolor{blue}{皮卡尔德}) E.Henriot(\textcolor{blue}{亨利厄特}) P.Ehrenfest(\textcolor{blue}{埃伦费斯特}) Ed.Herzen(\textcolor{blue}{赫尔岑}) Th.de Donder(\textcolor{blue}{德唐德}) E.Schr\"odinger(\textcolor{blue}{薛定谔}) E.Verschaffelt(\textcolor{blue}{费尔夏费尔特}) W.Pauli(\textcolor{blue}{泡利}) W.Heisenberg(\textcolor{blue}{海森堡}) R.H.Fowler(\textcolor{blue}{富勒}) L.Brillouin(\textcolor{blue}{布里渊})}}
 }
 %------------------------------------------------------------------------Reference----------------------------------------------------------------------------------------------
+
+\frame
+{
+	\frametitle{量子力学基本假设(\textcolor{red}{公理体系})}
+公理化方法的典型
+\begin{figure}[h!]
+\centering
+\vspace{10.5pt}
+\includegraphics[height=0.40\textwidth,width=0.45\textwidth,viewport=0 0 680 500,clip]{Figures/Element_Geometry_1.jpg}
+\includegraphics[height=0.40\textwidth,width=0.53\textwidth,viewport=0 0 750 480,clip]{Figures/Philp_Nature_Mach-2.png}
+%\caption{\textrm{ABINIT}的Si.in}
+\label{axiomatic-system}
+\end{figure}
+}
+
 \frame
 {
 	\frametitle{量子力学基本假设(\textcolor{red}{公理体系})}
@@ -265,7 +306,7 @@
 
 \frame
 {
-	\frametitle{Schr\"odinger's cat}
+	\frametitle{\rm{Schr\"odinger's~cat}}
 \begin{figure}[h!]
 \centering
 \vspace{-10.5pt}
@@ -294,8 +335,75 @@
 
 \frame
 {
-	\frametitle{\rm{Paul Dirac's Commandments}}
-	\textrm{\textcolor{purple}{The fundamental laws necessary for the mathematical treatment of a large part of physics and the whole of chemistry are thus completely known, and the difficulty lies only in the fact that application of these laws leads to equations that are too complex to be solved.}}
+	\frametitle{\rm{Paul Dirac's Commandments\upcite{PRSLSA123-714_1929}}}
+%	\textrm{\textcolor{purple}{The underlying laws necessary for the mathematical treatment of a large part of physics and the whole of chemistry are thus completely known, and the difficulty lies only in the fact that application of these laws leads to equations that are too complex to be solved.}}
+\begin{figure}[h!]
+\centering
+\vspace{-10.5pt}
+\includegraphics[height=0.71\textwidth,width=0.9\textwidth,viewport=0 0 1150 920,clip]{Figures/Dirac_comment.png}
+%\caption{\textrm{ABINIT}的Si.in}
+\label{Diract_Commandment}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{王守竞先生与量子力学}
+\begin{figure}[h!]
+\centering
+\vspace{-10.5pt}
+\includegraphics[height=0.66\textwidth,width=0.52\textwidth,viewport=0 0 270 350,clip]{Figures/Wang_Shoujing.jpg}
+\caption{王守竞先生(1902-1984)}
+\label{Wang_Shoujing}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{王守竞先生与量子力学}
+	王守竞先生的工作
+	\begin{itemize}
+		\item 计算氢分子的电子结构
+			\vskip 2.5pt
+			王守竞的博士论文\textcolor{purple}{《新量子力学下的常态氢分子问题》}
+	\textcolor{blue}{
+	\begin{displaymath}
+		\Psi=C\left\{ \mathrm{exp}[－Z(r_1+ p_2)/a]+\mathrm{exp}[－Z( r_2+ p_1)/a] \right\}
+	\end{displaymath}}
+	{\fontsize{7.2pt}{6.5pt}\selectfont{其中$r_1$、$p_1$是第一个电子到两个原子核的距离，$r_2$，$p_2$是第二个电子到两个原子核的距离，$a$是\textrm{Bohr}半径}}\\
+	得到的数值结果$Z=1.666$，$E_0=86.6\,\mathrm{kcal}$，$R_0=0.78$\,\textrm{\AA}
+		\item 不对称陀螺(不对称转动)的能谱
+			\vskip 2.5pt
+			不对称陀螺的能级公式(\textcolor{purple}{“王氏公式”})
+	\textcolor{blue}{
+	\begin{displaymath}
+		E= (hc8\pi)[Aj(j+1)+W]
+	\end{displaymath}}
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{王守竞先生与量子力学}
+\begin{figure}[h!]
+\centering
+\vspace{-10.5pt}
+\includegraphics[height=0.60\textwidth,width=1.0\textwidth,viewport=0 0 560 350,clip]{Figures/Collect_Wang.jpg}
+\caption{\fontsize{6.2pt}{5.5pt}\selectfont{\textrm{左1:~王守竞，左2:~Ralph Kronig 右1:~I. I. Rabi(1944年诺贝尔物理学奖获得者)}}}
+\label{Collect_Wang}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{苏州王氏家族与中国的科学事业}
+\begin{figure}[h!]
+\centering
+\hspace*{-10.5pt}
+\includegraphics[height=0.42\textwidth,width=1.05\textwidth,viewport=0 0 860 350,clip]{Figures/Wang_Family_Suzhou.jpg}
+\caption{\fontsize{6.2pt}{5.5pt}\selectfont{\textrm{苏州王氏家族中的几代学者}}}
+\label{Wang_Family}
+\end{figure}
 }
 
 %\frame
