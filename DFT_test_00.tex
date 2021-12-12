@@ -196,19 +196,32 @@
 }
 %在每个section之前列出全部Outline
 %类似的在每个subsection之前列出全部Outline是\AtBeginSubsection[]
-\AtBeginSection[]
-{
-  \frame<handout:0>%[allowframebreaks]
-  {
-    \frametitle{Outline}
-%全部Outline中，本部分加亮
-    \tableofcontents[current,currentsection]
-  }
-}
+%\AtBeginSection[]
+%{
+%  \frame<handout:0>%[allowframebreaks]
+%  {
+%    \frametitle{Outline}
+%%全部Outline中，本部分加亮
+%    \tableofcontents[current,currentsection]
+%  }
+%}
 
 %------------------------------------------------------------------------------PPT main Body------------------------------------------------------------------------------------
 \small
 \section{引言}
+\frame
+{
+	\frametitle{科学研究的范式}
+\begin{figure}[h!]
+\vspace*{-0.18in}
+\centering
+\includegraphics[height=1.85in,width=4.05in]{Figures/Four_Model_3.png}
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Model}
+\end{figure} 
+\centering{\fontsize{6.2pt}{4.9pt}\selectfont{图片引自文献\cite{JPM2-032001_2019}}}
+}
+
 \frame
 {
 	\frametitle{材料模拟的基本思想和方法}
@@ -226,19 +239,6 @@
 
 \frame
 {
-	\frametitle{科学研究的范式}
-\begin{figure}[h!]
-\vspace*{-0.18in}
-\centering
-\includegraphics[height=1.85in,width=4.05in]{Figures/Four_Model_3.png}
-%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{Model}
-\end{figure} 
-\centering{\fontsize{6.2pt}{4.9pt}\selectfont{图片引自文献\cite{JPM2-032001_2019}}}
-}
-
-\frame
-{
 	\frametitle{材料模拟的作用与地位}
 \begin{figure}[h!]
 \vspace*{-0.18in}
@@ -252,7 +252,7 @@
 
 \frame
 {
-%	\frametitle{\textrm{DFT-SCF}}
+	\frametitle{基本原理-理论-方法-计算软件}
 \begin{figure}[h!]
 \vspace*{-0.25in}
 \centering
@@ -275,6 +275,18 @@
 \end{figure}
 }
 
+\frame
+{
+	\frametitle{\textrm{各种计算方法的关系}}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.25in}
+%\hspace*{-0.80in}
+\includegraphics[height=2.70in,width=4.95in,viewport=0 0 1480 780,clip]{Figures/Method_Relation.png}
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Method_Relation}
+\end{figure}
+}
 %\frame
 %{
 %	\frametitle{\textrm{计算材料科学理论与实践}}
@@ -328,16 +340,16 @@
 %\end{itemize}
 %}
 
-\logo{}									%不显示logo
-\frame
-{
-\vskip 60 pt
-%\hskip 10pt \textcolor{blue}{\Huge 感谢答辩委员会各位老师\,\textrm{!}}\\
-\vskip 35 pt
-\hskip 60pt \textcolor{blue}{\Huge 谢谢大家\:!}
-%\vskip 15 pt
-%\hskip 40pt \textcolor{blue}{\Huge \textrm{for your attention\:!}}
-}
+%\logo{}									%不显示logo
+%\frame
+%{
+%\vskip 60 pt
+%%\hskip 10pt \textcolor{blue}{\Huge 感谢答辩委员会各位老师\,\textrm{!}}\\
+%\vskip 35 pt
+%\hskip 60pt \textcolor{blue}{\Huge 谢谢大家\:!}
+%%\vskip 15 pt
+%%\hskip 40pt \textcolor{blue}{\Huge \textrm{for your attention\:!}}
+%}
 
 %\frame
 %{
