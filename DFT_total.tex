@@ -5578,7 +5578,7 @@ $$U=E(d^{n+1})+E(d^{n-1})-2E(d^n)$$
 	\begin{displaymath}
 		\begin{aligned}
 			&\frac{\mathrm{i}e}{2mc}\vec{\sigma}\cdot[(\vec p\times\mathbf{A})+(\mathbf{A})\times\vec p]=\frac{\mathrm{i}e}{2mc}\vec{\sigma}\cdot(-\mathrm{i}\hbar\nabla\times\mathbf{A})\\
-			=&\frac{eh}{2mc}\vec{\sigma}\cdot\mathbf{B}=-\vec{\mu}_s\cdot\mathbf{B}
+			=&\frac{e\hbar}{2mc}\vec{\sigma}\cdot\mathbf{B}=-\vec{\mu}_s\cdot\mathbf{B}
 		\end{aligned}
 	\end{displaymath}
 	其中$\vec \mu_s=-g_s\mu_B\vec S$是电子自旋$\vec S$磁矩，$g_s$是电子自旋$g$因子，$\mu_B$是\textrm{Bohr}磁子，$\vec S$是自旋角动量，因此可得自旋-轨道相互作用能量为:
@@ -5675,7 +5675,7 @@ $$U=E(d^{n+1})+E(d^{n-1})-2E(d^n)$$
 	并有
 	\begin{displaymath}
 		\begin{aligned}
-			\vec pV&=V\vec p-\mathrm{i}h\vec{\nabla}V\\
+			\vec pV&=V\vec p-\mathrm{i}\hbar\vec{\nabla}V\\
 			(\vec{\sigma}\vec{\nabla}V)(\vec{\sigma}\cdot\vec p)&=(\vec{\nabla}V\vec p)+\mathrm{i}\vec{\sigma}[\vec{\nabla},\vec p]
 		\end{aligned}
 	\end{displaymath}
@@ -5690,7 +5690,7 @@ $$U=E(d^{n+1})+E(d^{n-1})-2E(d^n)$$
 	\frametitle{中心力场的\textrm{Dirac~}方程}
 	在球形对称势函数条件下
 	\begin{displaymath}
-		\hspace*{-10pt}\left[ \underline{\textcolor{blue}{\frac{p^2}{2m}+V}}-\underline{\textcolor{brown}{\frac{p^4}{8m^3c^2}}}-\underline{\textcolor{brown}{\frac{h^2}{4m^2c^2}\frac{\mathrm{d}V}{\mathrm{d}r}\frac{\partial}{\partial\vec r}}}+\underline{\textcolor{red}{\frac1{2m^2c^2}\frac1r\frac{\mathrm{d}V}{\mathrm{d}r}(\vec l\cdot\vec s)}} \right]\Phi=\varepsilon\Phi
+		\hspace*{-10pt}\left[ \underline{\textcolor{blue}{\frac{p^2}{2m}+V}}-\underline{\textcolor{brown}{\frac{p^4}{8m^3c^2}}}-\underline{\textcolor{brown}{\frac{\hbar^2}{4m^2c^2}\frac{\mathrm{d}V}{\mathrm{d}r}\frac{\partial}{\partial\vec r}}}+\underline{\textcolor{red}{\frac1{2m^2c^2}\frac1r\frac{\mathrm{d}V}{\mathrm{d}r}(\vec l\cdot\vec s)}} \right]\Phi=\varepsilon\Phi
 	\end{displaymath}
 	\begin{itemize}
 		\item 第一与第二项是非相对论\textrm{Schr\"odinger~}方程
@@ -5702,12 +5702,12 @@ $$U=E(d^{n+1})+E(d^{n-1})-2E(d^n)$$
 		\vec j&=\vec l+\vec s\\
 %		\vec j_z&=\vec l_z+\vec s_z
 	\end{aligned}$$
-	$h\kappa$是算符
+	$\hbar\kappa$是算符
 	\begin{displaymath}
 		K=\left( 
 		\begin{matrix}
-			\vec{\sigma}\cdot\vec l+h &0\\
-			0 &-\vec{\sigma}\cdot\vec l-h
+			\vec{\sigma}\cdot\vec l+\hbar &0\\
+			0 &-\vec{\sigma}\cdot\vec l-\hbar
 		\end{matrix}
 		\right)
 	\end{displaymath}
@@ -5756,15 +5756,15 @@ $$U=E(d^{n+1})+E(d^{n-1})-2E(d^n)$$
 	消去$f_{\kappa}(r)$，有
 	\begin{displaymath}
 		\begin{aligned}
-			&-\frac{h^2}{2Mr^2}\frac{\mathrm{d}}{\mathrm{d}r}\left[ r^2\frac{\mathrm{d}g_{\kappa}(r)}{\mathrm{d}r} \right]+\left[ V(r)+\frac{h^2}{2Mr^2}\frac{l(l+1)}{r^2} \right]g_{\kappa}(r)\\
-			&-\frac{h^2}{4M^2c^2}\frac{\mathrm{d}V(r)}{\mathrm{d}r}\frac{\mathrm{d}g_{\kappa}(r)}{\mathrm{d}r}-\frac{h^2}{4M^2c^2}\frac{\mathrm{d}V(r)}{\mathrm{d}r}\frac{1+\kappa}rg_{\kappa}(r)=\varepsilon g_{\kappa}(r)
+			&-\frac{\hbar^2}{2Mr^2}\frac{\mathrm{d}}{\mathrm{d}r}\left[ r^2\frac{\mathrm{d}g_{\kappa}(r)}{\mathrm{d}r} \right]+\left[ V(r)+\frac{\hbar^2}{2Mr^2}\frac{l(l+1)}{r^2} \right]g_{\kappa}(r)\\
+			&-\frac{\hbar^2}{4M^2c^2}\frac{\mathrm{d}V(r)}{\mathrm{d}r}\frac{\mathrm{d}g_{\kappa}(r)}{\mathrm{d}r}-\frac{\hbar^2}{4M^2c^2}\frac{\mathrm{d}V(r)}{\mathrm{d}r}\frac{1+\kappa}rg_{\kappa}(r)=\varepsilon g_{\kappa}(r)
 		\end{aligned}
 	\end{displaymath}
-	这里引入相对论质量$$M=m+\frac{\varepsilon-V(r)}{2c^2}$$
+	这里引入相对论质量$$M=\dfrac{m}{\sqrt{1-\dfrac{\varepsilon-V(\mathbf{r})}{2mc^2}}}=m+\frac{\varepsilon-V(r)}{2c^2}$$
 	利用等式关系$$\kappa(\kappa+1)=l(l+1)$$
 	小分量$f_{\kappa}(r)$可以表示为
 	\begin{displaymath}
-		f_{\kappa}(r)=\frac{h}{2Mc}\left( \frac{\mathrm{d}g_{\kappa}(r)}{\mathrm{d}r}+\frac{1+\kappa}rg_{\kappa}(r) \right)
+		f_{\kappa}(r)=\frac{\hbar}{2Mc}\left( \frac{\mathrm{d}g_{\kappa}(r)}{\mathrm{d}r}+\frac{1+\kappa}rg_{\kappa}(r) \right)
 	\end{displaymath}
 }
 
@@ -5774,15 +5774,15 @@ $$U=E(d^{n+1})+E(d^{n-1})-2E(d^n)$$
 	\textcolor{blue}{在$g_{\kappa}(r)$和$f_{\kappa}(r)$方程中}\textcolor{red}{略去有关$\kappa$项}\textcolor{blue}{即可得标量相对论方程}
 	\begin{displaymath}
 		\begin{aligned}
-			&-\frac{h^2}{2Mr^2}\frac{\mathrm{d}}{\mathrm{d}r}\left[ r^2\frac{\mathrm{d}\tilde{g}(r)}{\mathrm{d}r} \right]+\left[ V(r)+\frac{h^2}{2Mr^2}\frac{l(l+1)}{r^2} \right]\tilde{g}(r)\\
-			&-\frac{h^2}{4M^2c^2}\frac{\mathrm{d}V(r)}{\mathrm{d}r}\frac{\mathrm{d}\tilde{g}(r)}{\mathrm{d}r}=\varepsilon\tilde{g}(r)
+			&-\frac{\hbar^2}{2Mr^2}\frac{\mathrm{d}}{\mathrm{d}r}\left[ r^2\frac{\mathrm{d}\tilde{g}(r)}{\mathrm{d}r} \right]+\left[ V(r)+\frac{\hbar^2}{2Mr^2}\frac{l(l+1)}{r^2} \right]\tilde{g}(r)\\
+			&-\frac{\hbar^2}{4M^2c^2}\frac{\mathrm{d}V(r)}{\mathrm{d}r}\frac{\mathrm{d}\tilde{g}(r)}{\mathrm{d}r}=\varepsilon\tilde{g}(r)
 		\end{aligned}
 	\end{displaymath}
 	这里$\tilde g(r)$和$\tilde f(r)$是$g_{\kappa}(r)$和$f_{\kappa}(r)$的标量相对论近似，满足
 	\begin{displaymath}
 		\begin{aligned}
-			&\tilde{f}(r)=\frac{h}{2Mc}\frac{\mathrm{d}\tilde{g}(r)}{\mathrm{d}r}\\
-			&\tilde{g}(r)=-\frac{hc}{\varepsilon-V(r)}\frac{\mathrm{d}\tilde{f}(r)}{\mathrm{d}r}
+			&\tilde{f}(r)=\frac{\hbar}{2Mc}\frac{\mathrm{d}\tilde{g}(r)}{\mathrm{d}r}\\
+			&\tilde{g}(r)=-\frac{\hbar c}{\varepsilon-V(r)}\frac{\mathrm{d}\tilde{f}(r)}{\mathrm{d}r}
 		\end{aligned}
 	\end{displaymath}
 	\textcolor{blue}{在标量相对论近似下，$l$和$s$仍然是好量子数}
@@ -5810,7 +5810,7 @@ $$U=E(d^{n+1})+E(d^{n-1})-2E(d^n)$$
 	$$H\tilde{\psi}=\varepsilon\tilde{\psi}+H_{\mathrm{SO}}\tilde{\psi}$$
 	用$\tilde{g}(r)$为基函数，可得$H_{\mathrm{SO}}$为
 	\begin{displaymath}
-		H_{\mathrm{SO}}=\frac{h}{2Mc^2}\frac1r\frac{\mathrm{d}V(r)}{\mathrm{d}r}\left( 
+		H_{\mathrm{SO}}=\frac{\hbar}{2Mc^2}\frac1r\frac{\mathrm{d}V(r)}{\mathrm{d}r}\left( 
 		\begin{matrix}
 			\vec{\sigma}\cdot\vec l &0\\
 			0 &0
@@ -5827,8 +5827,8 @@ $$U=E(d^{n+1})+E(d^{n-1})-2E(d^n)$$
 	用旋-轨耦合处理价电子体系，先求解自旋分离的标量相对论波函数$\tilde{g}(r)$和$\tilde{f}(r)$
 	\begin{displaymath}
 		\begin{aligned}
-			&-\frac{h^2}{2Mr^2}\frac{\mathrm{d}}{\mathrm{d}r}\left[ r^2\frac{\mathrm{d}\tilde{g}(r)}{\mathrm{d}r} \right]+\left[ V(r)+\frac{h^2}{2Mr^2}\frac{l(l+1)}{r^2} \right]\tilde{g}(r)\\
-			&-\frac{h^2}{4M^2c^2}\frac{\mathrm{d}V(r)}{\mathrm{d}r}\frac{\mathrm{d}\tilde{g}(r)}{\mathrm{d}r}=\varepsilon\tilde{g}(r)\\
+			&-\frac{\hbar^2}{2Mr^2}\frac{\mathrm{d}}{\mathrm{d}r}\left[ r^2\frac{\mathrm{d}\tilde{g}(r)}{\mathrm{d}r} \right]+\left[ V(r)+\frac{\hbar^2}{2Mr^2}\frac{l(l+1)}{r^2} \right]\tilde{g}(r)\\
+			&-\frac{\hbar^2}{4M^2c^2}\frac{\mathrm{d}V(r)}{\mathrm{d}r}\frac{\mathrm{d}\tilde{g}(r)}{\mathrm{d}r}=\varepsilon\tilde{g}(r)\\
 			&\tilde{f}(r)=\frac{h}{2Mc}\frac{\mathrm{d}\tilde{g}(r)}{\mathrm{d}r}\\
 		\end{aligned}
 	\end{displaymath}
@@ -5904,7 +5904,7 @@ $$U=E(d^{n+1})+E(d^{n-1})-2E(d^n)$$
 
 \frame
 {
-	\frametitle{\textrm{LAPW~}框架下处理非共线磁矩}
+	\frametitle{\textrm{LAPW~}框架下处理旋-轨耦合}
 \begin{figure}[h!]
 \centering
 \vspace*{-0.10in}
@@ -5912,7 +5912,7 @@ $$U=E(d^{n+1})+E(d^{n-1})-2E(d^n)$$
 \caption{\small \textrm{The spin coordinate frmaes.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{WIENNCM_sphere}
 \end{figure}
-考虑非共线磁性后，\textrm{LAPW~}基函数表示为
+考虑旋-轨耦合后，\textrm{LAPW~}基函数表示为
 \begin{displaymath}
 	\footnotesize\hskip -50pt \varphi^{\vec G}_{\sigma}=\left\{
   \begin{aligned}
@@ -5925,7 +5925,7 @@ $$U=E(d^{n+1})+E(d^{n-1})-2E(d^n)$$
 
 \frame
 {
-	\frametitle{\textrm{LAPW~}框架下处理非共线磁矩}
+	\frametitle{\textrm{LAPW~}框架下处理旋-轨耦合}
 \begin{figure}[h!]
 \centering
 \vspace*{-0.10in}
