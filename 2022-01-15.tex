@@ -161,7 +161,7 @@
 \date[\today] % (optional, should be abbreviation of conference name)
 {	%{\fontsize{6.2pt}{4.2pt}\selectfont{\textcolor{blue}{E-mail:~}\url{jiangjun@bcc.ac.cn}}}
 \vskip 1 pt {\fontsize{8.2pt}{6.2pt}\selectfont{%北京理工大学%报告地点
-	\vskip 2 pt \textrm{2021-04-11}}}
+	\vskip 2 pt \textrm{2022-01-15}}}
 }
 
 % - Either use conference name or its abbreviation
@@ -205,9 +205,9 @@
 {
 	\frametitle{科学研究的范式变更}
 \begin{figure}[h!]
-\vspace*{-0.18in}
+\vspace*{0.08in}
 \centering
-\includegraphics[width=4.05in]{Figures/Four_Model.png}
+\includegraphics[width=4.15in]{Figures/Four_Model_3.png}
 %\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Four_Model}
 \end{figure}
@@ -402,16 +402,15 @@ $\varepsilon_{\mathrm{X}}[\rho]$和$\varepsilon_{\mathrm{C}}[\rho]$可理解为�
  \end{enumerate}
 }
 
-\frame                               %
+\frame
 {
-	\frametitle{\textrm{Kohn-Sham}方程}
+%	\frametitle{\textrm{DFT-SCF}}
 \begin{figure}[h!]
+\vspace*{-0.25in}
 \centering
-\vspace*{-0.21in}
-\hspace*{-0.1in}
-\includegraphics[height=2.7in,width=4.0in,viewport=2 5 1162 880,clip]{Figures/DFT.png}
-\caption{\tiny \textrm{The Analysis of Kohn-Sham equation.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{DFT}
+\includegraphics[height=2.80in,width=4.95in,viewport=5 3 1250 780,clip]{Figures/Method_Procedure_2.png}
+%\caption{\small \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Method-Procedure}
 \end{figure}
 }
 
@@ -453,10 +452,11 @@ $\varepsilon_{\mathrm{X}}[\rho]$和$\varepsilon_{\mathrm{C}}[\rho]$可理解为�
 %}
 \frame
 {
-	\frametitle{赝势-\textrm{PAW}方法}
+	\frametitle{赝势-\textrm{PAW}方法的关系}
 \begin{figure}[h!]
 \centering
-%\hspace*{-0.80in}
+\vspace*{-0.20in}
+\includegraphics[height=1.90in,width=2.70in,viewport=0 0 1190 876,clip]{Figures/Pseudo-Full_Potential.png}\\
 \includegraphics[height=1.0in,width=4.1in,clip]{Figures/Pseudo-Potential.png}
 \caption{\tiny \textrm{The relation of Pseudo potential and PAW.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Pseudo_Poential}
@@ -589,8 +589,8 @@ $\varepsilon_{\mathrm{X}}[\rho]$和$\varepsilon_{\mathrm{C}}[\rho]$可理解为�
 \centering
 %\includegraphics[height=2.7in,width=4.0in,viewport=0 0 1300 960,clip]{Figures/VASP_procedure-full.png}
 %\includegraphics[height=2.1in,width=1.6in,viewport=0 0 480 630,clip]{Figures/VASP_procedure.png}
-%\includegraphics[height=2.1in,width=2.3in,viewport=0 0 740 600,clip]{Figures/Ab-initio-Ene.png}
-\includegraphics[height=2.5in,width=1.8in,viewport=0 0 480 630,clip]{Figures/VASP_procedure.png}
+\includegraphics[height=2.1in,width=1.6in,viewport=0 0 480 630,clip]{Figures/VASP_procedure.png}
+\includegraphics[height=2.1in,width=2.3in,viewport=0 0 740 600,clip]{Figures/Ab-initio-Ene.png}
 \caption{\tiny \textrm{The Flow of calculation for the KS-ground states.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{PAW_baiseset}
 \end{figure} 
@@ -711,9 +711,22 @@ $\varepsilon_{\mathrm{X}}[\rho]$和$\varepsilon_{\mathrm{C}}[\rho]$可理解为�
 
 \frame
 {
+	\frametitle{\textrm{Heisenberg~}交换模型}
+\begin{figure}[h!]
+%	\vspace{-0.10in}
+\centering
+%\includegraphics[height=2.7in,width=4.0in,viewport=0 0 1180 875,clip]{Figures/dual_grid.png}
+\includegraphics[height=2.0in,width=4.0in,viewport=0 0 580 290,clip]{Figures/Heisenberg_model.jpg}
+\caption{\tiny \textrm{The model of Heisenberg-exchange coupling.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Heisenberg_Model}
+\end{figure} 
+}
+
+\frame
+{
 	\frametitle{磁振子与自旋响应函数}
 	\begin{itemize}
-		\item 如果不考虑电子间相互作用，$E-\chi$曲线在尽磁矩为0时有极小值，对应于自旋成对(抗磁态)
+		\item 如果不考虑电子间相互作用，$E-\chi$曲线在净磁矩为0时有极小值，对应于自旋成对(抗磁态)
 		\item 考虑电子交换作用，自旋有序(磁性态)能量更有利，因此$V_m(\vec r)$将依赖于$m(\vec r^{\prime})$:\\
 			\begin{enumerate}
 				\item 如果基态对应$\bar m>0$，则为铁磁态
@@ -725,6 +738,20 @@ $\varepsilon_{\mathrm{X}}[\rho]$和$\varepsilon_{\mathrm{C}}[\rho]$可理解为�
 			\end{displaymath}
 			其中$N(0)$是\textrm{Fermi~}能级的态密度，磁化有关的有效外势$V_m=V_m^{ext}+Im$
 	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{铁磁、反铁磁和亚铁磁}
+\begin{figure}[h!]
+	\vspace{-0.20in}
+\centering
+\includegraphics[height=0.95in,width=2.3in,viewport=0 0 350 230,clip]{Figures/Ferromagnetic.jpeg}\\
+\includegraphics[height=0.85in,width=2.3in,viewport=0 -13 350 155,clip]{Figures/Antiferromagnetic.png}\\
+\includegraphics[height=0.88in,width=2.3in,viewport=0 0 350 225,clip]{Figures/Ferrimagnetic.jpeg}
+\caption{\tiny \textrm{The model of Ferromagnetic, Antiferromagnetic and Ferrimagnetic.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Ferrimagneitic_Model}
+\end{figure} 
 }
 
 \frame
@@ -831,37 +858,36 @@ $\varepsilon_{\mathrm{X}}[\rho]$和$\varepsilon_{\mathrm{C}}[\rho]$可理解为�
 	如果自旋方向随晶格周期也有周期性变化，这种自旋进动(\textrm{spin-spiral})引起体系具有额外的\textcolor{red}{自旋旋进周期性}，因此自旋磁矩可以表示为
 	\begin{displaymath}
 		\vec m(\vec r+\vec R)=
-		\left(\begin{matrix}
+		\begin{pmatrix}
 			m_x(\vec r)\cos(\vec q\cdot\vec R)-m_y(\vec r)\sin(\vec q\cdot\vec R)\\
 			m_x(\vec r)\sin(\vec q\cdot\vec R)+m_y(\vec r)\cos(\vec q\cdot\vec R)\\
 			m_z(\vec r)
-		\end{matrix}\right)
+		\end{pmatrix}
 	\end{displaymath}
 	这里\textcolor{blue}{$\vec q$是倒空间中自旋进动的单位平移量}，因此\\
 	\textcolor{brown}{广义\textrm{Bl\"och}定理}，波函数和\textrm{Hamiltonian}满足
 	\begin{displaymath}
 		\begin{aligned}
-		&\left(\begin{matrix}
+		&\begin{pmatrix}
 			\Psi_{\vec k}^{\uparrow}(\vec r)\\
 			\Psi_{\vec k}^{\downarrow}(\vec r)
-		\end{matrix}\right)=\left(
-		\begin{matrix}
+		\end{pmatrix}=
+		\begin{pmatrix}
 			\mathrm{e}^{-\mathrm{i}\vec q\cdot\vec R/2} &0\\
 			0 &\mathrm{e}^{+\mathrm{i}\vec q\cdot\vec R/2}
-		\end{matrix}\right)\left(
-		\begin{matrix}
+		\end{pmatrix}
+		\begin{pmatrix}
 			\Psi_{\vec k}^{\uparrow}(\vec r-\vec R)\\
 			\Psi_{\vec k}^{\downarrow}(\vec r-\vec R)
-		\end{matrix}
-		\right)\\
-		&\left(\begin{matrix}
+		\end{pmatrix}\\
+		&\begin{pmatrix}
 			H^{\alpha\alpha}(\vec q) &V_{xc}^{\alpha\beta}\\
 			V_{xc}^{\beta\beta} &H^{\beta\beta}(\vec q)
-		\end{matrix}\right)\rightarrow\left(
-		\begin{matrix}
+		\end{pmatrix}\rightarrow
+		\begin{pmatrix}
 			H^{\alpha\alpha}(\vec q) &V_{xc}^{\alpha\beta}\mathrm{e}^{-\mathrm{i}\vec q\cdot\vec r}\\
 			V_{xc}^{\beta\alpha}\mathrm{e}^{+\mathrm{i}\vec q\cdot\vec r &H^{\beta\beta}(\vec q)}
-		\end{matrix}\right)
+		\end{pmatrix}
 		\end{aligned}
 	\end{displaymath}
 }
@@ -1526,7 +1552,7 @@ $\varepsilon_{\mathrm{X}}[\rho]$和$\varepsilon_{\mathrm{C}}[\rho]$可理解为�
 	\end{itemize}
 }
 
-\subsection{\rm{MagGene}应用算例}
+\section{\rm{MagGene}应用算例}
 \frame
 {
 	\frametitle{块体\textrm{\ch{FeSe}}}
@@ -1637,7 +1663,7 @@ $\varepsilon_{\mathrm{X}}[\rho]$和$\varepsilon_{\mathrm{C}}[\rho]$可理解为�
 
 \frame
 {
-	\frametitle{单层\ch{CrI3}磁结构的预测}
+	\frametitle{单层\textrm{\ch{CrI3}}磁结构的预测}
 	晶格常数为6.3\textrm{\AA}、7\textrm{\AA}和8\textrm{\AA}的单层\textrm{\ch{CrI3}}在第21、6和10代找到了最稳定的磁结构，分别是面内反铁磁、面外铁磁和面内铁磁。
 \begin{figure}[h!]
 \vspace*{-0.08in}
