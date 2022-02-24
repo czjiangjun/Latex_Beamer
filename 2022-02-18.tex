@@ -123,7 +123,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %-------------------------------PPT Title-------------------------------------
-\title{高通量材料自动流程计算软件框架:\\\rm{MP}与\rm{ASE}}
+\title{第一原理计算自动流程与数据库:\\\rm{MP}与\rm{ASE}}
 %-----------------------------------------------------------------------------
 
 %----------------------------Author & Date------------------------------------
@@ -220,7 +220,7 @@
 \begin{figure}[h!]:
 \centering
 \includegraphics[height=1.57in,width=4.95in,viewport=0 0 1800 550,clip]{Figures/Matcloud-login.png}
-\caption{\fontsize{7.2pt}{4.2pt}\selectfont{中科院计算机网络信息中心~杨小渝研究员~团队~开发}\upcite{CMS146-319_2018,url_Matcloud}}%
+\caption{\fontsize{7.2pt}{4.2pt}\selectfont{中科院计算机网络信息中心~杨小渝团队开发}\upcite{CMS146-319_2018,url_Matcloud}}%
 \label{Auto_Flow_Platform-2}
 \end{figure}
 }
@@ -257,6 +257,18 @@
 \includegraphics[height=2.1in,width=3.2in,viewport=0 0 1208 830,clip]{Figures/ASE_Python_lib.png}
 \caption{\fontsize{7.2pt}{4.2pt}\selectfont{\textrm{ASE:~a Python library for working with atoms.}}}%
 \label{Logo_ASE_lib}
+\end{figure} 
+}
+
+\frame
+{
+	\frametitle{\textrm{Atomly}:~物理所的无机晶体材料计算数据库}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.2in}
+\includegraphics[height=2.1in,width=4.1in,viewport=5 0 1608 830,clip]{Figures/Atomly.png}
+\caption{\fontsize{7.2pt}{4.2pt}\selectfont{\textrm{Atomly:~中科院物理所~刘淼等老师开发，数据库包含了17万\!$^+$\!无机晶体材料第一性原理计算结果\textrm{(包含电子结构信息:~DOS~+~energy~bands)}.}}}%
+\label{Logo_Atomly_lib}
 \end{figure} 
 }
 
@@ -430,7 +442,7 @@
 %		\textcolor{purple}{\textrm{Atomate}}:~:~适合一定复杂程度的\textrm{~VASP~}计算
 \begin{figure}[h!]
 \centering
-\vspace*{-0.2in}
+\vspace*{-0.19in}
 \includegraphics[height=1.4in,width=2.2in,viewport=0 0 820 630,clip]{Figures/Atomate_comp.png}
 \vskip 1pt
 \includegraphics[height=1.5in]{Figures/bandstructure_wf.png}
@@ -464,8 +476,8 @@
 \frametitle{\textrm{ASE}特色:~材料结构生成模块}
 \begin{figure}[h!]
 \centering
-\vspace*{-0.27in}
-\includegraphics[height=1.3in,width=1.9in,viewport=0 0 820 530,clip]{Figures/ASE_atoms_module.png}
+\vspace*{-0.15in}
+\includegraphics[height=1.2in,width=1.7in,viewport=0 0 820 530,clip]{Figures/ASE_atoms_module.png}
 \includegraphics[height=2.9in,width=2.2in,viewport=0 0 970 1200,clip]{Figures/ASE_atoms_module-examples.png}
 %\caption{\fontsize{7.2pt}{4.2pt}\selectfont{\textrm{The integrated calculator in ASE (Atomic Simulation Environment).}}}%
 \label{Logo_atoms-module}
@@ -491,7 +503,7 @@
 \frametitle{\textrm{ASE}特色:~提供多种优化算法模块和数据库}
 \begin{figure}[h!]
 \centering
-\vspace*{-0.21in}
+\vspace*{-0.18in}
 \includegraphics[height=1.3in,width=2.5in,viewport=0 0 838 500,clip]{Figures/ASE_opt_modules.png}
 \vskip 1pt
 \includegraphics[height=1.7in,width=2.5in,viewport=0 0 938 630,clip]{Figures/ASE_database.png}
@@ -539,9 +551,9 @@
 	\frametitle{应用示例:~\textrm{MgO:~DOS and Band}}
 \begin{figure}[h!]
 \centering
-\vspace*{-0.2in}
+\vspace*{-0.16in}
 \includegraphics[height=1.5in,width=2.3in,viewport=0 0 900 600,clip]{Figures/Atomate_MgO-DOS.png}
-\vskip 1pt
+\vskip 0.5pt
 \includegraphics[height=1.5in,width=2.3in,viewport=0 0 900 600,clip]{Figures/Atomate_MgO-Band.png}
 %\caption{\fontsize{7.2pt}{4.2pt}\selectfont{\textrm{The integrated calculator in Atomate-ASE.}}}%
 \label{Atomate_MgO-DOS}
@@ -654,6 +666,26 @@
 \label{pseudo_potential}
 \end{figure}
 }
+
+\frame
+{
+	\frametitle{\textrm{VASP}计算的并行实现}
+	\begin{itemize}
+	     \item 中间层设计:~\textrm{FFT}网格、实空间基组与计算节点的匹配\\
+		     \textcolor{red}{通过子程序\textrm{mgrid.F}生成中间层，实现并行负载与计算节点分配的匹配，减少\textrm{FFT}变换和实空间并行的节点间通信}
+\begin{figure}[h!]
+		\vspace{-0.25in}
+	\centering
+%\includegraphics[height=2.7in,width=4.0in,viewport=0 0 1180 875,clip]{Figures/dual_grid.png}
+\includegraphics[height=1.0in,width=4.0in,viewport=0 0 1500 450,clip]{Figures/VASP_FFT-MPI_Reciprocal.png}
+\vskip 0.5pt
+\includegraphics[height=0.7in,width=4.0in,viewport=0 0 730 150,clip]{Figures/VASP_FFT-MPI_Real.png}
+\caption{\tiny \textrm{VASP:~ Reciprocal-Real space layout for grids in MPI.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{MPI-FFT}
+\end{figure} 
+	\end{itemize}
+}
+
 %------------------------------------------------------------------------Reference----------------------------------------------------------------------------------------------
 %\begin{thebibliography}{99}
 %-----------------------------------------------------------------------------------------------------------------------------------------------------------------------%
