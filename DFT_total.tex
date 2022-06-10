@@ -153,16 +153,16 @@
 %-----------------------------------------------------------------------------
 
 %----------------------------Author & Date------------------------------------
-%\author[\textrm{Jun\_Jiang}]{姜\;\;骏\inst{}} %[]{} (optional, use only with lots of authors)
+\author[\textrm{Jun\_Jiang}]{姜\;\;骏\inst{}} %[]{} (optional, use only with lots of authors)
 %% - Give the names in the same order as the appear in the paper.
 %% - Use the \inst{?} command only if the authors have different
 %%   affiliation.
-%\institute[BCC]{\inst{}%
-% \vskip -20pt 北京市计算中心}
+\institute[BCC]{\inst{}%
+ \vskip -20pt 北京市计算中心}
 \date[\today] % (optional, should be abbreviation of conference name)
-{	%{\fontsize{6.2pt}{4.2pt}\selectfont{\textcolor{blue}{E-mail:~}\url{jiangjun@bcc.ac.cn}}}
-%\vskip 45 pt {\fontsize{8.2pt}{6.2pt}\selectfont{清华大学\;\;物理系% 报告地点
-%	\vskip 5 pt \textrm{2020.07}}}
+{	{\fontsize{6.2pt}{4.2pt}\selectfont{\textcolor{blue}{E-mail:~}\url{jiangjun@bcc.ac.cn}}}
+\vskip 45 pt {\fontsize{8.2pt}{6.2pt}\selectfont{%清华大学\;\;物理系% 报告地点
+	\vskip 5 pt \textrm{2022.06}}}
 }
 
 %% - Either use conference name or its abbreviation
@@ -1135,7 +1135,7 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 	如果定义函数
 	$$\chi_{lm}^{\mathrm{PP}}(\vec r)=\bigg\{\varepsilon_l-\bigg[-\dfrac12\nabla^2+V_{\mathrm{local}}^{\mathrm{PP}}(\vec r)\bigg]\bigg\}\psi_{lm}^{\mathrm{PP}}(\vec r)$$
 	赝势可以分解为局域部分与非局域部分之和
-	$$V_{NL}^{\mathrm{PP}}(r)=V_{\mathrm{local}}^{\mathrm{PP}}(r)+\dfrac{|\chi_{lm}^{\mathrm{PP}}\rangle\langle\chi_{lm}^{\mathrm{PP}}|}{\langle\chi_{lm}^{\mathrm{PP}}|\psi_{lm}^{\mathrm{PP}}\rangle}=V_{\mathrm{local}}^{\mathrm{PP}}(r)+\sum_{lm}\dfrac{|\psi_{lm}^{\mathrm{PP}}\delta V_l\rangle\langle\delta V_l\psi_{lm}^{\mathrm{PP}}|}{\langle\psi_{lm}^{\mathrm{PP}}|\delta V_l|\psi_{lm}^{\mathrm{PP}}\rangle}$$
+	$$V_{NL}^{\mathrm{PP}}(r)=V_{\mathrm{local}}^{\mathrm{PP}}(r)+\sum_{lm}\dfrac{|\chi_{lm}^{\mathrm{PP}}\rangle\langle\chi_{lm}^{\mathrm{PP}}|}{\langle\chi_{lm}^{\mathrm{PP}}|\psi_{lm}^{\mathrm{PP}}\rangle}=V_{\mathrm{local}}^{\mathrm{PP}}(r)+\sum_{lm}\dfrac{|\psi_{lm}^{\mathrm{PP}}\delta V_l\rangle\langle\delta V_l\psi_{lm}^{\mathrm{PP}}|}{\langle\psi_{lm}^{\mathrm{PP}}|\delta V_l|\psi_{lm}^{\mathrm{PP}}\rangle}$$
 }
 
 \frame
@@ -1184,7 +1184,7 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 \end{displaymath}
 因此非局域赝势可以表示为
 \begin{displaymath}
-	V_{NL}=\dfrac{|\chi_i\rangle\langle\chi_i|}{\langle\chi_i|\phi_i\rangle}=\sum_{i,j}\mathbf{D}_{ij}|\beta_i\rangle\langle\beta_j|
+	V_{NL}=\sum_{i,j}\dfrac{|\chi_i\rangle\langle\chi_i|}{\langle\chi_i|\phi_i\rangle}=\sum_{i,j}\mathbf{D}_{ij}|\beta_i\rangle\langle\beta_j|
 \end{displaymath}
 用平缓函数构造赝波函数与真实波函数的电荷密度差
 \begin{displaymath}
@@ -1941,7 +1941,7 @@ $n_i$是$\psi_i$上的电子占据数，$\varepsilon_i$是其能量本征值，�
 			=&\varepsilon_n\left(1+\sum_{nm}q_{nm}|\beta_n\rangle\langle\beta_m|\right)|\phi_n\rangle
 		\end{aligned}
 	\end{displaymath}
-	其中$$D_{nm}=B_{nm}+\varepsilon q_{nm}$$
+	其中$$D_{nm}=B_{nm}+\varepsilon_nq_{nm}$$
 }
 
 \frame
@@ -1974,15 +1974,15 @@ $n_i$是$\psi_i$上的电子占据数，$\varepsilon_i$是其能量本征值，�
 	\frametitle{\textrm{PAW}与\textrm{US-PP}近似}
 	\textrm{G. Kresse}指出只要总能量表达式中$E^1$和$\tilde E^1$在原子构象附近作线性化即可得到\textrm{US-PP}的表达式。
 	
-	如果原子构象由占据数$\rho_{ij}^a$、电荷密度分布$n_a^1$、$\tilde n_a^1$和$\hat n_a$确定，$E^1$中的\textcolor{blue}{\underline{\textrm{Hartree}能和交换-相关能项}}在$n_a^1$附近线性化得
+	如果已知原子构象中占据数$\rho_{ij}^a$、电荷密度分布$n_a^1$、$\tilde n_a^1$和$\hat n_a$，则$E^1$中的\textcolor{blue}{\underline{\textrm{Hartree}能和交换-相关能项}}在$n_a$附近线性化($n_a\Rightarrow n_a^1$)，有
 	\begin{displaymath}
-		E_{\mathrm{XC}}(\textcolor{red}{n_a^1+n_c})+E_H(\textcolor{red}{n_a^1})+\int(v_{\mathrm{XC}}[n_a^1+n_c]+v_H[n_a^1])\underline{\textcolor{red}{[n^1(\vec r)-n_a^1(\vec r)]}\mathrm{d}\vec r}
+		E_{\mathrm{XC}}(\textcolor{red}{n_a^1+n_c})+E_H(\textcolor{red}{n_a^1})+\int(v_{\mathrm{XC}}[n_a^1+n_c]+v_H[n_a^1])\textcolor{red}{[n^1(\vec r)-n_a^1(\vec r)]}\mathrm{d}\vec r
 	\end{displaymath}
 	在\textrm{PAW}方法中，电子密度$n^1(\vec r)$%和$\tilde n^1(\vec r)$
 	的表达式
 	\begin{displaymath}
 		\begin{aligned}
-			n^1(\vec2 r)=&\sum_{(i,j)}\rho_{ij}\langle\phi_i|\vec r\rangle\langle\vec r|\phi_j\rangle\\
+			n^1(\vec r)=&\sum_{(i,j)}\rho_{ij}\langle\phi_i|\vec r\rangle\langle\vec r|\phi_j\rangle\\
 	%		\tilde n^1(\vec r)=&\sum_{(i,j)}\rho_{ij}\langle\tilde\phi_i|\vec r\rangle\langle\vec r|\tilde\phi_j\rangle 
 		\end{aligned}
 	\end{displaymath}
@@ -1994,7 +1994,7 @@ $n_i$是$\psi_i$上的电子占据数，$\varepsilon_i$是其能量本征值，�
 \frame
 {
 	\frametitle{\textrm{PAW}与\textrm{US-PP}近似}
-	因此$E^1$用占据数$\rho_{ij}$近似到一阶可有
+	因此$E^1$用占据数$\rho_{ij}$近似到一阶($\rho_{ij}\Rightarrow\rho_{ij}^1$)，可有
 	\begin{displaymath}
 		E^1\approx\textcolor{blue}{C}+\sum_{(i,j)}\langle\phi_i|-\frac12\nabla^2+v_{e\!f\!f}^a|\phi_j\rangle
 	\end{displaymath}
@@ -2039,24 +2039,28 @@ $n_i$是$\psi_i$上的电子占据数，$\varepsilon_i$是其能量本征值，�
 	在$G_{ij}^{\mathrm{US}}$中，
 	\begin{displaymath}
 		\begin{aligned}
-			&\textcolor{blue}{\langle\phi_i|-\frac12\nabla^2+v_{e\!f\!f}^a|\phi_j\rangle-\langle\tilde\phi_i|-\frac12\nabla^2+\tilde v_{e\!f\!f}^a|\tilde\phi_j\rangle}\\
-			\rightarrow&\textcolor{red}{D_{nm}=B_{nm}+\varepsilon_mq_{nm}}
+			&\textcolor{blue}{\underbrace{\langle\phi_i|-\frac12\nabla^2+v_{e\!f\!f}^a|\phi_j\rangle-\langle\tilde\phi_i|-\frac12\nabla^2+\tilde v_{e\!f\!f}^a|\tilde\phi_j\rangle}}\\
+			\Longrightarrow\quad\quadd&\textcolor{red}{D_{nm}=B_{nm}+\varepsilon_mq_{nm}} \\
+			\overset{\text{\textcolor{red}{\textrm{unsrceen}}}}{-}&\textcolor{blue}{\underline{\int\hat Q_{ij}^L(\vec r)\tilde v_{e\!f\!f}^a(\vec r)\mathrm{d}\vec r}} \quadd\rightarrow\quadd \textcolor{red}{\int_{\Omega_r}\mathrm{d}\vec r\,^{\prime}\tilde v_{loc}^a(\vec r\,^{\prime})\hat Q_{mn}(\vec r\,^{\prime})}\\
+%			&\int\mathrm{d}\vec r\,^{\prime}V_{loc}(\vec r\,^{\prime})n(\vec r\,^{\prime})\\
+			\Longrightarrow\quad\quadd&\textcolor{red}{D_{nm}^{(0)}}
 		\end{aligned}
 	\end{displaymath}
 	\begin{displaymath}
-		\textcolor{blue}{\int\hat Q_{ij}^L(\vec r)\tilde v_{e\!f\!f}^a(\vec r)\mathrm{d}\vec r}\rightarrow\textcolor{red}{D_{nm}^{(0)}=D_{nm}-\int\mathrm{d}\vec r\,^{\prime}V_{loc}(\vec r\,^{\prime})n(\vec r\,^{\prime})}
+		\therefore D_{ij}^1-\tilde D_{ij}^1+\hat D_{ij}=D_{ij}^{(0)}+\sum_L\int\tilde v_{e\!f\!f}(\vec r)\hat{Q}_{ij}^L(\vec r)\mathrm{d}\vec r
 	\end{displaymath}
 
 	在\textrm{PAW}方法能量泛函中，如果缀加区补偿电荷$\hat n$满足$$\hat n=n^1-\tilde n^1$$
-	并且如果满足$\tilde n_{Zc}=n_{Zc}$和$\tilde n_c=n_c$，则“在位”(\textrm{on-site})动能对总能的贡献
-	\begin{displaymath}
-		E^1-\tilde E^1=\sum_{(i,j)}\rho_{ij}\big(\langle\phi_i|-\frac12\nabla^2|\phi_j\rangle-\langle\tilde\phi_i|-\frac12\nabla^2|\tilde\phi_j\big)
-	\end{displaymath}
 }
 
 \frame
 {
 	\frametitle{\textrm{PAW}与\textrm{US-PP}近似}
+	并且如果满足$\tilde n_{Zc}=n_{Zc}$和$\tilde n_c=n_c$
+	则“在位”(\textrm{on-site})动能对总能的贡献
+	\begin{displaymath}
+		E^1-\tilde E^1=\sum_{(i,j)}\rho_{ij}\big(\langle\phi_i|-\frac12\nabla^2|\phi_j\rangle-\langle\tilde\phi_i|-\frac12\nabla^2|\tilde\phi_j\rangle\big)
+	\end{displaymath}
 	\textcolor{red}{在这种极限情况下\textrm{PAW}与\textrm{US-PP}完全等价}
 
 	在\textrm{US-PP}中，\textcolor{orange}{缀加函数}满足条件
