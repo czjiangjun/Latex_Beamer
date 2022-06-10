@@ -2040,14 +2040,17 @@ $n_i$是$\psi_i$上的电子占据数，$\varepsilon_i$是其能量本征值，�
 	\begin{displaymath}
 		\begin{aligned}
 			&\textcolor{blue}{\underbrace{\langle\phi_i|-\frac12\nabla^2+v_{e\!f\!f}^a|\phi_j\rangle-\langle\tilde\phi_i|-\frac12\nabla^2+\tilde v_{e\!f\!f}^a|\tilde\phi_j\rangle}}\\
-			\Longrightarrow\quad\quadd&\textcolor{red}{D_{nm}=B_{nm}+\varepsilon_mq_{nm}} \\
-			\overset{\text{\textcolor{red}{\textrm{unsrceen}}}}{-}&\textcolor{blue}{\underline{\int\hat Q_{ij}^L(\vec r)\tilde v_{e\!f\!f}^a(\vec r)\mathrm{d}\vec r}} \quadd\rightarrow\quadd \textcolor{red}{\int_{\Omega_r}\mathrm{d}\vec r\,^{\prime}\tilde v_{loc}^a(\vec r\,^{\prime})Q_{mn}(\vec r\,^{\prime})}\\
+			\Longrightarrow\quad\qquad&\textcolor{red}{D_{nm}=B_{nm}+\varepsilon_mq_{nm}} \\
+			\overset{\textcolor{red}{\textrm{\fontsize{4.1pt}{3.9pt}\selectfont{desrceen}}}}{-}&\textcolor{blue}{\underline{\int\hat Q_{ij}^L(\vec r)\tilde v_{e\!f\!f}^a(\vec r)\mathrm{d}\vec r}} \qquad\rightarrow\qquad \textcolor{red}{\int_{\Omega_r}\mathrm{d}\vec r\,^{\prime}\tilde v_{loc}^a(\vec r\,^{\prime})Q_{mn}(\vec r\,^{\prime})}\\
 %			&\int\mathrm{d}\vec r\,^{\prime}V_{loc}(\vec r\,^{\prime})n(\vec r\,^{\prime})\\
-			\Longrightarrow\quad\quadd&\textcolor{red}{D_{nm}^{(0)}}
+			\Longrightarrow\quad\qquad&\textcolor{red}{D_{nm}^{(0)}}
 		\end{aligned}
 	\end{displaymath}
 	\begin{displaymath}
-		\therefore D_{ij}^1-\tilde D_{ij}^1+\hat D_{ij}=D_{ij}^{(0)}+\sum_L\int\tilde v_{e\!f\!f}(\vec r)\hat{Q}_{ij}^L(\vec r)\mathrm{d}\vec r
+		\begin{aligned}
+			\therefore D_{ij}^1-\tilde D_{ij}^1+\hat D_{ij}=D_{ij}^{(0)}+&\underbrace{\sum_L\int\tilde v_{e\!f\!f}(\vec r)\hat{Q}_{ij}^L(\vec r)\mathrm{d}\vec r}\\
+			&\qquad{\textcolor{blue}{\fontsize{5.2pt}{4.2pt}\selectfont{\textrm{non-local-terms}}}}
+		\end{aligned}
 	\end{displaymath}
 
 	在\textrm{PAW}方法能量泛函中，如果缀加区补偿电荷$\hat n$满足$$\hat n=n^1-\tilde n^1$$
@@ -4897,7 +4900,7 @@ $$U=E(d^{n+1})+E(d^{n-1})-2E(d^n)$$
 		\end{matrix}\right)\rightarrow\left(
 		\begin{matrix}
 			H^{\alpha\alpha}(\vec q) &V_{xc}^{\alpha\beta}\mathrm{e}^{-\mathrm{i}\vec q\cdot\vec r}\\
-			V_{xc}^{\beta\alpha}\mathrm{e}^{+\mathrm{i}\vec q\cdot\vec r &H^{\beta\beta}(\vec q)}
+			V_{xc}^{\beta\alpha}\mathrm{e}^{+\mathrm{i}\vec q\cdot\vec r} &H^{\beta\beta}(\vec q)
 		\end{matrix}\right)
 		\end{aligned}
 	\end{displaymath}
@@ -6405,7 +6408,7 @@ $$\Sigma(\vec r_1,\vec r_2;\omega)=\dfrac{\mathrm i}{2\pi}\int \mathrm e^{\mathr
 %	\bibitem{Novak}\textrm{P. Nov$\mathrm{\acute a}$k. \textit{Calculation of spin-orbit coupling} (unpublished)}
 	\bibitem{Dai_Qian}戴道生,钱昆明, {\textit{铁磁学}}(上册),\:科学出版社, 北京, 1998
 	\bibitem{JPCSSP13-2675_1980}\textrm{A. H. MacDonald, W. E. Pickett and D. D. Koelling. \textit{J. Phys. C: Solid St. Phys.}, \textbf{13} (1980), 2675}
-%}
+}
 \end{thebibliography}
 \nocite*{}
 }
