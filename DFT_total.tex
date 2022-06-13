@@ -1142,9 +1142,9 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 	$$V_{\mathrm{ion},l}^{\mathrm{PP}}(r)=V_{\mathrm{src},l}^{\mathrm{PP}}(r)-V_{\mathrm{H},l}^{\mathrm{PP}}(r)-V_{XC,l}^{\mathrm{PP}}(r)$$
 	去屏蔽过程中，特别需要注意$V_{XC,l}^{\mathrm{PP}}(r)$的处理
 	$$V_{XC}^{\mathrm{PP}}(r)=V_{XC}^{\mathrm{PP}}([n^{\mathrm{PP}}],r)+\big[V_{XC,l}^{\mathrm{PP}}([n^{\mathrm{PP}}+n^{core}],r)-V_{XC}^{\mathrm{PP}}([n^{\mathrm{PP}}],r)\big]$$
-	如果定义函数
+	{\fontsize{7.2pt}{5.2pt}\selectfont{如果定义辅助函数}}
 	$$\chi_{lm}^{\mathrm{PP}}(\vec r)=\bigg\{\varepsilon_l-\bigg[-\dfrac12\nabla^2+V_{\mathrm{local}}^{\mathrm{PP}}(\vec r)\bigg]\bigg\}\psi_{lm}^{\mathrm{PP}}(\vec r)$$
-	赝势可以分解为局域部分与非局域部分之和
+	{\fontsize{7.2pt}{5.2pt}\selectfont{赝势可以分解为局域部分与非局域部分之和称为可分离赝势(也称\textrm{factroided pseudo-potential})}}
 	$$V_{NL}^{\mathrm{PP}}(r)=V_{\mathrm{local}}^{\mathrm{PP}}(r)+\sum_{lm}\dfrac{|\chi_{lm}^{\mathrm{PP}}\rangle\langle\chi_{lm}^{\mathrm{PP}}|}{\langle\chi_{lm}^{\mathrm{PP}}|\psi_{lm}^{\mathrm{PP}}\rangle}=V_{\mathrm{local}}^{\mathrm{PP}}(r)+\sum_{lm}\dfrac{|\psi_{lm}^{\mathrm{PP}}\delta V_l\rangle\langle\delta V_l\psi_{lm}^{\mathrm{PP}}|}{\langle\psi_{lm}^{\mathrm{PP}}|\delta V_l|\psi_{lm}^{\mathrm{PP}}\rangle}$$
 }
 
@@ -1183,39 +1183,109 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 
 \frame
 {
+	\frametitle{从模守恒赝势到超软赝势}
+	为提高模守恒赝势的可移植性\footnote{\tiny{换言之，提升赝波函数能适应的能量变分空间}}，\textrm{Vanderbilt}和\textrm{Bl\"ochl}分别建议:\\
+	在构造可分离赝势时，\textcolor{blue}{引入额外的参考能量$\varepsilon_l$，并要求对每个角动量量子数$l$，所有能量参数$\varepsilon_l$构造的赝波函数$\phi_i^{\mathrm{ps}}$及其辅助函数$\chi_i$都满足
+	\begin{displaymath}
+		|\chi_i\rangle=-(\mathbf{T}+V_{\mathrm{loc}}-\varepsilon)|\phi_i^{\mathrm{ps}}\rangle
+	\end{displaymath}}
+	{\fontsize{7.2pt}{5.2pt}\selectfont{这里$i$表示量子数$l$，$m$和能量参数$\varepsilon$，即$i=(lm,\varepsilon)$}}
+	\vskip 5pt
+	由此出发，可构造出一组与赝波函数$\phi_i^{\mathrm{ps}}$垂直的函数$\beta_i$:~
+{\fontsize{7.2pt}{5.2pt}\selectfont{
+	\begin{itemize}
+		\item 构造矩阵$\mathbf{B}$，其矩阵元$B_{ij}$满足
+			\begin{displaymath}
+				B_{ij}= \langle\phi_j^{\mathrm{ps}}|\chi_i\rangle
+			\end{displaymath}
+		\item 由矩阵$\mathbf{B}$和$\chi$得到函数$\beta_i$
+			\begin{displaymath}
+				|\beta_i\rangle=\sum_j(\mathbf{B}^{-1})_{ij}|\chi_j\rangle
+			\end{displaymath}
+		\item 由此得到的$\beta$与赝波函数$\phi_i^{\mathrm{ps}}$满足正交条件
+	\begin{displaymath}
+		\langle\beta_i|\phi_j^{\mathrm{ps}}\rangle=\delta_{ij}
+	\end{displaymath}
+	\end{itemize}}}
+}
+
+\frame
+{
+	\frametitle{从模守恒赝势到超软赝势}
+	因此可分离赝势的非局域部分表示为
+	\textcolor{blue}{\begin{displaymath}
+		V_{\mathrm{NL}}=\sum_i|\chi_i\rangle\langle\beta_i|=\sum_{ij}B_{ij}|\beta_j\rangle\langle\beta_i|
+	\end{displaymath}}
+	{\fontsize{7.2pt}{5.2pt}\selectfont{不难看出，如果赝波函数满足广义模守恒条件
+	\begin{displaymath}
+		Q_{ij}=\langle\phi_j^{\mathrm{AE}}|\phi_i^{\mathrm{AE}}\rangle-\langle\phi_j^{\mathrm{PS}}|\phi_i^{\mathrm{PS}}\rangle = 0
+	\end{displaymath}
+	亦即
+	\begin{displaymath}
+		Q_{l\varepsilon,l\varepsilon^{\prime}}=\int_0^{R_c}\bigg(\phi_{l\varepsilon}^{\mathrm{AE}}(r)\phi_{l\epsilon^{\prime}}^{\mathrm{AE}}(r)-\phi_{l\varepsilon}^{\mathrm{PS}}(r)\phi_{l\varepsilon^{\prime}}^{\mathrm{PS}}(r)\bigg)\mathrm{d}r=0
+	\end{displaymath}
+	将大大提高赝势的可移植性。
+	\vskip 5pt
+	但实际上，广义模守恒条件看似简单，当能量参数$\varepsilon\neq\varepsilon^{\prime}$，要满足这个条件
+	$$Q_{l\varepsilon,l\varepsilon^{\prime}}=0$$
+	并非易事;~而一旦模守恒条件被破坏，矩阵$\mathbf{B}$(相应地，赝势的非局域部分$V_{\mathrm{NL}}$)就是非\textrm{Hermitian}}}
+}
+
+\frame
+{
 \frametitle{超软赝势的构造}
-超软赝势在平缓的局域势函数$V^L(\vec r)$和赝波函数$|\phi_{lmj}(\vec r)\rangle$的基础上，构造函数
+\textrm{Vanderbilt}建议构造赝波函数时放弃模守恒约束条件，只要求价电子赝波函数与真实电子波函数的径向部分在截断半径$r_{c,l}$外相同，由此得到的赝势显然非\textrm{Hermitian}，但是通过构造\\\textcolor{blue}{\textrm{Hermitian}重叠算符}
 \begin{displaymath}
-	|\chi_{lmj}(\vec r)\rangle=\bigg[\varepsilon_{lj}-\dfrac12\nabla^2-V^L(\vec r)\bigg]|\phi_{lmj}(\vec r)\rangle
+	\mathbf{S}=\mathbf{1}+\sum_{i,j}Q_{ij}|\beta_j\rangle\langle\beta_i|
 \end{displaymath}
-在此基础上得到矩阵$\mathbf{D}_{ij}=\langle\phi_i|\chi_j\rangle$和局域函数
+以及\textcolor{blue}{\textrm{Hermitian}赝势算符}
 \begin{displaymath}
-	|\beta_i\rangle=\sum_j(\mathbf{D}^{-1})_{ji}|\chi_{j}\rangle
+	\tilde V^{\mathrm{NL}}=\sum_{i,j}\mathbf{D}_{i,j}|\beta_j\rangle\langle\beta_i|
 \end{displaymath}
-因此非局域赝势可以表示为
+这里\textcolor{blue}{
 \begin{displaymath}
-	V_{NL}=\sum_{i,j}\dfrac{|\chi_i\rangle\langle\chi_i|}{\langle\chi_i|\phi_i\rangle}=\sum_{i,j}\mathbf{D}_{ij}|\beta_i\rangle\langle\beta_j|
+	\mathbf{D}_{ij}=B_{ij}+\varepsilon_iQ_{ij}
+\end{displaymath}}
+模守恒约束下的标准本征值方程将变成广义本征值方程
+\begin{displaymath}
+	(T+V_{\mathrm{loc}}+\tilde V^{\mathrm{NL}}-\varepsilon\mathbf{S})|\phi\rangle=0
 \end{displaymath}
-用平缓函数构造赝波函数与真实波函数的电荷密度差
+}
+
+\frame
+{
+\frametitle{超软赝势的特点}
+\textrm{Vanderbilt}的超软赝势构造方案最大的优点是
+\begin{itemize}
+	\item \textcolor{purple}{解除模守恒约束}:~有助于增加赝波函数的截断半径，系统提高赝势的柔软程度
+	\item \textcolor{purple}{引入多个参考能量$\varepsilon_l$}:~使得模守恒条件下只在特定参考能量$\varepsilon$处成立的对数导数连续条件，扩展到参考能量$\varepsilon_l$区间范围内，这大大提高了赝势的适用范围(可移植性)
+\end{itemize}
+
+相应的，超软赝势计算中，电子密度表达形式为
 \begin{displaymath}
-	Q_{nm}(\vec r)=\varphi_n^{\ast}(\vec r)\varphi_m(\vec r)-\tilde\varphi_n^{\ast}(\vec r)\tilde\varphi_m(\vec r)
+	n(r)=\sum_nf_n|\phi_n(r)|^2+\sum_{n,ij}f_n\langle\phi_n|\beta_j\rangle\langle\beta_i|\phi_n\rangle Q_{ij}(r)
+\end{displaymath}
+这里补偿电荷$Q_{ij}(r)$定义为
+\begin{displaymath}
+	Q_{ij}(r)=\phi_i^{\mathrm{AE}}(r)\phi_j^{\mathrm{AE}}(r)^{\ast}-\phi_i^{\mathrm{US}}(r)\phi_j^{\mathrm{US}}(r)^{\ast}
 \end{displaymath}
 }
 
 \frame
 {
 	\frametitle{超软赝势总能量计算}
+	去除价电子屏蔽效应的贡献后，可得最终超软赝势的总能量表达式
 	\begin{displaymath}
 		\begin{aligned}
 			E_{\mathrm{total}}=&\sum_j^{\mathrm{occ}}\langle\phi_{lmj}|\bigg[-\dfrac12\nabla^2+V_{\mathrm{local}}^{\mathrm{ion}}+\sum_{s,s^{\prime}}\mathbf{D}_{s,s^{\prime}}^{\mathrm{ion}}|\beta_s\rangle\langle\beta_{s^{\prime}}|\bigg]|\phi_{lmj}\rangle\\
 			&+E_{H}[n_v]+E_{N-N}+E_{XC}[n_v]
 		\end{aligned}
 	\end{displaymath}
-	其中$n_v(\vec r)=\sum\limits_j^{\mathrm{occ}}\phi_{lmj}^{\ast}(\vec r)\phi_{lmj}(\vec r)+\sum\limits_{s,s^{\prime}}\sum\limits_j^{\mathrm{occ}}\langle\phi_{lmj}|\beta_{s^{\prime}}\rangle\langle\beta_s|\phi_{lmj}\rangle Q_{s,s^{\prime}}(\vec r)$
+	{\fontsize{7.2pt}{5.2pt}\selectfont{其中$n_v(r)=\sum\limits_j^{\mathrm{occ}}\phi_{lmj}^{\ast}(r)\phi_{lmj}(r)+\sum\limits_{s,s^{\prime}}\sum\limits_j^{\mathrm{occ}}\langle\phi_{lmj}|\beta_{s^{\prime}}\rangle\langle\beta_s|\phi_{lmj}\rangle Q_{s,s^{\prime}}(r)$
 	$$V_{\mathrm{local}}^{\mathrm{ion}}=V_{\mathrm{local}}-V_{\mathrm H}-V_{XC}$$
-	$$\mathbf{D}_{s,s^{\prime}}^{\mathrm{ion}}=\mathbf{D}_{s,s^{\prime}}-\int\mathrm{d}\vec r\big[V_{\mathrm{H}}(\vec r)+V_{XC}(\vec r)\big]Q_{s,s^{\prime}}(r)$$
-	由此可得广义本征值方程
-	$$\bigg[-\dfrac12\nabla^2+V_{\mathrm{local}}+V_{NL}^{\mathrm{US}}-\varepsilon_i\bigg(\mathbf{1}+\sum_{s,s^{\prime}}Q_{s,s^{\prime}}|\beta_s\rangle\langle\beta_{s^{\prime}}|\bigg)\bigg]|\phi_{lmi}\rangle=0$$
+	$$\mathbf{D}_{s,s^{\prime}}^{\mathrm{ion}}=\mathbf{D}_{s,s^{\prime}}-\int\mathrm{d}\vec r\big[V_{\mathrm{H}}(\vec r)+V_{XC}(\vec r)\big]Q_{s,s^{\prime}}(r)$$}}
+	由此可得超软赝势的广义本征值方程
+	$$\bigg[-\dfrac12\nabla^2+V_{\mathrm{local}}+\tilde V_{NL}^{\mathrm{US}}-\varepsilon_i\bigg(\mathbf{1}+\sum_{s,s^{\prime}}Q_{s,s^{\prime}}|\beta_s\rangle\langle\beta_{s^{\prime}}|\bigg)\bigg]|\phi_{lmi}\rangle=0$$
 }
 
 \frame
