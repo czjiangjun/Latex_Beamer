@@ -6977,7 +6977,7 @@ $\alpha=(\tau-\tau_w)/\tau_{\mathrm{unif}}=(5p/3)(z^{-1}-1)$,~~~$\tau_{\mathrm{t
 	\frametitle{稀疏矩阵的\textrm{Lanczos~}算法}
 	根据递推关系有
 	\begin{displaymath}
-		\mathbf{A}\psi_p=\sum_{q=0}^{p-1}c_p^{(q)}\psi_q+a_q\psi_p+b_p\psi_{p+1}
+		\mathbf{A}\psi_p=\sum_{q=0}^{p-1}c_p^{(q)}\psi_q+a_p\psi_p+b_p\psi_{p+1}
 	\end{displaymath}
 	这里$\psi_{p+1}$将与所有之前的$\psi_q$(\textrm{processors})正交
 
@@ -7253,7 +7253,8 @@ $\alpha=(\tau-\tau_w)/\tau_{\mathrm{unif}}=(5p/3)(z^{-1}-1)$,~~~$\tau_{\mathrm{t
 	\frametitle{\textrm{AtomPAW}程序的赝势构造}
 	\begin{itemize}
 		\item 相关矩阵元的计算\\
-			\textrm{AtomPAW}完成了与原子分波、赝分波有关的矩阵元$D_{ij}^{\alpha}$、$O_{ij}^{\alpha}$的\\计算，此外还计算了
+			\textrm{AtomPAW}完成了与原子分波、赝分波有关的矩阵元$D_{ij}^{\alpha}$、$O_{ij}^{\alpha}$的计算\\
+			此外还计算了
 			$$W_{ij}^{\alpha}=\sum_{nl}c_{n\vec k}\langle\tilde\Psi_{n\vec k}|\tilde p_i^\alpha\rangle\langle\tilde p_j^{\alpha}|\tilde\Psi_{n\vec k}\rangle$$
 			实际计算中，$\tilde\Psi_{n\vec k}$用平面波展开，于是
 			$$\hspace*{-20pt}\langle\tilde p_i^{\alpha}|\tilde\Psi_{n\vec k}\rangle=\sqrt{\dfrac1V}\sum_{\vec G}(4\pi \mathrm{i}^l_iY^{\ast}_{l_im_i}(\widehat{\vec k+\vec G})\mathrm{e}^{\mathrm{i}(\vec k+\vec G)\cdot\vec R_{\alpha}}\tilde{\tilde p}_{n_il_i}(|\vec k+\vec G|)A_{n\vec k}(\vec G)$$
