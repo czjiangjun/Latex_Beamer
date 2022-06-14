@@ -6920,6 +6920,74 @@ $\alpha=(\tau-\tau_w)/\tau_{\mathrm{unif}}=(5p/3)(z^{-1}-1)$,~~~$\tau_{\mathrm{t
 
 \frame
 {
+	\frametitle{矩阵对角化的\textrm{Lanczos~}算法}
+	对于矩阵$\mathbf{A}$，取任意矢量$\psi_0$(要求归一),构造矢量$\psi_1$(同样要求归一，并与$\psi_0$正交)，满足
+	\begin{displaymath}
+		\mathbf{A}\psi_0=a_0\psi_0+b_0\psi_1
+	\end{displaymath}
+	由此确定$a_0$、$b_0$、$\psi_1$
+	\begin{displaymath}
+		\begin{aligned}
+			a_0&=\langle\psi_0|\mathbf{A}|\psi_0\rangle\\
+			b_0\psi_1&=\mathbf{A}\psi_0-a_0\psi_0\\
+			||\psi_1||&=1
+		\end{aligned}
+	\end{displaymath}
+	进而可构造$\psi_2$:
+	\begin{displaymath}
+		\mathbf{A}\psi_1=c_1\psi_0+a_1\psi_1+b_1\psi_2
+	\end{displaymath}
+	要求$\psi_2$与$\psi_0$、$\psi_1$正交归一条件，确定$\psi_2$，$a_1$，$b_1$，$c_1$
+}
+
+\frame
+{
+	\frametitle{矩阵对角化的\textrm{Lanczos~}算法}
+	根据递推关系有
+	\begin{displaymath}
+		\mathbf{A}\psi_p=\sum_{q=0}^{p-1}c_p^{(q)}\psi_q+a_p\psi_p+b_p\psi_{p+1}
+	\end{displaymath}
+	这里$\psi_{p+1}$将与所有之前的$\psi_q$(\textrm{processors})正交
+
+	利用矩阵$\mathrm{A}$的\textrm{Hermitian}，因此对于$q<p-1$各项，可有等式
+	\begin{displaymath}
+		c_p^{(q)}=\langle\psi_q|\mathbf{A}\psi_p\rangle=\langle\mathbf{A}\psi_q|\psi_p\rangle=0
+	\end{displaymath}
+	即矢量$\psi_p$垂直于矢量$\mathbf{A}\psi_q$，由此可得
+	\begin{displaymath}
+		c_p^{(p-1)}=\langle\psi_{p-1}|\mathbf{A}\psi_p\rangle=\langle\mathbf{A}\psi_{p-1}|\psi_p\rangle=b_{p-1}
+	\end{displaymath}
+	经过$p$步迭代后
+	\begin{displaymath}
+		\mathbf{A}\psi_p=b_{p-1}\psi_{p-1}+a_p\psi_p+b_p\psi_{p+1}
+	\end{displaymath}
+	这里$\psi_{p+1}$要求与$\psi_p$和$\psi_{p-1}$满足正交归一条件
+}
+
+\frame
+{
+	\frametitle{矩阵对角化的\textrm{Lanczos~}算法}
+	因此\textcolor{blue}{矩阵$\mathbf{A}$可以用$\psi_p$(称为\textrm{Lanczos}矢量)为基组表示成三对角阵形式}(稀疏矩阵)
+	\begin{displaymath}
+		\mathbf{A}^p=\begin{pmatrix}
+			a_1 & b_2 & & & & \\
+			b_2 & a_2 &b_3 & & &\\
+&b_3 &a_3 &\ddots & & \\
+& &\ddots &\ddots &b_{p-1} & \\
+& & &b_{p-1} &a_{p-1} &b_{p}\\
+& & & &b_{p} &a_{p}
+		\end{pmatrix}
+	\end{displaymath}
+	不难看出，\textcolor{blue}{经过$p$次\textrm{Lanczos}迭代，当$b\rightarrow0$即达到收敛，意味着此时$p\times p$三对角阵$\mathbf{A}^p$的本征值也将收敛到矩阵$\mathbf{A}$的本征值}
+	\begin{itemize}
+		\item 稀疏矩阵$\mathbf{A}^p$可通过快速\textrm{QR}分解得到本征值
+		\item 三对角阵的最低和最高本征值随着迭代次数增加收敛最迅速
+		\item \textrm{Lanczos}方法适用于少量本征值与剩余本征有较大差值的体系
+	\end{itemize}
+}
+
+\frame
+{
 	\frametitle{矩阵的迭代对角化}
 	\begin{itemize}
 		\item 矩阵的直接对角化计算量 $O(N^3)$
@@ -6941,7 +7009,7 @@ $\alpha=(\tau-\tau_w)/\tau_{\mathrm{unif}}=(5p/3)(z^{-1}-1)$,~~~$\tau_{\mathrm{t
 
 \frame
 {
-	\frametitle{稀疏矩阵的\textrm{Lanczos~}算法}
+	\frametitle{矩阵迭代对角化的基本实现}
 \begin{figure}[h!]
 \centering
 \includegraphics[height=2.5in,width=3.5in,viewport=0 0 850 590,clip]{Figures/Coordinate_transformation.png}
@@ -6950,51 +7018,6 @@ $\alpha=(\tau-\tau_w)/\tau_{\mathrm{unif}}=(5p/3)(z^{-1}-1)$,~~~$\tau_{\mathrm{t
 \end{figure}
 }
 
-\frame
-{
-	\frametitle{稀疏矩阵的\textrm{Lanczos~}算法}
-	对于稀疏矩阵$\mathbf{A}$，取任意矢量$\psi_0$(要求归一),构造矢量$\psi_1$(同样要求归一，并与$\psi_0$正交)，满足
-	\begin{displaymath}
-		\mathbf{A}\psi_0=a_0\psi_0+b_0\psi_1
-	\end{displaymath}
-	由此确定$a_0$、$b_0$、$\psi_1$
-	\begin{displaymath}
-		\begin{aligned}
-			a_0&=\langle\psi_0|\mathbf{A}|\psi_0\rangle\\
-			b_0\psi_1&=\mathbf{A}\psi_0-a_0\psi_0\\
-			||\psi_1||&=1
-		\end{aligned}
-	\end{displaymath}
-	进而可构造$\psi_2$:
-	\begin{displaymath}
-		\mathbf{A}\psi_1=c_1\psi_0+a_1\psi_1+b_1\psi_2
-	\end{displaymath}
-	要求$\psi_2$与$\psi_0$、$\psi_1$正交归一条件，确定$\psi_2$，$a_1$，$b_1$，$c_1$
-}
-
-\frame
-{
-	\frametitle{稀疏矩阵的\textrm{Lanczos~}算法}
-	根据递推关系有
-	\begin{displaymath}
-		\mathbf{A}\psi_p=\sum_{q=0}^{p-1}c_p^{(q)}\psi_q+a_p\psi_p+b_p\psi_{p+1}
-	\end{displaymath}
-	这里$\psi_{p+1}$将与所有之前的$\psi_q$(\textrm{processors})正交
-
-	利用矩阵$\mathrm{A}$的\textrm{Hermitian}，因此可有等式
-	\begin{displaymath}
-		c_p^{(q)}=\langle\psi_q|\mathbf{A}\psi_p\rangle=\langle\mathbf{A}\psi_q|\psi_p\rangle=0
-	\end{displaymath}
-	即矢量$\psi_p$垂直于矢量$\mathbf{A}\psi_q$，由此可得
-	\begin{displaymath}
-		c_p^{(p-1)}=\langle\psi_{p-1}|\mathbf{A}\psi_p\rangle=\langle\mathbf{A}\psi_{p-1}|\psi_p\rangle=b_{p-1}
-	\end{displaymath}
-	经过$p$步迭代后
-	\begin{displaymath}
-		\mathbf{A}\psi_p=b_{p-1}\psi_{p-1}+a_p\psi_p+b_p\psi_{p+1}
-	\end{displaymath}
-	这里$\psi_{p+1}$要求与$\psi_p$和$\psi_{p-1}$满足正交归一条件
-}
 \frame
 {
 	\frametitle{\textrm{Broyden Jacobian update Method}}
