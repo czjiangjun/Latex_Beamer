@@ -1476,14 +1476,38 @@ $$\left.\dfrac{\partial E[\tilde\Psi, R]}{\partial\langle\tilde\Psi_n|}\right|_R
 
 \frame
 {
-	\frametitle{\textrm{PAW}原子数据集}
-	原子分波:$$\bigg(-\dfrac12\nabla^2+v_{at}-\varepsilon_i^1\bigg)|\phi_i\rangle=0$$
+	\frametitle{\textrm{PAW}原子数据集:~实现方案}
+	\fontsize{7.2pt}{5.2pt}\selectfont{原子分波:$$\bigg(-\dfrac12\nabla^2+v_{at}-\varepsilon_i^1\bigg)|\phi_i\rangle=0$$
 	赝原子分波:$$\bigg(-\dfrac12\nabla^2+w_i(r)-\varepsilon_i^1\bigg)|\tilde\phi_i\rangle=0$$
-	局域赝势:%$$w_i(r)=\tilde v_{at}(r)+c_ik(r)=\tilde v_{at}(0)\mathrm{e}^{-(r/r_k)^{\lambda}}+[1-k(r)]v_{at}(r)+c_i\mathrm{e}^{-(r/r_k)^{\lambda}}$$
-	$$w_i(r)=\tilde v_{at}(0)\mathrm{e}^{-(r/r_k)^{\lambda}}+[1-\mathrm{e}^{-(r/r_k)^{\lambda}}]v_{at}(r)+c_i\mathrm{e}^{-(r/r_k)^{\lambda}}$$
+	局域赝势:% $$w_i(r)=\tilde v_{at}(r)+c_ik(r)=\tilde v_{at}(0)\mathrm{e}^{-(r/r_k)^{\lambda}}+[1-k(r)]v_{at}(r)+c_i\mathrm{e}^{-(r/r_k)^{\lambda}}$$
+	\begin{itemize}
+		\item 过渡金属体系:~采用带参数的四阶多项式，要求赝波函数在截断半径处保持与真实波函数相同的连续可微
+		\item 价层不含$d$电子电子体系:引入截断函数
+			\begin{displaymath}
+				k(r)=\exp[-(r/r_k)^{\lambda}]
+			\end{displaymath}
+			定义有效赝势
+			\begin{displaymath}
+				\tilde v_{\mathrm{at}}=\tilde v_{\mathrm{at}}(0)k(r)+[1-k(r)]v_{\mathrm{at}}(r)
+			\end{displaymath}
+			调节截断半径$r_k$和指数$\lambda$，使得赝原子势和真实原子势在截断半径外严格相等
+	\end{itemize}
+	\vskip 5pt
+	实际求解赝波函数时的赝势定义为
+\begin{displaymath}
+	w_i(r)=\tilde v_{\mathrm{at}}(r)+c_ik(r)
+\end{displaymath}
+调节参数$c_i$使得要求赝波函数与真实波函数在截断截断半径外完全相同
+%	$$w_i(r)=\tilde v_{at}(0)\mathrm{e}^{-(r/r_k)^{\lambda}}+[1-\mathrm{e}^{-(r/r_k)^{\lambda}}]v_{at}(r)+c_i\mathrm{e}^{-(r/r_k)^{\lambda}}$$
+}
+}
+
+\frame
+{
+	\frametitle{\textrm{PAW}原子数据集:~示例}
 \begin{figure}[h!]
 \centering
-\includegraphics[height=1.2in,width=1.5in,viewport=0 0 570 545,clip]{Figures/PAW-partical.png}
+\includegraphics[height=2.5in,width=3.3in,viewport=0 0 570 545,clip]{Figures/PAW-partical.png}
 \caption{\tiny \textrm{The partical-wave of Fe atom.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{PAW_partical_Fe}
 \end{figure}
@@ -1491,7 +1515,7 @@ $$\left.\dfrac{\partial E[\tilde\Psi, R]}{\partial\langle\tilde\Psi_n|}\right|_R
 
 \frame
 {
-	\frametitle{\textrm{PAW projector}}
+	\frametitle{\textrm{PAW projector}:~实现方案}
 	投影函数:$$|\tilde p_i\rangle=\bigg(-\dfrac12\nabla^2+\tilde v_{at}-\varepsilon_i^1\bigg)|\tilde\phi_i\rangle$$
 \begin{minipage}[t]{0.52\linewidth}
 \begin{figure}[h!]
