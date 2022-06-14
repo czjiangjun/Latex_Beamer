@@ -1488,7 +1488,7 @@ $$\left.\dfrac{\partial E[\tilde\Psi, R]}{\partial\langle\tilde\Psi_n|}\right|_R
 			\end{displaymath}
 			定义有效赝势
 			\begin{displaymath}
-				\tilde v_{\mathrm{at}}=\tilde v_{\mathrm{at}}(0)k(r)+[1-k(r)]v_{\mathrm{at}}(r)
+				\tilde v_{\mathrm{at}}(r) = \tilde v_{\mathrm{at}}(0)k(r)+[1-k(r)]v_{\mathrm{at}}(r)
 			\end{displaymath}
 			调节截断半径$r_k$和指数$\lambda$，使得赝原子势和真实原子势在截断半径外严格相等
 	\end{itemize}
@@ -1555,10 +1555,11 @@ $$\left.\dfrac{\partial E[\tilde\Psi, R]}{\partial\langle\tilde\Psi_n|}\right|_R
 \frame
 {
 	\frametitle{\textrm{局域势$\bar v$}}
-	如果解$$|\tilde\Psi\rangle=|u\rangle+\sum_i|w_i\rangle c_i$$
+	为检验赝势的散射性质，还要考虑赝势的可分离特征:\\
+	如果确定$\tilde v_{\mathrm{at}}(r)$的方程中，波函数满足$$|\tilde\Psi\rangle=|u\rangle+\sum_i|w_i\rangle c_i$$
 	其中$|u\rangle$和$|w_i\rangle$的定义分别为
-	$$\big(-\frac12\nabla^2+\tilde v-\varepsilon\big)|u\rangle=0$$
-	$$\big(-\frac12\nabla^2+\tilde v-\varepsilon\big)|w_i\rangle=|\tilde p_i\rangle$$
+	$$\big(-\frac12\nabla^2+\tilde v_{\mathrm{at}}-\varepsilon\big)|u\rangle=0$$
+	$$\big(-\frac12\nabla^2+\tilde v_{\mathrm{at}}-\varepsilon\big)|w_i\rangle=|\tilde p_i\rangle$$
 	因此可以得到
 	$$c_i=-\sum_{j,l}\bigg[\delta_{ij}+\sum_k\mathrm{d}H_{ik}-\varepsilon\mathrm{d}O_{ik}\langle\tilde p_k|w_j\rangle\bigg]^{-1}\big(\mathrm{d}H_{jl}-\varepsilon\mathrm{d}O_{jl}\big)\langle\tilde p_l|u\rangle$$
 }
