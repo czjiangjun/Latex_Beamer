@@ -7166,7 +7166,7 @@ $\alpha=(\tau-\tau_w)/\tau_{\mathrm{unif}}=(5p/3)(z^{-1}-1)$,~~~$\tau_{\mathrm{t
 	有效赝势的构造方案
 	\begin{itemize}
 		\item \textrm{Troullier-Martin NC} 方案 \\
-	首先构造赝波函数满足
+	首先通过指数多项式构造赝波函数，要求满足
 	\begin{displaymath}
 		\tilde\phi(r)=\left\{
 			\begin{aligned}
@@ -7187,7 +7187,7 @@ $\alpha=(\tau-\tau_w)/\tau_{\mathrm{unif}}=(5p/3)(z^{-1}-1)$,~~~$\tau_{\mathrm{t
 	有效赝势的构造方案
 	\begin{itemize}
 		\item \textrm{Ultra-soft} 方案 \\
-	构造赝波函数满足
+	首先用多项式构造赝波函数，要求满足
 	\begin{displaymath}
 		\tilde\phi(r)=\left\{
 			\begin{aligned}
@@ -7208,7 +7208,7 @@ $\alpha=(\tau-\tau_w)/\tau_{\mathrm{unif}}=(5p/3)(z^{-1}-1)$,~~~$\tau_{\mathrm{t
 	赝分波函数与投影子函数构造
 	\begin{itemize}
 		\item \textrm{Bl\"ochl}方法\\
-			构造截断函数$k(r)$
+			引入截断函数$k(r)$
 	\begin{displaymath}
 		k(r)=\left\{
 			\begin{aligned}
@@ -7217,11 +7217,11 @@ $\alpha=(\tau-\tau_w)/\tau_{\mathrm{unif}}=(5p/3)(z^{-1}-1)$,~~~$\tau_{\mathrm{t
 			\end{aligned}
 			\right.
 	\end{displaymath}
-	迭代求解方程
+	构造有效(局域)赝势$\tilde v_{\mathrm{at}}$，得到广义本征值方程
 	$$(\tilde H(\vec r)-\epsilon_i)|\tilde\phi_i^0(\vec r)\rangle=C_ik(r)|\phi_i^0(\vec r)\rangle$$
-	得到初始赝分波$\phi_i^0(\vec r)$\\
-	初始投影子函数$|\tilde p_i^0(\vec r)\rangle=\dfrac{k(r)|\tilde\phi_i^0(\vec r)\rangle}{\langle\phi_i^0|k|\phi_i^0\rangle}$
-	采用\textrm{Gram-Schmidt}正交化方法正交
+	迭代求解得到初始赝分波$\phi_i^0(\vec r)$\\
+	初始投影子函数$|\tilde p_i^0(\vec r)\rangle=\dfrac{k(r)|\tilde\phi_i^0(\vec r)\rangle}{\langle\phi_i^0|k|\phi_i^0\rangle}$\\
+	采用\textrm{Gram-Schmidt}正交化确定最终的赝分波和投影函数
 	\end{itemize}
 }
 
@@ -7231,7 +7231,7 @@ $\alpha=(\tau-\tau_w)/\tau_{\mathrm{unif}}=(5p/3)(z^{-1}-1)$,~~~$\tau_{\mathrm{t
 	赝分波函数与投影子函数构造
 	\begin{itemize}
 		\item \textrm{Vanderbilt}方法\\
-			用多项式构造赝分波函数
+			采用多项式构造赝分波函数，要求满足
 	\begin{displaymath}
 		\tilde\phi_i(r)=\left\{
 			\begin{aligned}
@@ -7240,10 +7240,10 @@ $\alpha=(\tau-\tau_w)/\tau_{\mathrm{unif}}=(5p/3)(z^{-1}-1)$,~~~$\tau_{\mathrm{t
 			\end{aligned}
 			\right.
 	\end{displaymath}
-	构造辅助函数
+	构造赝分波的辅助函数
 	$$\chi_l(r)=\bigg(\epsilon_l+\dfrac{\hbar^2}{2m}(\dfrac{\mathrm{d}^2}{\mathrm{d}r^2}-\dfrac{l(l+1)}{r^2}-V_{e\!f\!f}^{PS}(r)\bigg)\tilde\phi_l(r)$$
-	和变换矩阵\textbf{B}，矩阵元$B_{ij}=\int_0^{r_c}\mathrm{d}r\tilde\phi_i(r)\chi_j(r)$
-	由此得到投影子函数$\tilde p_i(\vec r)=\sum_{j}\chi_j(r)(\mathbf{B^{-1}})_{ji}$
+	和变换矩阵$\mathbf{B}$(其矩阵元$B_{ij}=\int_0^{r_c}\mathrm{d}r\tilde\phi_i(r)\chi_j(r)$)\\
+	由此得到投影子函数$\tilde p_i(\vec r)=\sum\limits_{j}\chi_j(r)(\mathbf{B^{-1}})_{ji}$
 	\end{itemize}
 }
 
@@ -7254,7 +7254,7 @@ $\alpha=(\tau-\tau_w)/\tau_{\mathrm{unif}}=(5p/3)(z^{-1}-1)$,~~~$\tau_{\mathrm{t
 	赝分波函数与投影子函数构造
 	\begin{itemize}
 		\item \textrm{RRKJ}方法\\
-		构造赝分波函数
+			采用球\textrm{Bessel}函数构造赝分波函数，要求满足
 	\begin{displaymath}
 		\tilde\phi_i=\left\{
 			\begin{aligned}
