@@ -1486,16 +1486,16 @@ $$\left.\dfrac{\partial E[\tilde\Psi, R]}{\partial\langle\tilde\Psi_n|}\right|_R
 			\begin{displaymath}
 				k(r)=\exp[-(r/r_k)^{\lambda}]
 			\end{displaymath}
-			定义有效赝势
+			定义有效(局域)赝势
 			\begin{displaymath}
-				\tilde v_{\mathrm{at}}(r) = \tilde v_{\mathrm{at}}(0)k(r)+[1-k(r)]v_{\mathrm{at}}(r)
+				\textcolor{red}{\tilde v_{\mathrm{at}}(r)} = \tilde v_{\mathrm{at}}(0)k(r)+[1-k(r)]v_{\mathrm{at}}(r)
 			\end{displaymath}
 			调节截断半径$r_k$和指数$\lambda$，使得赝原子势和真实原子势在截断半径外严格相等
 	\end{itemize}
 	\vskip 5pt
 	实际求解赝波函数时的赝势定义为
 \begin{displaymath}
-	w_i(r)=\tilde v_{\mathrm{at}}(r)+c_ik(r)
+	w_i(r)=\textcolor{red}{\tilde v_{\mathrm{at}}(r)}+\textcolor{blue}{\boxed{c_ik(r)}~\Leftarrow~{\mathrm{non~local~part~of~the~pseudo potential}}}
 \end{displaymath}
 调节参数$c_i$使得要求赝波函数与真实波函数在截断截断半径外完全相同
 %	$$w_i(r)=\tilde v_{at}(0)\mathrm{e}^{-(r/r_k)^{\lambda}}+[1-\mathrm{e}^{-(r/r_k)^{\lambda}}]v_{at}(r)+c_i\mathrm{e}^{-(r/r_k)^{\lambda}}$$
