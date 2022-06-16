@@ -7209,7 +7209,7 @@ $\alpha=(\tau-\tau_w)/\tau_{\mathrm{unif}}=(5p/3)(z^{-1}-1)$,~~~$\tau_{\mathrm{t
 	赝分波函数与投影子函数构造
 	\begin{itemize}
 		\item \textrm{Bl\"ochl}方法\\
-			引入截断函数$k(r)$
+			\fontsize{7.5pt}{5.2pt}\selectfont{引入截断函数$k(r)$
 	\begin{displaymath}
 		k(r)=\left\{
 			\begin{aligned}
@@ -7221,8 +7221,16 @@ $\alpha=(\tau-\tau_w)/\tau_{\mathrm{unif}}=(5p/3)(z^{-1}-1)$,~~~$\tau_{\mathrm{t
 	构造有效(局域)赝势$\tilde v_{\mathrm{at}}$，得到广义本征值方程
 	$$(\tilde H(\vec r)-\epsilon_i)|\tilde\phi_i^0(\vec r)\rangle=C_ik(r)|\phi_i^0(\vec r)\rangle$$
 	迭代求解得到初始赝分波$\phi_i^0(\vec r)$\\
-	初始投影子函数$|\tilde p_i^0(\vec r)\rangle=\dfrac{k(r)|\tilde\phi_i^0(\vec r)\rangle}{\langle\phi_i^0|k|\phi_i^0\rangle}$\\
-	采用\textrm{Gram-Schmidt}正交化确定最终的赝分波和投影函数
+	生成初始投影子函数$|\tilde p_i^0(\vec r)\rangle=\dfrac{k(r)|\tilde\phi_i^0(\vec r)\rangle}{\langle\phi_i^0|k|\phi_i^0\rangle}$\\
+	并且\textcolor{blue}{初始投影函数与初始赝分波满足归一化条件}
+	\begin{displaymath}
+		\langle\psi_i^0|\tilde p_i^0\rangle =1
+	\end{displaymath}
+意味着广义本征值方程可以表示为
+\begin{displaymath}
+	\bigg(\tilde H(\mathbf{r})-\varepsilon_i\bigg)|\tilde\phi_i^0(\mathbf{r})\rangle=|\tilde p_i^0(\mathbf{r})\rangle\langle\psi_i^0|\tilde H(\mathbf{r})-\varepsilon_i|\tilde\psi_i^0\rangle
+\end{displaymath}
+	采用\textrm{Gram-Schmidt}正交化确定最终的赝分波和投影函数}
 	\end{itemize}
 }
 
@@ -7296,7 +7304,7 @@ $\alpha=(\tau-\tau_w)/\tau_{\mathrm{unif}}=(5p/3)(z^{-1}-1)$,~~~$\tau_{\mathrm{t
 			形状函数$g_{LM}$的定义为$$g_{LM}(r)=N_Lr^Lk(r)Y_{LM}(\hat r)$$
 			根据$k(r)$的不同可以取\textrm{sinc}、\textrm{Gaussian}或\textrm{Bessel}型等几种
 		\item 局域势函数(\textcolor{red}{可移植的“赝势”})
-			{\fontsize{9.5pt}{5.2pt}\selectfont$$\hspace*{-25pt}\tilde v_{loc}(r)=V_{e\!f\!f}^{PS}(r)-e^2\int\mathrm{d}^3r^{\prime}\dfrac{\tilde n_{core}(r^{\prime})+\tilde n(r^{\prime})+\hat n(r^{\prime})}{|r-r^{\prime}|}+\mu_{XC}[\tilde n_{core}(r)+\tilde n(r)]$$}
+			{\fontsize{9.5pt}{5.2pt}\selectfont$$\hspace*{-25pt}\tilde v_{loc}(r)=V_{e\!f\!f}^{PS}(r)-e^2\int\mathrm{d}^3r^{\prime}\dfrac{\tilde n_{core}(r^{\prime})+\tilde n(r^{\prime})+\hat n(r^{\prime})}{|r-r^{\prime}|}-\mu_{XC}[\tilde n_{core}(r)+\tilde n(r)]$$}
 	\end{itemize}
 }
 
