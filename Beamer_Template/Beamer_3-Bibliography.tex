@@ -1,0 +1,15 @@
+\appendix
+%------------------------------------------------------------------------Reference----------------------------------------------------------------------------------------------
+%-----------------------------------------------------------Beamer下不建议使用bib,因为涉及分页--------------------------------------------------------------------------%
+\frame[allowframebreaks]
+{
+\frametitle{主要参考文献}
+{\tiny\textrm{
+%\phantomsection\addcontentsline{toc}{section}{Bibliography}	 %直接调用\addcontentsline命令可能导致超链指向不准确,一般需要在之前调用一次\phantomsection命令加以修正	%
+%\phantomsection\addcontentsline{toc}{section}{主要参考文献}	 %直接调用\addcontentsline命令可能导致超链指向不准确,一般需要在之前调用一次\phantomsection命令加以修正	%
+\bibliography{Ref_2020-03-04}%
+\bibliographystyle{../ref/mybib}%
+}}
+\nocite{*}%
+}
+%-----------------------------------------------------------------------------
