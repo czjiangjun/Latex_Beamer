@@ -320,8 +320,9 @@
 	\frametitle{几何原本:~公理体系的源头}
 \begin{figure}[h!]
 \centering
-\vspace{-12pt}
-\includegraphics[height=0.38\textwidth,width=0.65\textwidth,viewport=0 0 680 500,clip]{Figures/Element_Geometry_1.jpg}
+\vspace{-13pt}
+\includegraphics[height=0.38\textwidth,width=0.65\textwidth,viewport=0 0 680 500,clip]{Figures/Element_Geometry_1.jpg}\\
+\vspace{1pt}
 \includegraphics[height=0.36\textwidth,width=0.65\textwidth,viewport=0 0 810 500,clip]{Figures/Element_Geometry_2.jpg}
 %\caption{\textrm{ABINIT}的Si.in}
 \label{Element_Geometru}
@@ -6839,6 +6840,52 @@ $\alpha=(\tau-\tau_w)/\tau_{\mathrm{unif}}=(5p/3)(z^{-1}-1)$,~~~$\tau_{\mathrm{t
 
 \frame
 {
+	\frametitle{最陡下降与共轭梯度}
+\begin{figure}[h!]
+\centering
+\includegraphics[height=2.0in,width=3.5in,viewport=0 0 950 590,clip]{Figures/OP_descent_CG.png}
+\label{decent_CG}
+\caption{\tiny \textrm{Schematic illustration of minimization of a function in two dimensions. The steps 1,2,3,~$\cdots$ denote the steepest descent steps and the point - \!- \!- \!- \!- \!- denote the conjugate gradient path that reaches the exact solution after two steps if the functional is quadratic.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{共轭梯度的``轭''}
+\begin{figure}[h!]
+\centering
+\includegraphics[height=2.5in,width=4.0in,viewport=0 0 1050 680,clip]{Figures/Yoke_1.png}
+\label{Horse_Yoke}
+%\caption{\tiny \textrm{Schematic illustration of minimization of a function in two dimensions. The steps 1,2,3,$\cdots$ denote the steepest descent steps and the point $2^{\ast}$ denote the conjugate gradient path that reaches the exact solution after two steps if the functional is quadratic.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{共轭的含义}
+\begin{minipage}{0.63\textwidth}
+\begin{figure}[h!]
+\vskip -23pt
+\centering
+\includegraphics[height=1.6in,width=2.2in,viewport=0 0 600 490,clip]{Figures/Bi-Yoke_1.jpg}
+\vskip 2pt
+\includegraphics[height=1.5in,width=2.2in,viewport=0 0 750 530,clip]{Figures/Conjugate_Pi-bond.png}
+\label{Conjugate_1}
+%\caption{\tiny \textrm{Schematic illustration of minimization of a function in two dimensions. The steps 1,2,3,$\cdots$ denote the steepest descent steps and the point $2^{\ast}$ denote the conjugate gradient path that reaches the exact solution after two steps if the functional is quadratic.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\end{figure}
+\end{minipage}{\textwidth}
+\begin{minipage}{0.35\textwidth}
+\begin{figure}[h!]
+\centering
+\includegraphics[height=2.2in,width=1.5in,viewport=0 0 250 390,clip]{Figures/Conjugate_complex.jpg}
+\label{Conjugate_2}
+%\caption{\tiny \textrm{Schematic illustration of minimization of a function in two dimensions. The steps 1,2,3,$\cdots$ denote the steepest descent steps and the point $2^{\ast}$ denote the conjugate gradient path that reaches the exact solution after two steps if the functional is quadratic.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\end{figure}
+\end{minipage}{\textwidth}
+}
+
+\frame
+{
 	\frametitle{\textrm{Conjugate gradient}}
 	假设函数在接近极值附件，近似有二次函数的形式
 	\begin{displaymath}
@@ -6885,17 +6932,6 @@ $\alpha=(\tau-\tau_w)/\tau_{\mathrm{unif}}=(5p/3)(z^{-1}-1)$,~~~$\tau_{\mathrm{t
 			\end{displaymath}
 	\end{itemize}
 	\textcolor{purple}{共轭梯度法的收敛:~步收敛性，稳定性高，不需要任何外来参数}
-}
-
-\frame
-{
-	\frametitle{最陡下降与共轭梯度}
-\begin{figure}[h!]
-\centering
-\includegraphics[height=2.0in,width=3.5in,viewport=0 0 950 590,clip]{Figures/OP_descent_CG.png}
-\label{decent_CG}
-\caption{\tiny \textrm{Schematic illustration of minimization of a function in two dimensions. The steps 1,2,3,$\cdots$ denote the steepest descent steps and the point $2^{\ast}$ denote the conjugate gradient path that reaches the exact solution after two steps if the functional is quadratic.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\end{figure}
 }
 
 \frame
