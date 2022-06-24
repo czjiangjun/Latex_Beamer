@@ -1,0 +1,21 @@
+#!/bin/bash
+# 关于 texlive/xelatex 的中文输入
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+#%只要有相应的字体文档，不需要使用CJKutf8，直接由 xelatex 产生pdf文档	%
+#%检索安装字体用命令 fc-list | grep'字体名' 即可知道可用字体		%
+#%									%
+#\usepackage{fontspec}							%
+#\setmainfont[Mapping=tex-text]{LiSu}					%
+#%\setmainfont[Mapping=tex-text]{Adobe 宋体 Std}	%article用字体	%
+#%\setsansfont[Mapping=tex-text]{Adobe 黑体 Std}	 %Beamer用字体	%
+#%									%
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+xelatex Beamer/Template/Beamer-Template_Main
+bibtex Beamer/Template/Beamer-Template_Main
+xelatex Beamer/Template/Beamer-Template_Main
+xelatex Beamer/Template/Beamer-Template_Main
+rm -rf *.aux  *.bbl  *.dvi *.blg *.bcf *.out *.log *.nav *.thm *.snm *.toc *.*.xml *.*~ *~ .*.*.swp
+rm -rf Beamer_Template/*.aux Beamer_Template/*.bbl  Beamer_Template/*.bfg
+mv Beamer/Template/Beamer-Template_Main.pdf ./$1.pdf
+evince ./$1.pdf
