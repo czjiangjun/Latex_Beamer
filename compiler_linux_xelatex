@@ -12,8 +12,8 @@
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 xelatex $1
-bibtex $1
+bibtex  $1
 xelatex $1
 xelatex $1
+rm -rf *.aux  *.bbl  *.dvi *.blg *.bcf *.out *.log *.nav *.thm *.snm *.toc *.*.xml *.*~ *~ .*.*.swp
 evince $1.pdf
-rm -rf $1.aux  $1.bbl  $1.dvi $1.blg $1.bcf $1.out $1.log $1.nav $1.thm $1.snm $1.toc $1.*.xml *.*~ *~ .$1.*.swp
