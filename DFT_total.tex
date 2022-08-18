@@ -1396,6 +1396,62 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 
 \frame
 {
+	\frametitle{\textrm{US-PP}的总能量表示}
+	根据\textrm{D. Vanderbilt}的超软赝势(\textrm{US-PP})方案
+	原子波函数满足$$(T+V_{\mathrm{AE}}-\varepsilon_n)|\psi_n\rangle=0$$
+	据此构造原子赝波函数$\phi_n$，在截断半径$r_c^l$处，$\phi_n$与$\psi_n$平滑衔接(不需要模守恒条件)
+
+	类似地，构造局域平滑势$V_{loc}(r)$，在截断半径$r_c^{loc}$处，$V_{loc}(r)$与$V_{\mathrm{AE}}(r)$平滑衔接
+	
+	构造辅助轨道
+	$$|\chi_n\rangle=(\varepsilon_n-T-V_{loc})|\phi_n\rangle$$
+	由此构造内积矩阵，矩阵元$$B_{nm}=\langle\phi_n|\chi_m\rangle$$
+	并有$$|\beta_n\rangle=\sum_m(B^{-1})_{mn}|\chi_m\rangle$$
+	这里$\beta_n$是局域函数，并与$\phi_n$垂直
+}
+
+\frame
+{
+	\frametitle{\textrm{US-PP}的总能量表示}
+	定义\textcolor{orange}{缀加函数}$$Q_{nm}(\vec r)=\psi_n^{\ast}(\vec r)\psi_m(\vec r)-\phi_n^{\ast}(\vec r)\phi_m(\vec r)$$
+	\textcolor{blue}{可赝化的补偿电荷}$$q_{nm}=\langle\psi_n|\psi_m\rangle_R-\langle\phi_n|\phi_m\rangle_R$$
+	由此可以导出$\phi_n$满足久期方程
+	\begin{displaymath}
+		\begin{aligned}
+			&\left(T+V_{loc}+\sum_{nm}D_{nm}|\beta_n\rangle\langle\beta_m|\right)|\phi_n\rangle\\
+			=&\varepsilon_n\left(1+\sum_{nm}q_{nm}|\beta_n\rangle\langle\beta_m|\right)|\phi_n\rangle
+		\end{aligned}
+	\end{displaymath}
+	其中$$D_{nm}=B_{nm}+\varepsilon_nq_{nm}$$
+}
+
+\frame
+{
+	\frametitle{\textrm{US-PP}的总能量表示}
+	在超软赝势方法中，包含$N_v$个价电子体系的总能量\upcite{PRB47-10142_1993}
+	\begin{displaymath}
+		\begin{aligned}
+			E_{\mathrm{tot}}[\{\phi_i\},\{\vec R_I\}]=&\sum_i\langle\phi_i|-\frac12\nabla^2+V_{\mathrm{NL}}|\phi_i\rangle\\
+			&+\frac12\iint\mathrm{d}\vec r\mathrm{d}\vec r\,^{\prime}\dfrac{n(\vec r)n(\vec r\,^{\prime})}{|\vec r-\vec r\,^{\prime}|}\\
+			&+\int\mathrm{d}\vec r V_{loc}^{\mathrm{ion}}(\vec r)n(\vec r)+E_{\mathrm{XC}}[n]\\
+			&+U(\{\vec R_I\})
+		\end{aligned}
+	\end{displaymath}
+	这里$\phi$是体系波函数，$n(\vec r)$是电子密度，$E_{\mathrm{XC}}$是交换-相关能，$U(\{\vec R_I\})$是离子-离子相互作用能
+}
+
+\frame
+{
+	\frametitle{\textrm{US-PP}的总能量表示}
+	电荷密度$$n(\vec r)=\sum_i\big[|\phi_i(\vec r)|^2+\sum_{nm,I}Q_{nm}^I(\vec r)\langle\phi_i|\beta_n^I\rangle\langle\beta_m^I|\phi_i\rangle\big]$$
+	局域势$$V_{loc}^{\mathrm{ion}}(\vec r)=\sum_IV_{loc}^{\mathrm{ion}}(\vec r-\vec R_I)$$
+	$V_{loc}^{\mathrm{ion}}$由$V_{loc}$去屏蔽后得到$$V_{loc}^{\mathrm{ion}}(r)=V_{loc}(r)-\int\mathrm{d}\vec r\,^{\prime}\dfrac{n(\vec r\,^{\prime})}{|\vec r-\vec r\,^{\prime}|}-\mu_{\mathrm{XC}}(r)$$
+	非局域部分$$V_{\mathrm{NL}}=\sum_{nm,I}D_{nm}^{(0)}|\beta_n^I\rangle\langle\beta_m^I|$$
+	这里$$D_{nm}^{(0)}=D_{nm}-\int\mathrm{d}\vec r\,^{\prime}V_{loc}(\vec r\,^{\prime})n(\vec r\,^{\prime})$$
+}
+
+\frame
+{
 	\frametitle{超软赝势总能量计算}
 	去除价电子屏蔽效应的贡献后，可得最终超软赝势的总能量表达式
 	\begin{displaymath}
