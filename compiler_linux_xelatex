@@ -11,9 +11,15 @@
 #%									%
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-xelatex $1
-bibtex  $1
-xelatex $1
-xelatex $1
+touch Beamer_Template/.tmp 
+test -s Beamer_Template/Beamer_2-Main.tex && sed 's/^\\input/%\\input/g' Beamer_Template/Beamer_2-Main.tex  > Beamer_Template/.tmp || echo "%Main_File"  > Beamer_Template/.tmp
+sed '$a%%%%%%%%%%  '"$1"'   %%%%%%%%%%  \n\\\input{'"$1"'}' Beamer_Template/.tmp  > Beamer_Template/Beamer_2-Main.tex 
+rm Beamer_Template/.tmp 
+
+xelatex Beamer-Template_Main
+bibtex  Beamer-Template_Main
+xelatex Beamer-Template_Main
+xelatex Beamer-Template_Main
 rm -rf *.aux  *.bbl  *.dvi *.blg *.bcf *.out *.log *.nav *.thm *.snm *.toc *.*.xml *.*~ *~ .*.*.swp
+mv Beamer-Template_Main.pdf $1.pdf
 evince $1.pdf
