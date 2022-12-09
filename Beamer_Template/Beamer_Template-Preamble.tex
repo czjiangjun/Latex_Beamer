@@ -30,6 +30,11 @@
 \usepackage{subfigure}           %图片跨页
 \usepackage{animate}		 %插入动画
 \usepackage{tikz}		 %绘图工具
+\usetikzlibrary{arrows,shapes,chains}
+\usepackage{pgfplots}
+%\pgfplotsset{width=10cm,compat=1.9}                     %每个pgfplot图形的大小更改为10cm
+%\usepgfplotslibrary{external}                           %以将图形导出为单独的PDF文件，然后将其导入文档中
+%\tikzexternalize
 \usepackage{caption}
 \captionsetup{font=footnotesize}
 
@@ -98,7 +103,6 @@
 %\logo{\pgfuseimage{logoname}{\vspace{0.2cm}\hspace*{-2.0cm}}}
 
 %在指定位置精确放置logo
-\usepackage{tikz}
 \usepackage{beamerfoils}
 \usepackage{pgf}
 %\logo{\pgfputat{\pgfxy(11.68,0.15)}{\includegraphics[height=1.01cm,viewport=0 0 140 120,clip]{Figures/BCC_logo-1.png}}\pgfputat{\pgfxy(10.502,-0.218)}{\includegraphics[height=0.369cm,viewport=140 0 540 120,clip]{BCC_logo-1.png}}}
@@ -107,7 +111,7 @@
 %\logo{\pgfputat{\pgfxy(11.68,0.15)}{\includegraphics[height=0.95cm,viewport=0 0 510 360,clip]{Figures/Logo_Gainstrong.png}}\pgfputat{\pgfxy(10.333,-0.195)}{\includegraphics[height=0.35cm,viewport=530 70 1100 218,clip]{Figures/Logo_Gainstrong.png}}}
 %\logo{\pgfputat{\pgfxy(10.68,0.00)}{\includegraphics[height=1.20cm,viewport=0 15 400 430,clip]{Figures/seal_Jiang-2.jpg}}
       %\pgfputat{\pgfxy(10.817,-0.218)}{\includegraphics[height=0.47cm,viewport=20 0 670 350,clip]{Figures/signature_Jiang_new.jpg}}
-}
+%}
 %\logo{\pgfputat{\pgfxy(11.68,0.252)}{\includegraphics[height=0.89cm,viewport=0 15 810 800,clip]{Figures/seal_Jiang-new.jpg}}\pgfputat{\pgfxy(10.762,-0.218)}{\includegraphics[height=0.49cm,viewport=20 0 670 350,clip]{Figures/signature_Jiang_new.jpg}}}
 %\logo{\pgfputat{\pgfxy(11.68,0.252)}{\includegraphics[height=0.90cm,viewport=0 15 400 430,clip]{Figures/seal_Jiang-2.jpg}}\pgfputat{\pgfxy(10.817,-0.218)}{\includegraphics[height=0.47cm,viewport=20 0 670 350,clip]{Figures/signature_Jiang_new.jpg}}}
 %\MyLogo{
