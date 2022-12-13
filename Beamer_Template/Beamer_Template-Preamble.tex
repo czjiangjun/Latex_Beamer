@@ -30,7 +30,11 @@
 \usepackage{subfigure}           %图片跨页
 \usepackage{animate}		 %插入动画
 \usepackage{tikz}		 %绘图工具
-\usetikzlibrary{arrows,shapes,chains}
+\usetikzlibrary{arrows,shapes,chains,shapes,arrows.meta,matrix}
+\usepackage{adjustbox}                                   %绘制跨页流程图形
+\newsavebox{\mysavebox}                                  %绘制跨页流程图形
+\newlength{\myrest}                                      %绘制跨页流程图形
+
 \usepackage{pgfplots}
 %\pgfplotsset{width=10cm,compat=1.9}                     %每个pgfplot图形的大小更改为10cm
 %\usepgfplotslibrary{external}                           %以将图形导出为单独的PDF文件，然后将其导入文档中
