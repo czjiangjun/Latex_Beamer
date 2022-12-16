@@ -35,13 +35,13 @@
 %-----------------------------------------------------------------------------
 
 %------------------------------------------------------------------------------列出全文 outline ---------------------------------------------------------------------------------
-%\section*{}
-%\frame[allowframebreaks]
-%{
-%  \frametitle{Outline}
-%%  \frametitle{\textcolor{mycolor}{\secname}}
-%  \tableofcontents%[current,currentsection,currentsubsection]
-%}
+\section*{}
+\frame[allowframebreaks]
+{
+  \frametitle{Outline}
+%  \frametitle{\textcolor{mycolor}{\secname}}
+  \tableofcontents%[current,currentsection,currentsubsection]
+}
 %%在每个section之前列出全部Outline
 %%类似的在每个subsection之前列出全部Outline是\AtBeginSubsection[]
 %\AtBeginSection[]
@@ -56,6 +56,18 @@
 
 %-----------------------------------------------PPT main Body------------------------------------------------------------------------------------
 \small
+\frame
+{
+	\frametitle{科学研究的范式变更}
+\begin{figure}[h!]
+\vspace*{0.08in}
+\centering
+\includegraphics[height=2.00in,width=4.15in]{Figures/Four_Model_3.png}
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Four_Model}
+\end{figure}
+}
+
 \begin{frame}{科学研究的重要手段:~计算模拟}
 \begin{figure}[h!]
 \vspace*{-0.18in}
@@ -79,18 +91,6 @@
 \includegraphics[height=2.20in,width=3.45in]{Figures/Multi-Scale-6.png}
 %\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Multi-Scale}
-\end{figure}
-}
-
-\frame
-{
-	\frametitle{科学研究的范式变更}
-\begin{figure}[h!]
-\vspace*{0.08in}
-\centering
-\includegraphics[height=2.00in,width=4.15in]{Figures/Four_Model_3.png}
-%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{Four_Model}
 \end{figure}
 }
 
@@ -210,7 +210,7 @@ $V_{\mathrm{XC}}[\rho]=\dfrac{\delta E_{\mathrm{XC}}}{\delta\rho(\vec r)}$称为
 
 \frame
 {
-	\frametitle{\textrm{PAW}方法的基族和势}
+	\frametitle{\textrm{PAW}方法的基组和势}
 \begin{figure}[h!]
 \centering
 \includegraphics[height=1.0in,width=4.1in,clip]{Figures/Pseudo-Potential.png}
@@ -300,19 +300,6 @@ $V_{\mathrm{XC}}[\rho]=\dfrac{\delta E_{\mathrm{XC}}}{\delta\rho(\vec r)}$称为
 
 \frame
 {
-	\frametitle{双网格技术}
-\begin{figure}[h!]
-	\vspace{-0.15in}
-\centering
-%\includegraphics[height=2.7in,width=4.0in,viewport=0 0 1180 875,clip]{Figures/dual_grid.png}
-\includegraphics[height=2.75in,width=4.0in,viewport=0 0 800 600,clip]{Figures/dual_grid-2.png}
-\caption{\tiny \textrm{The Schematic description of the dual grid technique.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{PAW_dualgrid}
-\end{figure} 
-}
-
-\frame
-{
 	\frametitle{\textrm{VASP}的并行效率}
 	与同类型软件相比，\textrm{VASP}有着优异的并行能力
 \begin{figure}[h!]
@@ -328,6 +315,19 @@ $V_{\mathrm{XC}}[\rho]=\dfrac{\delta E_{\mathrm{XC}}}{\delta\rho(\vec r)}$称为
 	\item \textrm{VASP}迭代对角化约束了矩阵的维度，减少了对角化过程中的迭代次数，保证了\textrm{MPI}并行的规模和扩展性
 	\item \textrm{VASP}实施\textrm{FFT}变换时，保证各节点上处理的网格负载均衡
 \end{itemize}
+}
+
+\frame
+{
+	\frametitle{双网格技术}
+\begin{figure}[h!]
+	\vspace{-0.15in}
+\centering
+%\includegraphics[height=2.7in,width=4.0in,viewport=0 0 1180 875,clip]{Figures/dual_grid.png}
+\includegraphics[height=2.75in,width=4.0in,viewport=0 0 800 600,clip]{Figures/dual_grid-2.png}
+\caption{\tiny \textrm{The Schematic description of the dual grid technique.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{PAW_dualgrid}
+\end{figure} 
 }
 
 \frame
