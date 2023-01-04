@@ -1104,46 +1104,7 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 
 \frame
 {
-%\frametitle{The methods on band structure calculation}
-	\frametitle{由\textrm{OPW~}到赝势}
-%\vskip 10pt
-%\textrm{The mainly difference of all these methods below: the basis sets and the construction of the potential}
-\begin{itemize}
-\setlength{\itemsep}{5pt}
-	\item 完全平面波基组:~少数平面波就可以很好地描述波函数在原子间的行为，近核波函数则需要大量平面波展开。%因此完全平面波基组虽然方便，但求体系本征态对角化的矩阵非常巨大，计算变得异常耗时。
-	\item 正交平面波(\textrm{Orthogonalized plane wave, OPW})方法，价电子用与芯层波函数正交的平面波展开
-		\begin{displaymath}
-			\phi_{OPW}^{\vec k+\vec G}(\vec r)=\phi_{PW}^{\vec k+\vec G}(\vec r)-\sum_c\langle\varphi_c|\phi_{PW}^{\vec k+\vec G}\rangle\varphi_c(\vec r)
-		\end{displaymath}
-		代入\textrm{Schr\"odinger}方程
-		$$\hat H|\phi_{PW}^{\vec k+\vec G}\rangle-\sum_c\langle\varphi_c|\phi_{PW}^{\vec k+\vec G}\rangle\hat H|\varphi_c\rangle=\varepsilon|\phi_{PW}^{\vec k+\vec G}\rangle-\varepsilon\sum_c\langle\varphi_c|\phi_{PW}^{\vec k+\vec G}\rangle|\varphi_c\rangle$$
-		可有$$\hat H|\phi_{PW}^{\vec k+\vec G}\rangle+\textcolor{blue}{V^R}|\phi_{PW}^{\vec k+\vec G}\rangle=\textcolor{blue}{\varepsilon}|\phi_{PW}^{\vec k+\vec G}\rangle$$
-%		这里排斥势是$$V^R(\vec r,\vec r^{\prime})=\sum_c(\varepsilon-\varepsilon_c)|\varphi_c(\vec r^{\prime})\rangle\langle\varphi_c(\vec r)|$$
-\end{itemize}
-}
-
-\frame
-{
-	\frametitle{由\textrm{OPW~}到赝势}
-	\textrm{Phillips-Kleinman}指出赝势($V^{e\!f\!f}$)-赝波函数(可用$\phi_{PW}^{\vec k+\vec G}$展开)满足\textrm{Schr\"odinger}方程\upcite{PR116_1959}
-	$$\bigg(-\dfrac12\nabla^2+\textcolor{red}{V^{e\!f\!f}}\bigg)|\phi_{PW}^{\vec k+\vec G}\rangle=\textcolor{blue}{\varepsilon}|\phi_{PW}^{\vec k+\vec G}\rangle$$
-	其中$\textcolor{red}{V^{e\!f\!f}}=V(\vec r)+\textcolor{blue}{V^R}$
-	\begin{itemize}
-		\item 赝势-赝波函数的本征值$\varepsilon$与真实体系的能量本征值等价
-		\item 赝势$V^{e\!f\!f}$比$V(\vec r)$平滑得多，并且$V^R$是非局域的排斥势
-			\begin{displaymath}
-				\begin{aligned}
-					V^Rf(\vec r)=&\sum_c(\varepsilon-\varepsilon_c)\varphi_c(\vec r)\int\varphi_c^{\ast}(\vec r^{\prime})f(\vec r^{\prime})\mathrm{d}\vec r^{\prime} \\
-					=&\int V^R(\vec r,\vec r^{\prime})f(\vec r^{\prime})\mathrm{d}\vec r^{\prime}
-				\end{aligned}
-			\end{displaymath}
-			这里$$V^R(\vec r,\vec r^{\prime})=\sum_c(\varepsilon-\varepsilon_c)|\varphi_c(\vec r^{\prime})\rangle\langle\varphi_c(\vec r)|$$
-	\end{itemize}
-}
-
-\frame
-{
-\frametitle{赝势方法}
+\frametitle{赝势的评估}
 赝势(\textrm{Pseudo Potential, PP})方法是在正交平面波的基础上发展起来的，构造出平缓的势函数代替核的强吸引作用和芯层电子的排斥作用，用平缓的函数取代波函数近核时的震荡。
 \begin{itemize}
 \setlength{\itemsep}{5pt}

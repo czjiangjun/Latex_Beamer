@@ -8,14 +8,14 @@
 %% - Give the names in the same order as the appear in the paper.
 %% - Use the \inst{?} command only if the authors have different
 %%   affiliation.
-\institute[BCC]{\inst{}%
-%\institute[Gain~Strong]{\inst{}%
-\vskip -20pt 北京市计算中心}
-%\vskip -20pt {\large 格致斯创~科技}}
+%\institute[BCC]{\inst{}%
+\institute[Gain~Strong]{\inst{}%
+%\vskip -20pt 北京市计算中心}
+\vskip -20pt {\large 格致斯创~科技}}
 \date[\today] % (optional, should be abbreviation of conference name)
 {%	{\fontsize{6.2pt}{4.2pt}\selectfont{\textcolor{blue}{E-mail:~}\url{jiangjun@bcc.ac.cn}}}
 \vskip 45 pt {\fontsize{8.2pt}{6.2pt}\selectfont{%清华大学\;\;物理系% 报告地点
-	\vskip 5 pt \textrm{2022.07.22}}}
+	\vskip 5 pt \textrm{2023.01.07}}}
 }
 
 %% - Either use conference name or its abbreviation
@@ -56,28 +56,6 @@
 
 %-----------------------------------------------PPT main Body------------------------------------------------------------------------------------
 \small
-\section{固体能带理论}
-\frame
-{
-%\frametitle{The methods on band structure calculation}
-\frametitle{固体能带计算方法}
-%\vskip 10pt
-%\textrm{The mainly difference of all these methods below: the basis sets and the construction of the potential}
-\vskip 10pt
-常用的计算方法
-\begin{itemize}%[+-| alert@+>]
-%\begin{enumerate}%[+-| alert@+>]
-\setlength{\itemsep}{12pt}
-%  \item \textrm{Plane wave and the pseudo-potential}
-	\item	平面波方法
-	\item	正交平面波\textrm{(The orthogonalized plane wave, OPW)}和赝势\textrm{(Pseudo-potential, PP)}方法\upcite{Singh,PRB41-7892_1990,JPCM6-8245_1994}
-	\item	缀加平面波\textrm{(Augmented plane wave, APW)}方法
-	\item	\textrm{MT}轨道\textrm{(Muffin-tin orbitals, MTO)}方法
-	\item	投影子缀加波\textrm{(Projector Augmented Wave, PAW)}方法\upcite{PRB50-17953_1994,PRB59-1758_1999}
-\end{itemize}
-\vskip 5pt 各种方法的\textcolor{red}{主要区别}:~\textcolor{blue}{势函数的处理}与\textcolor{blue}{所选基函数类型}不同
-}
-
 \frame                               %
 {
 	\frametitle{\textrm{Kohn-Sham}方程}
@@ -91,108 +69,9 @@
 \end{figure}
 }
 
-\frame
-{
-	\frametitle{\textrm{DFT-SCF}}
-\begin{figure}[h!]
-\centering
-\vspace*{-0.25in}
-\hspace*{-0.80in}
-\includegraphics[height=2.80in,width=4.95in,viewport=5 3 1490 870,clip]{Figures/DFT-SCF_2.png}
-%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{DFT-SCF-2}
-\end{figure}
-}
-
 \section{赝势理论}       %Bookmark
 %\section{Induction on DFT and solid-state physics}       %Bookmark
 \subsection{平面波与赝势}       %Bookmark
-\frame
-{
-	\frametitle{球形势对平面波的散射与相移}
-\begin{figure}[h!]
-\centering
-\vspace*{-0.26in}
-\includegraphics[height=0.90in,width=1.24in,viewport=0 0 400 300,clip]{Figures/Pseudo-scatter.jpg}
-\caption{\fontsize{5.5pt}{4.2pt}\selectfont{\textrm{Schematic illustration of scattering of a plane wave by a spherical potential.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{Pseudo-scatter}
-\end{figure}
-\vspace*{-0.1in}
-\fontsize{7.5pt}{6.2pt}\selectfont{
-入射平面波
-$$\mathrm{e}^{\mathrm{i}\vec q\cdot\vec r}=4\pi\sum_{lm}\mathrm{i}^lj_l(\vec q\cdot\vec r)Y_{lm}^{\ast}(\hat{\vec q})Y_{lm}(\hat{\vec r})=\sum_{l}(2l+1)\mathrm{i}^lj_l(qr)P_{l}(\cos\theta)$$
-%$$\mathrm{e}^{\mathrm{i}\vec q\cdot\vec r}=\mathrm{e}^{\mathrm{i}qr\cos(\theta)}=\sum_{l}(2l+1)\mathrm{i}^lj_l(qr)P_{l}[\cos(\theta)]$$
-经散射后出射，波函数变为
-$$\Psi_l^{>}(\varepsilon,r)=C_l\bigg[j_l(\kappa r)-\tan\eta_l(\varepsilon)n_l(\kappa r)\bigg]\quad\text{其中}\kappa^2=\varepsilon$$
-根据散射理论，能量为$\varepsilon$的电子经单个势阱散射偏转$\theta$后，波函数的振幅可以表示为
-	\begin{displaymath}
-		t(\theta)=\dfrac{4\pi}{\kappa}\sum_l(2l+1)[\mathrm{exp}(2\mathrm{i}\eta_l(\varepsilon))-1]P_l(\cos\theta)
-	\end{displaymath}
-%$$t(\theta)=\dfrac{4\pi}{\sqrt\varepsilon}\sum_l(2l+1)\bigg[\mathrm{e}^{2\mathrm{i}\eta_l(\varepsilon)}-1\bigg]P_l(\cos\theta)$$
-%$$\eta_l(\varepsilon)=p_l\pi+\delta_l(\varepsilon)$$
-}
-}
-
-\frame
-{
-	\frametitle{散射相移与赝势}
-\begin{figure}[h!]
-\centering
-\vspace*{-0.25in}
-\includegraphics[height=1.20in,width=1.77in,viewport=0 0 1150 750,clip]{Figures/Pseudo-scatter-2.png}
-\caption{\fontsize{4.5pt}{3.2pt}\selectfont{\textrm{Radial wave-function $\phi=r\psi$ for low-energy scattering as illustrated in a figure from the 1934 and 1935 papers of Fermi and coworkers for low-energy electron scattering from atoms and neutron scattering from nuclei. The node in the wave-function near the origin show that the potential is attractive and strong enough to have bound states. The cross-section for scattering from the localized potential is determined by the phase shift and is the same for weaker pseudo-potential with the same phase shift modulo $2\pi$.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{Pseudo-scatter-2}
-\end{figure}
-\fontsize{7.5pt}{6.2pt}\selectfont{
-对于球形势散射，相移可由径向波函数计算
-$$\tan\eta_l(\varepsilon)=\dfrac{R\frac{\mathrm{d}}{\mathrm{d}r}j_l(\kappa r)|_R-D_l(\varepsilon)j_l(\kappa R)}{R\frac{\mathrm{d}}{\mathrm{d}r}n_l(\kappa r)|_R-D_l(\varepsilon)n_l(\kappa R)}$$
-$$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\mathrm{d}}{\mathrm{d}r}\ln\psi_l(r)$$
-同时相移与波函数节点的关系为:$$\eta_l(\varepsilon)=p_l\pi+\delta(\varepsilon)$$}
-}
-
-\frame
-{
-%\frametitle{The methods on band structure calculation}
-	\frametitle{由\textrm{OPW~}到赝势}
-%\vskip 10pt
-%\textrm{The mainly difference of all these methods below: the basis sets and the construction of the potential}
-\begin{itemize}
-%\setlength{\itemsep}{5pt}
-	\item 完全平面波基组\\{\fontsize{7.5pt}{5.5pt}\selectfont{少数平面波就可以很好地描述波函数在原子间的行为，近核波函数则需要大量平面波展开}}%。因此完全平面波基组虽然方便，但求体系本征态对角化的矩阵非常巨大，计算变得异常耗时。
-	\item 正交平面波(\textrm{Orthogonalized plane wave, OPW})方法\\{\fontsize{7.5pt}{5.5pt}\selectfont{价电子用与芯层波函数正交的平面波展开
-		\begin{displaymath}
-			\phi_{OPW}^{\vec k+\vec G}(\vec r)=\phi_{PW}^{\vec k+\vec G}(\vec r)-\sum_c\langle\varphi_c|\phi_{PW}^{\vec k+\vec G}\rangle\varphi_c(\vec r)
-		\end{displaymath}}}
-	{\fontsize{7.5pt}{5.5pt}\selectfont{构造赝波函数
-		\begin{displaymath}
-			\tilde{\phi}_v(\vec r)=\phi_v(\vec r)+\sum_c\langle\varphi_c|\tilde{\phi}_v\rangle\varphi_c(\vec r)
-		\end{displaymath}
-	代入\textrm{Schr\"odinger}方程
-		$$\hat H|\tilde{\phi}_v\rangle-\sum_c\langle\varphi_c|\tilde{\phi}_v\rangle\hat H|\varphi_c\rangle=\varepsilon_v|\tilde{\phi}_v\rangle-\varepsilon_v\sum_c\langle\varphi_c|\tilde{\phi}_v\rangle|\varphi_c\rangle$$
-		可有$$\hat H|\tilde{\phi}_v\rangle+\textcolor{blue}{V^R}|\tilde{\phi}_v\rangle=\textcolor{blue}{\varepsilon_v}|\tilde{\phi}_v\rangle$$
-		这里排斥势是$$V^R(\vec r,\vec r^{\prime})=\sum_c(\varepsilon_v-\varepsilon_c)|\varphi_c(\vec r^{\prime})\rangle\langle\varphi_c(\vec r)|$$}}
-\end{itemize}
-}
-
-\frame
-{
-	\frametitle{由\textrm{OPW~}到赝势}
-	\textrm{Phillips-Kleinman}指出，赝势($V^{e\!f\!f}$)-赝波函数(可用$\phi_{PW}^{\vec k+\vec G}$展开)满足\textrm{Schr\"odinger}方程%\upcite{PR116-287_1959}
-	$$\bigg(-\dfrac12\nabla^2+\textcolor{red}{V^{e\!f\!f}}\bigg)|\tilde{\phi}_v\rangle=\textcolor{blue}{\varepsilon_v}|\tilde{\phi}_v\rangle$$
-	其中$\textcolor{red}{V^{e\!f\!f}}=V(\vec r)+\textcolor{blue}{V^R}$
-	\begin{itemize}
-		\item 赝势-赝波函数的本征值$\varepsilon_v$与真实体系的价电子能量本征值等价
-		\item 赝势$\textcolor{red}{V^{e\!f\!f}}$比$V(\vec r)$平滑得多，并且$\textcolor{blue}{V^R}$是非局域的排斥势
-			\begin{displaymath}
-				\begin{aligned}
-					\textcolor{blue}{V^R}f(\vec r)=&\sum_c(\varepsilon_v-\varepsilon_c)\varphi_c(\vec r)\int\varphi_c^{\ast}(\vec r^{\prime})f(\vec r^{\prime})\mathrm{d}\vec r^{\prime} \\
-					=&\int V^R(\vec r,\vec r^{\prime})f(\vec r^{\prime})\mathrm{d}\vec r^{\prime}
-				\end{aligned}
-			\end{displaymath}
-%			这里$$V^R(\vec r,\vec r^{\prime})=\sum_c(\varepsilon_v-\varepsilon_c)|\varphi_c(\vec r^{\prime})\rangle\langle\varphi_c(\vec r)|$$
-	\end{itemize}
-}
-
 \frame
 {
 %\frametitle{The methods on band structure calculation}
@@ -255,7 +134,6 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 \end{figure}
 }
 
-\subsection{模守恒赝势与超软赝势}
 \frame
 {
 	\frametitle{传统赝势的构造}
@@ -289,6 +167,7 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 \end{figure}
 }
 
+\subsection{模守恒赝势与超软赝势}
 \frame
 {
 	\frametitle{第一原理赝势}
@@ -355,6 +234,181 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 \includegraphics[height=2.70in,width=3.77in,viewport=70 40 900 610,clip]{Figures/Pseudo-NC.jpg}
 %\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Pseudo-NC}
+\end{figure}
+}
+
+\subsection{模守恒赝势与超软赝势}
+\frame
+{
+	\frametitle{赝势去屏蔽与非局域化}
+	第一原理赝势建立了赝波函数与对应赝势的一一对应关系，但该赝势包含了电子屏蔽(原子、离子环境)信息，去屏蔽后的赝势对环境依赖更低，“可移植性”更好
+	$$V_{\mathrm{ion},l}^{\mathrm{PP}}(r)=V_{\mathrm{src},l}^{\mathrm{PP}}(r)-V_{\mathrm{H},l}^{\mathrm{PP}}(r)-V_{XC,l}^{\mathrm{PP}}(r)$$
+	去屏蔽过程中，特别需要注意$V_{XC,l}^{\mathrm{PP}}(r)$的处理
+	$$V_{XC}^{\mathrm{PP}}(r)=V_{XC}^{\mathrm{PP}}([n^{\mathrm{PP}}],r)+\big[V_{XC,l}^{\mathrm{PP}}([n^{\mathrm{PP}}+n^{core}],r)-V_{XC}^{\mathrm{PP}}([n^{\mathrm{PP}}],r)\big]$$
+	{\fontsize{7.2pt}{5.2pt}\selectfont{如果定义辅助函数}}
+	$$\chi_{lm}^{\mathrm{PP}}(\vec r)=\bigg\{\varepsilon_l-\bigg[-\dfrac12\nabla^2+V_{\mathrm{local}}^{\mathrm{PP}}(\vec r)\bigg]\bigg\}\psi_{lm}^{\mathrm{PP}}(\vec r)$$
+	{\fontsize{7.2pt}{5.2pt}\selectfont{赝势可以分解为局域部分与非局域部分之和称为可分离赝势(也称\textrm{separable pseudo-potential})}}
+	$$V_{NL}^{\mathrm{PP}}(r)=V_{\mathrm{local}}^{\mathrm{PP}}(r)+\sum_{lm}\dfrac{|\chi_{lm}^{\mathrm{PP}}\rangle\langle\chi_{lm}^{\mathrm{PP}}|}{\langle\chi_{lm}^{\mathrm{PP}}|\psi_{lm}^{\mathrm{PP}}\rangle}=V_{\mathrm{local}}^{\mathrm{PP}}(r)+\sum_{lm}\dfrac{|\psi_{lm}^{\mathrm{PP}}\delta V_l\rangle\langle\delta V_l\psi_{lm}^{\mathrm{PP}}|}{\langle\psi_{lm}^{\mathrm{PP}}|\delta V_l|\psi_{lm}^{\mathrm{PP}}\rangle}$$
+}
+
+\frame
+{
+	\frametitle{\textrm{semi-core}与\textrm{Ghost-band}}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.2in}
+\hspace*{-0.2in}
+\subfigure[\textrm{Windows with a semi-core state}]{
+\label{Semi-local-1}
+\includegraphics[height=1.88in,width=2.35in,viewport=0 0 785 615,clip]{Figures/Ghost-Multi_Windows.png}}
+\subfigure[\textrm{Variation of a semi-core and a valence band with $E_l$}]{
+\label{Semi-local-2}
+\includegraphics[height=1.88in,width=1.54in,viewport=0 0 625 650,clip]{Figures/Ghost-Multi_energy.png}}
+\label{Semi-local}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{从模守恒赝势到超软赝势}
+	为提高模守恒赝势的可移植性\footnote{\tiny{换言之，提升赝波函数能适应的能量变分空间}}，\textrm{Vanderbilt}和\textrm{Bl\"ochl}分别建议:\\
+	在构造可分离赝势时，\textcolor{blue}{引入额外的参考能量$\varepsilon_l$，并要求对每个角动量量子数$l$，所有能量参数$\varepsilon_l$构造的赝波函数$\phi_i^{\mathrm{ps}}$及其辅助函数$\chi_i$都满足
+	\begin{displaymath}
+		|\chi_i\rangle=-(\mathbf{T}+V_{\mathrm{loc}}-\varepsilon)|\phi_i^{\mathrm{ps}}\rangle
+	\end{displaymath}}
+	{\fontsize{7.2pt}{5.2pt}\selectfont{这里$i$表示量子数$l$，$m$和能量参数$\varepsilon$，即$i=(lm,\varepsilon)$}}
+	\vskip 5pt
+	由此出发，可构造出一组与赝波函数$\phi_i^{\mathrm{ps}}$垂直的函数$\beta_i$:~
+{\fontsize{7.2pt}{5.2pt}\selectfont{
+	\begin{itemize}
+		\item 构造矩阵$\mathbf{B}$，其矩阵元$B_{ij}$满足
+			\begin{displaymath}
+				B_{ij}= \langle\phi_j^{\mathrm{ps}}|\chi_i\rangle
+			\end{displaymath}
+		\item 由矩阵$\mathbf{B}$和$\chi$得到函数$\beta_i$
+			\begin{displaymath}
+				|\beta_i\rangle=\sum_j(\mathbf{B}^{-1})_{ij}|\chi_j\rangle
+			\end{displaymath}
+		\item 由此得到的$\beta$与赝波函数$\phi_i^{\mathrm{ps}}$满足正交条件
+	\begin{displaymath}
+		\langle\beta_i|\phi_j^{\mathrm{ps}}\rangle=\delta_{ij}
+	\end{displaymath}
+	\end{itemize}}}
+}
+
+\frame
+{
+	\frametitle{从模守恒赝势到超软赝势}
+	因此可分离赝势的非局域部分表示为
+	\textcolor{blue}{\begin{displaymath}
+		V_{\mathrm{NL}}=\sum_i|\chi_i\rangle\langle\beta_i|=\sum_{ij}B_{ij}|\beta_j\rangle\langle\beta_i|
+	\end{displaymath}}
+	{\fontsize{7.2pt}{5.2pt}\selectfont{不难看出，如果赝波函数满足广义模守恒条件
+	\begin{displaymath}
+		Q_{ij}=\langle\phi_j^{\mathrm{AE}}|\phi_i^{\mathrm{AE}}\rangle-\langle\phi_j^{\mathrm{PS}}|\phi_i^{\mathrm{PS}}\rangle = 0
+	\end{displaymath}
+	亦即
+	\begin{displaymath}
+		Q_{l\varepsilon,l\varepsilon^{\prime}}=\int_0^{R_c}\bigg(\phi_{l\varepsilon}^{\mathrm{AE}}(r)\phi_{l\epsilon^{\prime}}^{\mathrm{AE}}(r)-\phi_{l\varepsilon}^{\mathrm{PS}}(r)\phi_{l\varepsilon^{\prime}}^{\mathrm{PS}}(r)\bigg)\mathrm{d}r=0
+	\end{displaymath}
+	将大大提高赝势的可移植性。
+	\vskip 5pt
+	但实际上，广义模守恒条件看似简单，当能量参数$\varepsilon\neq\varepsilon^{\prime}$，要满足这个条件
+	$$Q_{l\varepsilon,l\varepsilon^{\prime}}=0$$
+	并非易事;~而一旦模守恒条件被破坏，矩阵$\mathbf{B}$(相应地，赝势的非局域部分$V_{\mathrm{NL}}$)就是非\textrm{Hermitian}}}
+}
+
+\frame
+{
+\frametitle{超软赝势}
+\begin{itemize}
+\setlength{\itemsep}{5pt}
+	\item 赝势构造的模守恒条件
+%		\begin{displaymath}
+%			\int_0^{r_c}\mathrm{d}\vec r\varphi^{\ast PS}(\vec r)\varphi^{PS}(\vec r)=\int_0^{r_c}\mathrm{d}\vec r\varphi^{\ast}(\vec r)\varphi(\vec r)
+%		\end{displaymath}
+	很好地解决了赝势可移植性问题，但对$1s$、$2p$、$3d$等轨道，模守恒方案构造的赝势过于“硬”，所需平面波基组依然非常大
+	\item 超软\textrm{(Ultra-soft)}赝势，解除模守恒条件，实现对第一、第二周期元素的高效计算
+\end{itemize}
+\begin{figure}[h!]
+\vspace*{-0.10in}
+\centering
+\includegraphics[height=1.35in,width=1.40in,viewport=30 55 415 500,clip]{Figures/Norm-US-wave.pdf}
+\caption{\tiny \textrm{Oxygen 2} \textit{p} \textrm{radical wave function (solid), NC-pseudo-wave (dotted) and US-pseudo-wave (dashed).}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Norm-US-wave}
+\end{figure}
+}
+
+\frame
+{
+\frametitle{补偿电荷与多极矩}
+根据电动力学定理:\\\textcolor{blue}{如果球\textrm{S}内的电荷密度分布$\rho(\vec r)$，在球外某点$\vec r$产生的势是由电荷密度的多极矩确定}:
+\begin{figure}[h!]
+\vspace*{-15pt}
+\centering
+\includegraphics[height=1.25in,width=1.32in,viewport=1 22 507 575,clip]{Figures/potential_multipole.jpg}
+%\caption{\tiny \textrm{From Muffin-tin Potential to Full Potential}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Potential-multipole}
+\end{figure}
+\begin{displaymath}
+	V(\vec r)=\sum_{l=0}^{\infty}\sum_{m=-l}^{l}\dfrac{4\pi}{2l+1}q_{lm}\dfrac{Y_{lm}(\hat{\vec r})}{r^{l+1}}
+\end{displaymath}
+其中多极矩$q_{lm}$由下式计算
+\begin{displaymath}
+	q_{lm}=\int_SY_{lm}^{\ast}(\hat{\vec r})r^l\rho(\vec r)\mathrm{d}^3r
+\end{displaymath}
+}
+
+\frame
+{
+\frametitle{超软赝势的构造}
+\textrm{Vanderbilt}建议构造赝波函数时放弃模守恒约束条件，只要求价电子赝波函数与真实电子波函数的径向部分在截断半径$r_{c,l}$外相同，由此得到的赝势显然非\textrm{Hermitian}，但是通过构造\\\textcolor{blue}{\textrm{Hermitian}重叠算符}
+\begin{displaymath}
+	\mathbf{S}=\mathbf{1}+\sum_{i,j}Q_{ij}|\beta_j\rangle\langle\beta_i|
+\end{displaymath}
+以及\textcolor{blue}{\textrm{Hermitian}赝势算符}
+\begin{displaymath}
+	\tilde V^{\mathrm{NL}}=\sum_{i,j}\mathbf{D}_{i,j}|\beta_j\rangle\langle\beta_i|
+\end{displaymath}
+这里\textcolor{blue}{
+\begin{displaymath}
+	\mathbf{D}_{ij}=B_{ij}+\varepsilon_iQ_{ij}
+\end{displaymath}}
+模守恒约束下的标准本征值方程将变成广义本征值方程
+\begin{displaymath}
+	(T+V_{\mathrm{loc}}+\tilde V^{\mathrm{NL}}-\varepsilon\mathbf{S})|\phi\rangle=0
+\end{displaymath}
+}
+
+\frame
+{
+\frametitle{超软赝势的特点}
+\textrm{Vanderbilt}的超软赝势构造方案最大的优点是
+\begin{itemize}
+	\item \textcolor{purple}{解除模守恒约束}:~有助于增加赝波函数的截断半径，系统提高赝势的柔软程度
+	\item \textcolor{purple}{引入多个参考能量$\varepsilon_l$}:~使得模守恒条件下只在特定参考能量$\varepsilon$处成立的对数导数连续条件，扩展到参考能量$\varepsilon_l$区间范围内，这大大提高了赝势的适用范围(可移植性)
+\end{itemize}
+
+相应的，超软赝势计算中，电子密度表达形式为
+\begin{displaymath}
+	n(r)=\sum_nf_n|\phi_n(r)|^2+\sum_{n,ij}f_n\langle\phi_n|\beta_j\rangle\langle\beta_i|\phi_n\rangle Q_{ij}(r)
+\end{displaymath}
+这里补偿电荷$Q_{ij}(r)$定义为
+\begin{displaymath}
+	Q_{ij}(r)=\phi_i^{\mathrm{AE}}(r)\phi_j^{\mathrm{AE}}(r)^{\ast}-\phi_i^{\mathrm{US}}(r)\phi_j^{\mathrm{US}}(r)^{\ast}
+\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{赝势方法发展概要}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.25in}
+%\hspace*{-0.80in}
+\includegraphics[height=2.80in,width=4.10in,viewport=0 0 1190 875,clip]{Figures/Pseudo_Potential.png}
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Pseudo_Poential}
 \end{figure}
 }
 
