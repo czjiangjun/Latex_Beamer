@@ -167,7 +167,7 @@
 \end{figure}
 }
 
-\subsection{模守恒赝势与超软赝势}
+\subsection{模守恒赝势}
 \frame
 {
 	\frametitle{第一原理赝势}
@@ -238,19 +238,6 @@
 }
 
 \subsection{模守恒赝势与超软赝势}
-\frame
-{
-	\frametitle{赝势去屏蔽与非局域化}
-	第一原理赝势建立了赝波函数与对应赝势的一一对应关系，但该赝势包含了电子屏蔽(原子、离子环境)信息，去屏蔽后的赝势对环境依赖更低，“可移植性”更好
-	$$V_{\mathrm{ion},l}^{\mathrm{PP}}(r)=V_{\mathrm{src},l}^{\mathrm{PP}}(r)-V_{\mathrm{H},l}^{\mathrm{PP}}(r)-V_{XC,l}^{\mathrm{PP}}(r)$$
-	去屏蔽过程中，特别需要注意$V_{XC,l}^{\mathrm{PP}}(r)$的处理
-	$$V_{XC}^{\mathrm{PP}}(r)=V_{XC}^{\mathrm{PP}}([n^{\mathrm{PP}}],r)+\big[V_{XC,l}^{\mathrm{PP}}([n^{\mathrm{PP}}+n^{core}],r)-V_{XC}^{\mathrm{PP}}([n^{\mathrm{PP}}],r)\big]$$
-	{\fontsize{7.2pt}{5.2pt}\selectfont{如果定义辅助函数}}
-	$$\chi_{lm}^{\mathrm{PP}}(\vec r)=\bigg\{\varepsilon_l-\bigg[-\dfrac12\nabla^2+V_{\mathrm{local}}^{\mathrm{PP}}(\vec r)\bigg]\bigg\}\psi_{lm}^{\mathrm{PP}}(\vec r)$$
-	{\fontsize{7.2pt}{5.2pt}\selectfont{赝势可以分解为局域部分与非局域部分之和称为可分离赝势(也称\textrm{separable pseudo-potential})}}
-	$$V_{NL}^{\mathrm{PP}}(r)=V_{\mathrm{local}}^{\mathrm{PP}}(r)+\sum_{lm}\dfrac{|\chi_{lm}^{\mathrm{PP}}\rangle\langle\chi_{lm}^{\mathrm{PP}}|}{\langle\chi_{lm}^{\mathrm{PP}}|\psi_{lm}^{\mathrm{PP}}\rangle}=V_{\mathrm{local}}^{\mathrm{PP}}(r)+\sum_{lm}\dfrac{|\psi_{lm}^{\mathrm{PP}}\delta V_l\rangle\langle\delta V_l\psi_{lm}^{\mathrm{PP}}|}{\langle\psi_{lm}^{\mathrm{PP}}|\delta V_l|\psi_{lm}^{\mathrm{PP}}\rangle}$$
-}
-
 \frame
 {
 	\frametitle{\textrm{semi-core}与\textrm{Ghost-band}}
