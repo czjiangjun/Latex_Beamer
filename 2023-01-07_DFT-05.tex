@@ -214,15 +214,51 @@
 
 \frame
 {
-	\frametitle{赝势去屏蔽与非局域化}
+	\frametitle{赝势去屏蔽}
 	第一原理赝势建立了赝波函数与对应赝势的一一对应关系，但该赝势包含了电子屏蔽(原子、离子环境)信息，去屏蔽后的赝势对环境依赖更低，“可移植性”更好
 	$$V_{\mathrm{ion},l}^{\mathrm{PP}}(r)=V_{\mathrm{src},l}^{\mathrm{PP}}(r)-V_{\mathrm{H},l}^{\mathrm{PP}}(r)-V_{XC,l}^{\mathrm{PP}}(r)$$
 	去屏蔽过程中，特别需要注意$V_{XC,l}^{\mathrm{PP}}(r)$的处理
 	$$V_{XC}^{\mathrm{PP}}(r)=V_{XC}^{\mathrm{PP}}([n^{\mathrm{PP}}],r)+\big[V_{XC,l}^{\mathrm{PP}}([n^{\mathrm{PP}}+n^{core}],r)-V_{XC}^{\mathrm{PP}}([n^{\mathrm{PP}}],r)\big]$$
-	{\fontsize{7.2pt}{5.2pt}\selectfont{如果定义辅助函数}}
+}
+
+\frame
+{
+	\frametitle{非局域赝势}
+	当前第一原理赝势径向部分是局域的，但与$l$有关，因此是半局域的(\textrm{semi-local})
+	\begin{displaymath}
+		\hat{V}^{\mathrm{SL}}=\sum_{lm}|Y_{lm}\rangle V_l(r)\langle Y_{lm}|
+	\end{displaymath}
+	将赝势的径向部分分解为局域部分($l$无关)和非局域部分($l$相关)
+	\begin{displaymath}
+		V_{\mathrm{ion},l}^{\mathrm{PP}}(r)=V_{\mathrm{local}}^{\mathrm{PP}}(r)+\delta V_l^{\mathrm{PP}}(r)
+	\end{displaymath}
+	第一原理赝势可以表示为
+	\begin{displaymath}
+		\hat{V}^{\mathrm{SL}}=V_{\mathrm{local}}^{\mathrm{PP}}(r)+\sum_{lm}|Y_{lm}\rangle\delta V_l(r)\langle Y_{lm}|
+	\end{displaymath}
+	赝势的非局域部分可以表示为
+	\begin{displaymath}
+		\delta V(\vec r,\vec r^{\prime})=\sum_{lm}|Y_{lm}\rangle\delta V_l(r)\langle Y_{lm}|
+	\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{非局域赝势的变量分离}
+	\textrm{Kleinman-Bylander}设计出了非局域赝势的变量分离的近似方案\footnote{即$\delta V(\vec r,\vec r^{\prime})$可以写成$\delta V(\vec r,\vec r^{\prime})=\sum_{i}f_i(\vec r)g_i(\vec r^{\prime})$的形式}
+%	引入分离算符$\delta V^{\mathrm{NL}}$满足
+	\begin{displaymath}
+		\hat{V}^{\mathrm{NL}}=V_{\mathrm{local}}^{\mathrm{PP}}(r)+\sum_{lm}\dfrac{|\psi_{lm}^{\mathrm{PP}}\delta V_l(r)\rangle\langle\delta V_l(r)\psi_{lm}^{\mathrm{PP}}|}{\langle\psi_{lm}^{\mathrm{PP}}|\delta V_l(r)|\psi_{lm}^{\mathrm{PP}}\rangle}
+	\end{displaymath}
+	本质上，\textcolor{magenta}{$\langle\delta V_l(r)\psi_{lm}^{\mathrm{PP}}|$是投影子算符}
+
+	引入投影子分离非局域赝势大大方便了数值计算，但也增加了出现\textrm{Ghost~band}的风险
+
+	\vskip 10pt
+	{\fontsize{7.2pt}{5.2pt}\selectfont{更一般地，如果定义辅助函数
 	$$\chi_{lm}^{\mathrm{PP}}(\vec r)=\bigg\{\varepsilon_l-\bigg[-\dfrac12\nabla^2+V_{\mathrm{local}}^{\mathrm{PP}}(\vec r)\bigg]\bigg\}\psi_{lm}^{\mathrm{PP}}(\vec r)$$
-	{\fontsize{7.2pt}{5.2pt}\selectfont{赝势可以分解为局域部分与非局域部分之和称为可分离赝势(也称\textrm{factroided pseudo-potential})}}
-	$$V_{NL}^{\mathrm{PP}}(r)=V_{\mathrm{local}}^{\mathrm{PP}}(r)+\sum_{lm}\dfrac{|\chi_{lm}^{\mathrm{PP}}\rangle\langle\chi_{lm}^{\mathrm{PP}}|}{\langle\chi_{lm}^{\mathrm{PP}}|\psi_{lm}^{\mathrm{PP}}\rangle}=V_{\mathrm{local}}^{\mathrm{PP}}(r)+\sum_{lm}\dfrac{|\psi_{lm}^{\mathrm{PP}}\delta V_l\rangle\langle\delta V_l\psi_{lm}^{\mathrm{PP}}|}{\langle\psi_{lm}^{\mathrm{PP}}|\delta V_l|\psi_{lm}^{\mathrm{PP}}\rangle}$$
+	赝势分解为局域部分与非局域部分之也称为\textrm{factored pseudo-potential}
+	$$V_{NL}^{\mathrm{PP}}(r)=V_{\mathrm{local}}^{\mathrm{PP}}(r)+\sum_{lm}\dfrac{|\chi_{lm}^{\mathrm{PP}}\rangle\langle\chi_{lm}^{\mathrm{PP}}|}{\langle\chi_{lm}^{\mathrm{PP}}|\psi_{lm}^{\mathrm{PP}}\rangle}=V_{\mathrm{local}}^{\mathrm{PP}}(r)+\sum_{lm}\dfrac{|\psi_{lm}^{\mathrm{PP}}\delta V_l\rangle\langle\delta V_l\psi_{lm}^{\mathrm{PP}}|}{\langle\psi_{lm}^{\mathrm{PP}}|\delta V_l|\psi_{lm}^{\mathrm{PP}}\rangle}$$ }}
 }
 
 \frame
@@ -240,19 +276,37 @@
 \subsection{模守恒赝势与超软赝势}
 \frame
 {
-	\frametitle{\textrm{semi-core}与\textrm{Ghost-band}}
+	\frametitle{\textrm{Ghost-band}}
+	\fontsize{9.2pt}{4.2pt}\selectfont{只有价电子的赝波函数与芯电子波函数完全正交，能带计算中才能确保芯层与价层电子的完全分离。但实际计算时，该正交条件很难严格保证，因此一旦赝波函数严重偏离正交条件，计算的能带中会在本不存在能带的区域出现电子结构分布(称为\textrm{Ghost~band})，这部分电子结构源自构造赝波函数的能量参数$\varepsilon_l$与芯层电子能量差别太大，无法正确描述芯层电荷引起的}
 \begin{figure}[h!]
 \centering
-\vspace*{-0.2in}
+\vspace*{-0.10in}
+\includegraphics[height=1.50in,width=1.98in,viewport=0 0 450 320,clip]{Figures/Ghostband-Vanadium-1.png}
+\includegraphics[height=1.50in,width=1.98in,viewport=0 0 450 320,clip]{Figures/Ghostband-Vanadium-4.png}
+\caption{\fontsize{7.2pt}{4.2pt}\selectfont{\textrm{The band structure of bcc Vanadium. %In the calculation, all electrons up to the 3p states were treated as core electrons, all other electrons as valence electrons. 
+\\Left:~Between 10 and 15 eV above the Fermi energy a strange band with nearly no dispersion can be observed. The vanishing dispersion of the band is a typical property of ghost bands.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Ghost-band}
+\end{figure}
+
+}
+
+\frame
+{
+	\frametitle{\textrm{semi-core}与\textrm{Ghost-band}}
+每个能量参数$\varepsilon_l$可用于描述有限区域内的能带结构，引入多个能量参数$\varepsilon_l$，有助于在更广泛的能量范围内描述电子结构
+\begin{figure}[h!]
+\centering
+\vspace*{-0.1in}
 \hspace*{-0.2in}
-\subfigure[\textrm{Windows with a semi-core state}]{
+\subfigure[\fontsize{7.2pt}{4.2pt}\selectfont{\textrm{Windows with a semi-core state}}]{
 \label{Semi-local-1}
-\includegraphics[height=1.88in,width=2.35in,viewport=0 0 785 615,clip]{Figures/Ghost-Multi_Windows.png}}
-\subfigure[\textrm{Variation of a semi-core and a valence band with $E_l$}]{
+\includegraphics[height=1.78in,width=2.25in,viewport=0 0 785 615,clip]{Figures/Ghost-Multi_Windows.png}}
+\subfigure[\fontsize{7.2pt}{4.2pt}\selectfont{\textrm{Variation of a semi-core and a valence band with $E_l$}}]{
 \label{Semi-local-2}
-\includegraphics[height=1.88in,width=1.54in,viewport=0 0 625 650,clip]{Figures/Ghost-Multi_energy.png}}
+\includegraphics[height=1.78in,width=1.50in,viewport=0 0 625 650,clip]{Figures/Ghost-Multi_energy.png}}
 \label{Semi-local}
 \end{figure}
+	针对靠近价层的芯电子，引入额外的赝波函数加以描述，可以更好地描述电子结构，防止\textrm{Ghost~band}
 }
 
 \frame
