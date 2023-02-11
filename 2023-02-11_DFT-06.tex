@@ -56,161 +56,13 @@
 
 %-----------------------------------------------PPT main Body------------------------------------------------------------------------------------
 \small
-\section{赝势理论(续)}       %Bookmark
-\frame
-{
-	\frametitle{非局域赝势}
-	当前第一原理赝势径向部分是局域的，但与$l$有关，因此是半局域的(\textrm{semi-local})
-	\begin{displaymath}
-		\hat{V}^{\mathrm{SL}}=\sum_{lm}|Y_{lm}\rangle V_l(r)\langle Y_{lm}|
-	\end{displaymath}
-	将赝势的径向部分分解为局域部分($l$无关)和非局域部分($l$相关)
-	\begin{displaymath}
-		V_{\mathrm{ion},l}^{\mathrm{PP}}(r)=V_{\mathrm{local}}^{\mathrm{PP}}(r)+\delta V_l^{\mathrm{PP}}(r)
-	\end{displaymath}
-	第一原理赝势可以表示为
-	\begin{displaymath}
-		\hat{V}^{\mathrm{SL}}=V_{\mathrm{local}}^{\mathrm{PP}}(r)+\sum_{lm}|Y_{lm}\rangle\delta V_l(r)\langle Y_{lm}|
-	\end{displaymath}
-	赝势的非局域部分可以表示为
-	\begin{displaymath}
-		\delta V(\vec r,\vec r^{\prime})=\sum_{lm}|Y_{lm}\rangle\delta V_l(r)\langle Y_{lm}|
-	\end{displaymath}
-}
-
-\frame
-{
-	\frametitle{非局域赝势的变量分离}
-	\textrm{Kleinman-Bylander}设计出了非局域赝势的变量分离的近似方案\footnote{即$\delta V(\vec r,\vec r^{\prime})$可以写成$\delta V(\vec r,\vec r^{\prime})=\sum_{i}f_i(\vec r)g_i(\vec r^{\prime})$的形式}
-%	引入分离算符$\delta V^{\mathrm{NL}}$满足
-	\begin{displaymath}
-		\hat{V}^{\mathrm{NL}}=V_{\mathrm{local}}^{\mathrm{PP}}(r)+\sum_{lm}\dfrac{|\psi_{lm}^{\mathrm{PP}}\delta V_l(r)\rangle\langle\delta V_l(r)\psi_{lm}^{\mathrm{PP}}|}{\langle\psi_{lm}^{\mathrm{PP}}|\delta V_l(r)|\psi_{lm}^{\mathrm{PP}}\rangle}
-	\end{displaymath}
-	本质上，\textcolor{magenta}{$\langle\delta V_l(r)\psi_{lm}^{\mathrm{PP}}|$是投影子算符}
-
-	引入投影子分离非局域赝势大大方便了数值计算，但也增加了出现\textrm{Ghost~band}的风险
-
-	\vskip 10pt
-	{\fontsize{7.2pt}{5.2pt}\selectfont{更一般地，如果定义辅助函数
-	$$\chi_{lm}^{\mathrm{PP}}(\vec r)=\bigg\{\varepsilon_l-\bigg[-\dfrac12\nabla^2+V_{\mathrm{local}}^{\mathrm{PP}}(\vec r)\bigg]\bigg\}\psi_{lm}^{\mathrm{PP}}(\vec r)$$
-	赝势分解为局域部分与非局域部分之也称为\textrm{factored pseudo-potential}
-	$$V_{NL}^{\mathrm{PP}}(r)=V_{\mathrm{local}}^{\mathrm{PP}}(r)+\sum_{lm}\dfrac{|\chi_{lm}^{\mathrm{PP}}\rangle\langle\chi_{lm}^{\mathrm{PP}}|}{\langle\chi_{lm}^{\mathrm{PP}}|\psi_{lm}^{\mathrm{PP}}\rangle}=V_{\mathrm{local}}^{\mathrm{PP}}(r)+\sum_{lm}\dfrac{|\psi_{lm}^{\mathrm{PP}}\delta V_l\rangle\langle\delta V_l\psi_{lm}^{\mathrm{PP}}|}{\langle\psi_{lm}^{\mathrm{PP}}|\delta V_l|\psi_{lm}^{\mathrm{PP}}\rangle}$$ }}
-}
-
-\subsection{模守恒赝势与超软赝势}
-\frame
-{
-	\frametitle{\textrm{Ghost-band}}
-	\fontsize{9.2pt}{4.2pt}\selectfont{只有价电子的赝波函数与芯电子波函数完全正交，能带计算中才能确保芯层与价层电子的完全分离。但实际计算时，该正交条件很难严格保证，因此一旦赝波函数严重偏离正交条件，计算的能带中会在本不存在能带的区域出现电子结构分布(称为\textrm{Ghost~band})，这部分电子结构源自构造赝波函数的能量参数$\varepsilon_l$与芯层电子能量差别太大，无法正确描述芯层电荷引起的}
-\begin{figure}[h!]
-\centering
-\vspace*{-0.10in}
-\includegraphics[height=1.50in,width=1.98in,viewport=0 0 450 320,clip]{Figures/Ghostband-Vanadium-1.png}
-\includegraphics[height=1.50in,width=1.98in,viewport=0 0 450 320,clip]{Figures/Ghostband-Vanadium-4.png}
-\caption{\fontsize{7.2pt}{4.2pt}\selectfont{\textrm{The band structure of bcc Vanadium. %In the calculation, all electrons up to the 3p states were treated as core electrons, all other electrons as valence electrons. 
-\\Left:~Between 10 and 15 eV above the Fermi energy a strange band with nearly no dispersion can be observed. The vanishing dispersion of the band is a typical property of ghost bands.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{Ghost-band}
-\end{figure}
-
-}
-
-\frame
-{
-	\frametitle{\textrm{semi-core}与\textrm{Ghost-band}}
-每个能量参数$\varepsilon_l$可用于描述有限区域内的能带结构，引入多个能量参数$\varepsilon_l$，有助于在更广泛的能量范围内描述电子结构
-\begin{figure}[h!]
-\centering
-\vspace*{-0.1in}
-\hspace*{-0.2in}
-\subfigure[\fontsize{7.2pt}{4.2pt}\selectfont{\textrm{Windows with a semi-core state}}]{
-\label{Semi-local-1}
-\includegraphics[height=1.78in,width=2.25in,viewport=0 0 785 615,clip]{Figures/Ghost-Multi_Windows.png}}
-\subfigure[\fontsize{7.2pt}{4.2pt}\selectfont{\textrm{Variation of a semi-core and a valence band with $E_l$}}]{
-\label{Semi-local-2}
-\includegraphics[height=1.78in,width=1.50in,viewport=0 0 625 650,clip]{Figures/Ghost-Multi_energy.png}}
-\label{Semi-local}
-\end{figure}
-	针对靠近价层的芯电子，引入额外的赝波函数加以描述，可以更好地描述电子结构，防止\textrm{Ghost~band}
-}
-
-\frame
-{
-	\frametitle{从模守恒赝势到超软赝势}
-	为提高模守恒赝势的可移植性\footnote{\tiny{换言之，提升赝波函数能适应的能量变分空间}}，\textrm{Vanderbilt}和\textrm{Bl\"ochl}分别建议:\\
-	在构造可分离赝势时，\textcolor{blue}{引入额外的参考能量$\varepsilon_l$，并要求对每个角动量量子数$l$，所有能量参数$\varepsilon_l$构造的赝波函数$\phi_i^{\mathrm{ps}}$及其辅助函数$\chi_i$都满足
-	\begin{displaymath}
-		|\chi_i\rangle=-(\mathbf{T}+V_{\mathrm{loc}}-\varepsilon)|\phi_i^{\mathrm{ps}}\rangle
-	\end{displaymath}}
-	{\fontsize{7.2pt}{5.2pt}\selectfont{这里$i$表示量子数$l$，$m$和能量参数$\varepsilon$，即$i=(lm,\varepsilon)$}}
-	\vskip 5pt
-	由此出发，可构造出一组与赝波函数$\phi_i^{\mathrm{ps}}$垂直的函数$\beta_i$:~
-{\fontsize{7.2pt}{5.2pt}\selectfont{
-	\begin{itemize}
-		\item 构造矩阵$\mathbf{B}$，其矩阵元$B_{ij}$满足
-			\begin{displaymath}
-				B_{ij}= \langle\phi_j^{\mathrm{ps}}|\chi_i\rangle
-			\end{displaymath}
-		\item 由矩阵$\mathbf{B}$和$\chi$得到函数$\beta_i$
-			\begin{displaymath}
-				|\beta_i\rangle=\sum_j(\mathbf{B}^{-1})_{ij}|\chi_j\rangle
-			\end{displaymath}
-		\item 由此得到的$\beta$与赝波函数$\phi_i^{\mathrm{ps}}$满足正交条件
-	\begin{displaymath}
-		\langle\beta_i|\phi_j^{\mathrm{ps}}\rangle=\delta_{ij}
-	\end{displaymath}
-	\end{itemize}}}
-}
-
-\frame
-{
-	\frametitle{从模守恒赝势到超软赝势}
-	因此可分离赝势的非局域部分表示为
-	\textcolor{blue}{\begin{displaymath}
-		V_{\mathrm{NL}}=\sum_i|\chi_i\rangle\langle\beta_i|=\sum_{ij}B_{ij}|\beta_j\rangle\langle\beta_i|
-	\end{displaymath}}
-	{\fontsize{7.2pt}{5.2pt}\selectfont{不难看出，如果赝波函数满足广义模守恒条件
-	\begin{displaymath}
-		Q_{ij}=\langle\phi_j^{\mathrm{AE}}|\phi_i^{\mathrm{AE}}\rangle-\langle\phi_j^{\mathrm{PS}}|\phi_i^{\mathrm{PS}}\rangle = 0
-	\end{displaymath}
-	亦即
-	\begin{displaymath}
-		Q_{l\varepsilon,l\varepsilon^{\prime}}=\int_0^{R_c}\bigg(\phi_{l\varepsilon}^{\mathrm{AE}}(r)\phi_{l\epsilon^{\prime}}^{\mathrm{AE}}(r)-\phi_{l\varepsilon}^{\mathrm{PS}}(r)\phi_{l\varepsilon^{\prime}}^{\mathrm{PS}}(r)\bigg)\mathrm{d}r=0
-	\end{displaymath}
-	将大大提高赝势的可移植性。
-	\vskip 5pt
-	但实际上，广义模守恒条件看似简单，当能量参数$\varepsilon\neq\varepsilon^{\prime}$，要满足这个条件
-	$$Q_{l\varepsilon,l\varepsilon^{\prime}}=0$$
-	并非易事;~而一旦模守恒条件被破坏，矩阵$\mathbf{B}$(相应地，赝势的非局域部分$V_{\mathrm{NL}}$)就是非\textrm{Hermitian}}}
-}
-
-\frame
-{
-\frametitle{超软赝势}
-\begin{itemize}
-\setlength{\itemsep}{5pt}
-	\item 赝势构造的模守恒条件
-%		\begin{displaymath}
-%			\int_0^{r_c}\mathrm{d}\vec r\varphi^{\ast PS}(\vec r)\varphi^{PS}(\vec r)=\int_0^{r_c}\mathrm{d}\vec r\varphi^{\ast}(\vec r)\varphi(\vec r)
-%		\end{displaymath}
-	很好地解决了赝势可移植性问题，但对$1s$、$2p$、$3d$等轨道，模守恒方案构造的赝势过于“硬”，所需平面波基组依然非常大
-	\item 超软\textrm{(Ultra-soft)}赝势，解除模守恒条件，实现对第一、第二周期元素的高效计算
-\end{itemize}
-\begin{figure}[h!]
-\vspace*{-0.10in}
-\centering
-\includegraphics[height=1.35in,width=1.40in,viewport=30 55 415 500,clip]{Figures/Norm-US-wave.pdf}
-\caption{\tiny \textrm{Oxygen 2} \textit{p} \textrm{radical wave function (solid), NC-pseudo-wave (dotted) and US-pseudo-wave (dashed).}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{Norm-US-wave}
-\end{figure}
-}
-
 \subsection{基态总能量表达式}
 \frame
 {
 	\frametitle{晶体总能量的一般表示\footnote{本部分参阅文献\cite{JPC-SSP12-4409_1979,Xie_Lu,Elect_Stru}}}
 采用赝势方法计算的晶体总能量$E_T$由晶格中的电子能量$E_{e-e}$与离子实排斥能$E_{N-N}$之和：
 	\begin{displaymath}
-		E_T=E_{e-e}+E_{N-N}=T[\rho]+E_{ext}+E_{\mathrm{Coul}}+E_{\mathrm{XC}}+E_{N-N}
+		E_T=E_{e-e}+E_{N-N}=\textcolor{blue}{T[\rho]+E_{ext}+E_{\mathrm{Coul}}}+E_{\mathrm{XC}}+E_{N-N}
 	\end{displaymath}
 根据\textrm{Kohn-Sham}方程，其中动能泛函用单电子能量表示为
 \begin{displaymath}
@@ -218,7 +70,7 @@
 \end{displaymath}
 $n_i$是$\psi_i$上的电子占据数，$\varepsilon_i$是其能量本征值，因此有
 \begin{displaymath}
-	\hspace*{-12.0pt}	E_T=\sum_in_i\varepsilon_i-\dfrac12\int\int\mathrm{d}\vec r\mathrm{d}\vec r\dfrac{\rho(\vec r)\rho(\vec r^{\prime})}{|\vec r-\vec r^{\prime}|}+\int\mathrm{d}\vec r\rho(\vec r)[\epsilon_{\mathrm{XC}}(\vec r)-V_{\mathrm{XC}}(\vec r)]+E_{N-N}
+	\hspace*{-12.0pt}	E_T=i\textcolor{blue}{\sum_in_i\varepsilon_i-\dfrac12\int\int\mathrm{d}\vec r\mathrm{d}\vec r\dfrac{\rho(\vec r)\rho(\vec r^{\prime})}{|\vec r-\vec r^{\prime}|}}+\int\mathrm{d}\vec r\rho(\vec r)[\epsilon_{\mathrm{XC}}(\vec r)-V_{\mathrm{XC}}(\vec r)]+E_{N-N}
 \end{displaymath}
 }
 
@@ -227,7 +79,7 @@ $n_i$是$\psi_i$上的电子占据数，$\varepsilon_i$是其能量本征值，�
 	\frametitle{晶体总能量倒空间的表示}
 周期体系的总能量表达式在动量空间($\vec K$空间)计算更方便
 \begin{displaymath}
-	\hspace*{-15.0pt}	E_T=\textcolor{red}{\sum_in_i\varepsilon_i}-\dfrac{\Omega}2\sum_{\textcolor{red}{\vec k\neq 0}}\rho^{\ast}(\vec k)V_{\mathrm{Coul}}(\vec k)+\Omega\sum_{\vec k}\rho^{\ast}(\vec k)[\epsilon_{\mathrm{XC}}(\vec k)-V_{\mathrm{XC}}(\vec k)]+E_{N-N}
+	\hspace*{-15.0pt}	E_T=\textcolor{red}{\sum_in_i\varepsilon_i}-\dfrac{\Omega}2\sum_{\textcolor{red}{\vec k\neq 0}}\rho^{\ast}(\vec k)V_{\mathrm{Coul}}(\vec k)+\Omega\sum_{\vec k}\rho^{\ast}(\vec k)[\epsilon_{\mathrm{XC}}(\vec k)-V_{\mathrm{XC}}(\vec k)]+\textcolor{red}{E_{N-N}}
 \end{displaymath}
 其中$V_{\mathrm{Coul}}(\vec k)$、$\epsilon_{\mathrm{XC}}(\vec k)$与$\rho^{\ast}(\vec k)$分别是\textrm{Coulomb}相互作用、单个电子的交换-相关能、交换-相关势和电子密度的\textrm{Fourier}分量。
 
