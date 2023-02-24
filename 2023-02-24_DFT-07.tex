@@ -279,13 +279,28 @@ $$\left.\dfrac{\partial E[\tilde\Psi, R]}{\partial\langle\tilde\Psi_n|}\right|_R
 
 \frame
 {
-	\frametitle{\textrm{PAW}原子数据集:~示例}
-\begin{figure}[h!]
-\centering
-\includegraphics[height=2.5in,width=3.3in,viewport=0 0 570 545,clip]{Figures/PAW-partical.png}
-\caption{\tiny \textrm{The partical-wave of Fe atom.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{PAW_partical_Fe}
-\end{figure}
+	\frametitle{\textrm{可移植离子局域势$\bar v$}}
+	%对于\textcolor{red}{束缚态}，
+	\fontsize{9.2pt}{7.2pt}\selectfont{参照局域赝势去屏蔽方案，扣除赝势中的赝分波部分的贡献，将得到可移植性更好的离子局域势:
+	$$\bar v(r)=\tilde v_{at}(r)-\int\mathrm{d}r^{\prime}\dfrac{\tilde n(r^{\prime})+\hat n(r^{\prime})}{|r-r^{\prime}|}-\mu_{xc}[\tilde n(r)]$$
+	\textcolor{magenta}{赝分波$\tilde\phi_j$并不一定对应原子束缚态}，但要满足以下广义本征值方程
+	$$\bigg[-\dfrac12\nabla^2+\tilde v_{at}-\varepsilon+\sum_{(i,j)}|\tilde p_i\rangle\big(\mathrm{d}H_{ij}-\varepsilon\mathrm{d}O_{ij}\big)\langle\tilde p_j|\bigg]|\tilde\phi_j\rangle=0$$
+	其中$\mathrm{d}H_{ij}$和$\mathrm{d}O_{ij}$分别是
+	$$\mathrm{d}H_{ij}=\langle\phi_i|-\dfrac12\nabla^2+v_{at}|\phi_j\rangle-\langle\tilde\phi_i|-\dfrac12\nabla^2+\tilde v_{at}|\tilde\phi_j\rangle$$
+	$$\mathrm{d}O_{ij}=\langle\phi_i|\phi_j\rangle-\langle\tilde\phi_i|\tilde\phi_j\rangle$$}
+}
+
+\frame
+{
+	\frametitle{赝分波函数的求解}
+	为检验赝势的散射性质，还要考虑赝势的可分离特征:\\
+	上述广义本征值方程是非齐次的，可假设其解形式为
+	$$|\tilde\phi\rangle=|u\rangle+\sum_i|w_i\rangle c_i$$
+	其中$|u\rangle$和$|w_i\rangle$的定义分别为
+	$$\big(-\frac12\nabla^2+\tilde v_{\mathrm{at}}-\varepsilon\big)|u\rangle=0$$
+	$$\big(-\frac12\nabla^2+\tilde v_{\mathrm{at}}-\varepsilon\big)|w_i\rangle=|\tilde p_i\rangle$$
+	由此可得到
+	$$c_i=-\sum_{j,l}\bigg[\delta_{ij}+\sum_k\mathrm{d}H_{ik}-\varepsilon\mathrm{d}O_{ik}\langle\tilde p_k|w_j\rangle\bigg]^{-1}\big(\mathrm{d}H_{jl}-\varepsilon\mathrm{d}O_{jl}\big)\langle\tilde p_l|u\rangle$$
 }
 
 \frame
@@ -319,28 +334,13 @@ $$\left.\dfrac{\partial E[\tilde\Psi, R]}{\partial\langle\tilde\Psi_n|}\right|_R
 
 \frame
 {
-	\frametitle{\textrm{可移植离子局域势$\bar v$}}
-	%对于\textcolor{red}{束缚态}，
-	\fontsize{9.2pt}{7.2pt}\selectfont{参照局域赝势去屏蔽方案，扣除赝势中的赝分波部分的贡献，将得到可移植性更好的离子局域势:
-	$$\bar v(r)=\tilde v_{at}(r)-\int\mathrm{d}r^{\prime}\dfrac{\tilde n(r^{\prime})+\hat n(r^{\prime})}{|r-r^{\prime}|}-\mu_{xc}[\tilde n(r)]$$
-	\textcolor{magenta}{赝分波$\tilde\phi_j$并不一定对应原子束缚态}，但要满足以下广义本征值方程
-	$$\bigg[-\dfrac12\nabla^2+\tilde v_{at}-\varepsilon+\sum_{(i,j)}|\tilde p_i\rangle\big(\mathrm{d}H_{ij}-\varepsilon\mathrm{d}O_{ij}\big)\langle\tilde p_j|\bigg]|\tilde\phi_j\rangle=0$$
-	其中$\mathrm{d}H_{ij}$和$\mathrm{d}O_{ij}$分别是
-	$$\mathrm{d}H_{ij}=\langle\phi_i|-\dfrac12\nabla^2+v_{at}|\phi_j\rangle-\langle\tilde\phi_i|-\dfrac12\nabla^2+\tilde v_{at}|\tilde\phi_j\rangle$$
-	$$\mathrm{d}O_{ij}=\langle\phi_i|\phi_j\rangle-\langle\tilde\phi_i|\tilde\phi_j\rangle$$}
-}
-
-\frame
-{
-	\frametitle{赝分波函数的求解}
-	为检验赝势的散射性质，还要考虑赝势的可分离特征:\\
-	上述广义本征值方程是非齐次的，可假设其解形式为
-	$$|\tilde\phi\rangle=|u\rangle+\sum_i|w_i\rangle c_i$$
-	其中$|u\rangle$和$|w_i\rangle$的定义分别为
-	$$\big(-\frac12\nabla^2+\tilde v_{\mathrm{at}}-\varepsilon\big)|u\rangle=0$$
-	$$\big(-\frac12\nabla^2+\tilde v_{\mathrm{at}}-\varepsilon\big)|w_i\rangle=|\tilde p_i\rangle$$
-	由此可得到
-	$$c_i=-\sum_{j,l}\bigg[\delta_{ij}+\sum_k\mathrm{d}H_{ik}-\varepsilon\mathrm{d}O_{ik}\langle\tilde p_k|w_j\rangle\bigg]^{-1}\big(\mathrm{d}H_{jl}-\varepsilon\mathrm{d}O_{jl}\big)\langle\tilde p_l|u\rangle$$
+	\frametitle{\textrm{PAW}原子数据集:~示例}
+\begin{figure}[h!]
+\centering
+\includegraphics[height=2.5in,width=3.3in,viewport=0 0 570 545,clip]{Figures/PAW-partical.png}
+\caption{\tiny \textrm{The partical-wave of Fe atom.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{PAW_partical_Fe}
+\end{figure}
 }
 
 \frame
