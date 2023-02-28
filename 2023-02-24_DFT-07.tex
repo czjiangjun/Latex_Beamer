@@ -123,7 +123,7 @@ $E=\tilde E+E^1-\tilde E^1$，每一项分别表示为：
 \begin{displaymath}
 	\begin{aligned}
 		\tilde E&=\sum_nf_n\langle\tilde\Psi_n|-\dfrac12\nabla^2|\tilde\Psi_n\rangle\\
-		 &+\dfrac12\int\mathrm{d}\vec r\int\mathrm{d}\vec r^{\prime}\dfrac{(\tilde n+\hat n)(\tilde n+\hat n)}{|\vec r-\vec r^{\prime}|}+\int\mathrm{d}\vec r \tilde n\bar v+\int\mathrm{d}\vec r \tilde n\epsilon_{\mathrm{XC}}(\tilde n)
+		&+\dfrac12\int\mathrm{d}\vec r\int\mathrm{d}\vec r^{\prime}\dfrac{(\tilde n+\hat n)(\tilde n+\hat n)}{|\vec r-\vec r^{\prime}|}+\int\mathrm{d}\vec r \tilde n\textcolor{blue}{\bar v}+\int\mathrm{d}\vec r \tilde n\epsilon_{\mathrm{XC}}(\tilde n)
  	\end{aligned}
 \end{displaymath}
 \begin{displaymath}
@@ -135,7 +135,7 @@ $E=\tilde E+E^1-\tilde E^1$，每一项分别表示为：
 \begin{displaymath}
 	\begin{aligned}
 		\tilde E^1&=\sum_{n,(i,j)}f_n\langle\tilde\Psi_n|\tilde p_i\rangle\langle\tilde\phi_i|-\dfrac12\nabla^2|\tilde\phi_j\rangle\langle\tilde p_j|\tilde\Psi_n\rangle\\
-		 &+\dfrac12\int\mathrm{d}\vec r\int\mathrm{d}\vec r^{\prime}\dfrac{(\tilde n^1+\hat n)(\tilde n^1+\hat n)}{|\vec r-\vec r^{\prime}|}+\int\mathrm{d}\vec r \tilde n^1\bar v+\int\mathrm{d}\vec r \tilde n^1\epsilon_{\mathrm{XC}}(\tilde n^1)
+		&+\dfrac12\int\mathrm{d}\vec r\int\mathrm{d}\vec r^{\prime}\dfrac{(\tilde n^1+\hat n)(\tilde n^1+\hat n)}{|\vec r-\vec r^{\prime}|}+\int\mathrm{d}\vec r \tilde n^1\textcolor{blue}{\bar v}+\int\mathrm{d}\vec r \tilde n^1\epsilon_{\mathrm{XC}}(\tilde n^1)
  	\end{aligned}
 \end{displaymath}
 }
@@ -244,9 +244,9 @@ $$\left.\dfrac{\partial E[\tilde\Psi, R]}{\partial\langle\tilde\Psi_n|}\right|_R
 	\begin{itemize}
 		\item 分波信息：原子分波$\phi_i$、赝分波$\tilde\phi_i$和投影子波函数$\tilde{p}_i$
 		\item 密度信息：$r_c$内的电荷密度$n^1$、赝电荷密度$\tilde n^1$和补充电荷$\hat n$
-		\item 赝势信息：局域赝势$\tilde v_{loc}(\vec r)$
+		\item 赝势信息：用于赝分布计算的赝势$\tilde v_{\textrm{loc}}(\vec r)$和总能计算中的可移植局域$\textcolor{blue}{\bar v(\vec r)}$
 	\end{itemize}
-	与赝势方法相似，一套原子数据集将用于各种化学环境下的\textrm{PAW}计算，即要求原子数据集有良好的可移植性；与赝势方法不同之处在于\textrm{PAW}原子集中除了赝原子的信息，还包含了真实原子的信息。
+	与赝势方法相似，一套原子数据集将用于各种化学环境下的\textrm{PAW}计算，即要求原子数据集有良好的可移植性;~与赝势方法不同之处在于\textrm{PAW}原子集中除了赝原子的信息，还包含了真实原子的信息。
 }
 
 \frame
@@ -275,32 +275,6 @@ $$\left.\dfrac{\partial E[\tilde\Psi, R]}{\partial\langle\tilde\Psi_n|}\right|_R
 调节参数$c_i$使得要求赝波函数与真实波函数在截断截断半径外完全相同
 %	$$w_i(r)=\tilde v_{at}(0)\mathrm{e}^{-(r/r_k)^{\lambda}}+[1-\mathrm{e}^{-(r/r_k)^{\lambda}}]v_{at}(r)+c_i\mathrm{e}^{-(r/r_k)^{\lambda}}$$
 }
-}
-
-\frame
-{
-	\frametitle{\textrm{可移植离子局域势$\bar v$}}
-	%对于\textcolor{red}{束缚态}，
-	\fontsize{9.2pt}{7.2pt}\selectfont{参照局域赝势去屏蔽方案，扣除赝势中的赝分波部分的贡献，将得到可移植性更好的离子局域势:
-	$$\bar v(r)=\tilde v_{at}(r)-\int\mathrm{d}r^{\prime}\dfrac{\tilde n(r^{\prime})+\hat n(r^{\prime})}{|r-r^{\prime}|}-\mu_{xc}[\tilde n(r)]$$
-	\textcolor{magenta}{赝分波$\tilde\phi_j$并不一定对应原子束缚态}，但要满足以下广义本征值方程
-	$$\bigg[-\dfrac12\nabla^2+\tilde v_{at}-\varepsilon+\sum_{(i,j)}|\tilde p_i\rangle\big(\mathrm{d}H_{ij}-\varepsilon\mathrm{d}O_{ij}\big)\langle\tilde p_j|\bigg]|\tilde\phi_j\rangle=0$$
-	其中$\mathrm{d}H_{ij}$和$\mathrm{d}O_{ij}$分别是
-	$$\mathrm{d}H_{ij}=\langle\phi_i|-\dfrac12\nabla^2+v_{at}|\phi_j\rangle-\langle\tilde\phi_i|-\dfrac12\nabla^2+\tilde v_{at}|\tilde\phi_j\rangle$$
-	$$\mathrm{d}O_{ij}=\langle\phi_i|\phi_j\rangle-\langle\tilde\phi_i|\tilde\phi_j\rangle$$}
-}
-
-\frame
-{
-	\frametitle{赝分波函数的求解}
-	为检验赝势的散射性质，还要考虑赝势的可分离特征:\\
-	上述广义本征值方程是非齐次的，可假设其解形式为
-	$$|\tilde\phi\rangle=|u\rangle+\sum_i|w_i\rangle c_i$$
-	其中$|u\rangle$和$|w_i\rangle$的定义分别为
-	$$\big(-\frac12\nabla^2+\tilde v_{\mathrm{at}}-\varepsilon\big)|u\rangle=0$$
-	$$\big(-\frac12\nabla^2+\tilde v_{\mathrm{at}}-\varepsilon\big)|w_i\rangle=|\tilde p_i\rangle$$
-	由此可得到
-	$$c_i=-\sum_{j,l}\bigg[\delta_{ij}+\sum_k\mathrm{d}H_{ik}-\varepsilon\mathrm{d}O_{ik}\langle\tilde p_k|w_j\rangle\bigg]^{-1}\big(\mathrm{d}H_{jl}-\varepsilon\mathrm{d}O_{jl}\big)\langle\tilde p_l|u\rangle$$
 }
 
 \frame
@@ -341,6 +315,33 @@ $$\left.\dfrac{\partial E[\tilde\Psi, R]}{\partial\langle\tilde\Psi_n|}\right|_R
 \caption{\tiny \textrm{The partical-wave of Fe atom.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{PAW_partical_Fe}
 \end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{局域势$\bar v$}}
+	原则上，局域势$\textcolor{blue}{\bar v}$的选择是任意的，但一般要求$\bar v$能使势函数误差足够小(\textcolor{red}{凸显局域势的可移植})\\
+	\fontsize{7.2pt}{5.2pt}\selectfont{参照局域赝势去屏蔽方案，扣除赝势中赝电荷密度部分的贡献，得到可移植局域势:
+	$$\bar v(r)=\tilde v_{at}(r)-\int\mathrm{d}r^{\prime}\dfrac{\tilde n(r^{\prime})+\hat n(r^{\prime})}{|r-r^{\prime}|}-\mu_{xc}[\tilde n(r)]$$
+	由于\textcolor{magenta}{赝分波$\tilde\phi_j$并不一定对应原子束缚态}，但去屏蔽过程的赝电荷密度$\tilde n(r)$必须通过束缚态计算:~即求解广义本征值方程
+	$$\bigg[-\dfrac12\nabla^2+\tilde v_{at}-\varepsilon+\sum_{(i,j)}|\tilde p_i\rangle\big(\mathrm{d}H_{ij}-\varepsilon\mathrm{d}O_{ij}\big)\langle\tilde p_j|\bigg]|\tilde\Psi_j\rangle=0$$
+	其中$\mathrm{d}H_{ij}$和$\mathrm{d}O_{ij}$分别是
+	$$\mathrm{d}H_{ij}=\langle\phi_i|-\dfrac12\nabla^2+v_{at}|\phi_j\rangle-\langle\tilde\phi_i|-\dfrac12\nabla^2+\tilde v_{at}|\tilde\phi_j\rangle$$
+	$$\mathrm{d}O_{ij}=\langle\phi_i|\phi_j\rangle-\langle\tilde\phi_i|\tilde\phi_j\rangle$$}
+	得到函数$\tilde\Psi_j$，结合价电子占据数和芯电荷$\tilde n^c$，得到赝电荷密度$\tilde n$
+}
+
+\frame
+{
+	\frametitle{\textrm{局域势$\bar v$}的优化}
+	上述广义本征值方程是非齐次的，因此其解形式为
+	$$|\tilde\Psi\rangle=|u\rangle+\sum_i|w_i\rangle c_i$$
+	其中$|u\rangle$和$|w_i\rangle$的分别由下式确定
+	$$\big(-\frac12\nabla^2+\tilde v_{\mathrm{at}}-\varepsilon\big)|u\rangle=0$$
+	$$\big(-\frac12\nabla^2+\tilde v_{\mathrm{at}}-\varepsilon\big)|w_i\rangle=|\tilde p_i\rangle$$
+	由此可得到
+	$$c_i=-\sum_{j,l}\bigg[\delta_{ij}+\sum_k\mathrm{d}H_{ik}-\varepsilon\mathrm{d}O_{ik}\langle\tilde p_k|w_j\rangle\bigg]^{-1}\big(\mathrm{d}H_{jl}-\varepsilon\mathrm{d}O_{jl}\big)\langle\tilde p_l|u\rangle$$
+	根据赝势的散射特征，确定参数$c_i$，完成对局域势$\bar v$的优化
 }
 
 \frame
