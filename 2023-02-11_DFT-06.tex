@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  不使用 authblk 包制作标题  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %-------------------------------PPT Title-------------------------------------
-\title{06-赝势理论与总能量求和}
+\title{06-超软赝势与总能量求和}
 %-----------------------------------------------------------------------------
 
 %----------------------------Author & Date------------------------------------
@@ -56,6 +56,88 @@
 
 %-----------------------------------------------PPT main Body------------------------------------------------------------------------------------
 \small
+\subsection{超软赝势}
+\frame
+{
+\frametitle{超软赝势}
+\begin{itemize}
+\setlength{\itemsep}{5pt}
+	\item 赝势构造的模守恒条件
+%		\begin{displaymath}
+%			\int_0^{r_c}\mathrm{d}\vec r\varphi^{\ast PS}(\vec r)\varphi^{PS}(\vec r)=\int_0^{r_c}\mathrm{d}\vec r\varphi^{\ast}(\vec r)\varphi(\vec r)
+%		\end{displaymath}
+	很好地解决了赝势可移植性问题，但对$1s$、$2p$、$3d$等轨道，模守恒方案构造的赝势过于“硬”，所需平面波基组依然非常大
+	\item 超软\textrm{(Ultra-soft)}赝势，解除模守恒条件，实现对第一、第二周期元素的高效计算
+\end{itemize}
+\begin{figure}[h!]
+\vspace*{-0.10in}
+\centering
+\includegraphics[height=1.35in,width=1.40in,viewport=30 55 415 500,clip]{Figures/Norm-US-wave.pdf}
+\caption{\tiny \textrm{Oxygen 2} \textit{p} \textrm{radical wave function (solid), NC-pseudo-wave (dotted) and US-pseudo-wave (dashed).}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Norm-US-wave}
+\end{figure}
+}
+
+\frame
+{
+\frametitle{补偿电荷与多极矩}
+根据电动力学定理:\\\textcolor{blue}{如果球\textrm{S}内的电荷密度分布$\rho(\vec r)$，在球外某点$\vec r$产生的势是由电荷密度的多极矩确定}:
+\begin{figure}[h!]
+\vspace*{-15pt}
+\centering
+\includegraphics[height=1.25in,width=1.32in,viewport=1 22 507 575,clip]{Figures/potential_multipole.jpg}
+%\caption{\tiny \textrm{From Muffin-tin Potential to Full Potential}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Potential-multipole}
+\end{figure}
+\begin{displaymath}
+	V(\vec r)=\sum_{l=0}^{\infty}\sum_{m=-l}^{l}\dfrac{4\pi}{2l+1}q_{lm}\dfrac{Y_{lm}(\hat{\vec r})}{r^{l+1}}
+\end{displaymath}
+其中多极矩$q_{lm}$由下式计算
+\begin{displaymath}
+	q_{lm}=\int_SY_{lm}^{\ast}(\hat{\vec r})r^l\rho(\vec r)\mathrm{d}^3r
+\end{displaymath}
+}
+
+\frame
+{
+\frametitle{超软赝势的构造}
+\textrm{Vanderbilt}建议构造赝波函数时放弃模守恒约束条件，只要求价电子赝波函数与真实电子波函数的径向部分在截断半径$r_{l}^c$外相同，由此得到的赝势显然非\textrm{Hermitian}，但是通过构造\\\textcolor{blue}{\textrm{Hermitian}重叠算符}
+\begin{displaymath}
+	\mathbf{S}=\mathbf{1}+\sum_{i,j}Q_{ij}|\beta_j\rangle\langle\beta_i|
+\end{displaymath}
+以及\textcolor{blue}{\textrm{Hermitian}赝势算符}
+\begin{displaymath}
+	\tilde V^{\mathrm{NL}}=\sum_{i,j}\mathbf{D}_{i,j}|\beta_j\rangle\langle\beta_i|
+\end{displaymath}
+这里\textcolor{blue}{
+\begin{displaymath}
+	\mathbf{D}_{ij}=B_{ij}+\varepsilon_iQ_{ij}
+\end{displaymath}}
+模守恒约束下的标准本征值方程将变成广义本征值方程
+\begin{displaymath}
+	(T+V_{\mathrm{loc}}+\tilde V^{\mathrm{NL}}-\varepsilon\mathbf{S})|\phi\rangle=0
+\end{displaymath}
+}
+
+\frame
+{
+\frametitle{超软赝势的特点}
+\textrm{Vanderbilt}的超软赝势构造方案最大的优点是
+\begin{itemize}
+	\item \textcolor{purple}{解除模守恒约束}:~有助于增加赝波函数的截断半径，系统提高赝势的柔软程度
+	\item \textcolor{purple}{引入多个参考能量$\varepsilon_l$}:~使得模守恒条件下只在特定参考能量$\varepsilon$处成立的对数导数连续条件，扩展到参考能量$\varepsilon_l$区间范围内，这大大提高了赝势的适用范围(可移植性)
+\end{itemize}
+
+相应的，超软赝势计算中，电子密度表达形式为
+\begin{displaymath}
+	n(r)=\sum_nf_n|\phi_n(r)|^2+\sum_{n,ij}f_n\langle\phi_n|\beta_j\rangle\langle\beta_i|\phi_n\rangle Q_{ij}(r)
+\end{displaymath}
+这里补偿电荷$Q_{ij}(r)$定义为
+\begin{displaymath}
+	Q_{ij}(r)=\phi_i^{\mathrm{AE}}(r)\phi_j^{\mathrm{AE}}(r)^{\ast}-\phi_i^{\mathrm{US}}(r)\phi_j^{\mathrm{US}}(r)^{\ast}
+\end{displaymath}
+}
+
 \subsection{基态总能量表达式}
 \frame
 {
@@ -221,7 +303,7 @@ $n_i$是$\psi_i$上的电子占据数，$\varepsilon_i$是其能量本征值，�
 
 \frame
 {
-	\frametitle{超软赝势的总能量表示}
+	\frametitle{示例:~超软赝势的总能量表示}
 	根据\textrm{D. Vanderbilt}的超软赝势(\textrm{US-PP})方案
 	原子波函数满足$$(T+V_{\mathrm{AE}}-\varepsilon_n)|\psi_n\rangle=0$$
 	据此构造原子赝波函数$\phi_n$，在截断半径$r_c^l$处，$\phi_n$与$\psi_n$平滑衔接(不需要模守恒条件)
@@ -290,6 +372,19 @@ $n_i$是$\psi_i$上的电子占据数，$\varepsilon_i$是其能量本征值，�
 	$$\mathbf{D}_{s,s^{\prime}}^{\mathrm{ion}}=\mathbf{D}_{s,s^{\prime}}-\int\mathrm{d}\vec r\big[V_{\mathrm{H}}(\vec r)+V_{XC}(\vec r)\big]Q_{s,s^{\prime}}(r)$$}}
 	由此可得超软赝势的广义本征值方程
 	$$\bigg[-\dfrac12\nabla^2+V_{\mathrm{local}}+\tilde V_{NL}^{\mathrm{US}}-\varepsilon_i\bigg(\mathbf{1}+\sum_{s,s^{\prime}}Q_{s,s^{\prime}}|\beta_s\rangle\langle\beta_{s^{\prime}}|\bigg)\bigg]|\phi_{lmi}\rangle=0$$
+}
+
+\frame
+{
+	\frametitle{赝势方法发展概要}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.25in}
+%\hspace*{-0.80in}
+\includegraphics[height=2.80in,width=4.10in,viewport=0 0 1190 875,clip]{Figures/Pseudo_Potential.png}
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Pseudo_Poential}
+\end{figure}
 }
 
 %------------------------------------------------------------------------Reference----------------------------------------------------------------------------------------------
