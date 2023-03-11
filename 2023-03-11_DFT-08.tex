@@ -121,12 +121,12 @@
 \begin{displaymath}
 	\begin{aligned}
 		n_T=n+n_{Zc}\equiv&\underbrace{(\tilde n+\hat n+\tilde n_{Zc})}\\
-				 		&\quad\qquad\tilde n_T\\
+		&\quad\qquad\textcolor{blue}{\tilde n_T}\\
 				  &+\underbrace{(n^1+\hat n+n_{Zc})}-\underbrace{(\tilde n^1+\hat n+\tilde n_{Zc})}\\
-				                  &\quad\qquad n_T^1\qquad\qquad\qquad\tilde n_T^1
+				  &\quad\qquad \textcolor{blue}{n_T^1}\qquad\qquad\qquad\textcolor{blue}{\tilde n_T^1}
 	\end{aligned}
 \end{displaymath}
-\textcolor{red}{注意}：\textrm{G. Kresse}方案中补偿电荷$\hat n$局域在每个缀加球内。
+\textcolor{red}{注意}:~\textrm{G. Kresse}方案中补偿电荷$\hat n$局域在每个缀加球内。
 }
 
 \frame
@@ -141,21 +141,23 @@
 这里$$(a)(b)=\int\mathrm{d}\vec r\mathrm{d}\vec r^{\prime}\dfrac{a(\vec r)b(\vec r\,^{\prime})}{|\vec r-\vec r\,^{\prime}|}$$
 \textcolor{red}{近似}：$\tilde n_T$用$\tilde n_T^1$替换：
 \begin{displaymath}
-	\dfrac12(n_T)(n_T)=\dfrac12(\tilde n_T)(\tilde n_T)-\dfrac12\overline{(n_T^1(\tilde n_T^1)}+\dfrac12\overline{(n_T^1)(n_T^1)}
+	\dfrac12(n_T)(n_T)=\dfrac12(\tilde n_T)(\tilde n_T)-\dfrac12\overline{(n_T^1)(\tilde n_T^1)}+\dfrac12\overline{(n_T^1)(n_T^1)}
 \end{displaymath}
+这里$$\overline{(a)(b)}=\int_0^{\mathrm{r}_c}\mathrm{d}\vec r\mathrm{d}\vec r^{\prime}\dfrac{a(\vec r)b(\vec r\,^{\prime})}{|\vec r-\vec r\,^{\prime}|}$$
 }
 
 \frame
 {
 \frametitle{交换-相关能泛函的处理}
-由于交换-相关能泛函是非线性的，\textrm{G. Kresse}方案中电荷密度分解为
+\textrm{G. Kresse}方案中电荷密度分解为
 \begin{displaymath}
 	n_c+n=(\tilde n+\hat n+\tilde n_c)+(n^1+n_c)-(\tilde n^1+\hat n+\tilde n_c)
 \end{displaymath}
-原始的\textrm{Bl\"ochl}方案中电荷分解为
+对比原始的\textrm{Bl\"ochl}方案中电荷分解为
 \begin{displaymath}
 	n_c+n=(\tilde n)+(n^1+n_c)-(\tilde n^1)
 \end{displaymath}
+由于交换-相关能泛函是非线性的，\textrm{VASP}中的交换-相关能计算表达式
 \begin{displaymath}
 	E_{\mathrm{XC}}[\tilde n+\hat n+\tilde n_c]+\overline{E_{\mathrm{XC}}[n^1+n_c]}-\overline{E_{\mathrm{XC}}[\tilde n^1+\hat n+\tilde n_c]}
 \end{displaymath}
