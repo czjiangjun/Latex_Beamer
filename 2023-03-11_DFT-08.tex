@@ -149,20 +149,27 @@
 \frame
 {
 	\frametitle{}
-	具体地，将$\tilde n_T$代入表达式并展开，有
+	{\fontsize{7.2pt}{5.2pt}\selectfont{具体地，将$\tilde n_T$代入表达式并展开，有
+	\begin{enumerate}
+	\item 第一项	
 	\begin{displaymath}
 		\begin{aligned}
-			&i\textcolor{blue}{\dfrac12(\tilde n+\hat n)(\tilde n+\hat n)+(\tilde n_{Zc})(\tilde n+\hat n)+\dfrac12(\tilde n_{Zc})(\tilde n_{Zc})}\\
-			=&\dfrac12(\tilde n+\hat n)(\tilde n+\hat n)+(\tilde n_{Zc})(\tilde n+\hat n)+\dfrac12\overline{(\tilde n_{Zc})(\tilde n_{Zc})}
+			&\textcolor{blue}{\dfrac12(\tilde n+\hat n)(\tilde n+\hat n)+(\tilde n_{Zc})(\tilde n+\hat n)+\dfrac12(\tilde n_{Zc})(\tilde n_{Zc})}\\
+			=&\dfrac12(\tilde n+\hat n)(\tilde n+\hat n)+(\tilde n_{Zc})(\tilde n+\hat n)\fbox{\textcolor{red}{+\dfrac12\overline{(\tilde n_{Zc})(\tilde n_{Zc})}}}\\
+			&+U(\mathbf{R},Z_{\mathrm{ion}})
 		\end{aligned}
 	\end{displaymath}
+这里假设不同原子彼此间芯电荷不发生重叠
+	\item 第二项
 	\begin{displaymath}
-		\textcolor{magenta}{-\dfrac12\overline{(\tilde n^1+\hat n)(\tilde n^1+\hat n)}-\overline{(\tilde n_{Zc})(\tilde n^1+\hat n)}-\dfrac12\overline{(\tilde n_{Zc})(\tilde n_{Zc})}}
+		\textcolor{magenta}{-\dfrac12\overline{(\tilde n^1+\hat n)(\tilde n^1+\hat n)}-\overline{(\tilde n_{Zc})(\tilde n^1+\hat n)}\fbox{\textcolor{red}{-\dfrac12\overline{(\tilde n_{Zc})(\tilde n_{Zc})}}}}
 	\end{displaymath}
-	注意到$U(\mathbf{R},Z_{\mathrm{ion}})$表示的是均匀静电场背景下点电荷$Z_{\mathrm{ion}}$的静电相互作用，而$\dfrac12\overline{(\tilde n_{Zc})(\tilde n_{Zc})}$表示离子实的自相互作用，这里将会部分彼此抵消，最后可用\textrm{Ewald}求和计算
+	\item 第三项
 \begin{displaymath}
-	\textcolor{purple}{\dfrac12\overline{(\tilde n^1)(\tilde n^1)}+\overline{(\tilde n_{Zc})(\tilde n^1)}+\dfrac12\overline{(\tilde n_{Zc})(\tilde n_{Zc})}}
+	\textcolor{purple}{\dfrac12\overline{(\tilde n^1)(\tilde n^1)}+\overline{(\tilde n_{Zc})(\tilde n^1)}\fbox{\textcolor{red}{+\dfrac12\overline{(\tilde n_{Zc})(\tilde n_{Zc})}}}}
 \end{displaymath}
+	\end{enumerate}
+	注意到第一项展开中$U(\mathbf{R},Z_{\mathrm{ion}})$表示的是均匀静电场背景下点电荷$Z_{\mathrm{ion}}$的静电相互作用，$\dfrac12\overline{(\tilde n_{Zc})(\tilde n_{Zc})}$表示离子实的自相互作用，这部分将与第二项展开式中对应部分彼此抵消，而第三项中$\dfrac12\overline{(\tilde n_{Zc})(\tilde n_{Zc})}$并未包括在最后的总能量表达式中，因为这部分能量只是影响了能量零点位置的选择}}%，最后用\textrm{Ewald}求和计算
 }
 
 \frame
