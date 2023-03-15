@@ -242,6 +242,18 @@
 	\end{displaymath}
 }
 
+\frame
+{
+	\frametitle{模守恒赝势构造流程}
+\begin{figure}[h!]
+\centering
+%\vspace*{-0.10in}
+\includegraphics[height=2.70in,width=3.77in,viewport=70 40 900 610,clip]{Figures/Pseudo-NC.jpg}
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Pseudo-NC}
+\end{figure}
+}
+
 \subsection{可分离赝势与\rm{Ghost~band}}
 \frame
 {
@@ -262,18 +274,6 @@
 
 \frame
 {
-	\frametitle{模守恒赝势构造流程}
-\begin{figure}[h!]
-\centering
-%\vspace*{-0.10in}
-\includegraphics[height=2.70in,width=3.77in,viewport=70 40 900 610,clip]{Figures/Pseudo-NC.jpg}
-%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{Pseudo-NC}
-\end{figure}
-}
-
-\frame
-{
 	\frametitle{\textrm{Ghost~band}的表现}
 	\fontsize{9.2pt}{4.2pt}\selectfont{只有价电子的赝波函数与芯电子波函数完全正交，能带计算中才能确保芯层与价层电子的完全分离。但实际计算时，该正交条件很难严格保证，因此一旦赝波函数严重偏离正交条件，计算的能带中会在本不存在能带的区域出现电子结构分布(称为\textrm{Ghost~band})，这部分电子结构源自构造赝波函数的能量参数$\varepsilon_l$与芯层电子能量差别太大，无法保持与芯层电荷严格正交引起的}
 \begin{figure}[h!]
@@ -289,7 +289,7 @@
 
 \frame
 {
-	\frametitle{\textrm{Ghost~band}的起源}
+	\frametitle{\textrm{Ghost~band}的根源}
 	可分离赝势方法中
 	\begin{displaymath}
 		\hat{\mathbf{H}}=-\dfrac12\nabla^2+V_{\mathrm{local}}(r)+\delta\hat{V}_{\mathrm{NL}}
@@ -301,6 +301,61 @@
 	的解。
 \vskip 15pt
 	因为$V_{\mathrm{local}}(r)$可随意选择，因此赝波函数$\psi_{lm}^{\mathrm{PP}}(r)$和能量$\varepsilon_l$不再要求与束缚态波函数相对应，将导致\textrm{Ghost~band}的出现
+}
+
+\frame
+{
+	\frametitle{\textrm{Ghost~band}根源的数学说明$^{\ast}$}
+	{\fontsize{8.2pt}{5.2pt}\selectfont{对于半局域势，求解能量$\varepsilon$对应的径向波函数$u_l(r,\varepsilon)$的方程\textcolor{blue}{是一个常微分方程}
+		\begin{displaymath}
+			-\dfrac12\dfrac{\mathrm{d}^2u_l}{\mathrm{d}r^2}+\overline{V}_l^{\mathrm{loc}}(r)u_l(r,\varepsilon)+\Delta V_l^{\mathrm{SL}}(r)u_l(r,\varepsilon)-\varepsilon u_l(r,\varepsilon)=0
+		\end{displaymath}
+		而对于可分离赝势(如\textrm{KB}势)，方程则为\textcolor{blue}{积分-微分方程}
+		\begin{displaymath}
+			-\dfrac12\dfrac{\mathrm{d}^2u_l}{\mathrm{d}r^2}+\overline{V}_l^{\mathrm{loc}}(r)u_l(r,\varepsilon)+\int\Delta V_l(r,r^{\prime})u_l(r^{\prime},\varepsilon)\mathrm{d}r^{\prime}-\varepsilon u_l(r,\varepsilon)=0
+		\end{displaymath}
+		将可分离赝势代入可有
+		\begin{displaymath}
+			-\dfrac12\dfrac{\mathrm{d}^2u_l}{\mathrm{d}r^2}+\overline{V}_l^{\mathrm{loc}}(r)u_l(r,\varepsilon)+f_l(r)\int g_l(r^{\prime})u_l(r^{\prime},\varepsilon)\mathrm{d}r^{\prime}-\varepsilon u_l(r,\varepsilon)=0
+		\end{displaymath}
+		由于积分项的存在，传统的常微分方程求解算法(如\textrm{Runger-Kutta}法等)无法直接用于该积分-微分方程，必须另图别策
+	}}
+}
+
+\frame
+{
+	\frametitle{\textrm{Ghost~band}根源的数学说明$^{\ast}$}
+		{\fontsize{7.2pt}{5.2pt}\selectfont{
+		基本思想:~类似积分方程求解的\textrm{Fredholm}方法
+		\begin{itemize}
+			\item 先将微分方程中的\textcolor{magenta}{积分项近似为常数因子}，\textcolor{blue}{求解非齐次常微分方程}
+			\item 对含有波函数的积分，应用闭路积分公式\textrm{(closure formula)}计算
+		\end{itemize}}}
+		{\fontsize{5.2pt}{5.2pt}\selectfont{具体求解流程
+		\begin{enumerate}
+			\item 采用通用方法分别求解\\\textcolor{blue}{齐次微分方程}
+				\begin{displaymath}
+					-\dfrac12\dfrac{\mathrm{d}^2W_l}{\mathrm{d}r^2}+\overline{V}_l^{\mathrm{loc}}(r)W_l(r,\varepsilon)-\varepsilon W_l(r,\varepsilon)=0
+				\end{displaymath}
+				的通解和\\\textcolor{magenta}{不含积分项的}\textcolor{blue}{非齐次微分方程}
+				\begin{displaymath}
+					-\dfrac12\dfrac{\mathrm{d}^2X_l}{\mathrm{d}r^2}+\overline{V}_l^{\mathrm{loc}}(r)X_l(r,\varepsilon)-\varepsilon X_l(r,\varepsilon)=f_l(r)
+				\end{displaymath}
+				的一个特解
+			\item 构造积分
+				\begin{displaymath}
+					\begin{aligned}
+					\tilde {W}(\varepsilon)=&\int g_l(r)W(r,\varepsilon)\mathrm{d}r\\
+					\tilde {X}(\varepsilon)=&1+\int g_l(r)X(r,\varepsilon)\mathrm{d}r
+					\end{aligned}
+				\end{displaymath}
+			\item 由此得到积分-微分方程的解
+				\begin{displaymath}
+					u(r,\varepsilon)=K[W(r,\varepsilon)\tilde{X}(\varepsilon)-X(r,\varepsilon)\tilde{W}(\varepsilon)]
+				\end{displaymath}
+		这里$K$是归一化因子	
+		\end{enumerate}
+	}}
 }
 
 \frame
@@ -378,4 +433,3 @@
 	$$Q_{l\varepsilon,l\varepsilon^{\prime}}=0$$
 	并非易事;~而一旦模守恒条件被破坏，矩阵$\mathbf{B}$(相应地，赝势的非局域部分$V_{\mathrm{NL}}$)就是非\textrm{Hermitian}}}
 }
-

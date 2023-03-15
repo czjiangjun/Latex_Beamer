@@ -2,8 +2,8 @@
 %-------------------------------PPT Title-------------------------------------
 \title{08-\rm{VASP}中的\rm{PAW}方法}
 %-----------------------------------------------------------------------------
-
 %----------------------------Author & Date------------------------------------
+
 %\author[\textrm{Jun\_Jiang}]{姜\;\;骏\inst{}} %[]{} (optional, use only with lots of authors)
 %% - Give the names in the same order as the appear in the paper.
 %% - Use the \inst{?} command only if the authors have different
@@ -141,9 +141,28 @@
 这里$$(a)(b)=\int\mathrm{d}\vec r\mathrm{d}\vec r^{\prime}\dfrac{a(\vec r)b(\vec r\,^{\prime})}{|\vec r-\vec r\,^{\prime}|}$$
 \textcolor{red}{近似}：$\tilde n_T$用$\tilde n_T^1$替换：
 \begin{displaymath}
-	\dfrac12(n_T)(n_T)=\dfrac12(\tilde n_T)(\tilde n_T)-\dfrac12\overline{(n_T^1)(\tilde n_T^1)}+\dfrac12\overline{(n_T^1)(n_T^1)}
+	\dfrac12(n_T)(n_T)=\textcolor{blue}{\dfrac12(\tilde n_T)(\tilde n_T)}\textcolor{magenta}{-\dfrac12\overline{(n_T^1)(\tilde n_T^1)}}+\textcolor{purple}{\dfrac12\overline{(n_T^1)(n_T^1)}}
 \end{displaymath}
 这里$$\overline{(a)(b)}=\int_0^{\mathrm{r}_c}\mathrm{d}\vec r\mathrm{d}\vec r^{\prime}\dfrac{a(\vec r)b(\vec r\,^{\prime})}{|\vec r-\vec r\,^{\prime}|}$$
+}
+
+\frame
+{
+	\frametitle{}
+	具体地，将$\tilde n_T$代入表达式并展开，有
+	\begin{displaymath}
+		\begin{aligned}
+			&i\textcolor{blue}{\dfrac12(\tilde n+\hat n)(\tilde n+\hat n)+(\tilde n_{Zc})(\tilde n+\hat n)+\dfrac12(\tilde n_{Zc})(\tilde n_{Zc})}\\
+			=&\dfrac12(\tilde n+\hat n)(\tilde n+\hat n)+(\tilde n_{Zc})(\tilde n+\hat n)+\dfrac12\overline{(\tilde n_{Zc})(\tilde n_{Zc})}
+		\end{aligned}
+	\end{displaymath}
+	\begin{displaymath}
+		\textcolor{magenta}{-\dfrac12\overline{(\tilde n^1+\hat n)(\tilde n^1+\hat n)}-\overline{(\tilde n_{Zc})(\tilde n^1+\hat n)}-\dfrac12\overline{(\tilde n_{Zc})(\tilde n_{Zc})}}
+	\end{displaymath}
+	注意到$U(\mathbf{R},Z_{\mathrm{ion}})$表示的是均匀静电场背景下点电荷$Z_{\mathrm{ion}}$的静电相互作用，而$\dfrac12\overline{(\tilde n_{Zc})(\tilde n_{Zc})}$表示离子实的自相互作用，这里将会部分彼此抵消，最后可用\textrm{Ewald}求和计算
+\begin{displaymath}
+	\textcolor{purple}{\dfrac12\overline{(\tilde n^1)(\tilde n^1)}+\overline{(\tilde n_{Zc})(\tilde n^1)}+\dfrac12\overline{(\tilde n_{Zc})(\tilde n_{Zc})}}
+\end{displaymath}
 }
 
 \frame
@@ -157,23 +176,31 @@
 \begin{displaymath}
 	n_c+n=(\tilde n)+(n^1+n_c)-(\tilde n^1)
 \end{displaymath}
-由于交换-相关能泛函是非线性的，\textrm{VASP}中的交换-相关能计算表达式
+%\textrm{G. Kresse}方案中赝离子实电荷$\tilde n_{Zc}$与\textrm{Bl\"ochl}方案中$\tilde n_c$的约束条件不同，
+
+显然，\textrm{VASP}中的交换-相关能计算表达式
 \begin{displaymath}
 	E_{\mathrm{XC}}[\tilde n+\hat n+\tilde n_c]+\overline{E_{\mathrm{XC}}[n^1+n_c]}-\overline{E_{\mathrm{XC}}[\tilde n^1+\hat n+\tilde n_c]}
 \end{displaymath}
-\textcolor{blue}{两种不同的电荷密度分解方案根源}：\\\textrm{G. Kresse}方案中赝离子实电荷$\tilde n_{Zc}$与\textrm{Bl\"ochl}方案中$\tilde n_c$的约束条件不同！
+但由于交换-相关能泛函是非线性的，\textrm{G. Kress}的电荷分解引起的误差则为
+\begin{displaymath}
+	\begin{aligned}
+		&\textcolor{blue}{\overline{E_{\mathrm{XC}}[(\tilde n+\hat n+\tilde n_c)+(n^1+n_c)-(\tilde n^1+\hat n+\tilde n_c)]}}\\
+		&-\overline{E_{\mathrm{XC}}[\tilde n+\hat n+\tilde n_c]}-\overline{E_{\mathrm{XC}}[n^1+n_c]}+\overline{E_{\mathrm{XC}}[\tilde n^1+\hat n+\tilde n_c]}
+	\end{aligned}
+\end{displaymath}
 }
 
 \frame
 {
 	\frametitle{总能量表达式}
-	根据总能量表达式$$E=\tilde E+E^1-\tilde E^1$$其中
+	最终完成体系总能量的表达式，根据总能量表达式$$E=\tilde E+E^1-\tilde E^1$$其中
 	\begin{displaymath}
 		\begin{aligned}
 			\tilde E=&\sum_nf_n\langle\tilde\Psi_n|-\frac12\nabla^2|\tilde\Psi_n\rangle+E_{\mathrm{XC}}[\tilde n+\hat n+\tilde n_c]+E_H[\tilde n+\hat n]\\
-			&+\int v_H[\tilde n_{Zc}][\tilde n(\vec r)+\hat n(\vec r)]\mathrm{d}\vec r+U(\vec R,Z_{\mathrm{ion}})\\
-			\tilde E^1=&\sum_{(i,j)}\rho_{ij}\langle\tilde\phi_i|-\frac12\nabla^2|\tilde\phi_j\rangle+\overline{E_{\mathrm{XC}}[\tilde n^1+\hat n+\tilde n_c]}+\overline{E_H[\tilde n^1+\hat n]}\\
-			&+\int_{\Omega_r}v_H[\tilde n_{Zc}][\tilde n^1(\vec r)+\hat n(\vec r)]\mathrm{d}\vec r
+			&+\int \textcolor{magenta}{v_H[\tilde n_{Zc}]}[\tilde n(\vec r)+\hat n(\vec r)]\mathrm{d}\vec r+U(\vec R,Z_{\mathrm{ion}})\\
+			\tilde E^1=&\sum_{(i,j)}\rho_{ij}\langle\tilde\phi_i|-\frac12\nabla^2|\tilde\phi_j\rangle+\textcolor{purple}{\overline{E_{\mathrm{XC}}[\tilde n^1+\hat n+\tilde n_c]}+\overline{E_H[\tilde n^1+\hat n]}}\\
+			&+\int_{\Omega_r}\textcolor{magenta}{v_H[\tilde n_{Zc}]}[\tilde n^1(\vec r)+\hat n(\vec r)]\mathrm{d}\vec r
 		\end{aligned}
 	\end{displaymath}
 }
@@ -267,9 +294,9 @@
 	\frametitle{\textrm{PAW}与\textrm{US-PP}近似}
 	\textrm{G. Kresse}指出只要总能量表达式中$E^1$和$\tilde E^1$在原子构象附近作线性化即可得到\textrm{US-PP}的表达式。
 	
-	如果已知原子构象中占据数$\rho_{ij}^a$、电荷密度分布$n_a^1$、$\tilde n_a^1$和$\hat n_a$，则$E^1$中的\textcolor{blue}{\underline{\textrm{Hartree}能和交换-相关能项}}在$n_a$附近线性化($n_a\Rightarrow n_a^1$)，有
+	如果电子占据数$\rho_{ij}$直接用原子态构象$\rho_{ij}^a$近似，因此电荷密度分布记作$n_a^1$、$\tilde n_a^1$和$\hat n_a$，则$E^1$中的\textcolor{blue}{\underline{\textrm{Hartree}能和交换-相关能项}}在$n_a$附近线性化($n_a\Rightarrow n_a^1$):
 	\begin{displaymath}
-		E_{\mathrm{XC}}(\textcolor{red}{n_a^1+n_c})+E_H(\textcolor{red}{n_a^1})+\int(v_{\mathrm{XC}}[n_a^1+n_c]+v_H[n_a^1])\textcolor{red}{[n^1(\vec r)-n_a^1(\vec r)]}\mathrm{d}\vec r
+		E_{\mathrm{XC}}(\textcolor{red}{n_a^1+n_c})+E_H(\textcolor{red}{n_a^1})+\int(v_{\mathrm{XC}}[\textcolor{red}{n_a^1+n_c}]+v_H[\textcolor{red}{n_a^1}])[n^1(\vec r)-\textcolor{red}{n_a^1(\vec r)}]\mathrm{d}\vec r
 	\end{displaymath}
 	在\textrm{PAW}方法中，电子密度$n^1(\vec r)$%和$\tilde n^1(\vec r)$
 	的表达式
@@ -280,8 +307,8 @@
 		\end{aligned}
 	\end{displaymath}
 	因此，\textrm{Hartree}能和交换-相关能项为
-	$$\textcolor{blue}{C}+\sum_{(i,j)}\rho_{ij}\langle\phi_i|\textcolor{red}{v_{\mathrm{XC}}[n_a^1+n_c]+v_H[n_a^1]}|\phi_j\rangle$$
-	这里\textcolor{blue}{\textrm{C}}是常数
+	$$\textcolor{blue}{C}+\sum_{(i,j)}\rho_{ij}\langle\phi_i|v_{\mathrm{XC}}[\textcolor{red}{n_a^1+n_c}]+v_H[\textcolor{red}{n_a^1}]|\phi_j\rangle$$
+	这里\textcolor{blue}{\textrm{C}}是常数:~{\fontsize{7.1pt}{3.9pt}\selectfont{$\textcolor{blue}{E_{\mathrm{XC}}(\textcolor{red}{n_a^1+n_c})+E_H(\textcolor{red}{n_a^1})-\int(v_{\mathrm{XC}}[\textcolor{red}{n_a^1+n_c}]+v_H[\textcolor{red}{n_a^1}])[\textcolor{red}{n_a^1(\vec r)}]\mathrm{d}\vec r}$}}
 }
 
 \frame
@@ -289,20 +316,19 @@
 	\frametitle{\textrm{PAW}与\textrm{US-PP}近似}
 	因此$E^1$用占据数$\rho_{ij}$近似到一阶($\rho_{ij}\Rightarrow\rho_{ij}^1$)，可有
 	\begin{displaymath}
-		E^1\approx\textcolor{blue}{C}+\sum_{(i,j)}\langle\phi_i|-\frac12\nabla^2+v_{e\!f\!f}^a|\phi_j\rangle
-	\end{displaymath}
-	其中
-	\begin{displaymath}
-		v_{e\!f\!f}^a=\textcolor{red}{v_H[n_a^1+}\textcolor{blue}{n_{Zc}}\textcolor{red}{]+v_{\mathrm{XC}}[n_a^1+n_c]}
+		E^1\approx\textcolor{blue}{C}+\sum_{(i,j)}\rho_{i,j}\langle\phi_i|-\frac12\nabla^2+\textcolor{blue}{v_{e\!f\!f}^a}|\phi_j\rangle
 	\end{displaymath}
 	这里\textcolor{red}{$v_{e\!f\!f}^a$}是\textcolor{blue}{原子构象下的全电子有效势}
+	\begin{displaymath}
+		v_{e\!f\!f}^a=v_H[\textcolor{red}{n_a^1}+\textcolor{blue}{n_{Zc}}]+v_{\mathrm{XC}}[\textcolor{red}{n_a^1+n_c}]
+	\end{displaymath}
 
 	类似地可有
 	\begin{displaymath}
 		\tilde E^1\approx\textcolor{blue}{\tilde C}+\sum_{(i,j)}\left[\langle\tilde\phi_i|-\frac12\nabla^2+\tilde v_{e\!f\!f}^a|\tilde\phi_j\rangle+\underline{\int\tilde Q_{ij}^L(\vec r)\tilde v_{e\!f\!f}^a(\vec r)\mathrm{d}\vec r}\right]
 	\end{displaymath}
-	其中$$\tilde v_{e\!f\!f}^a=v_H[\tilde n_a^1+\textcolor{blue}{\hat n_a}+\tilde n_{Zc}]+v_{\mathrm{XC}}[\tilde n_a^1+\textcolor{blue}{\hat n_a}+\tilde n_c]$$
 	这里\textcolor{red}{$\tilde v_{e\!f\!f}^a$}是\textcolor{blue}{原子构象下的局域原子赝势}
+	$$\tilde v_{e\!f\!f}^a=v_H[\tilde n_a^1+\textcolor{blue}{\hat n_a}+\tilde n_{Zc}]+v_{\mathrm{XC}}[\tilde n_a^1+\textcolor{blue}{\hat n_a}+\tilde n_c]$$
 }
 
 \frame
@@ -323,13 +349,14 @@
 			&-\int\hat Q_{ij}^L(\vec r)\tilde v_{e\!f\!f}^a(\vec r)\mathrm{d}\vec r
 		\end{aligned}
 	\end{displaymath}
-	\textcolor{red}{当补偿电荷$\hat n$用\textrm{US-PP}方案的赝化补偿电荷表示时，$E\rightarrow E_{\mathrm{tot}}$}
 }
+
 
 \frame
 {
 	\frametitle{\textrm{PAW}与\textrm{US-PP}近似}
-	在$G_{ij}^{\mathrm{US}}$中，
+	\textcolor{blue}{当补偿电荷$\hat n$用\textrm{US-PP}方案的赝化补偿电荷表示时}\\%$E\rightarrow E_{\mathrm{tot}}$
+	$G_{ij}^{\mathrm{US}}$的\textcolor{blue}{前两项}与赝势理论中对应的是$\textcolor{blue}{D_{ij}}$，\textcolor{blue}{最后一项}对应的是去\textcolor{blue}{屏蔽部分}
 	\begin{displaymath}
 		\begin{aligned}
 			&\textcolor{blue}{\underbrace{\langle\phi_i|-\frac12\nabla^2+v_{e\!f\!f}^a|\phi_j\rangle-\langle\tilde\phi_i|-\frac12\nabla^2+\tilde v_{e\!f\!f}^a|\tilde\phi_j\rangle}}\\
@@ -345,23 +372,44 @@
 			&\qquad{\textcolor{blue}{\fontsize{5.2pt}{4.2pt}\selectfont{\textrm{non-local-terms}}}}
 		\end{aligned}
 	\end{displaymath}
-
-	在\textrm{PAW}方法能量泛函中，如果缀加区补偿电荷$\hat n$满足$$\hat n=n^1-\tilde n^1$$
 }
 
 \frame
 {
 	\frametitle{\textrm{PAW}与\textrm{US-PP}近似}
-	并且如果满足$\tilde n_{Zc}=n_{Zc}$和$\tilde n_c=n_c$
-	则“在位”(\textrm{on-site})动能对总能的贡献
+	在\textrm{PAW}方法中，如果缀加区补偿电荷$\hat n$满足~$\hat n=n^1-\tilde n^1$，并且如果满足$\tilde n_{Zc}=n_{Zc}$和$\tilde n_c=n_c$，则各“在位”(\textrm{on-site})项对体系总能量的贡献，将完全来自动能部分
 	\begin{displaymath}
 		E^1-\tilde E^1=\sum_{(i,j)}\rho_{ij}\big(\langle\phi_i|-\frac12\nabla^2|\phi_j\rangle-\langle\tilde\phi_i|-\frac12\nabla^2|\tilde\phi_j\rangle\big)
 	\end{displaymath}
-	\textcolor{red}{在这种极限情况下\textrm{PAW}与\textrm{US-PP}完全等价}
+	显然，\textcolor{blue}{在这种极限情况下，\textrm{PAW}与\textrm{US-PP}是等价的;~如果考虑冻芯近似，则两种方法都将逼近精确解}\\ 
+	这也意味着\textrm{US-PP}中，用于构造补偿电荷的函数满足
+	$$\textcolor{magenta}{\hat Q_{ij}^L(\vec r)=Q_{ij}(\vec r)}=\phi_i^{\ast}(\vec r)\phi_j(\vec r)-\tilde\phi_i^{\ast}(\vec r)\tilde\phi_j(\vec r)$$
+	由此可见，\textcolor{blue}{在\textrm{US-PP}方案中，如能提高\underline{赝化缀加函数}的精度，有可能系统提升总能量的计算精度}
 
-	在\textrm{US-PP}中，\textcolor{orange}{缀加函数}满足条件
-	$$\hat Q_{ij}^L(\vec r)=Q_{ij}(\vec r)=\phi_i^{\ast}(\vec r)\phi_j(\vec r)-\tilde\phi_i^{\ast}(\vec r)\tilde\phi_j(\vec r)$$
-	上述推导表明:~\textcolor{blue}{在\textrm{US-PP}方案中，可以通过提高\underline{赝化缀加函数}的精度，系统提升总能量的计算精度}
+	{\fontsize{6.5pt}{3.9pt}\selectfont{换言之，如\textrm{US-PP}能使用精确形式的补偿电荷，其总能泛函将逼近冻芯近似下的全电子方法的结果}}
+}
+
+\frame
+{
+	\frametitle{\textrm{PAW}与\textrm{US-PP}近似}
+	\begin{itemize}
+		\item 前面的讨论表明，冻芯近似下，即使仅要求构造补充电荷的$\hat{Q}_{ij}^L(\vec r)$与$Q_{ij}(\vec r)$有相同的多极矩，但\textrm{US-PP}随原子态电荷分布的变化，也能精确到一阶\\
+			{\fontsize{6.5pt}{3.9pt}\selectfont{这从一定程度上解释了为什么\textrm{US-PP}方法具有相当的可靠性}}
+		\item 当电荷密度变化剧烈时，\textrm{US-PP}的可移植性引起的误差也将越来越大(\textcolor{blue}{因为误差与补偿电荷密切关联})为了得到更精确的结果，会要求$\hat{Q}_{ij}^L\textcolor{red}{\rightarrow}Q_{ij}(\vec r)$\\
+			{\fontsize{6.5pt}{3.9pt}\selectfont{即$\hat{Q}_{ij}^L$逼近真实电荷密度差的精确形式，不仅仅是要求多极矩相等}}
+	\end{itemize}
+	\begin{itemize}
+		\item \textrm{PAW}方法:~构造补偿电荷容易
+			\vskip 2pt
+			{\fontsize{6.5pt}{3.9pt}\selectfont{引入了全电子波函数，保持电荷密度差的精度\\
+		通过电荷密度差的多极矩构造补偿电荷\\
+		空间上补偿电荷更延展、更平滑}}
+		\item \textrm{US-PP}方法:~构造补偿电荷的代价更大
+			\vskip 2pt
+			{\fontsize{6.5pt}{3.9pt}\selectfont{越精确的赝势越要求\textcolor{blue}{精确和硬}(\textrm{accurate~and~hard})的电荷密度差\\
+		空间上补偿电荷更收缩、更局域}}
+	\end{itemize}
+
 }
 
 \subsection{\rm{PAW~}原子数据集}
@@ -381,25 +429,25 @@
 		\end{aligned}
 		\right.
 	\end{displaymath}
-	调节系数$\alpha_i$和$q_i$赝分波函数$\phi_{lk}(r)$在截断半径$r_c^l$处两阶连续可微
-	投影子波函数$\tilde p_i$由\textrm{Gram-Schmidt}正交条件$\langle\tilde p_i|\tilde\phi_j\rangle=\delta_{ij}$确定
+	调节系数$\alpha_i$和$q_i$，使得赝分波函数$\phi_{lk}(r)$在截断半径$r_c^l$处两阶连续可微\\
+	投影子波函数$\tilde p_i$根据\textrm{Gram-Schmidt}正交条件$\langle\tilde p_i|\tilde\phi_j\rangle=\delta_{ij}$确定
 }
 
 \frame
 {
 	\frametitle{\textrm{PAW}原子数据集}
-	\textcolor{blue}{构造原子局域赝势$\tilde v_{e\!f\!f}^a$}(\textcolor{red}{为防止\textrm{ghost band}}):\\在截断半径$r_{loc}$内的定义为
-	$$\tilde v_{e\!f\!f}^a=A\dfrac{\sin(q_{loc}r)}r\quad r<r_{loc}$$
-	其中$q_{loc}$和$A$要求局域赝势在截断半径$r_{loc}$处连续到一阶导数
+	\textcolor{blue}{构造原子局域赝势$\tilde v_{e\!f\!f}^a$}(\textcolor{red}{为防止\textrm{ghost band}}):\\在截断半径$r_{\mathrm{loc}}$内的定义为
+	$$\tilde v_{e\!f\!f}^a=A\dfrac{\sin(q_{\mathrm{loc}}r)}r\quad r<r_{\mathrm{loc}}$$
+	其中$q_{\mathrm{loc}}$和$A$要求局域赝势在截断半径$r_{\mathrm{loc}}$处连续到一阶导数
 
-	\textcolor{blue}{构造赝芯电荷密度$\tilde n_c$}:~在截断半径$r_{pc}$内的定义为
-	$$\sum_{i=1,2}B_i\dfrac{\sin(q_ir)}r\quad r<r_{pc}$$
-	调节系数$q_i$和$B_i$使得赝芯电荷密度$\tilde n_c(r)$在截断半径$r_{pc}$处的两阶导数连续
+	\textcolor{blue}{构造赝芯电荷密度$\tilde n_c$}:~在截断半径$r_{\mathrm{pc}}$内的定义为
+	$$\sum_{i=1,2}B_i\dfrac{\sin(q_ir)}r\quad r<r_{\mathrm{pc}}$$
+	调节系数$q_i$和$B_i$使得赝芯电荷密度$\tilde n_c(r)$在截断半径$r_{\mathrm{pc}}$处的两阶导数连续
 
 	局域离子赝势$v_H[\tilde n_{Zc}]$可由原子局域赝势去屏蔽得到
 	$$v_H[\tilde n_{Zc}]=\tilde v_{e\!f\!f}^a-v_H[\tilde n_a^1+\hat n_a]-v_{\mathrm{XC}}[\tilde n_a^1+\hat n_a+\tilde n_c]$$
 	在\textrm{VASP}的\textrm{POTCAR}生成过程中，各截断半径的确定条件
-	$r_{rad}=\max({r_c^l})$,$r_{pc}\approx r_{rad}/1.2$,$r_{loc}<r_{rad}/1.2$
+	$r_{\mathrm{rad}}=\max({r_c^l})$,$r_{pc}\approx r_{\mathrm{rad}}/1.2$,$r_{\mathrm{loc}}<r_{\mathrm{rad}}/1.2$
 }
 
 \frame
@@ -407,11 +455,11 @@
 	\frametitle{\textrm{PAW}原子数据集}
 	在每个原子球内用球\textrm{Bessel}函数构造补偿电荷$g_l(r)$
 	$$g_l(r)=\sum_{i=1}^2\alpha_i^lj_l(q_i^lr)$$
-	调节系数$q_i^l$和$\alpha_i^l$使得补偿电荷$g_l(r)$在截断半径$r_{comp}$处的数值和前两阶导数值都是0，因此可以选择$q_i^l$使得多极矩
-	$$\int_0^{r_{comp}}g_l(r)r^{l+2}\mathrm{d}r=1$$
+	调节系数$q_i^l$和$\alpha_i^l$使得补偿电荷$g_l(r)$在截断半径$r_{\mathrm{comp}}$处的数值和前两阶导数值都是0，因此可以选择$q_i^l$使得多极矩
+	$$\int_0^{r_{\mathrm{comp}}}g_l(r)r^{l+2}\mathrm{d}r=1$$
 	并且有
-	$$\dfrac{\mathrm{d}}{\mathrm{d}r}j_l(q_i^lr)\bigg|_{r_{comp}}=0$$
-	设置$\alpha_i^l$，因此$g_l(r_{comp})=0$，$r_{comp}=r_{rad}/1.3\sim r_{rad}/1.2$
+	$$\dfrac{\mathrm{d}}{\mathrm{d}r}j_l(q_i^lr)\bigg|_{r_{\mathrm{comp}}}=0$$
+	设置$\alpha_i^l$，因此$g_l(r_{\mathrm{comp}})=0$，$r_{\mathrm{comp}}=r_{\mathrm{rad}}/1.3\sim r_{\mathrm{rad}}/1.2$
 }
 
 %\frame
