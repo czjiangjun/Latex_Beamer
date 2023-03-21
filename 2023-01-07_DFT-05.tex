@@ -306,7 +306,7 @@
 \frame
 {
 	\frametitle{\textrm{Ghost~band}根源的数学说明$^{\ast}$}
-	{\fontsize{8.2pt}{5.2pt}\selectfont{对于半局域势，求解能量$\varepsilon$对应的径向波函数$u_l(r,\varepsilon)$的方程\textcolor{blue}{是一个常微分方程}
+	{\fontsize{7.2pt}{5.2pt}\selectfont{对于半局域势，求解能量$\varepsilon$对应的径向波函数$u_l(r,\varepsilon)$的方程\textcolor{blue}{是一个常微分方程}
 		\begin{displaymath}
 			-\dfrac12\dfrac{\mathrm{d}^2u_l}{\mathrm{d}r^2}+\overline{V}_l^{\mathrm{loc}}(r)u_l(r,\varepsilon)+\Delta V_l^{\mathrm{SL}}(r)u_l(r,\varepsilon)-\varepsilon u_l(r,\varepsilon)=0
 		\end{displaymath}
@@ -318,6 +318,10 @@
 		\begin{displaymath}
 			-\dfrac12\dfrac{\mathrm{d}^2u_l}{\mathrm{d}r^2}+\overline{V}_l^{\mathrm{loc}}(r)u_l(r,\varepsilon)+f_l(r)\int g_l(r^{\prime})u_l(r^{\prime},\varepsilon)\mathrm{d}r^{\prime}-\varepsilon u_l(r,\varepsilon)=0
 		\end{displaymath}
+		\begin{itemize}
+			\item \textcolor{blue}{常微分方程解的结构服从\textrm{Wronskian}定理的推论:~本征态能量$\varepsilon_0,\varepsilon_1,\cdots,\varepsilon_n$按升序排列时，对应的本征态波函数(径向)的节点数依次递增}
+			\item \textcolor{red}{积分-微分方程解的结构不要求满足该结论:~波函数的节点数与能量本征态不再有对应的升序关系}
+		\end{itemize}
 		由于积分项的存在，传统的常微分方程求解算法(如\textrm{Runger-Kutta}法等)无法直接用于该积分-微分方程，必须另图别策
 	}}
 }
