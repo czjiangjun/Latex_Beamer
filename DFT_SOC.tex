@@ -9,13 +9,13 @@
 %% - Use the \inst{?} command only if the authors have different
 %%   affiliation.
 %\institute[BCC]{\inst{}%
-\institute[Gain~Strong]{\inst{}%
+%\institute[Gain~Strong]{\inst{}%
 %\vskip -20pt 北京市计算中心}
-\vskip -20pt {\large 格致斯创~科技}}
+%\vskip -20pt {\large 格致斯创~科技}}
 \date[\today] % (optional, should be abbreviation of conference name)
 {%	{\fontsize{6.2pt}{4.2pt}\selectfont{\textcolor{blue}{E-mail:~}\url{jiangjun@bcc.ac.cn}}}
 \vskip 45 pt {\fontsize{8.2pt}{6.2pt}\selectfont{%清华大学\;\;物理系% 报告地点
-	\vskip 5 pt \textrm{2023.03.11}}}
+	\vskip 5 pt \textrm{2023.03.24}}}
 }
 
 %% - Either use conference name or its abbreviation
@@ -75,12 +75,16 @@
 \frame
 {
 	\frametitle{\textrm{Euler}角与旋转矩阵}
-	\textrm{WIEN2k}软件在旋-轨耦合计算时，须指定磁化轴向。从群论的角度考虑，旋-轨耦合效应会引入双值群\textrm{(Double group)}\footnote{\fontsize{5.2pt}{6.2pt}\selectfont{轨道角动量是三维空间的连续旋转本征值，可用\textrm{SO(3)}群表示;~自旋角动量则是二维复矢量的幺正群，用\textrm{SU(2)}群表示。两个群的\textrm{Lie}代数同构，但\textrm{Lie}群群元是一对二的关系。而点群都是\textrm{SO(3)}群的子群，因此不能用来描述\textrm{SU(2)}群，从而引入双值群}}
-\begin{figure}[h!]
+	从群论角度考虑，旋-轨耦合效应会引入双值群\textrm{(Double~group)}\footnote{\fontsize{5.2pt}{6.2pt}\selectfont{轨道角动量是三维空间的连续旋转本征值，可用\textrm{SO(3)}群表示;~自旋角动量则是二维复矢量的幺正群，用\textrm{SU(2)}群表示。两个群的\textrm{Lie}代数同构，但\textrm{Lie}群群元是一对二的关系。而点群都是\textrm{SO(3)}群的子群，因此不能用来描述\textrm{SU(2)}群，从而引入双值群}}
+
+	双值群的生成元可以通过自旋轴向确定的\textrm{Euler}角确定。
+
+	{\fontsize{6.5pt}{4.2pt}\selectfont{\textrm{WIEN2k}软件在旋-轨耦合计算时，须指定磁化轴向，由此可确定\textrm{Euler}角}}
+	\begin{figure}[h!]
 \centering
 \vspace*{-0.21in}
 \hspace*{-0.1in}
-\includegraphics[height=1.8in,width=2.1in,viewport=2 5 1162 1180,clip]{Figures/euler-angles-yaw-aircraft-principal-axes-orientation-cartesian-coordinate-system.png}
+\includegraphics[height=1.7in,width=2.0in,viewport=2 5 1162 1180,clip]{Figures/euler-angles-yaw-aircraft-principal-axes-orientation-cartesian-coordinate-system.png}
 \caption{\tiny \textrm{The Euler angles yaw aircraft-principal axes orientation Cartesian coordingate system.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Fig:Euler}
 \end{figure}
