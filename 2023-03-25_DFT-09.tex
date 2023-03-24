@@ -1,0 +1,465 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  不使用 authblk 包制作标题  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%-------------------------------PPT Title-------------------------------------
+\title{09-\rm{VASP}的优化与并行}
+%-----------------------------------------------------------------------------
+%----------------------------Author & Date------------------------------------
+
+%\author[\textrm{Jun\_Jiang}]{姜\;\;骏\inst{}} %[]{} (optional, use only with lots of authors)
+%% - Give the names in the same order as the appear in the paper.
+%% - Use the \inst{?} command only if the authors have different
+%%   affiliation.
+%\institute[BCC]{\inst{}%
+\institute[Gain~Strong]{\inst{}%
+%\vskip -20pt 北京市计算中心}
+\vskip -20pt {\large 格致斯创~科技}}
+\date[\today] % (optional, should be abbreviation of conference name)
+{%	{\fontsize{6.2pt}{4.2pt}\selectfont{\textcolor{blue}{E-mail:~}\url{jiangjun@bcc.ac.cn}}}
+\vskip 45 pt {\fontsize{8.2pt}{6.2pt}\selectfont{%清华大学\;\;物理系% 报告地点
+	\vskip 5 pt \textrm{2023.03.25}}}
+}
+
+%% - Either use conference name or its abbreviation
+%% - Not really information to the audience, more for people (including
+%%   yourself) who are reading the slides onlin%%   yourself) who are reading the slides onlin%%   yourself) who are reading the slides onlineee
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subject{}
+% This is only inserted into the PDF information catalog. Can be left
+% out.
+%\maketitle
+\frame
+{
+%	\frametitle{\fontsize{9.5pt}{5.2pt}\selectfont{\textcolor{orange}{“高通量并发式材料计算算法与软件”年度检查}}}
+\titlepage
+}
+%-----------------------------------------------------------------------------
+
+%------------------------------------------------------------------------------列出全文 outline ---------------------------------------------------------------------------------
+%\section*{}
+%\frame[allowframebreaks]
+%{
+%  \frametitle{Outline}
+%%  \frametitle{\textcolor{mycolor}{\secname}}
+%  \tableofcontents%[current,currentsection,currentsubsection]
+%}
+%%在每个section之前列出全部Outline
+%%类似的在每个subsection之前列出全部Outline是\AtBeginSubsection[]
+%\AtBeginSection[]
+%{
+%  \frame<handout:0>%[allowframebreaks]
+%  {
+%    \frametitle{Outline}
+%%全部Outline中，本部分加亮
+%    \tableofcontents[current,currentsection]
+%  }
+%}
+
+%-----------------------------------------------PPT main Body------------------------------------------------------------------------------------
+\small
+%\section{\rm{VASP~}软件中\rm{PAW~}计算的实现}
+%\frame
+%
+%	\frametitle{\textrm{VASP}计算的特色}
+%	相比于与普通的第一原理计算软件，\textrm{VASP}很好地平衡了计算效率和精度的问题，总的来说，\textrm{VASP}主要通过这几个特色保证了计算的高效能
+%	\begin{itemize}
+%	     \item 迭代与优化算法的多样性\\
+%		     本质上电荷密度迭代 \textrm{\&\&} 体系总能量优化是相同的优化问题，采用了类似的算法\upcite{CMS6-15_1996,PRB54-11169_1996}:\\
+%			\textcolor{blue}{\textrm{Pseudo-Newton、Conjugate-Gradient、Broyden~mix、damping-factor、RMM-DIIS}}
+%	     \item 尽可能采用局域基(原子轨道基)函数:~\\
+%		     \textcolor{blue}{\textrm{LREAL}}=\textcolor{red}{\textrm{.TRUE.}}\\
+%			优化的投影函数也尽可能在实空间表示
+%	     \item \textrm{PAW}原子数据集:\textcolor{blue}{优异的赝势}\upcite{PRB59-1758_1999}
+%	\end{itemize}
+%}
+
+\subsection{\rm{VASP}软件的特色}
+\frame
+{
+	\frametitle{\textrm{VASP}软件的特点}
+	\textrm{VASP}软件是维也纳大学\textrm{(Universit\"at Wien)}~\textrm{G. Kresse}等开发的第一原理模拟软件包
+	\begin{itemize}
+		\item \textrm{VASP}采用\textrm{PAW~(Projector Augmented-Wave)}方法\upcite{PRB50-17953_1994,PRB59-1758_1999}，平衡了赝势方法和全电子计算优点，兼顾了计算的精度和效率
+		\item \textrm{VASP}在实空间优化投影函数\textrm{(Projector)}，将主要的计算过程变换到实空间完成，大大节省了内存的开销%，保证了计算精度和效率
+		\item \textrm{VASP}通过引入多样的优化算法，提高了矩阵对角化和电荷密度搜索的效率
+		\item 在\textrm{VASP}的并行计算中，有效均衡了各节点处理\textrm{FFT}变换负载和通信，提升了软件的并行效率
+	\end{itemize}
+	相比于其他第一原理计算软件，\textrm{VASP}从物理思想与方法、优化算法和并行计算实现等多个方面都有更为出色的性能
+}
+
+\frame
+{
+	\frametitle{\textrm{VASP}的开发团队}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.25in}
+\includegraphics[height=2.70in,width=4.05in,viewport=330 135 1280 770,clip]{Figures/VASP_team.png}
+\caption{\tiny \textrm{The development team of VASP.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{VASP_team}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{双网格技术}
+\begin{figure}[h!]
+	\vspace{-0.2in}
+\centering
+\includegraphics[height=2.3in,width=2.3in,viewport=0 0 420 420,clip]{Figures/VASP_G_max.png}
+\caption{\fontsize{5.2pt}{3.9pt}\selectfont{\textrm{The small sphere contains all plane waves included in the basis set $\vec G<\vec G_\mathrm{cut}$. The charge density contains components up to $2\vec G$ cut (second sphere), and the acceleration a components up to $3\vec G$ cut , which are reflected in (third sphere) because of the finite size of the FFT-mesh. Nevertheless the components a $\vec G$ with $|\vec G|<\vec G$ cut are correct i.e. the small sphere does not intersect with the third large sphere.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{VASP_G_max}
+\end{figure} 
+}
+
+\frame
+{
+	\frametitle{双网格技术}
+\begin{figure}[h!]
+	\vspace{-0.15in}
+\centering
+%\includegraphics[height=2.7in,width=4.0in,viewport=0 0 1180 875,clip]{Figures/dual_grid.png}
+\includegraphics[height=2.75in,width=4.0in,viewport=0 0 800 600,clip]{Figures/dual_grid-2.png}
+\caption{\tiny \textrm{The Schematic description of the dual grid technique.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{PAW_dualgrid}
+\end{figure} 
+}
+
+\frame
+{
+	\frametitle{\textrm{VASP}的优化与迭代收敛}
+	\textrm{VASP}计算中，资源消耗的主要部分是求解\textrm{Kohn-Sham}方程，即偏微分方程\textrm{(Partial Differential Equations,~PDE)}的自洽迭代， 迭代过程主要包括
+	\begin{itemize}
+		\item 矩阵的迭代对角化
+		\item 电荷密度的自洽迭代
+	\end{itemize}
+
+	\vskip 10pt
+	\textrm{VASP}的计算高效得益于求解过程中中应用了多种经典优化算法，保证了迭代计算的快速收敛
+	\begin{itemize} 
+		\item 拟牛顿法\textrm{(Quasi-Newton method)}
+		\item 共轭梯度法\textrm{(Conjugate Gradients method, CG)}
+		\item 残差最小化\textrm{(RMM-DIIS)}方法
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{非线性方程的\rm{Newton~}法求根}
+	\textcolor{blue}{不管哪一种数值算法，其设计原理都是将复杂转化为简单的重复，或者说，通过简单的重复生成复杂}:\\
+	\textcolor{red}{在算法设计和算法实现过程中，重复就是力量}\\
+迭代算法设计:~\textcolor{purple}{“速度”\textrm{vs}“稳定”}
+\begin{figure}[h!]
+\centering
+\animategraphics[autoplay, loop, height=2.0in]{1}{Figures/OP_Newton_}{0}{17}
+\label{Equation_Newon}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{迭代优化基本思想}
+	对于给定函数$f$，在极值点，函数的梯度满足
+	\begin{displaymath}
+		\nabla f=0
+	\end{displaymath}
+	可将函数极值问题转化成方程求根问题
+\begin{figure}[h!]
+\centering
+\includegraphics[height=1.68in,width=1.95in,viewport=30 0 450 360,clip]{Figures/OP_mini-1.png}
+\hskip 0.05in
+\includegraphics[height=1.68in,width=1.95in,viewport=150 20 560 390,clip]{Figures/OP_mini-2.png}
+\label{OP_mini}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{Method of steepest descent}}
+	对于函数$f(\mathbf{x}_0)$当前位置$\mathbf{x}_0$的负梯度方向$\mathbf{g}_0$满足
+	\begin{displaymath}
+		\mathbf{g}_0=-\nabla f(\mathbf{x}_0)
+	\end{displaymath}
+	用$\mathbf{g}_0$方向作为搜索方向，
+	\begin{displaymath}
+		\mathbf{x}=\mathbf{x}_0+\lambda\mathbf{g}_0,\qquad \lambda>0
+	\end{displaymath}
+	因为负的梯度方向为当前位置的最快下降方向，所以被称为“\textcolor{blue}{最陡下降法}”\\
+	对函数$f$最小化参数$\lambda$，可确定下一步$\mathbf{x}_1$，可有
+	\begin{displaymath}
+		\dfrac{\mathrm{d}}{\mathrm{d}\lambda}f(\mathbf{x}_0+\lambda\mathbf{g})_0=\mathbf{g}_0\cdot\nabla f(\mathbf{x}_1)=\mathbf{g}_0\cdot\mathbf{g}_1=0
+	\end{displaymath}
+	因此\textcolor{red}{最速下降法最近邻两步的梯度彼此相互垂直}\\
+	\textcolor{purple}{最陡下降法的收敛:~\\靠近极小值时收敛速度减慢，越接近目标，步长越小，前进越慢}
+}
+
+\frame
+{
+	\frametitle{最陡下降与共轭梯度}
+\begin{figure}[h!]
+\centering
+\includegraphics[height=2.0in,width=3.5in,viewport=0 0 950 590,clip]{Figures/OP_descent_CG.png}
+\label{decent_CG}
+\caption{\tiny \textrm{Schematic illustration of minimization of a function in two dimensions. The steps 1,2,3,~$\cdots$ denote the steepest descent steps and the point - \!- \!- \!- \!- \!- denote the conjugate gradient path that reaches the exact solution after two steps if the functional is quadratic.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{共轭梯度的``轭''}
+\begin{figure}[h!]
+\centering
+\includegraphics[height=2.5in,width=4.0in,viewport=0 0 1050 680,clip]{Figures/Yoke_1.png}
+\label{Horse_Yoke}
+%\caption{\tiny \textrm{Schematic illustration of minimization of a function in two dimensions. The steps 1,2,3,$\cdots$ denote the steepest descent steps and the point $2^{\ast}$ denote the conjugate gradient path that reaches the exact solution after two steps if the functional is quadratic.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{共轭的含义}
+\begin{minipage}{0.63\textwidth}
+\begin{figure}[h!]
+\vskip -23pt
+\centering
+\includegraphics[height=1.6in,width=2.2in,viewport=0 0 600 490,clip]{Figures/Bi-Yoke_1.jpg}
+\vskip 2pt
+\includegraphics[height=1.5in,width=2.2in,viewport=0 0 750 530,clip]{Figures/Conjugate_Pi-bond.png}
+\label{Conjugate_1}
+%\caption{\tiny \textrm{Schematic illustration of minimization of a function in two dimensions. The steps 1,2,3,$\cdots$ denote the steepest descent steps and the point $2^{\ast}$ denote the conjugate gradient path that reaches the exact solution after two steps if the functional is quadratic.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.35\textwidth}
+\begin{figure}[h!]
+\centering
+\includegraphics[height=2.2in,width=1.5in,viewport=0 0 250 390,clip]{Figures/Conjugate_complex.jpg}
+\label{Conjugate_2}
+%\caption{\tiny \textrm{Schematic illustration of minimization of a function in two dimensions. The steps 1,2,3,$\cdots$ denote the steepest descent steps and the point $2^{\ast}$ denote the conjugate gradient path that reaches the exact solution after two steps if the functional is quadratic.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\end{figure}
+\end{minipage}
+}
+
+\frame
+{
+	\frametitle{\textrm{Conjugate gradient}}
+	假设函数在接近极值附件，近似有二次函数的形式
+	\begin{displaymath}
+		f(\mathbf{x})=f_0+\frac12\mathbf{x}\cdot\mathbf{H}{\mathbf{x}}+\cdots
+	\end{displaymath}
+	其中$\mathbf{H}$是\textcolor{blue}{\textrm{Hessian}矩阵}，定义为
+	\begin{displaymath}
+		H_{ij}=\dfrac{\partial^2f(\mathbf{x})}{\partial x_i\partial x_j}
+	\end{displaymath}
+	当$f$的偏导连续，则$\mathbf{H}$是对称矩阵，并且一般要求$\mathbf{H}$是正定的
+	\vskip 20pt
+	设从点$\mathbf{x}_i$出发沿方向$\mathbf{h}_i$(\textcolor{blue}{不再限于梯度$\mathbf{g}_i$方向})，前进到点$\mathbf{x}_{i+1}$，由根据最小化要求
+	\begin{displaymath}
+		\mathbf{h}_i\cdot\nabla f(\mathbf{x}_{i+1})=0
+	\end{displaymath}
+	为确定$\mathbf{x_{i+1}}$点的继续前进方向$\mathbf{h}_{i+1}$，设$\mathbf{x}_{i+1}$可由$\mathbf{x}_i+\lambda\mathbf{h}_{i+1}$得到，因此$\mathbf{x}_{i+1}$的梯度
+	\begin{displaymath}
+		\mathbf{g}_{i+1}=\nabla f(\mathbf{x}_{i+1})=-\mathbf{H}\mathbf{x}_{i+1}=-\mathbf{H}(\mathbf{x}_{i}+\lambda\mathbf{h}_{i+1})
+	\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{\textrm{Conjugate gradient}}
+	与方向$\mathbf{h}_i$相比，梯度的改变为
+	\begin{displaymath}
+		\Delta\mathbf{g}=-\lambda\mathbf{H}\mathbf{h}_{i+1}
+	\end{displaymath}
+
+	根据最小化要求，梯度的改变与$\mathbf{h}_i$方向正交
+	\begin{displaymath}
+		\mathbf{h}_i\cdot\mathbf{H}\mathbf{h}_{i+1}=0
+	\end{displaymath}
+	共轭梯度法算法:对于给定函数
+	\begin{itemize}
+		\item 已知初值$\mathbf{x}_0$和梯度$\mathbf{g}_0$，取初始方向$\mathbf{h_0}=\mathbf{g}_0$(\textcolor{blue}{最陡下降})
+		\item 根据递推关系确定
+			\begin{displaymath}
+				\begin{aligned}
+					\mathbf{g}_{i_+1}=&\mathbf{g}_{i_+1}-\lambda_i\mathbf{H}\mathbf{h}_{i}\qquad \lambda_i=\dfrac{\mathbf{g}_i\cdot\mathbf{g}_i}{\mathbf{g}_i\cdot\mathbf{H}\mathbf{h}_i}\\	
+					\mathbf{h}_{i_+1}=&\mathbf{g}_{i_+1}+\gamma_i\mathbf{h}_{i}\qquad \gamma_i=-\dfrac{\mathbf{g}_{i+1}\cdot\mathbf{H}\mathbf{h}_i}{\mathbf{h}_i\cdot\mathbf{H}\mathbf{h}_i}\\	
+					\mathbf{x}_{i_+1}=&\mathbf{x}_{i}+\lambda_i\mathbf{h}_{i}
+				\end{aligned}
+			\end{displaymath}
+	\end{itemize}
+	\textcolor{purple}{共轭梯度法的收敛:~步收敛性，稳定性高，不需要任何外来参数}
+}
+
+\frame
+{
+	\frametitle{\textrm{Quasi-Newton Methods}}
+	求解方程
+	\begin{displaymath}
+		f(\mathbf{x})=\mathbf{x}
+	\end{displaymath}
+	$\mathbf{x}$是函数$f(\mathbf{x})$的\textcolor{red}{不动点}
+	
+	对这类问题的求解，可以利用迭代关系
+	\begin{displaymath}
+		\mathbf{x}_{i+1}=f(\mathbf{x}_i)\qquad (i=1,2,3,\cdots)
+	\end{displaymath}
+	这称为\textcolor{blue}{不动点迭代法}
+
+	另一种求解策略是定义残量
+	\begin{displaymath}
+		R[\mathbf{x}]=f(\mathbf{x})-\mathbf{x}
+	\end{displaymath}
+	最小化残量的模$|R[\mathbf{x}]|$，特别是当残量$R[\mathbf{x}]$近似是$\mathbf{x}$的线性函数，可有\textcolor{purple}{Jacobian}矩阵
+	\begin{displaymath}
+		\mathbf{J}=\dfrac{\delta R[\mathbf{x}]}{\delta\mathbf{x}}
+	\end{displaymath}
+	可通过迭代关系求解原方程的解
+%	\begin{displaymath}
+		$\mathbf{x}_{i+1}=\mathbf{x}_{i}-\mathbf{J}^{-1}R[\mathbf{x}_{i}]$
+%	\end{displaymath}
+
+	\textcolor{purple}{准\textrm{Newton}法:~靠近极小值时收敛速快;~初值选择不好，易不收敛}
+}
+
+\frame
+{
+	\frametitle{\textrm{VASP}的并行效率}
+	与同类型软件相比，\textrm{VASP}有着优异的并行能力
+\begin{figure}[h!]
+	\vspace{-0.15in}
+\centering
+%\includegraphics[height=2.7in,width=4.0in,viewport=0 0 1180 875,clip]{Figures/dual_grid.png}
+\includegraphics[height=1.55in,width=1.95in,viewport=0 0 240 200,clip]{Figures/VASP-abinit_Li128-1.png}
+\includegraphics[height=1.55in,width=1.95in,viewport=0 0 240 200,clip]{Figures/VASP-abinit_Li128-2.png}
+\caption{\tiny \textrm{The comparison of parallel scaling for ABINIT vs VASP.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{ABINIT_vs_VASP}
+\end{figure} 
+\begin{itemize}
+	\item \textrm{VASP}迭代对角化约束了矩阵的维度，减少了对角化过程中的迭代次数，保证了\textrm{MPI}并行的规模和扩展性
+	\item \textrm{VASP}实施\textrm{FFT}变换时，保证各节点上处理的网格负载均衡
+\end{itemize}
+}
+
+\frame
+{
+	\frametitle{\textrm{VASP}计算的\textrm{FFT}并行实现}
+	\begin{itemize}
+	     \item 中间层设计:~\textrm{FFT}网格、实空间基组与计算节点的匹配\\
+		     \textcolor{red}{通过子程序\textrm{mgrid.F}生成中间层，实现并行负载与计算节点分配的匹配，减少\textrm{FFT}变换和实空间并行的节点间通信}
+\begin{figure}[h!]
+		\vspace{-0.25in}
+	\centering
+%\includegraphics[height=2.7in,width=4.0in,viewport=0 0 1180 875,clip]{Figures/dual_grid.png}
+\includegraphics[height=1.0in,width=4.0in,viewport=0 0 1500 450,clip]{Figures/VASP_FFT-MPI_Reciprocal.png}
+\vskip 0.5pt
+\includegraphics[height=0.7in,width=4.0in,viewport=0 0 730 150,clip]{Figures/VASP_FFT-MPI_Real.png}
+\caption{\tiny \textrm{VASP:~ Reciprocal-Real space layout for grids in MPI.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{MPI-FFT}
+\end{figure} 
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{\textrm{VASP}的通信开销}
+	在高性能的计算队列中，\textrm{VASP}的并行上限可以突破256核，但当并行核数超过百核数量级，并行效率下降非常明显
+\begin{figure}[h!]
+	\vspace{-0.15in}
+\centering
+%\includegraphics[height=2.7in,width=4.0in,viewport=0 0 1180 875,clip]{Figures/dual_grid.png}
+\includegraphics[height=1.55in,width=1.95in,viewport=0 0 240 200,clip]{Figures/VASP-mpi-Li128.png}
+\caption{\tiny \textrm{Time spent in MPI calls with increasing the number of ranks in a VASP calculation.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{VASP_communication}
+\end{figure} 
+
+如能对并行系统与\textrm{VASP}结合作深度改造(如国家超算天津中心方案)，\textrm{VASP}的并行扩展可以到$10^4$核级别，但这一改造需要对底层代码和计算框架作较大规模改动
+}
+
+\frame
+{
+	\frametitle{\textrm{VASP}的\textrm{GPU}加速}
+\textrm{NVIDIA}多年来致力于\textrm{VASP}的\textrm{GPU}加速，取得了一定的成效
+\begin{figure}[h!]
+	\vspace{-0.15in}
+\centering
+%\includegraphics[height=2.7in,width=4.0in,viewport=0 0 1180 875,clip]{Figures/dual_grid.png}
+\includegraphics[height=1.2in,width=4.05in,viewport=0 0 850 260,clip]{Figures/VASP-GPU-CPU.png}
+\caption{\tiny \textrm{Compare of VASP calculation with GPU and CPU.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{VASP_GPU}
+\end{figure} 
+\begin{itemize}
+	\item 通用配置下，\textrm{GPU}对\textrm{VASP}计算有加速效果，一般可提升4$\sim$6倍
+	\item 矩阵对角化的并行算法限制了\textrm{GPU}在第一原理计算中的应用
+	\item \textrm{GPU}加速的模式主要适合于分子动力学计算
+\end{itemize}
+}
+
+\subsection{\rm{VASP}软件的主程序结构}
+%\frame[allowframebreaks]
+\begin{frame}[allowframebreaks]{\textrm{VASP}的主程序结构}
+\begin{figure}[h!]
+\vskip -10pt
+\centering
+\includegraphics[height=2.65in,width=4.0in,viewport=0 360 562 720,clip]{Figures/VASP_main_Flow-1.png}
+\includegraphics[height=2.65in,width=4.0in,viewport=0 0 562 360,clip]{Figures/VASP_main_Flow-1.png}
+\includegraphics[height=2.35in,width=4.0in,viewport=0 370 562 680,clip]{Figures/VASP_main_Flow-2.png}
+\includegraphics[height=2.50in,width=4.0in,viewport=0 0 562 370,clip]{Figures/VASP_main_Flow-2.png}
+\includegraphics[height=2.45in,width=4.0in,viewport=0 350 562 660,clip]{Figures/VASP_main_Flow-3.png}
+\includegraphics[height=2.50in,width=4.0in,viewport=0 0 562 350,clip]{Figures/VASP_main_Flow-3.png}
+\includegraphics[height=2.30in,width=4.0in,viewport=0 215 562 530,clip]{Figures/VASP_main_Flow-4.png}
+\includegraphics[height=1.40in,width=4.0in,viewport=0 0 562 215,clip]{Figures/VASP_main_Flow-4.png}
+\caption{\tiny \textrm{The Flow of main program for VASP.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{FLOW_of_VASP}
+\end{figure}
+\end{frame}
+
+\frame
+{
+	\frametitle{\textrm{VASP}的迭代收敛}
+	完整的\textrm{VASP}计算流程是离子-电子的耦合自洽迭代，称为从头算分子动力学\textrm{(Ab Initio Molecular Dynamics, AIMD)}\upcite{PRL55-2471_1985,PRB47-10142_1993}
+\vskip 3pt
+	{\fontsize{6.2pt}{4.2pt}\selectfont{
+		\begin{itemize}
+		\item \textrm{AIMD}通过在动力学系统中引入经典力学的绝热能量，将\textrm{DFT}与\textrm{MD}关联起来，实现电子与离子运动在同一动力学框架内处理，同时又在时间尺度上保持分离
+		\item \textrm{AIMD}框架下，\textrm{DFT}到\textrm{MD}跨尺度无需再借助势函数模拟，电子弛豫过程与分子动力学可以用类似的迭代方式计算，大大降低了程序的复杂度
+	\end{itemize} }}
+\begin{figure}[h!]
+	\vspace{-0.2in}
+\centering
+%\includegraphics[height=2.7in,width=4.0in,viewport=0 0 1300 960,clip]{Figures/VASP_procedure-full.png}
+\includegraphics[height=1.8in,width=2.6in,viewport=0 0 740 600,clip]{Figures/Ab-initio-Ene.png}
+\caption{\tiny \textrm{The Flow of calculation for the AIMD.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{PAW_AIMD}
+\end{figure} 
+}
+
+\subsection{\rm{VASP}软件概要}
+\frame
+{
+	\frametitle{\textrm{VASP}软件概要}
+	作为第一性原理计算的商用软件，\textrm{VASP}已成为计算材料学领域应用最广泛的软件之一。全球绝大多数超算中心都安装了\textrm{VASP}，据统计，\textrm{VASP}软件的作业机时占用全球总机时的12$\sim$20\%，但由于其%类似于linpack软件，
+属于重型浮点计算密集型应用，实际耗电量占比则高达30$\sim$50\%
+\vskip 3pt
+	{\fontsize{9.0pt}{7.2pt}\selectfont{
+	\begin{itemize}
+		\item \textcolor{blue}{物理上}，\textrm{VASP}基于\textrm{DFT}近似，求解\textrm{Kohn-Sham}方程，并将粒子基态密度问题转化为矩阵的本征函数和本征值问题
+		\item \textcolor{blue}{数学上}，方程求解过程的核心是矩阵对角化与\textrm{PDE}的自洽迭代，即便对于简单体系，也需要完成数十次的迭代，而规模大的计算模拟体系则可能需要成千上万次迭代计算
+		\item \textcolor{blue}{计算过程上}，\textrm{VASP}计算的时长开销主要是本征值求解的矩阵对角化；此外由于算法限制，\textrm{Kohn-Sham}方程作为线性方程组作并行处理时，节点间存在密集的通信。在上千节点，上万计算核的大规模并行系统上，数据通信将严重影响程序的性能，这是当前\textrm{VASP}软件的主要瓶颈
+	\end{itemize}}}
+			\textcolor{magenta}{有必要探索新的并行和优化策略来提升\textrm{VASP}的计算性能}
+}
+
+%------------------------------------------------------------------------Reference----------------------------------------------------------------------------------------------
+		\frame[allowframebreaks]
+{
+\frametitle{主要参考文献}
+\begin{thebibliography}{99}
+{\tiny
+	\bibitem{PRB50-17953_1994}\textrm{P. E. Bl\"ochl. \textit{Phys. Rev.} B, \textbf{50} (1994), 17953}
+	\bibitem{PRB59-1758_1999}\textrm{G. Kresse and D. Joubert \textit{Phys. Rev.} B, \textbf{59} (1999), 1758}
+	\bibitem{PRL55-2471_1985}\textrm{R. Car and M. Parrinello \textit{Phys. Rev.} Lett., \textbf{55} (1985), 2471}
+	\bibitem{PRB47-10142_1993}\textrm{K. Laasonen and A. Pasquarello and R. Car and C. Lee and D. Vanderbilt \textit{Phys. Rev.} B, \textbf{47} (1993), 10142}
+	\bibitem{Elect_Stru}\textrm{Richard. M. Martin. \textit{Electronic Structure: Basic Theory and Practical Methods} (Cambridge University Press, Cambridge, England, 2004)}
+        \bibitem{Singh}\textrm{D. J. Singh. \textit{Plane Wave, PseudoPotential and the LAPW method} (Kluwer Academic, Boston,USA, 1994)}					%
+}
+\end{thebibliography}
+%\nocite*{}
+}
+%-----------------------------------------------------------------------------------------------------------------------------------------------------------------------%
