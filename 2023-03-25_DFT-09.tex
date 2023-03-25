@@ -238,6 +238,7 @@
 	\frametitle{\textrm{Quasi-Newton Method}}
 	\textrm{Newton}法收敛速度快，但计算过程中需计算\textrm{Hessian}矩阵(而且无法保证正定)，因此有了\textrm{Quasi-Newton}方法\\
 	思想:~\textcolor{blue}{构造可以近似\textrm{Hessian}矩阵(或逆)的正定对称阵}
+		{\fontsize{7.2pt}{4.2pt}\selectfont{
 	\begin{displaymath}
 		f(\mathbf{x})\approx f(\mathbf{x}_{k+1})+\nabla f(\mathbf{x}_{k+1})(\mathbf{x}-\mathbf{x}_{k+1})+\dfrac12(\mathbf{x}-\mathbf{x}_{k+1})\nabla^2f(\mathbf{x}_{k+1})(\mathbf{x}-\mathbf{x}_{k+1})
 	\end{displaymath}
@@ -256,7 +257,8 @@
 有
 \begin{displaymath}
 	\mathbf{y}_k\approx\mathbf{H}_{k+1}\cdot\mathbf{s}_k\quad\mbox{或}\quad\mathbf{s}_k\approx\mathbf{H}_{k+1}^{-1}\mathbf{y}_{k}
-\end{displaymath}
+\end{displaymath}}}
+{\fontsize{9.2pt}{4.2pt}\selectfont{\textcolor{purple}{\textrm{Quasi-Newton}法:~靠近极小值时收敛速快;~初值选择不好，易不收敛}}}
 }
 
 \frame
@@ -407,12 +409,12 @@ x_6 &=1.0430906366 ~\Longrightarrow \\lg(10+1.0430906366)&=1.04430906366
 
 \frame
 {
-	\frametitle{\textrm{Residue minimization and Quasi-Newton Methods}}
+	\frametitle{\textrm{Residue minimization Methods}}
 	另一种求解策略是定义残量
 	\begin{displaymath}
 		R[\mathbf{x}]=f(\mathbf{x})-\mathbf{x}
 	\end{displaymath}
-	最小化残量的模$|R[\mathbf{x}]|$，特别是当残量$R[\mathbf{x}]$近似是$\mathbf{x}$的线性函数，可有\textcolor{purple}{Jacobian}矩阵
+	最小化残量的模$|R[\mathbf{x}]|$，特别是当残量$R[\mathbf{x}]$近似是$\mathbf{x}$的线性函数，可有\textcolor{purple}{\textrm{Jacobian}矩阵}
 	\begin{displaymath}
 		\mathbf{J}=\dfrac{\delta R[\mathbf{x}]}{\delta\mathbf{x}}
 	\end{displaymath}
@@ -421,7 +423,11 @@ x_6 &=1.0430906366 ~\Longrightarrow \\lg(10+1.0430906366)&=1.04430906366
 		$\mathbf{x}_{i+1}=\mathbf{x}_{i}-\mathbf{J}^{-1}R[\mathbf{x}_{i}]$
 %	\end{displaymath}
 
-	\textcolor{purple}{准\textrm{Newton}法:~靠近极小值时收敛速快;~初值选择不好，易不收敛}
+		\begin{itemize}
+			\item \textrm{Direct Inversion in the Iterative Subspace (DIIS)}是\textrm{Pulay}引入的，也就是俗称的\textcolor{blue}{\textrm{Pulay}混合}
+			\item 一般地说，\textrm{DIIS}是适用于不动点迭代的加速收敛方法\\
+				对于线性问题，\textrm{DIIS}等价于\textrm{Generalised minimal residual (GMRES)}方法
+		\end{itemize}
 }
 
 \frame
