@@ -289,7 +289,7 @@
 
 \frame
 {
-	\frametitle{\textrm{Quasi-Newton Methods}}
+	\frametitle{\textrm{Fixed Point}}
 	求解方程
 	\begin{displaymath}
 		f(\mathbf{x})=\mathbf{x}
@@ -302,6 +302,44 @@
 	\end{displaymath}
 	这称为\textcolor{blue}{不动点迭代法}
 
+	{\fontsize{6.2pt}{4.2pt}\selectfont{例如求解方程
+	\begin{displaymath}
+%		\begin{aligned}
+			\lg(10+x)~=~x%\\
+			\Longrightarrow	\textcolor{blue}{x\approx 1.04309063}
+%		\end{aligned}
+		\end{displaymath}}}
+\begin{minipage}[b]{0.40\textwidth}
+		{\fontsize{3.2pt}{1.2pt}\selectfont{
+	\begin{displaymath}
+	\vspace{-0.11in}
+		\begin{aligned}
+			x_0&=1 ~\Longrightarrow \\\lg(10+1)&=1.041392685\\
+x_1 &=1.041392685 ~\Longrightarrow \\lg(10+1.041392685)&=1.0430238558\\
+x_2 &=1.043023856 ~\Longrightarrow \\lg(10+1.043023856)&=1.0430880104\\
+x_3 &=1.043088010 ~\Longrightarrow \\lg(10+1.043088010)&=1.0443090533\\
+x_4 &=1.043090533 ~\Longrightarrow \\lg(10+1.043090533)&=1.04430906326\\
+x_4 &=1.0430906326 ~\Longrightarrow \\lg(10+1.0430906326)&=1.04430906365\\
+x_5 &=1.0430906365 ~\Longrightarrow \\lg(10+1.0430906365)&=1.04430906366\\
+x_6 &=1.0430906366 ~\Longrightarrow \\lg(10+1.0430906366)&=1.04430906366
+		\end{aligned}
+	\end{displaymath}}}
+\end{minipage}
+\hfill
+\begin{minipage}[b]{0.56\textwidth}
+\begin{figure}[h!]
+	\vspace{-0.21in}
+\centering
+\includegraphics[height=1.3in,width=2.0in,viewport=0 0 2500 1600,clip]{Figures/solve_lg10.png}
+%\caption{\tiny \textrm{The comparison of parallel scaling for ABINIT vs VASP.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{solution-log_10}
+\end{figure}
+\end{minipage}
+}
+
+\frame
+{
+	\frametitle{\textrm{Residue minimization and Quasi-Newton Methods}}
 	另一种求解策略是定义残量
 	\begin{displaymath}
 		R[\mathbf{x}]=f(\mathbf{x})-\mathbf{x}
