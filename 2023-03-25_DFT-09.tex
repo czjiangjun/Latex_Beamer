@@ -193,13 +193,70 @@
 
 \frame
 {
-	\frametitle{最陡下降与共轭梯度}
-\begin{figure}[h!]
-\centering
-\includegraphics[height=2.0in,width=3.5in,viewport=0 0 950 590,clip]{Figures/OP_descent_CG.png}
-\label{decent_CG}
-\caption{\tiny \textrm{Schematic illustration of minimization of a function in two dimensions. The steps 1,2,3,~$\cdots$ denote the steepest descent steps and the point - \!- \!- \!- \!- \!- denote the conjugate gradient path that reaches the exact solution after two steps if the functional is quadratic.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\end{figure}
+	\frametitle{\textrm{Newton-Raphson Method}}
+	\textrm{Newton Method}是一种在实数和复数域上近似解方程的方法。\\
+	思想:~\textcolor{blue}{用函数的\textrm{Taylor}级数的前几项来寻找方程$f(x)=0$的根}\\
+	由\textrm{Newton}迭代公式有
+	\begin{displaymath}
+		x_{n+1}=x_n-\dfrac{f(x_n)}{f^{\prime}(x_n)}
+	\end{displaymath}
+	用\textrm{Taylor}级数在$a$附近展开$f(x)$
+	\begin{displaymath}
+		f(x)=\sum_{n=0}^{\infty}\dfrac{f^{(n)}(a)}{n!}(x-a)^n
+	\end{displaymath}
+	如果只取其前两项逼近$f(x)$，可有
+	\begin{displaymath}
+		f(x)=f(a)+f^{(1)}(a)(x-a)
+	\end{displaymath}
+	不难看出$x=a-\frac{f(a)}{f^{(1)}(a)}$时，有$f(x)=0$
+}
+
+\frame
+{
+	\frametitle{\textrm{Newton-Raphson Method}}
+	对于求极值问题(对应导数为零)，就转换成
+	\begin{displaymath}
+		x_{n+1}=x_{n}-\dfrac{f^{(1)}(x_n)}{f^{(2)}(x_n)}
+	\end{displaymath}
+	对高维函数，一阶导数是梯度，二阶导数是\textrm{Hessian}矩阵$\mathbf{H}f(\mathbf{x})=[\frac{\partial^2f}{\partial x_i\partial x_j}]_{n\times n}$，有
+	\begin{displaymath}
+		x_{n+1}=x_n-\alpha[\mathbf{H}f(x_n)]^{-1}\nabla f(x_n)\quad n\geqslant0
+	\end{displaymath}
+	这里$\alpha$是可调参数，$\mathbf{H}$是\textrm{Hessian}矩阵
+
+	\begin{itemize}
+		\item 最陡下降法是用一个平面去拟合当前位置的局部曲面
+		\item \textrm{Newton}法是用一个二次曲面拟合当前位置的局部曲面
+	\end{itemize}
+通常情况下，二次曲面的拟合会比平面更好，所以牛顿法选择的路径会更符合真实的最优下降路径(收敛更快)
+
+\textcolor{magenta}{\textrm{Newton}法的缺点:~\textrm{Hessian}矩阵求逆的计算成本和复杂度较高}
+}
+
+\frame
+{
+	\frametitle{\textrm{Quasi-Newton Method}}
+	\textrm{Newton}法收敛速度快，但计算过程中需计算\textrm{Hessian}矩阵(而且无法保证正定)，因此有了\textrm{Quasi-Newton}方法\\
+	思想:~\textcolor{blue}{构造可以近似\textrm{Hessian}矩阵(或逆)的正定对称阵}
+	\begin{displaymath}
+		f(\mathbf{x})\approx f(\mathbf{x}_{k+1})+\nabla f(\mathbf{x}_{k+1})(\mathbf{x}-\mathbf{x}_{k+1})+\dfrac12(\mathbf{x}-\mathbf{x}_{k+1})\nabla^2f(\mathbf{x}_{k+1})(\mathbf{x}-\mathbf{x}_{k+1})
+	\end{displaymath}
+	两边作用梯度算符$\nabla$
+	\begin{displaymath}
+		\nabla f(\mathbf{x})\approx\nabla f(\mathbf{x}_{k+1})+\mathbf{H}_{k+1}(\mathbf{x}-\mathbf{x}_{k+1})
+	\end{displaymath}
+	当$\mathbf{x}=\mathbf{x}_k$有
+	\begin{displaymath}
+		\mathbf{g}_{k+1}-\mathbf{g}_k\approx\mathbf{H}_{k+1}(\mathbf{x}-\mathbf{x}_k)
+	\end{displaymath}
+令
+\begin{displaymath}
+	\mathbf{s}_k=\mathbf{x}_{k+1}-\mathbf{x}_k\quad\mathbf{y}_k=\mathbf{g}_{k+1}-\mathbf{g}_k
+\end{displaymath}
+有
+\begin{displaymath}
+	\mathbf{y}_k\approx\mathbf{H}_{k+1}\cdot\mathbf{s}_k\quad\mbox{或}\quad\mathbf{s}_k\approx\mathbf{H}_{k+1}^{-1}\mathbf{y}_{k}
+\end{displaymath}
 }
 
 \frame
@@ -285,6 +342,17 @@
 			\end{displaymath}
 	\end{itemize}
 	\textcolor{purple}{共轭梯度法的收敛:~步收敛性，稳定性高，不需要任何外来参数}
+}
+
+\frame
+{
+	\frametitle{最陡下降与共轭梯度}
+\begin{figure}[h!]
+\centering
+\includegraphics[height=2.0in,width=3.5in,viewport=0 0 950 590,clip]{Figures/OP_descent_CG.png}
+\label{decent_CG}
+\caption{\tiny \textrm{Schematic illustration of minimization of a function in two dimensions. The steps 1,2,3,~$\cdots$ denote the steepest descent steps and the point - \!- \!- \!- \!- \!- denote the conjugate gradient path that reaches the exact solution after two steps if the functional is quadratic.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\end{figure}
 }
 
 \frame
