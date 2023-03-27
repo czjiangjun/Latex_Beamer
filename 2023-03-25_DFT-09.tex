@@ -214,15 +214,15 @@
 \frame
 {
 	\frametitle{\textrm{Newton-Raphson Method}}
-	对于求极值问题(对应导数为零)，就转换成
+	对于函数求极值问题(函数的导数为零)，就转换成
 	\begin{displaymath}
 		x_{n+1}=x_{n}-\dfrac{f^{(1)}(x_n)}{f^{(2)}(x_n)}
 	\end{displaymath}
-	对高维函数，一阶导数是梯度，二阶导数是\textrm{Hessian}矩阵$\mathbf{H}f(\mathbf{x})=[\frac{\partial^2f}{\partial x_i\partial x_j}]_{n\times n}$，有
+	对高维函数，一阶导数是梯度，二阶导数是\textcolor{blue}{\textrm{Hessian}矩阵}\\$\mathbf{H}f(\mathbf{x})=[\frac{\partial^2f}{\partial x_i\partial x_j}]_{n\times n}$，有
 	\begin{displaymath}
 		x_{n+1}=x_n-\alpha[\mathbf{H}f(x_n)]^{-1}\nabla f(x_n)\quad n\geqslant0
 	\end{displaymath}
-	这里$\alpha$是可调参数，$\mathbf{H}$是\textrm{Hessian}矩阵
+	这里$\alpha$是可调参数%，$\mathbf{H}$是\textrm{Hessian}矩阵
 
 	\begin{itemize}
 		\item 最陡下降法是用一个平面去拟合当前位置的局部曲面
@@ -299,17 +299,20 @@
 \frame
 {
 	\frametitle{\textrm{Conjugate gradient}}
-	假设函数在接近极值附件，近似有二次函数的形式
+	假设函数在接近极值附件，近似有\textcolor{magenta}{二次函数}的形式
 	\begin{displaymath}
 		f(\mathbf{x})=f_0+\frac12\mathbf{x}\cdot\mathbf{H}{\mathbf{x}}+\cdots
 	\end{displaymath}
-	其中$\mathbf{H}$是\textcolor{blue}{\textrm{Hessian}矩阵}，定义为
+	其中$\mathbf{H}$是\textcolor{blue}{\textrm{Hessian}矩阵}%，定义为
+%	\begin{displaymath}
+%		H_{ij}=\dfrac{\partial^2f(\mathbf{x})}{\partial x_i\partial x_j}
+%	\end{displaymath}
+	当$f$的偏导连续，则$\mathbf{H}$是对称矩阵，并且一般要求$\mathbf{H}$是正定的。相应的梯度表示为
 	\begin{displaymath}
-		H_{ij}=\dfrac{\partial^2f(\mathbf{x})}{\partial x_i\partial x_j}
+		\mathbf{g}=\nabla f(\mathbf{x})=-\dfrac{\partial f}{\partial\mathbf{x}}=-\mathbf{H}\cdot\mathbf{x}
 	\end{displaymath}
-	当$f$的偏导连续，则$\mathbf{H}$是对称矩阵，并且一般要求$\mathbf{H}$是正定的
 	\vskip 20pt
-	设从点$\mathbf{x}_i$出发沿方向$\mathbf{h}_i$(\textcolor{blue}{不再限于梯度$\mathbf{g}_i$方向})，前进到点$\mathbf{x}_{i+1}$，由根据最小化要求
+	设从点$\mathbf{x}_i$出发沿方向$\mathbf{h}_i$(\textcolor{blue}{不再限于梯度$\mathbf{g}_i$方向})，前进到点$\mathbf{x}_{i+1}$，根据最小化要求
 	\begin{displaymath}
 		\mathbf{h}_i\cdot\nabla f(\mathbf{x}_{i+1})=0
 	\end{displaymath}
@@ -329,7 +332,7 @@
 
 	根据最小化要求，梯度的改变与$\mathbf{h}_i$方向正交
 	\begin{displaymath}
-		\mathbf{h}_i\cdot\mathbf{H}\mathbf{h}_{i+1}=0
+		\mathbf{h}_i\cdot\mathbf{H}\cdot\mathbf{h}_{i+1}=0
 	\end{displaymath}
 	共轭梯度法算法:对于给定函数
 	\begin{itemize}
@@ -416,18 +419,78 @@ x_6 &=1.0430906366 ~\Longrightarrow \\lg(10+1.0430906366)&=1.04430906366
 	\end{displaymath}
 	最小化残量的模$|R[\mathbf{x}]|$，特别是当残量$R[\mathbf{x}]$近似是$\mathbf{x}$的线性函数，可有\textcolor{purple}{\textrm{Jacobian}矩阵}
 	\begin{displaymath}
-		\mathbf{J}=\dfrac{\delta R[\mathbf{x}]}{\delta\mathbf{x}}
+		\mathbf{J}\equiv\dfrac{\delta R[\mathbf{x}]}{\delta\mathbf{x}}
 	\end{displaymath}
-	可通过迭代关系求解原方程的解
-%	\begin{displaymath}
-		$\mathbf{x}_{i+1}=\mathbf{x}_{i}-\mathbf{J}^{-1}R[\mathbf{x}_{i}]$
-%	\end{displaymath}
+	然后可以用\textrm{Quasi-Newton}方法最小化残量\\具体地可通过迭代关系求解原方程的解
+	\begin{displaymath}
+		\mathbf{x}_{i+1}=\mathbf{x}_{i}-\mathbf{J}^{-1}R[\mathbf{x}_{i}]
+	\end{displaymath}
+		但是一般来说\textrm{Jacobian}矩阵很可能未知(或者很难求逆)，只有另图别策(在\textrm{Krylov}子空间中迭代求解)，一般称为迭代子空间求逆(\textrm{Discrete Inversion in the Iterative Subspace,~DIIS})
+}
+	
+\frame
+{
+	\frametitle{\textrm{Pulay DIIS full-subspace Metheod}}
+	\textrm{DIIS}是\textrm{Pulay}引入的，俗称的\textcolor{blue}{\textrm{Pulay}混合}\footnote{\fontsize{5.2pt}{1.2pt}\selectfont{一般地说，\textrm{DIIS}是通用的不动点迭代的加速收敛方法\\对于线性问题，\textrm{DIIS}等价于\textrm{Generalised minimal residual (GMRES)}方法}}\\
+	其思想是:~对迭代逼近的矢量$\mathbf{x}_{i}$，可通过将之前得到的所有矢量$\mathbf{x}$线性组合得到，组合系数则由对其残矢最小化确定。概要如下\\
+	{\fontsize{5.2pt}{1.2pt}\selectfont{在由$\mathbf{x}_i$构成的完全\textrm{Krylov}子空间内，有矢量
+	\begin{displaymath}
+		\mathbf{x}_{i+1}=\sum_{j=0}^{i}a_j\mathbf{x}_j=c_0\mathbf{x}_0+\sum_{j=1}^ic_j\delta\mathbf{x}_j
+	\end{displaymath}
+	若假设该矢量的残矢$R[\mathbf{x}_{i+1}]$与矢量$\mathbf{x}_{i+1}$满足相同的线性化要求
+	\begin{displaymath}
+		R[\mathbf{x}_{i+1}]=R[\sum_{j=0}^ia_j\mathbf{x}_j]=\sum_{j=0}^ia_jR[\mathbf{x}_j]
+	\end{displaymath}
+	通过最小化残矢的模
+	\begin{displaymath}
+		\langle R[\mathbf{x}_{i+1}]|R[\mathbf{x}_{i+1}]\rangle=\sum_{j,k}a_ja_kA_{j,k};A_{j,k}=\langle R[\mathbf{x}_j]|R[\mathbf{x}_k]\rangle
+	\end{displaymath}
+	即可确定矢量$\mathbf{x}_{i+1}$
 
+	在电子结构计算中，残矢最小化的约束条件最常用的有
+	\begin{itemize}
+		\item 电子能带的本征矢正交
+		\item 电荷密度混合时，电荷密度守恒，即$\sum\limits_{j=0}^i a_j=1$，可有\textcolor{blue}{$a_j=\sum\limits_jA_{j,i}^{-1}/\sum\limits_{j,k}a_ja_kA_{j,k}^{-1}$}
+	\end{itemize}
+}}
+}
+
+\frame
+{
+	\frametitle{\textrm{Broyden Jacobian update method}}
+	最初的\textrm{Broyden}方法是\textcolor{magenta}{迭代过程中连续产生\textrm{Jacobian}逆阵的方案}
+	{\fontsize{5.2pt}{1.2pt}\selectfont{
 		\begin{itemize}
-			\item \textrm{Direct Inversion in the Iterative Subspace (DIIS)}是\textrm{Pulay}引入的，也就是俗称的\textcolor{blue}{\textrm{Pulay}混合}
-			\item 一般地说，\textrm{DIIS}是适用于不动点迭代的加速收敛方法\\
-				对于线性问题，\textrm{DIIS}等价于\textrm{Generalised minimal residual (GMRES)}方法
+			\item 作为迭代起点，首先初猜合理的$\mathbf{J_0}^{-1}$(比如$\mathbf{J}_0^{-1}=\alpha\mathbf{I}$)
+			\item 迭代开始的若干步内，保持$\mathbf{J}^{-1}$为初猜形式;~后续$\mathbf{J}^{-1}$再逐步更新:~
+		因为$\mathbf{J}^{-1}$始终是近似的，有
+				\begin{displaymath}
+					\begin{aligned}
+						\delta\mathbf{x}_i=&\mathbf{x}_i-\mathbf{x}_{i-1}=-\mathbf{J}_{i-1}^{-1}R_{i-1}\\
+						\delta R_i=&R_i-R_{i-1}
+					\end{aligned}
+				\end{displaymath}
+				因此要求每一步迭代更新的$\mathbf{J}_i^{-1}$满足
+\begin{displaymath}
+	0=\delta\mathbf{x}_i-\mathbf{J}_i^{-1}\delta R_i
+\end{displaymath}
+由此得到构成$M\times M$的$\mathbf{J}_i^{-1}$的$M$个方程
+\item 最小化\textrm{Jacobian}逆阵的模变化
+	\begin{displaymath}
+		Q=||\mathbf{J}_{i}^{-1}-\mathbf{J}_{i}^{-1}||
+	\end{displaymath}
+	\textcolor{magenta}{\begin{displaymath}
+			\mathbf{J}_i^{-1}=\mathbf{J}_{i-1}^{-1}\dfrac{(\delta\mathbf{x}_i-\mathbf{J}_i^{-1}\delta R_i)\delta R_i}{\langle\delta R_i|\delta R_i\rangle}
+		\end{displaymath}}
 		\end{itemize}
+}}
+	改进的\textrm{Broyden}方法与\textrm{DIIS}方法的结果类似，可以节约内存
+	{\fontsize{5.2pt}{1.2pt}\selectfont{
+	\begin{displaymath}
+		Q^{\mathrm{modified}}=\sum_{j=1}^i w_j|\delta\mathbf{x}_j-\mathbf{J}_i^{-1}\delta R_j|^2+w_0||\mathbf{J}_i^{-1}-\mathbf{J}_0^{-1}||
+	\end{displaymath}
+	通过参数$w_j$筛选出迭代步中与之最密切关联的贡献
+}}
 }
 
 \frame
