@@ -443,9 +443,9 @@ x_6 &=1.0430906366 %~\Longrightarrow
 \frame
 {
 	\frametitle{\textrm{Pulay DIIS full-subspace Metheod}}
-	\textrm{DIIS}是\textrm{Pulay}引入的，俗称的\textcolor{blue}{\textrm{Pulay}混合}\footnote{\fontsize{5.2pt}{1.2pt}\selectfont{一般地说，\textrm{DIIS}是通用的不动点迭代的加速收敛方法\\对于线性问题，\textrm{DIIS}等价于\textrm{GMRES}方法}}\\
-	其思想是:~对迭代逼近的矢量$\mathbf{x}_{i}$，可通过将之前得到的所有矢量$\mathbf{x}$线性组合得到，组合系数则由对其残矢最小化确定。概要如下\\
-	{\fontsize{5.2pt}{1.2pt}\selectfont{在由$\mathbf{x}_i$构成的完全\textrm{Krylov}子空间内，有矢量
+	{\fontsize{7.2pt}{1.2pt}\selectfont{\textrm{DIIS}是\textrm{Pulay}引入的，俗称的\textcolor{blue}{\textrm{Pulay}混合}\footnote{\fontsize{5.2pt}{1.2pt}\selectfont{一般地说，\textrm{DIIS}是通用的不动点迭代的加速收敛方法;~对于线性问题，\textrm{DIIS}等价于\textrm{GMRES}方法}}}}\\
+	{\fontsize{5.2pt}{1.2pt}\selectfont{其思想是:~对迭代逼近的矢量$\mathbf{x}_{i}$，可通过将之前得到的所有矢量$\mathbf{x}$线性组合得到，组合系数则由对其残矢最小化确定。概要如下\\
+	在由$\mathbf{x}_i$构成的完全\textrm{Krylov}子空间内，有矢量
 	\begin{displaymath}
 		\mathbf{x}_{i+1}=\sum_{j=0}^{i}a_j\mathbf{x}_j=c_0\mathbf{x}_0+\sum_{j=1}^ic_j\delta\mathbf{x}_j
 	\end{displaymath}
@@ -462,7 +462,14 @@ x_6 &=1.0430906366 %~\Longrightarrow
 	在电子结构计算中，残矢最小化的约束条件最常用的有
 	\begin{itemize}
 		\item 电子能带的本征矢正交
-		\item 电荷密度混合时，电荷密度守恒，即$\sum\limits_{j=0}^i a_j=1$，可有\textcolor{blue}{$a_j=\sum\limits_jA_{j,i}^{-1}/\sum\limits_{j,k}a_ja_kA_{j,k}^{-1}$}
+		\item 电荷密度混合时，电荷密度守恒，即$\sum\limits_{j=0}^i a_j=1$，可有\textcolor{blue}{$a_j=\sum\limits_jA_{j,i}^{-1}/\sum\limits_{j,k}a_ja_kA_{j,k}^{-1}=\sum\limits_jA_{j,i}^{-1}/\sum\limits_{j,k}A_{j,k}^{-1}$
+%				\begin{displaymath}
+%					\begin{aligned}
+%						a_j=\sum\limits_jA_{j,i}^{-1}/\sum\limits_{j,k}&\underbrace{a_ja_k}A_{j,k}^{-1}\\
+%						&\mbox{\textcolor{purple}{可略去}}
+%					\end{aligned}
+%				\end{displaymath}
+		}
 	\end{itemize}
 }}
 }
