@@ -442,59 +442,6 @@ x_6 &=1.0430906366 %~\Longrightarrow
 	
 \frame
 {
-	\frametitle{\textrm{Anderson acceleration}}
-	\textrm{Donald~G.~Anderson}给出了加速不动点迭代的求解思路
-	{\fontsize{7.2pt}{1.2pt}\selectfont{
-	\begin{displaymath}
-		\begin{aligned}
-			\mathbf{x}_1=&f(\mathbf{x_0})\\
-			\forall k=&1,2,\cdots\\
-			&m_k=\min\{m,k\}\\
-			&R_k=[R_{k-m_k},\cdots,R_k]\\
-			&\alpha_k={\mathrm{argmin}}_\nolimits{\alpha\in A_k}||R_k\alpha||_2,~\mbox{这里}A_k=\{\alpha=(\alpha_0,\alpha_1,\cdots,\alpha_{m_k})~\mbox{并满足}\sum\limits_{i=0}^n\alpha_i=1\}\\
-			&\mathbf{x}_{k+1}=\sum_{i=0}^{m_k}(\alpha_k)_if_{k-m_k+i}
-		\end{aligned}
-	\end{displaymath}
-}}
-\begin{itemize}
-	\item \textrm{Anderson}本质上是\textrm{Quasi-Newton}方法求解非线性方程(是割线方法的推广)，也可以归入\textrm{Broyden}方法一类
-
-	\item \textrm{Anderson}加速数学形式上可以看成\textrm{Generalized Minimal RESidual Method~(GMRES)}迭代推广到非线性方程求解，只是作了适当的截断
-\end{itemize}
-}
-
-\frame
-{
-	\frametitle{\textrm{Anderson acceleration}}
-	{\fontsize{6.2pt}{1.2pt}\selectfont{
-	具体地，在迭代过程中，引入中间变量
-	\begin{displaymath}
-		\mathbf{x}_{i+1}^{\prime}=\alpha_k\mathbf{X}_k
-	\end{displaymath}
-	这里$\alpha_k$是组合系数$a_k\in A_k~$,~$\mathbf{X}_k=[\mathbf{x}_{k-m_k},\cdots, \mathbf{x}_k]$是含有最近$m_k+1$个矢量的矩阵\\
-	选择合适的$\mathbf{x}_{k+1}^{\prime}$使得$||R(\mathbf{x}_{k+1}^{\prime})||$最小化
-
-	因为$\alpha_k$的求和为1，有一阶近似
-	\begin{displaymath}
-		R(\mathbf{X}_k\alpha_k)=R\bigg(\sum_{i=0}^{m_k}(\alpha_k)_i\mathbf{x}_{k-m_k+i}\bigg)\approx\sum_{i=0}^{m_k}(\alpha_k)_iR(\mathbf{x}_{k-m_k+i})=R_k\alpha_k
-	\end{displaymath}
-	因此可以通过最小化$||R_k\alpha||_2$确定$\alpha$，进而确定$\mathbf{x}_{k+1}^{\prime}$
-	
-	考虑到$f(\mathbf{x})=\mathbf{x}$的精确解$\mathbf{x}^{\ast}$，因此$f(\mathbf{x}_{k+1}^{\prime})$可能比$\mathbf{x}_{k+1}^{\prime}$更接近$\mathbf{x}^{\ast}$，因此最终方程的解选为$\mathbf{x}_{k+1}=f(\mathbf{x}_{k+1}^{\prime})$而非$\mathbf{x}_{k+1}=\mathbf{x}_{k+1}^{\prime}$
-
-类似地，因为$\alpha_k$的求和为1，有一阶近似
-\begin{displaymath}
-	f(\mathbf{x}_{k+1}^{\prime})=f\bigg(\sum_{i=0}^{m_k}(\alpha_k)_i\mathbf{x}_{k-m_k+i}\bigg)\approx\sum_{i=0}^{m_k}(\alpha_k)_if(\mathbf{x}_{k-m_k+i})=\sum_{i=0}^{m_k}(\alpha_k)_if_{k-m_k+i}
-\end{displaymath}
-最终确定方程的解为
-\begin{displaymath}
-	\mathbf{x}_{k+1}=\sum_{i=0}^{m_k}(\alpha_k)_if_{k-m_k+i}
-\end{displaymath}
-	}}
-}
-
-\frame
-{
 	\frametitle{\textrm{Pulay DIIS full-subspace Metheod}}
 	\textrm{DIIS}是\textrm{Pulay}引入的，俗称的\textcolor{blue}{\textrm{Pulay}混合}\footnote{\fontsize{5.2pt}{1.2pt}\selectfont{一般地说，\textrm{DIIS}是通用的不动点迭代的加速收敛方法\\对于线性问题，\textrm{DIIS}等价于\textrm{GMRES}方法}}\\
 	其思想是:~对迭代逼近的矢量$\mathbf{x}_{i}$，可通过将之前得到的所有矢量$\mathbf{x}$线性组合得到，组合系数则由对其残矢最小化确定。概要如下\\
@@ -556,6 +503,231 @@ x_6 &=1.0430906366 %~\Longrightarrow
 	\end{displaymath}
 	通过参数$w_j$筛选出迭代步中与之最密切关联的贡献
 }}
+}
+
+\frame
+{
+	\frametitle{\textrm{Anderson acceleration}}
+	\textrm{Donald~G.~Anderson}给出了加速不动点迭代的求解思路
+	{\fontsize{7.2pt}{1.2pt}\selectfont{
+	\begin{displaymath}
+		\begin{aligned}
+			\mathbf{x}_1=&f(\mathbf{x_0})\\
+			\forall k=&1,2,\cdots\\
+			&m_k=\min\{m,k\}\\
+			&R_k=[R_{k-m_k},\cdots,R_k]\\
+			&\alpha_k={\mathrm{argmin}}_{\alpha\in A_k}||R_k\alpha||_2,~\mbox{这里}A_k=\{\alpha=(\alpha_0,\alpha_1,\cdots,\alpha_{m_k})~\mbox{并满足}\sum\limits_{i=0}^n\alpha_i=1\}\\
+			&\mathbf{x}_{k+1}=\sum_{i=0}^{m_k}(\alpha_k)_if_{k-m_k+i}
+		\end{aligned}
+	\end{displaymath}
+}}
+\begin{itemize}
+	\item \textrm{Anderson}本质上是\textrm{Quasi-Newton}方法求解非线性方程(是割线方法的推广)，也可以归入\textrm{Broyden}方法一类
+
+	\item \textrm{Anderson}加速数学形式上可以看成\textrm{Generalized Minimal RESidual Method~(GMRES)}迭代推广到非线性方程求解，只是作了适当的截断
+\end{itemize}
+}
+
+\frame
+{
+	\frametitle{\textrm{Anderson acceleration}}
+	{\fontsize{6.2pt}{1.2pt}\selectfont{
+	具体地，在迭代过程中，引入中间变量
+	\begin{displaymath}
+		\mathbf{x}_{i+1}^{\prime}=\alpha_k\mathbf{X}_k
+	\end{displaymath}
+	这里$\alpha_k$是组合系数$a_k\in A_k~$,~$\mathbf{X}_k=[\mathbf{x}_{k-m_k},\cdots, \mathbf{x}_k]$是含有最近$m_k+1$个矢量的矩阵\\
+	选择合适的$\mathbf{x}_{k+1}^{\prime}$使得$||R(\mathbf{x}_{k+1}^{\prime})||$最小化
+
+	因为$\alpha_k$的求和为1，有一阶近似
+	\begin{displaymath}
+		R(\mathbf{X}_k\alpha_k)=R\bigg(\sum_{i=0}^{m_k}(\alpha_k)_i\mathbf{x}_{k-m_k+i}\bigg)\approx\sum_{i=0}^{m_k}(\alpha_k)_iR(\mathbf{x}_{k-m_k+i})=R_k\alpha_k
+	\end{displaymath}
+	因此可以通过最小化$||R_k\alpha||_2$确定$\alpha$，进而确定$\mathbf{x}_{k+1}^{\prime}$
+	
+	考虑到$f(\mathbf{x})=\mathbf{x}$的精确解$\mathbf{x}^{\ast}$，因此$f(\mathbf{x}_{k+1}^{\prime})$可能比$\mathbf{x}_{k+1}^{\prime}$更接近$\mathbf{x}^{\ast}$，因此最终方程的解选为$\mathbf{x}_{k+1}=f(\mathbf{x}_{k+1}^{\prime})$而非$\mathbf{x}_{k+1}=\mathbf{x}_{k+1}^{\prime}$
+
+类似地，因为$\alpha_k$的求和为1，有一阶近似
+\begin{displaymath}
+	f(\mathbf{x}_{k+1}^{\prime})=f\bigg(\sum_{i=0}^{m_k}(\alpha_k)_i\mathbf{x}_{k-m_k+i}\bigg)\approx\sum_{i=0}^{m_k}(\alpha_k)_if(\mathbf{x}_{k-m_k+i})=\sum_{i=0}^{m_k}(\alpha_k)_if_{k-m_k+i}
+\end{displaymath}
+最终确定方程的解为
+\begin{displaymath}
+	\mathbf{x}_{k+1}=\sum_{i=0}^{m_k}(\alpha_k)_if_{k-m_k+i}
+\end{displaymath}
+	}}
+}
+
+\frame
+{
+	\frametitle{\textrm{Krylov}子空间与矩阵迭代}
+	对于矩阵$\mathbf{A}$，取任意矢量$\psi_0$(要求归一),构造矢量$\psi_1$(同样要求归一，并与$\psi_0$正交)，满足
+	\begin{displaymath}
+		\mathbf{A}\psi_0=a_0\psi_0+b_0\psi_1
+	\end{displaymath}
+	由此确定$a_0$、$b_0$、$\psi_1$
+	\begin{displaymath}
+		\begin{aligned}
+			a_0&=\langle\psi_0|\mathbf{A}|\psi_0\rangle\\
+			b_0\psi_1&=\mathbf{A}\psi_0-a_0\psi_0\\
+			||\psi_1||&=1
+		\end{aligned}
+	\end{displaymath}
+	进而可构造$\psi_2$:
+	\begin{displaymath}
+		\mathbf{A}\psi_1=c_1\psi_0+a_1\psi_1+b_1\psi_2
+	\end{displaymath}
+	要求$\psi_2$与$\psi_0$、$\psi_1$正交归一条件，确定$\psi_2$，$a_1$，$b_1$，$c_1$
+}
+
+\frame
+{
+	\frametitle{\textrm{Krylov}子空间与矩阵迭代}
+	根据递推关系有
+	\begin{displaymath}
+		\mathbf{A}\psi_p=\sum_{q=0}^{p-1}c_p^{(q)}\psi_q+a_p\psi_p+b_p\psi_{p+1}
+	\end{displaymath}
+	这里$\psi_{p+1}$将与所有之前的$\psi_q$(\textrm{processors})正交
+
+	利用矩阵$\mathrm{A}$的\textrm{Hermitian}，因此对于$q<p-1$各项，可有等式
+	\begin{displaymath}
+		c_p^{(q)}=\langle\psi_q|\mathbf{A}\psi_p\rangle=\langle\mathbf{A}\psi_q|\psi_p\rangle=0
+	\end{displaymath}
+	即矢量$\psi_p$垂直于矢量$\mathbf{A}\psi_q$，由此可得
+	\begin{displaymath}
+		c_p^{(p-1)}=\langle\psi_{p-1}|\mathbf{A}\psi_p\rangle=\langle\mathbf{A}\psi_{p-1}|\psi_p\rangle=b_{p-1}
+	\end{displaymath}
+	经过$p$步迭代后
+	\begin{displaymath}
+		\mathbf{A}\psi_p=b_{p-1}\psi_{p-1}+a_p\psi_p+b_p\psi_{p+1}
+	\end{displaymath}
+	这里$\psi_{p+1}$要求与$\psi_p$和$\psi_{p-1}$满足正交归一条件
+}
+
+\frame
+{
+	\frametitle{矩阵对角化的\textrm{Lanczos~}算法}
+	因此\textcolor{blue}{矩阵$\mathbf{A}$可以用$\psi_p$(称为\textrm{Lanczos}矢量)为基组表示成三对角阵形式}(稀疏矩阵)
+	\begin{displaymath}
+		\mathbf{A}^p=\begin{pmatrix}
+			a_1 & b_2 & & & & \\
+			b_2 & a_2 &b_3 & &\raisebox{0.8ex}[0pt]{\huge{0}} &\\
+&b_3 &a_3 &\ddots & & \\
+& &\ddots &\ddots &b_{p-1} & \\
+& & &b_{p-1} &a_{p-1} &b_{p}\\
+&\raisebox{0.8ex}[0pt]{\huge{0}} & & &b_{p} &a_{p}
+		\end{pmatrix}
+	\end{displaymath}
+	不难看出，\textcolor{blue}{经过$p$次\textrm{Lanczos}迭代，当$b\rightarrow0$即达到收敛，意味着此时$p\times p$三对角阵$\mathbf{A}^p$的本征值也将收敛到矩阵$\mathbf{A}$的本征值}
+	\begin{itemize}
+		\item 稀疏矩阵$\mathbf{A}^p$可通过快速\textrm{QR}分解得到本征值
+		\item 三对角阵的最低和最高本征值随着迭代次数增加收敛最迅速
+		\item \textrm{Lanczos}方法适用于少量本征值与剩余本征有较大差值的体系
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{矩阵对角化的\textrm{Lanczos~}算法}
+	大型稀疏矩阵对角化基本思路便是从一个试探向量$\mathbf{c}_0$出发，通过矩阵-向量乘操作\footnote{\fontsize{5.2pt}{1.2pt}\selectfont{由于矩阵是稀疏的，从而可以快速进行矩阵-向量乘这一基本操作(时间复杂度$\mathrm{O}(N^2)$)}}，同时保持矩阵的稀疏性，使得试探向量逐渐收敛到目标特征向量(往往是基态对应的特征向量)
+
+	{\fontsize{6.2pt}{1.2pt}\selectfont{
+		本征值求解对应如下优化问题
+		\begin{displaymath}
+			\lambda_{\min}=\mathrm{min}_{\mathbf{c}}\rho(\mathbf{c})=\mathrm{min}_{\mathbf{c}}\dfrac{\mathbf{c}^\mathbf{H}\mathbf{c}}{\mathbf{c}^T\mathbf{c}}
+		\end{displaymath}
+		利用最陡下降法求解上述优化问题，则需要计算函数的梯度
+		\begin{displaymath}
+			\nabla\rho(\mathbf{c})|_{\mathbf{c}=\mathbf{c}_0}=\dfrac2{\mathbf{c}^T\mathbf{c}}(\mathbf{H}\mathbf{c}_0-\rho(\mathbf{c}_0)\mathbf{c}_0)
+		\end{displaymath}
+		实际计算中无需求出梯度并作精确搜索，因为\textcolor{blue}{解一定在\textrm{Krylov}子空间$\mathrm{span}(\mathbf{c}_0,\mathbf{H}\mathbf{c}_0)$内;~只需计算这两个向量之间的哈密顿矩阵元，并对角化所得到的小矩阵便相当于做了一步最速下降法}
+
+		经过$k$步迭代之后所得到的解在子空间$\mathrm{span}(\mathbf{c}_0,\mathbf{H}\mathbf{c}_0,\cdots),\mathbf{H}^k\mathbf{c_0}$
+
+		因此\textcolor{magenta}{大型矩阵对角化的问题，转化为子空间内矩阵对角化的问题}
+
+		选取合适的初猜，经过若干次迭代之后，子空间内最小特征值可能于真实的最小特征值非常接近\footnote{\fontsize{5.2pt}{1.2pt}\selectfont{子空间内若干个最小特征值都可能于相应的真值非常接近}}
+
+		一般地，$k$次迭代后第$j$个特征向量写成
+		\begin{displaymath}
+			\mathbf{c}_j^{(k)}=\sum_{i=0}^kc_{i,j}^{(k)}\mathbf{H}^i\mathbf{c}_0
+		\end{displaymath}
+	}}
+}
+
+\frame
+{
+	\frametitle{矩阵的迭代对角化}
+	\begin{itemize}
+		\item 矩阵的直接对角化计算复杂复 $O(N^3)$
+		\item 矩阵的迭代对角化计算复杂度 $O(N_0^2\times N\ln N)\quad N_0\ll N$
+	\end{itemize}
+	\textcolor{blue}{迭代求本征值的思想是\textrm{Jacobian~}于\textrm{1846~}年提出的}\upcite{Crelle30-51_1846}\\
+	其基本思想是
+	\begin{displaymath}
+		(H-\varepsilon^n)|\psi^n\rangle=|R[\psi^n]\rangle
+	\end{displaymath}
+	这里$n$是迭代步数，$|\psi^n\rangle$和$\varepsilon^n$分别是本征态和本征值，$|R[\psi^n]\rangle$是残差矢量
+	\vskip 10pt
+	在电子态计算过程中，选择适当的基函数，可以使\textrm{Schr\"odinger~}方程的矩阵接近对角阵，因此可有
+	\begin{displaymath}
+		|\psi\rangle=\mathbf{D}^{-1}(\mathbf{H}-\varepsilon)|\psi\rangle+|\psi\rangle
+	\end{displaymath}
+	这里$\mathbf{D}$是非奇异矩阵，与$\mathbf{H}$矩阵有关，可根据需要选取多种形式
+}
+
+\frame
+{
+	\frametitle{矩阵迭代对角化的基本思想}
+\begin{figure}[h!]
+\centering
+\includegraphics[height=2.5in,width=3.5in,viewport=0 0 850 590,clip]{Figures/Coordinate_transformation.png}
+\label{decent_CG}
+\caption{\tiny \textrm{Schematic illustration of searching for the eigenvalue of a vector.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{矩阵迭代对角化}
+	稀疏矩阵求解的\textrm{Lanczos}优化过程，只变动一个分量$\mathbf{c}_I$的前提下
+	\begin{displaymath}
+		\dfrac{\partial\rho}{\partial\mathbf{c}_I}\bigg|_{\mathbf{c}_I+\delta_I}=0
+	\end{displaymath}
+	是可以精确求解的，其解为
+	\begin{displaymath}
+		\delta_I=(\rho(\mathbf{c}_0)-\mathbf{H}_{II})^{-1}\mathbf{q}_I\qquad\mbox{这里}\mathbf{q}=(\mathbf{H}-\rho\mathbf{I})\mathbf{c}_0
+	\end{displaymath}
+	不难看出，矢量$\mathbf{q}$就对应\textrm{Jacobi}迭代中用于判断收敛的残差矢量
+
+更一般地，求解方程
+	\begin{displaymath}
+		\dfrac{\partial\rho}{\partial\mathbf{c}}\bigg|_{\mathbf{c}+\mathbf{\delta}}=0
+	\end{displaymath}
+	将方程展开到二阶近似，不难有
+	\begin{displaymath}
+		(\rho-\mathbf{H}_{II})\delta_I\approx \mathbf{q}_I+\sum_{J\neq I}\delta_J+(\rho-\lambda)\mathbf{c}_I
+	\end{displaymath}
+	实际计算中选则$\delta_I=(\rho(\mathbf{c}_0)-\mathbf{H}_{II})^{-1}\mathbf{q}_I$并不是方程的解的好的近似，\textcolor{purple}{好处是计算比较简单}
+}
+
+\frame
+{
+	\frametitle{\textrm{Block-Davison algorithm}}
+	\textrm{Davidson}方法是求解大型稀疏矩阵的少量本征值问题提出来的，结合了\textrm{Lanczos}优化和\textrm{Jacobi}迭代的优点，简言之就是改进初猜，不用$\mathbf{H}\mathbf{c}_0$，而改用计算简单的$\delta_I=(\rho(\mathbf{c}_0)-\mathbf{H}_{II})^{-1}\mathbf{q}_I$形式
+	\vskip 10pt
+	应用\textrm{Davison}方法可以快速地依次求解稀疏矩阵的少量本征值和本征矢，将该方法推广为同时求解若干个本征态，即块-\textrm{Davidson}方法
+	{\fontsize{6.2pt}{1.2pt}\selectfont{
+		\begin{itemize}
+			\item 选取合适数目正交归一的向量$\mathbf{c}_1,\mathbf{c}_2,\cdots, \mathbf{c}_n$作为初猜子空间的基组, 计算并储存向量$\mathbf{H}\mathbf{c}_i$和矩阵元$\mathbf{H}=\langle\mathbf{c}_i|\mathbf{H}|\mathbf{c}_j\rangle$ 
+			\item 对角化矩阵，得到本征值$\lambda^{n}$和本征矢$\mathbf{a}^{n}$
+			\item 构造残量矢量$\mathbf{q}_M=(\mathbf{H}-\lambda^{(M)}\mathbf{I})\mathbf{a}^{(M)}~\mbox{其中}\mathbf{a}^{(M)}=\sum\limits_{i=1}^M a_i^{(M)}\mathbf{a}_i$
+			\item 根据模长$||\mathbf{q}_M||$判断迭代收敛情况
+			\item 构造$\delta_{I,M+1}=(\lambda^{(M)}-\mathbf{H}_{II})^{-1}\mathbf{q}_{I,M}$，与此前的基组正交归一化，得到$\mathbf{c}_{M+1}$
+			\item 计算矩阵元$\mathbf{H}_{i,M+1}\quad i=1,2,\cdots, M+1$
+			\item 对角化矩阵得到新的本征值和本征矢量，继续迭代
+		\end{itemize}
+	}}
 }
 
 \frame
