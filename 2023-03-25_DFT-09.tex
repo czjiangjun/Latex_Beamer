@@ -436,7 +436,7 @@ x_6 &=1.0430906366 %~\Longrightarrow
 	\end{displaymath}
 		但是一般来说\textrm{Jacobian}矩阵很可能未知(或者很难求逆)，只有另图别策(在\textrm{Krylov}子空间中迭代求解)，一般常用的方法有
 		\begin{itemize}
-			\item 迭代子空间求逆(\textrm{Direct Inversion in the Iterative Subspace,~DIIS})
+			\item 迭代子空间求逆(\textrm{Discret Inversion in the Iterative Subspace,~DIIS})
 			\item \textrm{Anderson}加速或\textrm{Anderson}混合
 		\end{itemize}
 }
@@ -581,11 +581,20 @@ x_6 &=1.0430906366 %~\Longrightarrow
 	\end{displaymath}
 	这里$n$是迭代步数，$|\psi^n\rangle$和$\varepsilon^n$分别是本征态和本征值，$|R[\psi^n]\rangle$是残差矢量
 	\vskip 10pt
-	在电子态计算过程中，选择适当的基函数，可以使\textrm{Schr\"odinger~}方程的矩阵接近对角阵，因此可有
+	{\fontsize{7.2pt}{1.2pt}\selectfont{
+	在电子态计算过程中，选择适当的基函数，可以使\textrm{Schr\"odinger~}方程的矩阵接近对角阵\\因此可有
 	\begin{displaymath}
-		|\psi\rangle=\mathbf{D}^{-1}(\mathbf{H}-\varepsilon)|\psi\rangle+|\psi\rangle
+		\begin{aligned}
+			|\psi^{n+1}\rangle=&\mathbf{D}^{-1}(\mathbf{H}-\varepsilon)|\psi^n\rangle+|\psi^n\rangle=\delta|\psi^{n+1}\rangle+|\psi^n\rangle\\
+		\mathbf{D}\delta\psi^{n+1}=&R[\psi^n]
+		\end{aligned}
 	\end{displaymath}
-	这里$\mathbf{D}$是非奇异矩阵，与$\mathbf{H}$矩阵有关，可根据需要选取多种形式
+	这里$\mathbf{D}$是非奇异矩阵，与$\mathbf{H}$矩阵有关，也叫''预处理矩阵''，可根据需要选取多种形式
+	\begin{itemize}
+		\item 要求$\mathbf{D}$比原始的$\mathbf{H}-\varepsilon$更易求逆阵
+		\item 要求$\mathbf{D}$使得修正项$\delta\psi^{n+1}$能够使$\psi^n$尽可能接近正确的本征矢
+	\end{itemize}
+}}
 }
 
 \frame
@@ -736,6 +745,35 @@ x_6 &=1.0430906366 %~\Longrightarrow
 			\item 计算矩阵元$\mathbf{H}_{i,M+1}\quad i=1,2,\cdots, M+1$
 			\item 对角化矩阵得到新的本征值和本征矢量，继续迭代
 		\end{itemize}
+	}}
+}
+
+\frame
+{
+	\frametitle{\textrm{RMM-DIIS}}
+	{\fontsize{7.2pt}{1.2pt}\selectfont{前述矩阵迭代对角化方法的优化策略都是
+	\begin{itemize}
+		\item 通过迭代优化得到最小本征值(极值)
+		\item 利用本征态正交，依次获得其他各本征态和本征值
+	\end{itemize}}}
+	{\fontsize{7.2pt}{1.2pt}\selectfont{\textrm{RMM-DIIS~(Residual Minimization Method by Direct Inversion in the Iterative Subspace)}\footnote{\fontsize{5.2pt}{1.2pt}\selectfont{\textrm{RMM-DIIS}的得名源自该方法的提出者\textrm{Pulay}:~该方法的基本思想是在历次迭代产生的矢量构成的完整\textrm{Krylov}子空间内，完成对残矢的最小化}}方法则可以不用引入正交条件而得到多个本征值，\textcolor{purple}{因为该方法最小化的不是本征值而是残矢}}}\\
+	{\fontsize{5.2pt}{1.2pt}\selectfont{
+		其基本思想概要:~在$n$维\textrm{Krylov}子空间内，生成矢量
+		\begin{displaymath}
+			\psi^{n+1}=c_0\psi^0+\sum_{j=1}^{n+1}c_j\delta\psi^{j}
+		\end{displaymath}
+		通过改变选取一套合适的系数$c_j$来完成$\psi^{n+1}$的残矢$R^{n=1}$的最小化。\textcolor{blue}{等价于$c_j$由$\{\psi^0,\psi^1,\cdots,\psi^n\}$构成的\textrm{Krylov}子空间内求\textrm{Hermitian}本征值问题}
+		\begin{displaymath}
+			\sum_{j=1}^n\langle R^i|R^j\rangle c_j=\varepsilon\sum_{j=1}^n\psi^i|\mathbf{S}|\psi^j\rangle c_j
+		\end{displaymath}
+		每迭代一次，子空间引入一个新波函数$\psi$和一个新残矢$R(\psi)$
+		\begin{itemize}
+			\item \textrm{RMM-DIIS}的计算量瓶颈将是后续的逐个矩阵-向量乘操作$\textrm{H}\psi$
+%				\\因此要避免直接用\textrm{RMM-DIIS}直接处理大规模本征态~(但可以是大体系中的少量本征态)
+			\item 只要内存许可，\textrm{RMM-DIIS}构造的完整的子空间内，构成子空间的矢量本征值都可以求解出来
+			\item 因为\textrm{RMM}方法对初猜的矢量敏感(矢量收敛的位置到离初猜较近)
+		\end{itemize}
+%		\textrm{RMM-DIIS}最大的优点是一次可以得到多个本征态和本征值，而且不需要正交化
 	}}
 }
 
