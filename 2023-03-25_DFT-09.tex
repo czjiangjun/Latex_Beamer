@@ -141,6 +141,7 @@
 	\end{itemize}
 }
 
+\subsection{经典数值优化算法概要}
 \frame
 {
 	\frametitle{非线性方程的\rm{Newton~}法求根}
@@ -565,6 +566,39 @@ x_6 &=1.0430906366 %~\Longrightarrow
 	}}
 }
 
+\subsection{矩阵的迭代对角化}
+\frame
+{
+	\frametitle{矩阵的迭代对角化}
+	\begin{itemize}
+		\item 矩阵的直接对角化计算复杂复 $O(N^3)$
+		\item 矩阵的迭代对角化计算复杂度 $O(N_0^2\times N\ln N)\quad N_0\ll N$
+	\end{itemize}
+	\textcolor{blue}{迭代求本征值的思想是\textrm{Jacobian~}于\textrm{1846~}年提出的}\upcite{Crelle30-51_1846}\\
+	其基本思想是
+	\begin{displaymath}
+		(H-\varepsilon^n)|\psi^n\rangle=|R[\psi^n]\rangle
+	\end{displaymath}
+	这里$n$是迭代步数，$|\psi^n\rangle$和$\varepsilon^n$分别是本征态和本征值，$|R[\psi^n]\rangle$是残差矢量
+	\vskip 10pt
+	在电子态计算过程中，选择适当的基函数，可以使\textrm{Schr\"odinger~}方程的矩阵接近对角阵，因此可有
+	\begin{displaymath}
+		|\psi\rangle=\mathbf{D}^{-1}(\mathbf{H}-\varepsilon)|\psi\rangle+|\psi\rangle
+	\end{displaymath}
+	这里$\mathbf{D}$是非奇异矩阵，与$\mathbf{H}$矩阵有关，可根据需要选取多种形式
+}
+
+\frame
+{
+	\frametitle{矩阵迭代对角化的基本思想}
+\begin{figure}[h!]
+\centering
+\includegraphics[height=2.5in,width=3.5in,viewport=0 0 850 590,clip]{Figures/Coordinate_transformation.png}
+\label{decent_CG}
+\caption{\tiny \textrm{Schematic illustration of searching for the eigenvalue of a vector.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\end{figure}
+}
+
 \frame
 {
 	\frametitle{\textrm{Krylov}子空间与矩阵迭代}
@@ -660,38 +694,6 @@ x_6 &=1.0430906366 %~\Longrightarrow
 			\mathbf{c}_j^{(k)}=\sum_{i=0}^kc_{i,j}^{(k)}\mathbf{H}^i\mathbf{c}_0
 		\end{displaymath}
 	}}
-}
-
-\frame
-{
-	\frametitle{矩阵的迭代对角化}
-	\begin{itemize}
-		\item 矩阵的直接对角化计算复杂复 $O(N^3)$
-		\item 矩阵的迭代对角化计算复杂度 $O(N_0^2\times N\ln N)\quad N_0\ll N$
-	\end{itemize}
-	\textcolor{blue}{迭代求本征值的思想是\textrm{Jacobian~}于\textrm{1846~}年提出的}\upcite{Crelle30-51_1846}\\
-	其基本思想是
-	\begin{displaymath}
-		(H-\varepsilon^n)|\psi^n\rangle=|R[\psi^n]\rangle
-	\end{displaymath}
-	这里$n$是迭代步数，$|\psi^n\rangle$和$\varepsilon^n$分别是本征态和本征值，$|R[\psi^n]\rangle$是残差矢量
-	\vskip 10pt
-	在电子态计算过程中，选择适当的基函数，可以使\textrm{Schr\"odinger~}方程的矩阵接近对角阵，因此可有
-	\begin{displaymath}
-		|\psi\rangle=\mathbf{D}^{-1}(\mathbf{H}-\varepsilon)|\psi\rangle+|\psi\rangle
-	\end{displaymath}
-	这里$\mathbf{D}$是非奇异矩阵，与$\mathbf{H}$矩阵有关，可根据需要选取多种形式
-}
-
-\frame
-{
-	\frametitle{矩阵迭代对角化的基本思想}
-\begin{figure}[h!]
-\centering
-\includegraphics[height=2.5in,width=3.5in,viewport=0 0 850 590,clip]{Figures/Coordinate_transformation.png}
-\label{decent_CG}
-\caption{\tiny \textrm{Schematic illustration of searching for the eigenvalue of a vector.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\end{figure}
 }
 
 \frame
