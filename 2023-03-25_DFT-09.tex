@@ -435,7 +435,7 @@ x_6 &=1.0430906366 %~\Longrightarrow
 	\end{displaymath}
 		但是一般来说\textrm{Jacobian}矩阵很可能未知(或者很难求逆)，只有另图别策(在\textrm{Krylov}子空间中迭代求解)，一般常用的方法有
 		\begin{itemize}
-			\item 迭代子空间求逆(\textrm{Discrete Inversion in the Iterative Subspace,~DIIS})
+			\item 迭代子空间求逆(\textrm{Direct Inversion in the Iterative Subspace,~DIIS})
 			\item \textrm{Anderson}加速或\textrm{Anderson}混合
 		\end{itemize}
 }
@@ -462,7 +462,7 @@ x_6 &=1.0430906366 %~\Longrightarrow
 	在电子结构计算中，残矢最小化的约束条件最常用的有
 	\begin{itemize}
 		\item 电子能带的本征矢正交
-		\item 电荷密度混合时，电荷密度守恒，即$\sum\limits_{j=0}^i a_j=1$，可有\textcolor{blue}{$a_j=\sum\limits_jA_{j,i}^{-1}/\sum\limits_{j,k}a_ja_kA_{j,k}^{-1}=\sum\limits_jA_{j,i}^{-1}/\sum\limits_{j,k}A_{j,k}^{-1}$
+		\item 电荷密度混合时，电荷密度守恒，即$\sum\limits_{j=0}^i a_j=1$，可有\\\textcolor{blue}{$a_j=\sum\limits_jA_{j,i}^{-1}/\sum\limits_{j,k}a_ja_kA_{j,k}^{-1}=\sum\limits_jA_{j,i}^{-1}/\sum\limits_{j,k}A_{j,k}^{-1}$
 %				\begin{displaymath}
 %					\begin{aligned}
 %						a_j=\sum\limits_jA_{j,i}^{-1}/\sum\limits_{j,k}&\underbrace{a_ja_k}A_{j,k}^{-1}\\
