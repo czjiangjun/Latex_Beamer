@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  不使用 authblk 包制作标题  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %-------------------------------PPT Title-------------------------------------
-\title{09-\rm{VASP}的优化与并行}
+\title{10-第一原理分子动力学的概要}
 %-----------------------------------------------------------------------------
 %----------------------------Author & Date------------------------------------
 
@@ -71,73 +71,368 @@
 %	     \item \textrm{PAW}原子数据集:\textcolor{blue}{优异的赝势}\upcite{PRB59-1758_1999}
 %	\end{itemize}
 %}
-
-\subsection{\rm{VASP}软件的特色}
 \frame
 {
-	\frametitle{\textrm{VASP}软件的特点}
-	\textrm{VASP}软件是维也纳大学\textrm{(Universit\"at Wien)}~\textrm{G. Kresse}等开发的第一原理模拟软件包
+	\frametitle{经典分子动力学}
+	装有$N$个经典粒子的$L_1\times L_2\times L_3$容器内，假设粒子间只有简单的二体相互作用\footnote{\fontsize{7.2pt}{6.2pt}\selectfont{二体作用是粒子间多体相互作用的简化，只考虑粒子两两间彼此相互作用。}}$\vec F(r)$，力的大小仅与粒子间间距$r$相关
+	\begin{displaymath}
+		\vec F(R_i)=\sum_{\substack{j=1\\j\neq i}}^N F(|\vec r_i-\vec r_j|)\hat{\vec r}_{ij}
+	\end{displaymath}
+	{\fontsize{7.2pt}{6.2pt}\selectfont{这里$R$代表全部原子坐标$\vec r_i$，$\hat{\vec r}_{ij}$是表示粒子$i$指向粒子$j$的矢量($\vec r_j-\vec r_i$)的单位矢量}}
+
+	在经典力学框架下，粒子$i$的受力运动方程是:~
+	\begin{displaymath}
+		\dfrac{\mathrm{d}^2\vec r_i(t)}{\mathrm{d}t^2}=\dfrac{\vec F_i(R)}{m_i}
+	\end{displaymath}
+	粒子$i$的质量是$m_i$\\
+	\textcolor{purple}{经典分子动力学，就是应用数值模拟对大量粒子求解该方程，基于统计力学原理，研究物质的状态和热力学性质}
+}
+
+\frame
+{
+	\frametitle{经典分子动力学与\textrm{Verlet}算法}
+	分子动力学模拟研究的对象是平衡态体系
 	\begin{itemize}
-		\item \textrm{VASP}采用\textrm{PAW~(Projector Augmented-Wave)}方法\upcite{PRB50-17953_1994,PRB59-1758_1999}，平衡了赝势方法和全电子计算优点，兼顾了计算的精度和效率
-		\item \textrm{VASP}在实空间优化投影函数\textrm{(Projector)}，将主要的计算过程变换到实空间完成，大大节省了内存的开销%，保证了计算精度和效率
-		\item \textrm{VASP}通过引入多样的优化算法，提高了矩阵对角化和电荷密度搜索的效率
-		\item 在\textrm{VASP}的并行计算中，有效均衡了各节点处理\textrm{FFT}变换负载和通信，提升了软件的并行效率
+		\item 初始化
+		\item 开始分子运动模拟，直到模拟体系达到平衡
+		\item 继续模拟体系的物理性质，保存计算结果
 	\end{itemize}
-	相比于其他第一原理计算软件，\textrm{VASP}从物理思想与方法、优化算法和并行计算实现等多个方面都有更为出色的性能
+	\textcolor{blue}{标准\textrm{Verlet}算法:~}求解作用力$\vec F$下单个粒子运动的积分
+	\begin{displaymath}
+		\vec r(t+h)=2\vec r(t)-\vec r(t-h)+h^2\vec F(\vec r(t))/m
+	\end{displaymath}
+	{\fontsize{7.2pt}{6.2pt}\selectfont{这里$h$是时间步长，$t=nh$是模拟累积时间，$\vec r(t)$是粒子在时间$t$时的位置\\
+	\textcolor{magenta}{每个时间步长的误差为$h^4$，在模拟时间范围内的累积误差是$h^2$}
+\vskip 5pt
+	{\fontsize{7.2pt}{6.2pt}\selectfont{如果已知模拟粒子的初始速度$\vec v$和时间，取初始态时间$t=0$}}
+	\begin{displaymath}
+		\vec r(h)=\vec r(0)=h\vec v(0)+\dfrac{h^2}2\vec F[\vec r(t=0)]~\qquad~ (m\equiv1)
+	\end{displaymath}
+误差为$h^3$，速度随时间变化的函数
+\begin{displaymath}
+	\vec v(t)=\dfrac{\vec r(t+h)-\vec r(t-h)}{2h}+\mathscr{O}(h^2)
+\end{displaymath}
+}}
 }
 
 \frame
 {
-	\frametitle{\textrm{VASP}的开发团队}
-\begin{figure}[h!]
-\centering
-\vspace*{-0.25in}
-\includegraphics[height=2.70in,width=4.05in,viewport=330 135 1280 770,clip]{Figures/VASP_team.png}
-\caption{\tiny \textrm{The development team of VASP.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{VASP_team}
-\end{figure}
+	\frametitle{经典分子动力学与\textrm{Verlet}算法}
+	\textrm{Verlet}算法有两种被普遍应用的变体形式，相比于标准\textrm{Verlet}算法，这两种方法误差累积效应更小
+	\begin{itemize}
+		\item \textcolor{blue}{蛙跳(\textrm{Leap-Frog})法}
+			\begin{displaymath}
+				\begin{aligned}
+					\vec v(t+h/2)=&\vec v(t-h/2)+h\vec F[\vec r(t)]\\
+					\vec r(t+h)=&\vec r(t)+h\vec v(t+h/2)
+				\end{aligned}
+			\end{displaymath}
+		\item \textcolor{blue}{速度-\textrm{Verlet}算法}
+			\begin{displaymath}
+				\vec v(t)=\dfrac{\vec r(t+h)-\vec r(t-h)}{2h}
+			\end{displaymath}
+			\begin{displaymath}
+				\begin{aligned}
+					\vec r(t+h)=&\vec r(t)+h\vec v(t)+h^2\vec F(t)/2\\
+					\vec v(r+h)=&\vec v(t)+h[\vec F(t+h)+\vec F(t)]/2
+				\end{aligned}
+			\end{displaymath}
+			速度-\textrm{Verlet}算法更稳定也更方便，但需要保存$\vec F(t)$和$\vec F(t+h)$两个力的数组
+	\end{itemize}
 }
 
 \frame
 {
-	\frametitle{双网格技术}
+	\frametitle{经典分子动力学与\textrm{Verlet}算法}
+	以下算法与速度-\textrm{Verlet}算法完全等价，但只需要保留$\vec F(t)$一个数组
+	\begin{displaymath}
+		\begin{aligned}
+			\tilde{\vec v}(t)=&\vec v(t)+h\vec F(t)/2\\
+			\vec r(t+h)=&\vec r(t)+h\tilde{\vec v}(t)\\
+			\vec v(t+h)=&\tilde{\vec v}(t)+h\vec F(t+h)/2
+		\end{aligned}
+	\end{displaymath}
+	而粒子受力$\vec F(t+h)$则在第二步、第三步之间临时计算
+\vskip 5pt
+	{\fontsize{6.2pt}{4.2pt}\selectfont{一般地，作用在粒子$i$上的力，是所有与粒子$i$的相互作用的“合成”结果
+	\begin{displaymath}
+		\vec F_i(R)=-\dfrac{\partial U(\{\vec r_i\})}{\partial \vec r_i}
+	\end{displaymath}
+	通常总的势能$U(\{\vec r_i\})$拆解为各部分贡献
+	\begin{displaymath}
+		U(\{\vec r_i\})=\sum_iU_1(\vec r_i)+\sum_i\sum_{j>i}U_2(\vec r_i,\vec r_j)+\sum_i\sum_{j>i}\sum_{k>j}U_3(\vec r_i,\vec r_j,\vec r_k)+\cdots
+	\end{displaymath}
+	这里$U_1(\vec r_i)$是单体势，一般是单个粒子在外场(如重力场、电场)中的势能，与材料性质无关\\
+$U_2(\vec r_i,\vec r_j)$是双体势，$U_3(\vec r_i,\vec r_j,\vec r_k)$是描述粒子间对相互作用的主要函数}}
+
+	在分子动力学计算中，力的计算需要更多的时间，因为其计算耗时步数是$\mathscr{O}(N^2)$，\textcolor{blue}{对于周期体系，这种力的计算尤其需要谨慎}
+}
+
+\frame{allowframebreak}
+{
+	\frametitle{经典分子动力学力场}
+	原子间受力一般用\textcolor{red}{力场}(\textrm{Force Field}，也就是“\textcolor{blue}{相互作用势}”)描述，力场的形式有很多种，最常提到的有
+	\begin{itemize}
+		\item \textrm{Lennard-Jones}对势
+	\begin{displaymath}
+		U(r)=4\varepsilon\bigg[\bigg(\dfrac{\sigma}{r}\bigg)^{12}-\bigg(\dfrac{\sigma}{r}\bigg)^6\bigg]
+	\end{displaymath}
+	{\fontsize{7.2pt}{6.2pt}\selectfont{这里$\varepsilon$和$\sigma$是和原子有关的参数
+	\textrm{L-J}势能的最低点在$r_{\min}=2^{(1/6)}\sigma\approx1.12\sigma$，$r<r_{\min}$时为排斥力，$r>r_{\min}$时为吸引力}}\\
+	由\textrm{L-J}势改造，可以得到\textrm{WCA}势和\textrm{PHS}势
+\item \textrm{Morse}势
+	\begin{displaymath}
+		U(r)=-D_{\mathrm{e}}+D_{\mathrm{e}}\bigg(1-\mathrm{e}^{-a(r-r_{\mathrm{e}})}\bigg)^2
+	\end{displaymath}
+	{\fontsize{7.2pt}{6.2pt}\selectfont{这里$D_{\mathrm{e}}$是\textrm{Morse}势的势阱深，参数$a$确定势阱宽度，$r_{\mathrm{e}}$是原子处于平衡位置的平衡键长}}
+\item \textrm{EAM}势\\
+	{\fontsize{7.2pt}{6.2pt}\selectfont{对于金属晶体，内能虽可以表示为对相互作用之和，但拟合原子受力非常困难:\\%\footnote
+		{\fontsize{5.2pt}{3.2pt}\selectfont{应用二体势计算金属弹性常数时必须涉及对体积很敏感的能量项，因为涉及缺陷、表面的体积很难确定}}\\
+	\textcolor{red}{从物理上说金属原子处于电子海洋中，电子密度来自多个原子的贡献，这是自由电子气带来的多体效应}}}\\
+	\textrm{EAM}将金属中原子的势能表示为二体势和多体势之和
+	\begin{displaymath}
+		E_i=F_{\alpha}\bigg(\sum_{j\neq i}\rho_{\beta}(r_{ij})\bigg)+\dfrac12\sum_{j\neq i}\phi_{\alpha\beta}(\vec r_{ij})
+	\end{displaymath}
+	{\fontsize{7.2pt}{6.2pt}\selectfont{$\alpha$和$\beta$分别为位置$i$、$j$处的原子类型\\
+		$\phi$是二体势，是原子$\alpha$和$\beta$和原子间距$r_{ij}$的函数\\
+		$F$是多体势，是其余原子在位置$i$处的电荷密度与位置$i$处原子$\alpha$的相互作用能，由原子类型$\alpha$和位置$i$处的电子密度确定\\
+		位置$j$原子在位置$i$处产生的电荷密度$\rho$只与位置$j$处原子类型$\beta$和原子间距$r_{ij}$有关，与方向无关
+	}}\\
+	各类\textrm{EAM}势中，$\phi(r)$、$\rho(r)$和$F(\rho)$都不是解析的，以数值形式存储
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{统计系综}
+}
+
+\frame
+{
+	\frametitle{能量泛函的直接优化}
+	根据\textrm{Car-Parrinello~}定义的经典\textrm{Lagrangian~}量
+	{\fontsize{9.0pt}{5.2pt}\selectfont
+	\begin{displaymath}
+		L(\{\psi_k\},\{\vec R_n\})=\frac{\mu}2\sum_k\dot{\psi}_k^2+\sum_n\frac{M_n}2\dot{\vec R}_n^2-E_{\mathrm{tot}}(\{\psi_k\},\{\vec R_n\})+\sum_{kl}\Lambda_{kl}\langle\psi_k|\psi_l\rangle
+	\end{displaymath}}
+	多粒子体系的\textrm{Euler-Lagrange~}运动方程可以表示为
+	\begin{displaymath}
+		\begin{aligned}
+			\mu\ddot{\psi}_k=&-\dfrac{\partial E_{\mathrm{tot}}}{\partial\psi_k}+2\sum_i\Lambda_{kl}\psi_l(\vec r)\\
+			M_n\ddot{\vec R}_n&=-\dfrac{\partial E_{\mathrm{tot}}}{\partial\vec R_n}+\sum_{kl}\Lambda_{kl}\dfrac{\partial\langle\psi_k|\psi_l\rangle}{\partial\vec R_n}
+		\end{aligned}
+	\end{displaymath}
+	\textcolor{purple}{电子基态可以通过求解\textrm{Verlet~}运动方程得到}\\
+	在\textrm{DFT~}框架下，有
+	{\fontsize{9.0pt}{5.2pt}\selectfont
+	\begin{displaymath}
+		\psi_k(t+h)=2\psi_k(t)-\psi_k(t-h)-\dfrac{2h^2}{\mu}(H\psi_k-\sum_l\Lambda_{kl}\psi_l)
+	\end{displaymath}}
+%	该方程表明:~\textcolor{blue}{电子基态也可通过各种优化方法直接求解}
+	每个时间步$t$，\textrm{Car-Parrinello~}采用\textrm{SHAKE~}算法迭代确定$\psi_k(t)$
+}
+
+\frame
+{
+	\frametitle{波函数正交与\rm{SHAKE~}迭代算法}
+	为确保电子轨道波函数正交，
+	{\fontsize{9.0pt}{5.2pt}\selectfont
+	\begin{displaymath}
+		|\tilde\psi_k(t+h)\rangle=2|\psi_k(t)\rangle-|\psi_k(t-h)\rangle-\dfrac{2h^2}{\mu}H|\psi_k(t)\rangle
+	\end{displaymath}}
+	为计算\textrm{Langrage}乘子，可有
+	{\fontsize{9.0pt}{5.2pt}\selectfont
+	\begin{displaymath}
+		|\psi_k(t+h)\rangle=|\tilde\psi_k(t+h)\rangle+\sum_lX_{kl}|\psi_l(t)\rangle
+	\end{displaymath}}
+	其中，{\fontsize{9.0pt}{5.2pt}\selectfont$X_{kl}=\dfrac{2h^2}{\mu}\Lambda_{kl}$}，由此$|\psi_k(t+h)\rangle$正交\\
+	$X_{ij}$要求关于$\mathbf{X}$的矩阵方程
+	{\fontsize{9.0pt}{5.2pt}\selectfont
+	\begin{displaymath}
+		\mathbf{X}\mathbf{X}^{\dag}+\mathbf{X}\mathbf{B}+\mathbf{B}^{\dag}\mathbf{X}^{\dag}=\mathbf{I}-\mathbf{A}
+	\end{displaymath}}
+	能通过以下迭代快速收敛，这里{\fontsize{9.0pt}{5.2pt}\selectfont$A_{kl}=\langle\tilde\psi_k(t+h)|\tilde\psi_l(t+h)\rangle$}，{\fontsize{9.0pt}{5.2pt}\selectfont$B_{kl}=\langle\psi_k(t)|\tilde\psi_l(t+h)\rangle$}
+	{\fontsize{9.0pt}{5.2pt}\selectfont
+	\begin{displaymath}
+		\mathbf{X}^{(n+1)}=\frac12[\mathbf{I}-\mathbf{A}+\mathbf{X}^{(n)}(\mathbf{I}-\mathbf{B})+\mathbf{X}^{(n)}(\mathbf{I}-\mathbf{B}^{\dag})-\mathbf{X}^{n}\mathbf{X}^{(n){\dag}}]
+		\end{displaymath}}
+	取初始{\fontsize{9.0pt}{5.2pt}\selectfont$\mathbf{X}=\frac12(\mathbf{I}-\mathbf{A})$}
+}
+
+\frame
+{
+	\frametitle{计算流程}
 \begin{figure}[h!]
 	\vspace{-0.2in}
 \centering
-\includegraphics[height=2.3in,width=2.3in,viewport=0 0 420 420,clip]{Figures/VASP_G_max.png}
-\caption{\fontsize{5.2pt}{3.9pt}\selectfont{\textrm{The small sphere contains all plane waves included in the basis set $\vec G<\vec G_\mathrm{cut}$. The charge density contains components up to $2\vec G$ cut (second sphere), and the acceleration a components up to $3\vec G$ cut , which are reflected in (third sphere) because of the finite size of the FFT-mesh. Nevertheless the components a $\vec G$ with $|\vec G|<\vec G$ cut are correct i.e. the small sphere does not intersect with the third large sphere.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{VASP_G_max}
+%\includegraphics[height=2.7in,width=4.0in,viewport=0 0 1300 960,clip]{Figures/VASP_procedure-full.png}
+\includegraphics[height=2.1in,width=2.7in,viewport=0 0 740 600,clip]{Figures/Ab-initio-Ene.png}
+\caption{\tiny \textrm{The Flow of calculation for the AIMD.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{PAW_AIMD}
 \end{figure} 
 }
 
+\subsection{电子态能量的最小化}
 \frame
 {
-	\frametitle{双网格技术}
-\begin{figure}[h!]
-	\vspace{-0.15in}
-\centering
-%\includegraphics[height=2.7in,width=4.0in,viewport=0 0 1180 875,clip]{Figures/dual_grid.png}
-\includegraphics[height=2.75in,width=4.0in,viewport=0 0 800 600,clip]{Figures/dual_grid-2.png}
-\caption{\tiny \textrm{The Schematic description of the dual grid technique.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{PAW_dualgrid}
-\end{figure} 
-}
-
-\frame
-{
-	\frametitle{\textrm{VASP}的优化与迭代收敛}
-	\textrm{VASP}计算中，资源消耗的主要部分是求解\textrm{Kohn-Sham}方程，即偏微分方程\textrm{(Partial Differential Equations,~PDE)}的自洽迭代， 迭代过程主要包括
+	\frametitle{电子态能量最小化}
+	\textrm{Car-Parinello~}方法基本思想
 	\begin{itemize}
-		\item 矩阵的迭代对角化
-		\item 电荷密度的自洽迭代
+		\item 只对原子核位置考虑受力$-\dfrac{\partial E_{\mathrm{tot}}}{\partial\vec R_n}$作用
+		\item 电子结构是通过某种最小化方法确定能量泛函$E_{\mathrm{tot}}[\rho(\vec r)]$的极值得到，而非\textrm{Born-Oppenheimer}近似下的自洽迭代
+		\item \textrm{Verlet}算法确定核位移过程中，并不要求在每一步核位移时，电子步充分弛豫到当前结构的基态
 	\end{itemize}
+	在\textrm{Car-Parinello}方法中，电子结构的计算变成经典的优化问题:~电子密度迭代过程中，约束条件下最小化问题
+	\begin{itemize}
+		\item 电子本征态波函数彼此正交约束下迭代对角化(内循环):\\
+			\textcolor{blue}{子空间旋转}:~不同的正交化方法对迭代计算的影响
+		\item 电荷密度混合过程中电荷数守恒约束(外循环)
+			\begin{displaymath}
+				\sum\limits_{j=0}^i a_j=1
+			\end{displaymath}
+	\end{itemize}
+}
 
-	\vskip 10pt
-	\textrm{VASP}的计算高效得益于求解过程中中应用了多种经典优化算法，保证了迭代计算的快速收敛
-	\begin{itemize} 
-		\item 拟牛顿法\textrm{(Quasi-Newton method)}
-		\item 共轭梯度法\textrm{(Conjugate Gradients method, CG)}
-		\item 残差最小化\textrm{(RMM-DIIS)}方法
+\frame
+{
+	\frametitle{矩阵的迭代对角化}
+	``预处理矩阵''$\mathbf{K}$的作用，是使\textcolor{red}{函数(泛函)对变量的依赖趋于“同质”(\textrm{isotropic})}，即函数曲线与不同变量的依赖关系趋同
+
+	具体到电子结构求解:~
+	\begin{itemize}
+		\item \textcolor{blue}{平面波基}\\
+			基函数$\mathrm{e}^{\mathrm{i}\vec G_m\cdot\vec r}$对波函数$\psi_{\vec k_i+\vec G}^n(\vec r)$的贡献为$c_{i,m}^n(\vec k)$\\
+		{\fontsize{7.2pt}{4.2pt}\selectfont{
+		在能量泛函表达式中，高频(大的$\vec G_m$)部分比低频(小的$\vec G_m$)贡献大得多}}\\
+			\textrm{preconditioning}\textcolor{blue}{要使不同频率对能量泛函贡献趋同}:\\
+			\textcolor{red}{不同本征矢的修正项趋同，而与相应的能量本征值无关。}取
+	\begin{displaymath}
+		K(x)=\dfrac{27+18x+12x^2+8x^3}{27+18x+12x^2+8x^3+16x^4}
+	\end{displaymath}
+	此处定义
+	\begin{displaymath}
+		x_i^n(\vec G_m)=\dfrac12\dfrac{|\vec k+\vec G_m|^2}{E^{\mathrm{kin}}(\mathbf{R}^n)}
+	\end{displaymath}
+	\textcolor{purple}{$x_i^n(\vec G_m)$表示对$n$次迭代后本征态$i$中平面波组分$|\vec k_i+\vec G_m|$动能贡献的调整比例}
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{矩阵的迭代对角化}
+	\begin{itemize}
+		\item \textcolor{blue}{实空间基}\\
+		与平面波基类似，可以定义
+	\begin{displaymath}
+		x_i^n(\vec r)=A\dfrac12\dfrac{\lambda_i^m-V(\vec r)}{E^{\mathrm{kin}}(\mathbf{R}^n)}
+	\end{displaymath}
+		\textcolor{purple}{$x_i^n(\vec r)$表示对$n$次迭代后本征态$i$中局部动能$|\lambda_i-V(\vec r)|$对总动能贡献的调整比例}
+	\end{itemize}
+	完成\textrm{preconditioning}得到矩阵$\mathbf{K}(x_i^n)$后，由
+	\begin{displaymath}
+		\psi^{n+1}\equiv\mathbf{K}\mathbf{R}^n
+	\end{displaymath}
+	可根据残矢量$\mathbf{R}^n$选择方式的不同，将\textcolor{blue}{\textrm{SD}、\textrm{CG}}、\textcolor{blue}{\textrm{RMM-DIIS}}等多种算法应用于矩阵迭代对角化计算
+}
+
+\subsection{电荷密度混合算法}
+\frame[allowframebreaks]
+{
+	\frametitle{电荷密度混合收敛算法}
+	根据\textrm{DFT}，搜索基态电荷密度的过程就是能量泛函优化的过程，可以通过此前讨论的迭代算法实现:\\
+%由初猜电荷密度出发，
+	\begin{displaymath}
+		R[\rho_{\mathrm{in}}]=\rho_{\mathrm{out}}[\rho_{\mathrm{in}}]-\rho_{\mathrm{in}}
+	\end{displaymath}
+	自洽迭代收敛时，残矢模量$\langle R[\rho_{\mathrm{in}}]|R[\rho_{\mathrm{in}}]\rangle~\rightarrow~0$
+
+	\begin{itemize}
+		\item 线性混合:\\
+			如果电荷密度自洽迭代的每一步只保留当前步的电荷密度信息，就是线性电荷密度的线性混合
+			\begin{displaymath}
+				\rho_{\mathrm{in}}^{m+1}=\rho_{\mathrm{in}}^{m}+\gamma R[\rho_{\mathrm{in}}^m]
+			\end{displaymath}
+	显然，这种线性混合收敛比较慢，应用\textrm{Jacobian}矩阵相关的知识，通过选择\textrm{Preconditioning~}函数，加速自洽迭代的收敛
+	\begin{displaymath}
+		\rho_{\mathrm{in}}^{m+1}=\rho_{\mathrm{in}}^{m}+\mathbf{G}^1R[\rho_{\mathrm{in}}^m]
+	\end{displaymath}
+		\item \textrm{Kerker~}混合:\\%~
+			以平面波为基，选择的\textrm{Preconditioning~}函数为
+			\begin{displaymath}
+				G_q^1=A\dfrac{q^2}{q^2+q_0^2}\quad\mbox{一般取$A=0.8$，$q_0$则可根据体系优化}
+			\end{displaymath}
+		\item \textrm{Pulay}混合:\\
+			优化过程中，保留此前若干步的输入电荷密度和残矢，用于迭代的优化电荷密度由此前的电荷密度线性组合得到
+			\begin{displaymath}
+				\rho_{\mathrm{in}}^{\mathrm{opt}}=\sum_i\alpha_i\rho_{\mathrm{in}}^i
+			\end{displaymath}
+			\textcolor{magenta}{假设残矢与密度有相同的线性化形式}
+			\begin{displaymath}
+				R[\rho_{\mathrm{in}}^{\mathrm{opt}}]=R\bigg[\sum_i\alpha_i\rho_{\mathrm{in}}^i\bigg]=\sum_i\alpha_iR[\rho_{\mathrm{in}}^i]
+			\end{displaymath}
+			在归一化约束条件$\sum\limits {i}\alpha_i=1$下，通过最小化残矢模量$\langle R\big[\rho_{\mathrm{in}}^{\mathrm{opt}}\big]|R\big[\rho_{\mathrm{in}}^{\mathrm{opt}}\big]\rangle$，得到优化电荷密度，可以得到优化系数$\alpha_i$
+	\begin{displaymath}
+		a_i=\dfrac{\sum\limits_{j}A_{j,i}^{-1}}{\sum\limits_{j,k}A_{j,k}^{-1}}\qquad A_{j,k}=\langle R[\rho_{\mathrm{in}}^{j}]|R[\rho_{\mathrm{in}}^{k}]\rangle 
+	\end{displaymath}
+\item \textrm{Brondey}混合:\\
+	这是所有自洽求解\textrm{Kohn-Sham}方程方法中最复杂的，属于准-\textrm{Newton}类方法。在迭代过程中，用近似方法不断对\textrm{Jacobian~}矩阵(或逆矩阵)逼近\\
+	每次自洽迭代中并不需要保存全部$N\times N$的\textrm{Jacobian}矩阵，只需要存储$N$-维矢量\\
+	\textcolor{purple}{残矢可以线性化地表示为}
+	\begin{displaymath}
+		R[\rho]=R[\rho_{\mathrm{in}}^m]-\mathrm{J}^m(\rho-\rho_{\mathrm{in}}^m)
+	\end{displaymath}
+	这里$\mathbf{J}^m$是对\textrm{Jacobian~}矩阵的近似($(\mathbf{J}^m)^{-1}$是\textrm{Jacobian}矩阵的逆阵，习惯上取$\mathbf{G}^m=(\mathbf{J}^m)^{-1}$)，由此可有迭代电荷密度
+	\begin{displaymath}
+		\rho_{\mathrm{in}}^{m+1}=\rho_{\mathrm{in}}^m+(\mathbf{J}^m)^{-1}R[\rho_{\mathrm{in}}^m]
+	\end{displaymath}
+	此类方法因为迭代中$\mathbf{J}^m$的变化形式不同，可以选择多种方案\\
+	定义误差函数
+	\begin{displaymath}
+		E=w_0||\mathbf{G}^{m+1}-\mathbf{G}^m||^2+\sum_{i=1}^mw_i||\Delta\rho^i+\mathbf{G}^{m+1}\Delta R^i||^2
+	\end{displaymath}
+	这里$||A||^2=\langle A|A\rangle$，$w_i$是权重因子，并且有
+	\begin{displaymath}
+		\begin{aligned}
+			\Delta\rho^i=&\rho_{\mathrm{in}}^{i+1}-\rho_{\mathrm{in}}^{i}\\
+			\Delta R[\rho^i]=&R[\rho_{\mathrm{in}}^{i+1}]-R[\rho_{\mathrm{in}}^{i}]
+		\end{aligned}
+	\end{displaymath}
+	\begin{itemize}
+		\item 误差函数的第一项要求\textrm{Jacobian}矩阵的逆阵在迭代中变化不大，并有$w_0\rightarrow0$
+		\item 误差函数的第二项要求模$||\Delta\rho^i+\mathbf{G}^{m+1}\Delta R^i||$足够小
+	\end{itemize}
+	用最小二乘法确定最小化误差，可以确定$\mathbf{G}^m$
+	\begin{displaymath}
+		\mathbf{G}^{m+1}=\mathrm{G}^1-\sum_{k=1}^m|\mathbf{Z}_k^m\rangle\langle\Delta R^k|
+	\end{displaymath}
+	其中
+	\begin{displaymath}
+		\begin{aligned}
+			|\mathbf{Z}_k^m\rangle=&\sum_{n=1}^m\beta_{kn}w_kw_n|u^n\rangle+\sum_{n=1}^{m-1}\bar{\beta}_{kn}|\mathbf{Z}_n^{m-1}\rangle\\
+			|u^n\rangle=&\mathbf{G}^1|\Delta R^n\rangle+|\Delta \rho^n\rangle
+		\end{aligned}
+	\end{displaymath}
+	而$\beta_{kn}$和$\bar\beta_{kn}$由下式给出
+	\begin{displaymath}
+		\begin{aligned}
+			\beta_{kn}=&\big(w_0^2+\bar A\big)_{kn}^{-1},\qquad \bar A_{kn}=w_kw_n\langle\Delta R^n|\Delta R^k\rangle\\
+			\bar\beta_{kn}=&\delta_{kn}-\sum_{j=1}^mw_kw_j\beta_{kj}\langle\Delta R^n|\Delta R^j\rangle
+		\end{aligned}
+	\end{displaymath}
+		{\fontsize{7.2pt}{4.2pt}\selectfont{
+	不难看出\\$w_0\rightarrow 0$并且$w_0\ll w_n$，该方法就得到\textrm{Pulay}方法\\
+	而一旦$w_0\rightarrow 0$时，$w_n$的选择，完全不会影响$\mathbf{G}^{m+1}$，因此取$w_n=1$可有
+	\begin{displaymath}
+		\mathbf{G}^m=\mathbf{G}^1-\sum_{k,n=1}^{m-1}\beta_{kn}|u^n\rangle\langle\Delta R^k|
+	\end{displaymath}
+而如果令$w_i=0$并要求$w_0\ll w_m$，有
+\begin{displaymath}
+	\begin{aligned}
+		|\mathbf{Z}_k^m\rangle=&|\mathbf{Z}_k^{m-1}\rangle\qquad k<m\\
+		|\mathbf{Z}_m^m\rangle=&\dfrac1{||\Delta R^m||^2}\bigg(|u^m\rangle-\sum_{k=1}^{m-1}\langle\Delta R^k|\Delta R^m\rangle|\mathbf{Z}_k^{m-1}\rangle\bigg)
+	\end{aligned}
+\end{displaymath}
+}}
 	\end{itemize}
 }
 
@@ -586,14 +881,13 @@ x_6 &=1.0430906366 %~\Longrightarrow
 	\begin{displaymath}
 		\begin{aligned}
 			|\psi^{n+1}\rangle=&\mathbf{D}^{-1}(\mathbf{H}-\varepsilon)|\psi^n\rangle+|\psi^n\rangle=\delta|\psi^{n+1}\rangle+|\psi^n\rangle\\
-			\mathbf{D}\delta\psi^{n+1}=&R[\psi^n]\quad \mbox{或}\quad \delta\psi^{n+1}=\mathbf{D}^{-1}R[\psi^n]\equiv\mathbf{K}R[\psi^n]
+		\mathbf{D}\delta\psi^{n+1}=&R[\psi^n]
 		\end{aligned}
 	\end{displaymath}
-	这里$\mathbf{D}$是非奇异矩阵，与$\mathbf{H}$矩阵有关\\
-	$\mathbf{K}=\mathbf{D}^{-1}$，也叫''预处理矩阵''，可根据需要选取多种形式
+	这里$\mathbf{D}$是非奇异矩阵，与$\mathbf{H}$矩阵有关，也叫''预处理矩阵''，可根据需要选取多种形式
 	\begin{itemize}
 		\item 要求$\mathbf{D}$比原始的$\mathbf{H}-\varepsilon$更易求逆阵
-		\item 要求$\mathbf{D}$使得修正项$\delta\psi^{n+1}$能够使$\psi^n$尽可能更接近正确的本征矢
+		\item 要求$\mathbf{D}$使得修正项$\delta\psi^{n+1}$能够使$\psi^n$尽可能接近正确的本征矢
 	\end{itemize}
 }}
 }
@@ -778,148 +1072,4 @@ x_6 &=1.0430906366 %~\Longrightarrow
 	}}
 }
 
-\frame
-{
-	\frametitle{\textrm{VASP}的并行效率}
-	与同类型软件相比，\textrm{VASP}有着优异的并行能力
-\begin{figure}[h!]
-	\vspace{-0.15in}
-\centering
-%\includegraphics[height=2.7in,width=4.0in,viewport=0 0 1180 875,clip]{Figures/dual_grid.png}
-\includegraphics[height=1.55in,width=1.95in,viewport=0 0 240 200,clip]{Figures/VASP-abinit_Li128-1.png}
-\includegraphics[height=1.55in,width=1.95in,viewport=0 0 240 200,clip]{Figures/VASP-abinit_Li128-2.png}
-\caption{\tiny \textrm{The comparison of parallel scaling for ABINIT vs VASP.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{ABINIT_vs_VASP}
-\end{figure} 
-\begin{itemize}
-	\item \textrm{VASP}迭代对角化约束了矩阵的维度，减少了对角化过程中的迭代次数，保证了\textrm{MPI}并行的规模和扩展性
-	\item \textrm{VASP}实施\textrm{FFT}变换时，保证各节点上处理的网格负载均衡
-\end{itemize}
-}
-
-\frame
-{
-	\frametitle{\textrm{VASP}计算的\textrm{FFT}并行实现}
-	\begin{itemize}
-	     \item 中间层设计:~\textrm{FFT}网格、实空间基组与计算节点的匹配\\
-		     \textcolor{red}{通过子程序\textrm{mgrid.F}生成中间层，实现并行负载与计算节点分配的匹配，减少\textrm{FFT}变换和实空间并行的节点间通信}
-\begin{figure}[h!]
-		\vspace{-0.25in}
-	\centering
-%\includegraphics[height=2.7in,width=4.0in,viewport=0 0 1180 875,clip]{Figures/dual_grid.png}
-\includegraphics[height=1.0in,width=4.0in,viewport=0 0 1500 450,clip]{Figures/VASP_FFT-MPI_Reciprocal.png}
-\vskip 0.5pt
-\includegraphics[height=0.7in,width=4.0in,viewport=0 0 730 150,clip]{Figures/VASP_FFT-MPI_Real.png}
-\caption{\tiny \textrm{VASP:~ Reciprocal-Real space layout for grids in MPI.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{MPI-FFT}
-\end{figure} 
-	\end{itemize}
-}
-
-\frame
-{
-	\frametitle{\textrm{VASP}的通信开销}
-	在高性能的计算队列中，\textrm{VASP}的并行上限可以突破256核，但当并行核数超过百核数量级，并行效率下降非常明显
-\begin{figure}[h!]
-	\vspace{-0.15in}
-\centering
-%\includegraphics[height=2.7in,width=4.0in,viewport=0 0 1180 875,clip]{Figures/dual_grid.png}
-\includegraphics[height=1.55in,width=1.95in,viewport=0 0 240 200,clip]{Figures/VASP-mpi-Li128.png}
-\caption{\tiny \textrm{Time spent in MPI calls with increasing the number of ranks in a VASP calculation.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{VASP_communication}
-\end{figure} 
-
-如能对并行系统与\textrm{VASP}结合作深度改造(如国家超算天津中心方案)，\textrm{VASP}的并行扩展可以到$10^4$核级别，但这一改造需要对底层代码和计算框架作较大规模改动
-}
-
-\frame
-{
-	\frametitle{\textrm{VASP}的\textrm{GPU}加速}
-\textrm{NVIDIA}多年来致力于\textrm{VASP}的\textrm{GPU}加速，取得了一定的成效
-\begin{figure}[h!]
-	\vspace{-0.15in}
-\centering
-%\includegraphics[height=2.7in,width=4.0in,viewport=0 0 1180 875,clip]{Figures/dual_grid.png}
-\includegraphics[height=1.2in,width=4.05in,viewport=0 0 850 260,clip]{Figures/VASP-GPU-CPU.png}
-\caption{\tiny \textrm{Compare of VASP calculation with GPU and CPU.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{VASP_GPU}
-\end{figure} 
-\begin{itemize}
-	\item 通用配置下，\textrm{GPU}对\textrm{VASP}计算有加速效果，一般可提升4$\sim$6倍
-	\item 矩阵对角化的并行算法限制了\textrm{GPU}在第一原理计算中的应用
-	\item \textrm{GPU}加速的模式主要适合于分子动力学计算
-\end{itemize}
-}
-
-\subsection{\rm{VASP}软件的主程序结构}
-%\frame[allowframebreaks]
-\begin{frame}[allowframebreaks]{\textrm{VASP}的主程序结构}
-\begin{figure}[h!]
-\vskip -10pt
-\centering
-\includegraphics[height=2.65in,width=4.0in,viewport=0 360 562 720,clip]{Figures/VASP_main_Flow-1.png}
-\includegraphics[height=2.65in,width=4.0in,viewport=0 0 562 360,clip]{Figures/VASP_main_Flow-1.png}
-\includegraphics[height=2.35in,width=4.0in,viewport=0 370 562 680,clip]{Figures/VASP_main_Flow-2.png}
-\includegraphics[height=2.50in,width=4.0in,viewport=0 0 562 370,clip]{Figures/VASP_main_Flow-2.png}
-\includegraphics[height=2.45in,width=4.0in,viewport=0 350 562 660,clip]{Figures/VASP_main_Flow-3.png}
-\includegraphics[height=2.50in,width=4.0in,viewport=0 0 562 350,clip]{Figures/VASP_main_Flow-3.png}
-\includegraphics[height=2.30in,width=4.0in,viewport=0 215 562 530,clip]{Figures/VASP_main_Flow-4.png}
-\includegraphics[height=1.40in,width=4.0in,viewport=0 0 562 215,clip]{Figures/VASP_main_Flow-4.png}
-\caption{\tiny \textrm{The Flow of main program for VASP.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{FLOW_of_VASP}
-\end{figure}
-\end{frame}
-
-\frame
-{
-	\frametitle{\textrm{VASP}的迭代收敛}
-	完整的\textrm{VASP}计算流程是离子-电子的耦合自洽迭代，称为从头算分子动力学\textrm{(Ab Initio Molecular Dynamics, AIMD)}\upcite{PRL55-2471_1985,PRB47-10142_1993}
-\vskip 3pt
-	{\fontsize{6.2pt}{4.2pt}\selectfont{
-		\begin{itemize}
-		\item \textrm{AIMD}通过在动力学系统中引入经典力学的绝热能量，将\textrm{DFT}与\textrm{MD}关联起来，实现电子与离子运动在同一动力学框架内处理，同时又在时间尺度上保持分离
-		\item \textrm{AIMD}框架下，\textrm{DFT}到\textrm{MD}跨尺度无需再借助势函数模拟，电子弛豫过程与分子动力学可以用类似的迭代方式计算，大大降低了程序的复杂度
-	\end{itemize} }}
-\begin{figure}[h!]
-	\vspace{-0.2in}
-\centering
-%\includegraphics[height=2.7in,width=4.0in,viewport=0 0 1300 960,clip]{Figures/VASP_procedure-full.png}
-\includegraphics[height=1.8in,width=2.6in,viewport=0 0 740 600,clip]{Figures/Ab-initio-Ene.png}
-\caption{\tiny \textrm{The Flow of calculation for the AIMD.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{PAW_AIMD}
-\end{figure} 
-}
-
-\subsection{\rm{VASP}软件概要}
-\frame
-{
-	\frametitle{\textrm{VASP}软件概要}
-	作为第一性原理计算的商用软件，\textrm{VASP}已成为计算材料学领域应用最广泛的软件之一。全球绝大多数超算中心都安装了\textrm{VASP}，据统计，\textrm{VASP}软件的作业机时占用全球总机时的12$\sim$20\%，但由于其%类似于linpack软件，
-属于重型浮点计算密集型应用，实际耗电量占比则高达30$\sim$50\%
-\vskip 3pt
-	{\fontsize{9.0pt}{7.2pt}\selectfont{
-	\begin{itemize}
-		\item \textcolor{blue}{物理上}，\textrm{VASP}基于\textrm{DFT}近似，求解\textrm{Kohn-Sham}方程，并将粒子基态密度问题转化为矩阵的本征函数和本征值问题
-		\item \textcolor{blue}{数学上}，方程求解过程的核心是矩阵对角化与\textrm{PDE}的自洽迭代，即便对于简单体系，也需要完成数十次的迭代，而规模大的计算模拟体系则可能需要成千上万次迭代计算
-		\item \textcolor{blue}{计算过程上}，\textrm{VASP}计算的时长开销主要是本征值求解的矩阵对角化；此外由于算法限制，\textrm{Kohn-Sham}方程作为线性方程组作并行处理时，节点间存在密集的通信。在上千节点，上万计算核的大规模并行系统上，数据通信将严重影响程序的性能，这是当前\textrm{VASP}软件的主要瓶颈
-	\end{itemize}}}
-			\textcolor{magenta}{有必要探索新的并行和优化策略来提升\textrm{VASP}的计算性能}
-}
-
-%------------------------------------------------------------------------Reference----------------------------------------------------------------------------------------------
-		\frame[allowframebreaks]
-{
-\frametitle{主要参考文献}
-\begin{thebibliography}{99}
-{\tiny
-	\bibitem{PRB50-17953_1994}\textrm{P. E. Bl\"ochl. \textit{Phys. Rev.} B, \textbf{50} (1994), 17953}
-	\bibitem{PRB59-1758_1999}\textrm{G. Kresse and D. Joubert \textit{Phys. Rev.} B, \textbf{59} (1999), 1758}
-	\bibitem{PRL55-2471_1985}\textrm{R. Car and M. Parrinello \textit{Phys. Rev.} Lett., \textbf{55} (1985), 2471}
-	\bibitem{PRB47-10142_1993}\textrm{K. Laasonen and A. Pasquarello and R. Car and C. Lee and D. Vanderbilt \textit{Phys. Rev.} B, \textbf{47} (1993), 10142}
-	\bibitem{Elect_Stru}\textrm{Richard. M. Martin. \textit{Electronic Structure: Basic Theory and Practical Methods} (Cambridge University Press, Cambridge, England, 2004)}
-        \bibitem{Singh}\textrm{D. J. Singh. \textit{Plane Wave, PseudoPotential and the LAPW method} (Kluwer Academic, Boston,USA, 1994)}					%
-}
-\end{thebibliography}
-%\nocite*{}
-}
 %-----------------------------------------------------------------------------------------------------------------------------------------------------------------------%

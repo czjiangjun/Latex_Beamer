@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  不使用 authblk 包制作标题  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %-------------------------------PPT Title-------------------------------------
-\title{09-\rm{VASP}的优化与并行}
+\title{药物设计中的量子力学概述}
 %-----------------------------------------------------------------------------
 %----------------------------Author & Date------------------------------------
 
@@ -8,14 +8,14 @@
 %% - Give the names in the same order as the appear in the paper.
 %% - Use the \inst{?} command only if the authors have different
 %%   affiliation.
-%\institute[BCC]{\inst{}%
-\institute[Gain~Strong]{\inst{}%
-%\vskip -20pt 北京市计算中心}
-\vskip -20pt {\large 格致斯创~科技}}
+\institute[BCC]{\inst{}%
+%\institute[Gain~Strong]{\inst{}%
+\vskip -20pt 北京市计算中心}
+%\vskip -20pt {\large 格致斯创~科技}}
 \date[\today] % (optional, should be abbreviation of conference name)
 {%	{\fontsize{6.2pt}{4.2pt}\selectfont{\textcolor{blue}{E-mail:~}\url{jiangjun@bcc.ac.cn}}}
 \vskip 45 pt {\fontsize{8.2pt}{6.2pt}\selectfont{%清华大学\;\;物理系% 报告地点
-	\vskip 5 pt \textrm{2023.03.25}}}
+	\vskip 5 pt \textrm{2023.04}}}
 }
 
 %% - Either use conference name or its abbreviation
@@ -72,7 +72,7 @@
 %	\end{itemize}
 %}
 
-\subsection{\rm{VASP}软件的特色}
+\section{量子力学简介}
 \frame
 {
 	\frametitle{\textrm{VASP}软件的特点}
@@ -586,14 +586,13 @@ x_6 &=1.0430906366 %~\Longrightarrow
 	\begin{displaymath}
 		\begin{aligned}
 			|\psi^{n+1}\rangle=&\mathbf{D}^{-1}(\mathbf{H}-\varepsilon)|\psi^n\rangle+|\psi^n\rangle=\delta|\psi^{n+1}\rangle+|\psi^n\rangle\\
-			\mathbf{D}\delta\psi^{n+1}=&R[\psi^n]\quad \mbox{或}\quad \delta\psi^{n+1}=\mathbf{D}^{-1}R[\psi^n]\equiv\mathbf{K}R[\psi^n]
+		\mathbf{D}\delta\psi^{n+1}=&R[\psi^n]
 		\end{aligned}
 	\end{displaymath}
-	这里$\mathbf{D}$是非奇异矩阵，与$\mathbf{H}$矩阵有关\\
-	$\mathbf{K}=\mathbf{D}^{-1}$，也叫''预处理矩阵''，可根据需要选取多种形式
+	这里$\mathbf{D}$是非奇异矩阵，与$\mathbf{H}$矩阵有关，也叫''预处理矩阵''，可根据需要选取多种形式
 	\begin{itemize}
 		\item 要求$\mathbf{D}$比原始的$\mathbf{H}-\varepsilon$更易求逆阵
-		\item 要求$\mathbf{D}$使得修正项$\delta\psi^{n+1}$能够使$\psi^n$尽可能更接近正确的本征矢
+		\item 要求$\mathbf{D}$使得修正项$\delta\psi^{n+1}$能够使$\psi^n$尽可能接近正确的本征矢
 	\end{itemize}
 }}
 }
