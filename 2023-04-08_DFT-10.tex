@@ -168,26 +168,41 @@ $U_2(\vec r_i,\vec r_j)$是双体势，$U_3(\vec r_i,\vec r_j,\vec r_k)$是描�
 	在分子动力学计算中，力的计算需要更多的时间，因为其计算耗时步数是$\mathscr{O}(N^2)$，\textcolor{blue}{对于周期体系，这种力的计算尤其需要谨慎}
 }
 
-\frame{allowframebreak}
+\frame[allowframebreaks]
 {
 	\frametitle{经典分子动力学力场}
-	原子间受力一般用\textcolor{red}{力场}(\textrm{Force Field}，也就是“\textcolor{blue}{相互作用势}”)描述，力场的形式有很多种，最常提到的有
+	原子间受力一般用\textcolor{red}{力场}(\textrm{Force Field}，也就是“\textcolor{blue}{相互作用势}”)描述，力场的形式有很多种，典型力场的有
 	\begin{itemize}
 		\item \textrm{Lennard-Jones}对势
 	\begin{displaymath}
 		U(r)=4\varepsilon\bigg[\bigg(\dfrac{\sigma}{r}\bigg)^{12}-\bigg(\dfrac{\sigma}{r}\bigg)^6\bigg]
 	\end{displaymath}
 	{\fontsize{7.2pt}{6.2pt}\selectfont{这里$\varepsilon$和$\sigma$是和原子有关的参数
-	\textrm{L-J}势能的最低点在$r_{\min}=2^{(1/6)}\sigma\approx1.12\sigma$，$r<r_{\min}$时为排斥力，$r>r_{\min}$时为吸引力}}\\
-	由\textrm{L-J}势改造，可以得到\textrm{WCA}势和\textrm{PHS}势
+	\textrm{L-J}势能的最低点在$r_{\min}=2^{(1/6)}\sigma\approx1.12\sigma$，$r<r_{\min}$时为排斥力，$r>r_{\min}$时为吸引力
+\begin{figure}[h!]
+\centering
+\vspace*{-0.30in}
+\includegraphics[height=1.00in,width=1.35in,viewport=0 0 340 270,clip]{Figures/Lennard-Jones_potential.png}
+\caption{\tiny \textrm{The Lennard-Jones Potential.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Potential-Lennard-Jones}
+\end{figure}
+\vskip -20pt
+	由\textrm{L-J}势改造，可以得到\textrm{WCA}势和\textrm{PHS}势}}
 \item \textrm{Morse}势
 	\begin{displaymath}
 		U(r)=-D_{\mathrm{e}}+D_{\mathrm{e}}\bigg(1-\mathrm{e}^{-a(r-r_{\mathrm{e}})}\bigg)^2
 	\end{displaymath}
-	{\fontsize{7.2pt}{6.2pt}\selectfont{这里$D_{\mathrm{e}}$是\textrm{Morse}势的势阱深，参数$a$确定势阱宽度，$r_{\mathrm{e}}$是原子处于平衡位置的平衡键长}}
+	{\fontsize{7.2pt}{6.2pt}\selectfont{这里$D_{\mathrm{e}}$是\textrm{Morse}势的势阱深，参数$a$确定势阱宽度，$r_{\mathrm{e}}$是原子处于平衡位置的平衡键长
+\begin{figure}[h!]
+\centering
+\vspace*{-0.15in}
+\includegraphics[height=1.30in,width=1.85in,viewport=0 0 3540 2770,clip]{Figures/Morse-potential.png}
+\caption{\tiny \textrm{The Morse potential (blue) and harmonic oscillator potential (green).}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Potential-Morse}
+\end{figure}
+}}
 \item \textrm{EAM}势\\
-	{\fontsize{7.2pt}{6.2pt}\selectfont{对于金属晶体，内能虽可以表示为对相互作用之和，但拟合原子受力非常困难:\\%\footnote
-		{\fontsize{5.2pt}{3.2pt}\selectfont{应用二体势计算金属弹性常数时必须涉及对体积很敏感的能量项，因为涉及缺陷、表面的体积很难确定}}\\
+	{\fontsize{7.2pt}{6.2pt}\selectfont{对于金属晶体，内能虽可以表示为对相互作用之和，但拟合原子受力非常困难:\footnote{\fontsize{5.2pt}{3.2pt}\selectfont{应用二体势计算金属弹性常数时必须涉及对体积很敏感的能量项，因为涉及缺陷、表面的体积很难确定。}}\\
 	\textcolor{red}{从物理上说金属原子处于电子海洋中，电子密度来自多个原子的贡献，这是自由电子气带来的多体效应}}}\\
 	\textrm{EAM}将金属中原子的势能表示为二体势和多体势之和
 	\begin{displaymath}
@@ -205,6 +220,98 @@ $U_2(\vec r_i,\vec r_j)$是双体势，$U_3(\vec r_i,\vec r_j,\vec r_k)$是描�
 \frame
 {
 	\frametitle{统计系综}
+	系综(\textrm{Ensembles})是在一定的宏观条件下，由大量微观粒子组成的性质和结构完全相同的、处于各种运动状态的、各自独立的系统整体的集合\footnote{\fontsize{6.2pt}{5.2pt}\selectfont{简言之，系综是系统的集合(\textcolor{magenta}{系统}:~宏观相同，微观不同)。}}。\\
+	应用\textrm{Verlet}算法，完成单粒子运动的数值积分，可以得到动力学体系的\textrm{Hamiltonian}对应的能量，进而应用统计力学的统计系综，获得宏观体系的物理量
+\begin{figure}[h!]
+\centering
+\vspace*{-0.30in}
+\includegraphics[height=1.60in,width=3.85in,viewport=0 0 1420 570,clip]{Figures/Statistical_Ensembles.png}
+\caption{\tiny \textrm{The Statistical Ensembles.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Statistical_Ensembles}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{第一原理分子动力学}
+	电子结构计算时，体系总能是基于\textrm{Born-Oppenheimer}近似得到，如果变化原子位置，可以得到体系总能随原子位置变化的规律\\
+	作为原子位置$\vec R_i$函数的电子态总能量$E(\vec R_1,\vec R_2,\cdots,\vec R_N)$称\textcolor{red}{势能面}~(\textrm{potential surface})
+
+	对于一套给定原子核位置$\mathbf{S}=(\vec R_1,\cdots,\vec R_N)$，$\vec R_i$表示第$i$个原子核的位置;~如果电子的基态波函数是$\psi_{\mathrm{G}}$则\\电子态能量为
+	\begin{displaymath}
+		E=\dfrac{\langle\psi_{\mathrm{G}}|\mathbf{H}(\mathbf{S})|\psi_{\mathrm{G}}\rangle}{\langle\psi_{\mathrm{G}}|\psi_{\mathrm{G}}\rangle}
+	\end{displaymath}
+作用在原子核$n$上的经典作用力，可由电子态能量对原子位置$\vec R_n$的梯度$\nabla_n$的负值给出
+\begin{displaymath}
+	\vec F_n=-\nabla_nE(\mathbf{S})=-\nabla_n\bigg[\dfrac{\langle\psi_{\mathrm{G}}|\mathbf{H}(\mathbf{S})|\psi_{\mathrm{G}}\rangle}{\langle\psi_{\mathrm{G}}|\psi_{\mathrm{G}}\rangle}\bigg]
+\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{\textrm{Hellmann-Feynman}定理}
+	如果$\psi_{\mathrm{G}}$是\textrm{Hamiltonian}的本征态，有
+	\begin{displaymath}
+		\begin{aligned}
+			&(\langle\psi_{\mathrm{G}}|\psi_{\mathrm{G}}\rangle)^2\nabla_nE\\
+			=&\big[\langle(\nabla_n\psi_{\mathrm{G}}|\mathbf{H}|\psi_{\mathrm{G}}\rangle+\langle\psi_{\mathrm{G}}|(\nabla_n\mathbf{H})|\psi_{\mathrm{G}}\rangle+\langle\psi_{\mathrm{G}}|\mathbf{H}|(\nabla_n\psi_{\mathrm{G}})\rangle\big]\langle\psi_{\mathrm{G}}|\psi_{\mathrm{G}}\rangle\\
+			&-\langle\psi_{\mathrm{G}}|\mathbf{H}|\psi_{\mathrm{G}}\rangle\big[\langle(\nabla_n\psi_{\mathrm{G}})|\psi_{\mathrm{G}}\rangle+\langle\psi_{\mathrm{G}}|(\nabla_n\psi_{\mathrm{G}})\rangle\big]
+		\end{aligned}
+	\end{displaymath}
+	{\fontsize{6.2pt}{5.2pt}\selectfont{这里暂不考虑$\mathbf{H}$对$\mathbf{S}$的依赖}}\\
+	\vskip 5pt
+	\textrm{Hellmann-Feynman}定理指出:~如果\textrm{Hamiltonian}$\mathbf{H}$是\textrm{Hermitian}的，并且有
+	\begin{displaymath}
+		\mathbf{H}\psi_{\mathrm{G}}=E_{\mathrm{G}}\psi_{\mathrm{G}}
+	\end{displaymath}
+则上述表达式中，除了$\langle\psi_{\mathrm{G}}|(\nabla_n\mathbf{H})|\psi_{\mathrm{G}}\rangle$之外，等式右侧其余各项彼此抵消。由此得到能量梯度的表达式
+\begin{displaymath}
+	\nabla_nE=\dfrac{\langle\psi_{\mathrm{G}}|(\nabla_n\mathbf{H})|\psi_{\mathrm{G}}\rangle}{\langle\psi_{\mathrm{G}}|\psi_{\mathrm{G}}\rangle}
+\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{\textrm{Car-Parrinello~}方法}
+	基于\textrm{Born-Oppenheimer}近似的原子-电子耦合的势能面计算方案，每一原子步都需要完整的电子结构自洽迭代，计算量相当可观。
+\vskip 5pt
+\textrm{1985}年，在\textrm{Car-Parrinello}建议的方案中，\textcolor{purple}{电子态将原子核的运动一样，都用分子动力学算法计算}。\\
+在该方案中，\textcolor{blue}{体系的电子态并未能达到当前正电荷环境的真实基态，但体系总能却与真实基态更为接近}\\
+{\fontsize{6.2pt}{5.2pt}\selectfont{考虑\textcolor{blue}{体系总能}(即\textcolor{red}{电子态总能}+\textcolor{magenta}{原子核静电相互作用能})是电子态波函数$\psi_k$和原子核坐标$\mathbf{S}$的泛函
+\begin{displaymath}
+	E_{\mathrm{tot}}=E_{\mathrm{tot}}(\{\psi_k\},\mathbf{S})
+\end{displaymath}
+如果波函数可用一套基组$\{\chi_r\}$表示，即
+\begin{displaymath}
+	\psi_k(\vec r)=\sum_rC_{rk}\chi_r(\vec r)
+\end{displaymath}
+则体系总能可表示为
+\begin{displaymath}
+	E_{\mathrm{tot}}=E_{\mathrm{tot}}(\{C_{rk}\},\mathbf{S})
+\end{displaymath}
+考虑到基函数常常选择以原子核为坐标原点，因此也依赖于$\mathbf{S}$
+}}\\
+\textrm{Car-Parrinello}方法通过变量\underline{\textcolor{blue}{$\psi_k$(或$C_{rk}$)和原子核坐标$\mathbf{S}$}}来完成$E_{\mathrm{tot}}$的优化(确定$E_{\mathrm{tot}}$的极小值)
+}
+
+\frame
+{
+	\frametitle{\textrm{Car-Parrinello~}方法}
+	{\fontsize{6.2pt}{5.2pt}\selectfont{到这里，能量最小化问题可以视为一个抽象的数学问题，原则上，任何一种最小化方法都适用(如模拟退火方法(\textrm{simulated annealing method}))}}
+	\vskip 5pt
+	\textrm{Car-Parrinello}要求原子核坐标随时间变化，还引入虚拟时间，要求波函数随虚拟时间变化，由此构造动态\textrm{Lagrangian}量\\
+	{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{Lagrangian}量包括
+	\begin{itemize}
+		\item 电子态波函数$\{\psi_k\}$
+		\item 原子核坐标$\{\vec R_i\}$
+		\item 电子态波函数时间导数$\dot\psi_k$和原子核坐标时间导数$\{\dot{\vec R}_i\}$
+	\end{itemize}}}
+	电子态总能$E_{\mathrm{tot}}$是该\textrm{Lagrangian}量的势能，形式上这是一个经典力学的问题
+	\begin{itemize}
+		\item 在经典力学体系的运动方程中引入阻尼项贡献，则\\
+			\textcolor{blue}{经过一段时间体系达到平衡态时，许可自由度的值对应体系经典势能达到最小值态时的取值}
+		\item 在模拟体系在非零温下的运动时，可将阻尼项设为零
+	\end{itemize}
 }
 
 \frame
@@ -215,14 +322,38 @@ $U_2(\vec r_i,\vec r_j)$是双体势，$U_3(\vec r_i,\vec r_j,\vec r_k)$是描�
 	\begin{displaymath}
 		L(\{\psi_k\},\{\vec R_n\})=\frac{\mu}2\sum_k\dot{\psi}_k^2+\sum_n\frac{M_n}2\dot{\vec R}_n^2-E_{\mathrm{tot}}(\{\psi_k\},\{\vec R_n\})+\sum_{kl}\Lambda_{kl}\langle\psi_k|\psi_l\rangle
 	\end{displaymath}}
-	多粒子体系的\textrm{Euler-Lagrange~}运动方程可以表示为
+由波函数正交约束，体系的\textrm{Euler-Lagrange~}运动方程可表示为
 	\begin{displaymath}
 		\begin{aligned}
-			\mu\ddot{\psi}_k=&-\dfrac{\partial E_{\mathrm{tot}}}{\partial\psi_k}+2\sum_i\Lambda_{kl}\psi_l(\vec r)\\
-			M_n\ddot{\vec R}_n&=-\dfrac{\partial E_{\mathrm{tot}}}{\partial\vec R_n}+\sum_{kl}\Lambda_{kl}\dfrac{\partial\langle\psi_k|\psi_l\rangle}{\partial\vec R_n}
+			\mu\ddot{\psi}_k=&-\dfrac{\partial E_{\mathrm{tot}}}{\partial\psi_k}+2\sum_i\Lambda_{kl}(t)\psi_l(\vec r)\\
+			M_n\ddot{\vec R}_n&=-\dfrac{\partial E_{\mathrm{tot}}}{\partial\vec R_n}+\textcolor{red}{\sum_{kl}\Lambda_{kl}(t)\dfrac{\partial\langle\psi_k|\psi_l\rangle}{\partial\vec R_n}}
 		\end{aligned}
 	\end{displaymath}
-	\textcolor{purple}{电子基态可以通过求解\textrm{Verlet~}运动方程得到}\\
+	{\fontsize{6.2pt}{5.2pt}\selectfont{\begin{itemize}
+		\item \textcolor{red}{如果表示$\psi_k$的基函数不依赖原子核位置$\mathbf{S}$，则上述最后一个方程右侧最后一项消失}
+		\item 电子态总能$E_{\mathrm{tot}}$是波函数$\psi_k$和原子核位置$\{\vec R_n\}$的函数
+		\item 电子态动能表示为
+			\begin{displaymath}
+				\mu\ddot{\psi}_k=-\dfrac{\partial E_{\mathrm{tot}}}{\partial\psi_k}+2\sum_i\Lambda_{kl}(t)\sum_sS_{rs}(\vec r)C_{sl}
+			\end{displaymath}
+		只要电子态波函数的基函数可由原子核位置确定，$\mu$的数值受基函数影响不大
+	\end{itemize}}}
+}
+
+\frame
+{
+	\frametitle{能量泛函的直接优化:~电子态运动方程}
+如果运动方程中引入阻尼项，则经过一段时间后，方程的解达到稳定态，前述随时间二阶导数项消失(等号左侧为零)
+\begin{itemize}
+	\item 电子态的运动方程与\textrm{Kohn-Sham}方程类似\\
+		{\fontsize{6.2pt}{5.2pt}\selectfont{能量本征值由$\varepsilon_k$变成矩阵元$\Lambda_{kl}$}}
+	\item \textrm{Lagrange}参数$\Lambda_{kl}$是时间相关的\\
+		{\fontsize{6.2pt}{5.2pt}\selectfont{
+		因此每个\textrm{MD}步必须重新计算$\Lambda_{kl}$，以确保电子态波函数满足正交约束条件}}
+	\item \textcolor{purple}{电子近似基态可以通过求解\textrm{Verlet~}运动方程得到}
+	\item 对于搜索原子核的平衡位置问题，如果原子初始位置离平衡位置较远，很可能只得到体系的局域极小值\\
+		{\fontsize{6.2pt}{5.2pt}\selectfont{使用模拟退火方法，使体系跃出局域极小点，搜索全局极小值}}
+\end{itemize}
 	在\textrm{DFT~}框架下，有
 	{\fontsize{9.0pt}{5.2pt}\selectfont
 	\begin{displaymath}
@@ -234,29 +365,64 @@ $U_2(\vec r_i,\vec r_j)$是双体势，$U_3(\vec r_i,\vec r_j,\vec r_k)$是描�
 
 \frame
 {
-	\frametitle{波函数正交与\rm{SHAKE~}迭代算法}
-	为确保电子轨道波函数正交，
+	\frametitle{能量泛函的直接优化:~原子核运动}
+	原子核运动方程的求解主要围绕电子态总能对原子位置$\vec R_i$的求导，虚考虑求导贡献的共三部分
+	\begin{itemize}
+		\item 原子核之间的\textrm{Coulomb}相互作用:\\
+			与原子核间距离反比:~$1/R_{ij}~\quad|\vec R_{ij}=\vec R_i-\vec R_j|$
+		\item 电子\textrm{Hamiltonian}中包括的电子与核之间的\textrm{Coulomb}吸引势\\
+			与原子核位置有关:~$\vec R_i$
+		\item 基函数$\chi_r$对原子核位置$\vec R_i$的依赖\\
+			当基函数的中心选定在原子核$\vec R_i$上时，原子核位置的变化会引起\textrm{Fock}矩阵和重叠矩阵的变化\\
+	{\fontsize{7.2pt}{5.2pt}\selectfont{因原子核位置变化引起基函数改变的贡献称为\textcolor{blue}{\textrm{Pulay}力}}}
+	\end{itemize}
+	\textrm{Car-Parrinello HF}方法得到的结果与二体势(力场)方法结果等价
+	\vskip 5pt
+	计算得到位于$\vec R_i$的原子核受力，用于描述\textrm{Verlet}模拟原子核的运动状态
+}
+
+\frame
+{
+	\frametitle{波函数正交对计算的影响}
 	{\fontsize{9.0pt}{5.2pt}\selectfont
+	\textrm{Verlet}算法计算电子态波函数的运动方程
 	\begin{displaymath}
-		|\tilde\psi_k(t+h)\rangle=2|\psi_k(t)\rangle-|\psi_k(t-h)\rangle-\dfrac{2h^2}{\mu}H|\psi_k(t)\rangle
+		|\tilde\psi_k(t+h)\rangle=2|\psi_k(t)\rangle-|\psi_k(t-h)\rangle-\dfrac{2h^2}{\mu}(H|\psi_k(t)\rangle-\sum_l\Lambda_{kl}\psi_l)
 	\end{displaymath}}
-	为计算\textrm{Langrage}乘子，可有
+	\textrm{Langrage}乘子确保电子轨道波函数正交%，可有
+	{\fontsize{7.0pt}{5.2pt}\selectfont
+	实际上，这里存在多种正交方案
+	\begin{itemize}
+		\item 一次\textrm{unitary}变换产生一套正交轨道
+			\begin{displaymath}
+				\psi_k^{\prime}=\sum_lU_{kl}\psi_l
+			\end{displaymath}
+			这里基组$\{\psi_k^{\prime}\}$是正交的
+		\item 一次波函数的\textrm{unitary}变化伴随\textrm{Lagtange}乘子的一次类似变换
+			\begin{displaymath}
+				\Lambda_{kl}^{\prime}=\sum_{mn}U_{km}^{\dagger}\Lambda_{mn}U_{nl}
+			\end{displaymath}
+	\end{itemize}
+	不同的正交方案对应张开的空间相同，但张开空间的函数有所旋转
+%	\begin{displaymath}
+%		|\psi_k(t+h)\rangle=|\tilde\psi_k(t+h)\rangle+\sum_lX_{kl}|\psi_l(t)\rangle
+%	\end{displaymath}
+}\\
+%	其中，{\fontsize{9.0pt}{5.2pt}\selectfont$X_{kl}=\dfrac{2h^2}{\mu}\Lambda_{kl}$}，由此$|\psi_k(t+h)\rangle$正交\\
+%	$X_{ij}$要求关于$\mathbf{X}$的矩阵方程
+	{\fontsize{8.0pt}{5.2pt}\selectfont
+	\textcolor{purple}{不同的旋转方式会对\textrm{Verlet}算法的执行效率产生很大的影响}
+%	\begin{displaymath}
+%		\mathbf{X}\mathbf{X}^{\dag}+\mathbf{X}\mathbf{B}+\mathbf{B}^{\dag}\mathbf{X}^{\dag}=\mathbf{I}-\mathbf{A}
+%	\end{displaymath}
+}
+%	能通过以下迭代快速收敛，这里{\fontsize{9.0pt}{5.2pt}\selectfont$A_{kl}=\langle\tilde\psi_k(t+h)|\tilde\psi_l(t+h)\rangle$}，{\fontsize{9.0pt}{5.2pt}\selectfont$B_{kl}=\langle\psi_k(t)|\tilde\psi_l(t+h)\rangle$}
 	{\fontsize{9.0pt}{5.2pt}\selectfont
-	\begin{displaymath}
-		|\psi_k(t+h)\rangle=|\tilde\psi_k(t+h)\rangle+\sum_lX_{kl}|\psi_l(t)\rangle
-	\end{displaymath}}
-	其中，{\fontsize{9.0pt}{5.2pt}\selectfont$X_{kl}=\dfrac{2h^2}{\mu}\Lambda_{kl}$}，由此$|\psi_k(t+h)\rangle$正交\\
-	$X_{ij}$要求关于$\mathbf{X}$的矩阵方程
-	{\fontsize{9.0pt}{5.2pt}\selectfont
-	\begin{displaymath}
-		\mathbf{X}\mathbf{X}^{\dag}+\mathbf{X}\mathbf{B}+\mathbf{B}^{\dag}\mathbf{X}^{\dag}=\mathbf{I}-\mathbf{A}
-	\end{displaymath}}
-	能通过以下迭代快速收敛，这里{\fontsize{9.0pt}{5.2pt}\selectfont$A_{kl}=\langle\tilde\psi_k(t+h)|\tilde\psi_l(t+h)\rangle$}，{\fontsize{9.0pt}{5.2pt}\selectfont$B_{kl}=\langle\psi_k(t)|\tilde\psi_l(t+h)\rangle$}
-	{\fontsize{9.0pt}{5.2pt}\selectfont
-	\begin{displaymath}
-		\mathbf{X}^{(n+1)}=\frac12[\mathbf{I}-\mathbf{A}+\mathbf{X}^{(n)}(\mathbf{I}-\mathbf{B})+\mathbf{X}^{(n)}(\mathbf{I}-\mathbf{B}^{\dag})-\mathbf{X}^{n}\mathbf{X}^{(n){\dag}}]
-		\end{displaymath}}
-	取初始{\fontsize{9.0pt}{5.2pt}\selectfont$\mathbf{X}=\frac12(\mathbf{I}-\mathbf{A})$}
+%	\begin{displaymath}
+%		\mathbf{X}^{(n+1)}=\frac12[\mathbf{I}-\mathbf{A}+\mathbf{X}^{(n)}(\mathbf{I}-\mathbf{B})+\mathbf{X}^{(n)}(\mathbf{I}-\mathbf{B}^{\dag})-\mathbf{X}^{n}\mathbf{X}^{(n){\dag}}]
+%		\end{displaymath}
+}
+%	取初始{\fontsize{9.0pt}{5.2pt}\selectfont$\mathbf{X}=\frac12(\mathbf{I}-\mathbf{A})$}
 }
 
 \frame
@@ -272,10 +438,10 @@ $U_2(\vec r_i,\vec r_j)$是双体势，$U_3(\vec r_i,\vec r_j,\vec r_k)$是描�
 \end{figure} 
 }
 
-\subsection{电子态能量的最小化}
+%\subsection{电子态能量的最小化}
 \frame
 {
-	\frametitle{电子态能量最小化}
+	\frametitle{第一原理分子动力学提要}
 	\textrm{Car-Parinello~}方法基本思想
 	\begin{itemize}
 		\item 只对原子核位置考虑受力$-\dfrac{\partial E_{\mathrm{tot}}}{\partial\vec R_n}$作用
