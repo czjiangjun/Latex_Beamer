@@ -15,7 +15,7 @@
 \date[\today] % (optional, should be abbreviation of conference name)
 {%	{\fontsize{6.2pt}{4.2pt}\selectfont{\textcolor{blue}{E-mail:~}\url{jiangjun@bcc.ac.cn}}}
 \vskip 45 pt {\fontsize{8.2pt}{6.2pt}\selectfont{%清华大学\;\;物理系% 报告地点
-	\vskip 5 pt \textrm{2023.03.25}}}
+	\vskip 5 pt \textrm{2023.04.08}}}
 }
 
 %% - Either use conference name or its abbreviation
@@ -71,6 +71,219 @@
 %	     \item \textrm{PAW}原子数据集:\textcolor{blue}{优异的赝势}\upcite{PRB59-1758_1999}
 %	\end{itemize}
 %}
+\subsection{\textrm{VASP}中的电荷密度混合与矩阵迭代对角化}
+\frame
+{
+	\frametitle{不动点问题}
+	求解方程
+	\begin{displaymath}
+		f(\mathbf{x})=\mathbf{x}
+	\end{displaymath}
+	$\mathbf{x}$是函数$f(\mathbf{x})$的\textcolor{red}{不动点}\textrm{Fixed Point}
+	
+	对这类问题的求解，可以利用迭代关系
+	\begin{displaymath}
+		\mathbf{x}_{i+1}=f(\mathbf{x}_i)\qquad (i=1,2,3,\cdots)
+	\end{displaymath}
+	这称为\textcolor{blue}{不动点迭代法}
+
+	{\fontsize{6.2pt}{4.2pt}\selectfont{例如求解方程
+	\begin{displaymath}
+%		\begin{aligned}
+			\lg(10+x)~=~x%\\
+			\Longrightarrow	\textcolor{blue}{x\approx 1.04309063}
+%		\end{aligned}
+		\end{displaymath}}}
+\begin{minipage}[b]{0.35\textwidth}
+		{\fontsize{3.2pt}{1.2pt}\selectfont{
+	\begin{displaymath}
+	\vspace{-0.11in}
+		\begin{aligned}
+			x_0&=1 %~\Longrightarrow 
+			\\\lg(10+1)&=1.041392685\\
+x_1 &=1.041392685 %~\Longrightarrow 
+\\\lg(10+1.041392685)&=1.0430238558\\
+x_2 &=1.043023856 %~\Longrightarrow 
+\\\lg(10+1.043023856)&=1.0430880104\\
+x_3 &=1.043088010 %~\Longrightarrow 
+\\\lg(10+1.043088010)&=1.0443090533\\
+x_4 &=1.043090533 %~\Longrightarrow 
+\\\lg(10+1.043090533)&=1.04430906326\\
+x_4 &=1.0430906326 %~\Longrightarrow 
+\\\lg(10+1.0430906326)&=1.04430906365\\
+x_5 &=1.0430906365 %~\Longrightarrow 
+\\\lg(10+1.0430906365)&=1.04430906366\\
+x_6 &=1.0430906366 %~\Longrightarrow 
+\\\lg(10+1.0430906366)&=1.04430906366
+		\end{aligned}
+	\end{displaymath}}}
+\end{minipage}
+\hfill
+\begin{minipage}[b]{0.62\textwidth}
+\begin{figure}[h!]
+	\vspace{-0.21in}
+\centering
+\includegraphics[height=1.3in,width=2.0in,viewport=0 0 2500 1600,clip]{Figures/solve_lg10.png}
+%\caption{\tiny \textrm{The comparison of parallel scaling for ABINIT vs VASP.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{solution-log_10}
+\end{figure}
+\end{minipage}
+}
+
+\frame[allowframebreaks]
+{
+	\frametitle{电荷密度混合收敛算法}
+	根据\textrm{DFT}，搜索基态电荷密度的过程就是能量泛函优化的过程，可以通过此前讨论的迭代算法实现:\\
+%由初猜电荷密度出发，
+	\begin{displaymath}
+		R[\rho_{\mathrm{in}}]=\rho_{\mathrm{out}}[\rho_{\mathrm{in}}]-\rho_{\mathrm{in}}
+	\end{displaymath}
+	自洽迭代收敛时，残矢模量$\langle R[\rho_{\mathrm{in}}]|R[\rho_{\mathrm{in}}]\rangle~\rightarrow~0$
+
+	\begin{itemize}
+		\item 线性混合:\\
+			如果电荷密度自洽迭代的每一步只保留当前步的电荷密度信息，就是线性电荷密度的线性混合
+			\begin{displaymath}
+				\rho_{\mathrm{in}}^{m+1}=\rho_{\mathrm{in}}^{m}+\gamma R[\rho_{\mathrm{in}}^m]
+			\end{displaymath}
+	显然，这种线性混合收敛比较慢，应用\textrm{Jacobian}矩阵相关的知识，通过选择\textrm{Preconditioning~}函数，加速自洽迭代的收敛
+	\begin{displaymath}
+		\rho_{\mathrm{in}}^{m+1}=\rho_{\mathrm{in}}^{m}+\mathbf{G}^1R[\rho_{\mathrm{in}}^m]
+	\end{displaymath}
+		\item \textrm{Kerker~}混合:\\%~
+			以平面波为基，选择的\textrm{Preconditioning~}函数为
+			\begin{displaymath}
+				G_q^1=A\dfrac{q^2}{q^2+q_0^2}\quad\mbox{一般取$A=0.8$，$q_0$则可根据体系优化}
+			\end{displaymath}
+		\item \textrm{Pulay}混合:\\
+			优化过程中，保留此前若干步的输入电荷密度和残矢，用于迭代的优化电荷密度由此前的电荷密度线性组合得到
+			\begin{displaymath}
+				\rho_{\mathrm{in}}^{\mathrm{opt}}=\sum_i\alpha_i\rho_{\mathrm{in}}^i
+			\end{displaymath}
+			\textcolor{magenta}{假设残矢与密度有相同的线性化形式}
+			\begin{displaymath}
+				R[\rho_{\mathrm{in}}^{\mathrm{opt}}]=R\bigg[\sum_i\alpha_i\rho_{\mathrm{in}}^i\bigg]=\sum_i\alpha_iR[\rho_{\mathrm{in}}^i]
+			\end{displaymath}
+			在归一化约束条件$\sum\limits {i}\alpha_i=1$下，通过最小化残矢模量$\langle R\big[\rho_{\mathrm{in}}^{\mathrm{opt}}\big]|R\big[\rho_{\mathrm{in}}^{\mathrm{opt}}\big]\rangle$，得到优化电荷密度，可以得到优化系数$\alpha_i$
+	\begin{displaymath}
+		a_i=\dfrac{\sum\limits_{j}A_{j,i}^{-1}}{\sum\limits_{j,k}A_{j,k}^{-1}}\qquad A_{j,k}=\langle R[\rho_{\mathrm{in}}^{j}]|R[\rho_{\mathrm{in}}^{k}]\rangle 
+	\end{displaymath}
+\item \textrm{Brondey}混合:\\
+	这是所有自洽求解\textrm{Kohn-Sham}方程方法中最复杂的，属于准-\textrm{Newton}类方法。在迭代过程中，用近似方法不断对\textrm{Jacobian~}矩阵(或逆矩阵)逼近\\
+	每次自洽迭代中并不需要保存全部$N\times N$的\textrm{Jacobian}矩阵，只需要存储$N$-维矢量\\
+	\textcolor{purple}{残矢可以线性化地表示为}
+	\begin{displaymath}
+		R[\rho]=R[\rho_{\mathrm{in}}^m]-\mathrm{J}^m(\rho-\rho_{\mathrm{in}}^m)
+	\end{displaymath}
+	这里$\mathbf{J}^m$是对\textrm{Jacobian~}矩阵的近似($(\mathbf{J}^m)^{-1}$是\textrm{Jacobian}矩阵的逆阵，习惯上取$\mathbf{G}^m=(\mathbf{J}^m)^{-1}$)，由此可有迭代电荷密度
+	\begin{displaymath}
+		\rho_{\mathrm{in}}^{m+1}=\rho_{\mathrm{in}}^m+(\mathbf{J}^m)^{-1}R[\rho_{\mathrm{in}}^m]
+	\end{displaymath}
+	此类方法因为迭代中$\mathbf{J}^m$的变化形式不同，可以选择多种方案\\
+	定义误差函数
+	\begin{displaymath}
+		E=w_0||\mathbf{G}^{m+1}-\mathbf{G}^m||^2+\sum_{i=1}^mw_i||\Delta\rho^i+\mathbf{G}^{m+1}\Delta R^i||^2
+	\end{displaymath}
+	这里$||A||^2=\langle A|A\rangle$，$w_i$是权重因子，并且有
+	\begin{displaymath}
+		\begin{aligned}
+			\Delta\rho^i=&\rho_{\mathrm{in}}^{i+1}-\rho_{\mathrm{in}}^{i}\\
+			\Delta R[\rho^i]=&R[\rho_{\mathrm{in}}^{i+1}]-R[\rho_{\mathrm{in}}^{i}]
+		\end{aligned}
+	\end{displaymath}
+	\begin{itemize}
+		\item 误差函数的第一项要求\textrm{Jacobian}矩阵的逆阵在迭代中变化不大，并有$w_0\rightarrow0$
+		\item 误差函数的第二项要求模$||\Delta\rho^i+\mathbf{G}^{m+1}\Delta R^i||$足够小
+	\end{itemize}
+	用最小二乘法确定最小化误差，可以确定$\mathbf{G}^m$
+	\begin{displaymath}
+		\mathbf{G}^{m+1}=\mathrm{G}^1-\sum_{k=1}^m|\mathbf{Z}_k^m\rangle\langle\Delta R^k|
+	\end{displaymath}
+	其中
+	\begin{displaymath}
+		\begin{aligned}
+			|\mathbf{Z}_k^m\rangle=&\sum_{n=1}^m\beta_{kn}w_kw_n|u^n\rangle+\sum_{n=1}^{m-1}\bar{\beta}_{kn}|\mathbf{Z}_n^{m-1}\rangle\\
+			|u^n\rangle=&\mathbf{G}^1|\Delta R^n\rangle+|\Delta \rho^n\rangle
+		\end{aligned}
+	\end{displaymath}
+	而$\beta_{kn}$和$\bar\beta_{kn}$由下式给出
+	\begin{displaymath}
+		\begin{aligned}
+			\beta_{kn}=&\big(w_0^2+\bar A\big)_{kn}^{-1},\qquad \bar A_{kn}=w_kw_n\langle\Delta R^n|\Delta R^k\rangle\\
+			\bar\beta_{kn}=&\delta_{kn}-\sum_{j=1}^mw_kw_j\beta_{kj}\langle\Delta R^n|\Delta R^j\rangle
+		\end{aligned}
+	\end{displaymath}
+		{\fontsize{7.2pt}{4.2pt}\selectfont{
+	不难看出\\$w_0\rightarrow 0$并且$w_0\ll w_n$，该方法就得到\textrm{Pulay}方法\\
+	而一旦$w_0\rightarrow 0$时，$w_n$的选择，完全不会影响$\mathbf{G}^{m+1}$，因此取$w_n=1$可有
+	\begin{displaymath}
+		\mathbf{G}^m=\mathbf{G}^1-\sum_{k,n=1}^{m-1}\beta_{kn}|u^n\rangle\langle\Delta R^k|
+	\end{displaymath}
+而如果令$w_i=0$并要求$w_0\ll w_m$，有
+\begin{displaymath}
+	\begin{aligned}
+		|\mathbf{Z}_k^m\rangle=&|\mathbf{Z}_k^{m-1}\rangle\qquad k<m\\
+		|\mathbf{Z}_m^m\rangle=&\dfrac1{||\Delta R^m||^2}\bigg(|u^m\rangle-\sum_{k=1}^{m-1}\langle\Delta R^k|\Delta R^m\rangle|\mathbf{Z}_k^{m-1}\rangle\bigg)
+	\end{aligned}
+\end{displaymath}
+}}
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{矩阵迭代对角化的基本思想}
+\begin{figure}[h!]
+\centering
+\includegraphics[height=2.5in,width=3.5in,viewport=0 0 850 590,clip]{Figures/Coordinate_transformation.png}
+\label{decent_CG}
+\caption{\tiny \textrm{Schematic illustration of searching for the eigenvalue of a vector.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{矩阵的迭代对角化}
+	``预处理矩阵''$\mathbf{K}$的作用，是使\textcolor{red}{函数(泛函)对变量的依赖趋于“同质”(\textrm{isotropic})}，即函数曲线与不同变量的依赖关系趋同
+
+	具体到电子结构求解:~
+	\begin{itemize}
+		\item \textcolor{blue}{平面波基}\\
+			基函数$\mathrm{e}^{\mathrm{i}\vec G_m\cdot\vec r}$对波函数$\psi_{\vec k_i+\vec G}^n(\vec r)$的贡献为$c_{i,m}^n(\vec k)$\\
+		{\fontsize{7.2pt}{4.2pt}\selectfont{
+		在能量泛函表达式中，高频(大的$\vec G_m$)部分比低频(小的$\vec G_m$)贡献大得多}}\\
+			\textrm{preconditioning}\textcolor{blue}{要使不同频率对能量泛函贡献趋同}:\\
+			\textcolor{red}{不同本征矢的修正项趋同，而与相应的能量本征值无关。}取
+	\begin{displaymath}
+		K(x)=\dfrac{27+18x+12x^2+8x^3}{27+18x+12x^2+8x^3+16x^4}
+	\end{displaymath}
+	此处定义
+	\begin{displaymath}
+		x_i^n(\vec G_m)=\dfrac12\dfrac{|\vec k+\vec G_m|^2}{E^{\mathrm{kin}}(\mathbf{R}^n)}
+	\end{displaymath}
+	\textcolor{purple}{$x_i^n(\vec G_m)$表示对$n$次迭代后本征态$i$中平面波组分$|\vec k_i+\vec G_m|$动能贡献的调整比例}
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{矩阵的迭代对角化}
+	\begin{itemize}
+		\item \textcolor{blue}{实空间基}\\
+		与平面波基类似，可以定义
+	\begin{displaymath}
+		x_i^n(\vec r)=A\dfrac12\dfrac{\lambda_i^m-V(\vec r)}{E^{\mathrm{kin}}(\mathbf{R}^n)}
+	\end{displaymath}
+		\textcolor{purple}{$x_i^n(\vec r)$表示对$n$次迭代后本征态$i$中局部动能$|\lambda_i-V(\vec r)|$对总动能贡献的调整比例}
+	\end{itemize}
+	完成\textrm{preconditioning}得到矩阵$\mathbf{K}(x_i^n)$后，由
+	\begin{displaymath}
+		\psi^{n+1}\equiv\mathbf{K}\mathbf{R}^n
+	\end{displaymath}
+	可根据残矢量$\mathbf{R}^n$选择方式的不同，将\textcolor{blue}{\textrm{SD}、\textrm{CG}}、\textcolor{blue}{\textrm{RMM-DIIS}}等多种算法应用于矩阵迭代对角化计算
+}
+
+\subsection{经典分子动力学提要}
 \frame
 {
 	\frametitle{经典分子动力学}
@@ -231,6 +444,7 @@ $U_2(\vec r_i,\vec r_j)$是双体势，$U_3(\vec r_i,\vec r_j,\vec r_k)$是描�
 \end{figure}
 }
 
+\subsection{第一原理分子动力学简介}
 \frame
 {
 	\frametitle{第一原理分子动力学}
@@ -543,149 +757,25 @@ $U_2(\vec r_i,\vec r_j)$是双体势，$U_3(\vec r_i,\vec r_j,\vec r_k)$是描�
 	\end{itemize}
 }
 
-\frame
+%------------------------------------------------------------------------Reference----------------------------------------------------------------------------------------------
+		\frame[allowframebreaks]
 {
-	\frametitle{矩阵的迭代对角化}
-	``预处理矩阵''$\mathbf{K}$的作用，是使\textcolor{red}{函数(泛函)对变量的依赖趋于“同质”(\textrm{isotropic})}，即函数曲线与不同变量的依赖关系趋同
-
-	具体到电子结构求解:~
-	\begin{itemize}
-		\item \textcolor{blue}{平面波基}\\
-			基函数$\mathrm{e}^{\mathrm{i}\vec G_m\cdot\vec r}$对波函数$\psi_{\vec k_i+\vec G}^n(\vec r)$的贡献为$c_{i,m}^n(\vec k)$\\
-		{\fontsize{7.2pt}{4.2pt}\selectfont{
-		在能量泛函表达式中，高频(大的$\vec G_m$)部分比低频(小的$\vec G_m$)贡献大得多}}\\
-			\textrm{preconditioning}\textcolor{blue}{要使不同频率对能量泛函贡献趋同}:\\
-			\textcolor{red}{不同本征矢的修正项趋同，而与相应的能量本征值无关。}取
-	\begin{displaymath}
-		K(x)=\dfrac{27+18x+12x^2+8x^3}{27+18x+12x^2+8x^3+16x^4}
-	\end{displaymath}
-	此处定义
-	\begin{displaymath}
-		x_i^n(\vec G_m)=\dfrac12\dfrac{|\vec k+\vec G_m|^2}{E^{\mathrm{kin}}(\mathbf{R}^n)}
-	\end{displaymath}
-	\textcolor{purple}{$x_i^n(\vec G_m)$表示对$n$次迭代后本征态$i$中平面波组分$|\vec k_i+\vec G_m|$动能贡献的调整比例}
-	\end{itemize}
+\frametitle{主要参考文献}
+\begin{thebibliography}{99}
+{\tiny
+	\bibitem{CMS6-15_1996}\textrm{G. Kresse and J. Furthm\"uller \textit{Comput. Mat. Sci.}, \textbf{6} (1996), 15}
+	\bibitem{PRB54-11169_1996}\textrm{G. Kresse and J. Furthm\"uller \textit{Phys. Rev.} B, \textbf{54} (1996), 11169}
+	\bibitem{PRL55-2471_1985}\textrm{R. Car and M. Parrinello \textit{Phys. Rev.} Lett., \textbf{55} (1985), 2471}
+	\bibitem{PRB47-10142_1993}\textrm{K. Laasonen and A. Pasquarello and R. Car and C. Lee and D. Vanderbilt \textit{Phys. Rev.} B, \textbf{47} (1993), 10142}
+	\bibitem{Elect_Stru}\textrm{Richard. M. Martin. \textit{Electronic Structure: Basic Theory and Practical Methods} (Cambridge University Press, Cambridge, England, 2004)}
+	\bibitem{Comp_Phys}\textrm{J. M. Thijssen. \textit{Computational Physics (2nd Edition)} (Cambridge University Press, Cambridge, England, 2007)}
+        \bibitem{Singh}\textrm{D. J. Singh. \textit{Plane Wave, PseudoPotential and the LAPW method} (Kluwer Academic, Boston,USA, 1994)}					%
 }
-
-\frame
-{
-	\frametitle{矩阵的迭代对角化}
-	\begin{itemize}
-		\item \textcolor{blue}{实空间基}\\
-		与平面波基类似，可以定义
-	\begin{displaymath}
-		x_i^n(\vec r)=A\dfrac12\dfrac{\lambda_i^m-V(\vec r)}{E^{\mathrm{kin}}(\mathbf{R}^n)}
-	\end{displaymath}
-		\textcolor{purple}{$x_i^n(\vec r)$表示对$n$次迭代后本征态$i$中局部动能$|\lambda_i-V(\vec r)|$对总动能贡献的调整比例}
-	\end{itemize}
-	完成\textrm{preconditioning}得到矩阵$\mathbf{K}(x_i^n)$后，由
-	\begin{displaymath}
-		\psi^{n+1}\equiv\mathbf{K}\mathbf{R}^n
-	\end{displaymath}
-	可根据残矢量$\mathbf{R}^n$选择方式的不同，将\textcolor{blue}{\textrm{SD}、\textrm{CG}}、\textcolor{blue}{\textrm{RMM-DIIS}}等多种算法应用于矩阵迭代对角化计算
+\end{thebibliography}
+%\nocite*{}
 }
-
-\subsection{电荷密度混合算法}
-\frame[allowframebreaks]
-{
-	\frametitle{电荷密度混合收敛算法}
-	根据\textrm{DFT}，搜索基态电荷密度的过程就是能量泛函优化的过程，可以通过此前讨论的迭代算法实现:\\
-%由初猜电荷密度出发，
-	\begin{displaymath}
-		R[\rho_{\mathrm{in}}]=\rho_{\mathrm{out}}[\rho_{\mathrm{in}}]-\rho_{\mathrm{in}}
-	\end{displaymath}
-	自洽迭代收敛时，残矢模量$\langle R[\rho_{\mathrm{in}}]|R[\rho_{\mathrm{in}}]\rangle~\rightarrow~0$
-
-	\begin{itemize}
-		\item 线性混合:\\
-			如果电荷密度自洽迭代的每一步只保留当前步的电荷密度信息，就是线性电荷密度的线性混合
-			\begin{displaymath}
-				\rho_{\mathrm{in}}^{m+1}=\rho_{\mathrm{in}}^{m}+\gamma R[\rho_{\mathrm{in}}^m]
-			\end{displaymath}
-	显然，这种线性混合收敛比较慢，应用\textrm{Jacobian}矩阵相关的知识，通过选择\textrm{Preconditioning~}函数，加速自洽迭代的收敛
-	\begin{displaymath}
-		\rho_{\mathrm{in}}^{m+1}=\rho_{\mathrm{in}}^{m}+\mathbf{G}^1R[\rho_{\mathrm{in}}^m]
-	\end{displaymath}
-		\item \textrm{Kerker~}混合:\\%~
-			以平面波为基，选择的\textrm{Preconditioning~}函数为
-			\begin{displaymath}
-				G_q^1=A\dfrac{q^2}{q^2+q_0^2}\quad\mbox{一般取$A=0.8$，$q_0$则可根据体系优化}
-			\end{displaymath}
-		\item \textrm{Pulay}混合:\\
-			优化过程中，保留此前若干步的输入电荷密度和残矢，用于迭代的优化电荷密度由此前的电荷密度线性组合得到
-			\begin{displaymath}
-				\rho_{\mathrm{in}}^{\mathrm{opt}}=\sum_i\alpha_i\rho_{\mathrm{in}}^i
-			\end{displaymath}
-			\textcolor{magenta}{假设残矢与密度有相同的线性化形式}
-			\begin{displaymath}
-				R[\rho_{\mathrm{in}}^{\mathrm{opt}}]=R\bigg[\sum_i\alpha_i\rho_{\mathrm{in}}^i\bigg]=\sum_i\alpha_iR[\rho_{\mathrm{in}}^i]
-			\end{displaymath}
-			在归一化约束条件$\sum\limits {i}\alpha_i=1$下，通过最小化残矢模量$\langle R\big[\rho_{\mathrm{in}}^{\mathrm{opt}}\big]|R\big[\rho_{\mathrm{in}}^{\mathrm{opt}}\big]\rangle$，得到优化电荷密度，可以得到优化系数$\alpha_i$
-	\begin{displaymath}
-		a_i=\dfrac{\sum\limits_{j}A_{j,i}^{-1}}{\sum\limits_{j,k}A_{j,k}^{-1}}\qquad A_{j,k}=\langle R[\rho_{\mathrm{in}}^{j}]|R[\rho_{\mathrm{in}}^{k}]\rangle 
-	\end{displaymath}
-\item \textrm{Brondey}混合:\\
-	这是所有自洽求解\textrm{Kohn-Sham}方程方法中最复杂的，属于准-\textrm{Newton}类方法。在迭代过程中，用近似方法不断对\textrm{Jacobian~}矩阵(或逆矩阵)逼近\\
-	每次自洽迭代中并不需要保存全部$N\times N$的\textrm{Jacobian}矩阵，只需要存储$N$-维矢量\\
-	\textcolor{purple}{残矢可以线性化地表示为}
-	\begin{displaymath}
-		R[\rho]=R[\rho_{\mathrm{in}}^m]-\mathrm{J}^m(\rho-\rho_{\mathrm{in}}^m)
-	\end{displaymath}
-	这里$\mathbf{J}^m$是对\textrm{Jacobian~}矩阵的近似($(\mathbf{J}^m)^{-1}$是\textrm{Jacobian}矩阵的逆阵，习惯上取$\mathbf{G}^m=(\mathbf{J}^m)^{-1}$)，由此可有迭代电荷密度
-	\begin{displaymath}
-		\rho_{\mathrm{in}}^{m+1}=\rho_{\mathrm{in}}^m+(\mathbf{J}^m)^{-1}R[\rho_{\mathrm{in}}^m]
-	\end{displaymath}
-	此类方法因为迭代中$\mathbf{J}^m$的变化形式不同，可以选择多种方案\\
-	定义误差函数
-	\begin{displaymath}
-		E=w_0||\mathbf{G}^{m+1}-\mathbf{G}^m||^2+\sum_{i=1}^mw_i||\Delta\rho^i+\mathbf{G}^{m+1}\Delta R^i||^2
-	\end{displaymath}
-	这里$||A||^2=\langle A|A\rangle$，$w_i$是权重因子，并且有
-	\begin{displaymath}
-		\begin{aligned}
-			\Delta\rho^i=&\rho_{\mathrm{in}}^{i+1}-\rho_{\mathrm{in}}^{i}\\
-			\Delta R[\rho^i]=&R[\rho_{\mathrm{in}}^{i+1}]-R[\rho_{\mathrm{in}}^{i}]
-		\end{aligned}
-	\end{displaymath}
-	\begin{itemize}
-		\item 误差函数的第一项要求\textrm{Jacobian}矩阵的逆阵在迭代中变化不大，并有$w_0\rightarrow0$
-		\item 误差函数的第二项要求模$||\Delta\rho^i+\mathbf{G}^{m+1}\Delta R^i||$足够小
-	\end{itemize}
-	用最小二乘法确定最小化误差，可以确定$\mathbf{G}^m$
-	\begin{displaymath}
-		\mathbf{G}^{m+1}=\mathrm{G}^1-\sum_{k=1}^m|\mathbf{Z}_k^m\rangle\langle\Delta R^k|
-	\end{displaymath}
-	其中
-	\begin{displaymath}
-		\begin{aligned}
-			|\mathbf{Z}_k^m\rangle=&\sum_{n=1}^m\beta_{kn}w_kw_n|u^n\rangle+\sum_{n=1}^{m-1}\bar{\beta}_{kn}|\mathbf{Z}_n^{m-1}\rangle\\
-			|u^n\rangle=&\mathbf{G}^1|\Delta R^n\rangle+|\Delta \rho^n\rangle
-		\end{aligned}
-	\end{displaymath}
-	而$\beta_{kn}$和$\bar\beta_{kn}$由下式给出
-	\begin{displaymath}
-		\begin{aligned}
-			\beta_{kn}=&\big(w_0^2+\bar A\big)_{kn}^{-1},\qquad \bar A_{kn}=w_kw_n\langle\Delta R^n|\Delta R^k\rangle\\
-			\bar\beta_{kn}=&\delta_{kn}-\sum_{j=1}^mw_kw_j\beta_{kj}\langle\Delta R^n|\Delta R^j\rangle
-		\end{aligned}
-	\end{displaymath}
-		{\fontsize{7.2pt}{4.2pt}\selectfont{
-	不难看出\\$w_0\rightarrow 0$并且$w_0\ll w_n$，该方法就得到\textrm{Pulay}方法\\
-	而一旦$w_0\rightarrow 0$时，$w_n$的选择，完全不会影响$\mathbf{G}^{m+1}$，因此取$w_n=1$可有
-	\begin{displaymath}
-		\mathbf{G}^m=\mathbf{G}^1-\sum_{k,n=1}^{m-1}\beta_{kn}|u^n\rangle\langle\Delta R^k|
-	\end{displaymath}
-而如果令$w_i=0$并要求$w_0\ll w_m$，有
-\begin{displaymath}
-	\begin{aligned}
-		|\mathbf{Z}_k^m\rangle=&|\mathbf{Z}_k^{m-1}\rangle\qquad k<m\\
-		|\mathbf{Z}_m^m\rangle=&\dfrac1{||\Delta R^m||^2}\bigg(|u^m\rangle-\sum_{k=1}^{m-1}\langle\Delta R^k|\Delta R^m\rangle|\mathbf{Z}_k^{m-1}\rangle\bigg)
-	\end{aligned}
-\end{displaymath}
-}}
-	\end{itemize}
-}
-
+%-----------------------------------------------------------------------------------------------------------------------------------------------------------------------%
+\appendix
 \subsection{经典数值优化算法概要}
 \frame
 {
@@ -902,18 +992,18 @@ $U_2(\vec r_i,\vec r_j)$是双体势，$U_3(\vec r_i,\vec r_j,\vec r_k)$是描�
 \centering
 \includegraphics[height=2.0in,width=3.5in,viewport=0 0 950 590,clip]{Figures/OP_descent_CG.png}
 \label{decent_CG}
-\caption{\tiny \textrm{Schematic illustration of minimization of a function in two dimensions. The steps 1,2,3,~$\cdots$ denote the steepest descent steps and the point - \!- \!- \!- \!- \!- denote the conjugate gradient path that reaches the exact solution after two steps if the functional is quadratic.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\caption{\tiny \textrm{Schematic illustration of minimization of a function in two dimensions. The steps 1,2,3,~$\cdots$ denote the steepest descent steps and - \!- \!- \!- \!- \!- the point 2$^{\ast}$ denote the conjugate gradient path that reaches the exact solution after two steps if the functional is quadratic.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \end{figure}
 }
 
 \frame
 {
-	\frametitle{\textrm{Fixed Point}}
+	\frametitle{不动点问题}
 	求解方程
 	\begin{displaymath}
 		f(\mathbf{x})=\mathbf{x}
 	\end{displaymath}
-	$\mathbf{x}$是函数$f(\mathbf{x})$的\textcolor{red}{不动点}
+	$\mathbf{x}$是函数$f(\mathbf{x})$的\textcolor{red}{不动点}\textrm{Fixed Point}
 	
 	对这类问题的求解，可以利用迭代关系
 	\begin{displaymath}
