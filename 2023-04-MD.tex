@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  不使用 authblk 包制作标题  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %-------------------------------PPT Title-------------------------------------
-\title{药物设计中的量子力学概述}
+\title{生化反应中的量子力学概述}
 %-----------------------------------------------------------------------------
 %----------------------------Author & Date------------------------------------
 
@@ -71,6 +71,18 @@
 %	     \item \textrm{PAW}原子数据集:\textcolor{blue}{优异的赝势}\upcite{PRB59-1758_1999}
 %	\end{itemize}
 %}
+\frame
+{
+	\frametitle{生物化学反应机理研究}
+\begin{figure}[h!]
+\centering
+\vspace{-8.5pt}
+\includegraphics[height=0.67\textwidth,width=1.0\textwidth,viewport=0 0 1380 900,clip]{Figures/anti-tumour_mechanism-of the-Cin-Pt(IV)-Val-complex.png}
+%\caption{\textrm{ABINIT}的Si.in}
+\label{mechanism}
+\end{figure}
+}
+
 \frame
 {
 	\frametitle{分子间相互作用与化学键}
@@ -292,14 +304,27 @@
 
 \frame
 {
-	\frametitle{原子的驻波方程}
+	\frametitle{原子中电子的驻波方程}
 \begin{figure}[h!]
 	\vspace{-10.5pt}
 \centering
 \includegraphics[height=0.38\textwidth,width=0.74\textwidth,viewport=0 0 840 440,clip]{Figures/Standing_wave-atom.png}
 \vskip 2pt
 \animategraphics[autoplay, loop, height=1.3in]{1}{Figures/Standing_wave_circle_}{1}{25}
-\label{Atomic_Standing_wave}
+\label{Atomic-electron_Standing_wave}
+\end{figure}
+}
+
+
+\frame
+{
+	\frametitle{原子中的电子轨道和能量}
+\begin{figure}[h!]
+	\vspace{-10.5pt}
+\centering
+\includegraphics[height=0.60\textwidth,width=0.38\textwidth,viewport=0 10 1280 1900,clip]{Figures/wave_function.png}
+\includegraphics[height=0.70\textwidth,width=0.60\textwidth,viewport=0 0 580 600,clip]{Figures/Electron_orbital-energy.png}
+\label{Atomic-electron_wave-energy}
 \end{figure}
 }
 
@@ -457,6 +482,7 @@
 }
 
 \section{量子力学与化学键的本质}
+\subsection{分子轨道理论}
 \frame
 {
 	\frametitle{原子核外电子排布}
@@ -509,6 +535,7 @@
 \end{figure}
 }
 
+\subsection{分子的稳定性与键级}
 \frame
 {
 	\frametitle{分子轨道与键强度}
@@ -542,10 +569,11 @@
 \vspace{-15.5pt}
 %\caption{\textrm{The wave-particle duality and Photoelectric effect}}
 \includegraphics[height=2.80in,width=4.10in,viewport=0 0 800 550,clip]{Figures/Band-order-2.jpg}
-\label{Bond_Order}
+\label{Bond_Order-2}
 \end{figure}
 }
 
+\subsection{化学键的本质}
 \frame
 {
 	\frametitle{轨道杂化与分子结构}
@@ -635,7 +663,127 @@
 \end{figure}
 }
 
-\section{化学键的模拟与常用软件}
+\section{生物化学反应机理的模拟与常用软件}
+\frame
+{
+	\frametitle{生物化学反应的特点}
+\begin{figure}[h!]
+\centering
+\vspace{-10.5pt}
+%\caption{\textrm{The wave-particle duality and Photoelectric effect}}
+\includegraphics[height=2.80in,width=3.70in,viewport=0 0 750 600,clip]{Figures/Citric_acid_cycle_with_aconitate.png}
+\label{Bio-Chem}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{酶在生物化学反应中的作用}
+\begin{figure}[h!]
+\centering
+\vspace{-5.5pt}
+%\caption{\textrm{The wave-particle duality and Photoelectric effect}}
+\includegraphics[height=1.55in,width=4.00in,viewport=0 0 800 320,clip]{Figures/enzyme-substrate-2.jpeg}
+\label{Bio-Chem-enzy}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{酶的蛋白质结构特点}
+\begin{figure}[h!]
+\centering
+\vspace{-5.5pt}
+%\caption{\textrm{The wave-particle duality and Photoelectric effect}}
+\includegraphics[height=2.20in,width=4.00in,viewport=0 0 1950 1200,clip]{Figures/Enzyme_structure.png}
+\label{enzyem_Structure}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{酶催化反应的理论研究:\textrm{QM/MM}}
+\begin{figure}[h!]
+\centering
+\vspace{-10.5pt}
+%\caption{\textrm{The wave-particle duality and Photoelectric effect}}
+\includegraphics[height=2.40in,width=4.00in,viewport=0 0 240 140,clip]{Figures/QM-MM_part.jpg}
+\label{enzyem_Structure}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{酶催化反应的理论研究:\textrm{QM/MM}}
+\begin{figure}[h!]
+\centering
+\vspace{-10.5pt}
+%\caption{\textrm{The wave-particle duality and Photoelectric effect}}
+\includegraphics[height=2.80in,width=3.30in,viewport=0 0 280 250,clip]{Figures/biomolecules-QM-MM.png}
+\label{enzyem_Structure}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{酶催化反应的理论研究:\textrm{QM/MM}}
+\begin{figure}[h!]
+\centering
+\vspace{-10.5pt}
+%\caption{\textrm{The wave-particle duality and Photoelectric effect}}
+\includegraphics[height=2.20in,width=4.0in,viewport=0 0 280 160,clip]{Figures/QM_MM-2.jpg}
+\label{enzyem_Structure}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{酶催化反应的理论研究:\textrm{QM/MM}}
+\begin{figure}[h!]
+\centering
+\vspace{-10.5pt}
+%\caption{\textrm{The wave-particle duality and Photoelectric effect}}
+\includegraphics[height=2.25in,width=4.00in,viewport=0 0 320 180,clip]{Figures/MM-QM-CCSD.jpg}
+\label{enzyem_Structure}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{酶催化的反应动力学过程}
+\begin{figure}[h!]
+\centering
+\vspace{-10.5pt}
+%\caption{\textrm{The wave-particle duality and Photoelectric effect}}
+\includegraphics[height=2.70in,width=4.00in,viewport=0 0 500 370,clip]{Figures/Catalyst-reaction-path.png}
+\label{enzyem_Structure}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{酶催化的反应动力学过程}
+\begin{figure}[h!]
+\centering
+\vspace{-10.5pt}
+%\caption{\textrm{The wave-particle duality and Photoelectric effect}}
+\includegraphics[height=2.35in,width=4.00in,viewport=0 0 180 135,clip]{Figures/molecules-reaction-path.jpg}
+\label{enzyem_Structure}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{生化反应的常用计算软件}
+\begin{figure}[h!]
+\centering
+\vspace{-10.5pt}
+%\caption{\textrm{The wave-particle duality and Photoelectric effect}}
+\includegraphics[height=2.65in,width=4.00in,viewport=0 0 700 450,clip]{Figures/QM-MM-treatment-of-a-biocatalytic-system.png}
+\label{enzyem_Structure}
+\end{figure}
+}
+
 \frame
 {
 %	\frametitle{\textrm{DFT-SCF}}
@@ -647,7 +795,40 @@
 \label{Method-Procedure}
 \end{figure}
 }
+
+\frame
+{
+	\frametitle{生命科学的研究:~分解\textrm{.vs.}整合}
+	生理学家刘曾复教授\footnote{\fontsize{6.2pt}{4.2pt}\selectfont{刘曾复教授(\textrm{1914-2012})，我国老一辈生理学家，首都医科大学前身北京第二医学院创始人之一。主要研究方向是电生理学、整合生理学。}}认为
+\pgfputat{\pgfxy(11.68,0.15)}{\includegraphics[height=0.95cm,viewport=0 0 510 360,clip]{Figures/Huang.jpg}}\pgfputat{\pgfxy(10.333,-0.195)}{\includegraphics[height=0.35cm,viewport=530 70 1100 218,clip]{Figures/Huang.jpg}}
+%\pgfputat{\pgfxy(10.333,-0.195)}{\includegraphics[height=0.35cm,viewport=530 70 1100 218,clip]{Figures/Huang.jpg}}}
+	\begin{itemize}
+		\item 应该重视系统科学的思想和方法\\
+			注意生命体机能的整合调节
+		\item 生理学中的整合(\textrm{intergration})类似集成电路\\
+			对控制-反馈过程的研究，要有整体的思想
+		\item 生理学研究重视整合、调节，应该有新的数学为生理学服务\\
+	大数据、\textrm{AI}、机器学习
+	\end{itemize}
+	$^{\ast}${\fontsize{7.2pt}{4.2pt}\selectfont{根据刘曾复~著、娄悦~编~《刘曾复京剧文存》附录“刘曾复访谈”部分整理}}
+}
 %------------------------------------------------------------------------Reference----------------------------------------------------------------------------------------------
+		\frame[allowframebreaks]
+{
+\frametitle{主要参考文献}
+\begin{thebibliography}{99}
+{\tiny
+	\bibitem{PRB50-17953_1994}\textrm{P. E. Bl\"ochl. \textit{Phys. Rev.} B, \textbf{50} (1994), 17953}
+	\bibitem{PRB59-1758_1999}\textrm{G. Kresse and D. Joubert \textit{Phys. Rev.} B, \textbf{59} (1999), 1758}
+	\bibitem{PRL55-2471_1985}\textrm{R. Car and M. Parrinello \textit{Phys. Rev.} Lett., \textbf{55} (1985), 2471}
+	\bibitem{PRB47-10142_1993}\textrm{K. Laasonen and A. Pasquarello and R. Car and C. Lee and D. Vanderbilt \textit{Phys. Rev.} B, \textbf{47} (1993), 10142}
+	\bibitem{Elect_Stru}\textrm{Richard. M. Martin. \textit{Electronic Structure: Basic Theory and Practical Methods} (Cambridge University Press, Cambridge, England, 2004)}
+        \bibitem{Singh}\textrm{D. J. Singh. \textit{Plane Wave, PseudoPotential and the LAPW method} (Kluwer Academic, Boston,USA, 1994)}					%
+}
+\end{thebibliography}
+%\nocite*{}
+}
+%-----------------------------------------------------------------------------------------------------------------------------------------------------------------------%
 		\frame[allowframebreaks]
 {
 \frametitle{主要参考文献}
