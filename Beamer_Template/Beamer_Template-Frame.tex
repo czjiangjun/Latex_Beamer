@@ -26,5 +26,14 @@
 %        \draw[red, ultra thick, rounded corners] (0.62,0.65) rectangle (0.78,0.75);
 %    \end{scope}
 %\end{tikzpicture}
+%指定位置插入图片
+%\begin{tikzpicture}[remember picture,overlay]
+%    \node<1->[xshift=-3cm,yshift=-1cm] at (current page.center) {\includegraphics[height=3cm]{Figures/Huang.jpg}};
+%    \node<2->[xshift=0cm,yshift=0cm] at (current page.east) {\includegraphics[height=3cm]{Figures/Huang.jpg}};
+%    \node<3->[xshift=3cm,yshift=1cm] at (current page.north) {\includegraphics[height=3cm]{Figures/Huang.jpg}};
+%\end{tikzpicture}
+%\begin{tikzpicture}[remember picture,overlay]
+%	\node[xshift=-1.8cm,yshift=1.43cm] at (current page.east) {\includegraphics[height=2.5cm, width=2.22cm, viewport=360 0 1350 1100,clip]{Figures/Liu_Zengfu.jpg}};
+%\end{tikzpicture}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
