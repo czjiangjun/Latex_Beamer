@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  不使用 authblk 包制作标题  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %-------------------------------PPT Title-------------------------------------
-\title{生化反应中的量子力学概述}
+\title{化学键的本质与生化反应动力学模拟}
 %-----------------------------------------------------------------------------
 %----------------------------Author & Date------------------------------------
 
@@ -10,7 +10,7 @@
 %%   affiliation.
 \institute[BCC]{\inst{}%
 %\institute[Gain~Strong]{\inst{}%
-\vskip -20pt 北京市计算中心}
+\vskip -20pt 北京市计算中心~智能计算事业部}
 %\vskip -20pt {\large 格致斯创~科技}}
 \date[\today] % (optional, should be abbreviation of conference name)
 {%	{\fontsize{6.2pt}{4.2pt}\selectfont{\textcolor{blue}{E-mail:~}\url{jiangjun@bcc.ac.cn}}}
@@ -35,13 +35,13 @@
 %-----------------------------------------------------------------------------
 
 %------------------------------------------------------------------------------列出全文 outline ---------------------------------------------------------------------------------
-%\section*{}
-%\frame[allowframebreaks]
-%{
-%  \frametitle{Outline}
-%%  \frametitle{\textcolor{mycolor}{\secname}}
-%  \tableofcontents%[current,currentsection,currentsubsection]
-%}
+\section*{}
+\frame[allowframebreaks]
+{
+  \frametitle{Outline}
+%  \frametitle{\textcolor{mycolor}{\secname}}
+  \tableofcontents%[current,currentsection,currentsubsection]
+}
 %%在每个section之前列出全部Outline
 %%类似的在每个subsection之前列出全部Outline是\AtBeginSubsection[]
 %\AtBeginSection[]
@@ -78,7 +78,7 @@
 \centering
 \vspace{-10.5pt}
 %\caption{\textrm{The wave-particle duality and Photoelectric effect}}
-\includegraphics[height=2.80in,width=3.70in,viewport=0 0 750 600,clip]{Figures/Citric_acid_cycle_with_aconitate.png}
+\includegraphics[height=2.80in,width=3.70in,viewport=0 0 750 600,clip]{Figures/Citric_acid_cycle_with_aconitate_Chinese.png}
 \label{Bio-Chem}
 \end{figure}
 }
@@ -110,7 +110,7 @@
 \subsection{蛋白质分子结构与活性位点}
 \frame
 {
-	\frametitle{蛋白质分子的结构}
+	\frametitle{蛋白质的结构与分子间作用力}
 \begin{figure}[h!]
 \centering
 \vspace{-25.5pt}
@@ -122,7 +122,7 @@
 
 \frame
 {
-	\frametitle{蛋白质分子的折叠}
+	\frametitle{\textrm{H}键与蛋白质分子的折叠}
 \begin{figure}[h!]
 \centering
 \vspace{-5.5pt}
@@ -134,7 +134,7 @@
 
 \frame
 {
-	\frametitle{蛋白质分子的折叠}
+	\frametitle{分子动力学模拟:~蛋白质分子的折叠}
 \begin{figure}[h!]
 \centering
 \vspace{-13.5pt}
@@ -146,7 +146,7 @@
 
 \frame
 {
-	\frametitle{活性位点:~酶与底物相互作用}
+	\frametitle{反应动力学:~酶与底物相互作用}
 \begin{figure}[h!]
 \centering
 \vspace{-10.5pt}
@@ -377,7 +377,7 @@
 \centering
 %
 \vspace{-25.5pt}
-\includegraphics[height=1.80in,width=2.00in,viewport=250 0 1350 1100,clip]{Figures/Schrodinger_article.png}
+\includegraphics[height=1.80in,width=2.00in,viewport=180 0 1380 1100,clip]{Figures/Schrodinger_article.png}
 \includegraphics[height=1.20in,width=2.00in,viewport=0 0 600 350,clip]{Figures/Schrodinger_Equation.png}
 \label{Schrodinger_Equation}
 \end{figure}
@@ -647,7 +647,7 @@
 %\caption{\textrm{The wave-particle duality and Photoelectric effect}}
 \includegraphics[height=2.80in,width=2.00in,viewport=0 0 1600 2050,clip]{Figures/Linus_Pauling.jpeg}
 \includegraphics[height=2.80in,width=1.85in,viewport=0 0 420 650,clip]{Figures/The-Nature-of-the-Chemical-Bond_content.png}
-\label{Bond_Hybrid}
+\label{Pauling:Bond_Hybrid}
 \end{figure}
 }
 
@@ -660,7 +660,7 @@
 %\caption{\textrm{The wave-particle duality and Photoelectric effect}}
 \includegraphics[height=1.50in,width=1.70in,viewport=0 0 820 680,clip]{Figures/MO-CH4.jpg}
 \includegraphics[height=1.45in,width=4.00in,viewport=0 0 2100 750,clip]{Figures/methane-sp3.png}
-\label{MO-vs-VB}
+\label{MO-vs-VB:CH4}
 \end{figure}
 }
 
@@ -732,61 +732,106 @@
 \frame
 {
 	\frametitle{酶的蛋白质结构特点}
+%酶的\textcolor{blue}{活性位点}
+\begin{figure}[h!]
+\centering
+\vspace{-10.5pt}
+%\caption{\textrm{The wave-particle duality and Photoelectric effect}}
+\includegraphics[height=1.90in,width=3.60in,viewport=0 0 1950 1200,clip]{Figures/Enzyme_structure.png}
+\label{enzyem_Structure}
+\end{figure}
+\begin{itemize}
+	\item \textcolor{magenta}{专一性、高效性}:~催化反应位置
+	\item \textcolor{magenta}{选择性}:~活性位点
+	\item \textcolor{magenta}{温和性}:~蛋白质的特点
+\end{itemize}
+}
+
+\frame
+{
+	\frametitle{催化反应的理论研究:\textrm{QM/MM}}
+\textrm{QM/MM}方法是一种分子模拟中结合量子力学的准确性以及分子力学速度优势的计算方法\footnote{\fontsize{6.0pt}{4.2pt}\selectfont{\textrm{QM/MM}最早由\textrm{Warshel}和\textrm{Levitt}在\textrm{1976}年提出。他们和\textrm{Martin~Karplus}于2013年因为“发展了复杂化学体系的多尺度模型”而获得诺贝尔化学奖}}
+\begin{figure}[h!]
+\centering
+\vspace{-10.5pt}
+%\caption{\textrm{The wave-particle duality and Photoelectric effect}}
+\includegraphics[height=1.90in,width=3.40in,viewport=0 0 240 140,clip]{Figures/QM-MM_part.jpg}
+\label{QM-MM_depart}
+\end{figure}
+\textrm{QM/MM}方法常用于研究溶液中的化学过程以及蛋白质体系
+}
+
+\frame
+{
+	\frametitle{催化反应的理论研究:\textrm{QM/MM}}
+	\textrm{QM/MM}将整个体系分为两个部分:~模型和环境
+	\begin{itemize}
+		\item 关键化学反应区域，需要准确、高昂的\textrm{QM}方法进行计算
+		\item 环境部分使用准确度较低，但效率较高的\textrm{MM}方法进行模拟
+	\end{itemize}
+\begin{figure}[h!]
+\centering
+\vspace{-10.5pt}
+%\caption{\textrm{The wave-particle duality and Photoelectric effect}}
+\includegraphics[height=1.92in,width=4.0in,viewport=0 0 280 130,clip]{Figures/QM_MM-2.jpg}
+\label{QM-MM-surface}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{QM/MM}常用计算软件}
+\begin{figure}[h!]
+\centering
+\vspace{-10.5pt}
+%\caption{\textrm{The wave-particle duality and Photoelectric effect}}
+\includegraphics[height=1.90in,width=2.95in,viewport=0 0 700 450,clip]{Figures/QM-MM-treatment-of-a-biocatalytic-system.png}
+\label{QM-MM-biocatalytic}
+\end{figure}
+体系整体能量:~两部分的能量以及两部分相互作用的能量加和
+\begin{displaymath}
+	E_{\mathrm{QM/MM}}=E_{\mathrm{QM},model}+E_{\mathrm{MM},env}+E_{\mathrm{QM/MM},interaction}
+\end{displaymath}
+{\fontsize{6.0pt}{4.2pt}\selectfont{
+\textrm{QM/MM}组合哈密顿量是模型和环境之间的相互作用，通常包括
+\begin{itemize}
+	\item 与\textrm{QM/MM}边界一分为二的共价键的成键作用(即拉伸、弯曲和扭转的贡献)
+	\item 非键作用(即\textrm{van~der~Waals}和静电相互作用)
+\end{itemize}}}
+}
+
+\frame
+{
+	\frametitle{\textrm{QM/MM}的特点}
+\begin{figure}[h!]
+\centering
+\vspace{-10.5pt}
+%\caption{\textrm{The wave-particle duality and Photoelectric effect}}
+\includegraphics[height=2.60in,width=3.10in,viewport=0 0 280 250,clip]{Figures/biomolecules-QM-MM.png}
+\label{biomelecules-QM-MM}
+\end{figure}
+\begin{itemize}
+	\item \textrm{QM/MM}方法的\textcolor{red}{优点}:~能处理复杂的大分子体系\\{\fontsize{6.0pt}{4.2pt}\selectfont{使原本\textrm{QM}方法算不动的体系变得可能计算}}
+\end{itemize}
+}
+
+\frame
+{
+	\frametitle{\textrm{QM/MM}的特点}
 \begin{figure}[h!]
 \centering
 \vspace{-5.5pt}
 %\caption{\textrm{The wave-particle duality and Photoelectric effect}}
-\includegraphics[height=2.20in,width=4.00in,viewport=0 0 1950 1200,clip]{Figures/Enzyme_structure.png}
-\label{enzyem_Structure}
+\includegraphics[height=1.95in,width=3.70in,viewport=0 15 320 165,clip]{Figures/MM-QM-CCSD.jpg}
+\label{MM-QM-CCSD}
 \end{figure}
-}
-
-\frame
-{
-	\frametitle{酶催化反应的理论研究:\textrm{QM/MM}}
-\begin{figure}[h!]
-\centering
-\vspace{-10.5pt}
-%\caption{\textrm{The wave-particle duality and Photoelectric effect}}
-\includegraphics[height=2.40in,width=4.00in,viewport=0 0 240 140,clip]{Figures/QM-MM_part.jpg}
-\label{enzyem_Structure}
-\end{figure}
-}
-
-\frame
-{
-	\frametitle{酶催化反应的理论研究:\textrm{QM/MM}}
-\begin{figure}[h!]
-\centering
-\vspace{-10.5pt}
-%\caption{\textrm{The wave-particle duality and Photoelectric effect}}
-\includegraphics[height=2.80in,width=3.30in,viewport=0 0 280 250,clip]{Figures/biomolecules-QM-MM.png}
-\label{enzyem_Structure}
-\end{figure}
-}
-
-\frame
-{
-	\frametitle{酶催化反应的理论研究:\textrm{QM/MM}}
-\begin{figure}[h!]
-\centering
-\vspace{-10.5pt}
-%\caption{\textrm{The wave-particle duality and Photoelectric effect}}
-\includegraphics[height=2.20in,width=4.0in,viewport=0 0 280 160,clip]{Figures/QM_MM-2.jpg}
-\label{enzyem_Structure}
-\end{figure}
-}
-
-\frame
-{
-	\frametitle{酶催化反应的理论研究:\textrm{QM/MM}}
-\begin{figure}[h!]
-\centering
-\vspace{-10.5pt}
-%\caption{\textrm{The wave-particle duality and Photoelectric effect}}
-\includegraphics[height=2.25in,width=4.00in,viewport=0 0 320 180,clip]{Figures/MM-QM-CCSD.jpg}
-\label{enzyem_Structure}
-\end{figure}
+\textrm{QM/MM}方法的\textcolor{red}{缺点}:~
+{\fontsize{6.0pt}{4.2pt}\selectfont{
+	\begin{enumerate}
+		\item 不同计算水平的能量进行简单加和会造成较大的误差，需要计算\textrm{S-Value}来评价误差是否可以接受
+		\item 需要补力场参数，参数的来源有时不好得到，甚至需要自行拟合
+		\item 计算耗时并不短
+	\end{enumerate}}}
 }
 
 \frame
@@ -797,7 +842,7 @@
 \vspace{-10.5pt}
 %\caption{\textrm{The wave-particle duality and Photoelectric effect}}
 \includegraphics[height=2.70in,width=4.00in,viewport=0 0 500 370,clip]{Figures/Catalyst-reaction-path.png}
-\label{enzyem_Structure}
+\label{enzyem-reaction-path-1}
 \end{figure}
 }
 
@@ -806,60 +851,25 @@
 	\frametitle{酶催化的反应动力学过程}
 \begin{figure}[h!]
 \centering
-\vspace{-10.5pt}
+\vspace{-5.5pt}
 %\caption{\textrm{The wave-particle duality and Photoelectric effect}}
-\includegraphics[height=2.35in,width=4.00in,viewport=0 0 180 135,clip]{Figures/molecules-reaction-path.jpg}
-\label{enzyem_Structure}
+\includegraphics[height=2.45in,width=4.00in,viewport=0 0 180 135,clip]{Figures/molecules-reaction-path.jpg}
+\label{enzyem-reaction-path-2}
 \end{figure}
 }
 
-\frame
-{
-	\frametitle{生化反应的常用计算软件}
-\begin{figure}[h!]
-\centering
-\vspace{-10.5pt}
-%\caption{\textrm{The wave-particle duality and Photoelectric effect}}
-\includegraphics[height=2.65in,width=4.00in,viewport=0 0 700 450,clip]{Figures/QM-MM-treatment-of-a-biocatalytic-system.png}
-\label{enzyem_Structure}
-\end{figure}
-}
-
-\frame
-{
-%	\frametitle{\textrm{DFT-SCF}}
-\begin{figure}[h!]
-\vspace*{-0.25in}
-\centering
-\includegraphics[height=2.80in,width=4.95in,viewport=5 3 1250 780,clip]{Figures/Method_Procedure.png}
-%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{Method-Procedure}
-\end{figure}
-}
-
-\frame
-{
-	\frametitle{生命科学的研究:~分解\textrm{.vs.}整合}
-	生理学家刘曾复教授\footnote{\fontsize{6.0pt}{4.2pt}\selectfont{刘曾复教授(\textrm{1914-2012})，我国老一辈著名生理学家，曾任北京医学院教授，北京第二医学院(首都医科大学前身)创始人之一。刘曾复教授的主要研究方向是电生理学、整合生理学。}}认为$^{\ast}$
-	\begin{tikzpicture}[remember picture,overlay]
-	\node[xshift=-1.8cm,yshift=1.43cm] at (current page.east) {\includegraphics[height=2.5cm, width=2.22cm, viewport=360 0 1350 1100,clip]{Figures/Liu_Zengfu.jpg}};
-	\end{tikzpicture}
-%	\begin{tikzpicture}[remember picture,overlay]
-%    \node<1->[xshift=-3cm,yshift=-1cm] at (current page.center) {\includegraphics[height=3cm]{Figures/Huang.jpg}};
-%    \node<2->[xshift=0cm,yshift=0cm] at (current page.east) {\includegraphics[height=3cm]{Figures/Huang.jpg}};
-%    \node<3->[xshift=3cm,yshift=1cm] at (current page.north) {\includegraphics[height=3cm]{Figures/Huang.jpg}};
-%\end{tikzpicture}
-	\begin{itemize}
-		\item 应该重视系统科学的思想和方法\\
-			注意生命体机能的整合调节
-		\item 生理学中的整合(\textrm{intergration})类比集成电路\\
-			对“控制-反馈”过程的研究，要有整体意识
-		\item 生理学研究重视整合、调节，应该有新的数学为生理学服务\\
-	大数据、\textrm{AI}、机器学习等新技术，为生命科学研究提供了新的技术手段
-	\end{itemize}
-	{\fontsize{7.2pt}{4.2pt}\selectfont{$^{\ast}$根据{\fontsize{6.2pt}{4.2pt}\selectfont{\\杜金香~主编~《生理说苑——刘曾复论文选编及其他》~ 首都医科大学~(内部刊印) (2002)\\
-	刘曾复~著、娄悦~编~《刘曾复京剧文存》~ 学苑出版社~(北京)~(2013)~ 附录“刘曾复访谈”部分相关内容\\}}整理}}
-}
+%\frame
+%{
+%%	\frametitle{\textrm{DFT-SCF}}
+%\begin{figure}[h!]
+%\vspace*{-0.25in}
+%\centering
+%\includegraphics[height=2.80in,width=4.95in,viewport=5 3 1250 780,clip]{Figures/Method_Procedure.png}
+%%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\label{Method-Procedure}
+%\end{figure}
+%}
+%
 %------------------------------------------------------------------------Reference----------------------------------------------------------------------------------------------
 		\frame[allowframebreaks]
 {
@@ -877,64 +887,87 @@
 %\nocite*{}
 }
 %-----------------------------------------------------------------------------------------------------------------------------------------------------------------------%
-\appendix
 \frame
 {
-	\frametitle{王守竞先生与量子力学}
-	王守竞(\textrm{Shou~Chin~Wang})的工作
+	\frametitle{生命科学的研究思想:~分化\textrm{.vs.}整合}
+	生理学家刘曾复教授\footnote{\fontsize{6.0pt}{4.2pt}\selectfont{刘曾复教授(\textrm{1914-2012})，我国老一辈著名生理学家，曾任北京医学院教授，北京第二医学院(首都医科大学前身)创始人之一。刘曾复教授的主要研究方向是电生理学、整合生理学。}}认为$^{\ast}$
+	\begin{tikzpicture}[remember picture,overlay]
+	\node[xshift=-1.8cm,yshift=1.43cm] at (current page.east) {\includegraphics[height=2.5cm, width=2.22cm, viewport=360 0 1350 1100,clip]{Figures/Liu_Zengfu.jpg}};
+	\end{tikzpicture}
+%	\begin{tikzpicture}[remember picture,overlay]
+%    \node<1->[xshift=-3cm,yshift=-1cm] at (current page.center) {\includegraphics[height=3cm]{Figures/Huang.jpg}};
+%    \node<2->[xshift=0cm,yshift=0cm] at (current page.east) {\includegraphics[height=3cm]{Figures/Huang.jpg}};
+%    \node<3->[xshift=3cm,yshift=1cm] at (current page.north) {\includegraphics[height=3cm]{Figures/Huang.jpg}};
+%\end{tikzpicture}
 	\begin{itemize}
-		\item 计算氢分子的电子结构
-			\vskip 2.5pt
-			王守竞的论文\textcolor{purple}{《新量子力学下的常态氢分子问题》}%THE PROBLEM OF THE NORMAL HYDROGEN MOLECULE IN THE NEW QUANTUM MECHANICS
-	\textcolor{blue}{
-	\begin{displaymath}
-		\Psi=C\left\{ \mathrm{exp}[－Z(r_1+ p_2)/a]+\mathrm{exp}[－Z( r_2+ p_1)/a] \right\}
-	\end{displaymath}}
-	{\fontsize{7.2pt}{6.5pt}\selectfont{其中$r_1$、$p_1$是第一个电子到两个原子核的距离，$r_2$，$p_2$是第二个电子到两个原子核的距离，$a$是\textrm{Bohr}半径}}\\
-	得到的数值结果$Z=1.666$，$E_0=86.6\,\mathrm{kcal}$，$R_0=0.78$\,\textrm{\AA}
-		\item 不对称陀螺(不对称转动)的能谱%On the Asymmetrical Top in Quantum Mechanics
-			\vskip 2.5pt
-			不对称陀螺的能级公式(\textcolor{purple}{“王氏公式”})
-	\textcolor{blue}{
-	\begin{displaymath}
-		E= (hc8\pi)[Aj(j+1)+W]
-	\end{displaymath}}
+		\item 应该重视系统科学的思想和方法\\
+			注意\textcolor{purple}{生命体机能的整合调节}
+		\item 生理学中的整合(\textrm{intergration})类比集成电路\\
+			对“控制-反馈”过程的研究，\textcolor{red}{要有整体意识}
+		\item 生理学研究重视整合、调节，应该有新的数学为生理学服务\\
+			大数据、\textrm{AI}、机器学习等技术日趋成熟，\textcolor{blue}{为生命科学研究提供了新的技术手段}
 	\end{itemize}
+	{\fontsize{7.2pt}{4.2pt}\selectfont{$^{\ast}$根据{\fontsize{6.2pt}{4.2pt}\selectfont{\\杜金香~主编~《生理说苑——刘曾复论文选编及其他》~ 首都医科大学~(内部刊印) (2002)\\
+	刘曾复~著、娄悦~编~《刘曾复京剧文存》~ 学苑出版社~(北京)~(2013)~ 附录“刘曾复访谈”部分相关内容\\}}整理}}
 }
-
-\frame
-{
-	\frametitle{王守竞先生与量子力学}
-\begin{figure}[h!]
-\centering
-\vspace{-10.5pt}
-\includegraphics[height=0.66\textwidth,width=0.52\textwidth,viewport=0 0 270 350,clip]{Figures/Wang_Shoujing.jpg}
-\caption{王守竞先生(1902-1984)}
-\label{Wang_Shoujing}
-\end{figure}
-}
-
-\frame
-{
-	\frametitle{王守竞先生与量子力学}
-\begin{figure}[h!]
-\centering
-\vspace{-10.5pt}
-\includegraphics[height=0.65\textwidth,width=1.0\textwidth,viewport=0 0 560 350,clip]{Figures/Collect_Wang.jpg}
-\caption{\fontsize{7.2pt}{6.5pt}\selectfont{\textrm{左1:~王守竞，左2:~Ralph~Kronig 右1:~I.~I.~Rabi(1944年诺贝尔物理学奖获得者)}}}
-\label{Collect_Wang}
-\end{figure}
-}
-
-\frame
-{
-	\frametitle{}
-\begin{figure}[h!]
-\centering
-\hspace*{-10.5pt}
-\includegraphics[height=0.42\textwidth,width=1.05\textwidth,viewport=0 0 860 350,clip]{Figures/Wang_Family_Suzhou.jpg}
-\caption{\fontsize{6.2pt}{5.5pt}\selectfont{\textrm{苏州王氏家族中的著名学者}}}
-\label{Wang_Family}
-\end{figure}
-}
-
+%\appendix
+%\frame
+%{
+%	\frametitle{王守竞先生与量子力学}
+%	王守竞(\textrm{Shou~Chin~Wang})的工作
+%	\begin{itemize}
+%		\item 计算氢分子的电子结构
+%			\vskip 2.5pt
+%			王守竞的论文\textcolor{purple}{《新量子力学下的常态氢分子问题》}%THE PROBLEM OF THE NORMAL HYDROGEN MOLECULE IN THE NEW QUANTUM MECHANICS
+%	\textcolor{blue}{
+%	\begin{displaymath}
+%		\Psi=C\left\{ \mathrm{exp}[－Z(r_1+ p_2)/a]+\mathrm{exp}[－Z( r_2+ p_1)/a] \right\}
+%	\end{displaymath}}
+%	{\fontsize{7.2pt}{6.5pt}\selectfont{其中$r_1$、$p_1$是第一个电子到两个原子核的距离，$r_2$，$p_2$是第二个电子到两个原子核的距离，$a$是\textrm{Bohr}半径}}\\
+%	得到的数值结果$Z=1.666$，$E_0=86.6\,\mathrm{kcal}$，$R_0=0.78$\,\textrm{\AA}
+%		\item 不对称陀螺(不对称转动)的能谱%On the Asymmetrical Top in Quantum Mechanics
+%			\vskip 2.5pt
+%			不对称陀螺的能级公式(\textcolor{purple}{“王氏公式”})
+%	\textcolor{blue}{
+%	\begin{displaymath}
+%		E= (hc8\pi)[Aj(j+1)+W]
+%	\end{displaymath}}
+%	\end{itemize}
+%}
+%
+%\frame
+%{
+%	\frametitle{王守竞先生与量子力学}
+%\begin{figure}[h!]
+%\centering
+%\vspace{-10.5pt}
+%\includegraphics[height=0.66\textwidth,width=0.52\textwidth,viewport=0 0 270 350,clip]{Figures/Wang_Shoujing.jpg}
+%\caption{王守竞先生(1902-1984)}
+%\label{Wang_Shoujing}
+%\end{figure}
+%}
+%
+%\frame
+%{
+%	\frametitle{王守竞先生与量子力学}
+%\begin{figure}[h!]
+%\centering
+%\vspace{-10.5pt}
+%\includegraphics[height=0.65\textwidth,width=1.0\textwidth,viewport=0 0 560 350,clip]{Figures/Collect_Wang.jpg}
+%\caption{\fontsize{7.2pt}{6.5pt}\selectfont{\textrm{左1:~王守竞，左2:~Ralph~Kronig 右1:~I.~I.~Rabi(1944年诺贝尔物理学奖获得者)}}}
+%\label{Collect_Wang}
+%\end{figure}
+%}
+%
+%\frame
+%{
+%	\frametitle{}
+%\begin{figure}[h!]
+%\centering
+%\hspace*{-10.5pt}
+%\includegraphics[height=0.42\textwidth,width=1.05\textwidth,viewport=0 0 860 350,clip]{Figures/Wang_Family_Suzhou.jpg}
+%\caption{\fontsize{6.2pt}{5.5pt}\selectfont{\textrm{苏州王氏家族中的著名学者}}}
+%\label{Wang_Family}
+%\end{figure}
+%}
+%
