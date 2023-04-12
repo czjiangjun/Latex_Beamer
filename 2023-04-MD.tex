@@ -749,6 +749,7 @@
 }
 
 \section{生物化学反应机理的模拟与常用软件}
+\subsection{\rm{QM/MM}与酶化学反应机理}
 \frame
 {
 	\frametitle{酶在生物化学反应中的作用}
@@ -782,7 +783,7 @@
 
 \frame
 {
-	\frametitle{催化反应的理论研究:\textrm{QM/MM}}
+	\frametitle{酶化学的理论研究:\textrm{QM/MM}}
 	\textrm{QM/MM}方法是一种分子模拟中结合量子力学\textrm{(QM)}的准确性以及分子力学\textrm{(MM)}速度优势的计算方法\footnote{\fontsize{6.0pt}{4.2pt}\selectfont{\textrm{QM/MM}最早由\textrm{Warshel}和\textrm{Levitt}在\textrm{1976}年提出。他们和\textrm{Martin~Karplus}于2013年因为“发展了复杂化学体系的多尺度模型”而获得诺贝尔化学奖}}
 \begin{figure}[h!]
 \centering
@@ -796,7 +797,7 @@
 
 \frame
 {
-	\frametitle{催化反应的理论研究:\textrm{QM/MM}}
+	\frametitle{酶化学的理论研究:\textrm{QM/MM}}
 	\textrm{QM/MM}将整个体系分为两个部分:~模型和环境
 	\begin{itemize}
 		\item 关键化学反应区域，需要准确、高昂的\textrm{QM}方法进行计算
@@ -813,7 +814,7 @@
 
 \frame
 {
-	\frametitle{\textrm{QM/MM}常用计算软件}
+	\frametitle{\textrm{QM/MM}的计算策略}
 \begin{figure}[h!]
 \centering
 \vspace{-10.5pt}
@@ -893,6 +894,68 @@
 \label{enzyem-reaction-path-2}
 \end{figure}
 }
+
+%\frame
+%{
+%	\frametitle{\textrm{QM/MM}计算软件}
+%	\begin{itemize}
+%   		\setlength{\itemsep}{15pt}
+%		\item 基于第一原理
+%		\item 基于半经验
+%		\item 基于密度泛函理论
+%		\item 基于分子动力学
+%	\end{itemize}
+%}
+%\frame
+%{
+%	\frametitle{\textrm{QM/MM}计算软件}
+%	\begin{itemize}
+%   		\setlength{\itemsep}{15pt}
+%		\item 基于第一原理
+%		\item 基于半经验
+%		\item 基于密度泛函理论
+%		\item 基于分子动力学
+%	\end{itemize}
+%}
+%
+\subsection{\rm{QM/MM}计算软件}
+\frame
+{
+	\frametitle{\textrm{QM/MM}计算建模与软件}
+\begin{figure}[h!]
+\centering
+\vspace{-13.0pt}
+\includegraphics[height=1.00in,width=2.90in,viewport=0 20 920 375,clip]{Figures/QM-MM_modeling.png}
+\includegraphics[height=2.00in,width=3.60in,viewport=0 0 1250 820,clip]{Figures/QM-MM-softwares.png}
+%\caption{\textrm{The wave-particle duality and Photoelectric effect}}
+\label{QM/MM-Modeling}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{QM/MM}计算流程}
+\begin{figure}[h!]
+\centering
+\vspace{-8.0pt}
+\includegraphics[height=2.85in,width=2.00in,viewport=0 0 550 818,clip]{Figures/QM-MM-workflow.png}
+\includegraphics[height=2.75in,width=1.96in,viewport=0 0 600 790,clip]{Figures/cover-image-volume-39-issue-19-2018}
+%\caption{\textrm{The wave-particle duality and Photoelectric effect}}
+\label{QM/MM-Workflow}
+\end{figure}
+}
+
+%\frame
+%{
+%	\frametitle{\textrm{QM/MM}软件的发展}
+%\begin{figure}[h!]
+%\centering
+%\vspace{-5.5pt}
+%\includegraphics[height=2.45in,width=2.00in,viewport=0 0 480 640,clip]{Figures/cover-image-volume-39-issue-19-2018}
+%%\caption{\textrm{The wave-particle duality and Photoelectric effect}}
+%\label{QM/MM-moiUP}
+%\end{figure}
+%}
 
 %\frame
 %{
