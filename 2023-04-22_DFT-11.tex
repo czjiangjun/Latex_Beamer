@@ -114,7 +114,7 @@
 \frame
 {
 	\frametitle{空间两部分函数在球面上的衔接}
-	根据\textrm{Huygens}原理:\textcolor{blue}{平面波可以在各个原子球中心用球面波展开}:
+	\textrm{Huygens}原理:~\textcolor{blue}{平面波可以在各个原子球中心用球谐函数展开}:
 	\begin{displaymath}
 		\mathrm{e}^{\mathrm{i}\vec k\cdot\vec r}=4\pi\sum_{l=0}^{\infty}\sum_{m=-l}^l\mathrm{i}^lj_l(|\vec k|r)Y_{lm}^{\ast}(\hat{\vec k})Y_{lm}(\hat{\vec r})
 	\end{displaymath}
@@ -124,7 +124,7 @@
 \begin{displaymath}
 	A_{lm}^{\vec k}=4\pi\mathrm{e}^{\mathrm{i}\vec k\cdot\vec r_s}\mathrm{i}^lY_{lm}^{\ast}(\hat{\vec k})j_l(|\vec k|R_{MT}^s)/u_l(R_{MT}^s,E)
 \end{displaymath}
-\textrm{APW}的问题:\textcolor{blue}{球面参数$A_{lm}^{\vec k}$对能量$E$依赖，由此构造的久期方程是非线性的}
+\textrm{APW}的问题:\textcolor{blue}{球面参数$A_{lm}^{\vec k}$对能量$E$依赖，由此构造的久期方程\footnote{\fontsize{7.2pt}{6.2pt}\selectfont{久期方程\textrm{secular~equation}，\textrm{secular}来自拉丁语\textrm{saeculum}，本意为一代人、一个时期、一个时代、一个世界等意思。其名词在拉丁语中就作为世纪讲。汉译\textrm{secular}为久期，是取\textrm{long-term}的意思(实为慢，\textrm{slow~in~comparison~to~the~annual~motion}的意思)，与期待\textrm{(expectation)}无关\upcite{PhysCN40-477_2011}。}}非线性的}
 }
 
 \frame
@@ -147,6 +147,21 @@ $$\hskip -14pt \varphi(\vec k_j,\vec r)=\left\{
 \includegraphics[height=1.10in,width=1.88in,viewport=1 20 585 435,clip]{Figures/WIEN2k-LAPW.png}
 \caption{\tiny \textrm{Partitioning of the unit cell into atomic spheres(I) and an interstitial region(II)}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Muffin_tin-3}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{Ghost~band}的表现}
+	\fontsize{9.2pt}{4.2pt}\selectfont{只有价电子的波函数与芯电子波函数完全正交，能带计算中才能确保芯层与价层电子的完全分离。但实际计算时，该正交条件很难严格保证，因此一旦价电子波函数严重偏离正交条件，计算的能带中会在本不存在能带的区域出现电子结构分布(称为\textrm{Ghost~band})，这部分电子结构源自构造价电子波函数的能量参数$\varepsilon_l$与芯层电子能量差别太大，无法保持与芯层电荷严格正交引起的}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.10in}
+\includegraphics[height=1.50in,width=1.98in,viewport=0 0 450 320,clip]{Figures/Ghostband-Vanadium-1.png}
+\includegraphics[height=1.50in,width=1.98in,viewport=0 0 450 320,clip]{Figures/Ghostband-Vanadium-4.png}
+\caption{\fontsize{7.2pt}{4.2pt}\selectfont{\textrm{The band structure of bcc Vanadium. %In the calculation, all electrons up to the 3p states were treated as core electrons, all other electrons as valence electrons. 
+\\Left:~Between 10 and 15 eV above the Fermi energy a strange band with nearly no dispersion can be observed. The vanishing dispersion of the band is a typical property of ghost bands.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Ghost-band}
 \end{figure}
 }
 
@@ -213,6 +228,7 @@ $$  \phi_{lm}^{\mathrm{lo}}(\vec r)=\left\{
 \textrm{APW+lo}基函数式形式上与标准\textrm{LAPW}基函数式形式非常相似，但\textrm{APW+lo}基函数是平滑且一阶可微的，在\textrm{MT}球面上有动能对\textrm{Hamiltonian}的贡献需要计算。计算表明，采用\textrm{APW+lo}基组比标准\textrm{LAPW}基组计算效率高。
 }
 
+\subsection{全势的基本思想}
 \frame
 {
 \frametitle{全势的基本思想}
@@ -360,6 +376,7 @@ $$
 \end{itemize}
 }
 
+\subsection{全势方法下的总能量计算}
 \frame
 {
 	\frametitle{总能量的计算}
@@ -373,6 +390,19 @@ $$
 		U[\rho]=\dfrac12\left[\int\dfrac{\rho(\vec r)\rho(\vec r^{\prime})}{|\vec r-\vec r^{\prime}|}\mathrm{d}\vec r\mathrm{d}\vec r^{\prime}-2\sum_{\alpha}Z_{\alpha}\int\dfrac{\rho(\vec r)\mathrm{d}\vec r}{|\vec r-\vec R_{\alpha}|}+\sum_{\alpha,\beta}{}^{\prime}\dfrac{Z_{\alpha}Z_{\beta}}{|\vec R_{\alpha}-\vec R_{\beta}|}\right]
 	\end{displaymath}
 	这里$Z_{\alpha}$是位于$R_{\alpha}$的核电荷
+}
+
+\frame
+{
+	\frametitle{\textrm{Madelung}常数与\textrm{Madelung}势}
+\begin{figure}[h!]
+\vspace*{-10pt}
+\centering
+\includegraphics[height=0.75in,width=2.50in,viewport=0 15 950 330,clip]{Figures/Madelung_Constant.jpg}\\
+\includegraphics[height=2.15in,width=2.50in,viewport=0 0 850 750,clip]{Figures/Madelung-potential-V-Mad-for-different-impact-parameters-Y-along-a-grazing-trajectory.png}
+%\caption{\tiny \textrm{From Muffin-tin Potential to Full Potential}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Madelung-Constant_Potential}
+\end{figure}
 }
 
 \frame
@@ -485,6 +515,7 @@ $$
 \begin{thebibliography}{99}
 \frametitle{主要参考文献}
 {\tiny
+	\bibitem{PhysCN40-477_2011}曹则贤, \textit{Secular,equation}, \textit{物理}, \textbf{40} \textrm{(2011), 477}
 	\bibitem{Singh}\textrm{D. J. Singh. \textit{Plane Wave, PseudoPotential and the LAPW method} (Kluwer Academic, Boston,USA, 1994)}
 	\bibitem{Nemoshkalenko-Antonov}\textrm{V. V. Nemoshkalenko and V. N. Antonov. \textit{Computational Methods in Solid State Physics} (Gordon and Breach Science Publisher, Amsterdam, The Netherlands, 1998)}
 	\bibitem{WIEN2k_UG}\textrm{P. Blaha, K. Schwarz, G. Madsen, D. Kvasnicka and J. Luitz. \textit{User's Guide of WIEN2K, An Augmented Plane Wave Plus Local Orbitals Program for Calculating Crystal Properties}. Vienna University of Technology, Inst. of Physical and Theoretical Chemistry, Vienna, Austria (2012)}

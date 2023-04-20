@@ -64,10 +64,10 @@
 	\begin{itemize}
 		\item \textrm{VASP}采用\textrm{PAW~(Projector Augmented-Wave)}方法\upcite{PRB50-17953_1994,PRB59-1758_1999}，平衡了赝势方法和全电子计算优点，兼顾了计算的精度和效率
 		\item \textrm{VASP}在实空间优化投影函数\textrm{(Projector)}，将主要的计算过程变换到实空间完成，大大节省了内存的开销%，保证了计算精度和效率
-		\item \textrm{VASP}通过引入多样的优化算法，提高了矩阵对角化和电荷密度搜索的效率
+		\item \textrm{VASP}通过引入多样的优化算法，提高了矩阵对角化和电荷密度搜索的效率\upcite{CMS6-15_1996,PRB54-11169_1996}
 		\item 在\textrm{VASP}的并行计算中，有效均衡了各节点处理\textrm{FFT}变换负载和通信，提升了软件的并行效率
 	\end{itemize}
-	相比于其他第一原理计算软件，\textrm{VASP}从物理思想与方法、优化算法和并行计算实现等多个方面都有更为出色的性能
+	相比于其他第一原理计算软件，\textrm{VASP}从物理思想与方法、优化算法和并行计算实现等多个方面都有更为出色的性能\upcite{PRL55-2471_1985,PRB47-10142_1993}
 }
 
 \frame
@@ -195,7 +195,7 @@
 	\end{itemize}
 
 	\vskip 10pt
-	\textrm{VASP}的计算高效得益于求解过程中中应用了多种经典优化算法，保证了迭代计算的快速收敛
+	\textrm{VASP}的计算高效得益于求解过程中中应用了多种经典优化算法，保证了迭代计算的快速收敛\upcite{CMS6-15_1996,PRB54-11169_1996}
 	\begin{itemize} 
 		\item 拟牛顿法\textrm{(Quasi-Newton method)}
 		\item 共轭梯度法\textrm{(Conjugate Gradients method, CG)}
@@ -305,19 +305,39 @@
 
 \frame
 {
-	\frametitle{矩阵迭代对角化的基本思想}
-\begin{figure}[h!]
-\centering
-\includegraphics[height=2.5in,width=3.5in,viewport=0 0 850 590,clip]{Figures/Coordinate_transformation.png}
-\label{decent_CG}
-\caption{\tiny \textrm{Schematic illustration of searching for the eigenvalue of a vector.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\end{figure}
+	\frametitle{矩阵的迭代对角化}
+	\begin{itemize}
+		\item 矩阵的直接对角化计算复杂复 $O(N^3)$
+		\item 矩阵的迭代对角化计算复杂度 $O(N_0^2\times N\ln N)\quad N_0\ll N$
+	\end{itemize}
+	\textcolor{blue}{迭代求本征值的思想是\textrm{Jacobian~}于\textrm{1846~}年提出的}\upcite{Crelle30-51_1846}\\
+	其基本思想是
+	\begin{displaymath}
+		(H-\varepsilon^n)|\psi^n\rangle=|R[\psi^n]\rangle
+	\end{displaymath}
+	这里$n$是迭代步数，$|\psi^n\rangle$和$\varepsilon^n$分别是本征态和本征值，$|R[\psi^n]\rangle$是残差矢量
+	\vskip 10pt
+	{\fontsize{7.2pt}{1.2pt}\selectfont{
+	在电子态计算过程中，选择适当的基函数，可以使\textrm{Schr\"odinger~}方程的矩阵接近对角阵\\因此可有
+	\begin{displaymath}
+		\begin{aligned}
+			|\psi^{n+1}\rangle=&\mathbf{D}^{-1}(\mathbf{H}-\varepsilon)|\psi^n\rangle+|\psi^n\rangle=\delta|\psi^{n+1}\rangle+|\psi^n\rangle\\
+		\mathbf{D}\delta\psi^{n+1}=&R[\psi^n]
+		\end{aligned}
+	\end{displaymath}
+	这里$\mathbf{D}$是非奇异矩阵，与$\mathbf{H}$矩阵有关，也叫''预处理矩阵''，可根据需要选取多种形式
+	\begin{itemize}
+		\item 要求$\mathbf{D}$比原始的$\mathbf{H}-\varepsilon$更易求逆阵
+		\item 要求$\mathbf{D}$使得修正项$\delta\psi^{n+1}$能够使$\psi^n$尽可能接近正确的本征矢
+	\end{itemize}
+}}
 }
 
 \frame
 {
 	\frametitle{矩阵的迭代对角化}
-	``预处理矩阵''$\mathbf{K}$的作用，是使\textcolor{red}{函数(泛函)对变量的依赖趋于“同质”(\textrm{isotropic})}，即函数曲线与不同变量的依赖关系趋同
+	``预处理矩阵''%$\mathbf{K}$
+	的作用，是使\textcolor{red}{函数(泛函)对变量的依赖趋于“同质”(\textrm{isotropic})}，即函数曲线与不同变量的依赖关系趋同
 
 	具体到电子结构求解:~
 	\begin{itemize}
@@ -340,22 +360,94 @@
 
 \frame
 {
-	\frametitle{矩阵的迭代对角化}
-	\begin{itemize}
-		\item \textcolor{blue}{实空间基}\\
-		与平面波基类似，可以定义
+	\frametitle{矩阵迭代对角化}
+	稀疏矩阵求解的\textrm{Lanczos}优化过程\upcite{Elect_Stru,Comp_Phys}，只变动一个分量$\mathbf{c}_I$的前提下
 	\begin{displaymath}
-		x_i^n(\vec r)=A\dfrac12\dfrac{\lambda_i^m-V(\vec r)}{E^{\mathrm{kin}}(\mathbf{R}^n)}
+		\dfrac{\partial\rho}{\partial\mathbf{c}_I}\bigg|_{\mathbf{c}_I+\delta_I}=0
 	\end{displaymath}
-		\textcolor{purple}{$x_i^n(\vec r)$表示对$n$次迭代后本征态$i$中局部动能$|\lambda_i-V(\vec r)|$对总动能贡献的调整比例}
-	\end{itemize}
-	完成\textrm{preconditioning}得到矩阵$\mathbf{K}(x_i^n)$后，由
+	是可以精确求解的，其解为
 	\begin{displaymath}
-		\psi^{n+1}\equiv\mathbf{K}\mathbf{R}^n
+		\delta_I=(\rho(\mathbf{c}_0)-\mathbf{H}_{II})^{-1}\mathbf{q}_I\qquad\mbox{这里}\mathbf{q}=(\mathbf{H}-\rho\mathbf{I})\mathbf{c}_0
 	\end{displaymath}
-	可根据残矢量$\mathbf{R}^n$选择方式的不同，将\textcolor{blue}{\textrm{SD}、\textrm{CG}}、\textcolor{blue}{\textrm{RMM-DIIS}}等多种算法应用于矩阵迭代对角化计算
+	不难看出，矢量$\mathbf{q}$就对应\textrm{Jacobi}迭代中用于判断收敛的残差矢量
+
+更一般地，求解方程
+	\begin{displaymath}
+		\dfrac{\partial\rho}{\partial\mathbf{c}}\bigg|_{\mathbf{c}+\mathbf{\delta}}=0
+	\end{displaymath}
+	将方程展开到二阶近似，不难有
+	\begin{displaymath}
+		(\rho-\mathbf{H}_{II})\delta_I\approx \mathbf{q}_I+\sum_{J\neq I}\delta_J+(\rho-\lambda)\mathbf{c}_I
+	\end{displaymath}
+	实际计算中选则$\delta_I=(\rho(\mathbf{c}_0)-\mathbf{H}_{II})^{-1}\mathbf{q}_I$并不是方程的解的好的近似，\textcolor{purple}{好处是计算比较简单}
 }
 
+\frame
+{
+	\frametitle{\textrm{Block-Davison algorithm}}
+	\textrm{Davidson}方法是求解大型稀疏矩阵的少量本征值问题提出来的，结合了\textrm{Lanczos}优化和\textrm{Jacobi}迭代的优点，简言之就是改进初猜，不用$\mathbf{H}\mathbf{c}_0$，而改用计算简单的$\delta_I=(\rho(\mathbf{c}_0)-\mathbf{H}_{II})^{-1}\mathbf{q}_I$形式
+	\vskip 10pt
+	应用\textrm{Davison}方法可以快速地依次求解稀疏矩阵的少量本征值和本征矢，将该方法推广为同时求解若干个本征态，即块-\textrm{Davidson}方法
+	{\fontsize{6.2pt}{1.2pt}\selectfont{
+		\begin{itemize}
+			\item 选取合适数目正交归一的向量$\mathbf{c}_1,\mathbf{c}_2,\cdots, \mathbf{c}_n$作为初猜子空间的基组, 计算并储存向量$\mathbf{H}\mathbf{c}_i$和矩阵元$\mathbf{H}=\langle\mathbf{c}_i|\mathbf{H}|\mathbf{c}_j\rangle$ 
+			\item 对角化矩阵，得到本征值$\lambda^{n}$和本征矢$\mathbf{a}^{n}$
+			\item 构造残量矢量$\mathbf{q}_M=(\mathbf{H}-\lambda^{(M)}\mathbf{I})\mathbf{a}^{(M)}~\mbox{其中}\mathbf{a}^{(M)}=\sum\limits_{i=1}^M a_i^{(M)}\mathbf{a}_i$
+			\item 根据模长$||\mathbf{q}_M||$判断迭代收敛情况
+			\item 构造$\delta_{I,M+1}=(\lambda^{(M)}-\mathbf{H}_{II})^{-1}\mathbf{q}_{I,M}$，与此前的基组正交归一化，得到$\mathbf{c}_{M+1}$
+			\item 计算矩阵元$\mathbf{H}_{i,M+1}\quad i=1,2,\cdots, M+1$
+			\item 对角化矩阵得到新的本征值和本征矢量，继续迭代
+		\end{itemize}
+	}}
+}
+
+\frame
+{
+	\frametitle{\textrm{RMM-DIIS}}
+	{\fontsize{7.2pt}{1.2pt}\selectfont{前述矩阵迭代对角化方法的优化策略都是
+	\begin{itemize}
+		\item 通过迭代优化得到最小本征值(极值)
+		\item 利用本征态正交，依次获得其他各本征态和本征值
+	\end{itemize}}}
+	{\fontsize{7.2pt}{1.2pt}\selectfont{\textrm{RMM-DIIS~(Residual Minimization Method by Direct Inversion in the Iterative Subspace)}\footnote{\fontsize{5.2pt}{1.2pt}\selectfont{\textrm{RMM-DIIS}的得名源自该方法的提出者\textrm{Pulay}:~该方法的基本思想是在历次迭代产生的矢量构成的完整\textrm{Krylov}子空间内，完成对残矢的最小化}}方法则可以不用引入正交条件而得到多个本征值，\textcolor{purple}{因为该方法最小化的不是本征值而是残矢}}}\\
+	{\fontsize{5.2pt}{1.2pt}\selectfont{
+		其基本思想概要:~在$n$维\textrm{Krylov}子空间内，生成矢量
+		\begin{displaymath}
+			\psi^{n+1}=c_0\psi^0+\sum_{j=1}^{n+1}c_j\delta\psi^{j}
+		\end{displaymath}
+		通过改变选取一套合适的系数$c_j$来完成$\psi^{n+1}$的残矢$R^{n=1}$的最小化。\textcolor{blue}{等价于$c_j$由$\{\psi^0,\psi^1,\cdots,\psi^n\}$构成的\textrm{Krylov}子空间内求\textrm{Hermitian}本征值问题}
+		\begin{displaymath}
+			\sum_{j=1}^n\langle R^i|R^j\rangle c_j=\varepsilon\sum_{j=1}^n\psi^i|\mathbf{S}|\psi^j\rangle c_j
+		\end{displaymath}
+		每迭代一次，子空间引入一个新波函数$\psi$和一个新残矢$R(\psi)$
+		\begin{itemize}
+			\item \textrm{RMM-DIIS}的计算量瓶颈将是后续的逐个矩阵-向量乘操作$\textrm{H}\psi$
+%				\\因此要避免直接用\textrm{RMM-DIIS}直接处理大规模本征态~(但可以是大体系中的少量本征态)
+			\item 只要内存许可，\textrm{RMM-DIIS}构造的完整的子空间内，构成子空间的矢量本征值都可以求解出来
+			\item 因为\textrm{RMM}方法对初猜的矢量敏感(矢量收敛的位置到离初猜较近)
+		\end{itemize}
+%		\textrm{RMM-DIIS}最大的优点是一次可以得到多个本征态和本征值，而且不需要正交化
+	}}
+}
+
+%\frame
+%{
+%	\frametitle{矩阵的迭代对角化}
+%	\begin{itemize}
+%		\item \textcolor{blue}{实空间基}\\
+%		与平面波基类似，可以定义
+%	\begin{displaymath}
+%		x_i^n(\vec r)=A\dfrac12\dfrac{\lambda_i^m-V(\vec r)}{E^{\mathrm{kin}}(\mathbf{R}^n)}
+%	\end{displaymath}
+%		\textcolor{purple}{$x_i^n(\vec r)$表示对$n$次迭代后本征态$i$中局部动能$|\lambda_i-V(\vec r)|$对总动能贡献的调整比例}
+%	\end{itemize}
+%	完成\textrm{preconditioning}得到矩阵$\mathbf{K}(x_i^n)$后，由
+%	\begin{displaymath}
+%		\psi^{n+1}\equiv\mathbf{K}\mathbf{R}^n
+%	\end{displaymath}
+%	可根据残矢量$\mathbf{R}^n$选择方式的不同，将\textcolor{blue}{\textrm{SD}、\textrm{CG}}、\textcolor{blue}{\textrm{RMM-DIIS}}等多种算法应用于矩阵迭代对角化计算
+%}
+%
 \section{\rm{VASP}计算的原子数据重建}
 \frame
 {
@@ -470,7 +562,7 @@
 \begin{figure}[h!]
 \vskip -0.2in
 \centering
-\includegraphics[width=4.0in,height=2.35in,viewport=0 0 1530 850, clip]{Figures/CORE_G-dat.pdf}
+\includegraphics[width=4.0in,height=2.35in,viewport=0 0 1530 850, clip]{Figures/PSRHO_G-dat.pdf}
 \caption{\tiny \textrm{The pseudo-density in reciprocal space.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{pseudo_density_in_reciprocal-space}
 \end{figure}
@@ -498,11 +590,12 @@
 \vskip 3pt
 	{\fontsize{9.0pt}{7.2pt}\selectfont{
 	\begin{itemize}
+\setlength{\itemsep}{5pt}
 		\item \textcolor{blue}{物理上}，\textrm{VASP}基于\textrm{DFT}近似，求解\textrm{Kohn-Sham}方程，并将粒子基态密度问题转化为矩阵的本征函数和本征值问题
 		\item \textcolor{blue}{数学上}，方程求解过程的核心是矩阵对角化与\textrm{PDE}的自洽迭代，即便对于简单体系，也需要完成数十次的迭代，而规模大的计算模拟体系则可能需要成千上万次迭代计算
 		\item \textcolor{blue}{计算过程上}，\textrm{VASP}计算的时长开销主要是本征值求解的矩阵对角化；此外由于算法限制，\textrm{Kohn-Sham}方程作为线性方程组作并行处理时，节点间存在密集的通信。在上千节点，上万计算核的大规模并行系统上，数据通信将严重影响程序的性能，这是当前\textrm{VASP}软件的主要瓶颈
 	\end{itemize}}}
-			\textcolor{magenta}{有必要探索新的并行和优化策略来提升\textrm{VASP}的计算性能}
+%			\textcolor{magenta}{有必要探索新的并行和优化策略来提升\textrm{VASP}的计算性能}
 }
 
 %------------------------------------------------------------------------Reference----------------------------------------------------------------------------------------------
@@ -511,12 +604,15 @@
 \frametitle{主要参考文献}
 \begin{thebibliography}{99}
 {\tiny
-	\bibitem{PR136-B864_1964}\textrm{P. Hohenberg and W. Kohn, \textit{Phys. Rev.} \textbf{136} (1964), B864}
-	\bibitem{PR140-A1133_1965}\textrm{W. Kohn and L.J. Sham, \textit{Phys. Rev.} \textbf{140} (1965), A1133}
 	\bibitem{PRB50-17953_1994}\textrm{P. E. Bl\"ochl. \textit{Phys. Rev.} B, \textbf{50} (1994), 17953}
 	\bibitem{PRB59-1758_1999}\textrm{G. Kresse and D. Joubert \textit{Phys. Rev.} B, \textbf{59} (1999), 1758}
+	\bibitem{CMS6-15_1996}\textrm{G. Kresse and J. Furthm\"uller \textit{Comput. Mat. Sci.}, \textbf{6} (1996), 15}
+	\bibitem{PRB54-11169_1996}\textrm{G. Kresse and J. Furthm\"uller \textit{Phys. Rev.} B, \textbf{54} (1996), 11169}
+	\bibitem{PRL55-2471_1985}\textrm{R. Car and M. Parrinello \textit{Phys. Rev.} Lett., \textbf{55} (1985), 2471}
+	\bibitem{PRB47-10142_1993}\textrm{K. Laasonen and A. Pasquarello and R. Car and C. Lee and D. Vanderbilt \textit{Phys. Rev.} B, \textbf{47} (1993), 10142}
+	\bibitem{Crelle30-51_1846}\textrm{C. G. Jacobi,\textbf{\"Uber ein leichtes Verfahren die in der Theorie der S\"acul\"arst\"orrungen vorkommenden Gleichungen numerisch aufzul\"osen}, \textit{Crelle's J.} \textbf{30} (1846), 51-94}
 	\bibitem{Elect_Stru}\textrm{Richard. M. Martin. \textit{Electronic Structure: Basic Theory and Practical Methods} (Cambridge University Press, Cambridge, England, 2004)}
-        \bibitem{Singh}\textrm{D. J. Singh. \textit{Plane Wave, PseudoPotential and the LAPW method} (Kluwer Academic, Boston,USA, 1994)}					%
+	\bibitem{Comp_Phys}\textrm{J. M. Thijssen. \textit{Computational Physics}~\textrm{(2nd Edition)} (Cambridge University Press, Cambridge, England, 2007)}
 }
 \end{thebibliography}
 %\nocite*{}
