@@ -1,0 +1,421 @@
+
+\section{旋-轨耦合作用的本质}
+\frame
+{
+\frametitle{旋-轨耦合的起源}
+\begin{itemize}
+	\item 电场对静止的电荷有静电力作用(\textrm{Coulomb}力)
+	\item 电场对运动的电荷除静电力外还有磁场力作用
+	\item 磁场对运动的电荷有力的作用(\textrm{Lorentz}力)
+\end{itemize}
+自旋-轨道耦合本质:~\textcolor{red}{外电场对运动自旋磁矩的作用，是相对论效应}
+\begin{figure}[h!]
+\centering
+\includegraphics[height=1.15in,width=2.45in,viewport=0 0 600 270,clip]{Figures/SOC_cor.png}
+\caption{\tiny \textrm{A schematic coordinate for an electron in atom: (a) atomic coordinate system, (b) electron coordinate ones.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Muffin_tin}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{经典唯象的旋-轨耦合}
+	\begin{itemize}
+		\item 在原子核坐标系下，根据\textrm{Coulomb}定理，运动电子-$e$的速度$v$~,并有自旋磁矩，离子实的势场会与运动的磁矩发生相互作用
+		\item 由于运动是相对的，在电子坐标系下，选-轨耦合可理解为电场$\vec E$以速度-$v$运动产生磁场$\vec B$，磁场会对电子自旋有力的作用
+	\end{itemize}
+	\begin{displaymath}
+		\vec B=\frac{\mu_0\vec j\times\vec r}{r^3}=\mu_0\varepsilon_0(\vec v\times\vec E)
+	\end{displaymath}
+其中$\vec v$是电子运动速度，$\vec E$是离子实在电子处的电场。根据电场强度的径向分布形式
+\begin{displaymath}
+	\vec E=\frac1{e}\frac{\partial V}{\partial r}\frac{\vec r}r
+\end{displaymath}
+利用轨道角动量关系$\vec L=\vec r\times\vec p$和$\vec p=m\vec v$，可得磁感应强度
+\begin{displaymath}
+	\vec B=\frac1{emc^2}\frac1r\frac{\partial V}{\partial r}\vec L
+\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{经典唯象的旋-轨耦合}
+对自由电子自旋，离子实在电子处的磁场对\textrm{Hamiltonian}贡献为
+\begin{displaymath}
+	\vec H=\frac{(\vec{\sigma}\cdot\vec p)^2}{2m}
+\end{displaymath}
+
+考虑磁场与交变电磁场$\mathbf{A}$:~$\vec B=\nabla\times\mathbf A$，因此
+\begin{displaymath}
+	H=\frac{\left( \vec{\sigma}\cdot\left( \vec p+\dfrac ec\mathbf A \right) \right)^2}{2m}
+\end{displaymath}
+利用关系式$(\vec{\sigma}\cdot\mathbf A)(\vec{\sigma}\cdot\mathbf B)=\mathbf{A}\cdot\mathbf{B}+\mathrm{i}\vec{\sigma}(\mathbf{A}\times\mathbf{B})$，可得
+\begin{displaymath}
+	H=\frac{\left( \vec p+\frac ec\mathbf{A} \right)^2}{2m}+\underline{\textcolor{red}{\frac{\mathrm i}{2m}\vec{\sigma}\cdot\left( \vec p+\frac ec\mathbf{A} \right)\times\left( \vec p+\frac ec\mathbf{A} \right)}}
+\end{displaymath}
+其中第一项是轨道磁矩与外磁场相互作用，第二项是自旋磁矩与外磁场相互作用
+}
+
+\frame
+{
+	\frametitle{经典唯象的旋-轨耦合}
+	自旋磁矩与外场相互作用
+	\begin{displaymath}
+		\begin{aligned}
+			&\frac{\mathrm{i}e}{2mc}\vec{\sigma}\cdot[(\vec p\times\mathbf{A})+(\mathbf{A})\times\vec p]=\frac{\mathrm{i}e}{2mc}\vec{\sigma}\cdot(-\mathrm{i}\hbar\nabla\times\mathbf{A})\\
+			=&\frac{e\hbar}{2mc}\vec{\sigma}\cdot\mathbf{B}=-\vec{\mu}_s\cdot\mathbf{B}
+		\end{aligned}
+	\end{displaymath}
+	其中$\vec \mu_s=-g_s\mu_B\vec S$是电子自旋$\vec S$磁矩，$g_s$是电子自旋$g$因子，$\mu_B$是\textrm{Bohr}磁子，$\vec S$是自旋角动量，因此可得自旋-轨道相互作用能量为:
+	\begin{displaymath}
+		\begin{aligned}
+			U=&\frac1{m^2c^2}\frac1r\frac{\partial V}{\partial r}\vec L\cdot\vec S\\
+			=&-\frac1{m^2c^2}\nabla V\cdot(\vec S\times\vec p)
+		\end{aligned}
+	\end{displaymath}
+	考虑电子参照系的非惯性系性质，会产生\textrm{Thomas}进动，因此非惯性系中真空自旋-轨道耦合\textrm{Hamiltonian}为
+	\begin{displaymath}
+		\vec H_{\mathrm{SO}}=-\frac1{4m^2c^2}(\vec{\sigma\cdot\vec p})\times\nabla V
+	\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{由\textrm{Dirac~}方程导出}
+	自旋是相对量量子力学的自然结果，严格地给出自旋-轨道耦合必须要从\textrm{Dirac~}方程出发，由\textrm{Dirac~}方程的非相对论极限可得到旋-轨耦合的具体形式，由\textrm{Dirac~}算符
+	\begin{displaymath}
+		\vec H_{\mathrm D}=c\vec{\alpha}\cdot\vec p+(\vec{\beta}-1)mc^2+V(\vec r)
+	\end{displaymath}
+	其中$\mathbf{\alpha}$和$\mathbf{\beta}$是$4\times4$的矩阵
+	\begin{displaymath}
+		\vec{\alpha}=\left(
+		\begin{matrix}
+			0 &\vec{\sigma}\\
+			\vec{\sigma} &0
+		\end{matrix}
+		\right)\quad\beta=\left(
+		\begin{matrix}
+			1 &0 &0 &0\\
+			0 &1 &0 &0\\
+			0 &0 &-1 &0\\
+			0 &0 &0 &-1
+		\end{matrix}
+		\right)
+	\end{displaymath}
+	$\vec{\sigma}$是\textrm{Pauli-spin~}矩阵，
+	\begin{displaymath}
+		\sigma_x=\left( 
+		\begin{matrix}
+			0 &1\\
+			1 &0
+		\end{matrix}
+		\right)\quad
+		\sigma_y=\left( 
+		\begin{matrix}
+			0 &-\mathrm{i}\\
+			\mathrm{i} &0
+		\end{matrix}
+		\right)\quad
+		\sigma_z=\left( 
+		\begin{matrix}
+			1 &0\\
+			0 &-1
+		\end{matrix}
+		\right)
+	\end{displaymath}
+	$p=-\mathrm{i}\nabla$是动量算符，$c$是光速(原子单位下$c=274.0746$)
+}
+
+\frame
+{
+	\frametitle{二分量\textrm{Dirac~}方程}
+	在低速非相对论近似下，可以把正负能态间的耦合作为微扰处理，可以得到二分量方程(\textrm{Pauli~}方程)，其解是四分量波函数$\Psi$，可以写成二分量函数形式$\Phi$、$\chi$
+	\begin{displaymath}
+		\Psi=\left( 
+		\begin{matrix}
+			\Phi\\
+			\chi
+		\end{matrix}
+		\right)
+	\end{displaymath}
+	$\Phi$称为波函数的\textcolor{blue}{大分量部分}，$\chi$称为波函数的\textcolor{blue}{小分量部分}
+
+	$\Phi$和$\chi$是耦合方程:%，在没有外场$\mathbf{A}$时
+	\begin{displaymath}
+		\begin{aligned}
+			c(\vec{\sigma}\cdot\vec p)\chi&=(\varepsilon-V)\Phi\\
+			c(\vec{\sigma}\cdot\vec p)\Phi&=(\varepsilon-V+2mc^2)\chi
+		\end{aligned}
+	\end{displaymath}
+	由此得到大分量组分方程
+	\begin{displaymath}
+		\frac1{2m}(\vec{\sigma}\cdot\vec p)\left( 1+\frac{\varepsilon-V}{2mc^2} \right)^{-1}(\vec{\sigma}\cdot\vec p)\Phi+V\Phi=\varepsilon\Phi	
+	\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{二分量\textrm{Dirac~}方程}
+	利用近似$$\left( 1+\frac{\varepsilon-V}{2mc^2} \right)^{-1}\approx1-\frac{\varepsilon-V}{2mc^2}$$
+	并有
+	\begin{displaymath}
+		\begin{aligned}
+			\vec pV&=V\vec p-\mathrm{i}\hbar\vec{\nabla}V\\
+			(\vec{\sigma}\vec{\nabla}V)(\vec{\sigma}\cdot\vec p)&=(\vec{\nabla}V\vec p)+\mathrm{i}\vec{\sigma}[\vec{\nabla},\vec p]
+		\end{aligned}
+	\end{displaymath}
+	由此得$\Phi$的微分方程
+	\begin{displaymath}
+		\hspace*{-10pt}	\left[ \left( 1-\frac{\varepsilon-V}{2mc^2} \right)\frac{\vec p^2}{2m}+V \right]\Phi-\frac{h^2}{4m^2c^2}(\vec{\nabla}V\vec{\nabla}\Phi)+\frac{h^2}{4m^2c^2}(\sigma[\vec{\nabla V},\vec p]\Phi)=\varepsilon\Phi
+	\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{中心力场的\textrm{Dirac~}方程}
+	在球形对称势函数条件下
+	\begin{displaymath}
+		\hspace*{-10pt}\left[ \underline{\textcolor{blue}{\frac{p^2}{2m}+V}}-\underline{\textcolor{brown}{\frac{p^4}{8m^3c^2}}}-\underline{\textcolor{brown}{\frac{\hbar^2}{4m^2c^2}\frac{\mathrm{d}V}{\mathrm{d}r}\frac{\partial}{\partial\vec r}}}+\underline{\textcolor{red}{\frac1{2m^2c^2}\frac1r\frac{\mathrm{d}V}{\mathrm{d}r}(\vec l\cdot\vec s)}} \right]\Phi=\varepsilon\Phi
+	\end{displaymath}
+	\begin{itemize}
+		\item 第一与第二项是非相对论\textrm{Schr\"odinger~}方程
+		\item 第三和第四项是质量和\textrm{Darwin~}校正
+		\item 最后一项对应于自旋-轨道耦合
+	\end{itemize}
+	考虑旋-轨耦合后，波函数$\Psi$不再是自旋或轨道角动量的本征态，新的好量子数$j$、$j_z$和$\kappa$定义为
+	$$\begin{aligned}
+		\vec j&=\vec l+\vec s\\
+%		\vec j_z&=\vec l_z+\vec s_z
+	\end{aligned}$$
+	$\hbar\kappa$是算符
+	\begin{displaymath}
+		K=\left( 
+		\begin{matrix}
+			\vec{\sigma}\cdot\vec l+\hbar &0\\
+			0 &-\vec{\sigma}\cdot\vec l-\hbar
+		\end{matrix}
+		\right)
+	\end{displaymath}
+	的本征值
+%	
+%	$\kappa$和$j$的关系是
+%	$$\kappa=\pm(j+\frac12)$$
+}
+
+\frame
+{
+	\frametitle{中心力场的\textrm{Dirac~}方程}
+	球对称下的\textrm{Dirac~}方程解，四分量波函数$\Psi$因此可写成
+	\begin{displaymath}
+		\Psi=\left( 
+		\begin{matrix}
+			\Phi\\
+			\chi
+		\end{matrix}
+		\right)=\left( 
+		\begin{matrix}
+			g_{\kappa}(r)\mathcal{Y}_{jl}^{j_z}\\
+			\mathrm{i}f_{\kappa}(r)\mathcal{Y}_{jl^{\prime}}^{j_z}
+		\end{matrix}
+		\right)
+	\end{displaymath}
+	$g$和$f$是径向函数，相对论量子数$\kappa$满足$\kappa=\pm(j+\frac12)$，$\mathcal{Y}_{jl}^{j_z}$是二分量自旋-角动量本征态函数，满足
+	\begin{displaymath}
+		\begin{aligned}
+			-(1+\vec{\sigma}\cdot\vec l)\mathcal{Y}_{jl}^{j_z}=\kappa\mathcal{Y}_{jl}^{j_z}\\
+			\vec{\sigma}\cdot\frac{\vec r}r\mathcal{Y}_{jl}^{j_z}=-\mathcal{Y}_{jl}^{j_z}
+		\end{aligned}
+	\end{displaymath}
+	径向函数$g_{\kappa}(r)$和小分量$f_{\kappa}(r)$满足线性\textrm{Dirac~}方程
+	\begin{displaymath}
+		\begin{aligned}
+			\left( \frac{\mathrm{d}}{\mathrm{d}r}+\frac1r-\frac{\kappa}r \right)cf_{\kappa}(r)+[\varepsilon-V(r)]g_{\kappa}(r)=0\\
+			\left( \frac{\mathrm{d}}{\mathrm{d}r}+\frac1r+\frac{\kappa}r \right)g_{\kappa}(r)-\left[ 1+\frac{\varepsilon-V(r)}{c^2} \right]cf_{\kappa}(r)=0
+		\end{aligned}
+	\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{中心力场的\textrm{Dirac~}方程}
+	消去$f_{\kappa}(r)$，有
+	\begin{displaymath}
+		\begin{aligned}
+			&-\frac{\hbar^2}{2Mr^2}\frac{\mathrm{d}}{\mathrm{d}r}\left[ r^2\frac{\mathrm{d}g_{\kappa}(r)}{\mathrm{d}r} \right]+\left[ V(r)+\frac{\hbar^2}{2Mr^2}\frac{l(l+1)}{r^2} \right]g_{\kappa}(r)\\
+			&-\frac{\hbar^2}{4M^2c^2}\frac{\mathrm{d}V(r)}{\mathrm{d}r}\frac{\mathrm{d}g_{\kappa}(r)}{\mathrm{d}r}-\frac{\hbar^2}{4M^2c^2}\frac{\mathrm{d}V(r)}{\mathrm{d}r}\frac{1+\kappa}rg_{\kappa}(r)=\varepsilon g_{\kappa}(r)
+		\end{aligned}
+	\end{displaymath}
+	这里引入相对论质量$$M=\dfrac{m}{\sqrt{1-\dfrac{\varepsilon-V(\mathbf{r})}{2mc^2}}}=m+\frac{\varepsilon-V(r)}{2c^2}$$
+	利用等式关系$$\kappa(\kappa+1)=l(l+1)$$
+	小分量$f_{\kappa}(r)$可以表示为
+	\begin{displaymath}
+		f_{\kappa}(r)=\frac{\hbar}{2Mc}\left( \frac{\mathrm{d}g_{\kappa}(r)}{\mathrm{d}r}+\frac{1+\kappa}rg_{\kappa}(r) \right)
+	\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{标量相对论近似}
+	\textcolor{blue}{在$g_{\kappa}(r)$和$f_{\kappa}(r)$方程中}\textcolor{red}{略去有关$\kappa$项}\textcolor{blue}{即可得标量相对论方程}
+	\begin{displaymath}
+		\begin{aligned}
+			&-\frac{\hbar^2}{2Mr^2}\frac{\mathrm{d}}{\mathrm{d}r}\left[ r^2\frac{\mathrm{d}\tilde{g}(r)}{\mathrm{d}r} \right]+\left[ V(r)+\frac{\hbar^2}{2Mr^2}\frac{l(l+1)}{r^2} \right]\tilde{g}(r)\\
+			&-\frac{\hbar^2}{4M^2c^2}\frac{\mathrm{d}V(r)}{\mathrm{d}r}\frac{\mathrm{d}\tilde{g}(r)}{\mathrm{d}r}=\varepsilon\tilde{g}(r)
+		\end{aligned}
+	\end{displaymath}
+	这里$\tilde g(r)$和$\tilde f(r)$是$g_{\kappa}(r)$和$f_{\kappa}(r)$的标量相对论近似，满足
+	\begin{displaymath}
+		\begin{aligned}
+			&\tilde{f}(r)=\frac{\hbar}{2Mc}\frac{\mathrm{d}\tilde{g}(r)}{\mathrm{d}r}\\
+			&\tilde{g}(r)=-\frac{\hbar c}{\varepsilon-V(r)}\frac{\mathrm{d}\tilde{f}(r)}{\mathrm{d}r}
+		\end{aligned}
+	\end{displaymath}
+	\textcolor{blue}{在标量相对论近似下，$l$和$s$仍然是好量子数}
+}
+
+\frame
+{
+	\frametitle{标量相对论近似与旋-轨耦合}
+	标量相对论近似下四分量波函数$\tilde\Psi$可以写成
+	\begin{displaymath}
+		\tilde\Psi=\left( 
+		\begin{matrix}
+			\tilde\Phi\\
+			\tilde\chi
+		\end{matrix}
+		\right)
+	\end{displaymath}
+	这里$\tilde\Phi$是\textcolor{blue}{纯自旋态}$$\tilde\Phi=\tilde gY_{lm}\chi_s$$
+	$\chi_s$是二分量旋量(\textrm{spinor})\\
+	$\tilde\chi$\textcolor{red}{包含了\textrm{spin-up}和\textrm{spin-dn}的混合态}
+	\begin{displaymath}
+		\tilde\chi=\mathrm{i}\frac{\vec{\sigma}\cdot\vec r}r\left( -\tilde{f}(r)+\frac{\tilde{g}(r)}{2Mcr}\vec{\sigma}\cdot\vec l \right)Y_{lm}\chi_s
+	\end{displaymath}
+	\textcolor{red}{\textrm{Dirac~}方程可用旋-轨耦合的\textrm{Hamiltonian~}$H_{\mathrm{SO}}$近似}
+	$$H\tilde{\psi}=\varepsilon\tilde{\psi}+H_{\mathrm{SO}}\tilde{\psi}$$
+	用$\tilde{g}(r)$为基函数，可得$H_{\mathrm{SO}}$为
+	\begin{displaymath}
+		H_{\mathrm{SO}}=\frac{\hbar}{2Mc^2}\frac1r\frac{\mathrm{d}V(r)}{\mathrm{d}r}\left( 
+		\begin{matrix}
+			\vec{\sigma}\cdot\vec l &0\\
+			0 &0
+		\end{matrix}
+		\right)
+	\end{displaymath}
+%	\textcolor{red}{注意:~这样定义的$H_{\mathrm{SO}}$只是对波函数的大分量有贡献}
+}
+
+\subsection{旋-轨耦合与二次变分}
+\frame
+{
+	\frametitle{标量相对论计算与自旋极化}
+	用旋-轨耦合处理价电子体系，先求解自旋分离的标量相对论波函数$\tilde{g}(r)$和$\tilde{f}(r)$
+	\begin{displaymath}
+		\begin{aligned}
+			&-\frac{\hbar^2}{2Mr^2}\frac{\mathrm{d}}{\mathrm{d}r}\left[ r^2\frac{\mathrm{d}\tilde{g}(r)}{\mathrm{d}r} \right]+\left[ V(r)+\frac{\hbar^2}{2Mr^2}\frac{l(l+1)}{r^2} \right]\tilde{g}(r)\\
+			&-\frac{\hbar^2}{4M^2c^2}\frac{\mathrm{d}V(r)}{\mathrm{d}r}\frac{\mathrm{d}\tilde{g}(r)}{\mathrm{d}r}=\varepsilon\tilde{g}(r)\\
+			&\tilde{f}(r)=\frac{h}{2Mc}\frac{\mathrm{d}\tilde{g}(r)}{\mathrm{d}r}\\
+		\end{aligned}
+	\end{displaymath}
+	由于在标量相对论近似下，自旋是好的量子数，因此可分别组合到\textcolor{blue}{自旋波函数}
+	\begin{displaymath}
+		\phi_{lm}^{\uparrow}=\left( 
+		\begin{matrix}
+			\tilde{g}_l^{\uparrow}Y_{lm}\\
+			-\mathrm{i}\tilde{f}_l^{\uparrow}Y_{lm}
+		\end{matrix}
+		\right)\chi_{\uparrow}\quad
+		\phi_{lm}^{\downarrow}=\left( 
+		\begin{matrix}
+			\tilde{g}_l^{\downarrow}Y_{lm}\\
+			-\mathrm{i}\tilde{f}_l^{\downarrow}Y_{lm}
+		\end{matrix}
+		\right)\chi_{\downarrow}\quad
+		\chi_{\uparrow}=\left( 
+		\begin{matrix}
+			1\\
+			0
+		\end{matrix}
+		\right)\quad
+		\chi_{\downarrow}=\left( 
+		\begin{matrix}
+			0\\
+			1
+		\end{matrix}
+		\right)
+	\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{旋-轨耦合与二次变分}
+	\begin{itemize}
+		\setlength{\itemsep}{20pt}
+		\item \textcolor{blue}{旋-轨耦合作用于标量相对论的大分量$\tilde{g}_l$，因此对自旋向上和向下部分都有贡献}
+		\item 在原有\textrm{Hamiltonian}基础上直接引入旋-轨耦合算符$H_{\mathrm{SO}}$，将使基函数加大一倍(\textrm{spin-up+spin-dn})\\
+			不适应大的计算体系
+		\item \textcolor{red}{二次变分}
+	\begin{displaymath}
+		\left[ 
+			\begin{matrix}
+				\ddots & & &\raisebox{-1.0ex}[0pt]{\Huge0}  \\
+				&\mathbf{H}_{\mathrm{SO}}^{\alpha\alpha} &\mathbf{H}_{\mathrm{SO}}^{\alpha\beta} &\\
+			&\mathbf{H}_{\mathrm{SO}}^{\beta\alpha} &\mathbf{H}_{\mathrm{SO}}^{\beta\beta} &\\
+			\raisebox{0.8ex}[0pt]{\Huge0} & & & \ddots
+			\end{matrix}
+			\right]
+	\end{displaymath}
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{旋-轨耦合与二次变分}
+	\begin{itemize}
+		\item \textcolor{red}{二次变分的实现}
+			\begin{enumerate}
+				\setlength{\itemsep}{30pt}
+				\item \textcolor{brown}{正常求解自旋极化本征态波函数(不含$H_{\mathrm{SO}}$)得
+%					\begin{displaymath}
+						$\psi_n^{\uparrow}\quad\varepsilon_n^{\uparrow}\quad\psi_n^{\downarrow}\quad\varepsilon_n^{\downarrow}$
+%					\end{displaymath}
+					}
+				\item \textcolor{brown}{用自旋极化本征态波函数为基函数，对总\textrm{Hamiltonian}\\(包含$H_{\mathrm{SO}}$)构造矩阵更方便:}\\
+					\textcolor{red}{矩阵维度低且近似对角化，对角元是标量相对论本征值\\大多数情况下，$H_{\mathrm{SO}}$比较小，计算方便}
+				\item \textcolor{brown}{二次变分增加了变分自由度}
+			\end{enumerate}
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{\textrm{LAPW~}框架下处理旋-轨耦合}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.10in}
+\includegraphics[height=1.45in,width=2.01in,viewport=0 10 430 330,clip]{Figures/WIENNCM_Sphere.png}
+\caption{\small \textrm{The spin coordinate frmaes.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{WIENNCM_sphere}
+\end{figure}
+考虑旋-轨耦合后，\textrm{LAPW~}基函数表示为
+\begin{displaymath}
+	\footnotesize\hskip -50pt \varphi^{\vec G}_{\sigma}=\left\{
+  \begin{aligned}
+	  &\mathrm{e}^{\mathrm{i}(\vec G+\vec k)\cdot\vec r}\chi_{\sigma}\\
+	  &\sum_{\sigma^{\alpha}}\sum_{lm}[A^{\vec G_{\sigma\sigma^{\alpha}}}_{lm}u_l^{\sigma^{\alpha}}+B^{\vec G_{\sigma\sigma^{\alpha}}}_{lm}\dot u_l^{\sigma^{\alpha}}]Y_{lm}\chi_{\sigma^{\alpha}}
+  \end{aligned}
+\right.
+\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{\textrm{LAPW~}框架下处理旋-轨耦合}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.10in}
+\includegraphics[height=2.19in,width=3.15in,viewport=0 0 650 430,clip]{Figures/WIENNCM_Ham.png}
+\caption{\small \textrm{Allocation of the Hamiltonian and overlap matrix.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{WIENNCM_Ham}
+\end{figure}
+}

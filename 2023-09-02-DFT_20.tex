@@ -1,0 +1,248 @@
+
+\section{附录4:~赝势\rm{Data set}的生成}
+%\frame
+%{
+%	\frametitle{\textrm{AtomPAW}程序包简介}
+%	\textrm{AtomPAW}程序包是由\textrm{Holzwarth}、\textrm{Tackett}和\textrm{Matthews}开发的\textrm{PAW}原子数据集生成程序，主要基于基于\textrm{Bl\"ochl}提出的原子数据集生成方案。
+%
+%	\textrm{AtomPAW}程序包产生的原子数据集，主要用于基于\textrm{PAW}方法的材料计算软件\textrm{PWPAW}和\textrm{ABINIT}。
+%
+%%\centering {\large \textrm{PP-PW}$\Longrightarrow$} \textbf{PP-PAW}$\Longleftrightarrow$\textbf{\textcolor{red}{FP-PAW}}{\large$\Longleftarrow$ \textrm{FP-LAPW}}
+%%\begin{table}[!H]
+%%\tabcolsep 5pt 
+%%%\vspace*{-12pt}
+%%%\caption{\textrm{The compare of directly diagonalization and $\vec k\cdot\vec p$ perturbation.}}
+%%\vspace{5pt}
+%%\label{Table-Compare_CaB6}
+%%\begin{minipage}{\textwidth}
+%%%\begin{center}
+%%\centering
+%%\def\temptablewidth{1.01\textwidth}
+%%\rule{\temptablewidth}{1pt}
+%%\begin{tabular*} {\temptablewidth}{@{\extracolsep{\fill}}cccc}
+%%	& \textcolor{red}{基函数} & \textcolor{red}{\textrm{Coulomb}势}  &\textcolor{red}{总能量}  \\
+%%	& \textrm{(PW}与球内分波\textrm{)} & \textrm{(}$\rho_I$与赝电荷$\hat n$\textrm{)}  &奇点排除  \\ \hline
+%%	\textrm{LAPW}  &\textcolor{blue}{在球面上连续}       &\textcolor{blue}{简单叠加}        & \textcolor{blue}{需要考虑}\\
+%%	\textrm{PAW}  &\textcolor{blue}{线性变换}：\textcolor{brown}{简单}        &\textcolor{blue}{线性变换}：\textcolor{brown}{复杂}    &\textcolor{blue}{需要考虑}\\
+%%\end{tabular*}
+%%\rule{\temptablewidth}{1pt}\\
+%%%\end{center}
+%%\end{minipage}
+%%\end{table}
+%}
+%
+%\frame
+%{
+%	\frametitle{\textrm{AtomPAW}的输入文件}
+%	\textrm{AtomPAW}的输入文件主要包括
+%	\begin{itemize}
+%		\item 指定原子名称、核电荷数
+%		\item 指定交换-相关泛函的形式和径向布点数
+%		\item 指定原子核外电子的排布(电子组态)
+%		\item 指定波函数展开所需分波最高角动量和各种半径\\$r_{paw}$、$r_{shape}$、$r_{vloc}$和$r_{core}$
+%		\item 指定构造外加分波的能量参数$E_l$
+%		\item 指定\textcolor{blue}{赝波函数、投影子函数(含正交化)和补偿电荷生成方案}
+%		\item 指定\textcolor{blue}{局域势$v_{loc}(r)$生成方案}
+%		\item 指定原子数据集输出方式
+%	\end{itemize}
+%}
+%
+%\frame
+%{
+%	\frametitle{\textrm{AtomPAW}的输出原子数据集文件}
+%	\textrm{AtomPAW}的输出的原子数据集文件主要包括
+%	\begin{itemize}
+%		\item 计算中使用的控制参数
+%		\item 原子价电子波函数$\phi_l(r_i)$
+%		\item 价电子波函数的赝波函数$\tilde\phi_l(r_i)$
+%		\item 投影子函数$\tilde p_l(r_i)$
+%		\item 原子核附近真实价电荷密度$n^1(r_i)$
+%		\item 赝电荷密度$\tilde n^1(r_i)$
+%		\item 补充电荷密度$\hat n(r_i)$
+%		\item 局域势$v_{loc}(r)$
+%	\end{itemize}
+%}
+
+\frame
+{
+	\frametitle{\textrm{AtomPAW}程序的赝势构造}
+	求解原子的价层的全电子分波函数
+	{\fontsize{9.0pt}{5.2pt}\selectfont$$\hspace*{-17pt}\bigg(-\dfrac{\hbar^2}{2m}\nabla^2-\dfrac{Ze^2}r+e^2\int\mathrm{d}^3r^{\prime}\dfrac{n_{core}(r^{\prime})+n(r^{\prime})}{|r-r^{\prime}|}+\mu_{XC}[n_{core}(r)+n(r)]\bigg)|\phi_i\rangle=\epsilon_i|\phi_i\rangle$$}
+	全电子分波电荷密度
+	$$n(r)=\sum_{n,l}c_{n,l}\dfrac{|\phi_{n,l}(r)|^2}{4\pi r^2}$$
+}
+
+\frame
+{
+	\frametitle{\textrm{AtomPAW}程序的赝势构造}
+	有效赝势的构造方案
+	\begin{itemize}
+		\item \textrm{Troullier-Martin NC} 方案 \\
+	首先通过指数多项式构造赝波函数，要求满足
+	\begin{displaymath}
+		\tilde\phi(r)=\left\{
+			\begin{aligned}
+				&r^{L_v+1}\mathrm{e}^{p(r)}\quad &\mathrm{for}\quad r\leqslant r_c \\
+				&\phi(r)\quad &\mathrm{for}\quad r>r_c
+			\end{aligned}
+			\right.
+	\end{displaymath}
+	这里$$p(r)=\sum_{m=0}^6C_mr^{2m}$$
+	可得赝势 
+	$$V_{e\!f\!f}^{PS}(r)=\epsilon_l+\dfrac{\hbar^2}{2m}\bigg(\dfrac{\mathrm{d}^2p}{\mathrm{d}r^2}+(\dfrac{\mathrm{d}p}{\mathrm{d}r})^2+\dfrac{2(L_v+1)}r\dfrac{\mathrm{d}p}{\mathrm{d}r}\bigg)$$
+	于是赝\textrm{Hamiltonian}是$\tilde H(r)=-\dfrac{\hbar^2}{2m}\nabla^2+V_{e\!f\!f}^{PS}(r)$
+	\end{itemize}
+}
+\frame
+{
+	\frametitle{\textrm{AtomPAW}程序的赝势构造}
+	有效赝势的构造方案
+	\begin{itemize}
+		\item \textrm{Ultra-soft} 方案 \\
+	首先用多项式构造赝波函数，要求满足
+	\begin{displaymath}
+		\tilde\phi(r)=\left\{
+			\begin{aligned}
+				&r^{L_v+1}\sum_{m=0}^3C_mr^{2m}\quad &\mathrm{for}\quad r\leqslant r_c \\
+				&\phi(r)\quad &\mathrm{for}\quad r>r_c
+			\end{aligned}
+			\right.
+	\end{displaymath}
+	与\textrm{Troullier-Martin NC}方案类似，逆向求解本征方程得到有效赝势
+		\item \textrm{Bessel}方案\\
+			直接构造有效赝势 $V_{e\!f\!f}^{PS}(r)=\alpha\cdot\dfrac{\sin(q\cdot r)}r$
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{\textrm{AtomPAW}程序的赝势构造}
+	赝分波函数与投影子函数构造
+	\begin{itemize}
+		\item \textrm{Bl\"ochl}方法\\
+			\fontsize{7.2pt}{5.2pt}\selectfont{引入截断函数$k(r)$
+	\begin{displaymath}
+		k(r)=\left\{
+			\begin{aligned}
+				&\bigg[\dfrac{\sin({\pi r/r_c})}{(\pi r/r_c)}\bigg]^2\qquad &\mathrm{for}\quad r<r_c \\
+				&0\qquad &\mathrm{for}\quad r\geqslant r_c
+			\end{aligned}
+			\right.
+	\end{displaymath}
+	构造有效(局域)赝势$\tilde v_{\mathrm{at}}$，得到广义本征值方程
+	$$(\tilde H(\vec r)-\epsilon_i)|\tilde\phi_i^0(\vec r)\rangle=C_ik(r)|\tilde\phi_i^0(\vec r)\rangle$$
+	迭代求解得到初始赝分波$\phi_i^0(\vec r)$\\
+	生成初始投影子函数$|\tilde p_i^0(\vec r)\rangle=\dfrac{k(r)|\tilde\phi_i^0(\vec r)\rangle}{\langle\phi_i^0|k|\phi_i^0\rangle}$\\
+	并且\textcolor{blue}{初始投影函数与初始赝分波满足归一化条件}(\textcolor{red}{不要求正交})
+	\begin{displaymath}
+		\langle\psi_i^0|\tilde p_i^0\rangle =1
+	\end{displaymath}
+意味着广义本征值方程可以表示为
+\begin{displaymath}
+	\bigg(\tilde H(\mathbf{r})-\varepsilon_i\bigg)|\tilde\phi_i^0(\mathbf{r})\rangle=|\tilde p_i^0(\mathbf{r})\rangle\langle\psi_i^0|\tilde H(\mathbf{r})-\varepsilon_i|\tilde\psi_i^0\rangle
+\end{displaymath}
+	采用\textrm{Gram-Schmidt}正交化确定最终的赝分波和投影函数}
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{\textrm{AtomPAW}程序的赝势构造}
+	赝分波函数与投影子函数构造
+	\begin{itemize}
+		\item \textrm{Vanderbilt}方法\\
+			采用多项式构造赝分波函数，要求满足
+	\begin{displaymath}
+		\tilde\phi_i(r)=\left\{
+			\begin{aligned}
+				&r^{l+1}\sum_{m=0}^4C_mr^{2m}\qquad &\mathrm{for}\quad r<r_c \\
+				&\phi_l(r)\qquad &\mathrm{for}\quad r\geqslant r_c
+			\end{aligned}
+			\right.
+	\end{displaymath}
+	构造赝分波的辅助函数
+	$$\chi_l(r)=\bigg(\epsilon_l+\dfrac{\hbar^2}{2m}(\dfrac{\mathrm{d}^2}{\mathrm{d}r^2})-\dfrac{l(l+1)}{r^2}-V_{e\!f\!f}^{PS}(r)\bigg)\tilde\phi_l(r)$$
+	和变换矩阵$\mathbf{B}$(其矩阵元$B_{ij}=\int_0^{r_c}\mathrm{d}r\tilde\phi_i(r)\chi_j(r)$)\\
+	由此得到投影子函数$\tilde p_i(\vec r)=\sum\limits_{j}\chi_j(r)(\mathbf{B^{-1}})_{ji}$
+	\end{itemize}
+}
+
+
+\frame
+{
+	\frametitle{\textrm{AtomPAW}程序的赝势构造}
+	赝分波函数与投影子函数构造
+	\begin{itemize}
+		\item \textrm{RRKJ}方法\\
+			采用球\textrm{Bessel}函数构造赝分波函数，要求满足
+	\begin{displaymath}
+		\tilde\phi_i=\left\{
+			\begin{aligned}
+				&r\cdot\bigg(\alpha_1^l\cdot j_l(q_1^lr)+\alpha_2^l\cdot j_l(q_2^lr)\bigg) \qquad &\mathrm{for}\quad r<r_c \\
+				&\phi_l(r)\qquad &\mathrm{for}\quad r\geqslant r_c
+			\end{aligned}
+			\right.
+	\end{displaymath}
+	投影子函数的构造与\textrm{Vanderbilt}方法类似
+	\end{itemize}
+}
+
+
+\frame
+{
+	\frametitle{\textrm{AtomPAW}程序的赝势构造}
+	\begin{itemize}
+		\item 赝分波电荷密度的计算
+	$$\tilde n(r)=\sum_{n,l}c_{n,l}\dfrac{|\tilde\phi_{n,l}(r)|^2}{4\pi r^2}$$
+		\item 赝芯波电荷密度的计算
+	\begin{displaymath}
+		4\pi r^2\tilde n_{core}(r)=\left\{
+			\begin{aligned}
+				&r^2(U_0+U_2r^2+U_4r^4)\quad &\mathrm{for}\quad r\leqslant r_c \\
+				&4\pi r^2n_{core}(r)\quad &\mathrm{for}\quad r>r_c
+			\end{aligned}
+			\right.
+	\end{displaymath}
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{\textrm{AtomPAW}程序的赝势构造}
+	\begin{itemize}
+		\item 补充电荷的构造
+			$$\hat n(r)=\bigg(-Z+\int\mathrm{d}^3r[n_{core}(r)+n(r)-\tilde n_{core}(r)-\tilde n(r)]\bigg)g_{00}(r)$$
+			形状函数$g_{LM}$的定义为$$g_{LM}(r)=N_Lr^Lk(r)Y_{LM}(\hat r)$$
+			根据$k(r)$的不同可以取\textrm{sinc}、\textrm{Gaussian}或\textrm{Bessel}型等几种
+		\item 局域势函数(\textcolor{red}{可移植的“赝势”})
+			{\fontsize{9.5pt}{5.2pt}\selectfont$$\hspace*{-25pt}\tilde v_{loc}(r)=V_{e\!f\!f}^{PS}(r)-e^2\int\mathrm{d}^3r^{\prime}\dfrac{\tilde n_{core}(r^{\prime})+\tilde n(r^{\prime})+\hat n(r^{\prime})}{|r-r^{\prime}|}-\mu_{XC}[\tilde n_{core}(r)+\tilde n(r)]$$}
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{\textrm{AtomPAW}程序的赝势构造}
+	\begin{itemize}
+		\item 相关矩阵元的计算\\
+			\textrm{AtomPAW}完成了与原子分波、赝分波有关的矩阵元$D_{ij}^{\alpha}$、$O_{ij}^{\alpha}$的计算\\
+			此外还计算了
+			$$W_{ij}^{\alpha}=\sum_{nl}c_{n\vec k}\langle\tilde\Psi_{n\vec k}|\tilde p_i^\alpha\rangle\langle\tilde p_j^{\alpha}|\tilde\Psi_{n\vec k}\rangle$$
+			实际计算中，$\tilde\Psi_{n\vec k}$用平面波展开，于是
+			$$\hspace*{-28pt}\langle\tilde p_i^{\alpha}|\tilde\Psi_{n\vec k}\rangle=\sqrt{\dfrac1V}\sum_{\vec G}\bigg(4\pi \mathrm{i}^l_iY^{\ast}_{l_im_i}(\widehat{\vec k+\vec G})\mathrm{e}^{\mathrm{i}(\vec k+\vec G)\cdot\vec R_{\alpha}}\bigg)\tilde{\tilde p}_{n_il_i}(|\vec k+\vec G|)A_{n\vec k}(\vec G)$$
+			这里$$\tilde{\tilde p}_{n_il_i}(\vec q)=\int_0^{r_c^{\alpha}}\mathrm{d}rr\tilde p_{n_il_i}(r)j_{l_i}(\vec q\cdot\vec r)$$
+	\end{itemize}
+}
+
+%\frame
+%{
+%	\frametitle{适应\textrm{Abinit}的输出}
+%	\begin{itemize}
+%		\item \textrm{Abinit}程序的\textrm{PAW}计算部分主要基于\textrm{Kresse}-\textrm{Joubert}方案
+%		\item \textrm{Kresse}方案与\textrm{Bl\"ochl}方案最大的区别在电荷密度的处理不同
+%		\item 为了适应\textrm{Abinit}程序包的计算需要，\textrm{AtomPAW}提供了专供\\\textrm{Abinit}计算的接口模块\textrm{Abinitinterface}，对有关电荷密度与势\\函数作了相应的变换
+%			$$n_{Z_c}^{\alpha}(|\vec r-\vec R^{\alpha}|)=-Z^{\alpha}\delta(\vec r-\vec R^{\alpha})+n_{core}^{\alpha}(\vec r-\vec R^{\alpha}|)$$
+%			$$\tilde n_{Z_c}^{\alpha}(|\vec r-\vec R^{\alpha}|)=\tilde n_{core}(|\vec r-\vec R^{\alpha}|)+(-Z^{\alpha}+Q_{core}-\tilde Q_{core})g_{00}(\vec r-\vec R^{\alpha}|)$$
+%			$${\hat{\hat n}}^{\alpha}(|\vec r-\vec R^{\alpha}|)=\sum_{ij,LM}W_{ij}^{\alpha}G_{l_im_il_jm_j}^{LM}n_{n_il_in_jl_j}^{\alpha L}g_{LM}(\vec r-\vec R^{\alpha})$$
+%			{\fontsize{9.5pt}{5.2pt}\selectfont$$\hspace*{-32pt}\tilde v_{Z_c}^{\alpha}(r)=V_{\alpha}^{PS}(r)-e^2\int\mathrm{d}^3r^{\prime}\dfrac{\tilde n^{\alpha}(r^{\prime})+\hat{\hat{n}}^{\alpha}(r^{\prime})}{|r-r^{\prime}|}+\mu_{XC}[\tilde n_{core}^{\alpha}(r)+\hat{\hat{n}}^{\alpha}(r)+\tilde n^{\alpha}(r)]$$} 
+%	\end{itemize}
+%}

@@ -1,0 +1,296 @@
+
+\section{固体光学性质与能带跃迁}
+\frame
+{
+	\frametitle{固体光学常数间的基本关系}
+	光(电磁波)通过固体材料时，电磁波将与固体中的电子、原子(离子)间相互作用，因此发生光吸收
+	\begin{itemize}
+		\item 角频率为$\omega$的电磁波(横波)在均匀介质中传播(设为$x$方向)
+			\begin{displaymath}
+				\mathbf{E}(\vec r,t)=E(z)\mathrm{e}^{-\mathrm{i}\omega t}(1,0,0)\qquad\mathbf{E}\parallel x
+			\end{displaymath}
+			根据\textrm{Maxwell~}方程，可有电场与电流密度的基本关系
+			\begin{displaymath}
+				\frac{\mathrm{d}^2E(z)}{\mathrm{d}z^2}=-\frac{\omega^2}{c^2}E(z)-\frac{4\pi\mathrm{i}\omega}{c^2}J(z)
+			\end{displaymath}
+		\item 引入复数电导率$\sigma(\sigma)=\sigma_1(\omega)+\mathrm{i}\sigma_2(\omega)$
+			\begin{displaymath}
+				J(z)=\sigma(\omega)E(z)=\sigma_1(\omega)E(z)+\mathrm{i}\sigma_2(\omega)E(z)
+			\end{displaymath}
+			吸收介质中电流$\mathbf{j}$分为两部分，一部分与$\mathbf{E}$相位差$90^{\circ}$，称为\textcolor{magenta}{极化电流}，一部分与电场$\mathbf{E}$同相位，称为\textcolor{magenta}{传导电流}\\
+			\textcolor{red}{注意}:~极化电流与电场相位差$90^{\circ}$，在一个周期平均电场做工为零，不消耗电磁场能量
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{固体光学常数间的基本关系}
+	\begin{itemize}
+		\item 当载流子迁移距离比电磁波的波长小得多时(长波极限)，可忽略电磁波在空间变化的影响
+			\begin{displaymath}
+				\frac{\mathrm{d}^2E(z)}{\mathrm{d}z^2}=-\frac{\omega^2}{c^2}\left[ 1+\frac{4\pi\mathrm{i}\omega\sigma(\omega)}{\omega} \right]E(z)
+			\end{displaymath}
+		可解得电磁波在介质内的衰减
+		\begin{displaymath}
+			E(z)=E_0\mathrm{e}^{\mathrm{i}(\omega/c)Nz}
+		\end{displaymath}
+		这里$N$是复数折射率，满足
+		\begin{displaymath}
+			N^2=1+\frac{4\pi\mathrm{i}\sigma(\omega)}{\omega} 
+		\end{displaymath}
+		\item 复数折射写成$N=n+\mathrm{i}k$，其中$n$是折射指数，$k$是消光系数，因此
+			\begin{displaymath}
+				E(z)=E_0\mathrm{e}^{\mathrm{i}(\omega/c)nz}\mathrm{e}^{-(\omega/c)kz}
+			\end{displaymath}
+			因此电磁波在介质中传播速度$c/n$，透射深度$\delta(\omega)=\frac{c}{\omega k(\omega)}$
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{固体光学常数间的基本关系}
+	\begin{itemize}
+		\item 吸收系数
+			\begin{displaymath}
+				\alpha(\omega)=\frac{2\omega k(\omega)}c\equiv\frac2{\delta(\omega)}
+			\end{displaymath}
+		\item 电磁波在介质中传播，根据介电函数和复数折射率的关系$N^2=\varepsilon$，因此
+			\begin{displaymath}
+				\varepsilon_1=n^2-k^2\qquad\varepsilon_2=2nk
+			\end{displaymath}
+			相应地
+			\begin{displaymath}
+				n^2=\frac12(\varepsilon_1+\sqrt{\varepsilon_1^2+\varepsilon_2^2})\quad k^2=\frac12(-\varepsilon_1+\sqrt{\varepsilon_1^2+\varepsilon_2^2})
+			\end{displaymath}
+			根据等式$\varepsilon(\omega)=1+\dfrac{4\pi\mathrm{i}\sigma(\omega)}{\omega}$有
+			\begin{displaymath}
+				\varepsilon_1=1-\frac{4\pi\sigma_2(\omega)}{\omega}\qquad\varepsilon_2=\frac{4\pi\sigma_1(\omega)}{\omega} 
+			\end{displaymath}
+			\textcolor{red}{注意}:~\textcolor{blue}{确定介电函数虚部与电导率实部间的关系}
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{固体光学常数间的基本关系}
+	\begin{itemize}
+		\item 电磁波垂直入射时，反射波与入射波分别为
+\begin{figure}[h!]
+\centering
+%\hspace*{-10pt}
+\vspace*{-0.4in}
+\includegraphics[height=1.2in,width=1.8in,viewport=0 0 750 600,clip]{Figures/Optic-reflect.png}
+\caption{\tiny \textrm{Schematic representation of incident, reflected and transmitted electromagnetic wave at the surface.}}%
+\label{Optic-reflect}
+\end{figure} 
+			\begin{displaymath}
+				\begin{aligned}
+					&E(z)=E_t\mathrm{e}^{\mathrm{i}(\omega/c)Nz}\quad z>0\\
+					&E(z)=E_i\mathrm{e}^{\mathrm{i}(\omega/c)z}+E_r\mathrm{e}^{-\mathrm{i}(\omega/c)z}\quad z<0\\
+				\end{aligned}
+			\end{displaymath}
+			反射率$R$可以表示为
+			\begin{displaymath}
+				R=\left|\frac{E_r}{E_i}\right|^2=\left|\frac{1-N}{1+N}\right|^2=\frac{(n-1)^2+k^2}{(n+1)^2+k^2}
+			\end{displaymath}
+	\end{itemize}
+}
+
+%\subsection{自由载流子与\rm{Drude}模型}
+\frame
+{
+	\frametitle{自由电子的\textrm{Drude}模型}
+	\textcolor{blue}{在远红外区，经典自由电子气模型可以很好地描述金属的光学行为}
+	\begin{itemize}
+		\item 载流子在外电场$\mathbf{E}(\vec r,t)=\mathbf{E}_0\mathrm{e}^{\mathrm{i}(\vec q\cdot\vec r-\omega t)}$下的运动方程
+			\begin{displaymath}
+				m\ddot{\vec r}=-\frac m{\tau}\dot{\vec r}+(-e)\mathbf{E}_0\mathrm{e}^{\mathrm{i}(\vec q\cdot\vec r-\omega t)}
+			\end{displaymath}
+			这里$\vec r(t)$是载流子坐标，$\tau$是\textcolor{red}{唯象弛豫时间}
+		\item 长波极限下，忽略电磁波在空间的变化
+			\begin{displaymath}
+				m\ddot{\vec r}=-\frac m{\tau}\dot{\vec r}-e\mathbf{E}_0\mathrm{e}^{\mathrm{i}-\omega t}
+			\end{displaymath}
+			取载流子位置函数$\vec r(t)=\vec A_0\mathrm{e}^{-\mathrm{i}\omega t}$，有
+			\begin{displaymath}
+				\vec A_0=\frac{e\tau}m\frac1{\omega(\mathrm{i}+\omega\tau)}\mathbf{E}_0
+			\end{displaymath}
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{自由电子的\textrm{Drude}模型}
+	如果载流子密度为$n$，则电流密度
+	\begin{displaymath}
+		\mathbf{J}=n(-e)\dot{\vec r}=n(-e)(-\mathrm{i}\omega)\vec A_0\mathrm{e}^{-\mathrm{i}\omega t}=\frac{ne^2\tau}m\frac1{1-\mathrm{i}\omega\tau}\mathbf{E}_0\mathrm{e}^{-\mathrm{i}\omega t}
+	\end{displaymath}
+	由此可得频率有关的电导率表示为
+	\begin{displaymath}
+		\sigma(\omega)=\frac{ne^2\tau}m\frac1{1-\mathrm{i}\omega\tau}=\sigma_0\frac1{1-\mathrm{i}\omega\tau}
+	\end{displaymath}
+	其中$\sigma_0=ne^2\tau/m$是静态电导率
+	\begin{itemize}
+		\item 介电函数可表示为
+			\begin{displaymath}
+				\varepsilon(\omega)=1-\frac{\omega_\mathrm{p}^2}{\omega(\omega+\mathrm{i}/\tau)}=\underline{\textcolor{blue}{\left[ 1-\frac{\omega_{\mathrm{p}}^2\tau^2}{1+\omega^2\tau^2} \right]}}+\mathrm{i}\underline{\textcolor{blue}{\left[ \frac{\omega_{\mathrm{p}}^2\tau}{\omega(1+\omega^2\tau^2)} \right]}}
+			\end{displaymath}
+			其中$\omega_{\mathrm{p}}$是载流子的等离振荡频率
+			\begin{displaymath}
+				\omega_{\mathrm{p}}^2=\frac{4\pi ne^2}m
+			\end{displaymath}
+%\begin{displaymath}
+%	\epsilon_1(\omega)=1-\frac{\omega_{\mathrm{p}}^2\tau^2}{1+\omega^2\tau^2}\quad \epsilon_2(\omega)=\frac{\omega_{\mathrm{p}}^2\tau}{\omega(1+\omega^2\tau^2)}\quad
+%\end{displaymath}
+	\end{itemize}
+}
+
+\frame
+{
+\frametitle{带间跃迁的计算}
+\begin{itemize}
+\setlength{\itemsep}{10pt}
+	\item 用半经典方法处理周期性体系的光学性质，用量子力学处理介质，对电磁波仍然采用经典电动力学描写
+	\item 以半导体中的带间垂直跃迁(价带$|v,\vec k\rangle$，导带$|c,\vec k\rangle$)为例讨论固体的能带间跃迁
+\begin{figure}[h!]
+\centering
+%\hspace*{-10pt}
+\vspace*{-0.3in}
+\includegraphics[height=1.8in,width=2.0in,viewport=0 0 1000 900,clip]{Figures/optic_dir.png}
+\caption{\fontsize{8.0pt}{5.2pt}\selectfont\textrm{Schematic representation of directly inter-band transition.}}%
+\label{Optic-dir}
+\end{figure} 
+\end{itemize}
+}
+
+\frame
+{
+	\frametitle{带间跃迁的计算}
+%\begin{itemize}
+晶体中动量为$\vec p$的电子在电磁场(电磁场矢量势为$\vec A$)存在情况下，应用含时微扰理论，
+\begin{displaymath}
+	\hspace*{-20pt}
+	H=\frac1{2m}[\vec p+\frac{e}c\mathbf{A}(\vec r,t)]^2+V(\vec r)=\left[ \frac{\vec p^2}{2m}+V(\vec r) \right]+\frac{e}{mc}\mathbf{A}\cdot\vec p+\frac{e^2}{2mc^2}\mathbf{A}^2
+\end{displaymath}
+其中电磁波
+\begin{displaymath}
+	\mathbf{A}(\vec r,t)=A_0\mathbf{e}\mathrm{e}^{\mathrm{i}(\vec q\cdot\vec r-\omega t)}+\mathrm{c.c}\quad\mathbf{e}\bot\vec q
+\end{displaymath}
+准确到$\vec A$的线性项(忽略$\vec A$的平方项)\textrm{Hamiltonian}为:
+\begin{displaymath}
+	H=\left[ \frac{\vec p^2}{2m}+V(\vec r) \right]+\frac{eA_0}{mc}\mathrm{e}^{\mathrm{i}(\vec q\cdot\vec r-\omega t)}\mathbf{e}\cdot\vec p+\frac{eA_0}{mc}\mathrm{e}^{-\mathrm{i}(\vec q\cdot\vec r-\omega t)}\mathbf{e}\cdot\vec p
+\end{displaymath}
+%	\item 
+频率为$\omega$的平面偏振光，电场和磁场的强度为
+\begin{displaymath}
+%  \left\{
+\begin{aligned}
+    \vec E&=-\frac1c\frac{\partial\vec A}{\partial t}\\
+    \vec B&=\nabla\times\vec A
+  \end{aligned}%\right.
+  \label{eq:optic-26}
+\end{displaymath}
+%\end{itemize}
+%式中$c$为光速。
+}
+
+\frame
+{
+\frametitle{带间跃迁的计算}
+在含时微扰\textrm{Hamiltonian}作用下，带间垂直跃迁为
+\begin{displaymath}
+	\begin{aligned}
+		W(\vec q,\omega)=&\frac{2\pi}{\hbar}\left( \frac{eA_0}{m_ec} \right)^22\sum_{i,j}|\langle c,\vec k|\mathrm{e}^{\mathrm{i}\vec q\cdot\vec r}\mathbf{e}\cdot\vec p|v,\vec k\rangle|^2\\
+		\times&\delta[E_c(\vec k)-E_v(\vec k)-\omega][f(E_c(\vec k))-f(E_v(\vec k))]
+	\end{aligned}
+  \label{eq:optic-27}
+\end{displaymath}
+$\delta$因子表示跃迁过程的能量守恒关系%，矩阵元$\langle c\vec k|H'|v\vec k\rangle$表示\textrm{Bloch}函数间的积分
+。对垂直跃迁，忽略磁场贡献，%矩阵元可以简写成$\dfrac1cA_0\vec e\cdot\vec M_{cv}(\vec k)$，$\vec s$为电磁波矢量势$\vec A_0(=A_0\vec s)$方向的单位矢量。
+只有满足能量守恒和动量守恒条件的跃迁才对积分有贡献。%$\displaystyle\int W\dfrac{\textrm{d}\vec k}{(2\pi)^3}$为单位体积、单位时间内吸收能量为$\omega$的光子的总数，系数2是考虑两种自旋态。将式\eqref{eq:optic-27}，\eqref{eq:optic-28}代入式\eqref{eq:optic-29}，并应用$\dfrac{A_0}c\vec e\cdot\vec M_{cv}(\vec k)$表示矩阵元，得
+
+电磁波在介质中产生的电场
+\begin{displaymath}
+	\mathbf{E}(\vec r,t)=-\frac1c\frac{\partial\mathbf{A}}{\partial t}=E_0\mathbf{e}\mathrm{e}^{\mathrm{i}\vec q\cdot\vec r-\omega t}+\mathrm{c.c}\quad\mbox{其中}E_0=\mathrm{i}\omega\frac{A_0}c
+\end{displaymath}
+
+介质中的传导电流
+\begin{displaymath}
+	\mathbf{J}(\vec r,t)=\sigma(\vec q,\omega)E_0\mathbf{e}\mathrm{e}^{\mathrm{i}(\vec q\cdot\vec r-\omega t)}+\mathrm{c.c}\quad(\mathbf{e}\bot\vec q)
+\end{displaymath}
+由此计算得到吸收功率
+\begin{displaymath}
+	\int_V\mathbf{J}\cdot\mathbf{E}\mathrm{d}\vec r=2\sigma_1(\vec q,\omega)|E_0|^2V=2\sigma_1(\vec q,\omega)\frac1{c^2}\omega^2A_0^2V=\textcolor{blue}{\hbar\omega W(\vec q,\omega)}
+\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{带间跃迁的计算}
+长波极限下($\vec q\rightarrow0$)， 根据光学性质的基本关系，可有介电函数的介电函数虚部表达式
+\begin{displaymath}
+	\begin{aligned}
+		\varepsilon_2(\omega)=&\lim_{\vec q\rightarrow0}\frac{8\pi^2e^2}{m_e^2\omega^2}\int\frac{\mathrm{d}\vec k}{(2\pi)^3}|\langle c,\vec k|\mathbf{e}\cdot\vec p|v,\vec k\rangle|^2\\
+		\times&\delta(E_c(\vec k)-E_v(\vec k)-\hbar\omega)[f(E_c(\vec k))-f(E_v(\vec k))]
+	\end{aligned}
+  \label{eq:optic-varepsilon_2}
+\end{displaymath}
+$\varepsilon_2(\omega)$是晶体的光学吸收和能带结构之间的基本关系
+
+对应的$\varepsilon_1$可以根据\textrm{Kramers-Kr\"onig}关系%\eqref{eq:optic-16}
+得到
+\begin{displaymath}
+	\varepsilon_1(\omega)=1+\frac1{\pi}\mathscr{P}\int_{-\infty}^{+\infty}\frac{\varepsilon_2(\omega^{\prime})}{\omega^{\prime}-\omega}\textrm{d}\omega^{\prime}=1+\frac2{\pi}\mathscr{P}\int_0^{+\infty}\frac{\omega^{\prime}\varepsilon_2(\omega^{\prime})}{\omega^{\prime2}-\omega^2}\textrm{d}\omega^{\prime}
+  \label{eq:optic-varepsilon_1}
+\end{displaymath}
+因此介电函数表示为
+\begin{displaymath}
+	\hspace*{-10pt}
+	\varepsilon(\omega)=1+\frac{8\pi e^2}{m_e^2}\int\frac{\mathrm{d}\vec k}{(2\pi)^3}\frac{|\langle c,\vec k|\mathbf{e}\cdot\vec p|v,\vec k\rangle|^2}{(E_c(\vec k)-E_v(\vec k))/\hbar^2}\frac{(-\mathrm{i})[f(E_c(\vec k))-f(E_v(\vec k))]}{E_c(\vec k)-E_v(\vec k)-\hbar\omega-\mathrm{i}\eta}
+  \label{eq:optic-varepsilon}
+\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{带间跃迁和带内跃迁的计算}
+电导率函数可表示为
+\begin{displaymath}
+	\sigma(\omega)=\frac{2e^2}{m_e^2}\int\frac{\mathrm{d}\vec k}{(2\pi)^3}\frac{|\langle c,\vec k|\mathbf{e}\cdot\vec p|v,\vec k\rangle|^2}{(E_c(\vec k)-E_v(\vec k))/\hbar}\frac{(-\mathrm{i})[f(E_c(\vec k))-f(E_v(\vec k))]}{E_c(\vec k)-E_v(\vec k)-\hbar\omega-\mathrm{i}\eta}
+  \label{eq:optic-sigma}
+\end{displaymath}
+
+\textcolor{violet}{推广到长波极限下的带内跃迁}
+\begin{displaymath}
+	f(E_c(\vec k))-f(E_v(\vec k))\approx\frac{\partial f}{\partial E}(f(E_c(\vec k))-f(E_v(\vec k)))
+\end{displaymath}
+\begin{displaymath}
+	\sigma(\omega)=\frac{e^2\hbar}{4\pi^3}\int\mathrm{d}\vec k\langle c,\vec k|\mathbf{e}\cdot\vec p|v,\vec k\rangle|^2\frac{-\mathrm{i}}{E_c(\vec k)-E_v(\vec k)-\hbar\omega-\mathrm{i}\eta}\left( -\frac{\partial f}{\partial E} \right)
+\end{displaymath}
+引入等式$\eta=\hbar/\tau$，并作展开
+\begin{displaymath}
+	E_{\vec k+\vec q}-E_{\vec k}\approx\vec q\cdot(\partial E/\partial\vec k)=\frac{\hbar}{m_e}\langle c,\vec k|\mathbf{q}\cdot\vec p|v,\vec k\rangle
+\end{displaymath}
+由此可得
+\vspace{-5pt}
+\begin{displaymath}
+	\sigma(\vec q,\omega)=\frac{e^2}{4\pi^3}\int\mathrm{d}\vec k\frac{\tau|\langle c,\vec k|\mathbf{e}\cdot\vec p|v,\vec k\rangle|^2}{1-\mathrm{i}\tau(\omega-\langle c,\vec k|\mathbf{q}\cdot\vec p|v,\vec k\rangle)}\left( -\frac{\partial f}{\partial E} \right)
+\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{联合态密度\textrm{(Joint DOS, JDOS)}}
+定义联合态密度(\textrm{Joint Density of States, JDOS})
+\begin{displaymath}
+  J_{cv}(\hbar\omega)=\sum_{v,c}\int\delta[E_c(\vec k)-E_v(\vec k)-\omega]\frac{2\textrm{d}\vec k}{(2\pi)^3}
+  \label{eq:optic-33}
+\end{displaymath}
+令$E_{cv}(\vec k)$\,=\,$E_c(\vec k)-E_v(\vec k)$，因$\textrm{d}\vec k$\,=\,$\dfrac{dE_{cv}(\vec k)}{\nabla_{\vec k}E_{cv}(\vec k)}\textrm{d}S$，故有
+\begin{displaymath}
+  J_{cv}(\omega)=\frac2{(2\pi)^3}\sum_{v,c}\int\limits_{E_{cv}(\vec k)=\omega}\frac{\textrm{d}S}{\nabla_{\vec k}E_{cv}(\vec k)}
+  \label{eq:optic-34}
+\end{displaymath}
+类似态密度的定义，而$E_{cv}(\vec k)$同时联系着价带和导带，因此称为联合态密度。当矩阵元$\vec M_{cv}(\vec k)$随波矢$\vec k$变化比较小的时候，可以近似地认为$\varepsilon_2(\omega)\!\propto\!J_{cv}(\omega)$。满足$|\nabla_{\vec k}E_{cv}(\vec k)|\!=\!0$的$\vec k$点，是联合态密度$J_{cv}(\omega)$和$\varepsilon_2(\omega)$的奇点(\textrm{Van Hove}奇点或临界点)，在这些点，$J_{cv}(\omega)$和$\varepsilon_2(\omega)$%的能谱图将出现典型结构(即
+对能量的微商呈现典型的不连续。%联合态密度的奇点有两种情况，即$\nabla_{\vec k}E_c(\vec k)\!=\!\nabla_{\vec k}E_v(\vec k)\!=\!0$和$\nabla_{\vec k}E_c(\vec k)\!=\!\nabla_{\vec k}E_v(\vec k)\!\neq\!0$。将$E_{cv}(\vec k)$在奇点作Taylor级数展开到二级，$$E_{cv}(\vec k)=E_0+a_xk_x^2+a_yk_y^2+a_zk_z^2$$可以看出有四种类型的奇点：
+}
