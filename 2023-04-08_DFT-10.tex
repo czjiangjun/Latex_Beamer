@@ -164,7 +164,7 @@ x_6 &=1.0430906366 %~\Longrightarrow
 			\begin{displaymath}
 				R[\rho_{\mathrm{in}}^{\mathrm{opt}}]=R\bigg[\sum_i\alpha_i\rho_{\mathrm{in}}^i\bigg]=\sum_i\alpha_iR[\rho_{\mathrm{in}}^i]
 			\end{displaymath}
-			在归一化约束条件$\sum\limits {i}\alpha_i=1$下，通过最小化残矢模量$\langle R\big[\rho_{\mathrm{in}}^{\mathrm{opt}}\big]|R\big[\rho_{\mathrm{in}}^{\mathrm{opt}}\big]\rangle$，得到优化电荷密度，可以得到优化系数$\alpha_i$
+			在归一化约束条件$\sum\limits_{i}\alpha_i=1$下，通过最小化残矢模量$\langle R\big[\rho_{\mathrm{in}}^{\mathrm{opt}}\big]|R\big[\rho_{\mathrm{in}}^{\mathrm{opt}}\big]\rangle$，得到优化电荷密度，可以得到优化系数$\alpha_i$
 	\begin{displaymath}
 		a_i=\dfrac{\sum\limits_{j}A_{j,i}^{-1}}{\sum\limits_{j,k}A_{j,k}^{-1}}\qquad A_{j,k}=\langle R[\rho_{\mathrm{in}}^{j}]|R[\rho_{\mathrm{in}}^{k}]\rangle 
 	\end{displaymath}
@@ -1399,7 +1399,7 @@ x_6 &=1.0430906366 %~\Longrightarrow
 		\end{displaymath}
 		通过改变选取一套合适的系数$c_j$来完成$\psi^{n+1}$的残矢$R^{n=1}$的最小化。\textcolor{blue}{等价于$c_j$由$\{\psi^0,\psi^1,\cdots,\psi^n\}$构成的\textrm{Krylov}子空间内求\textrm{Hermitian}本征值问题}
 		\begin{displaymath}
-			\sum_{j=1}^n\langle R^i|R^j\rangle c_j=\varepsilon\sum_{j=1}^n\psi^i|\mathbf{S}|\psi^j\rangle c_j
+			\sum_{j=1}^n\langle R^i|R^j\rangle c_j=\varepsilon\sum_{j=1}^n\langle\psi^i|\mathbf{S}|\psi^j\rangle c_j
 		\end{displaymath}
 		每迭代一次，子空间引入一个新波函数$\psi$和一个新残矢$R(\psi)$
 		\begin{itemize}
