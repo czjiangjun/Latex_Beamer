@@ -428,7 +428,7 @@ $$
 \frame
 {
 	\frametitle{总能量的计算}
-	假设已知晶体中全部电荷产生\textrm{Coulomb}势，并设原点$\gamma_{\nu}$半径为$R_{\nu}$的球面上的球平均势是$S_0(R_{\nu})$，则除了球面上除核电荷$Z_{\nu}$外的平均势为
+	假设已知晶体中全部电荷产生\textrm{Coulomb}势，并设原点$\gamma_{\nu}$半径为$R_{\nu}$的球面上的球形平均势是$S_0(R_{\nu})$\footnote{\fontsize{7.2pt}{6.2pt}\selectfont{$S_0(R_{\nu})$就是前面全势方案实现中，\textcolor{blue}{赝电荷密度$\tilde{\rho}(\vec K)$}\textcolor{red}{在\textrm{muffin-tin}球面上}产生的势}}，则除了球面上除核电荷$Z_{\nu}$外的平均势为
 	\begin{displaymath}
 		S(R_{\nu})=S_0(R_{\nu})+Z_{\nu}/R_{\nu}
 	\end{displaymath}
@@ -441,8 +441,8 @@ $$
 	并记球内电子电荷为$Q_{\nu}$，由此可得
 	\begin{displaymath}
 		\begin{aligned}
-			V_M(\gamma_{\nu})=&\dfrac1{R_{\nu}}\big[R_{\nu}S_0(R_{\nu})+Z_{\nu}-Q_{\nu}\big]+\sqrt{4\pi}\int_0^{R_{\nu}}\mathrm{d}rr\rho_{00}(r_{\nu})\\
-			=&\dfrac1{R_{\nu}}\big[R_{\nu}S_0(R_{\nu})+Z_{\nu}-Q_{\nu}\big]+\left\langle\dfrac1r\rho(\vec r)\right\rangle_{\nu}
+			\textcolor{red}{V_M(\gamma_{\nu})}=&\dfrac1{R_{\nu}}\big[R_{\nu}S_0(R_{\nu})+Z_{\nu}-Q_{\nu}\big]+\textcolor{magenta}{\sqrt{4\pi}\int_0^{R_{\nu}}\mathrm{d}rr\rho_{00}(r_{\nu})}\\
+			=&\dfrac1{R_{\nu}}\big[R_{\nu}S_0(R_{\nu})+Z_{\nu}-Q_{\nu}\big]+\textcolor{magenta}{\left\langle\dfrac1r\rho(\vec r)\right\rangle_{\nu}}
 		\end{aligned}
 	\end{displaymath}
 }
@@ -459,10 +459,10 @@ $$
 {\fontsize{9.5pt}{5.2pt}\selectfont
 \begin{displaymath}
 \begin{split}
-	E_T=&\sum_i\varepsilon_i-\frac12\int_{\Omega}\underline{\textcolor{blue}{\rho(\vec r)}}[\underline{\textcolor{blue}{V_c(\vec r)}}+2\mu_{XC}(\vec r)]\mathrm{d}\vec r-\frac12\sum_{\nu}\underline{\textcolor{blue}{Z_{\nu}V_M(\vec r_{\nu})}}+E_{\mathrm{XC}}[\rho] \\
-	=&\sum_i\varepsilon_i-\frac12\left(\underline{\textcolor{blue}{\int_{\Omega}\rho(\vec r)V_c(\vec r)\mathrm{d}\vec r}}+\underline{\textcolor{blue}{\sum_{\nu}Z_{\nu}\bigg\langle\frac1r\rho(\vec r)\bigg\rangle_{\nu}}}\right)-%\dfrac12
+	E_T=&\sum_i\varepsilon_i-\frac12\int_{\Omega}\underline{\textcolor{blue}{\rho(\vec r)}}[\underline{\textcolor{blue}{V_c(\vec r)}}+2\mu_{XC}(\vec r)]\mathrm{d}\vec r-\frac12\sum_{\nu}\underline{\textcolor{blue}{Z_{\nu}}\textcolor{red}{V_M(\vec r_{\nu})}}+E_{\mathrm{XC}}[\rho] \\
+	=&\sum_i\varepsilon_i-\frac12\left(\underline{\textcolor{blue}{\int_{\Omega}\rho(\vec r)V_c(\vec r)\mathrm{d}\vec r}}+\sum_{\nu}\underline{\textcolor{blue}{Z_{\nu}}\textcolor{magenta}{\bigg\langle\frac1r\rho(\vec r)\bigg\rangle_{\nu}}}\right)-%\dfrac12
    \int_{\Omega}\rho(\vec r)\mu_{\mathrm{XC}}(\vec r)\mathrm{d}\vec r \\
-   &-\frac12\underline{\textcolor{blue}{\sum_{\nu}\frac{Z_{\nu}}{R_{\nu}}[R_{\nu}S_0(R_{\nu})+Z_{\nu}-Q_{\nu}]}}+E_{\mathrm{XC}}[\rho]
+   &-\frac12\sum_{\nu}\underline{\textcolor{blue}{\frac{Z_{\nu}}{R_{\nu}}[R_{\nu}S_0(R_{\nu})+Z_{\nu}-Q_{\nu}]}}+E_{\mathrm{XC}}[\rho]
 \end{split}
 \end{displaymath}
 }
@@ -479,12 +479,12 @@ $$
 \begin{displaymath}
   \begin{split}
     &\int_{\Omega}\rho(\vec r)V_c(\vec r)\mathrm{d}\vec r+Z_{\nu}\sqrt{4\pi}\int_0^{R_{\nu}}\mathrm{d}rr^2\frac{\rho_{00}(r)}r\\
-    =&\sqrt{4\pi}\int_0^{R_{\nu}}\mathrm{d}rr^2\rho_{00}(\vec r)\left(\textcolor{red}{\dfrac1{\sqrt{4\pi}}V_{00}(r)}+\textcolor{red}{\frac{Z_{\nu}}r}\right)+\sum_{lm>0}\int_0^{R_{nu}}\mathrm{d}rr^2\rho_{lm}(r)V_{lm}(r)
+    =&\sqrt{4\pi}\int_0^{R_{\nu}}\mathrm{d}rr^2\rho_{00}(\vec r)\left(\textcolor{red}{\dfrac1{\sqrt{4\pi}}V_{00}(r)}+\textcolor{magenta}{\frac{Z_{\nu}}r}\right)+\sum_{lm>0}\int_0^{R_{nu}}\mathrm{d}rr^2\rho_{lm}(r)V_{lm}(r)
   \end{split}
 \end{displaymath}
 }
-\textcolor{blue}{\textrm{Coulomb}势的奇点只出现在$V_{00}(r)$中，将$V_{00}(r)$写成核的点电荷势与源于电子的平缓的势$\hat V_{00}(r)$两部分之和}:~
-\textcolor{red}{$$V_{00}(r)=-\sqrt{4\pi}\frac{Z_{\nu}}r+\textcolor{red}{\hat V_{00}(r)}$$}
+\textcolor{blue}{\textrm{Coulomb}势的奇点只出现在$V_{00}(r)$中，将$V_{00}(r)$写成核的点电荷势与\textcolor{red}{源于电子的平缓的势$\hat V_{00}(r)$}两部分之和}:~
+\textcolor{red}{$$V_{00}(r)=-\sqrt{4\pi}\frac{Z_{\nu}}r+\textcolor{blue}{\hat V_{00}(r)}$$}
 可以看出\textrm{Coulomb}势的奇点被消去了。\\有必要指出的是，这样方式可以将总能量中的奇点排除，但是\textcolor{red}{单独每一项在原子核位置仍然是发散的}。
 }
 
