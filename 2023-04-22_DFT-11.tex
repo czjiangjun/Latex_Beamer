@@ -342,12 +342,27 @@ $$
 			&\times\mathrm{e}^{\mathrm{-i}\vec K\cdot\vec r_s}Y_{lm}^{\ast}(\hat{\vec K})
 		\end{aligned}
 	\end{displaymath}
+	这里$a_n$满足
+	\begin{displaymath}
+		\sum_{\eta=\nu}^n\dfrac{a_n\eta!R_i^{2\eta}}{(\eta-\nu)!}=0,\qquad \nu=0,1,\cdots,n-1
+	\end{displaymath}
+	相应的解为
+	$a_{\eta}=(-1)^{n-\eta}R_l^{2(n-\eta)}
+	\begin{pmatrix}
+		n\\\eta
+	\end{pmatrix}
+	a_n$
 \end{itemize}
 }
 
 \frame
 {
 	\frametitle{全势方法在$\vec k$空间的实现}
+%	特殊地，
+	当$\vec K=0$时，有
+%	\begin{displaymath}
+		$\tilde\rho_s(\vec K=0)=\dfrac{\sqrt{4\pi}}{\Omega}\sum\limits_i\tilde{q}_{00}^i$
+%	\end{displaymath}
 \begin{itemize}
 	\item 在$\vec k$空间内，用平面波电荷密度$\rho_I(\vec K)$叠加\textrm{MT}球内赝电荷密度$\tilde\rho_s(\vec K)$:
 		\begin{displaymath}
@@ -357,6 +372,10 @@ $$
 		\begin{displaymath}
 			V_I(\vec K)=\dfrac{4\pi\tilde\rho(\vec K)}{|\vec K|^2}
 		\end{displaymath}
+	间隙区在球面处\textrm{Coulomb}势的计算，需要总的赝电荷密度的\textrm{Fourier}变换
+	\begin{displaymath}
+		\tilde\rho(\vec r)=\sum_{\vec K}[\rho_I(\vec K)+\tilde\rho_s(\vec K)]\mathrm{e}^{\mathrm{i}\vec K\cdot\vec r}
+	\end{displaymath}
 \end{itemize}
 }
 
@@ -407,6 +426,35 @@ $$
 
 \frame
 {
+	\frametitle{\textrm{Madelung}常数与\textrm{Madelung}势}
+	以$\mathrm{NaCl}$结构为例，为计算\textrm{Madelung}势，\textrm{Fourier}系数仅与原子核位置处的电荷有关
+\begin{displaymath}
+	\tilde\rho_s(\vec K)=\dfrac{-(2n+3)!!}{\Omega}\dfrac{j_{n+1}(\vec K\cdot\vec R_{MT}^s)}{(\vec K\cdot\vec R_{MT}^s)^{n+1}}(1-\mathrm{e}^{\vec K\cdot\vec\eta})
+\end{displaymath}
+这里默认阴离子$\mathrm{Cl}^{-}$位于原点，阳离子$\mathrm{Na}^{+}$位于$\eta$，阴阳离子半径相等
+\vskip 10pt
+	平面波表示的间隙区电荷在原点处产生的球形势为
+	\begin{displaymath}
+		V_{l=0}(\vec r)=\sqrt{4\pi}\bigg[\sideset{}{^{\prime}}\sum_{\vec K}\dfrac{4\pi}{\vec K^2}\tilde\rho_s(\vec K)j_0(\vec K\cdot\vec R)\bigg]Y_{00}(\hat r)
+	\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{\textrm{Madelung}常数与\textrm{Madelung}势}
+	为计算\textrm{Madelung}常数，须扣除原子核位置的净电荷(此处为$\pm$1)对势能的贡献
+	\begin{displaymath}
+		V_{l=0}^{\prime}(\vec r)=\sqrt{4\pi}\bigg[\sideset{}{^{\prime}}\sum_{\vec K}\dfrac{4\pi}{\vec K^2}\tilde\rho_s(\vec K)j_0(\vec K\cdot\vec R)+\dfrac1r\bigg]Y_{00}(\hat r)
+	\end{displaymath}
+	因此\textcolor{blue}{参考\textrm{Madelung}常数的定义\footnote{\fontsize{7.2pt}{6.2pt}\selectfont{这里离子的\textrm{Madelung}常数和势不考虑\textrm{Muffin-tin}球内电荷的贡献。因此\textrm{Madelung}常数的计算仅须考虑球面处的贡献。}}，周围原子在原点处的贡献为}
+	\begin{displaymath}
+		V(\vec r=0)=\sideset{}{^{\prime}}\sum_{\vec K}\dfrac{4\pi}{\vec K^2}\tilde\rho_s(\vec K)j_0(\vec K\cdot\vec R)+\dfrac1R
+	\end{displaymath}
+	这也就是\textrm{Madelung}常数
+}
+
+\frame
+{
 	\frametitle{总能量的计算}
 	记经典\textrm{Coulomb}势
 	\begin{displaymath}
@@ -416,7 +464,7 @@ $$
 	\begin{displaymath}
 		V_M(\gamma_{\nu})=\int\dfrac{\rho(\vec r)\mathrm{d}\vec r}{|\vec r-\vec \gamma_{\nu}|}-\sum_{\alpha}{}^{\prime}\dfrac{Z_{\alpha}}{|R_{\alpha}-\gamma_{\nu}|}
 	\end{displaymath}
-	\textcolor{red}{注意}:~\textcolor{blue}{位于\textrm{$\gamma_{\nu}$的\textrm{Madelung}势是晶体中除该点核电荷$Z_{\nu}$之外，所有其他电荷在该点产生电势之和}}
+	\textcolor{red}{注意}:~\textcolor{blue}{位于\textrm{$\gamma_{\nu}$的\textrm{Madelung}势是离子除该点核电荷$Z_{\nu}$之外，所有其他电荷在该点产生电势之和}}
 
 	如果体积为$\Omega$的晶体包含$N$个原胞，则$U$表示为
 	\begin{displaymath}
@@ -433,12 +481,12 @@ $$
 		S(R_{\nu})=S_0(R_{\nu})+Z_{\nu}/R_{\nu}
 	\end{displaymath}
 	根据球形\textrm{Dirichlet}边值条件，$\gamma_{\nu}$处的\textrm{Coulomb}势，可由球内电荷密度分布$\rho(\vec r)$和$S(R_{\nu})$确定。
-
+%	\frametitle{\textrm{Madelung}常数}
 	球内的电荷密度用球谐函数展开
 	\begin{displaymath}
 		\rho(\vec r_{\nu})=\sum_{lm}\rho_{lm(r_{\nu})}Y_{lm}(\hat{\vec r}_{\nu})
 	\end{displaymath}
-	并记球内电子电荷为$Q_{\nu}$，由此可得
+	并记球内电子电荷为$Q_{\nu}$，由此可得离子\textrm{Madelung}势
 	\begin{displaymath}
 		\begin{aligned}
 			\textcolor{red}{V_M(\gamma_{\nu})}=&\dfrac1{R_{\nu}}\big[R_{\nu}S_0(R_{\nu})+Z_{\nu}-Q_{\nu}\big]+\textcolor{magenta}{\sqrt{4\pi}\int_0^{R_{\nu}}\mathrm{d}rr\rho_{00}(r_{\nu})}\\
