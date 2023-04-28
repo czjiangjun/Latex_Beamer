@@ -276,20 +276,28 @@
 \end{figure}
 
 \begin{itemize}
-	\item 一般说，分解后的粒子间相互作用中，最重要的贡献来自双体相互作用。对常将多体相互作用截断，仅保留双体相互作用的求和部分
+			\setlength{\itemsep}{5pt}
+	\item 一般说，力场中最主要来自双体相互作用(也称为``对势'')，因此可将力场展开函数中的多体相互作用截断，仅保留双体相互作用的贡献
 		\begin{displaymath}
 			V(\vec r)=\sum_{ij}V_{ij}(\vec r_i,\vec r_j)
 		\end{displaymath}
-	\item 真实的
+	\item 真实模拟中，为了更好地表示考虑粒子间相互作用的多体效应，双体相互作用用的是``有效对势''，有效对势包含了一部分粒子间的多体相互作用
+		\begin{displaymath}
+			V(\vec r)=\sum_{ij}V_{ij}^{\mathrm{eff}}(\vec r_i,\vec r_j)
+		\end{displaymath}
+	\item 具体计算使用的力场都是参数化的，这些参数主要通过对实验数据和结果的拟合确定
 \end{itemize}
 
 	典型力场的有
 	\begin{itemize}
-		\item \textrm{Lennard-Jones}对势
-	\begin{displaymath}
-		U(r)=4\varepsilon\bigg[\bigg(\dfrac{\sigma}{r}\bigg)^{12}-\bigg(\dfrac{\sigma}{r}\bigg)^6\bigg]
+		\item \textrm{Lennard-Jones}对势和受力
+	{\fontsize{7.2pt}{6.2pt}\selectfont{\begin{displaymath}
+		\begin{aligned}
+			U(r)=&4\varepsilon\bigg[\bigg(\dfrac{\sigma}{r}\bigg)^{12}-\bigg(\dfrac{\sigma}{r}\bigg)^6\bigg]\\ 
+			\vec F(r)=&-\nabla V(r)=24\dfrac{\varepsilon}r\bigg[2\bigg(\dfrac{\sigma}{r}\bigg)^{12}-\bigg(\dfrac{\sigma}{r}\bigg)^6\bigg]\hat{\vec r}
+		\end{aligned}
 	\end{displaymath}
-	{\fontsize{7.2pt}{6.2pt}\selectfont{这里$\varepsilon$和$\sigma$是和原子有关的参数
+	这里$\varepsilon$和$\sigma$是和原子有关的参数\\
 	\textrm{L-J}势能的最低点在$r_{\min}=2^{(1/6)}\sigma\approx1.12\sigma$，$r<r_{\min}$时为排斥力，$r>r_{\min}$时为吸引力
 \begin{figure}[h!]
 \centering
@@ -299,7 +307,8 @@
 \label{Potential-Lennard-Jones}
 \end{figure}
 \vskip -20pt
-	由\textrm{L-J}势改造，可以得到\textrm{WCA}势和\textrm{PHS}势}}
+%	由\textrm{L-J}势改造，可以得到\textrm{WCA}势和\textrm{PHS}势
+}}
 \item \textrm{Morse}势
 	\begin{displaymath}
 		U(r)=-D_{\mathrm{e}}+D_{\mathrm{e}}\bigg(1-\mathrm{e}^{-a(r-r_{\mathrm{e}})}\bigg)^2
