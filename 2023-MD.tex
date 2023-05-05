@@ -190,7 +190,7 @@
 	\textcolor{magenta}{各态遍历假设}\textrm{(ergodic~hypothesis)}\\
 	\vskip 5pt
 {\fontsize{9.5pt}{6.2pt}\selectfont{
-只要演化时间足够长，孤立体系会等概率地遍历每个可能的微观状态~\\
+	只要演化时间足够长，孤立体系会\textcolor{red}{等概率地遍历每个可能的}微观状态~\\
 换言之，\textcolor{blue}{体系足够长时间平均}等价于\textcolor{blue}{体系许可的大量系综的系综平均}
 %分子动力学模拟的一个思想是用时间换取空间。我们无法得知系统在某一时刻所有可能的微观状态，但是可以通过一段时间的采样来获取系统大量的微观状态数。模拟的整个过程可以理解为建立了一个系综，而每一个时间点就是组成这个系综的一个系统，它们具有相同的限制条件（例如：粒子总数，温度、压强或体积等），但是具有不同的微观状态。系统的热力学量就是系综平均的结果。
 }}
@@ -291,37 +291,40 @@
 	典型力场的有
 	\begin{itemize}
 		\item \textrm{Lennard-Jones}对势和受力
-	{\fontsize{7.2pt}{6.2pt}\selectfont{\begin{displaymath}
+	\begin{displaymath}
 		\begin{aligned}
 			U(r)=&4\varepsilon\bigg[\bigg(\dfrac{\sigma}{r}\bigg)^{12}-\bigg(\dfrac{\sigma}{r}\bigg)^6\bigg]\\ 
 			\vec F(r)=&-\nabla V(r)=24\dfrac{\varepsilon}r\bigg[2\bigg(\dfrac{\sigma}{r}\bigg)^{12}-\bigg(\dfrac{\sigma}{r}\bigg)^6\bigg]\hat{\vec r}
 		\end{aligned}
 	\end{displaymath}
-	这里$\varepsilon$和$\sigma$是和原子有关的参数\\
-	\textrm{L-J}势能的最低点在$r_{\min}=2^{(1/6)}\sigma\approx1.12\sigma$，$r<r_{\min}$时为排斥力，$r>r_{\min}$时为吸引力
+	{\fontsize{7.2pt}{6.2pt}\selectfont{这里$\varepsilon$和$\sigma$是和原子有关的参数}}
+		\begin{itemize}{\fontsize{8.0pt}{6.2pt}\selectfont{
+			\item \textcolor{blue}{$\dfrac1{r^6}$项}:~描述中性原子间的\textrm{Vander-der-Waals}的相互吸引作用(包含偶极-偶极相互作用)
+			\item \textcolor{blue}{$\dfrac1{r^{12}}$项}:~描述电子云重叠引起的短程排斥作用
+			\item \textrm{L-J}势能的最低点在$r_{\min}=2^{(1/6)}\sigma\approx1.122\sigma$\\
+				$r<r_{\min}$时为排斥力，$r>r_{\min}$时为吸引力}}
+		\end{itemize}
+惰性气体的原子间相互作用仅用\textrm{L-J}基本可以完全描述
 \begin{figure}[h!]
 \centering
-\vspace*{-0.30in}
-\includegraphics[height=1.00in,width=1.35in,viewport=0 0 340 270,clip]{Figures/Lennard-Jones_potential.png}
-\caption{\tiny \textrm{The Lennard-Jones Potential.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\vspace*{-0.15in}
+\includegraphics[height=2.05in,width=2.90in,viewport=0 0 350 270,clip]{Figures/Argon_dimer_potential_and_Lennard-Jones.png}
+\caption{\tiny \textrm{The Lennard-Jones potential for argon dimer.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Potential-Lennard-Jones}
 \end{figure}
-\vskip -20pt
 %	由\textrm{L-J}势改造，可以得到\textrm{WCA}势和\textrm{PHS}势
-}}
 \item \textrm{Morse}势
 	\begin{displaymath}
 		U(r)=-D_{\mathrm{e}}+D_{\mathrm{e}}\bigg(1-\mathrm{e}^{-a(r-r_{\mathrm{e}})}\bigg)^2
 	\end{displaymath}
-	{\fontsize{7.2pt}{6.2pt}\selectfont{这里$D_{\mathrm{e}}$是\textrm{Morse}势的势阱深，参数$a$确定势阱宽度，$r_{\mathrm{e}}$是原子处于平衡位置的平衡键长
+	{\fontsize{6.5pt}{6.2pt}\selectfont{这里$D_{\mathrm{e}}$是\textrm{Morse}势的势阱深，参数$a$确定势阱宽度，$r_{\mathrm{e}}$是原子处于平衡位置的平衡键长 }}
 \begin{figure}[h!]
 \centering
-\vspace*{-0.15in}
-\includegraphics[height=1.30in,width=1.85in,viewport=0 0 3540 2770,clip]{Figures/Morse-potential.png}
+\vspace*{-0.10in}
+\includegraphics[height=1.35in,width=1.95in,viewport=0 0 3540 2770,clip]{Figures/Morse-potential.png}
 \caption{\tiny \textrm{The Morse potential (blue) and harmonic oscillator potential (green).}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Potential-Morse}
 \end{figure}
-}}
 \item \textrm{EAM}势\\
 	{\fontsize{7.2pt}{6.2pt}\selectfont{对于金属晶体，内能虽可以表示为对相互作用之和，但拟合原子受力非常困难:\footnote{\fontsize{5.2pt}{3.2pt}\selectfont{应用二体势计算金属弹性常数时必须涉及对体积很敏感的能量项，因为涉及缺陷、表面的体积很难确定。}}\\
 	\textcolor{red}{从物理上说金属原子处于电子海洋中，电子密度来自多个原子的贡献，这是自由电子气带来的多体效应}}}\\
@@ -336,6 +339,19 @@
 	}}\\
 	各类\textrm{EAM}势中，$\phi(r)$、$\rho(r)$和$F(\rho)$都不是解析的，以数值形式存储
 	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{复杂研究对象中的力场}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.10in}
+\includegraphics[height=2.70in,width=3.95in,viewport=0 0 830 550,clip]{Figures/Bonded-and-non-bonded-interactions-used-to-describe-interactions-between-atoms.png}
+%\includegraphics[height=2.70in,width=2.85in,viewport=0 40 830 850,clip]{Figures/Bonded-and-non-bonded-forces-consider-in-MD-simulations.png}
+\caption{\tiny \textrm{Bonded and non-bonded forces consider in MD simulations.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Bond-non-Bonded}
+\end{figure}
 }
 
 \frame
@@ -435,20 +451,61 @@ $U_2(\vec r_i,\vec r_j)$是双体势，$U_3(\vec r_i,\vec r_j,\vec r_k)$是描�
 	在分子动力学计算中，力的计算需要更多的时间，因为其计算耗时步数是$\mathscr{O}(N^2)$，\textcolor{blue}{对于周期体系，这种力的计算尤其需要谨慎}
 }
 
+\subsection{平衡态统计基础}
 \frame
 {
-	\frametitle{统计系综}
-	系综(\textrm{Ensembles})是在一定的宏观条件下，由大量微观粒子组成的性质和结构完全相同的、处于各种运动状态的、各自独立的系统整体的集合\footnote{\fontsize{4.2pt}{2.2pt}\selectfont{简言之，系综是系统的集合(\textcolor{magenta}{系统}:~宏观相同，微观不同)。}}。\\
-	应用\textrm{Verlet}算法，完成单粒子运动的数值积分，可以得到动力学体系的\textrm{Hamiltonian}对应的能量，进而应用统计力学的统计系综，获得宏观体系的物理量
+	\frametitle{平衡态统计基础}
+	系综(\textrm{Ensembles})是在一定的宏观条件下，由大量微观粒子组成的性质和结构完全相同的、处于各种运动状态的、各自独立的系统整体的集合。简言之，系综是给定宏观条件下，所有微观状态的集合。
+%	应用\textrm{Verlet}算法，完成单粒子运动的数值积分，可以得到动力学体系的\textrm{Hamiltonian}对应的能量，进而应用统计力学的统计系综，获得宏观体系的物理量
+	\vskip 3pt
+	\textcolor{blue}{等概率原理}\textrm{(Principle of equal weights)}:\\
+	一个热力学体系有相同的概率到达每个可能经历的微观态。\\
+	等概率原理导出\textrm{Boltzmann}分布
+	\begin{displaymath}
+		P_j=\dfrac{\mathrm{e}^{-\beta\varepsilon_j}}Q
+	\end{displaymath}
+	这里$Q$称为配分函数\textrm{(partition function)}
+	\begin{displaymath}
+		\begin{aligned}
+			Q=&\sum_i\mathrm{e}^{(-\beta\varepsilon_i)}\\
+			\beta=&1/k_{\mathrm{B}}T
+		\end{aligned}
+	\end{displaymath}
+	物理量的系综平均
+	\begin{displaymath}
+		\langle A\rangle=\sum_jA_j\mathrm{e}^{(-\beta\varepsilon_j)}/Q
+	\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{常用统计系综}
 \begin{figure}[h!]
 \centering
 \vspace*{-0.20in}
 %\includegraphics[height=1.60in,width=3.85in,viewport=0 0 1420 570,clip]{Figures/Statistical_Ensembles.png}
-\includegraphics[height=1.30in,width=3.35in,viewport=0 0 1420 570,clip]{Figures/Statistical_Ensembles.png}
-\caption{\tiny \textrm{The Statistical Ensembles.\footnote{\fontsize{3.5pt}{1.2pt}\selectfont{\textrm{canonical}，汉译作“正则”，出自《楚辞\textperiodcentered 离骚》“皇揽揆余於初度兮，肇锡余以嘉名;~名余曰\textcolor{red}{正则}兮，字余曰灵均”，《楚辞章句》\upcite{Chucizhangju}:~“正，平也;~则，法也;~灵，神也;~均，调也。言正平可法则者，莫过于天;~养物均调者，莫过于地。高平曰原，故父伯庸名我为平以法天，字我为原以法地。言己上能安君，下能养民也。”，意思是说“正则”、“灵均”隐喻着某种意义，即平正是天的象征，原均是地的象征。因此正则的含义是“符合天道”，与\textrm{canonical}的意思\textrm{of, relating to, or forming a canon}意义一致。}}}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\includegraphics[height=1.20in,width=3.75in,viewport=0 0 1420 470,clip]{Figures/Statistical_Ensembles.png}
+\caption{\tiny \textrm{The Statistical Ensembles.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Statistical_Ensembles}
 \end{figure}
+\vskip -15pt
+\begin{itemize}
+		{\fontsize{7.2pt}{1.2pt}\selectfont{
+		\item 微正则系综\textrm{(Mircocanonical Ensemble)}\footnote{\fontsize{4.5pt}{1.2pt}\selectfont{\textrm{canonical}，汉译作“正则”，出自《楚辞\textperiodcentered 离骚》“皇揽揆余於初度兮，肇锡余以嘉名;~名余曰\textcolor{red}{正则}兮，字余曰灵均”，《楚辞章句》\upcite{Chucizhangju}:~“正，平也;~则，法也;~灵，神也;~均，调也。言正平可法则者，莫过于天;~养物均调者，莫神于地。高平曰原，故父伯庸名我为平以法天，字我为原以法地。言己上之能安君，下之能养民也。”，意思是说“正则”、“灵均”隐喻着某种意义，即平正是天的象征，原均是地的象征。因此正则的含义是“\textcolor{blue}{符合天道}”，与\textrm{canonical}的意思\textrm{of, relating to, or forming a canon}意义一致。}}:~\textrm{NVE}皆为常数
+		\item 正则系综\textrm{(Canonical Ensemble)}:~\textrm{NVT}皆为常数
+		\item 巨正则系综\textrm{(Grandcanonical Ensemble)}:~\textrm{$\mu$VT}皆为常数，粒子数不固定
+		\item 等压-等温系综\textrm{(Isobaric-Isothermal Ensemble)}:~\textrm{NPT}皆为常数
+		\item 等焓-等压系综\textrm{(Isoenthalpic-Isobaric Ensemble)}:~\textrm{NPH}皆为常数
+		\item 等张力-等温系综\textrm{(Isotension-Isothermal Ensemble)}:~容器形状可变 }}
+\end{itemize}
 }
+
+\frame
+{
+	\frametitle{周期边界条件}
+	少量分子或团簇的模拟与含有大量宏观粒子
+}
+
 \frame
 {
 	\frametitle{分子动力学模拟}
@@ -461,6 +518,7 @@ $U_2(\vec r_i,\vec r_j)$是双体势，$U_3(\vec r_i,\vec r_j,\vec r_k)$是描�
 \begin{thebibliography}{99}
 {\tiny
 	\bibitem{JCP27-1208_1957}\textrm{B.J. Alder, T.E. Wainwright. \textit{J. Chem. Phys.} \textbf{27} (1957), 1208}
+	\bibitem{Chucizhangju}[东汉]王逸\:撰~黄灵庚\:点校, {\textit{楚辞章句}}\:上海古籍出版社, 上海, 2017
 }
 \end{thebibliography}
 %\nocite*{}
