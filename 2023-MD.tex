@@ -260,6 +260,7 @@
 \end{figure}
 }
 
+\subsection{分子动力学的力场}
 \frame[allowframebreaks]
 {
 	\frametitle{力场}
@@ -356,7 +357,20 @@
 
 \frame
 {
-	\frametitle{经典分子动力学}
+	\frametitle{复杂研究对象中的力场}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.15in}
+\includegraphics[height=2.75in,width=3.55in,viewport=0 0 660 540,clip]{Figures/Potential-energy-function-for-molecular-interactions-in-the-molecular-mechanics.png}
+\caption{\tiny \textrm{Potential energy function for molecular interactions in the molecular mechanics.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Potential-component}
+\end{figure}
+}
+
+\subsection{分子动力学\rm{Verlet}算法}
+\frame
+{
+	\frametitle{分子的受力与运动}
 	装有$N$个经典粒子的$L_1\times L_2\times L_3$容器内，假设粒子间只有简单的二体相互作用%\footnote{\fontsize{7.2pt}{6.2pt}\selectfont{二体作用是粒子间多体相互作用的简化，只考虑粒子两两间彼此相互作用。}}
 	$\vec F(r)$，力的大小仅与粒子间间距$r$相关
 	\begin{displaymath}
@@ -684,23 +698,23 @@ $U_2(\vec r_i,\vec r_j)$是双体势，$U_3(\vec r_i,\vec r_j,\vec r_k)$是描�
 	\frametitle{相关系数}
 	\begin{displaymath}
 		\begin{aligned}
-			c(A,B)&=\dfrac{\bigg\langle\big(A-\langle A\rangle\big)\big(B-\langle B\rangle\big)\bigg\rangle}{\sqrt{\bigg\langle\big(A-\langle A\rangle\big)^2\bigg\rangle\bigg\langle\big(B-\langle B\rangle\big)^2\bigg\rangle}}\\
+			c(A,B)&=\dfrac{\big\langle\big(A-\langle A\rangle\big)\big(B-\langle B\rangle\big)\big\rangle}{\sqrt{\big\langle\big(A-\langle A\rangle\big)^2\big\rangle\big\langle\big(B-\langle B\rangle\big)^2\big\rangle}}\\
 			c&\in[0,1]
 		\end{aligned}
 	\end{displaymath}
 	\begin{itemize}
 		\item 时间相关系数\\
 			\begin{displaymath}
-				c(A,B,t)=\dfrac{\bigg\langle\big(A(t+t_0)-\langle A(t+t_0)\rangle\big)\big(B(t_0)-\langle B(t_0)\rangle\big)\bigg\rangle}{\sqrt{\bigg\langle\big(A(t+t_0)-\langle A(t+t_0)\rangle\big)^2\bigg\rangle\bigg\langle\big(B(t_0)-\langle B(t_0)\rangle\big)^2\bigg\rangle}}
+				c(A,B,t)=\dfrac{\big\langle\big(A(t+t_0)-\langle A(t+t_0)\rangle\big)\big(B(t_0)-\langle B(t_0)\rangle\big)\big\rangle}{\sqrt{\big\langle\big(A(t+t_0)-\langle A(t+t_0)\rangle\big)^2\big\rangle\big\langle\big(B(t_0)-\langle B(t_0)\rangle\big)^2\big\rangle}}
 			\end{displaymath}
 		\item 时间自相关系数
 			\begin{displaymath}
-				c(A,t)=\dfrac{\bigg\langle\big(A(t+t_0)-\langle A(t+t_0)\rangle\big)\big(A(t_0)-\langle A(t_0)\rangle\big)\bigg\rangle}{\bigg\langle\big(A(t_0)-\langle A(t_0)\rangle\big)^2\bigg\rangle}
+				c(A,t)=\dfrac{\big\langle\big(A(t+t_0)-\langle A(t+t_0)\rangle\big)\big(A(t_0)-\langle A(t_0)\rangle\big)\big\rangle}{\big\langle\big(A(t_0)-\langle A(t_0)\rangle\big)^2\big\rangle}
 			\end{displaymath}
 	\end{itemize}
 }
 
-\frame
+\frame[allowframebreaks]
 {
 	\frametitle{结构特征}
 	\begin{itemize}
@@ -710,12 +724,67 @@ $U_2(\vec r_i,\vec r_j)$是双体势，$U_3(\vec r_i,\vec r_j,\vec r_k)$是描�
 				g(r)=\dfrac{V}{N^2}\bigg\langle\sum_i\sum_{j\neq i}\delta(\vec r-\vec r_{ij})\bigg\rangle
 			\end{displaymath}
 			理想气体~$g(r)=1$
+
+\begin{figure}[h!]
+\centering
+\vspace*{-0.15in}
+\includegraphics[height=1.0in,width=1.1in,viewport=0 0 630 600,clip]{Figures/Rdf_schematic.png}
+\includegraphics[height=1.0in,width=0.9in,viewport=0 0 610 660,clip]{Figures/Schematic-illustration-of-g(r)-dependence-on-r.png}
+\includegraphics[height=1.0in,width=1.6in,viewport=0 0 680 480,clip]{Figures/Lennard-Jones_Radial_Distribution_Function.png}
+\caption{\fontsize{5.5pt}{2.2pt}\selectfont{\textrm{Schematic illustration of g(r) dependence on r and the radial distribution function for Lennard-Jones fluid at $T^{\ast}=0.71$, $n^{\ast}=0.844$.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Radial_distribution-function}
+\end{figure}
 		\item \textrm{Structure factor}:\\
 			\textrm{RDF}在$\vec k$空间的\textrm{Fourier}变换，实验可直接观测的物理量
 			\begin{displaymath}
 				S(k)=1+4\pi\rho\int_0^{\infty}r^2\dfrac{\sin(\vec k\cdot\vec r)}{\vec k\cdot\vec r}g(r)\mathrm{d}r
 			\end{displaymath}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.25in}
+\includegraphics[height=1.4in,width=1.9in,viewport=60 10 730 580,clip]{Figures/Structure-factor-RDF.png}
+\caption{\fontsize{5.5pt}{2.2pt}\selectfont{\textrm{The structure factor of argon calculating from a radial distribution function.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Structure-factor}
+\end{figure}
 	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{扩散系数}
+	\begin{itemize}
+		\item \textrm{Mean square displacement~(MSD)}:\\
+			时间$t$间隔内粒子运动的平均距离的平方
+			\begin{displaymath}
+				\big\langle r^2(t)\big\rangle\equiv\big\langle\Delta r^2(t)\big\rangle=\dfrac1N\sum_{i=1}^N\Delta r_i^2(t)
+			\end{displaymath}
+		\item \textrm{Diffusion coefficient}:\\
+			\begin{displaymath}
+				\big\langle r^2(t)\big\rangle=2\mathrm{d}D\qquad\qquad \mbox{\textrm{d}是空间维度}
+			\end{displaymath}
+			\item \textrm{Velocity autocorelation function~(VACF)}:\\
+				\begin{displaymath}
+					\begin{aligned}
+					&\big\langle\vec v(t)\vec v(0)\big\rangle\\
+					D=&\int_0^{\infty}\langle\vec v(t)\vec v(0)\mathrm{d}t
+						
+					\end{aligned}
+				\end{displaymath}
+
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{扩散系数}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.2in}
+\includegraphics[height=1.4in,width=2.0in,viewport=0 0 350 300,clip]{Figures/MSD_O2-N2-CO2-CH4.png}\\
+\includegraphics[height=1.4in,width=2.5in,viewport=0 0 230 160,clip]{Figures/The-velocity-autocorrelation-function-VACF-of-the-Al-atoms-showing-the-increase-of-rigidity of the local Al-coordination-for-G3-G4-and-G338-glasses.png}
+%\caption{\fontsize{5.5pt}{2.2pt}\selectfont{\textrm{The structure factor of argon calculating from a radial distribution function.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{MSD-VACF}
+\end{figure}
 }
 %------------------------------------------------------------------------Reference----------------------------------------------------------------------------------------------
 		\frame[allowframebreaks]
