@@ -10,7 +10,7 @@
 %%   affiliation.
 \institute[BCC]{\inst{}%
 %\institute[Gain~Strong]{\inst{}%
-\vskip -20pt 北京市计算中心~智能计算事业部}
+\vskip -20pt 北京市计算中心~云平台事业部}
 %\vskip -20pt {\large 格致斯创~科技}}
 \date[\today] % (optional, should be abbreviation of conference name)
 {%	{\fontsize{6.2pt}{4.2pt}\selectfont{\textcolor{blue}{E-mail:~}\url{jiangjun@bcc.ac.cn}}}
@@ -56,6 +56,7 @@
 
 %-----------------------------------------------PPT main Body------------------------------------------------------------------------------------
 \small
+\section{分子动力学基础}
 \frame
 {
 	\frametitle{分子模拟}
@@ -765,9 +766,8 @@ $U_2(\vec r_i,\vec r_j)$是双体势，$U_3(\vec r_i,\vec r_j,\vec r_k)$是描�
 			\item \textrm{Velocity autocorelation function~(VACF)}:\\
 				\begin{displaymath}
 					\begin{aligned}
-					&\big\langle\vec v(t)\vec v(0)\big\rangle\\
-					D=&\int_0^{\infty}\langle\vec v(t)\vec v(0)\mathrm{d}t
-						
+						&\big\langle\vec v(t)\vec v(0)\big\rangle\\
+						D=&\int_0^{\infty}\langle\vec v(t)\vec v(0)\mathrm{d}t
 					\end{aligned}
 				\end{displaymath}
 
@@ -780,12 +780,82 @@ $U_2(\vec r_i,\vec r_j)$是双体势，$U_3(\vec r_i,\vec r_j,\vec r_k)$是描�
 \begin{figure}[h!]
 \centering
 \vspace*{-0.2in}
-\includegraphics[height=1.4in,width=2.0in,viewport=0 0 350 300,clip]{Figures/MSD_O2-N2-CO2-CH4.png}\\
-\includegraphics[height=1.4in,width=2.5in,viewport=0 0 230 160,clip]{Figures/The-velocity-autocorrelation-function-VACF-of-the-Al-atoms-showing-the-increase-of-rigidity of the local Al-coordination-for-G3-G4-and-G338-glasses.png}
+\includegraphics[height=1.2in,width=2.0in,viewport=0 0 350 300,clip]{Figures/MSD_O2-N2-CO2-CH4.png}\\
+\includegraphics[height=1.6in,width=2.8in,viewport=0 0 230 160,clip]{Figures/The-velocity-autocorrelation-function-VACF-of-the-Al-atoms-showing-the-increase-of-rigidity of the local Al-coordination-for-G3-G4-and-G338-glasses.png}
 %\caption{\fontsize{5.5pt}{2.2pt}\selectfont{\textrm{The structure factor of argon calculating from a radial distribution function.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{MSD-VACF}
 \end{figure}
 }
+
+\section{\rm{LAMMPS}软件基础}
+\frame
+{
+	\frametitle{\textrm{LAMMPS}简介}
+	\textcolor{blue}{\textrm{LAMMPS}}:\\
+	\textrm{Large-scale Atomic/Molecular Massively Parallel Simulator}\\
+	美国能源部的两个实验室和三个公司联合开发\\
+	由\textrm{Sandia}国家实验室发布
+	\begin{itemize}
+			\setlength{\itemsep}{10pt}
+		\item 固态、液态、气态的经典分子动力学模拟
+		\item 易于扩展:~方便引入新的力场、原子类型和边界条件
+		\item 开发语言:~\textrm{C++-MPI/FFT}
+		\item 支持\textrm{GPU}计算，支持\textrm{OpenMP}
+		\item 脚本可支持一个或多个模拟进程
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{模型\textrm{(atom\_style)}}
+	\begin{itemize}
+		\item 原子或简单分子
+		\item 粗粒化粒子~(如有机高分子模型:~小球-弹簧模型)
+		\item \textrm{United-atom}高分子或有机分子
+		\item 全原子高分子:~有机分子、蛋白质、\textrm{DNA}
+		\item 金属:~金属单质、合金
+		\item 颗粒物质
+		\item 粗粒化介观模型
+		\item 有限尺度球和椭球粒子
+		\item 有限尺度\textrm{line segment~(2d)}与三角\textrm{(3d)}粒子
+		\item 偶极粒子
+		\item 硬球粒子
+		\item 上述模型的组合
+	\end{itemize}
+}
+
+\frame[allowframebreaks]
+{
+	\frametitle{各类力场}
+	\begin{itemize}
+{\fontsize{9.5pt}{2.2pt}\selectfont{
+		\item \textcolor{blue}{二体势}:~\textrm{Lennard-Jones, Buckingham, Morse, Born-Mayer-Huggins, Yukawa, soft, COMPASS,hydrogen bond, tabulated}
+		\item \textcolor{blue}{带点二体势}:~\textrm{Coulomb}势，点电荷-电偶极矩作用
+		\item \textcolor{blue}{多体势}:~\textrm{EAM, Finnis/Sinclair EAM, modified EAM~(MEAM), embedded ion method~(EIM), EDIP, ADP, Stillinger-Weber, Tersoff, REBO, AIREBO, ReaxFF, COMB}
+		\item \textcolor{blue}{电子力场}:~\textrm{eFF, AWPMD}
+		\item \textcolor{blue}{粗粒化势}:~\textrm{DPD, GayBerne, REsquared, colloidal， DLVO}
+		\item \textcolor{blue}{介观势}:~\textrm{granular, Peridynamics, SPH}
+		\item \textcolor{magenta}{Bond potentials}:~\textrm{harmonic, FENE, Morse, nonlinear, class 2, quartic (breakable)}
+		\item \textcolor{magenta}{Angle potentials}:~\textrm{harmonic, CHARMM, cosine, cosine/squared, cosine/periodic, class 2~(COMPASS)}
+		\item \textcolor{magenta}{Dihedral potentials}:~\textrm{harmonic, CHARMM, multi-harmonic, helix, class 2~(COMPASS), OPLS}
+		\item \textcolor{magenta}{Improper potentials}:~\textrm{harmonic, cvff, umbrella, class 2~(COMPASS)}
+		\item \textcolor{purple}{高分子势}:~\textrm{all-atom, united-atom,bead-spring, breakable}
+		\item \textcolor{purple}{水分子势}:~\textrm{TIP3P, TIP4P, SPC}
+		\item \textcolor{purple}{隐含溶液势}:~\textrm{hydrodynamic lubrication, Debye}
+		\item \textcolor{blue}{\textrm{KIM archive of potentials}}
+		\item \textcolor{purple}{长程势}:~\textrm{Ewald, Wolf， PPPM~(similar to particle-mesh Ewald), Ewald/N for long-range Lennard-Jones}
+		\item 与常用力场\textrm{CHARMM, AMBER, DREIDING, OPLS, GROMACS, COMPASS}格式兼容}}
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{初始构型}
+	\begin{itemize}
+		\item 
+	\end{itemize}<++>
+}
+
 %------------------------------------------------------------------------Reference----------------------------------------------------------------------------------------------
 		\frame[allowframebreaks]
 {
@@ -793,6 +863,8 @@ $U_2(\vec r_i,\vec r_j)$是双体势，$U_3(\vec r_i,\vec r_j,\vec r_k)$是描�
 \begin{thebibliography}{99}
 {\tiny
 	\bibitem{JCP27-1208_1957}\textrm{B.J. Alder, T.E. Wainwright. \textit{J. Chem. Phys.} \textbf{27} (1957), 1208}
+	\bibitem{Comp_Phys}\textrm{J. M. Thijssen. \textit{Computational Physics (2nd Edition)} (Cambridge University Press, Cambridge, England, 2007)}
+	\bibitem{Lammps_turtorial}王延颋, \textrm{LAMMPS}教程~中科院超算中心培训, 北京, \textrm{2012}
 	\bibitem{Chucizhangju}[东汉]王逸\:撰,黄灵庚\:点校, {\textit{楚辞章句}}\:上海古籍出版社, 上海, \textrm{2017}
 }
 \end{thebibliography}
