@@ -509,7 +509,7 @@ $U_2(\vec r_i,\vec r_j)$是双体势，$U_3(\vec r_i,\vec r_j,\vec r_k)$是描�
 		\item 动能 ~$E_{\mathrm{k}}=\bigg\langle\sum\limits_{i=1}^N\dfrac12m_iv_i^2\bigg\rangle$
 		\item 势能 ~$E_{\mathrm{p}}=\bigg\langle\sum\limits_{i=1}^NE_{\mathrm{p}i}\bigg\rangle$
 		\item 温度 ~$T=\dfrac1{\mathrm{d}Nk_{\mathrm{B}}}\bigg\langle\sum\limits_{i=1}^Nm_iv_i^2\bigg\rangle$ ~~~~ 其中$\mathrm{d}$是空间维度
-		\item 压强 ~$p=\dfrac{k_{\mathrm{B}}TN}{V}-\dfrac1{\mathrm{d}V}\bigg\langle\sum\limits_{i<j}\vec f_{ij}\cdot\vec r_{ij}\bigg\rangle$
+		\item 压强 ~$p=\dfrac{k_{\mathrm{B}}TN}{V}+\dfrac1{\mathrm{d}V}\bigg\langle\sum\limits_{i<j}\vec f_{ij}\cdot\vec r_{ij}\bigg\rangle$
 		\item 焓 ~$H=E+pV$ ~~~~ 相当于\textrm{NPT}下的有效总内能
 		\item 熵 ~$S=k_{\mathrm{B}}\ln\Omega(N,V,E)$ ~~~~ $\Omega$是系统的总的微观状态数
 		\item \textrm{Helmholtz}自由能:~\textcolor{blue}{\textrm{NVT}下的自由能}
@@ -541,14 +541,181 @@ $U_2(\vec r_i,\vec r_j)$是双体势，$U_3(\vec r_i,\vec r_j,\vec r_k)$是描�
 		\item \textcolor{blue}{策略}:~模拟的容器中粒子与无穷多镜像中粒子存在相互作用
 	\end{itemize}
 	\begin{displaymath}
-		\vec F_{\mathrm{PBC}}(\vec r_i-\vec r_j)=\sum_n\vec F\bigg(\bigg|\vec r_i-\vec r_j+\sum_{\mu=1}^3\mathbf{L}_{\mu}n_{\mu}\bigg|\bigg)
+		\begin{aligned}
+			\vec F_{\mathrm{PBC}}(\vec r_i-\vec r_j)=&\sum_n\vec F\bigg(\bigg|\vec r_i-\vec r_j+\sum_{\mu=1}^3\mathbf{L}_{\mu}n_{\mu}\bigg|\bigg)\\
+			E_{\mathrm{tot}}=&\dfrac12\sideset{}{^{\prime}}\sum_{i,j,n}\varepsilon\big(\big|\vec r_{ij}+n\mathbf{L}\big|\big)
+		\end{aligned}
 	\end{displaymath}
 }
 
 \frame
 {
-	\frametitle{分子动力学模拟}
+	\frametitle{空间、边界与周期边界条件}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.15in}
+\includegraphics[height=0.75in,width=2.35in,viewport=0 0 460 170,clip]{Figures/Periodic-boundary-conditions-on-a-spin-lattice.jpg}
+\vskip 1pt
+\includegraphics[height=1.95in,width=2.15in,viewport=0 0 300 300,clip]{Figures/Periodic-boundary-conditions.png}
+\caption{\tiny \textrm{Schematic representation of the idea of periodic boundary conditions.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Periodic_boundary_conditions}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{模拟与采样参数}
+	\begin{itemize}
+		\item \textcolor{blue}{特征长度}\textrm{(characteristic length)}:~物理量在空间的相关长度\\
+			{\fontsize{8.5pt}{1.2pt}\selectfont{原则上，模拟容器的边长应大于关心物理量的特征长度;~具体操作上，可以通过变化模拟尺寸来了解有限尺寸效应\textrm{(finite size effect)}的影响}}
+		\item \textcolor{blue}{截断距离}\textrm{(cutoff distance)}:~应小于模拟容器边长的一半\\
+			{\fontsize{8.5pt}{1.2pt}\selectfont{避免同一粒子与两个镜像同时作用;~截断的处理方式有:~简单截断、截断平移、最小镜像法等三种}}
+		\item \textcolor{blue}{采样}\textrm{(sampling)}:~本质是有限时间内的重要性采样\textrm{(importance sampling)}\\
+			{\fontsize{8.5pt}{1.2pt}\selectfont{采样对系综平均贡献最大的瞬时量的子集，一般采用均匀时间间隔采样}}
+		\item \textcolor{blue}{初始构型}\textrm{(Initial Configuration)}:~要尽量接近平衡态\\
+			{\fontsize{8.5pt}{1.2pt}\selectfont{一般需要一定的初始模拟过程使得初始构型达到平衡态，在此初始模拟过程中不采样，需要根据某些参数的变化观察系统是否达到平衡态(液体体积很容易平衡，势能次之，扩散系数较难达到平衡)}}
+		\item \textcolor{blue}{样本相关度}\textrm{(Correlation)}:~离得越近采样样本相关度越大\\
+			{\fontsize{8.5pt}{1.2pt}\selectfont{相关的样本不影响平均值，但会影响误差范围}}
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{\textrm{Maxwell-Boltzmann}分布}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.15in}
+\includegraphics[height=2.75in,width=3.25in,viewport=0 0 470 460,clip]{Figures/Maxwell-Boltzmann-distribution-Energetic-molecules-of-an-ideal-gas.jpeg}
+%\includegraphics[height=2.70in,width=2.85in,viewport=0 40 830 850,clip]{Figures/Bonded-and-non-bonded-forces-consider-in-MD-simulations.png}
+\caption{\tiny \textrm{Maxwell-Boltzmann distribution Energetic molecules of an ideal gas.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Maxwell-Boltzmann-distribution}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{热耦或热浴\textrm{(Thermostat or Heat~Bath)}}
+	\begin{itemize}
+		\item \textrm{Isokinetics thermostat}:\\
+			每一步采样都对速度进行修正，直到体系达到设定的目标温度
+			\begin{displaymath}
+				\dfrac32Nk_{\mathrm{B}}T=\dfrac12\sum_im_iv_i^2\Longrightarrow v_i^{\mathrm{scale}}=\lambda v_i\quad\mbox{有}~\lambda=\sqrt{\dfrac{T}{T_0}}
+			\end{displaymath}
+		\item \textrm{Berendsen thermostat}:
+			\begin{displaymath}
+				\lambda=\bigg[1+\dfrac{\Delta t}{\tau_T}\bigg(\dfrac{T}{T_0}-1\bigg)\bigg]^{\frac12}
+			\end{displaymath}
+		\item \textrm{Andersen thermostat}:\\
+			每一步从温度为$T$的\textrm{Maxwell-Boltzmann}分布中随机产生一个速度赋予被选中的粒子
+		\item \textrm{Nos\'e-Hoover thermostat}:\\
+			增加额外的自由度，在扩展的微正则系综内实现实际体系的正则系综
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{离子间相互作用的\textrm{Ewald}求和}
+	周期边界下长程\textrm{Coulomb}相互作用的计算\\
+	通过屏蔽电荷将点电荷分解为时空间中的长程部分和短程部分
+	\begin{itemize}
+		\item \textcolor{blue}{短程部分}:~实空间截断
+		\item \textcolor{blue}{长程部分}:~$\vec k$-空间截断
+	\end{itemize}
+\begin{figure}[h!]
+\centering
+%\vspace*{-0.20in}
+\includegraphics[height=1.2in,width=2.82in,viewport=0 0 1100 455,clip]{Figures/Ewald_method.png}
+\caption{\fontsize{5.5pt}{2.2pt}\selectfont{\textrm{Decomposition of the potential $-e^2/r$ (singular at the origin and of long-range nature) into a contribution $-(e^2/r)\mathrm{erf}(\sqrt{\eta}r)$(regular at the origin of long-range) and a contribution $-(e^2/r)\mathrm{erfc}(\sqrt{\eta}r)$ (singular at the origin and of short-range nature). Here $\sqrt{\eta}=1 (\mathrm{Bohr radius unit})$ is chosen.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Error_Function}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{离子间相互作用的\textrm{Ewald}求和}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.20in}
+\includegraphics[height=1.6in,width=3.32in,viewport=0 0 1800 955,clip]{Figures/Ewald_method-2.png}
+\caption{\fontsize{5.5pt}{2.2pt}\selectfont{\textrm{Each charge be screened by a Gaussian charge distribution of opposite sign and equal magnitude: $\rho_i(r)=\dfrac{Z_i\eta^3}{\pi^{3/2}}\mathrm{e}^{-\eta^2r^2}$.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Ewald_method-2}
+\end{figure}
+\textrm{Particle mesh Ewald~(PME)}和\textrm{Particle-Particle Particle-Mesh~(PPPM)}算法:\\
+空间离散化，应用快速\textrm{Fourier}变换\textrm{(Fast Fourier Transform, FFT)}将计算复杂度由$\mathscr{O}(N^2)$降为$\mathscr{O}(N\log(N))$
+}
+
+\frame
+{
+	\frametitle{邻居列表\textrm{(neighbour list)}}
+	\begin{itemize}
+		\item 遍历模拟体系全部任意两个粒子间距离的计算复杂度为$\mathscr{O}(N^2)$，实际计算中，对于短程相互作用，可以忽略远距离的长程作用，截断后的计算复杂度将大大下降
+		\item \textcolor{blue}{\textrm{The minimum-image convention}}:\\为加速计算，将容器空间划分成小的立方体\textrm{(cell)}，每个\textrm{cell}的边长为截断距离。计算粒子距离时，对于给定粒子只须遍历最近邻27个\textrm{cell}内的粒子(包括本身所在的\textrm{cell})。计算复杂度降为$\mathscr{O}(N)$
+\begin{figure}[h!]
+\centering
+\vspace*{-0.18in}
+\includegraphics[height=1.2in,width=1.28in,viewport=0 0 180 180,clip]{Figures/Schematic-showing-the-closest-neighbors-of-atom_A-in-the-primary-simulation-cell-as-determined-by-the-minimum-image-criterion.jpg}
+\caption{\fontsize{5.5pt}{2.2pt}\selectfont{\textrm{Schematic showing the closest neighbors of atom A in the primary simulation cell as determined by the minimum image criterion.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Minimum-image-convention}
+\end{figure}
+	\end{itemize}
 	
+}
+
+\subsection{数据分析}
+\frame
+{
+	\frametitle{能量数据}
+	\begin{itemize}
+		\item 总能量~$E=E_{\mathrm{k}}+E_{\mathrm{p}}$
+\begin{displaymath}
+	\begin{aligned}
+		E_{\mathrm{k}}=&\bigg\langle\sum\limits_{i=1}^N\dfrac12m_iv_i^2\bigg\rangle\\
+		E_{\mathrm{p}}=&\bigg\langle\sum\limits_{i=1}^NE_{\mathrm{p}i}\bigg\rangle 
+	\end{aligned}
+\end{displaymath}
+\item 比热容~$C_V^{\mathrm{NVT}}=\dfrac{\big\langle E_{\mathrm{p}}^2\big\rangle-\big\langle E_{\mathrm{p}}\big\rangle^2}{k_{\mathrm{B}}T^2}+\dfrac32Nk_{\mathrm{B}}$
+\item 瞬时温度 ~$T=\dfrac2{\mathrm{d}Nk_{\mathrm{B}}}E_{\mathrm{k}}$ ~~~~ 其中$\mathrm{d}$是空间维度
+\item 瞬时压强 ~$P=\rho k_{\mathrm{B}}T+\dfrac1{\mathrm{d}V}\bigg\langle\sum\limits_{i<j}\vec f_{ij}(\vec r_{ij})\cdot\vec r_{ij}\bigg\rangle$
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{相关系数}
+	\begin{displaymath}
+		\begin{aligned}
+			c(A,B)&=\dfrac{\bigg\langle\big(A-\langle A\rangle\big)\big(B-\langle B\rangle\big)\bigg\rangle}{\sqrt{\bigg\langle\big(A-\langle A\rangle\big)^2\bigg\rangle\bigg\langle\big(B-\langle B\rangle\big)^2\bigg\rangle}}\\
+			c&\in[0,1]
+		\end{aligned}
+	\end{displaymath}
+	\begin{itemize}
+		\item 时间相关系数\\
+			\begin{displaymath}
+				c(A,B,t)=\dfrac{\bigg\langle\big(A(t+t_0)-\langle A(t+t_0)\rangle\big)\big(B(t_0)-\langle B(t_0)\rangle\big)\bigg\rangle}{\sqrt{\bigg\langle\big(A(t+t_0)-\langle A(t+t_0)\rangle\big)^2\bigg\rangle\bigg\langle\big(B(t_0)-\langle B(t_0)\rangle\big)^2\bigg\rangle}}
+			\end{displaymath}
+		\item 时间自相关系数
+			\begin{displaymath}
+				c(A,t)=\dfrac{\bigg\langle\big(A(t+t_0)-\langle A(t+t_0)\rangle\big)\big(A(t_0)-\langle A(t_0)\rangle\big)\bigg\rangle}{\bigg\langle\big(A(t_0)-\langle A(t_0)\rangle\big)^2\bigg\rangle}
+			\end{displaymath}
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{结构特征}
+	\begin{itemize}
+		\item \textrm{Radial distribution function~(RDF)}:\\
+			在距离$r$处找到粒子的概率
+			\begin{displaymath}
+				g(r)=\dfrac{V}{N^2}\bigg\langle\sum_i\sum_{j\neq i}\delta(\vec r-\vec r_{ij})\bigg\rangle
+			\end{displaymath}
+			理想气体~$g(r)=1$
+		\item \textrm{Structure factor}:\\
+			\textrm{RDF}在$\vec k$空间的\textrm{Fourier}变换，实验可直接观测的物理量
+			\begin{displaymath}
+				S(k)=1+4\pi\rho\int_0^{\infty}r^2\dfrac{\sin(\vec k\cdot\vec r)}{\vec k\cdot\vec r}g(r)\mathrm{d}r
+			\end{displaymath}
+	\end{itemize}
 }
 %------------------------------------------------------------------------Reference----------------------------------------------------------------------------------------------
 		\frame[allowframebreaks]
