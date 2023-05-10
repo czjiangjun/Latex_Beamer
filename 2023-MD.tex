@@ -788,6 +788,7 @@ $U_2(\vec r_i,\vec r_j)$是双体势，$U_3(\vec r_i,\vec r_j,\vec r_k)$是描�
 }
 
 \section{\rm{LAMMPS}软件基础}
+\subsection{\rm{LAMMPS}软件}
 \frame
 {
 	\frametitle{\textrm{LAMMPS}简介}
@@ -852,10 +853,395 @@ $U_2(\vec r_i,\vec r_j)$是双体势，$U_3(\vec r_i,\vec r_j,\vec r_k)$是描�
 {
 	\frametitle{初始构型}
 	\begin{itemize}
-		\item 
-	\end{itemize}<++>
+		\item \textcolor{blue}{read\_data}:\\
+			从构型文件中读入原子坐标
+		\item \textcolor{blue}{lattice}:\\
+			确定空间格子类型
+		\item \textcolor{blue}{create\_atoms}:\\
+			在格点上摆放原子
+		\item \textcolor{blue}{delete\_atoms}:\\
+			在给定构型上删除成组原子
+		\item \textcolor{blue}{displace\_atoms}:\\
+			移动已有原子位置
+		\item \textcolor{blue}{replicate}:\\
+			复制已有构型，可多次复制
+	\end{itemize}
 }
 
+\frame
+{
+	\frametitle{系综与约束\textrm{(fix)}条件}
+	\begin{itemize}
+		\item 空间二维或三维的系统
+		\item 正交或非正交晶系(含三斜晶系)
+		\item \textrm{NVE, NVT, NPT, NPH, Parinello/Rahman}积分器
+		\item 针对原子组群可以指定不同的热耦
+		\item 通过\textrm{Nose/Hoover}或者\textrm{Berendsen}压耦控制压强
+		\item 模拟容器的变形(拉伸或剪切)
+		\item 谐振函数约束的力(回复力)
+		\item 刚体约束，\textrm{SHAKE}算法固定键长和键角
+		\item 化学键的断裂、形成与交换
+		\item 各类边界条件
+		\item 非平衡态分子动力学模拟
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{积分算法}
+	\begin{itemize}
+		\item \textcolor{blue}{run}:\\
+			运行\textrm{run}命令，执行(积分)模拟过程
+		\item \textcolor{blue}{run\_style}:\\
+			配套\textrm{run}命令使用，不一定需要
+		\item \textrm{velocity-Verlet}积分器
+		\item \textrm{Brown}运动积分
+		\item 刚体积分
+		\item \textcolor{blue}{minimize}:\\
+			共轭梯度或最陡下降法进行能量优化
+		\item \textrm{rRESPA}多等级时间步长
+		\item \textcolor{blue}{return}:\\
+			\textrm{return}命令，重新运行模拟过程
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{数据输出}
+	\begin{itemize}
+		\item \textcolor{green}{log}:\\
+			\textrm{log}文件输出热力学信息\\
+文本文件输出原子坐标、速度等基本信息
+\item \textcolor{green}{restart}:\\
+	二进制重启文件
+\item 并行输出的文件流
+\item 热力学量~(能量、压力等等状态函数)
+\item 用户定义的计算
+\item 热力学量的时间平均
+\item \textrm{XYZ, XTC, DCD, CFG}和自定义格式的原子构型
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{多重交换模型}
+	\begin{itemize}
+			\setlength{\itemsep}{10pt}
+		\item \textrm{Nudged elastic band}:\\
+			寻找局域最优的反应路径
+		\item \textrm{Parallel replica dynamics}:\\
+			通过多个短模拟估算单个跃迁事件所需的时间
+		\item \textrm{Temperature accelerated dynamics}:\\
+			通过高温模拟以加速动力学过程
+		\item \textrm{Parallel tempering (replica exchange)}:\\
+			同时执行不同问题的模拟，通过高温的模拟辅助低温模型提高采样效率
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{前后处理与可视化工具}
+	\textrm{\textcolor{blue}{LAMMPS}}提供了各种串行的前后处理的工具软件
+\vskip 15pt
+	\textcolor{brown}{\textrm{Pizzaa.py}}软件包:\\\
+	包括创建输入文件、分析、绘制数据图和计算结果可视化等功能
+\vskip 15pt
+分子构型绘图软件 
+	\begin{itemize}
+			\setlength{\itemsep}{8pt}
+		\item \textcolor{red}{xmakemol}:\\
+			简单软件，方法绘制矢量图~(只能用\textrm{XYZ}格式的输入文件)
+		\item \textcolor{red}{VMD}:\\
+			\textrm{UIUC}的\textrm{Klaus Schulten}组开发，与\textrm{\textcolor{blue}{NAMD}}配套使用\\
+			\textrm{VMD}功能强大，有自己的\textrm{script}语言，能完成简单的\textrm{MD}模拟辅助功能，特别适合针对生物体系的作图
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{\textrm{LAMMPS}的特殊功能}
+	\begin{itemize}
+			\setlength{\itemsep}{5pt}
+		\item 随机转动动力学
+		\item 实时可视化和交互分子动力学模拟
+		\item 有限元方法实现的原子与连续模型的耦合
+		\item 通过\textrm{POEMS}库实现耦合刚体的积分
+		\item 巨正则系综\textrm{$\mu$VT}的\textrm{Monte-Carlo}模拟插入和删除粒子
+		\item 低密度流体的\textrm{Monte-Carlo}直接模拟
+		\item \textcolor{blue}{Peridynamics}:\\
+			应用近场动力学方法完成介观尺度粒子模拟
+		\item \textrm{Targeted MD}与\textrm{Steered MD}
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{\textrm{LAMMPS}不具备的功能}
+	\begin{itemize}
+			\setlength{\itemsep}{10pt}
+			\item %\textrm{\textcolor{blue}{LAMMPS}}
+				没有提供图形界面用以执行模拟命令
+		\item 没有自带的分子模型建模工具
+		\item 没有默认设定通用的力场参数
+		\item 无法对复杂的模拟结果进行深入分析
+		\item 没有自带的模拟结果可视化工具\\
+			必须借助诸如\textcolor{red}{xmakemol}或\textcolor{red}{VMD}等外部软件
+		\item 无法对输出数据直接作图
+	\end{itemize}
+}
+
+\subsection{\rm{LAMMPS}的输入文件格式}
+\frame[allowframebreaks]
+{
+	\frametitle{构型文件}
+	\begin{itemize}
+		\item $\ast\ast\ast\ast\ast\ast\ast\ast$ ~~~~~~~ 标题
+			\vskip 8pt
+		\item \textrm{XXX} \textcolor{blue}{\textrm{atoms}} ~~~~~~~ 体系的总原子数
+		\item \textrm{XXX} \textcolor{blue}{\textrm{bonds}} ~~~~~~~ 体系的总键数
+		\item \textrm{XXX} \textcolor{blue}{\textrm{angles}} ~~~~~~~ 体系的总角度数
+		\item \textrm{XXX} \textcolor{blue}{\textrm{dihedrals}} ~~~~~~~ 体系的总二面角数
+		\item \textrm{XXX} \textcolor{blue}{\textrm{impropers}} ~~~~~~~ 体系的总\textrm{improper dihedral}数
+\vskip 8pt
+		\item \textrm{XXX} \textcolor{blue}{\textrm{atom types}} ~~~~~~~ 体系的原子类型数
+		\item \textrm{XXX} \textcolor{blue}{\textrm{bond types}} ~~~~~~~ 体系的化学键类型数
+		\item \textrm{XXX} \textcolor{blue}{\textrm{angle types}} ~~~~~~~ 体系的键角类型数
+		\item \textrm{XXX} \textcolor{blue}{\textrm{dihedral types}} ~~~~~~~ 体系的二面角类型数
+		\item \textrm{XXX} \textcolor{blue}{\textrm{improper types}} ~~~~~~~ 体系的\textrm{improper dihedral}类型数
+			\vskip 8pt
+		\item \textrm{XXX ~ XXX} \textcolor{blue}{\textrm{xlo ~~ xhi}} ~~~~~~~ 模拟盒子在$x$方向的范围
+		\item \textrm{XXX ~ XXX} \textcolor{blue}{\textrm{ylo ~~ yhi}} ~~~~~~~ 模拟盒子在$y$方向的范围
+		\item \textrm{XXX ~ XXX} \textcolor{blue}{\textrm{zlo ~~ zhi}} ~~~~~~~ 模拟盒子在$z$方向的范围
+			\vskip 8pt
+		\item \textcolor{blue}{\textrm{Masses}}
+			\vskip 2pt
+		\{\textrm{atom-type ~ mass}\}
+			\vskip 8pt
+		\item \textcolor{blue}{\textrm{Pair Coeffs}}
+			\vskip 2pt
+		\{\textrm{pair-type ~ p1 ~ p2 ~ p3 ~ p4}\}
+			\vskip 8pt
+		\item \textcolor{blue}{\textrm{Bond Coeffs}}
+			\vskip 2pt
+		\{\textrm{bond-type ~ p1 ~ p2}\}
+			\vskip 8pt
+		\item \textcolor{blue}{\textrm{Angle Coeffs}}
+			\vskip 2pt
+		\{\textrm{angle-type ~ p1 ~ p2}\}
+			\vskip 8pt
+		\item \textcolor{blue}{\textrm{Dihedral Coeffs}}
+			\vskip 2pt
+		\{\textrm{dihedral-type ~ p1 ~ p2 ~p3}\}
+			\vskip 8pt
+		\item \textcolor{blue}{\textrm{Improper Coeffs}}
+			\vskip 2pt
+		\{\textrm{improper-type ~ p1 ~ p2 ~p3}\}
+			\vskip 8pt
+		\item \textcolor{blue}{\textrm{Atoms}}
+			\vskip 2pt
+	 	\{\textrm{atom-ID ~ molecule-ID ~ atom-type ~ q ~ x ~ y ~ z}\}
+			\vskip 8pt
+		\item \textcolor{blue}{\textrm{Velocities}}
+			\vskip 2pt
+		\{\textrm{atom-ID ~ vx ~ vy ~ vz}\}
+			\vskip 8pt
+		\item \textcolor{blue}{\textrm{Bonds}}
+			\vskip 2pt
+		\{\textrm{bond-ID ~ bond-type ~ atom-ID1 ~ atom-ID2}\}
+			\vskip 8pt
+		\item \textcolor{blue}{\textrm{Angles}}
+			\vskip 2pt
+		\{\textrm{angle-ID ~ angle-type ~ atom-ID1 ~ atom-ID2 ~ atom-ID3}\}
+			\vskip 8pt
+		\item \textcolor{blue}{\textrm{Dihedrals}}
+			\vskip 2pt
+		\{\textrm{dihedral-ID ~ dihedral-type ~ atom-ID1 ~ atom-ID2 ~ atom-ID3 ~ atom-ID4}\}
+			\vskip 8pt
+		\item \textcolor{blue}{\textrm{Impropers}}
+			\vskip 2pt
+		\{\textrm{improper-ID ~ improper-type ~ atom-ID1 ~ atom-ID2 ~ atom-ID3 ~ atom-ID4}\}
+	\end{itemize}
+}
+
+\frame[allowframebreaks]
+{
+	\frametitle{参数文件}
+	\begin{itemize}
+		\item \#~$\ast\ast\ast\ast\ast\ast\ast\ast$ ~~~~~~~ 标题
+			\vskip 4pt
+		\item \textcolor{blue}{units} ~ $\ast\ast\ast$ ~~~~~~~ 能量单位
+		\item \textcolor{blue}{atom\_style} ~ $\ast\ast\ast$ ~~~~~~~ 原子构型格式
+		\item \textcolor{blue}{boundary} ~ $\ast\ast\ast$ ~~~~~~~ 周期边界条件
+		\item \textcolor{blue}{pair\_style} ~ $\ast\ast\ast$ ~~~~~~~ 非成键相互作用的函数形式
+		\item \textcolor{blue}{pair\_modify} ~ $\ast\ast\ast$ ~~~~~~~ 修改非成键相互作用的函数形式
+		\item \textcolor{blue}{bond\_style} ~ $\ast\ast\ast$ ~~~~~~~ 化学键类型
+		\item \textcolor{blue}{angle\_style} ~ $\ast\ast\ast$ ~~~~~~~ 键角类型
+		\item \textcolor{blue}{dihedral\_modify} ~ $\ast\ast\ast$ ~~~~~~~ 二面角类型
+		\item \textcolor{blue}{improper\_style} ~ $\ast\ast\ast$ ~~~~~~~ \textrm{improper dihedral}类型
+		\item \textcolor{blue}{kspace\_style} ~ $\ast\ast\ast$ ~~~~~~~ 长程力算法
+			\vskip 4pt
+		\item \textcolor{blue}{read\_data} ~ $\ast\ast\ast$ ~~~~~~~ 指定读入数据文件名
+		\item \textcolor{blue}{neighbor} ~ $\ast\ast\ast$ ~~~~~~~ 设定\textrm{neighbor list}参数
+		\item \textcolor{blue}{neigh\_modify} ~ $\ast\ast\ast$ ~~~~~~~ 原子类型格式
+			\vskip 4pt
+		\item \textcolor{blue}{timestep} ~ $\ast\ast\ast$ ~~~~~~~ 时间步长;~单位取决于\textrm{units}的设置
+			\vskip 4pt
+		\item \textcolor{blue}{thermo\_style} ~ $\ast\ast\ast$ ~~~~~~~ 输出文件的数据内容
+		\item \textcolor{blue}{thermo} ~ \textrm{XXX} ~~~~~~~ 输出数据间隔
+			\vskip 4pt
+		\item \textcolor{blue}{fix} ~ $\ast\ast\ast$ ~~~~~~~ 设定模拟系综及参数等
+			\vskip 4pt
+		\item \textcolor{blue}{dump} ~ $\ast\ast\ast$ ~~~~~~~ 设定输出构型文件名及参数
+			\vskip 4pt
+		\item \textcolor{blue}{run} ~ \textrm{XXX} ~~~~~~~ 输运行的总步长
+			\vskip 4pt
+		\item \textcolor{blue}{write restart} ~ $\ast\ast\ast$ ~~~~~~~ 断点保存的文件名
+	\end{itemize}
+}
+
+\subsection{\textrm{LAMMPS}命令}
+\frame[allowframebreaks]
+{
+	\frametitle{\textrm{LAMMPS}命令的特点和分类}
+	\textrm{LAMMPS}命令的特点
+	\begin{itemize}
+		\item \textrm{LAMMPS}采用逐行解释执行命令形式
+		\item \textcolor{blue}{命令}都用\textcolor{red}{小写字母}表示，\textcolor{blue}{文件名}和\textcolor{blue}{变量}都用\textcolor{red}{大写字母}表示
+		\item 特殊字符的含义:~\textcolor{purple}{\&}:~续行;~\textcolor{purple}{\#}:~注释;~\textcolor{purple}{\$}:~变量
+	\end{itemize}
+	\textrm{LAMMPS}命令的分类
+	\begin{itemize}
+			\setlength{\itemsep}{10pt}
+		\item 初始化命令:\\
+			\textcolor{blue}{atom\_modify},\textcolor{blue}{atom\_style},\textcolor{blue}{boundary},\textcolor{blue}{dimension},\textcolor{blue}{newton},\\\textcolor{blue}{processors},\textcolor{blue}{units}
+		\item 初始构型命令:\\
+			\textcolor{blue}{create\_atoms},\textcolor{blue}{create\_box},\textcolor{blue}{lattice},\textcolor{blue}{read\_data},\textcolor{blue}{read\_dump},\\\textcolor{blue}{read\_restart},\textcolor{blue}{region},\textcolor{blue}{replicate}
+		\item 力场命令:\\
+			\textcolor{blue}{angle\_coeff},\textcolor{blue}{angle\_style},\textcolor{blue}{bond\_coeff},\textcolor{blue}{bond\_style},\textcolor{blue}{dielectric},\\
+			\textcolor{blue}{dihedral\_coeff},\textcolor{blue}{dihedral\_style},\textcolor{blue}{improper\_coeff},\textcolor{blue}{improper\_style},\\
+			\textcolor{blue}{kspace\_modify},\textcolor{blue}{kspace\_style},\textcolor{blue}{pair\_coeff},\textcolor{blue}{pair\_style},\textcolor{blue}{pair\_write},\\
+			\textcolor{blue}{special\_bonds}
+		\item 设置命令:\\
+			\textcolor{blue}{communicate},\textcolor{blue}{group},\textcolor{blue}{mass},\textcolor{blue}{min\_modify},\textcolor{blue}{min\_style},\textcolor{blue}{neigh\_modify},\\\textcolor{blue}{neighbor},\textcolor{blue}{rest\_timestep},\textcolor{blue}{run\_style},\textcolor{blue}{set},\textcolor{blue}{timestep},\textcolor{blue}{velocity}
+		\item \textrm{Fix}命令:\\
+			\textcolor{blue}{fix},\textcolor{blue}{fix\_modify},\textcolor{blue}{unfix}
+		\item \textrm{Compute}命令:\\
+			\textcolor{blue}{compute},\textcolor{blue}{compute\_modify},\textcolor{blue}{uncompute}
+		\item 设置命令:\\
+			\textcolor{blue}{dump},\textcolor{blue}{dump\_image},\textcolor{blue}{dump\_modify},\textcolor{blue}{restart},\textcolor{blue}{thermo},\textcolor{blue}{thermo\_modify},\\\textcolor{blue}{thermo\_style},\textcolor{blue}{undump},\textcolor{blue}{write\_restart}
+		\item 运行命令:\\
+			\textcolor{blue}{delete\_atoms},\textcolor{blue}{delete\_bonds},\textcolor{blue}{displace\_atoms},\textcolor{blue}{change\_box},\textcolor{blue}{minimize},\\\textcolor{blue}{neb\_prd},\textcolor{blue}{return},\textcolor{blue}{run},\textcolor{blue}{temper}
+		\item 其它命令:\\
+			\textcolor{blue}{clear},\textcolor{blue}{echo},\textcolor{blue}{if},\textcolor{blue}{include},\textcolor{blue}{jump},\textcolor{blue}{label},\textcolor{blue}{log},\textcolor{blue}{next},\textcolor{blue}{print},\textcolor{blue}{shell},\textcolor{blue}{variable}
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{}
+	\begin{itemize}
+		\item \textcolor{magenta}{Fix}命令:~设置模拟系综、算法、条件、参数等
+	\end{itemize}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.1in}
+\includegraphics[height=2.4in,width=3.4in,viewport=0 0 1100 760,clip]{Figures/LAMMPS-fix_command.png}
+%\caption{\fontsize{5.5pt}{2.2pt}\selectfont{\textrm{The structure factor of argon calculating from a radial distribution function.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{LAMMPS-Fix}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{}
+	\begin{itemize}
+		\item \textcolor{magenta}{Compute}命令:~设置实时运行中完成的数据处理运算
+	\end{itemize}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.1in}
+\includegraphics[height=2.4in,width=3.4in,viewport=0 0 1150 760,clip]{Figures/LAMMPS-compute_command.png}
+%\caption{\fontsize{5.5pt}{2.2pt}\selectfont{\textrm{The structure factor of argon calculating from a radial distribution function.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{LAMMPS-Compute}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{}
+	\begin{itemize}
+		\item \textcolor{magenta}{Pair\_style}:~非成键相互作用的设置
+	\end{itemize}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.1in}
+\includegraphics[height=2.2in,width=3.4in,viewport=0 0 1100 760,clip]{Figures/LAMMPS-Pair_style-command.png}
+%\caption{\fontsize{5.5pt}{2.2pt}\selectfont{\textrm{The structure factor of argon calculating from a radial distribution function.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{LAMMPS-Pair_style}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{}
+	\begin{itemize}
+		\item \textcolor{magenta}{Bond\_style}:~化学键的设置
+\begin{figure}[h!]
+\centering
+\vspace*{-0.1in}
+\includegraphics[height=1.0in,width=3.4in,viewport=0 0 1100 350,clip]{Figures/LAMMPS-bond_style-command.png}
+%\caption{\fontsize{5.5pt}{2.2pt}\selectfont{\textrm{The structure factor of argon calculating from a radial distribution function.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{LAMMPS-bond_style}
+\end{figure}
+		\item \textcolor{magenta}{Angle\_style}:~键角的设置
+\begin{figure}[h!]
+\centering
+\vspace*{-0.1in}
+\includegraphics[height=1.0in,width=3.4in,viewport=0 0 1100 350,clip]{Figures/LAMMPS-angle_style-command.png}
+%\caption{\fontsize{5.5pt}{2.2pt}\selectfont{\textrm{The structure factor of argon calculating from a radial distribution function.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{LAMMPS-angle_style}
+\end{figure}
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{}
+	\begin{itemize}
+		\item \textcolor{magenta}{Dihedral\_style}:~二面角的设置
+\begin{figure}[h!]
+\centering
+\vspace*{-0.10in}
+\includegraphics[height=0.8in,width=3.4in,viewport=0 0 1100 290,clip]{Figures/LAMMPS-dihedral_style-command.png}
+%\caption{\fontsize{5.5pt}{2.2pt}\selectfont{\textrm{The structure factor of argon calculating from a radial distribution function.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{LAMMPS-dihedral_style}
+\end{figure}
+		\item \textcolor{magenta}{Improper\_style}:~\textrm{Improper dihedral}的设置
+\begin{figure}[h!]
+\centering
+\vspace*{-0.10in}
+\includegraphics[height=0.8in,width=3.4in,viewport=0 0 1100 280,clip]{Figures/LAMMPS-improper_dihedral-command.png}
+%\caption{\fontsize{5.5pt}{2.2pt}\selectfont{\textrm{The structure factor of argon calculating from a radial distribution function.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{LAMMPS-improper_dihedral}
+\end{figure}
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{}
+	\begin{itemize}
+		\item \textcolor{magenta}{Kspace\_style}长程力算法命令
+\begin{figure}[h!]
+\centering
+\vspace*{-0.10in}
+\includegraphics[height=0.9in,width=3.4in,viewport=0 0 1100 300,clip]{Figures/LAMMPS-kspace_style-command.png}
+%\caption{\fontsize{5.5pt}{2.2pt}\selectfont{\textrm{The structure factor of argon calculating from a radial distribution function.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{LAMMPS-kspace_style}
+\end{figure}
+		\item 另外还有很多扩展命令:~对应于相应的扩展软件包
+	\end{itemize}
+}
 %------------------------------------------------------------------------Reference----------------------------------------------------------------------------------------------
 		\frame[allowframebreaks]
 {
