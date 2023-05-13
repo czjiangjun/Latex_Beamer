@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  不使用 authblk 包制作标题  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %-------------------------------PPT Title-------------------------------------
-\title{12 多重散射与\rm{MTO}方法}
+\title{12 多重散射与\rm{LMTO}方法}
 %-----------------------------------------------------------------------------
 
 %----------------------------Author & Date------------------------------------
@@ -104,9 +104,9 @@ $$\mathrm{e}^{\mathrm{i}\vec q\cdot\vec r}=4\pi\sum_{lm}\mathrm{i}^lj_l(\vec q\c
 \fontsize{7.5pt}{6.2pt}\selectfont{
 平面波经散射后出射，波函数变为
 $$\Psi_l^{>}(\varepsilon,r)=C_l\bigg[j_l(\kappa r)-\tan\eta_l(\varepsilon)n_l(\kappa r)\bigg]\quad\text{其中}\kappa^2=\varepsilon$$
-根据散射理论，能量为$\varepsilon$的电子经单个势阱散射偏转$\theta$后，波函数的振幅可以表示为
+根据散射理论，能量为$\varepsilon$的电子经单个势阱散射偏转$\eta$后，波函数的振幅可以表示为
 	\begin{displaymath}
-		t(\theta)=\dfrac{4\pi}{\kappa}\sum_l(2l+1)[\mathrm{exp}(2\mathrm{i}\eta_l(\varepsilon))-1]P_l(\cos\theta)
+		t(\eta)=\dfrac{4\pi}{\kappa}\sum_l(2l+1)[\mathrm{exp}(2\mathrm{i}\eta_l(\varepsilon))-1]P_l(\cos\eta)
 	\end{displaymath}
 %$$t(\theta)=\dfrac{4\pi}{\sqrt\varepsilon}\sum_l(2l+1)\bigg[\mathrm{e}^{2\mathrm{i}\eta_l(\varepsilon)}-1\bigg]P_l(\cos\theta)$$
 %$$\eta_l(\varepsilon)=p_l\pi+\delta_l(\varepsilon)$$
@@ -114,6 +114,7 @@ $$\Psi_l^{>}(\varepsilon,r)=C_l\bigg[j_l(\kappa r)-\tan\eta_l(\varepsilon)n_l(\k
 }
 
 \section{\rm{MTO~}与\rm{LMTO~}方法}
+\subsection{\rm{MTO}方法与\rm{Bessel}函数}
 \frame
 {
 \frametitle{\textrm{MTO}方法}
@@ -201,7 +202,7 @@ $$\Psi_l^{>}(\varepsilon,r)=C_l\bigg[j_l(\kappa r)-\tan\eta_l(\varepsilon)n_l(\k
 
 			%	鉴于\textrm{Bessel~}函数会发散，当$\varepsilon<0$，\textrm{Neumann}函数$n_l$用\textrm{Hankel}函数$h_l=j_l+\mathrm{i}n_l$替换，\\
 	%			\textcolor{red}{只有$\varepsilon$对应体系本征值时，函数在\textrm{MT}球面上连续}
-				因此\textcolor{red}{分波函数$\psi_L(\varepsilon,q_0,r)$不是好的\textrm{MTO}基函数形式}
+				因此\textcolor{red}{分波函数$\psi_L(\varepsilon,q_0,r)$不是描述束缚态好的基函数形式}
 		\end{enumerate}
 %		特别地，当能量$\varepsilon<0$，\textrm{Neumannn}函数$n_l$用\textrm{Hankel}函数$h_l$代替$$h_l^{(1)}=j_l+\mathrm{i}\eta_l$$渐近形式为$\frac{\mathrm{i}^{-l}\mathrm{e}^{-|q_0|r}}{|q_0|r}$\\
 %		此时球\textrm{Bessel}是非约束的，这样的轨道不适合做基函数:~因为当能量$\varepsilon<0$，只有当能量$\varepsilon=\varepsilon_{\vec k}$，球\textrm{Bessel}函数的系数为0，基函数才可能是正交归一
@@ -263,6 +264,7 @@ $$\Psi_l^{>}(\varepsilon,r)=C_l\bigg[j_l(\kappa r)-\tan\eta_l(\varepsilon)n_l(\k
 
 }
 
+\subsection{正则能带基函数}
 \frame
 {
 	\frametitle{\textrm{MTO}方法的基函数}
@@ -297,12 +299,13 @@ $$\Psi_l^{>}(\varepsilon,r)=C_l\bigg[j_l(\kappa r)-\tan\eta_l(\varepsilon)n_l(\k
 	\textcolor{blue}{考虑平移周期性}，
 $$\chi_{L,\vec k}^{\mathrm{MTO}}(\varepsilon,0,\vec r)=\sum_{\vec T}\mathrm{e}^{\mathrm{i}\vec k\cdot\vec R}\chi_L^{\mathrm{MTO}}(\varepsilon,0,\vec r)$$
 \textcolor{blue}{\textrm{MT}球内的\textrm{MTO-ASA}的基函数为}
-{\fontsize{9.0pt}{5.2pt}\selectfont
+{\fontsize{7.0pt}{5.2pt}\selectfont
 \begin{displaymath}
+\chi_{L,\vec k}^{\mathrm{MTO}}(\varepsilon,0,\vec r)=\left\{
 	\begin{aligned}
-		\chi_{L,\vec k}^{\mathrm{MTO}}(\varepsilon,0,\vec r)=&\underline{\textcolor{red}{u_l(\varepsilon,r)\mathrm{i}^lY_L(\hat{\vec r})}}-\dfrac{D_l(\varepsilon)+l+1}{2l+l}u_l(\varepsilon,S)\left(\dfrac rS\right)^l\mathrm{i}^lY_L(\hat{\vec r})\\
-		&+\dfrac{l-D_l(\varepsilon)}{2l+1}u_l(\varepsilon,S)\sum_{L^{\prime}}\left(\dfrac rS\right)^{l^{\prime}}\dfrac1{2(2l^{\prime}+1)}\mathrm{i}^{l^{\prime}}Y_{L^{\prime}}(\hat{\vec r})S_{LL^{\prime}}(\vec k)
-	\end{aligned}
+		&\underline{\textcolor{red}{u_l(\varepsilon,r)\mathrm{i}^lY_L(\hat{\vec r})}}-\dfrac{D_l(\varepsilon)+l+1}{2l+l}u_l(\varepsilon,S)\left(\dfrac rS\right)^l\mathrm{i}^lY_L(\hat{\vec r})&\, r\leqslant S\\
+		&+\textcolor{magenta}{\dfrac{l-D_l(\varepsilon)}{2l+1}u_l(\varepsilon,S)\sum_{L^{\prime}}\left(\dfrac rS\right)^{l^{\prime}}\dfrac1{2(2l^{\prime}+1)}\mathrm{i}^{l^{\prime}}Y_{L^{\prime}}(\hat{\vec r})S_{LL^{\prime}}(\vec k)}&\, r>S
+	\end{aligned}\right.
 \end{displaymath}}
 其中
 \begin{displaymath}
@@ -318,7 +321,7 @@ $$\chi_{L,\vec k}^{\mathrm{MTO}}(\varepsilon,0,\vec r)=\sum_{\vec T}\mathrm{e}^{
 	\frametitle{正则能带}
 	\textcolor{red}{$u_l(\varepsilon,r)\mathrm{i}^lY_L(\hat{\vec r})$是\textrm{MT}球内满足原子分波函数的形式}
 	\begin{itemize}
-		\item \textcolor{blue}{在\textrm{MT}球内来自其他原子尾部贡献部分}$$\dfrac{l-D_l(\varepsilon)}{2l+1}u_l(\varepsilon,S)\sum_{L^{\prime}}\left(\dfrac rS\right)^{l^{\prime}}\dfrac1{2(2l^{\prime}+1)}\mathrm{i}^{l^{\prime}}Y_{L^{\prime}}(\hat{\vec r})S_{LL^{\prime}}(\vec k)$$
+		\item \textcolor{magenta}{在\textrm{MT}球内来自其他原子尾部贡献部分}$$\dfrac{l-D_l(\varepsilon)}{2l+1}u_l(\varepsilon,S)\sum_{L^{\prime}}\left(\dfrac rS\right)^{l^{\prime}}\dfrac1{2(2l^{\prime}+1)}\mathrm{i}^{l^{\prime}}Y_{L^{\prime}}(\hat{\vec r})S_{LL^{\prime}}(\vec k)$$
 		\item \textcolor{blue}{在\textrm{MT}球内非物理贡献部分}$$\dfrac{D_l(\varepsilon)+l+1}{2l+l}u_l(\varepsilon,S)\left(\dfrac rS\right)^l\mathrm{i}^lY_L(\hat{\vec r})$$
 	\end{itemize}
 	\textcolor{red}{这两部分相互抵消}，由此得到\textrm{MTO}中的\textrm{KKR}-型方程
@@ -344,18 +347,7 @@ $$\chi_{L,\vec k}^{\mathrm{MTO}}(\varepsilon,0,\vec r)=\sum_{\vec T}\mathrm{e}^{
 \end{figure}
 }
 
-\frame
-{
-	\frametitle{\textrm{LMTO~.vs.~LAPW}}
-\begin{figure}[h!]
-\centering
-\vspace*{-0.15in}
-\includegraphics[height=2.50in,width=3.30in,viewport=0 0 440 350,clip]{Figures/LMTO-vs-LAPW.png}
-\caption{\fontsize{5.5pt}{4.2pt}\selectfont{\textrm{Schematic illustration of LMTO vs LAPW.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{LMTO-vs-LAPW}
-\end{figure}
-}
-
+\subsection{\rm{LMTO}方法}
 \frame
 {
 	\frametitle{\textrm{LMTO}方法}
@@ -412,6 +404,18 @@ $$\chi_{L,\vec k}^{\mathrm{MTO}}(\varepsilon,0,\vec r)=\sum_{\vec T}\mathrm{e}^{
 		\item \textcolor{red}{对能量$\varepsilon_v$依赖到一阶}
 		\item \textcolor{red}{径向函数在\textrm{MT}球外的尾巴抵消保持到计算所需要的最低阶}
 	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{\textrm{LMTO~.vs.~LAPW}}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.15in}
+\includegraphics[height=2.50in,width=3.30in,viewport=0 0 440 350,clip]{Figures/LMTO-vs-LAPW.png}
+\caption{\fontsize{5.5pt}{4.2pt}\selectfont{\textrm{Schematic illustration of LMTO vs LAPW.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{LMTO-vs-LAPW}
+\end{figure}
 }
 
 \frame
