@@ -254,12 +254,11 @@ $$\Psi_l^{>}(\varepsilon,r)=C_l\bigg[j_l(\kappa r)-\tan\eta_l(\varepsilon)n_l(\k
 		%这里参数(衰减常数)$q_0$由$q_0^2=\varepsilon-V_0$确定
 		该展开形式表明:
 		\begin{itemize}
-			\item 位于$\vec R$处的球\textrm{Neumann}函数(含角度部分$\mathrm{i}^lY_L(\hat{\vec r})$)可由位于$\vec R^{\prime}$处的球\textrm{Bessel}函数展开
-			\item 考虑到位于$\vec R$的球\textrm{Neumann}函数在原点不发散，必须用\textrm{Helmholtz}方程的正则解\textrm{(regular solutions)}展开:~已知含角度部分的球\textrm{Bessel}函数(令$\vec R^{\prime}=0$)可以写成
+			\item 位于$\vec R$处的球\textrm{Neumann}函数(含角度部分$\mathrm{i}^lY_L(\hat{\vec r})$)可由位于$\vec R^{\prime}$处的球\textrm{Bessel}函数展开(为简便起见，可取$\vec R^{\prime}=0$)，此时含角度部分的球\textrm{Bessel}函数可以写成
 				\begin{displaymath}
 					j_{L^{\prime}}(\vec k,\vec r)=j_{l^{\prime}}(\vec k\cdot\vec r)\mathrm{i}^{l^{\prime}}Y_{L^{\prime}}(\hat{\vec r})
 				\end{displaymath}
-			因此在每个\textrm{MT}球内，来自其它球内的函数$\chi_L^{\mathrm{MTO}}(\varepsilon,q_0,\vec r)$的尾巴部分贡献，都有相同的\textrm{Bessel}函数形式
+			\item 考虑到位于$\vec R$的球\textrm{Neumann}函数在原点不发散，必须用\textrm{Helmholtz}方程的正则解\textrm{(regular solutions)}展开，因此在每个\textrm{MT}球内，来自其它球内的函数$\chi_L^{\mathrm{MTO}}(\varepsilon,q_0,\vec r)$的尾巴部分贡献，都有相同的\textrm{Bessel}函数形式
 		\item 不同\textrm{MT}球的尾巴部分实际影响的大小，通过$\cot(\eta_l)$调节
 		\end{itemize}
 
@@ -305,7 +304,7 @@ $$\chi_{L,\vec k}^{\mathrm{MTO}}(\varepsilon,0,\vec r)=\sum_{\vec T}\mathrm{e}^{
 \chi_{L,\vec k}^{\mathrm{MTO}}(\varepsilon,0,\vec r)=\left\{
 	\begin{aligned}
 		&\underline{\textcolor{red}{u_l(\varepsilon,r)\mathrm{i}^lY_L(\hat{\vec r})}}-\dfrac{D_l(\varepsilon)+l+1}{2l+l}u_l(\varepsilon,S)\left(\dfrac rS\right)^l\mathrm{i}^lY_L(\hat{\vec r})&\, r\leqslant S\\
-		&+\textcolor{magenta}{\dfrac{l-D_l(\varepsilon)}{2l+1}u_l(\varepsilon,S)\sum_{L^{\prime}}\left(\dfrac rS\right)^{l^{\prime}}\dfrac1{2(2l^{\prime}+1)}\mathrm{i}^{l^{\prime}}Y_{L^{\prime}}(\hat{\vec r})S_{LL^{\prime}}(\vec k)}&\, r>S
+		&\textcolor{magenta}{+\dfrac{l-D_l(\varepsilon)}{2l+1}u_l(\varepsilon,S)\sum_{L^{\prime}}\left(\dfrac rS\right)^{l^{\prime}}\dfrac1{2(2l^{\prime}+1)}\mathrm{i}^{l^{\prime}}Y_{L^{\prime}}(\hat{\vec r})S_{LL^{\prime}}(\vec k)}&\, r>S
 	\end{aligned}\right.
 \end{displaymath}}
 其中
@@ -456,6 +455,7 @@ $$\chi_{L,\vec k}^{\mathrm{MTO}}(\varepsilon,0,\vec r)=\sum_{\vec T}\mathrm{e}^{
 	\bibitem{PR94-1111_1954}\textrm{W. Kohn and N. Rostocker. \textit{Phys. Rev.} \textbf{94} (1954), 1111}
 	\bibitem{PRB12-3060_1975}\textrm{O. K. Andersen. \textit{Phys. Rev.} B, \textbf{12} (1975), 3060}
 	\bibitem{LMTO_Book}\textrm{H. Skriver. \textit{The LMTO method} (Springer, New York, USA, 1984)}
+	\bibitem{Xu_Li_Wang}徐光宪、黎乐民、王德民, {\textit{量子化学——基本原理和从头计算法}}\; \textrm{({\textit{中}}):}~\:~\textrm{第16章~自洽场$\mathrm{X}_{\alpha}$方法},\\科学出版社, 北京, 1985
 	\bibitem{Singh}\textrm{D. J. Singh. \textit{Plane Wave, PseudoPotential and the LAPW method} (Kluwer Academic, Boston,USA, 1994)}
 	\bibitem{Nemoshkalenko-Antonov}\textrm{V. V. Nemoshkalenko and V. N. Antonov. \textit{Computational Methods in Solid State Physics} (Gordon and Breach Science Publisher, Amsterdam, The Netherlands, 1998)}
 }
