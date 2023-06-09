@@ -15,7 +15,7 @@
 \date[\today] % (optional, should be abbreviation of conference name)
 {%	{\fontsize{6.2pt}{4.2pt}\selectfont{\textcolor{blue}{E-mail:~}\url{jiangjun@bcc.ac.cn}}}
 \vskip 45 pt {\fontsize{8.2pt}{6.2pt}\selectfont{%清华大学\;\;物理系% 报告地点
-	\vskip 5 pt \textrm{2023.04.22}}}
+	\vskip 5 pt \textrm{2023.06.10}}}
 }
 
 %% - Either use conference name or its abbreviation
@@ -35,13 +35,13 @@
 %-----------------------------------------------------------------------------
 
 %------------------------------------------------------------------------------列出全文 outline ---------------------------------------------------------------------------------
-%\section*{}
-%\frame[allowframebreaks]
-%{
-%  \frametitle{Outline}
-%%  \frametitle{\textcolor{mycolor}{\secname}}
-%  \tableofcontents%[current,currentsection,currentsubsection]
-%}
+\section*{}
+\frame[allowframebreaks]
+{
+  \frametitle{Outline}
+%  \frametitle{\textcolor{mycolor}{\secname}}
+  \tableofcontents%[current,currentsection,currentsubsection]
+}
 %%在每个section之前列出全部Outline
 %%类似的在每个subsection之前列出全部Outline是\AtBeginSubsection[]
 %\AtBeginSection[]
@@ -72,14 +72,27 @@
 %	\end{itemize}
 %}
 \section{固体光学性质与能带跃迁}
+\subsection{固体光学常数的基本关系}
 \frame
 {
 	\frametitle{固体光学常数间的基本关系}
 	光(电磁波)通过固体材料时，电磁波将与固体中的电子、原子(离子)间相互作用，因此发生光吸收
+\begin{figure}[h!]
+	\vspace{-3pt}
+\centering
+\animategraphics[autoplay, loop, height=2.25in, width=3.6in,viewport= 15 30 570 515,clip]{1}{Figures/Light-wave-}{0}{30}
+%\includegraphics[height=1.29in,width=1.91in,viewport=0 0 400 275,clip]{Figures/Pseudo-scatter.jpg}
+\caption{\fontsize{5.5pt}{4.2pt}\selectfont{\textrm{Schematic illustration of electromagnetic wave propagation.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Light-Wave}
+\end{figure}
+}
+
+\frame{
+	\frametitle{固体光学常数间的基本关系}
 	\begin{itemize}
 		\item 角频率为$\omega$的电磁波(横波)在均匀介质中传播(设为$x$方向)
 			\begin{displaymath}
-				\mathbf{E}(\vec r,t)=E(z)\mathrm{e}^{-\mathrm{i}\omega t}(1,0,0)\qquad\mathbf{E}\parallel x
+				\mathbf{E}(\vec r,t)=E(z)\mathrm{e}^{-\mathrm{i}\omega t}(1,0,0)\qquad\mathbf{E}\perp x
 			\end{displaymath}
 			根据\textrm{Maxwell~}方程，可有电场与电流密度的基本关系
 			\begin{displaymath}
@@ -152,7 +165,7 @@
 %\hspace*{-10pt}
 \vspace*{-0.4in}
 \includegraphics[height=1.2in,width=1.8in,viewport=0 0 750 600,clip]{Figures/Optic-reflect.png}
-\caption{\tiny \textrm{Schematic representation of incident, reflected and transmitted electromagnetic wave at the surface.}}%
+\caption{\fontsize{5.5pt}{4.2pt}\selectfont{\textrm{Schematic representation of incident, reflected and transmitted electromagnetic\\ wave at the surface.}}}%
 \label{Optic-reflect}
 \end{figure} 
 			\begin{displaymath}
@@ -169,6 +182,41 @@
 }
 
 %\subsection{自由载流子与\rm{Drude}模型}
+\subsection{光子与电子的激发}
+\frame
+{
+	\frametitle{光子与电子的激发}
+	电磁波在介质中的传播，伴随了光子与介质中电子的相互作用
+\begin{figure}[h!]
+\centering
+%\hspace*{-10pt}
+\vspace*{-10pt}
+\includegraphics[height=2.3in,width=2.2in,viewport=0 0 800 800,clip]{Figures/Inter-Intra_band-transition.png}
+\caption{\fontsize{5.5pt}{4.2pt}\selectfont{\textrm{Schematic representation of interaction of photons and the electrons in the semiconductor.}}}%
+\label{Optic-transition}
+\end{figure} 
+}
+
+\frame
+{
+	\frametitle{光子与电子的激发}
+	粒子间相互作用遵守能量守恒与动量守恒:~\\
+	假设介质中的电子初始态为$\vec k_i$，对应的能量为$E_n(\vec k_i)$，电子吸收入射光子跃迁到终态$\vec k_f$，能量变为$E_m(\vec k_f)$，则有
+	\begin{itemize}
+		\item 能量守恒
+			\begin{displaymath}
+				E_m(\vec k_f)=E_n(\vec k_i)+\hbar\omega
+			\end{displaymath}
+			$\hbar\omega$是入射光子能量
+		\item 动量守恒
+			\begin{displaymath}
+				\vec k_f=\vec k_i+\vec q
+			\end{displaymath}
+			$\vec q$是入射光子的动量
+	\end{itemize}
+	具体计算过程中，考虑光子引起的介质中电子的状态变化，采取了一系列的简化
+}
+
 \frame
 {
 	\frametitle{自由电子的\textrm{Drude}模型}
@@ -227,7 +275,7 @@
 \begin{figure}[h!]
 \centering
 %\hspace*{-10pt}
-\vspace*{-0.3in}
+\vspace*{-0.2in}
 \includegraphics[height=1.8in,width=2.0in,viewport=0 0 1000 900,clip]{Figures/optic_dir.png}
 \caption{\fontsize{8.0pt}{5.2pt}\selectfont\textrm{Schematic representation of directly inter-band transition.}}%
 \label{Optic-dir}
@@ -239,9 +287,9 @@
 {
 	\frametitle{带间跃迁的计算}
 %\begin{itemize}
-晶体中动量为$\vec p$的电子在电磁场(电磁场矢量势为$\vec A$)存在情况下，应用含时微扰理论，
+	晶体中动量为$\vec p$的电子在电磁场(电磁场矢量势为$\mathbf{A}$)存在情况下，应用含时微扰理论，
 \begin{displaymath}
-	\hspace*{-20pt}
+	\hspace*{-10pt}
 	H=\frac1{2m}[\vec p+\frac{e}c\mathbf{A}(\vec r,t)]^2+V(\vec r)=\left[ \frac{\vec p^2}{2m}+V(\vec r) \right]+\frac{e}{mc}\mathbf{A}\cdot\vec p+\frac{e^2}{2mc^2}\mathbf{A}^2
 \end{displaymath}
 其中电磁波
@@ -257,8 +305,8 @@
 \begin{displaymath}
 %  \left\{
 \begin{aligned}
-    \vec E&=-\frac1c\frac{\partial\vec A}{\partial t}\\
-    \vec B&=\nabla\times\vec A
+	\vec E&=-\frac1c\frac{\partial\mathbf{A}}{\partial t}\\
+	\vec B&=\nabla\times\mathbf{A}
   \end{aligned}%\right.
   \label{eq:optic-26}
 \end{displaymath}
@@ -365,4 +413,59 @@ $\varepsilon_2(\omega)$是晶体的光学吸收和能带结构之间的基本关
 \end{displaymath}
 类似态密度的定义，而$E_{cv}(\vec k)$同时联系着价带和导带，因此称为联合态密度。当矩阵元$\vec M_{cv}(\vec k)$随波矢$\vec k$变化比较小的时候，可以近似地认为$\varepsilon_2(\omega)\!\propto\!J_{cv}(\omega)$。满足$|\nabla_{\vec k}E_{cv}(\vec k)|\!=\!0$的$\vec k$点，是联合态密度$J_{cv}(\omega)$和$\varepsilon_2(\omega)$的奇点(\textrm{Van Hove}奇点或临界点)，在这些点，$J_{cv}(\omega)$和$\varepsilon_2(\omega)$%的能谱图将出现典型结构(即
 对能量的微商呈现典型的不连续。%联合态密度的奇点有两种情况，即$\nabla_{\vec k}E_c(\vec k)\!=\!\nabla_{\vec k}E_v(\vec k)\!=\!0$和$\nabla_{\vec k}E_c(\vec k)\!=\!\nabla_{\vec k}E_v(\vec k)\!\neq\!0$。将$E_{cv}(\vec k)$在奇点作Taylor级数展开到二级，$$E_{cv}(\vec k)=E_0+a_xk_x^2+a_yk_y^2+a_zk_z^2$$可以看出有四种类型的奇点：
+}
+
+\frame
+{
+	\frametitle{联合态密度\textrm{(Joint DOS, JDOS)}}
+\begin{figure}[h!]
+\centering
+%\hspace*{-10pt}
+\vspace*{-0.05in}
+\includegraphics[height=2.0in,width=1.7in,viewport=0 0 630 760,clip]{Figures/Inter_band-transition_R.png}
+\includegraphics[height=1.0in,width=2.15in,viewport=0 0 1320 580,clip]{Figures/Inter_band-transition_JDOS.png}
+\caption{\fontsize{5.2pt}{4.0pt}\selectfont\textrm{Schematic representation of the joint-DOS and the Van-Hove singularity.}}%
+\label{Optic-JDOS}
+\end{figure} 
+}
+
+\subsection{复杂的光子与电子相互作用}
+\frame
+{
+	\frametitle{电子对光子的吸收与受激辐射}
+\begin{figure}[h!]
+\centering
+%\hspace*{-10pt}
+\vspace*{-0.05in}
+\includegraphics[height=1.9in,width=4.0in,viewport=0 0 1500 600,clip]{Figures/Inter_band-transition_abs-emi.png}
+\caption{\fontsize{5.2pt}{4.0pt}\selectfont\textrm{Schematic representation of the stimulated absorption and emission of electrons.}}%
+\label{Stimulated-absorption-emission}
+\end{figure} 
+}
+
+\frame
+{
+	\frametitle{电子的自发辐射}
+\begin{figure}[h!]
+\centering
+%\hspace*{-10pt}
+\vspace*{-0.05in}
+\includegraphics[height=2.0in,width=2.7in,viewport=0 0 830 620,clip]{Figures/Inter_band-transition_emission.png}
+\caption{\fontsize{5.2pt}{4.0pt}\selectfont\textrm{Schematic representation of the spontaneous emission of electrons.}}%
+\label{spontaneous-emission}
+\end{figure} 
+}
+
+\frame
+{
+	\frametitle{光电子能谱与电子带隙}
+\begin{figure}[h!]
+\centering
+%\hspace*{-10pt}
+%\vspace*{-0.00in}
+\includegraphics[height=1.7in,width=1.95in,viewport=0 0 950 700,clip]{Figures/Optical_gain-loss.png}
+\includegraphics[height=1.2in,width=1.95in,viewport=0 0 680 460,clip]{Figures/Optical_Bandgap.jpg}
+\caption{\fontsize{5.2pt}{4.0pt}\selectfont\textrm{Schematic representation of the gain-loss spectra and the spectra vs the band gap.}}%
+\label{gain-loss_Bandgap}
+\end{figure} 
 }
