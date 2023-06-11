@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  不使用 authblk 包制作标题  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %-------------------------------PPT Title-------------------------------------
-\title{14-固体光学性质与带间跃迁}
+\title{14-固体光学性质与电子带间跃迁}
 %-----------------------------------------------------------------------------
 %----------------------------Author & Date------------------------------------
 
@@ -181,15 +181,14 @@
 	\end{itemize}
 }
 
-%\subsection{自由载流子与\rm{Drude}模型}
-\subsection{光子与电子的激发}
+\subsection{载流子与\rm{Lorentz-Drude}模型}
+%\subsection{光子与电子的激发}
 \frame
 {
 	\frametitle{光子与电子的激发}
 	电磁波在介质中的传播，伴随了光子与介质中电子的相互作用
 \begin{figure}[h!]
 \centering
-%\hspace*{-10pt}
 \vspace*{-10pt}
 \includegraphics[height=2.3in,width=2.2in,viewport=0 0 800 800,clip]{Figures/Inter-Intra_band-transition.png}
 \caption{\fontsize{5.5pt}{4.2pt}\selectfont{\textrm{Schematic representation of interaction of photons and the electrons in the semiconductor.}}}%
@@ -219,8 +218,7 @@
 
 \frame
 {
-	\frametitle{自由电子的\textrm{Drude}模型}
-	\textcolor{blue}{在远红外区，经典自由电子气模型可以很好地描述金属的光学行为}
+	\frametitle{电场中的自由电子:~\textrm{Lorentz}模型}
 	\begin{itemize}
 		\item 载流子在外电场$\mathbf{E}(\vec r,t)=\mathbf{E}_0\mathrm{e}^{\mathrm{i}(\vec q\cdot\vec r-\omega t)}$下的运动方程
 			\begin{displaymath}
@@ -236,11 +234,43 @@
 				\vec A_0=\frac{e\tau}m\frac1{\omega(\mathrm{i}+\omega\tau)}\mathbf{E}_0
 			\end{displaymath}
 	\end{itemize}
+	在经典的图像中，交变电场中的自由电子运动可类比谐振子
 }
 
 \frame
 {
-	\frametitle{自由电子的\textrm{Drude}模型}
+	\frametitle{\textrm{Lorentz}模型}
+\begin{figure}[h!]
+\centering
+\vspace*{-5pt}
+\includegraphics[height=1.05in,width=0.7in,viewport=0 0 380 550,clip]{Figures/A_mechanical_model_giving_rise_to_the_negative_effective_mass_effect.jpg}
+\includegraphics[height=1.55in,width=3.25in,viewport=0 0 1300 600,clip]{Figures/Equivalent_mechanical_scheme_of_electron_gas_in_ionic_lattice.jpg}
+\caption{\fontsize{5.5pt}{4.2pt}\selectfont{\textrm{Equivalent mechanical scheme of electron gas in ionic lattice.}}}%
+\label{Electron-gas-in-lattice}
+\end{figure} 
+			$\omega_{\mathrm{p}}$是载流子的等离振荡频率
+			\begin{displaymath}
+				\omega_{\mathrm{p}}^2=\frac{4\pi ne^2}m
+			\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{电场对导带电子的影响}
+\begin{figure}[h!]
+\centering
+\vspace*{-13pt}
+\includegraphics[height=1.4in,width=3.8in,viewport=0 0 480 180,clip]{Figures/Electrmagnetic_Fermi-surface-1.jpg}
+\includegraphics[height=1.35in,width=2.2in,viewport=0 0 200 130,clip]{Figures/Electrmagnetic_Fermi-surface-2.jpg}
+\caption{\fontsize{5.5pt}{4.2pt}\selectfont{\textrm{Schematic representation of the Fermi-surface affected by the electrmagnetic field.}}}%
+\label{CB-Electron-in-E}
+\end{figure} 
+}
+
+\frame
+{
+	\frametitle{\textrm{Lorentz-Drude}模型}
+	\textcolor{blue}{在远红外区，经典自由电子气模型可以很好地描述金属的光学行为}
 	如果载流子密度为$n$，则电流密度
 	\begin{displaymath}
 		\mathbf{J}=n(-e)\dot{\vec r}=n(-e)(-\mathrm{i}\omega)\vec A_0\mathrm{e}^{-\mathrm{i}\omega t}=\frac{ne^2\tau}m\frac1{1-\mathrm{i}\omega\tau}\mathbf{E}_0\mathrm{e}^{-\mathrm{i}\omega t}
@@ -255,14 +285,40 @@
 			\begin{displaymath}
 				\varepsilon(\omega)=1-\frac{\omega_\mathrm{p}^2}{\omega(\omega+\mathrm{i}/\tau)}=\underline{\textcolor{blue}{\left[ 1-\frac{\omega_{\mathrm{p}}^2\tau^2}{1+\omega^2\tau^2} \right]}}+\mathrm{i}\underline{\textcolor{blue}{\left[ \frac{\omega_{\mathrm{p}}^2\tau}{\omega(1+\omega^2\tau^2)} \right]}}
 			\end{displaymath}
-			其中$\omega_{\mathrm{p}}$是载流子的等离振荡频率
-			\begin{displaymath}
-				\omega_{\mathrm{p}}^2=\frac{4\pi ne^2}m
-			\end{displaymath}
 %\begin{displaymath}
 %	\epsilon_1(\omega)=1-\frac{\omega_{\mathrm{p}}^2\tau^2}{1+\omega^2\tau^2}\quad \epsilon_2(\omega)=\frac{\omega_{\mathrm{p}}^2\tau}{\omega(1+\omega^2\tau^2)}\quad
 %\end{displaymath}
 	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{\textrm{Lorentz-Drude}模型}
+\begin{figure}[h!]
+\centering
+\vspace*{-13pt}
+\includegraphics[height=1.8in,width=2.6in,viewport=0 0 200 155,clip]{Figures/Optical-conductivity-in-the-Drude-relaxation-and-in-the-Lorentz-resonance.png}
+\caption{\fontsize{5.5pt}{4.2pt}\selectfont{\textrm{Optical conductivity in the Drude relaxation and in the Lorentz resonance.}}}%
+\label{Drude-vs-Lorentz}
+\end{figure} 
+\begin{itemize}
+	\item \textrm{Lorentz-Model}:\\
+		始于电子与晶格离子间作用，侧重描述电子在固体中的运动
+	\item \textrm{Drude-Model}:\\
+		侧重描述自由电子气对外部交变电场的响应
+\end{itemize}
+}
+
+\frame
+{
+	\frametitle{\textrm{Lorentz-Drude}模型}
+\begin{figure}[h!]
+\centering
+\vspace*{-13pt}
+\includegraphics[height=2.7in,width=3.6in,viewport=0 0 500 400,clip]{Figures/Lorentz_Drude-model.png}
+\caption{\fontsize{5.5pt}{4.2pt}\selectfont{\textrm{Optical permittivity in the Plasma oscillation and in the Dielectric resonance.}}}%
+\label{Drude-vs-Lorentz}
+\end{figure} 
 }
 
 \frame
@@ -283,6 +339,7 @@
 \end{itemize}
 }
 
+\subsection{带间电子的激发}
 \frame
 {
 	\frametitle{带间跃迁的计算}
@@ -433,19 +490,22 @@ $\varepsilon_2(\omega)$是晶体的光学吸收和能带结构之间的基本关
 \frame
 {
 	\frametitle{电子对光子的吸收与受激辐射}
+电子、空穴与相互作用	
 \begin{figure}[h!]
 \centering
 %\hspace*{-10pt}
-\vspace*{-0.05in}
+\vspace*{-0.2in}
 \includegraphics[height=1.9in,width=4.1in,viewport=0 0 1500 600,clip]{Figures/Inter_band-transition_abs-emi.png}
 \caption{\fontsize{5.2pt}{4.0pt}\selectfont\textrm{Schematic representation of the stimulated absorption and emission of electrons.}}%
 \label{Stimulated-absorption-emission}
 \end{figure} 
+电子-空穴对构成准粒子\textrm{(quasi-particle)}
 }
 
 \frame
 {
 	\frametitle{电子的自发辐射}
+	电子-空穴的复合与准粒子的寿命
 \begin{figure}[h!]
 \centering
 %\hspace*{-10pt}
@@ -458,14 +518,28 @@ $\varepsilon_2(\omega)$是晶体的光学吸收和能带结构之间的基本关
 
 \frame
 {
-	\frametitle{光电子能谱与电子带隙}
+	\frametitle{吸收谱与发射谱}
 \begin{figure}[h!]
 \centering
 %\hspace*{-10pt}
 \vspace*{-0.19in}
-\includegraphics[height=1.7in,width=2.30in,viewport=0 0 950 700,clip]{Figures/Optical_gain-loss.png}
-\includegraphics[height=1.1in,width=2.00in,viewport=0 0 670 460,clip]{Figures/Optical_Bandgap.jpg}
-\caption{\fontsize{5.2pt}{4.0pt}\selectfont\textrm{Schematic representation of the gain-loss spectra and the spectra vs the band gap.}}%
+\includegraphics[height=2.5in,width=3.80in,viewport=0 0 950 700,clip]{Figures/Optical_gain-loss.png}
+%\includegraphics[height=1.1in,width=2.00in,viewport=0 0 670 460,clip]{Figures/Optical_Bandgap.jpg}
+\caption{\fontsize{5.2pt}{4.0pt}\selectfont\textrm{Schematic representation of the gain-loss spectra.}}%
+\label{gain-loss_Bandgap}
+\end{figure} 
+}
+
+\frame
+{
+	\frametitle{光电子能谱与电子带隙}
+\begin{figure}[h!]
+\centering
+%\hspace*{-10pt}
+\vspace*{-3pt}
+%\includegraphics[height=1.7in,width=2.30in,viewport=0 0 950 700,clip]{Figures/Optical_gain-loss.png}
+\includegraphics[height=2.4in,width=4.00in,viewport=0 0 670 460,clip]{Figures/Optical_Bandgap.jpg}
+\caption{\fontsize{5.2pt}{4.0pt}\selectfont\textrm{Schematic representation of the spectra vs the band gap.}}%
 \label{gain-loss_Bandgap}
 \end{figure} 
 }
