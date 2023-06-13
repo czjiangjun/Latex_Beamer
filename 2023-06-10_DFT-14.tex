@@ -227,16 +227,41 @@
 			这里$\vec r(t)$是载流子坐标，$\tau$是\textcolor{red}{唯象弛豫时间}
 		\item 长波极限下，忽略电磁波在空间的变化
 			\begin{displaymath}
-				m\ddot{\vec r}=-\frac m{\tau}\dot{\vec r}-e\mathbf{E}_0\mathrm{e}^{\mathrm{i}-\omega t}
+				m\ddot{\vec r}=-\frac m{\tau}\dot{\vec r}-e\mathbf{E}_0\mathrm{e}^{-\mathrm{i}\omega t}
 			\end{displaymath}
 			取载流子位置函数$\vec r(t)=\vec A_0\mathrm{e}^{-\mathrm{i}\omega t}$，有
 			\begin{displaymath}
-				\vec A_0=\frac{e\tau}m\frac1{\omega(\mathrm{i}+\omega\tau)}\mathbf{E}_0
+				\vec A_0=\frac{e\tau}m\frac1{(\omega^2+\mathrm{i}\omega\tau-\omega_0^2)}\mathbf{E}_0
 			\end{displaymath}
 	\end{itemize}
-	在经典的图像中，交变电场中的自由电子运动可类比谐振子
+	经典图像中，介质中载流子的运动可类比于谐振子，$\omega_0$为弹簧的固有频率
 }
 
+%\frame
+%{
+%	\frametitle{\textrm{Lorentz}模型}
+%由谐振子偶极与电场的关系(电极化率)可有
+%\begin{displaymath}
+%\begin{aligned}
+%	\mathbf{P}=&N\mathbf{p}\\
+%	\mathbf{P}=&\varepsilon_0\chi_{\mathrm{e}}\mathbf{E}\\
+%	\varepsilon=&1+\chi_{\mathrm{e}}
+%\end{aligned}
+%\end{displaymath}
+%这里$\chi_{\mathrm{e}}$称为电极化率
+%\begin{displaymath}
+%\begin{aligned}
+%	\vec p=&q\vec r(t)\\
+%	=&\dfrac{q^2}m\dfrac1{(\omega^2+\mathrm{i}\omega\tau-\omega_0^2)}\mathbf{E}_0\mathrm{e}^{-\mathrm{i}\omega t}\\
+%	=&\dfrac{q^2}m\dfrac1{(\omega^2+\mathrm{i}\omega\tau-\omega_0^2)}\mathbf{E}
+%\end{aligned}
+%\end{displaymath}
+%因此
+%\begin{displaymath}
+%	\varepsilon=1+\dfrac{Nq^2}{m\varepsilon_0}\dfrac1{(\omega^2+\mathrm{i}\omega\tau-\omega_0^2)}\Longrightarrow \omega_{\mathrm{p}}^2=\dfrac{Nq^2}{m\varepsilon_0}	
+%\end{displaymath}
+%}
+%
 \frame
 {
 	\frametitle{\textrm{Lorentz}模型}
@@ -270,25 +295,20 @@
 \frame
 {
 	\frametitle{\textrm{Lorentz-Drude}模型}
-	\textcolor{blue}{在远红外区，经典自由电子气模型可以很好地描述金属的光学行为}
-	如果载流子密度为$n$，则电流密度
-	\begin{displaymath}
-		\mathbf{J}=n(-e)\dot{\vec r}=n(-e)(-\mathrm{i}\omega)\vec A_0\mathrm{e}^{-\mathrm{i}\omega t}=\frac{ne^2\tau}m\frac1{1-\mathrm{i}\omega\tau}\mathbf{E}_0\mathrm{e}^{-\mathrm{i}\omega t}
-	\end{displaymath}
-	由此可得频率有关的电导率表示为
-	\begin{displaymath}
-		\sigma(\omega)=\frac{ne^2\tau}m\frac1{1-\mathrm{i}\omega\tau}=\sigma_0\frac1{1-\mathrm{i}\omega\tau}
-	\end{displaymath}
-	其中$\sigma_0=ne^2\tau/m$是静态电导率
-	\begin{itemize}
-		\item 介电函数可表示为
+\begin{itemize}
+	\item \textrm{Lorentz-Model}:\\
+		始于电子与晶格离子间作用，侧重描述电子在固体中的运动，介电函数为
+		\begin{displaymath}
+			\varepsilon(\omega)=1-\dfrac{\omega_{\mathrm{p}^2}}{\omega^2+\mathrm{i}\omega\tau-\omega_0^2}
+		\end{displaymath}
+		\textcolor{blue}{\textrm{Lorentz}模型中，取$\omega_0=0$，即为\textrm{Drude}模型}
+	\item \textrm{Drude-Model}:\\
+		侧重描述自由电子气对外部交变电场的响应，则介电函数可以表示为:
 			\begin{displaymath}
 				\varepsilon(\omega)=1-\frac{\omega_\mathrm{p}^2}{\omega(\omega+\mathrm{i}/\tau)}=\underline{\textcolor{blue}{\left[ 1-\frac{\omega_{\mathrm{p}}^2\tau^2}{1+\omega^2\tau^2} \right]}}+\mathrm{i}\underline{\textcolor{blue}{\left[ \frac{\omega_{\mathrm{p}}^2\tau}{\omega(1+\omega^2\tau^2)} \right]}}
 			\end{displaymath}
 %\begin{displaymath}
-%	\epsilon_1(\omega)=1-\frac{\omega_{\mathrm{p}}^2\tau^2}{1+\omega^2\tau^2}\quad \epsilon_2(\omega)=\frac{\omega_{\mathrm{p}}^2\tau}{\omega(1+\omega^2\tau^2)}\quad
-%\end{displaymath}
-	\end{itemize}
+\end{itemize}
 }
 
 \frame
@@ -297,16 +317,10 @@
 \begin{figure}[h!]
 \centering
 \vspace*{-13pt}
-\includegraphics[height=1.8in,width=2.6in,viewport=0 0 200 155,clip]{Figures/Optical-conductivity-in-the-Drude-relaxation-and-in-the-Lorentz-resonance.png}
+\includegraphics[height=2.5in,width=3.6in,viewport=0 0 200 155,clip]{Figures/Optical-conductivity-in-the-Drude-relaxation-and-in-the-Lorentz-resonance.png}
 \caption{\fontsize{5.5pt}{4.2pt}\selectfont{\textrm{Optical conductivity in the Drude relaxation and in the Lorentz resonance.}}}%
 \label{Drude-vs-Lorentz}
 \end{figure} 
-\begin{itemize}
-	\item \textrm{Lorentz-Model}:\\
-		始于电子与晶格离子间作用，侧重描述电子在固体中的运动
-	\item \textrm{Drude-Model}:\\
-		侧重描述自由电子气对外部交变电场的响应
-\end{itemize}
 }
 
 \frame
@@ -319,6 +333,28 @@
 \caption{\fontsize{5.5pt}{4.2pt}\selectfont{\textrm{Optical permittivity in the Plasma oscillation and in the Dielectric resonance.}}}%
 \label{Drude-vs-Lorentz}
 \end{figure} 
+}
+
+\frame
+{
+	\frametitle{\textrm{Drude}模型}
+	\textcolor{blue}{在远红外区，经典自由电子气模型可以很好地描述金属的光学行为}
+	如果载流子密度为$n$，则电流密度
+	\begin{displaymath}
+		\mathbf{J}=n(-e)\dot{\vec r}=n(-e)(-\mathrm{i}\omega)\vec A_0\mathrm{e}^{-\mathrm{i}\omega t}=\frac{ne^2\tau}m\frac1{1-\mathrm{i}\omega\tau}\mathbf{E}_0\mathrm{e}^{-\mathrm{i}\omega t}
+	\end{displaymath}
+	由此可得频率有关的电导率表示为
+	\begin{displaymath}
+		\sigma(\omega)=\frac{ne^2\tau}m\frac1{1-\mathrm{i}\omega\tau}=\sigma_0\frac1{1-\mathrm{i}\omega\tau}
+	\end{displaymath}
+	其中$\sigma_0=ne^2\tau/m$是静态电导率
+%	\begin{itemize}
+%		\item 
+	介电函数可表示为
+	\begin{displaymath}
+	\epsilon_1(\omega)=1-\frac{\omega_{\mathrm{p}}^2\tau^2}{1+\omega^2\tau^2}\quad \epsilon_2(\omega)=\frac{\omega_{\mathrm{p}}^2\tau}{\omega(1+\omega^2\tau^2)}\quad
+\end{displaymath}
+%	\end{itemize}
 }
 
 \frame
