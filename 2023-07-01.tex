@@ -516,21 +516,343 @@
 {
 	\frametitle{网络查询命令}
 	\begin{itemize}
-		\item \textcolor{blue}{whereis}:~确定命令位置
-		\item \textcolor{blue}{which}:~确定命令位置
-		\item \textcolor{blue}{who}:~列出正在使用系统的用户
-		\item \textcolor{blue}{whoami}:~显示正在使用本终端的用户名
+		\item \textcolor{blue}{arp}:~网络和\textrm{IP}地址查询
+		\item \textcolor{blue}{ifconfig}:~网络和\textrm{MAC}地址查询
 	\end{itemize}
 \begin{figure}[h!]
 \centering
 \vspace{-5.5pt}
-\includegraphics[height=1.4in,width=3.9in,viewport=0 30 800 300,clip]{Figures/Ubuntu-which.png}
+\includegraphics[height=2.1in,width=3.9in,viewport=0 0 800 470,clip]{Figures/Ubuntu-netip.png}
 %\caption{\textrm{The wave-particle duality and Photoelectric effect}}
-\label{Linux-command-which}
+\label{Linux-command-netip}
 \end{figure}
 }
 
+\frame
+{
+	\frametitle{远程登录命令}
+	\begin{itemize}
+		\item \textcolor{blue}{ssh}:~远程登录
+\begin{figure}[h!]
+\centering
+\vspace{-10.5pt}
+\includegraphics[height=2.4in,width=3.9in,viewport=0 0 800 550,clip]{Figures/Ubuntu-ssh.png}
+%\caption{\textrm{The wave-particle duality and Photoelectric effect}}
+\label{Linux-command-ssh}
+\end{figure}
+	\end{itemize}
+}
 
+\frame
+{
+	\frametitle{远程无密码登录}
+\begin{figure}[h!]
+\centering
+\vspace{-13.2pt}
+\includegraphics[height=3.02in,width=2.9in,viewport=0 0 1080 1130,clip]{Figures/Ubuntu-auto-ssh.png}
+%\caption{\textrm{The wave-particle duality and Photoelectric effect}}
+\label{Linux-command-auto-ssh}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{远程传输命令}
+	\begin{itemize}
+		\item \textcolor{blue}{scp}:~远程传输
+\begin{figure}[h!]
+\centering
+\vspace{-10.5pt}
+\includegraphics[height=0.65in,width=3.9in,viewport=0 0 1080 200,clip]{Figures/Ubuntu-scp.png}
+%\caption{\textrm{The wave-particle duality and Photoelectric effect}}
+\label{Linux-command-scp}
+\end{figure}
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{程序运行命令}
+	\begin{itemize}
+\setlength{\itemsep}{-10pt}
+		\item \textcolor{blue}{echo}:~参数回应至标准输出
+\begin{figure}[h!]
+\centering
+\vspace{-15.5pt}
+\includegraphics[height=1.1in,width=3.9in,viewport=0 0 800 230,clip]{Figures/Ubuntu-echo.png}
+%\caption{\textrm{The wave-particle duality and Photoelectric effect}}
+\label{Linux-command-echo}
+\end{figure}
+		\item \textcolor{blue}{kill}:~终止指定进程
+\begin{figure}[h!]
+\centering
+\vspace{-15.5pt}
+\includegraphics[height=0.8in,width=3.9in,viewport=0 0 800 180,clip]{Figures/Ubuntu-kill.png}
+%\caption{\textrm{The wave-particle duality and Photoelectric effect}}
+\label{Linux-command-kill}
+\end{figure}
+\end{itemize}
+}
+
+\frame
+{
+	\frametitle{程序运行命令}
+	\begin{itemize}
+		\item \textcolor{blue}{tee}:~将标准输出同时复制到文件
+\begin{figure}[h!]
+\centering
+\vspace{-10.5pt}
+\includegraphics[height=1.15in,width=3.9in,viewport=0 0 800 260,clip]{Figures/Ubuntu-tee.png}
+%\caption{\textrm{The wave-particle duality and Photoelectric effect}}
+\label{Linux-command-tee}
+\end{figure}
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{其它命令}
+	\begin{itemize}
+\setlength{\itemsep}{-5pt}
+		\item \textcolor{blue}{cal}:~打印日历
+\begin{figure}[h!]
+\centering
+\vspace{-5.5pt}
+\includegraphics[height=1.7in,width=3.4in,viewport=0 110 700 480,clip]{Figures/Ubuntu-cal.png}
+%\caption{\textrm{The wave-particle duality and Photoelectric effect}}
+\label{Linux-command-cal}
+\end{figure}
+		\item \textcolor{blue}{passwd}:~终止指定进程
+\begin{figure}[h!]
+\centering
+\vspace{-5.5pt}
+\includegraphics[height=0.55in,width=3.4in,viewport=0 0 700 120,clip]{Figures/Ubuntu-passwd.png}
+%\caption{\textrm{The wave-particle duality and Photoelectric effect}}
+\label{Linux-command-passwd}
+\end{figure}
+\end{itemize}
+}
+
+\frame
+{
+	\frametitle{其它命令}
+	\begin{itemize}
+		\item \textcolor{blue}{man}:~查询参考手册信息
+	\end{itemize}
+\begin{figure}[h!]
+\centering
+\vspace{-7.5pt}
+\includegraphics[height=2.65in,width=4.0in,viewport=0 0 1410 860,clip]{Figures/Ubuntu-man.png}
+%\caption{\textrm{The wave-particle duality and Photoelectric effect}}
+\label{Linux-command-man}
+\end{figure}
+}
+
+\section{文本编辑器\rm{vi/vim}简介}
+\frame
+{
+	\frametitle{\textrm{vi}简介}
+	\textrm{vi}命令是\textrm{UNIX}操作系统和类\textrm{UNIX}操作系统中最通用的全屏幕纯文本编辑器
+
+	\textrm{Linux}中的\textrm{vi}编辑器叫\textrm{vim}，是\textrm{vi}的增强版 \textrm{(vi Improved)}，与\textrm{vi}编辑器完全兼容，而且实现了很多增强功能
+	
+	\textrm{Ubuntu}中\textrm{vim}的安装:~\underline{\textcolor{purple}{sudo~apt-get~install~vim}}
+\begin{figure}[h!]
+\centering
+\vspace*{0.1in}
+\subfigure[\textrm{A new file}]{
+\label{fig:vim-open-0}
+\includegraphics[height=1.1in,width=2.00in,viewport=0 0 730 400,clip]{Figures/vim-open-0.png}}
+\subfigure[\textrm{An existing file}]{
+\label{fig:vim-open-1}
+\includegraphics[height=1.1in,width=1.75in,viewport=0 0 700 450,clip]{Figures/vim-open-1.png}}
+%\caption{\tiny \textrm{The Band-structure from Molecular-orbital.}}%
+\label{vim-open}
+\end{figure} 
+}
+
+\frame
+{
+	\frametitle{\textrm{vi}的三种工作方式}
+	\begin{itemize}
+		\item 命令方式~\textrm{(默认方式)}
+		\item 插入方式
+		\item 末行方式~\textrm{(ex~转义方式)}
+	\end{itemize}
+\begin{figure}[h!]
+\centering
+\vspace{-6.0pt}
+\includegraphics[height=2.15in,width=2.5in,viewport=0 0 610 555,clip]{Figures/vi.jpg}
+%\caption{\textrm{The wave-particle duality and Photoelectric effect}}
+\label{Linux-vi-command}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{vi}的插入方式}
+	\begin{enumerate}
+		\item 默认命令方式下按``\textcolor{red}{A}''、``\textcolor{red}{a}''、``\textcolor{red}{O}''、``\textcolor{red}{o}''、``\textcolor{red}{I}''、``\textcolor{red}{i}''键进入插入模式
+	\end{enumerate}
+\begin{minipage}{0.48\textwidth}
+\begin{figure}[h!]
+\centering
+\hspace*{-0.5pt}
+%\vspace{-18.5pt}
+\includegraphics[height=1.3in,width=2.0in,viewport=8 0 700 460,clip]{Figures/vim-insert.png}
+%\caption{\textrm{The wave-particle duality and Photoelectric effect}}
+\label{vim-command-insert}
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.50\textwidth}
+	\begin{itemize}
+		\item \textcolor{red}{a}:~当前字符后添加文本
+		\item \textcolor{red}{A}:~在行末添加文本
+		\item \textcolor{red}{i}:~当前字符前插入文本
+		\item \textcolor{red}{I}:~在行首插入文本
+		\item \textcolor{red}{o}:~当前行后面插入一空行
+		\item \textcolor{red}{O}:~当前行前面插入一空行
+		\item \textcolor{red}{r}:~替换光标位置的字符
+		\item \textcolor{red}{R}:~替换光标开始的字符
+	\end{itemize}
+\end{minipage}
+	\begin{enumerate}
+			\setcounter{enumi}{1}
+		\item 按``\textcolor{red}{Esc}''键退出插入模式
+	\end{enumerate}
+}
+
+\frame
+{
+	\frametitle{\textrm{vi}的命令方式}
+	\begin{itemize}
+		\item \textcolor{red}{h}:~光标向左移动一个字符~~~~\textcolor{red}{i}:~光标向右移动一个字符
+		\item \textcolor{red}{j}:~光标移动至下一行~~~~~~~~~~\textcolor{red}{k}:~光标移动到上一行
+		\item \textcolor{red}{b}:~光标向左移动一个词~~~~~~\textcolor{red}{w}:~光标向右移动一个词
+		\item \textcolor{red}{G}:~光标移动到最后一行~~~~~~\textcolor{red}{gg}:~光标移动到第一行
+		\item \textcolor{red}{\$}:~光标移动本行末~~~~~~~~~~~~~\textcolor{red}{\^{}}:~光标移动到本行第一个字符处
+		\item \textcolor{red}{x}:~删除光标位置的字符~~~~~~~\textcolor{red}{dd}:~删除光标所在行
+		\item \textcolor{red}{D}:~删除光标位置到行末~~~~~~\textcolor{red}{d0}:~删除光标所在位置到行首
+		\item \textcolor{red}{dG}:~删除光标位置到文件尾~\textcolor{red}{dw}:~删除光标所在位置的单词
+		\item \textcolor{red}{u}:~撤销上一次操作~~~~~~~~~~~~\textcolor{red}{.}:~重复上一次操作
+
+		\item \textcolor{red}{yy}:~复制当前行到编辑缓冲区
+		\item \textcolor{red}{pp}:~将编辑缓冲区内容\textrm{copy}到光标下一行
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{\textrm{vi}的命令方式}
+	\begin{itemize}
+		\item \textcolor{red}{Ctrl+u}:~屏幕向上滚动半屏~~~~\textcolor{red}{Ctrl+d}:~屏幕向下滚动半屏
+		\item \textcolor{red}{Ctrl+b}:~屏幕向上滚动一屏~~~~\textcolor{red}{Ctrl+f}:~屏幕向下滚动一屏
+		\item \textcolor{red}{Ctrl+g}:~显示当前编辑文本信息
+		\item \textcolor{blue}{n}\textcolor{red}{dd}:~删除光标所在行起的\textcolor{blue}{n}行字符
+		\item \textcolor{blue}{n}\textcolor{red}{yy}:~复制光标所在行起的\textcolor{blue}{n}行字符
+		\item \textcolor{red}{:}\textcolor{blue}{n}:~光标跳转至第\textcolor{blue}{n}行行首
+		\item \textcolor{red}{:\$}:~光标跳转至末行行首
+		\item \textcolor{red}{ZZ}:~必要时存盘并退出\textrm{vi}
+		\item \textcolor{red}{v}:~\textrm{VISUAL}状态
+		\item \textcolor{red}{V}:~\textrm{VISUAL~LINE}状态
+		\item \textcolor{red}{V}:~\textrm{VISUAL~LINE}状态
+		\item \textcolor{red}{Ctrl+v}:~\textrm{VISUAL~BLOCK}状态
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{\textrm{vi}的末行方式}
+	\begin{itemize}
+		\item \textcolor{red}{/}\textcolor{blue}{exp}:~向前搜索字符串\textcolor{blue}{exp}~~~~\textcolor{red}{?}\textcolor{blue}{exp}:~向回搜索字符串\textcolor{blue}{exp}\\
+		\textcolor{red}{n}:~重复前一搜索命令\textrm{(下一个)}\\
+		\textcolor{red}{N}:~重复前一搜索命令\textrm{(前一个)}
+		\item \textcolor{red}{:w}:执行存盘操作~~~~~~~~~~~~\textcolor{red}{:w}~\textcolor{blue}{file}:~当前编辑内容写入文件\textcolor{blue}{file}
+%		\item \textcolor{red}{:w~>~>}~\textcolor{blue}{file}:~当前编辑内容写到文件\textcolor{blue}{file}原有内容之后
+		\item \textcolor{red}{:w!}~\textcolor{blue}{file}:~当前编辑内容强制写到文件\textcolor{blue}{file}
+		\item \textcolor{red}{:q}:~退出\textrm{vi}~~~~~~~~~~~~\textcolor{red}{:q!}:~强制退出\textrm{vi}，放弃编辑修改内容
+		\item \textcolor{red}{:wq}:~存盘并退出\textrm{vi}
+		\item \textcolor{red}{:x}:~必要时存盘并退出\textrm{vi}
+		\item \textcolor{red}{:s/}\textcolor{blue}{old}\textcolor{red}{/}\textcolor{blue}{new}:~将光标所在行的第一个字符串\textcolor{blue}{old}替换为\textcolor{blue}{new}
+		\item \textcolor{red}{:s/}\textcolor{blue}{old}\textcolor{red}{/}\textcolor{blue}{new}\textcolor{red}{/g}:~将光标所在行的所有的字符串\textcolor{blue}{old}替换为\textcolor{blue}{new}
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{\textrm{vi}的末行方式}
+	\begin{itemize}
+		\item \textcolor{red}{:}\textcolor{blue}{n1,n2}~\textcolor{red}{s/}\textcolor{blue}{old}\textcolor{red}{/}\textcolor{blue}{new}\textcolor{red}{/g}:~将第\textcolor{blue}{n1}行到\textcolor{blue}{n2}行的全部字符串\textcolor{blue}{old}替换为\textcolor{blue}{new}
+		\item \textcolor{red}{:\%s/}\textcolor{blue}{old}\textcolor{red}{/}\textcolor{blue}{new}:~将所有行的第一个字符串\textcolor{blue}{old}替换为\textcolor{blue}{new}
+		\item \textcolor{red}{:\%s/}\textcolor{blue}{old}\textcolor{red}{/}\textcolor{blue}{new}\textcolor{red}{/g}:~将所有行的全部字符串\textcolor{blue}{old}替换为\textcolor{blue}{new}
+		\item \textcolor{red}{:set~nu}:~显示文本的行号~~~~\textcolor{red}{:set~nonu}:~不显示文本的行号
+		\item \textcolor{red}{:set~list}:~显示不可见字符~~~\textcolor{red}{:set~nolist}:~隐藏不可见字符
+		\item \textcolor{red}{:set~all}:~显示全部环境设置
+		\item \textcolor{red}{:!}\textcolor{blue}{cmd}:~在\textrm{vi}中执行\textrm{shell}命令\textcolor{blue}{cmd}
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{\textrm{vim}的标签窗口}
+	\begin{itemize}
+		\item \textcolor{red}{:tabnew}~\textcolor{blue}{file}:~在\textrm{vim}新标签窗口中打开一个新的编辑文件\textcolor{blue}{file}按\textcolor{red}{g+t}在标签窗口间切换
+		\item \textcolor{red}{:vertical~diffsplit}~\textcolor{blue}{file}: 对比当前文件和新文件\textcolor{blue}{file}的差别\\
+			按\textcolor{red}{Ctrl+w}在标签窗口间切换
+	\end{itemize}
+\begin{figure}[h!]
+\centering
+\hspace*{-5.5pt}
+%\vspace{-18.5pt}
+\includegraphics[height=1.1in,width=1.8in,viewport=0 0 700 450,clip]{Figures/vim-tabnew.png}
+\includegraphics[height=1.1in,width=2.0in,viewport=0 0 730 460,clip]{Figures/vim-diff.png}
+%\caption{\textrm{The wave-particle duality and Photoelectric effect}}
+\label{vim-command-switch}
+\end{figure}
+	\begin{itemize}
+\item \textcolor{red}{:qall}:~退出所有的标签窗口
+\item \textcolor{red}{:qall!}:~强制退出所有的标签窗口
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{\textrm{vim}的环境变量配置文件\textrm{\textasciitilde/.vimrc}}
+\begin{figure}[h!]
+\centering
+\hspace*{-5.5pt}
+%\vspace{-18.5pt}
+\includegraphics[height=2.4in,width=4.0in,viewport=0 0 700 450,clip]{Figures/vim-vimrc.png}
+%\caption{\textrm{The wave-particle duality and Photoelectric effect}}
+\label{vim-vimrc}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{vim}的键盘分布图}
+\vspace*{-18.5pt}
+\begin{figure}[h!]
+\centering
+\hspace*{-5.5pt}
+\includegraphics[height=2.8in,width=4.1in,viewport=0 0 1050 750,clip]{Figures/Vim_Key.png}
+%\caption{\textrm{The wave-particle duality and Photoelectric effect}}
+\label{vim-Key}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{第一次使用\textrm{vim}}
+\begin{figure}[h!]
+\centering
+%\hspace*{-5.5pt}
+\vspace{-5.5pt}
+\includegraphics[height=2.5in,width=4.0in,viewport=0 0 650 510,clip]{Figures/vim_use_first.jpg}
+%\caption{\textrm{The wave-particle duality and Photoelectric effect}}
+\label{vim-use-first}
+\end{figure}
+}
 
 \section{\rm{Linux}下的软件安装与\rm{Make}}
 \frame
