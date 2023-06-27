@@ -1,5 +1,5 @@
 %-------------------------------PPT Title-------------------------------------
-\title{\rm{LINUX}环境、命令与\rm{GNU}软件编译}
+\title{\rm{LINUX}命令、\rm{vim}使用与\rm{GNU}软件编译}
 %-----------------------------------------------------------------------------
 
 %----------------------------Author & Date------------------------------------
@@ -8,11 +8,11 @@
 %% - Use the \inst{?} command only if the authors have different
 %%   affiliation.
 \institute[BCC]{\inst{}%
- \vskip -20pt 北京市计算中心 云平台}
+ \vskip -20pt 北京市计算中心~云平台事业部~姜骏}
 \date[\today] % (optional, should be abbreviation of conference name)
-{	%{\fontsize{6.2pt}{4.2pt}\selectfont{\textcolor{blue}{E-mail:~}\url{jiangjun@bcc.ac.cn}}}
-\vskip 45 pt {\fontsize{8.2pt}{6.2pt}\selectfont{%中国科学院\;\;理论物理所% 报告地点
-	\vskip 5 pt \textrm{2021.07.13}}}
+{	{\fontsize{6.2pt}{4.2pt}\selectfont{\textcolor{blue}{E-mail:~}\url{jiangjun@bcc.ac.cn}}}
+\vskip 45 pt {\fontsize{8.2pt}{6.2pt}\selectfont{北京科技大学~理化楼-308% 报告地点
+	\vskip 5 pt \textrm{2023.07.01}}}
 }
 
 %% - Either use conference name or its abbreviation
@@ -32,6 +32,25 @@
 %-----------------------------------------------------------------------------
 
 %------------------------------------------------------------------------------列出全文 outline ---------------------------------------------------------------------------------
+\section*{}
+\frame[allowframebreaks]
+{
+  \frametitle{Outline}
+%  \frametitle{\textcolor{mycolor}{\secname}}
+  \tableofcontents%[current,currentsection,currentsubsection]
+}
+%%在每个section之前列出全部Outline
+%%类似的在每个subsection之前列出全部Outline是\AtBeginSubsection[]
+%\AtBeginSection[]
+%{
+%  \frame<handout:0>%[allowframebreaks]
+%  {
+%    \frametitle{Outline}
+%%全部Outline中，本部分加亮
+%    \tableofcontents[current,currentsection]
+%  }
+%}
+
 \small
 \section{\rm{Linux}操作系统概述}
 \frame
@@ -129,7 +148,7 @@
 \label{Linux-distri-timeline}
 \end{figure}
 }
-%\section{虚拟机与\rm{Linux}的安装}
+
 \section{\rm{Linux}命令简介}
 \frame
 {
@@ -645,6 +664,18 @@
 \includegraphics[height=2.65in,width=4.0in,viewport=0 0 1410 860,clip]{Figures/Ubuntu-man.png}
 %\caption{\textrm{The wave-particle duality and Photoelectric effect}}
 \label{Linux-command-man}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{Ubuntu}下的软件安装与系统更新}
+\begin{figure}[h!]
+\centering
+\vspace{-11.5pt}
+\includegraphics[height=0.74\textwidth]{Figures/Ubuntu-apt-get.png}
+%\caption{\fontsize{6.2pt}{5.2pt}\selectfont{欧阳修(1007-1072)~《欧阳文忠公文集$\cdot$归田录》~卷上}}
+\label{Ubuntu-apt-get}
 \end{figure}
 }
 
@@ -1164,4 +1195,292 @@
 	\end{itemize}
 
 	这是\textcolor{blue}{\textbf{make}}命令工作的基础，也是其执行规制所定义命令的依据
+}
+
+\frame
+{
+	\frametitle{卖油翁:~\textcolor{red}{无他~但手熟尔}}
+%陈康肃公尧咨善射，当世无双 ，公亦以此自矜。尝射于家圃，有卖油翁释担而立，睨之，久而不去。见其发矢十中八、九，但微颔之。康肃问曰：“汝亦知射乎?吾射不亦精乎?”翁曰：“无他，但手熟尔。”康肃忿然曰：“尔安敢轻吾射!”翁曰：“以我酌油知之。”乃取一葫芦置于地，以钱覆其口，徐以杓酌油沥之，自钱孔入而\footnote{一作“而入”}钱不湿。因曰：“\textcolor{red}{我亦无他，惟手熟尔}。”康肃笑而遣之。此与庄生所谓“解牛”、“斫轮”者何异?
+\begin{figure}[h!]
+\centering
+\vspace{-10.5pt}
+\includegraphics[height=0.65\textwidth]{Figures/Sale_Oil_Ouyang.png}
+\hspace{1pt}
+\includegraphics[height=0.65\textwidth]{Figures/Ouyang_Xiu-2.jpg}
+\caption{\fontsize{6.2pt}{5.2pt}\selectfont{欧阳修(1007-1072)~《欧阳文忠公文集$\cdot$归田录》~卷上}}
+\label{Sale_oil}
+\end{figure}
+}
+
+\appendix
+\section{虚拟机与\rm{Ubuntu}的安装}
+\frame
+{
+	\frametitle{虚拟机}
+	虚拟机\textrm{(Virtual~Machine,~VM)}是指通过软件模拟的具有完整硬件系统功能的、运行在一个完全隔离环境中的完整计算机系统
+	\begin{itemize}
+		\item 虚拟机是指由软件模拟出来的一台虚拟的计算机:逻辑上是一台计算机
+		\item 可以在同一台物理计算机上运行多个虚拟机:~每个虚拟机都有独立的操作系统
+	\end{itemize}
+	流行的的虚拟机软件有\textrm{VMware~(VMWare~ACE)}、\textrm{VirtualBox}和\textrm{Virtual~PC}等
+\begin{figure}[h!]
+\centering
+\vspace{-14.5pt}
+\includegraphics[height=1.3in,width=2.0in,viewport=0 0 1580 1000,clip]{Figures/Virtualbox-Lin-Win.png}
+\caption{\textrm{\fontsize{6.2pt}{5.2pt}\selectfont{The Virtualbox installed in Ubuntu.}}}
+\label{Virtualbox-Lin-Win}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{Virtualbox}}
+	\textrm{VirtualBox}是一款开源虚拟机软件。\textrm{VirtualBox}最初是由德国\textrm{Innotek}公司开发，由\textrm{Sun~Microsystems}公司出品的软件，在\textrm{Sun}被\textrm{Oracle}收购后正式更名成\textrm{Oracle~VM~VirtualBox}
+\begin{figure}[h!]
+\centering
+\vspace{-1.5pt}
+\includegraphics[height=0.525\textwidth]{Figures/Virtualbox-http.png}
+\caption{\textrm{\fontsize{6.2pt}{5.2pt}\selectfont{The homepage of Virtualbox.}}}
+\label{Virtualbox-http}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{Virtualbox}的下载}
+\begin{figure}[h!]
+\centering
+\vspace{-5.5pt}
+\includegraphics[height=0.57\textwidth]{Figures/Virtualbox-url.png}
+\caption{\textrm{\fontsize{6.2pt}{5.2pt}\selectfont{The url page for Virtualbox download.}}}
+\label{Virtualbox-url}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{Windows}下安装\textrm{Virtualbox}}
+\begin{figure}[h!]
+\centering
+\vspace{-5.5pt}
+\includegraphics[height=0.50\textwidth]{Figures/Virtualbox-install-0.png}
+\caption{\textrm{\fontsize{6.2pt}{5.2pt}\selectfont{The install step-1 of Virtualbox.}}}
+\label{Virtualbox-install-0}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{Windows}下安装\textrm{Virtualbox}}
+\begin{figure}[h!]
+\centering
+\vspace{-5.5pt}
+\includegraphics[height=0.44\textwidth]{Figures/Virtualbox-install-2.png}
+\caption{\textrm{\fontsize{6.2pt}{5.2pt}\selectfont{The install step-2 of Virtualbox.}}}
+\label{Virtualbox-install-2}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{Windows}下安装\textrm{Virtualbox}}
+\begin{figure}[h!]
+\centering
+\vspace{25.5pt}
+\includegraphics[height=0.37\textwidth]{Figures/Virtualbox-install-3.png}
+\includegraphics[height=0.37\textwidth]{Figures/Virtualbox-install-4.png}
+\caption{\textrm{\fontsize{6.2pt}{5.2pt}\selectfont{The install step-3 of Virtualbox.}}}
+\label{Virtualbox-install-3}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{Windows}下安装\textrm{Virtualbox}}
+\begin{figure}[h!]
+\centering
+\vspace{-11.5pt}
+\includegraphics[height=0.34\textwidth]{Figures/Virtualbox-install-5.png}
+\hskip 1pt
+\includegraphics[height=0.34\textwidth]{Figures/Virtualbox-install-6.png}
+\includegraphics[height=0.34\textwidth]{Figures/Virtualbox-install-7.png}
+\caption{\textrm{\fontsize{6.2pt}{5.2pt}\selectfont{The install step-4 of Virtualbox.}}}
+\label{Virtualbox-install-4}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{Windows}下\textrm{Virtualbox}安装的常见问题}
+	\textcolor{red}{常见错误}
+\begin{figure}[h!]
+\centering
+\vspace{-15.5pt}
+\includegraphics[height=0.25\textwidth]{Figures/Virtualbox-install-error-0.png}
+%\caption{\textrm{\fontsize{6.2pt}{5.2pt}\selectfont{The install step-2 of Virtualbox.}}}
+\label{Virtualbox-error-0}
+\end{figure}
+	\textcolor{blue}{解决方案}
+\begin{figure}[h!]
+\centering
+\vspace{-15.5pt}
+\includegraphics[height=0.38\textwidth]{Figures/Virtualbox-install-error-1.png}
+\includegraphics[height=0.38\textwidth]{Figures/Virtualbox-install-error.png}
+%\caption{\textrm{\fontsize{6.2pt}{5.2pt}\selectfont{The install step-2 of Virtualbox.}}}
+\label{Virtualbox-error-1}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{Virtualbox}安装扩展功能}
+\begin{figure}[h!]
+\centering
+\vspace{17.5pt}
+\includegraphics[height=0.40\textwidth]{Figures/Virtualbox-install-8.png}
+\caption{\textrm{\fontsize{6.2pt}{5.2pt}\selectfont{The install step-5 of Virtualbox.}}}
+\label{Virtualbox-install-5}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{Virtualbox}安装扩展功能}
+\begin{figure}[h!]
+\centering
+\vspace{-5.5pt}
+\includegraphics[height=0.62\textwidth]{Figures/Virtualbox-install-9.png}
+\caption{\textrm{\fontsize{6.2pt}{5.2pt}\selectfont{The install step-6 of Virtualbox.}}}
+\label{Virtualbox-install-6}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{Ubuntu}的安装}
+\begin{figure}[h!]
+\centering
+\vspace{17.5pt}
+\includegraphics[height=0.41\textwidth]{Figures/Virtualbox-ubuntu-install-0.png}
+\caption{\textrm{\fontsize{6.2pt}{5.2pt}\selectfont{The install step-1 of Ubuntu in Virtualbox.}}}
+\label{Virtualbox-ubuntu-install-0}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{Ubuntu}的安装}
+\begin{figure}[h!]
+\centering
+\vspace{-5.5pt}
+\includegraphics[height=0.62\textwidth]{Figures/Virtualbox-ubuntu-install-1.png}
+\caption{\textrm{\fontsize{6.2pt}{5.2pt}\selectfont{The install step-2 of Ubuntu in Virtualbox.}}}
+\label{Virtualbox-ubuntu-install-1}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{Ubuntu}的安装}
+\begin{figure}[h!]
+\centering
+\vspace{17.5pt}
+\includegraphics[height=0.41\textwidth]{Figures/Virtualbox-ubuntu-install-2.png}
+\caption{\textrm{\fontsize{6.2pt}{5.2pt}\selectfont{The install step-3 of Ubuntu in Virtualbox.}}}
+\label{Virtualbox-ubuntu-install-2}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{Ubuntu}的安装}
+\begin{figure}[h!]
+\centering
+\vspace{-12.5pt}
+\includegraphics[height=0.37\textwidth]{Figures/Virtualbox-ubuntu-install-3.png}
+\includegraphics[height=0.37\textwidth]{Figures/Virtualbox-ubuntu-install-4.png}
+\includegraphics[height=0.37\textwidth]{Figures/Virtualbox-ubuntu-install-5.png}
+\includegraphics[height=0.37\textwidth]{Figures/Virtualbox-ubuntu-install-6.png}
+\caption{\textrm{\fontsize{6.2pt}{5.2pt}\selectfont{The install step-4 of Ubuntu in Virtualbox.}}}
+\label{Virtualbox-ubuntu-install-3}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{Ubuntu}的安装}
+\begin{figure}[h!]
+\centering
+\vspace{-12.5pt}
+\includegraphics[height=0.37\textwidth]{Figures/Virtualbox-ubuntu-install-7.png}
+\includegraphics[height=0.37\textwidth]{Figures/Virtualbox-ubuntu-install-8.png}
+\includegraphics[height=0.37\textwidth]{Figures/Virtualbox-ubuntu-install-9.png}
+\includegraphics[height=0.37\textwidth]{Figures/Virtualbox-ubuntu-install-10.png}
+\caption{\textrm{\fontsize{6.2pt}{5.2pt}\selectfont{The install step-5 of Ubuntu in Virtualbox.}}}
+\label{Virtualbox-ubuntu-install-4}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{安装\textrm{Virtualbox}扩展支持}
+\begin{figure}[h!]
+\centering
+\vspace{-2.5pt}
+\includegraphics[height=0.30\textwidth]{Figures/Virtualbox-ubuntu-install-11.png}
+\includegraphics[height=0.30\textwidth]{Figures/Virtualbox-ubuntu-install-12.png}
+\includegraphics[height=0.27\textwidth]{Figures/Virtualbox-ubuntu-install-13.png}
+\includegraphics[height=0.27\textwidth]{Figures/Virtualbox-ubuntu-install-14.png}
+%\caption{\textrm{\fontsize{6.2pt}{5.2pt}\selectfont{The install step-6 of Ubuntu in Virtualbox.}}}
+\label{Virtualbox-ubuntu-install-5}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{Virtualbox}设置共享}
+\begin{figure}[h!]
+\centering
+\vspace{2.5pt}
+\includegraphics[height=0.62\textwidth]{Figures/Virtualbox-add-2.png}
+%\caption{\textrm{\fontsize{6.2pt}{5.2pt}\selectfont{The install step-3 of Ubuntu in Virtualbox.}}}
+\label{Virtualbox-add-2}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{文件共享:~\textrm{Virtualbox}的设置}
+\begin{figure}[h!]
+\centering
+\vspace{17.5pt}
+\includegraphics[height=0.44\textwidth]{Figures/Virtualbox-add.png}
+%\caption{\textrm{\fontsize{6.2pt}{5.2pt}\selectfont{The install step-3 of Ubuntu in Virtualbox.}}}
+\label{Virtualbox-add}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{文件共享:~\textrm{Ubuntu}的设置}
+\begin{figure}[h!]
+\centering
+\vspace{17.5pt}
+\includegraphics[height=0.47\textwidth]{Figures/Virtualbox-add-8.png}
+%\caption{\textrm{\fontsize{6.2pt}{5.2pt}\selectfont{The install step-3 of Ubuntu in Virtualbox.}}}
+\label{Virtualbox-add-8}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{文件共享:~\textrm{Ubuntu}设置的自动挂载}
+\begin{figure}[h!]
+\centering
+\vspace{17.5pt}
+\includegraphics[height=0.38\textwidth]{Figures/Virtualbox-add-9.png}
+\includegraphics[height=0.38\textwidth]{Figures/Virtualbox-add-10.png}
+%\caption{\textrm{\fontsize{6.2pt}{5.2pt}\selectfont{The install step-3 of Ubuntu in Virtualbox.}}}
+\label{Virtualbox-add-9}
+\end{figure}
 }
