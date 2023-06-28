@@ -1,0 +1,1294 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  不使用 authblk 包制作标题  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%-------------------------------PPT Title-------------------------------------
+\title{第一原理计算理论与算法基础\rm{(II)}}
+%-----------------------------------------------------------------------------
+
+%----------------------------Author & Date------------------------------------
+%\author[\textrm{Jun\_Jiang}]{姜\;\;骏\inst{}} %[]{} (optional, use only with lots of authors)
+%% - Give the names in the same order as the appear in the paper.
+%% - Use the \inst{?} command only if the authors have different
+%%   affiliation.
+\institute[BCC]{\inst{}%
+%\institute[Gain~Strong]{\inst{}%
+\vskip -20pt 北京市计算中心~云平台事业部~姜骏}
+%\vskip -20pt {\large 格致斯创~科技}}
+\date[\today] % (optional, should be abbreviation of conference name)
+{	{\fontsize{6.2pt}{4.2pt}\selectfont{\textcolor{blue}{E-mail:~}\url{jiangjun@bcc.ac.cn}}}
+\vskip 45 pt {\fontsize{8.2pt}{6.2pt}\selectfont{北京科技大学~理化楼-308% 报告地点
+	\vskip 5 pt \textrm{2023.07.10}}}
+}
+
+%% - Either use conference name or its abbreviation
+%% - Not really information to the audience, more for people (including
+%%   yourself) who are reading the slides onlin%%   yourself) who are reading the slides onlin%%   yourself) who are reading the slides onlineee
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subject{}
+% This is only inserted into the PDF information catalog. Can be left
+% out.
+%\maketitle
+\frame
+{
+%	\frametitle{\fontsize{9.5pt}{5.2pt}\selectfont{\textcolor{orange}{“高通量并发式材料计算算法与软件”年度检查}}}
+\titlepage
+}
+%-----------------------------------------------------------------------------
+
+%------------------------------------------------------------------------------列出全文 outline ---------------------------------------------------------------------------------
+\section*{}
+\frame[allowframebreaks]
+{
+  \frametitle{Outline}
+%  \frametitle{\textcolor{mycolor}{\secname}}
+  \tableofcontents%[current,currentsection,currentsubsection]
+}
+%%在每个section之前列出全部Outline
+%%类似的在每个subsection之前列出全部Outline是\AtBeginSubsection[]
+%\AtBeginSection[]
+%{
+%  \frame<handout:0>%[allowframebreaks]
+%  {
+%    \frametitle{Outline}
+%%全部Outline中，本部分加亮
+%    \tableofcontents[current,currentsection]
+%  }
+%}
+
+%-----------------------------------------------PPT main Body------------------------------------------------------------------------------------
+\small
+\section{固体能带理论}       %Bookmark
+\frame
+{
+%\frametitle{The Bloch theorem}
+	\frametitle{\textrm{Bloch~}定理}
+\begin{itemize}%[+-| alert@+>]
+   \setlength{\itemsep}{8pt}
+   \item 固体能带理论\upcite{Huang-Han}是固体电子理论的基础，形式上是单电子理论：
+    $$\hat H |\psi_i^{\vec k}(\vec r)\rangle=\bigg[-\dfrac{\hbar^2}{2m}\nabla^2+V(\vec r)\bigg]|\psi_i^{\vec k}(\vec r)\rangle=\epsilon_i(\vec k)|\psi_i^{\vec k}(\vec r)\rangle$$
+  \item \textrm{Bloch}定理:
+%   \item \textrm{periodic potential:} $$V(\vec r)=V(\vec r+\vec R_n)$$
+%     \textrm{Here,} $\vec R_n=n\vec R$
+%   \item \textrm{Bloch theorem:}$$\psi_{\vec k}(\vec r)=\textrm{e}^{\textrm i\vec k\cdot\vec r}u_{\vec k}(\vec r)$$
+%     \textrm{Here, $u_{\vec k}(\vec r)$ is a periodic function with the same periodicity as $V(\vec r)$, i.e., $u_{\vec k}(\vec r)=u_{\vec k}(\vec r+\vec R_n)$, then Bloch theorem could reads as:}
+%     $$\psi_{\vec k}(\vec r+\vec R_n)=\textrm{e}^{\textrm i\vec k\cdot\vec R_n}\psi_{\vec k}(\vec r)$$
+具有平移周期性的理想晶体，势能$V(\vec r)$满足$$V(\vec r)=V(\vec r+\vec R_n)$$
+体系的波函数满足\textrm{Bloch}波函数形式:$$\psi_{\vec k}(\vec r)=\textrm{e}^{i\vec k\cdot\vec r}u_{\vec k}(\vec r)$$
+是平面波和周期函数的乘积。$u(\vec r)$与势能有相同的周期。即$$u_{\vec k}(\vec r)=u_{\vec k}(\vec r+\vec R_n)$$
+  \item 能带理论相当于分子轨道理论
+%   \setlength{\itemsep}{30pt}
+\item \textrm{Bloch}函数反映了波函数在周期性势场下的变化规律。
+\end{itemize}
+}
+
+\frame
+{
+\frametitle{周期体系的波函数}
+物质的电子体系，可分为芯层分子和价层电子。芯电子能量低，受周围化学环境影响很小，基本保持原子属性；价层电子相互作用较强，对化学环境较为敏感。一般地，价电子波函数在原子间区域(\textrm{Interstitial}区)的变化平缓，在临近原子核附近区域(\textrm{Muffin-tin}球内)，会出现剧烈振荡(与芯层波函数正交)。
+\begin{figure}[h!]
+\centering
+\includegraphics[height=0.8in,width=4.in,viewport=41 433 539 546,clip]{Figures/Pseudo_wave.pdf}\\
+\includegraphics[height=0.8in,width=4.in,viewport=41 210 539 339,clip]{Figures/Pseudo_wave.pdf}
+\caption{\tiny \textrm{The periodic Potential and the wave functions in crystal.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Potential-Wave}
+\end{figure}
+}
+
+\frame
+{
+\frametitle{一维自由电子近似微扰}
+\begin{figure}[h!]
+\centering
+%\hspace*{-10pt}
+%\vspace*{-1.1in}
+\includegraphics[height=1.5in,width=2.5in,viewport=5 5 700 450,clip]{Figures/Band_Gap-2.png}
+%\caption{\tiny \textrm{The Band-structure from free-electron gas.}}%
+\label{Band-Gap-2}
+\end{figure} 
+\begin{displaymath}
+	\begin{aligned}
+		&\hat H_0=-\dfrac{\hbar^2}{2m}\dfrac{\mathrm{d}^2}{\mathrm{d}x^2}+\={V} \longrightarrow \hat H=\hat H_0+\hat H^{\prime}=-\dfrac{\hbar^2}{2m}\dfrac{\mathrm{d}^2}{\mathrm{d}x^2}+\={V}+\underline{V(x)-\={V}}\\
+		&\Psi_k^0(x)=\dfrac1{\sqrt V}\mathrm{e}^{\mathrm{i}k\cdot x} \longrightarrow \Psi_k(x)=\Psi_k^0(x)+\sum_{k^{\prime}\neq k}\dfrac{\langle k^{\prime}|\hat H^{\prime}|k\rangle}{E_k^0-E_{k^{\prime}}^0}\Psi_{k^{\prime}}^0(x)\\
+		&\hat E_k^0=-\dfrac{\hbar^2k^2}{2m}+\={V} \longrightarrow E_k=%E_k^0+E^{\prime}=
+		\dfrac{\hbar^2k^2}{2m}+\={V}+\sum_n{}^{\prime}\dfrac{|V_n|^2}{\frac{\hbar^2}{2m}[k^2-(k+2\pi\frac na)^2]}
+	\end{aligned}
+\end{displaymath}
+}
+
+\frame
+{
+\frametitle{一维自由电子简并微扰}
+在波矢$k=\pm\frac{n\pi}{a}$位置，电子能量出现简并态，必须采用简并态微扰理论处理
+\begin{figure}[h!]
+\centering
+%\hspace*{-10pt}
+%\vspace*{-1.1in}
+\includegraphics[height=1.3in,width=1.4in,viewport=0 5 420 450,clip]{Figures/Band_Gap-1.png}
+%\caption{\tiny \textrm{The Band-structure from free-electron gas.}}%
+\label{Band-Gap-1}
+\end{figure} 
+\begin{displaymath}
+	E_{\textcolor{red}{\pm}}=\left\{
+	\begin{aligned}
+		&T_n+\={V}\textcolor{red}{+}\Delta^2T_n\bigg(\dfrac{2T_n}{|V_n|}\textcolor{red}{+}1\bigg)\\
+		&T_n+\={V}\textcolor{red}{-}\Delta^2T_n\bigg(\dfrac{2T_n}{|V_n|}\textcolor{red}{-}1\bigg)
+	\end{aligned}\right.
+\end{displaymath}
+这里$T_n=\frac{\hbar^2}{2m}\big(\frac{n\pi}a\big)^2$
+}
+
+\frame
+{
+\frametitle{自由电子气模型}
+简并态微扰理论引起的能带裂分
+\begin{figure}[h!]
+\centering
+%\hspace*{-10pt}
+%\vspace*{-1.1in}
+\includegraphics[height=2.1in,width=3.8in,viewport=10 90 570 380,clip]{Figures/Band_Gap.pdf}
+\caption{\tiny \textrm{The Band-structure from free-electron gas.}}%
+\label{Band-Gap-co}
+\end{figure} 
+}
+
+\frame
+{
+\frametitle{紧束缚模型}
+从分子轨道到能带
+\begin{figure}[h!]
+\centering
+\hspace*{-0.29in}
+\vspace*{-0.1in}
+\subfigure[一维$\mathrm{H}$原子链]{
+\label{fig:Hydrogen-1D}
+\includegraphics[height=0.25in,width=1.1in,viewport=70 255 570 375,clip]{Figures/Hydrogen-1D.pdf}}
+\subfigure[$\mathrm{H}_n$分子轨道]{
+\label{fig:Hydrogen-2-n}
+\includegraphics[height=0.8in,width=1.5in,viewport=30 140 545 480,clip]{Figures/Hydrogen-Mol-Orbital.pdf}}
+\subfigure[分子波函数]{
+\label{fig:Hydrogen-Psi}
+\includegraphics[height=0.5in,width=1.4in,viewport=25 218 595 440,clip]{Figures/Hydrogen-Psi.pdf}}\\
+\vspace*{5pt}
+\subfigure[分子轨道与能带]{
+\label{fig:Hydrogen-Band-1D}
+\includegraphics[height=0.6in,width=1.4in,viewport=35 215 575 450,clip]{Figures/Hydrogen-Band-1D.pdf}}
+\subfigure[$d$\,轨道]{
+\label{fig:Hydrogen-d-Band-1D}
+\includegraphics[height=1.0in,width=0.7in,viewport=40 45 330 535,clip]{Figures/Hydrogen-d-Band-1D.pdf}}
+\caption{\tiny \textrm{The Band-structure from Molecular-orbital.}}%
+\label{Band-Structure-local-orbit}
+\end{figure} 
+}
+
+\subsection{能带、$\vec k$-空间与~\rm{Fermi~}面}
+\frame
+{
+\frametitle{能带、$\vec k$空间与\textrm{Fermi}面}
+\vspace{30pt}
+\begin{figure}[h!]
+\centering
+\hspace*{-0.10in}
+\subfigure[\textrm{Band structure}]{
+\label{Band_Gap_Fermi-1}
+\includegraphics[height=1.6in,width=2.1in,viewport=0 0 480 350,clip]{Figures/Band_Brillouin_zone.png}}
+\subfigure[\textrm{Brillouin Zone}]{
+\label{Band_Gap_Fermi-2}
+\includegraphics[height=1.28in,width=1.75in,viewport=100 120 545 470,clip]{Figures/2D_Brillouin-Zone.pdf}}
+\label{Band_Gap_Fermi}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{简单立方体系的\textrm{Brillouin}区与能带}
+\vspace{10pt}
+\begin{figure}[h!]
+\centering
+\hspace*{-0.28in}
+\subfigure[\textrm{Brillouin Zone of Cubic lattice}]{
+\label{Brillouin_Zone_Cubic-1}
+\includegraphics[height=2.1in,width=2.0in,viewport=90 0 550 500,clip]{Figures/Brillouin-Zone_CUB.png}}
+\subfigure[\textrm{Band Structure of \ch{SrSnO3}}]{
+\label{Band_Gap_SrSnO3-1}
+\vspace*{-1.00in}
+\includegraphics[height=2.10in,width=1.75in,viewport=0 0 710 550,clip]{Figures/Band-Struct_SrSnO3.png}}
+\label{Band_Gap_CUB_SrSnO3}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{面心立方体系的\textrm{Brillouin}区与能带}
+\vspace{10pt}
+\begin{figure}[h!]
+\centering
+\hspace*{-0.30in}
+\subfigure[\textrm{Brillouin Zone of FCC lattice}]{
+\label{Brillouin_Zone_FCC}
+\includegraphics[height=1.9in,width=1.8in,viewport=75 0 560 520,clip]{Figures/Brillouin-Zone_FCC.png}}
+\subfigure[\textrm{Band structure of \ch{CdS}}]{
+\label{Band_Gap_CdS}
+\includegraphics[height=2.10in,width=1.95in,viewport=0 0 700 520,clip]{Figures/Band-Struct_CdS.png}}
+\label{Band_Gap_FCC_CdS}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{体心立方体系的\textrm{Brillouin}区与能带}
+\vspace{10pt}
+\begin{figure}[h!]
+\centering
+\hspace*{-0.30in}
+\subfigure[\textrm{Brillouin Zone of BCC lattice}]{
+\label{Brillouin_Zone_BCC}
+\includegraphics[height=2.1in,width=1.9in,viewport=80 0 550 520,clip]{Figures/Brillouin-Zone_BCC.png}}
+\subfigure[\textrm{Band structure of \ch{GeF4}}]{
+\label{Band_Gap_GeF4}
+\includegraphics[height=2.10in,width=1.95in,viewport=0 0 700 500,clip]{Figures/Band-Struct_GeF4.png}}
+\label{Band_Gap_BCC_GeF4}
+\end{figure}
+}
+
+\subsection{固体能带计算方法}
+\frame
+{
+%\frametitle{The methods on band structure calculation}
+\frametitle{固体能带计算方法}
+%\vskip 10pt
+%\textrm{The mainly difference of all these methods below: the basis sets and the construction of the potential}
+\vskip 10pt
+常用的计算方法
+\begin{itemize}%[+-| alert@+>]
+%\begin{enumerate}%[+-| alert@+>]
+\setlength{\itemsep}{12pt}
+%  \item \textrm{Plane wave and the pseudo-potential}
+	\item	平面波方法
+	\item	正交平面波\textrm{(The orthogonalized plane wave, OPW)}和赝势\textrm{(Pseudo-potential, PP)}方法\upcite{Singh,PRB41-7892_1990,JPCM6-8245_1994}
+	\item	缀加平面波\textrm{(Augmented plane wave, APW)}方法
+	\item	\textrm{MT}轨道\textrm{(Muffin-tin orbitals, MTO)}方法
+	\item	投影子缀加波\textrm{(Projector Augmented Wave, PAW)}方法\upcite{PRB50-17953_1994,PRB59-1758_1999}
+\end{itemize}
+\vskip 5pt 各种方法的\textcolor{red}{主要区别}:~\textcolor{blue}{势函数的处理}与\textcolor{blue}{所选基函数类型}不同
+}
+
+\frame
+{
+	\frametitle{多重散射理论}
+\begin{figure}[h!]
+	\vspace{-11pt}
+\centering
+\animategraphics[autoplay, loop, height=1.0in]{1}{Figures/Multi_scattering-}{0}{9}
+\includegraphics[height=1.29in,width=1.91in,viewport=0 0 400 275,clip]{Figures/Pseudo-scatter.jpg}
+\caption{\fontsize{5.5pt}{4.2pt}\selectfont{\textrm{Schematic illustration of scattering of a plane wave by a spherical potential.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Multiple_scattering}
+\end{figure}
+\vspace*{-0.10in}
+\fontsize{7.5pt}{6.2pt}\selectfont{
+	入射平面波用球\textrm{Bessel}函数展开
+$$\mathrm{e}^{\mathrm{i}\vec q\cdot\vec r}=4\pi\sum_{lm}\mathrm{i}^lj_l(\vec q\cdot\vec r)Y_{lm}^{\ast}(\hat{\vec q})Y_{lm}(\hat{\vec r})=\sum_{l}(2l+1)\mathrm{i}^lj_l(qr)P_{l}(\cos\theta)$$
+%$$\mathrm{e}^{\mathrm{i}\vec q\cdot\vec r}=\mathrm{e}^{\mathrm{i}qr\cos(\theta)}=\sum_{l}(2l+1)\mathrm{i}^lj_l(qr)P_{l}[\cos(\theta)]$$
+}
+}
+
+\frame
+{
+	\frametitle{势阱与相移}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.26in}
+\includegraphics[height=1.85in,width=1.3in,viewport=0 0 750 1050,clip]{Figures/Radial_wave_functions_for_various_square_well_potential.png}
+\caption{\fontsize{5.5pt}{4.2pt}\selectfont{\textrm{The radial wave functions for \textit{l}=0 for various square well potential depths.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Pseudo-scatter}
+\end{figure}
+\vspace*{-0.1in}
+\fontsize{7.5pt}{6.2pt}\selectfont{
+平面波经散射后出射，波函数变为
+$$\Psi_l^{>}(\varepsilon,r)=C_l\bigg[j_l(\kappa r)-\tan\eta_l(\varepsilon)n_l(\kappa r)\bigg]\quad\text{其中}\kappa^2=\varepsilon$$
+根据散射理论，能量为$\varepsilon$的电子经单个势阱散射偏转$\theta$后，波函数的振幅可以表示为
+	\begin{displaymath}
+		t(\theta)=\dfrac{4\pi}{\kappa}\sum_l(2l+1)[\mathrm{exp}(2\mathrm{i}\eta_l(\varepsilon))-1]P_l(\cos\theta)
+	\end{displaymath}
+%$$t(\theta)=\dfrac{4\pi}{\sqrt\varepsilon}\sum_l(2l+1)\bigg[\mathrm{e}^{2\mathrm{i}\eta_l(\varepsilon)}-1\bigg]P_l(\cos\theta)$$
+%$$\eta_l(\varepsilon)=p_l\pi+\delta_l(\varepsilon)$$
+}
+}
+
+\frame
+{
+	\frametitle{球形势散射的相移与赝势}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.20in}
+\includegraphics[height=1.20in,width=1.77in,viewport=0 0 1150 750,clip]{Figures/Pseudo-scatter-2.png}
+\caption{\fontsize{4.5pt}{3.2pt}\selectfont{\textrm{Radial wave-function $\phi=r\psi$ for low-energy scattering as illustrated in a figure from the 1934 and 1935 papers of Fermi and coworkers for low-energy electron scattering from atoms and neutron scattering from nuclei. The node in the wave-function near the origin show that the potential is attractive and strong enough to have bound states. The cross-section for scattering from the localized potential is determined by the phase shift and is the same for weaker pseudo-potential with the same phase shift modulo $2\pi$.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Pseudo-scatter-2}
+\end{figure}
+\fontsize{7.5pt}{6.2pt}\selectfont{
+对于球形势散射，相移可由径向波函数计算
+$$\tan\eta_l(\varepsilon)=\dfrac{R\frac{\mathrm{d}}{\mathrm{d}r}j_l(\kappa r)|_R-D_l(\varepsilon)j_l(\kappa R)}{R\frac{\mathrm{d}}{\mathrm{d}r}n_l(\kappa r)|_R-D_l(\varepsilon)n_l(\kappa R)}$$
+$$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\mathrm{d}}{\mathrm{d}r}\ln\psi_l(r)$$
+同时相移与波函数节点的关系为:$$\eta_l(\varepsilon)=p_l\pi+\delta(\varepsilon)$$}
+}
+
+%\frame
+%{
+%\begin{figure}[h!]
+%\centering
+%\vskip -3pt
+%\includegraphics[height=2.5in,width=1.7in,viewport=0 0 600 850,clip]{Figures/Ouyang_Xiu-2.jpg}
+%\hskip 20pt
+%\includegraphics[height=2.5in,width=1.7in,viewport=0 0 600 790,clip]{Figures/Sale_Oil_Ouyang.png}
+%\label{Sale_Oil_Ouyang}
+%\caption{\tiny \textrm{欧阳修的《归田录\!$\cdot$\!卖油翁》.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\end{figure}
+%}
+%
+%-----------------------------------------------------------------------------------------------------------------------------------------------------------------------%
+\section{赝势理论}       %Bookmark
+%\section{Induction on DFT and solid-state physics}       %Bookmark
+\frame
+{
+%\frametitle{The methods on band structure calculation}
+	\frametitle{由\textrm{OPW~}到赝势}
+%\vskip 10pt
+%\textrm{The mainly difference of all these methods below: the basis sets and the construction of the potential}
+\begin{itemize}
+%\setlength{\itemsep}{5pt}
+	\item 完全平面波基组\\{\fontsize{7.5pt}{5.5pt}\selectfont{少数平面波就可以很好地描述波函数在原子间的行为，近核波函数则需要大量平面波展开}}%。因此完全平面波基组虽然方便，但求体系本征态对角化的矩阵非常巨大，计算变得异常耗时。
+	\item 正交平面波(\textrm{Orthogonalized plane wave, OPW})方法\\{\fontsize{7.5pt}{5.5pt}\selectfont{价电子用与芯层波函数正交的平面波展开
+		\begin{displaymath}
+			\phi_{\textrm{OPW}}^{\vec k+\vec G}(\vec r)=\phi_{\textrm{PW}}^{\vec k+\vec G}(\vec r)-\sum_c\langle\varphi_c|\phi_{\textrm{PW}}^{\vec k+\vec G}\rangle\varphi_c(\vec r)
+		\end{displaymath}}}
+	{\fontsize{7.5pt}{5.5pt}\selectfont{构造赝波函数
+		\begin{displaymath}
+			\tilde{\phi}_v(\vec r)=\phi_v(\vec r)+\sum_c\langle\varphi_c|\tilde{\phi}_v\rangle\varphi_c(\vec r)
+		\end{displaymath}
+	代入\textrm{Schr\"odinger}方程
+		$$\hat H|\tilde{\phi}_v\rangle-\sum_c\langle\varphi_c|\tilde{\phi}_v\rangle\hat H|\varphi_c\rangle=\varepsilon_v|\tilde{\phi}_v\rangle-\varepsilon_v\sum_c\langle\varphi_c|\tilde{\phi}_v\rangle|\varphi_c\rangle$$
+		可有$$\hat H|\tilde{\phi}_v\rangle+\textcolor{blue}{V^R}|\tilde{\phi}_v\rangle=\textcolor{blue}{\varepsilon_v}|\tilde{\phi}_v\rangle$$
+		这里排斥势是$$V^R(\vec r,\vec r^{\prime})=\sum_c(\varepsilon_v-\varepsilon_c)|\varphi_c(\vec r^{\prime})\rangle\langle\varphi_c(\vec r)|$$}}
+\end{itemize}
+}
+
+\frame
+{
+	\frametitle{由\textrm{OPW~}到赝势}
+	\textrm{Phillips-Kleinman}指出，赝势($V^{e\!f\!f}$)-赝波函数(可用$\phi_{PW}^{\vec k+\vec G}$展开)满足\textrm{Schr\"odinger}方程%\upcite{PR116-287_1959}
+	$$\bigg(-\dfrac12\nabla^2+\textcolor{red}{V^{e\!f\!f}}\bigg)|\tilde{\phi}_v\rangle=\textcolor{blue}{\varepsilon_v}|\tilde{\phi}_v\rangle$$
+	其中$\textcolor{red}{V^{e\!f\!f}}=V(\vec r)+\textcolor{blue}{V^R}$
+	\begin{itemize}
+		\item 赝势-赝波函数的本征值$\varepsilon_v$与真实体系的价电子能量本征值等价
+		\item 赝势$\textcolor{red}{V^{e\!f\!f}}$比$V(\vec r)$平滑得多，并且$\textcolor{blue}{V^R}$是非局域的排斥势
+			\begin{displaymath}
+				\begin{aligned}
+					\textcolor{blue}{V^R}f(\vec r)=&\sum_c(\varepsilon_v-\varepsilon_c)\varphi_c(\vec r)\int\varphi_c^{\ast}(\vec r^{\prime})f(\vec r^{\prime})\mathrm{d}\vec r^{\prime} \\
+					=&\int V^R(\vec r,\vec r^{\prime})f(\vec r^{\prime})\mathrm{d}\vec r^{\prime}
+				\end{aligned}
+			\end{displaymath}
+%			这里$$V^R(\vec r,\vec r^{\prime})=\sum_c(\varepsilon_v-\varepsilon_c)|\varphi_c(\vec r^{\prime})\rangle\langle\varphi_c(\vec r)|$$
+	\end{itemize}
+}
+
+\frame
+{
+\frametitle{赝势的评估}
+赝势(\textrm{Pseudo Potential, PP})方法是在正交平面波的基础上发展起来的，构造出平缓的势函数代替核的强吸引作用和芯层电子的排斥作用，用平缓的函数取代波函数近核时的震荡。
+\begin{itemize}
+\setlength{\itemsep}{5pt}
+	\item 赝势-平面波方法，只需要少量平面波可展开赝波函数，大大提升了计算效率；但是赝波函数不能很好地反映与电子近核行为有关的性质。
+	\item 赝势的构造并不唯一，考核构造赝势的两大指标:~\\“柔软程度”\textrm{(Soft)}与“可移植性”\textrm{(transferability)}
+\end{itemize}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.10in}
+\includegraphics[height=1.35in,width=1.40in,viewport=154 100 562 508,clip]{Figures/Pseudo.pdf}
+\includegraphics[height=1.35in,width=2.55in,viewport=1 1 980 500,clip]{Figures/Pseudo-2.png}
+\caption{\tiny \textrm{The Pseudo wave function and Pseudo potential.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Pseudo_Potential-Wave}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{第一原理赝势}
+		由第一原理求解出全电子波函数(径向部分)$P_{n,l}(r)$
+			\begin{displaymath}
+				\bigg[-\dfrac12\dfrac{\mathrm{d}^2}{\mathrm{d}r^2}+\dfrac{l(l+1)}{2r^2}+V(\rho,r)\bigg]P_{n,l}(r)=\varepsilon_{n,l}P_{n,l}(r)
+			\end{displaymath}
+			这里$V(\rho,r)$是自洽单电子势
+			$$V(\rho,r)=-\frac{Z}r+V_{\mathrm H}(\rho,r)+V_{XC}^{\mathrm{LDA}}(\rho(r))$$
+			$V_{\mathrm H}(\rho,r)$是\textrm{Hartree}势，$V_{XC}^{\mathrm{LDA}}(\rho(r))$是交换-相关势
+
+			由此构造赝波函数$P_l^{\mathrm{PP}}(r)$，满足
+			$$P_l^{\mathrm{PP}}(r)=P_l^{\mathrm{AE}}(r),\quad r>r_{l}^c$$
+			进而构造赝势$V_{\mathrm{src},l}^{\mathrm{PP}}(r)$
+			$$V_{\mathrm{src},l}^{\mathrm{PP}}(r)=\varepsilon_l-\dfrac{l(l+2)}{2r^2}+\dfrac{1}{2P_l^{\mathrm{PP}}(r)}\dfrac{\mathrm{d}^2}{\mathrm{d}r^2}P_l^{\mathrm{PP}}(r),\quad r<r_{l}^c$$
+}
+
+\frame
+{
+	\frametitle{模守恒\textrm{(Norm-conserving)}条件}
+%	构造赝势确定参数的边界(构造条件)
+	\begin{enumerate}
+		\item 价电子赝波函数的能量本征值与对应全电子波函数能量本征值相等:~$\varepsilon_l^{\mathrm{PP}}=\varepsilon_l^{\mathrm{AE}}$
+		\item 价电子赝波函数与真实电子波函数的径向部分在截断半径$r_{c,l}$外相同:~$\psi_l^{\mathrm{PP}}(r)=\psi_l^{\mathrm{AE}}(r),\quad r>r_{l}^c$
+		\item 价电子赝波函数与真实电子波函数的对数导数在截断半径$r_{c,l}$处相等:~$D_l^{\mathrm{PP}}(r)=D_l^{\mathrm{AE}}(r),\quad r\geqslant r_{l}^c$\\
+		这里$D_l(\varepsilon,r)=r\frac{\psi_l^{\prime}(\varepsilon,r)}{\psi_l(\varepsilon,r)}=r\dfrac{\mathrm{d}}{\mathrm{d}r}\ln\psi_l(\varepsilon,r)$
+		\item 价电子赝波函数与真实电子波函数在截断半径$r_{l}^c$内的积分电荷相等(\textcolor{red}{模守恒条件})
+			$$Q_l=\int_0^{r_{l}^c}\mathrm{d}rr^2|\psi_l^{\mathrm{PP}}(r)|^2=\int_0^{r_{l}^c}\mathrm{d}rr^2|\psi_l^{\mathrm{AE}}(r)|^2$$
+		\item 价电子赝波函数与真实电子波函数的对数导数一阶能量导数$\mathrm{d}D_l(\varepsilon,r)/\mathrm{d}\varepsilon$在截断半径$r_{l}^c$处及以外相等
+	\end{enumerate}
+}
+
+\frame
+{
+	\frametitle{模守恒\textrm{(Norm-conserving)}条件}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.10in}
+\includegraphics[height=1.30in,width=4.17in,viewport=0 0 1150 350,clip]{Figures/Pseudo-OPW_NCPP.png}
+\caption{\tiny \textrm{Schematic example of a valence function that has the character of a $3s$ orbital near the nucleus and two examples of smooth functions (dashed lines) that equal the full wave-function outside the core region. Left: the smooth part of the valence function defined by OPW-like equation; Right: a smooth pseudo-function that satisfies the norm-conservation condition.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Pseudo-OPW_NCPP}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{赝势去屏蔽}
+	第一原理赝势建立了赝波函数与对应赝势的一一对应关系，但该赝势包含了电子屏蔽(原子、离子环境)信息，去屏蔽后的赝势对环境依赖更低，“可移植性”更好
+	$$V_{\mathrm{ion},l}^{\mathrm{PP}}(r)=V_{\mathrm{src},l}^{\mathrm{PP}}(r)-V_{\mathrm{H},l}^{\mathrm{PP}}(r)-V_{XC,l}^{\mathrm{PP}}(r)$$
+	去屏蔽过程中，特别需要注意$V_{XC,l}^{\mathrm{PP}}(r)$的处理
+	$$V_{XC,l}^{\mathrm{PP}}(r)=V_{XC}^{\mathrm{PP}}([n_l^{\mathrm{PP}}],r)+\big[V_{XC}^{\mathrm{PP}}([n_l^{\mathrm{PP}}+n^{core}],r)-V_{XC}^{\mathrm{PP}}([n_l^{\mathrm{PP}}],r)\big]$$
+}
+
+\frame
+{
+\frametitle{超软赝势}
+\begin{itemize}
+\setlength{\itemsep}{5pt}
+	\item 赝势构造的模守恒条件
+%		\begin{displaymath}
+%			\int_0^{r_c}\mathrm{d}\vec r\varphi^{\ast PS}(\vec r)\varphi^{PS}(\vec r)=\int_0^{r_c}\mathrm{d}\vec r\varphi^{\ast}(\vec r)\varphi(\vec r)
+%		\end{displaymath}
+	很好地解决了赝势可移植性问题，但对$1s$、$2p$、$3d$等轨道，模守恒方案构造的赝势过于“硬”，所需平面波基组依然非常大
+	\item 超软\textrm{(Ultra-soft)}赝势，解除模守恒条件，实现对第一、第二周期元素的高效计算
+\end{itemize}
+\begin{figure}[h!]
+\vspace*{-0.10in}
+\centering
+\includegraphics[height=1.35in,width=1.40in,viewport=30 55 415 500,clip]{Figures/Norm-US-wave.pdf}
+\caption{\tiny \textrm{Oxygen 2} \textit{p} \textrm{radical wave function (solid), NC-pseudo-wave (dotted) and US-pseudo-wave (dashed).}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Norm-US-wave}
+\end{figure}
+}
+
+\frame
+{
+\frametitle{补偿电荷与多极矩}
+根据电动力学定理:\\\textcolor{blue}{如果球\textrm{S}内的电荷密度分布$\rho(\vec r)$，在球外某点$\vec r$产生的势是由电荷密度的多极矩确定}:
+\begin{figure}[h!]
+\vspace*{-15pt}
+\centering
+\includegraphics[height=1.25in,width=1.32in,viewport=1 22 507 575,clip]{Figures/potential_multipole.jpg}
+%\caption{\tiny \textrm{From Muffin-tin Potential to Full Potential}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Potential-multipole}
+\end{figure}
+\begin{displaymath}
+	V(\vec r)=\sum_{l=0}^{\infty}\sum_{m=-l}^{l}\dfrac{4\pi}{2l+1}q_{lm}\dfrac{Y_{lm}(\hat{\vec r})}{r^{l+1}}
+\end{displaymath}
+其中多极矩$q_{lm}$由下式计算
+\begin{displaymath}
+	q_{lm}=\int_SY_{lm}^{\ast}(\hat{\vec r})r^l\rho(\vec r)\mathrm{d}^3r
+\end{displaymath}
+}
+
+\frame
+{
+\frametitle{超软赝势的构造}
+\textrm{Vanderbilt}建议构造赝波函数时放弃模守恒约束条件，只要求价电子赝波函数与真实电子波函数的径向部分在截断半径$r_{l}^c$外相同，由此得到的赝势显然非\textrm{Hermitian}，但是通过构造\\\textcolor{blue}{\textrm{Hermitian}重叠算符}
+\begin{displaymath}
+	\mathbf{S}=\mathbf{1}+\sum_{i,j}Q_{ij}|\beta_j\rangle\langle\beta_i|
+\end{displaymath}
+以及\textcolor{blue}{\textrm{Hermitian}赝势算符}
+\begin{displaymath}
+	\tilde V^{\mathrm{NL}}=\sum_{i,j}\mathbf{D}_{i,j}|\beta_j\rangle\langle\beta_i|
+\end{displaymath}
+这里\textcolor{blue}{
+\begin{displaymath}
+	\mathbf{D}_{ij}=B_{ij}+\varepsilon_iQ_{ij}
+\end{displaymath}}
+模守恒约束下的标准本征值方程将变成广义本征值方程
+\begin{displaymath}
+	(T+V_{\mathrm{loc}}+\tilde V^{\mathrm{NL}}-\varepsilon\mathbf{S})|\phi\rangle=0
+\end{displaymath}
+}
+
+\frame
+{
+\frametitle{超软赝势的特点}
+\textrm{Vanderbilt}的超软赝势构造方案最大的优点是
+\begin{itemize}
+	\item \textcolor{purple}{解除模守恒约束}:~有助于增加赝波函数的截断半径，系统提高赝势的柔软程度
+	\item \textcolor{purple}{引入多个参考能量$\varepsilon_l$}:~使得模守恒条件下只在特定参考能量$\varepsilon$处成立的对数导数连续条件，扩展到参考能量$\varepsilon_l$区间范围内，这大大提高了赝势的适用范围(可移植性)
+\end{itemize}
+
+相应的，超软赝势计算中，电子密度表达形式为
+\begin{displaymath}
+	n(r)=\sum_nf_n|\phi_n(r)|^2+\sum_{n,ij}f_n\langle\phi_n|\beta_j\rangle\langle\beta_i|\phi_n\rangle Q_{ij}(r)
+\end{displaymath}
+这里补偿电荷$Q_{ij}(r)$定义为
+\begin{displaymath}
+	Q_{ij}(r)=\phi_i^{\mathrm{AE}}(r)\phi_j^{\mathrm{AE}}(r)^{\ast}-\phi_i^{\mathrm{US}}(r)\phi_j^{\mathrm{US}}(r)^{\ast}
+\end{displaymath}
+}
+
+\section{\rm{APW~}与\rm{LAPW~}方法}
+\frame
+{
+\frametitle{\textrm{APW}方法}
+\begin{figure}[h!]
+\centering
+\includegraphics[height=1.10in,width=1.80in,viewport=40 150 545 465,clip]{Figures/Muffin_tin.pdf}
+\includegraphics[height=1.10in,width=1.45in,viewport=1 20 485 435,clip]{Figures/APW.png}
+\caption{\tiny \textrm{Partitioning of the unit cell into atomic spheres(I) and an interstitial region(II)}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Muffin_tin-2}
+\end{figure}
+\begin{displaymath}
+\hskip -28pt\footnotesize \varphi(\vec k_j,\vec r)=\left\{
+  \begin{aligned}
+    &\Omega^{-1/2}\exp[i\vec k_j\cdot\vec r],&|\vec r-\vec r_s|>R_{\mathrm{MT}}^s\\
+    &\sum_{lm}A_{lm}u_l(|\vec r-\vec r_s|,E)Y_{lm}(\widehat{\vec r-\vec r_s}),&|\vec r-\vec r_s|\leqslant R_{\mathrm{MT}}^s
+  \end{aligned}
+\right.
+\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{空间两部分函数在球面上的衔接}
+	\textrm{Huygens}原理:~\textcolor{blue}{平面波可以在各个原子球中心用球谐函数展开}:
+	\begin{displaymath}
+		\mathrm{e}^{\mathrm{i}\vec k\cdot\vec r}=4\pi\sum_{l=0}^{\infty}\sum_{m=-l}^l\mathrm{i}^lj_l(|\vec k|r)Y_{lm}^{\ast}(\hat{\vec k})Y_{lm}(\hat{\vec r})
+	\end{displaymath}
+	其中$j_l(|\vec k|r)$是$l$-阶球\textrm{Bessel}函数，$\hat{\vec k}$和$\hat{\vec r}$分别是矢量$\vec k$和$\vec r$与直角坐标$z$-轴的夹角$\theta$和$\varphi$
+
+	要求空间中不同区域函数在球面上连续，可调参数$A_{lm}^{\vec k}$可为下式确定
+\begin{displaymath}
+	A_{lm}^{\vec k}=4\pi\mathrm{e}^{\mathrm{i}\vec k\cdot\vec r_s}\mathrm{i}^lY_{lm}^{\ast}(\hat{\vec k})j_l(|\vec k|R_{MT}^s)/u_l(R_{MT}^s,E)
+\end{displaymath}
+\textrm{APW}的问题:\textcolor{blue}{球面参数$A_{lm}^{\vec k}$对能量$E$依赖，由此构造的久期方程\footnote{\fontsize{7.2pt}{6.2pt}\selectfont{久期方程\textrm{secular~equation}，\textrm{secular}来自拉丁语\textrm{saeculum}，本意为一代人、一个时期、一个时代、一个世界等意思。其名词在拉丁语中就作为世纪讲。汉译\textrm{secular}为久期，是取\textrm{long-term}的意思(实为慢，\textrm{slow~in~comparison~to~the~annual~motion}的意思)，与期待\textrm{(expectation)}无关。}}非线性的}
+}
+
+\frame
+{
+\frametitle{\textrm{LAPW}方法}
+%\small\textrm{APW}方法的困难，久期方程不能化成广义本征值方程的形式(久期方程对能量$E$是非线性的)为了克服这一困难，人们提出线性化方法，
+\textrm{O.~K.~Andersen~}提出\textrm{LAPW}方法\upcite{Singh}:将$u_l(r,E)$在某一合适的$E_l$值附近对$E$的一阶微商{$\left.\dfrac{\textrm{d}u_l(r,E)}{\textrm{d}E}\right|_{E_l}\equiv\dot u_l(r,E_l)$}\\代入\textrm{APW}基函数中可得\textrm{LAPW}方法的基函数：
+{\fontsize{7.5pt}{3.3pt}\selectfont
+$$\hskip -14pt \varphi(\vec k_j,\vec r)=\left\{
+  \begin{aligned}
+    &\Omega^{-1/2}\exp[i\vec k_j\cdot\vec r],&|\vec r-\vec r_s|>R_{\mathrm{MT}}^s\\
+    &\sum_{lm}[A^{\vec k_j}_{lm}u_l(|\vec r-\vec r_s|,E_l)+B^{\vec k_j}_{lm}\dot u_l(|\vec r-\vec r_s|,E_l)]Y_{lm}(\widehat{\vec r-\vec r_s}),&|\vec r-\vec r_s|\leqslant R_{\mathrm{MT}}^s
+  \end{aligned}
+\right.$$
+%$$\Psi_{\vec k}(\vec r)=\int_{\Omega}\tilde G_{\vec k}(\vec r-\vec r\,^\prime;E)V(\vec r\,^\prime)\Psi_{\vec k}(\vec r\,^\prime)\textrm{d}\vec r\,^\prime$$
+根据基函数在\textrm{MT}球面上连续到一阶，确定系数$A^{\vec k}_{lm}$，$B^{\vec k}_{lm}$的值。}
+\begin{figure}[h!]
+	\vskip -3pt
+\centering
+\includegraphics[height=1.10in,width=1.88in,viewport=1 20 585 435,clip]{Figures/WIEN2k-LAPW.png}
+\caption{\tiny \textrm{Partitioning of the unit cell into atomic spheres(I) and an interstitial region(II)}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Muffin_tin-3}
+\end{figure}
+}
+
+\section{\rm{MTO~}与\rm{LMTO~}方法}
+\frame
+{
+\frametitle{\textrm{MTO}方法}
+\textrm{MTO (Muffin-tin Orbial)}方法是\textrm{Andersen}于\textrm{1971}年提出的局域缀加基函数方案\upcite{Andersen_Book}
+%\textrm{MTO}的
+\vskip 5pt
+\textcolor{blue}{目的:~用最小基组方法解析电子结构}
+\begin{itemize}
+	\item \textcolor{red}{物理图像}:~和\textrm{APW}方法类似，要求基函数在\textrm{MT}球内、外分区域表示，并且在球面上连续
+	\item \textcolor{red}{数学形式}:~基函数是最小优化基组
+\end{itemize}
+\begin{figure}[h!]
+	\vspace{-5pt}
+\centering
+\includegraphics[height=1.20in,width=2.42in,viewport=5 0 1005 495,clip]{Figures/Atomic_sphere-appro.png}
+\caption{\fontsize{6.2pt}{4.2pt}\selectfont\textrm{Atomic sphere approximation (ASA) in which the MT spheres are chosen to have the same volume as the Wigner-Seitz cell, which leads to overlapping spheres.}}
+\label{Atomic_sphere-appro}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{MTO}方法的基函数}
+\begin{figure}[h!]
+	\vspace{-13pt}
+\centering
+\includegraphics[height=1.25in,width=1.95in,viewport=0 0 845 635,clip]{Figures/MTO-envelope-1.png}
+\includegraphics[height=1.25in,width=1.95in,viewport=0 0 885 635,clip]{Figures/MTO-envelope-2.png}
+\caption{\tiny \textrm{The radial function of MTO expressed in different region.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{MTO-envelope}
+\end{figure}
+当$q_0=0$时，构成最简单的\textrm{MTO}基函数
+		\begin{displaymath}
+			\hspace*{-12pt}\chi_L^{\mathrm{MTO}}(\varepsilon,0,\vec r)=\mathrm{i}^lY_L(\hat{\vec r})u_l(\varepsilon,S)\left\{
+			\begin{aligned}
+				&\dfrac{u_l(\varepsilon,r)}{u_l(\varepsilon,S)}-\dfrac{D_l(\varepsilon)+l+1}{2l+l}\left(\dfrac rS\right)^l&\, r\leqslant S\\
+				&+\dfrac{l-D_l(\varepsilon)}{2l+1}\left(\dfrac Sr\right)^{l+1}&\, r>S
+			\end{aligned}\right.
+		\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{\textrm{MTO}轨道的“尾部抵消”}
+\begin{figure}[h!]
+	\vspace*{-0.7in}
+\centering
+\includegraphics[height=2.55in,width=3.15in,viewport=0 0 845 635,clip]{Figures/MTO-Tail_cancellation.png}
+\caption{\tiny \textrm{The wavefunction in the spere at the origin is the sum of the ``head function'' in that sphere plus the tails from neighboring spheres. The schematic illustration of the ``tail cancellation'' of the MTO.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{MTO-tail-candellation}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{LMTO}方法}
+	与\textrm{LAPW}方法类似，在给定能量$\varepsilon_v$和衰减常数$q_0$附近，\textrm{LMTO}的基函数球内部分用函数$\psi_l(\varepsilon_v,r)$及其对能量导数$\dot\psi(\varepsilon_v,r)$表示\\
+\textcolor{blue}{\textrm{LMTO}与\textrm{MTO}基函数的区别}
+	\begin{itemize}
+		\item 球内部分的$\psi(\varepsilon,r)$是主要部分:~由$\psi(\varepsilon_v,r)$和$\dot\psi(\varepsilon_v,r)$线性组合
+		\item 球内来自其它\textrm{MT}球的函数尾部贡献被$\dot\psi(\varepsilon_v,r)$的线性组合替代
+	\end{itemize}
+	由此根据物理直觉，可以把\textrm{LMTO}基函数的形式表示成
+		\begin{displaymath}
+			\hspace*{-12pt}\chi_L^{\mathrm{LMTO}}(\varepsilon,q_0,\vec r)=\mathrm{i}^lY_L(\hat{\vec r})\left\{
+			\begin{aligned}
+				&u_l(\varepsilon,r)-q_0\cot(\eta_l(\varepsilon))J_l(q_0r)&\, r\leqslant S\\
+				&q_0N_l(q_0r)&\, r>S
+			\end{aligned}\right.
+		\end{displaymath}
+		实际应用中，选定函数$J_l$和$N_l$与球\textrm{Bessel}函数$j_l$和\textrm{Neumann}函数$n_l$相似
+}
+
+\frame
+{
+	\frametitle{\textrm{LMTO~.vs.~LAPW}}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.15in}
+\includegraphics[height=2.50in,width=3.30in,viewport=0 0 440 350,clip]{Figures/LMTO-vs-LAPW.png}
+\caption{\fontsize{5.5pt}{4.2pt}\selectfont{\textrm{Schematic illustration of LMTO vs LAPW.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{LMTO-vs-LAPW}
+\end{figure}
+}
+
+\section{\rm{PAW}方法}
+\frame
+{
+	\frametitle{\textrm{PAW}方法概要}
+\begin{itemize}
+	\item 与芯层态正交的全部价电子构成的\textrm{Hilbert}空间%，价电子彼此的正交使得波函数在\textrm{Muffin-tin}球内振荡
+	\item 作\textcolor{red}{线性空间变换}，全电子波函数$|\Psi\rangle$与赝波函数$|\tilde\Psi\rangle$满足：
+		$$|\Psi\rangle=\mathbf{\tau|}\tilde\Psi\rangle$$
+%	$$\tau=\mathbf{1}+\sum_{\mathrm R}\hat\tau_{\mathrm R}$$
+	\item 在原子核附近的$r_c$范围内，波函数用原子分波函数展开：
+	$$|\Psi\rangle=|\tilde\Psi\rangle+\sum_i(|\phi_i\rangle-|\tilde\phi_i\rangle)\langle\tilde p_i|\tilde\Psi\rangle$$
+	\item 在$r_c$外$|\tilde\Psi\rangle$与$|\Psi\rangle$变换前后保持不变，因此线性变换$\mathbf{\tau}$可表示为：
+	$$\mathbf{\tau}=\mathbf{1}+\sum_i(|\phi_i\rangle-|\tilde\phi_i\rangle)\langle\tilde p_i|$$
+\end{itemize}
+其中$|\tilde p_i\rangle$是\textrm{MT}球内的投影函数\\
+$i$表示原子位置$\vec R$、原子轨道($l,m$)和能级$\epsilon_k$的指标。
+}
+
+\frame
+{
+%	\frametitle{\textrm{PAW}原子数据集}
+	\frametitle{\textrm{PAW}方法的基本思想}
+\begin{figure}[h!]
+\centering
+\includegraphics[height=2.3in,width=4.0in,viewport=0 0 1280 745,clip]{Figures/PAW-baseset.png}
+\caption{\tiny \textrm{The Augmentation of PAW.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{PAW_baseset}
+\end{figure}
+}
+
+\frame
+{
+\frametitle{\textrm{PAW}方法的基本思想}
+	在赝波函数$|\tilde\Psi\rangle$表象下，算符期望值计算满足$$\langle A \rangle=\langle\Psi|\mathbf{A}|\Psi\rangle=\langle\tilde\Psi|\mathbf{\tau}^{\dag}\mathbf{A}\mathbf{\tau}|\tilde\Psi\rangle=\langle\tilde\Psi|\tilde{\mathrm{A}}|\tilde\Psi\rangle$$
+\begin{itemize}
+	\item 一般赝算符$\tilde A$表示为
+		$$\tilde A=\mathbf{A}+\sum_i|\tilde p_i\rangle(\langle\phi_i|\mathbf{A}|\phi_i\rangle-\langle\tilde\phi_i|\mathbf{A}|\tilde\phi_i\rangle)\langle\tilde p_i|$$
+	\item 赝重叠算符$\tilde O$表示为
+		$$\tilde O=\mathbf{1}+\sum_i|\tilde p_i\rangle(\langle\phi_i|\phi_i\rangle-\langle\tilde\phi_i|\tilde\phi_i\rangle)\langle\tilde p_i|$$
+\end{itemize}
+}
+
+\frame
+{
+\frametitle{\textrm{PAW}方法密度计算}
+在\textrm{PAW}框架下，将密度算符$|\vec r\rangle\langle\vec r|$代入，可知密度表达式为
+$$n(\vec r)=\tilde n(\vec r)+n^1(\vec r)-\tilde n^1(\vec r)$$
+这里
+$$\tilde n(\vec r)=\sum_nf_n\langle\tilde\Psi_n|\vec r\rangle\langle\vec r|\tilde\Psi_n\rangle$$ 
+$$n^1(\vec r)=\sum_{n,(i,j)}f_n\langle\tilde\Psi_n|\tilde p_i\rangle\langle\phi_i|\vec r\rangle\langle\vec r|\phi_j\rangle\langle\tilde p_j|\tilde\Psi_n\rangle$$
+$$\tilde n^1(\vec r)=\sum_{n,(i,j)}f_n\langle\tilde\Psi_n|\tilde p_i\rangle\langle\tilde\phi_i|\vec r\rangle\langle\vec r|\tilde\phi_j\rangle\langle\tilde p_j|\tilde\Psi_n\rangle$$
+}
+
+%\frame
+%{
+%	\frametitle{\textrm{PAW Augmentation}}
+%\begin{figure}[h!]
+%\centering
+%\includegraphics[height=2.3in,width=4.0in,viewport=0 0 1100 745,clip]{Figures/PAW-projector.png}
+%\caption{\tiny \textrm{The projector of PAW.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\label{PAW_projector}
+%\end{figure}
+%}
+
+\frame
+{
+\frametitle{电荷密度的重新分解}
+\textrm{PAW}方法提出后有很长一段时间没有能够得到广泛应用，直到\textrm{G. Kresse}等将\textrm{Bl\"ochl}的原始方案中电荷密度计算方案重新组合后，明确了\textrm{PAW}方法与\textrm{USPP}方法的内在联系。
+\begin{itemize}
+	\item 芯层电荷与核电荷构成离子实电荷：$n_{Zc}=n_Z+n_c$
+\end{itemize}
+\begin{figure}[h!]
+\centering
+\vspace{-10.5pt}
+\includegraphics[height=1.5in,width=3.0in,viewport=0 0 380 190,clip]{Figures/Pseudo-potential_charge.png}
+\caption{\tiny \textrm{The difference of the electron-density distributing from P.~Bl\"ochl  and from G.~Kresse.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{PAW_Pseudo-Charge}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{固体计算方法总结}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.25in}
+%\hspace*{-0.80in}
+\includegraphics[height=2.80in,width=4.10in,viewport=0 0 1150 850,clip]{Figures/Pseudo-Full_Potential-2.png}
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Pseudo-Full_Poential}
+\end{figure}
+}
+
+\section{经典数值优化算法概要}
+\frame
+{
+	\frametitle{非线性方程的\rm{Newton~}法求根}
+	\textcolor{blue}{不管哪一种数值算法，其设计原理都是将复杂转化为简单的重复，或者说，通过简单的重复生成复杂}:\\
+	\textcolor{red}{在算法设计和算法实现过程中，重复就是力量}\\
+迭代算法设计:~\textcolor{purple}{“速度”\textrm{vs}“稳定”}
+\begin{figure}[h!]
+\centering
+\animategraphics[autoplay, loop, height=2.0in]{1}{Figures/OP_Newton_}{0}{17}
+\label{Equation_Newon}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{迭代优化基本思想}
+	对于给定函数$f$，在极值点，函数的梯度满足
+	\begin{displaymath}
+		\nabla f=0
+	\end{displaymath}
+	可将函数极值问题转化成方程求根问题
+\begin{figure}[h!]
+\centering
+\includegraphics[height=1.68in,width=1.95in,viewport=30 0 450 360,clip]{Figures/OP_mini-1.png}
+\hskip 0.05in
+\includegraphics[height=1.68in,width=1.95in,viewport=150 20 560 390,clip]{Figures/OP_mini-2.png}
+\label{OP_mini}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{Method of steepest descent}}
+	对于函数$f(\mathbf{x}_0)$当前位置$\mathbf{x}_0$的负梯度方向$\mathbf{g}_0$满足
+	\begin{displaymath}
+		\mathbf{g}_0=-\nabla f(\mathbf{x}_0)
+	\end{displaymath}
+	用$\mathbf{g}_0$方向作为搜索方向，
+	\begin{displaymath}
+		\mathbf{x}=\mathbf{x}_0+\lambda\mathbf{g}_0,\qquad \lambda>0
+	\end{displaymath}
+	因为负的梯度方向为当前位置的最快下降方向，所以被称为“\textcolor{blue}{最陡下降法}”\\
+	对函数$f$最小化参数$\lambda$，可确定下一步$\mathbf{x}_1$，可有
+	\begin{displaymath}
+		\dfrac{\mathrm{d}}{\mathrm{d}\lambda}f(\mathbf{x}_0+\lambda\mathbf{g})_0=\mathbf{g}_0\cdot\nabla f(\mathbf{x}_1)=\mathbf{g}_0\cdot\mathbf{g}_1=0
+	\end{displaymath}
+	因此\textcolor{red}{最速下降法最近邻两步的梯度彼此相互垂直}\\
+	\textcolor{purple}{最陡下降法的收敛:~\\靠近极小值时收敛速度减慢，越接近目标，步长越小，前进越慢}
+}
+
+\frame
+{
+	\frametitle{\textrm{Newton-Raphson Method}}
+	\textrm{Newton Method}是一种在实数和复数域上近似解方程的方法。\\
+	思想:~\textcolor{blue}{用函数的\textrm{Taylor}级数的前几项来寻找方程$f(x)=0$的根}\\
+	由\textrm{Newton}迭代公式有
+	\begin{displaymath}
+		x_{n+1}=x_n-\dfrac{f(x_n)}{f^{\prime}(x_n)}
+	\end{displaymath}
+	用\textrm{Taylor}级数在$a$附近展开$f(x)$
+	\begin{displaymath}
+		f(x)=\sum_{n=0}^{\infty}\dfrac{f^{(n)}(a)}{n!}(x-a)^n
+	\end{displaymath}
+	如果只取其前两项逼近$f(x)$，可有
+	\begin{displaymath}
+		f(x)=f(a)+f^{(1)}(a)(x-a)
+	\end{displaymath}
+	不难看出$x=a-\frac{f(a)}{f^{(1)}(a)}$时，有$f(x)=0$
+}
+
+\frame
+{
+	\frametitle{\textrm{Newton-Raphson Method}}
+	对于函数求极值问题(函数的导数为零)，就转换成
+	\begin{displaymath}
+		x_{n+1}=x_{n}-\dfrac{f^{(1)}(x_n)}{f^{(2)}(x_n)}
+	\end{displaymath}
+	对高维函数，一阶导数是梯度，二阶导数是\textcolor{blue}{\textrm{Hessian}矩阵}\\$\mathbf{H}f(\mathbf{x})=[\frac{\partial^2f}{\partial x_i\partial x_j}]_{n\times n}$，有
+	\begin{displaymath}
+		x_{n+1}=x_n-\alpha[\mathbf{H}f(x_n)]^{-1}\nabla f(x_n)\quad n\geqslant0
+	\end{displaymath}
+	这里$\alpha$是可调参数%，$\mathbf{H}$是\textrm{Hessian}矩阵
+
+	\begin{itemize}
+		\item 最陡下降法是用一个平面去拟合当前位置的局部曲面
+		\item \textrm{Newton}法是用一个二次曲面拟合当前位置的局部曲面
+	\end{itemize}
+通常情况下，二次曲面的拟合会比平面更好，所以牛顿法选择的路径会更符合真实的最优下降路径(收敛更快)
+
+\textcolor{magenta}{\textrm{Newton}法的缺点:~\textrm{Hessian}矩阵求逆的计算成本和复杂度较高}
+}
+
+\frame
+{
+	\frametitle{\textrm{Quasi-Newton Method}}
+	\textrm{Newton}法收敛速度快，但计算过程中需计算\textrm{Hessian}矩阵(而且无法保证正定)，因此有了\textrm{Quasi-Newton}方法\\
+	思想:~\textcolor{blue}{构造可以近似\textrm{Hessian}矩阵(或逆)的正定对称阵}
+		{\fontsize{7.2pt}{4.2pt}\selectfont{
+	\begin{displaymath}
+		f(\mathbf{x})\approx f(\mathbf{x}_{k+1})+\nabla f(\mathbf{x}_{k+1})(\mathbf{x}-\mathbf{x}_{k+1})+\dfrac12(\mathbf{x}-\mathbf{x}_{k+1})\nabla^2f(\mathbf{x}_{k+1})(\mathbf{x}-\mathbf{x}_{k+1})
+	\end{displaymath}
+	两边作用梯度算符$\nabla$
+	\begin{displaymath}
+		\nabla f(\mathbf{x})\approx\nabla f(\mathbf{x}_{k+1})+\mathbf{H}_{k+1}(\mathbf{x}-\mathbf{x}_{k+1})
+	\end{displaymath}
+	当$\mathbf{x}=\mathbf{x}_k$有
+	\begin{displaymath}
+		\mathbf{g}_{k+1}-\mathbf{g}_k\approx\mathbf{H}_{k+1}(\mathbf{x}-\mathbf{x}_k)
+	\end{displaymath}
+令
+\begin{displaymath}
+	\mathbf{s}_k=\mathbf{x}_{k+1}-\mathbf{x}_k\quad\mathbf{y}_k=\mathbf{g}_{k+1}-\mathbf{g}_k
+\end{displaymath}
+有
+\begin{displaymath}
+	\mathbf{y}_k\approx\mathbf{H}_{k+1}\cdot\mathbf{s}_k\quad\mbox{或}\quad\mathbf{s}_k\approx\mathbf{H}_{k+1}^{-1}\mathbf{y}_{k}
+\end{displaymath}}}
+{\fontsize{9.2pt}{4.2pt}\selectfont{\textcolor{purple}{\textrm{Quasi-Newton}法:~靠近极小值时收敛速快;~初值选择不好，易不收敛}}}
+}
+
+\frame
+{
+	\frametitle{共轭梯度的``轭''}
+\begin{figure}[h!]
+\centering
+\includegraphics[height=2.5in,width=4.0in,viewport=0 0 1050 680,clip]{Figures/Yoke_1.png}
+\label{Horse_Yoke}
+%\caption{\tiny \textrm{Schematic illustration of minimization of a function in two dimensions. The steps 1,2,3,$\cdots$ denote the steepest descent steps and the point $2^{\ast}$ denote the conjugate gradient path that reaches the exact solution after two steps if the functional is quadratic.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{共轭的含义}
+\begin{minipage}{0.63\textwidth}
+\begin{figure}[h!]
+\vskip -23pt
+\centering
+\includegraphics[height=1.6in,width=2.2in,viewport=0 0 600 490,clip]{Figures/Bi-Yoke_1.jpg}
+\vskip 2pt
+\includegraphics[height=1.5in,width=2.2in,viewport=0 0 750 530,clip]{Figures/Conjugate_Pi-bond.png}
+\label{Conjugate_1}
+%\caption{\tiny \textrm{Schematic illustration of minimization of a function in two dimensions. The steps 1,2,3,$\cdots$ denote the steepest descent steps and the point $2^{\ast}$ denote the conjugate gradient path that reaches the exact solution after two steps if the functional is quadratic.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.35\textwidth}
+\begin{figure}[h!]
+\centering
+\includegraphics[height=2.2in,width=1.5in,viewport=0 0 250 390,clip]{Figures/Conjugate_complex.jpg}
+\label{Conjugate_2}
+%\caption{\tiny \textrm{Schematic illustration of minimization of a function in two dimensions. The steps 1,2,3,$\cdots$ denote the steepest descent steps and the point $2^{\ast}$ denote the conjugate gradient path that reaches the exact solution after two steps if the functional is quadratic.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\end{figure}
+\end{minipage}
+}
+
+\frame
+{
+	\frametitle{\textrm{Conjugate gradient}}
+	假设函数在接近极值附件，近似有\textcolor{magenta}{二次函数}的形式
+	\begin{displaymath}
+		f(\mathbf{x})=f_0+\frac12\mathbf{x}\cdot\mathbf{H}{\mathbf{x}}+\cdots
+	\end{displaymath}
+	其中$\mathbf{H}$是\textcolor{blue}{\textrm{Hessian}矩阵}%，定义为
+%	\begin{displaymath}
+%		H_{ij}=\dfrac{\partial^2f(\mathbf{x})}{\partial x_i\partial x_j}
+%	\end{displaymath}
+	当$f$的偏导连续，则$\mathbf{H}$是对称矩阵，并且一般要求$\mathbf{H}$是正定的。相应的梯度表示为
+	\begin{displaymath}
+		\mathbf{g}=\nabla f(\mathbf{x})=-\dfrac{\partial f}{\partial\mathbf{x}}=-\mathbf{H}\cdot\mathbf{x}
+	\end{displaymath}
+	\vskip 20pt
+	设从点$\mathbf{x}_i$出发沿方向$\mathbf{h}_i$(\textcolor{blue}{不再限于梯度$\mathbf{g}_i$方向})，前进到点$\mathbf{x}_{i+1}$，根据最小化要求
+	\begin{displaymath}
+		\mathbf{h}_i\cdot\nabla f(\mathbf{x}_{i+1})=0
+	\end{displaymath}
+	为确定$\mathbf{x_{i+1}}$点的继续前进方向$\mathbf{h}_{i+1}$，设$\mathbf{x}_{i+1}$可由$\mathbf{x}_i+\lambda\mathbf{h}_{i+1}$得到，因此$\mathbf{x}_{i+1}$的梯度
+	\begin{displaymath}
+		\mathbf{g}_{i+1}=\nabla f(\mathbf{x}_{i+1})=-\mathbf{H}\mathbf{x}_{i+1}=-\mathbf{H}(\mathbf{x}_{i}+\lambda\mathbf{h}_{i+1})
+	\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{\textrm{Conjugate gradient}}
+	与方向$\mathbf{h}_i$相比，梯度的改变为
+	\begin{displaymath}
+		\Delta\mathbf{g}=-\lambda\mathbf{H}\mathbf{h}_{i+1}
+	\end{displaymath}
+
+	根据最小化要求，梯度的改变与$\mathbf{h}_i$方向正交
+	\begin{displaymath}
+		\mathbf{h}_i\cdot\mathbf{H}\cdot\mathbf{h}_{i+1}=0
+	\end{displaymath}
+	共轭梯度法算法:对于给定函数
+	\begin{itemize}
+		\item 已知初值$\mathbf{x}_0$和梯度$\mathbf{g}_0$，取初始方向$\mathbf{h_0}=\mathbf{g}_0$(\textcolor{blue}{最陡下降})
+		\item 根据递推关系确定
+			\begin{displaymath}
+				\begin{aligned}
+					\mathbf{g}_{i_+1}=&\mathbf{g}_{i_+1}-\lambda_i\mathbf{H}\mathbf{h}_{i}\qquad \lambda_i=\dfrac{\mathbf{g}_i\cdot\mathbf{g}_i}{\mathbf{g}_i\cdot\mathbf{H}\mathbf{h}_i}\\	
+					\mathbf{h}_{i_+1}=&\mathbf{g}_{i_+1}+\gamma_i\mathbf{h}_{i}\qquad \gamma_i=-\dfrac{\mathbf{g}_{i+1}\cdot\mathbf{H}\mathbf{h}_i}{\mathbf{h}_i\cdot\mathbf{H}\mathbf{h}_i}\\	
+					\mathbf{x}_{i_+1}=&\mathbf{x}_{i}+\lambda_i\mathbf{h}_{i}
+				\end{aligned}
+			\end{displaymath}
+	\end{itemize}
+	\textcolor{purple}{共轭梯度法的收敛:~步收敛性，稳定性高，不需要任何外来参数}
+}
+
+\frame
+{
+	\frametitle{最陡下降与共轭梯度}
+\begin{figure}[h!]
+\centering
+\includegraphics[height=2.0in,width=3.5in,viewport=0 0 950 590,clip]{Figures/OP_descent_CG.png}
+\label{decent_CG}
+\caption{\tiny \textrm{Schematic illustration of minimization of a function in two dimensions. The steps 1,2,3,~$\cdots$ denote the steepest descent steps and the point - \!- \!- \!- \!- \!- denote the conjugate gradient path that reaches the exact solution after two steps if the functional is quadratic.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{Fixed Point}}
+	求解方程
+	\begin{displaymath}
+		f(\mathbf{x})=\mathbf{x}
+	\end{displaymath}
+	$\mathbf{x}$是函数$f(\mathbf{x})$的\textcolor{red}{不动点}
+	
+	对这类问题的求解，可以利用迭代关系
+	\begin{displaymath}
+		\mathbf{x}_{i+1}=f(\mathbf{x}_i)\qquad (i=1,2,3,\cdots)
+	\end{displaymath}
+	这称为\textcolor{blue}{不动点迭代法}
+
+	{\fontsize{6.2pt}{4.2pt}\selectfont{例如求解方程
+	\begin{displaymath}
+%		\begin{aligned}
+			\lg(10+x)~=~x%\\
+			\Longrightarrow	\textcolor{blue}{x\approx 1.04309063}
+%		\end{aligned}
+		\end{displaymath}}}
+\begin{minipage}[b]{0.35\textwidth}
+		{\fontsize{3.2pt}{1.2pt}\selectfont{
+	\begin{displaymath}
+	\vspace{-0.11in}
+		\begin{aligned}
+			x_0&=1 %~\Longrightarrow 
+			\\\lg(10+1)&=1.041392685\\
+x_1 &=1.041392685 %~\Longrightarrow 
+\\\lg(10+1.041392685)&=1.0430238558\\
+x_2 &=1.043023856 %~\Longrightarrow 
+\\\lg(10+1.043023856)&=1.0430880104\\
+x_3 &=1.043088010 %~\Longrightarrow 
+\\\lg(10+1.043088010)&=1.0443090533\\
+x_4 &=1.043090533 %~\Longrightarrow 
+\\\lg(10+1.043090533)&=1.04430906326\\
+x_4 &=1.0430906326 %~\Longrightarrow 
+\\\lg(10+1.0430906326)&=1.04430906365\\
+x_5 &=1.0430906365 %~\Longrightarrow 
+\\\lg(10+1.0430906365)&=1.04430906366\\
+x_6 &=1.0430906366 %~\Longrightarrow 
+\\\lg(10+1.0430906366)&=1.04430906366
+		\end{aligned}
+	\end{displaymath}}}
+\end{minipage}
+\hfill
+\begin{minipage}[b]{0.62\textwidth}
+\begin{figure}[h!]
+	\vspace{-0.21in}
+\centering
+\includegraphics[height=1.3in,width=2.0in,viewport=0 0 2500 1600,clip]{Figures/solve_lg10.png}
+%\caption{\tiny \textrm{The comparison of parallel scaling for ABINIT vs VASP.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{solution-log_10}
+\end{figure}
+\end{minipage}
+}
+
+\subsection{矩阵的迭代对角化}
+\frame
+{
+	\frametitle{矩阵的迭代对角化}
+	\begin{itemize}
+		\item 矩阵的直接对角化计算复杂复 $O(N^3)$
+		\item 矩阵的迭代对角化计算复杂度 $O(N_0^2\times N\ln N)\quad N_0\ll N$
+	\end{itemize}
+	\textcolor{blue}{迭代求本征值的思想是\textrm{Jacobian~}于\textrm{1846~}年提出的}\\
+	其基本思想是
+	\begin{displaymath}
+		(H-\varepsilon^n)|\psi^n\rangle=|R[\psi^n]\rangle
+	\end{displaymath}
+	这里$n$是迭代步数，$|\psi^n\rangle$和$\varepsilon^n$分别是本征态和本征值，$|R[\psi^n]\rangle$是残差矢量
+	\vskip 10pt
+	{\fontsize{7.2pt}{1.2pt}\selectfont{
+	在电子态计算过程中，选择适当的基函数，可以使\textrm{Schr\"odinger~}方程的矩阵接近对角阵\\因此可有
+	\begin{displaymath}
+		\begin{aligned}
+			|\psi^{n+1}\rangle=&\mathbf{D}^{-1}(\mathbf{H}-\varepsilon)|\psi^n\rangle+|\psi^n\rangle=\delta|\psi^{n+1}\rangle+|\psi^n\rangle\\
+			\mathbf{D}\delta\psi^{n+1}=&R[\psi^n]\quad \mbox{或}\quad \delta\psi^{n+1}=\mathbf{D}^{-1}R[\psi^n]\equiv\mathbf{K}R[\psi^n]
+		\end{aligned}
+	\end{displaymath}
+	这里$\mathbf{D}$是非奇异矩阵，与$\mathbf{H}$矩阵有关\\
+	$\mathbf{K}=\mathbf{D}^{-1}$，也叫''预处理矩阵''，可根据需要选取多种形式
+	\begin{itemize}
+		\item 要求$\mathbf{D}$比原始的$\mathbf{H}-\varepsilon$更易求逆阵
+		\item 要求$\mathbf{D}$使得修正项$\delta\psi^{n+1}$能够使$\psi^n$尽可能更接近正确的本征矢
+	\end{itemize}
+}}
+}
+
+\frame
+{
+	\frametitle{矩阵迭代对角化的基本思想}
+\begin{figure}[h!]
+\centering
+\includegraphics[height=2.5in,width=3.5in,viewport=0 0 850 590,clip]{Figures/Coordinate_transformation.png}
+\label{decent_CG}
+\caption{\tiny \textrm{Schematic illustration of searching for the eigenvalue of a vector.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{Krylov}子空间与矩阵迭代}
+	对于矩阵$\mathbf{A}$，取任意矢量$\psi_0$(要求归一),构造矢量$\psi_1$(同样要求归一，并与$\psi_0$正交)，满足
+	\begin{displaymath}
+		\mathbf{A}\psi_0=a_0\psi_0+b_0\psi_1
+	\end{displaymath}
+	由此确定$a_0$、$b_0$、$\psi_1$
+	\begin{displaymath}
+		\begin{aligned}
+			a_0&=\langle\psi_0|\mathbf{A}|\psi_0\rangle\\
+			b_0\psi_1&=\mathbf{A}\psi_0-a_0\psi_0\\
+			||\psi_1||&=1
+		\end{aligned}
+	\end{displaymath}
+	进而可构造$\psi_2$:
+	\begin{displaymath}
+		\mathbf{A}\psi_1=c_1\psi_0+a_1\psi_1+b_1\psi_2
+	\end{displaymath}
+	要求$\psi_2$与$\psi_0$、$\psi_1$正交归一条件，确定$\psi_2$，$a_1$，$b_1$，$c_1$
+}
+
+\frame
+{
+	\frametitle{\textrm{Krylov}子空间与矩阵迭代}
+	根据递推关系有
+	\begin{displaymath}
+		\mathbf{A}\psi_p=\sum_{q=0}^{p-1}c_p^{(q)}\psi_q+a_p\psi_p+b_p\psi_{p+1}
+	\end{displaymath}
+	这里$\psi_{p+1}$将与所有之前的$\psi_q$(\textrm{processors})正交
+
+	利用矩阵$\mathrm{A}$的\textrm{Hermitian}，因此对于$q<p-1$各项，可有等式
+	\begin{displaymath}
+		c_p^{(q)}=\langle\psi_q|\mathbf{A}\psi_p\rangle=\langle\mathbf{A}\psi_q|\psi_p\rangle=0
+	\end{displaymath}
+	即矢量$\psi_p$垂直于矢量$\mathbf{A}\psi_q$，由此可得
+	\begin{displaymath}
+		c_p^{(p-1)}=\langle\psi_{p-1}|\mathbf{A}\psi_p\rangle=\langle\mathbf{A}\psi_{p-1}|\psi_p\rangle=b_{p-1}
+	\end{displaymath}
+	经过$p$步迭代后
+	\begin{displaymath}
+		\mathbf{A}\psi_p=b_{p-1}\psi_{p-1}+a_p\psi_p+b_p\psi_{p+1}
+	\end{displaymath}
+	这里$\psi_{p+1}$要求与$\psi_p$和$\psi_{p-1}$满足正交归一条件
+}
+
+\frame
+{
+	\frametitle{矩阵对角化的\textrm{Lanczos~}算法}
+	因此\textcolor{blue}{矩阵$\mathbf{A}$可以用$\psi_p$(称为\textrm{Lanczos}矢量)为基组表示成三对角阵形式}(稀疏矩阵)
+	\begin{displaymath}
+		\mathbf{A}^p=\begin{pmatrix}
+			a_1 & b_2 & & & & \\
+			b_2 & a_2 &b_3 & &\raisebox{0.8ex}[0pt]{\huge{0}} &\\
+&b_3 &a_3 &\ddots & & \\
+& &\ddots &\ddots &b_{p-1} & \\
+& & &b_{p-1} &a_{p-1} &b_{p}\\
+&\raisebox{0.8ex}[0pt]{\huge{0}} & & &b_{p} &a_{p}
+		\end{pmatrix}
+	\end{displaymath}
+	不难看出，\textcolor{blue}{经过$p$次\textrm{Lanczos}迭代，当$b\rightarrow0$即达到收敛，意味着此时$p\times p$三对角阵$\mathbf{A}^p$的本征值也将收敛到矩阵$\mathbf{A}$的本征值}
+	\begin{itemize}
+		\item 稀疏矩阵$\mathbf{A}^p$可通过快速\textrm{QR}分解得到本征值
+		\item 三对角阵的最低和最高本征值随着迭代次数增加收敛最迅速
+		\item \textrm{Lanczos}方法适用于少量本征值与剩余本征有较大差值的体系
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{矩阵对角化的\textrm{Lanczos~}算法}
+	大型稀疏矩阵对角化基本思路便是从一个试探向量$\mathbf{c}_0$出发，通过矩阵-向量乘操作\footnote{\fontsize{5.2pt}{1.2pt}\selectfont{由于矩阵是稀疏的，从而可以快速进行矩阵-向量乘这一基本操作(时间复杂度$\mathrm{O}(N^2)$)}}，同时保持矩阵的稀疏性，使得试探向量逐渐收敛到目标特征向量(往往是基态对应的特征向量)
+
+	{\fontsize{6.2pt}{1.2pt}\selectfont{
+		本征值求解对应如下优化问题
+		\begin{displaymath}
+			\lambda_{\min}=\mathrm{min}_{\mathbf{c}}\rho(\mathbf{c})=\mathrm{min}_{\mathbf{c}}\dfrac{\mathbf{c}^\mathbf{H}\mathbf{c}}{\mathbf{c}^T\mathbf{c}}
+		\end{displaymath}
+		利用最陡下降法求解上述优化问题，则需要计算函数的梯度
+		\begin{displaymath}
+			\nabla\rho(\mathbf{c})|_{\mathbf{c}=\mathbf{c}_0}=\dfrac2{\mathbf{c}^T\mathbf{c}}(\mathbf{H}\mathbf{c}_0-\rho(\mathbf{c}_0)\mathbf{c}_0)
+		\end{displaymath}
+		实际计算中无需求出梯度并作精确搜索，因为\textcolor{blue}{解一定在\textrm{Krylov}子空间$\mathrm{span}(\mathbf{c}_0,\mathbf{H}\mathbf{c}_0)$内;~只需计算这两个向量之间的哈密顿矩阵元，并对角化所得到的小矩阵便相当于做了一步最速下降法}
+
+		经过$k$步迭代之后所得到的解在子空间$\mathrm{span}(\mathbf{c}_0,\mathbf{H}\mathbf{c}_0,\cdots),\mathbf{H}^k\mathbf{c_0}$
+
+		因此\textcolor{magenta}{大型矩阵对角化的问题，转化为子空间内矩阵对角化的问题}
+
+		选取合适的初猜，经过若干次迭代之后，子空间内最小特征值可能于真实的最小特征值非常接近\footnote{\fontsize{5.2pt}{1.2pt}\selectfont{子空间内若干个最小特征值都可能于相应的真值非常接近}}
+
+		一般地，$k$次迭代后第$j$个特征向量写成
+		\begin{displaymath}
+			\mathbf{c}_j^{(k)}=\sum_{i=0}^kc_{i,j}^{(k)}\mathbf{H}^i\mathbf{c}_0
+		\end{displaymath}
+	}}
+}
+
+\frame
+{
+	\frametitle{矩阵迭代对角化}
+	稀疏矩阵求解的\textrm{Lanczos}优化过程，只变动一个分量$\mathbf{c}_I$的前提下
+	\begin{displaymath}
+		\dfrac{\partial\rho}{\partial\mathbf{c}_I}\bigg|_{\mathbf{c}_I+\delta_I}=0
+	\end{displaymath}
+	是可以精确求解的，其解为
+	\begin{displaymath}
+		\delta_I=(\rho(\mathbf{c}_0)-\mathbf{H}_{II})^{-1}\mathbf{q}_I\qquad\mbox{这里}\mathbf{q}=(\mathbf{H}-\rho\mathbf{I})\mathbf{c}_0
+	\end{displaymath}
+	不难看出，矢量$\mathbf{q}$就对应\textrm{Jacobi}迭代中用于判断收敛的残差矢量
+
+更一般地，求解方程
+	\begin{displaymath}
+		\dfrac{\partial\rho}{\partial\mathbf{c}}\bigg|_{\mathbf{c}+\mathbf{\delta}}=0
+	\end{displaymath}
+	将方程展开到二阶近似，不难有
+	\begin{displaymath}
+		(\rho-\mathbf{H}_{II})\delta_I\approx \mathbf{q}_I+\sum_{J\neq I}\delta_J+(\rho-\lambda)\mathbf{c}_I
+	\end{displaymath}
+	实际计算中选则$\delta_I=(\rho(\mathbf{c}_0)-\mathbf{H}_{II})^{-1}\mathbf{q}_I$并不是方程的解的好的近似，\textcolor{purple}{好处是计算比较简单}
+}
+
+\frame
+{
+	\frametitle{\textrm{Block-Davison algorithm}}
+	\textrm{Davidson}方法是求解大型稀疏矩阵的少量本征值问题提出来的，结合了\textrm{Lanczos}优化和\textrm{Jacobi}迭代的优点，简言之就是改进初猜，不用$\mathbf{H}\mathbf{c}_0$，而改用计算简单的$\delta_I=(\rho(\mathbf{c}_0)-\mathbf{H}_{II})^{-1}\mathbf{q}_I$形式
+	\vskip 10pt
+	应用\textrm{Davison}方法可以快速地依次求解稀疏矩阵的少量本征值和本征矢，将该方法推广为同时求解若干个本征态，即块-\textrm{Davidson}方法
+	{\fontsize{6.2pt}{1.2pt}\selectfont{
+		\begin{itemize}
+			\item 选取合适数目正交归一的向量$\mathbf{c}_1,\mathbf{c}_2,\cdots, \mathbf{c}_n$作为初猜子空间的基组, 计算并储存向量$\mathbf{H}\mathbf{c}_i$和矩阵元$\mathbf{H}=\langle\mathbf{c}_i|\mathbf{H}|\mathbf{c}_j\rangle$ 
+			\item 对角化矩阵，得到本征值$\lambda^{n}$和本征矢$\mathbf{a}^{n}$
+			\item 构造残量矢量$\mathbf{q}_M=(\mathbf{H}-\lambda^{(M)}\mathbf{I})\mathbf{a}^{(M)}~\mbox{其中}\mathbf{a}^{(M)}=\sum\limits_{i=1}^M a_i^{(M)}\mathbf{a}_i$
+			\item 根据模长$||\mathbf{q}_M||$判断迭代收敛情况
+			\item 构造$\delta_{I,M+1}=(\lambda^{(M)}-\mathbf{H}_{II})^{-1}\mathbf{q}_{I,M}$，与此前的基组正交归一化，得到$\mathbf{c}_{M+1}$
+			\item 计算矩阵元$\mathbf{H}_{i,M+1}\quad i=1,2,\cdots, M+1$
+			\item 对角化矩阵得到新的本征值和本征矢量，继续迭代
+		\end{itemize}
+	}}
+}
+
+\frame
+{
+	\frametitle{\textrm{RMM-DIIS}}
+	{\fontsize{7.2pt}{1.2pt}\selectfont{前述矩阵迭代对角化方法的优化策略都是
+	\begin{itemize}
+		\item 通过迭代优化得到最小本征值(极值)
+		\item 利用本征态正交，依次获得其他各本征态和本征值
+	\end{itemize}}}
+	{\fontsize{7.2pt}{1.2pt}\selectfont{\textrm{RMM-DIIS~(Residual Minimization Method by Direct Inversion in the Iterative Subspace)}\footnote{\fontsize{5.2pt}{1.2pt}\selectfont{\textrm{RMM-DIIS}的得名源自该方法的提出者\textrm{Pulay}:~该方法的基本思想是在历次迭代产生的矢量构成的完整\textrm{Krylov}子空间内，完成对残矢的最小化}}方法则可以不用引入正交条件而得到多个本征值，\textcolor{purple}{因为该方法最小化的不是本征值而是残矢}}}\\
+	{\fontsize{5.2pt}{1.2pt}\selectfont{
+		其基本思想概要:~在$n$维\textrm{Krylov}子空间内，生成矢量
+		\begin{displaymath}
+			\psi^{n+1}=c_0\psi^0+\sum_{j=1}^{n+1}c_j\delta\psi^{j}
+		\end{displaymath}
+		通过改变选取一套合适的系数$c_j$来完成$\psi^{n+1}$的残矢$R^{n=1}$的最小化。\textcolor{blue}{等价于$c_j$由$\{\psi^0,\psi^1,\cdots,\psi^n\}$构成的\textrm{Krylov}子空间内求\textrm{Hermitian}本征值问题}
+		\begin{displaymath}
+			\sum_{j=1}^n\langle R^i|R^j\rangle c_j=\varepsilon\sum_{j=1}^n\psi^i|\mathbf{S}|\psi^j\rangle c_j
+		\end{displaymath}
+		每迭代一次，子空间引入一个新波函数$\psi$和一个新残矢$R(\psi)$
+		\begin{itemize}
+			\item \textrm{RMM-DIIS}的计算量瓶颈将是后续的逐个矩阵-向量乘操作$\textrm{H}\psi$
+%				\\因此要避免直接用\textrm{RMM-DIIS}直接处理大规模本征态~(但可以是大体系中的少量本征态)
+			\item 只要内存许可，\textrm{RMM-DIIS}构造的完整的子空间内，构成子空间的矢量本征值都可以求解出来
+			\item 因为\textrm{RMM}方法对初猜的矢量敏感(矢量收敛的位置到离初猜较近)
+		\end{itemize}
+%		\textrm{RMM-DIIS}最大的优点是一次可以得到多个本征态和本征值，而且不需要正交化
+	}}
+}
+
+%------------------------------------------------------------------------Reference----------------------------------------------------------------------------------------------
+		\frame[allowframebreaks]
+{
+\frametitle{主要参考文献}
+\begin{thebibliography}{99}
+{\tiny
+	\bibitem{Huang-Han}黄昆\:原著、韩汝琦\:改编, {\textit{固体物理学}}\:高等教育出版社, 北京, 1988
+	\bibitem{Xie-Lu}谢希德、陆栋\:主编, {\textit{固体能带理论}}\:复旦大学出版社, 上海, 1998
+	\bibitem{Elect_Stru}\textrm{Richard. M. Martin. \textit{Electronic Structure: Basic Theory and Practical Methods} (Cambridge University Press, Cambridge, England, 2004)}
+        \bibitem{Singh}\textrm{D. J. Singh. \textit{Plane Wave, PseudoPotential and the LAPW method} (Kluwer Academic, Boston,USA, 1994)}					%
+	\bibitem{PRB41-7892_1990}\textrm{D. Vanderbilt. \textit{Phys. Rev.} B, \textbf{41} (1990), 7892} 
+	\bibitem{Andersen_Book}\textrm{O. K. Andersen. \textit{Computational Methods in Band Theory} (Plenum, New York, USA, 1971)}
+	\bibitem{LMTO_Book}\textrm{H. Skriver. \textit{The LMTO method} (Springer, New York, USA, 1984)}
+	\bibitem{JPCM6-8245_1994}\textrm{G. Kresse and J. Hafner. J. Phys: \textit{Condens. Matter}, \textbf{6} (1994), 8245}
+	\bibitem{PRB50-17953_1994}\textrm{P. E. Bl\"ochl. \textit{Phys. Rev.} B, \textbf{50} (1994), 17953}
+	\bibitem{PRB59-1758_1999}\textrm{G. Kresse and D. Joubert \textit{Phys. Rev.} B, \textbf{59} (1999), 1758}
+	\bibitem{Nemoshkalenko-Antonov}\textrm{V. V. Nemoshkalenko and V. N. Antonov. \textit{Computational Methods in Solid State Physics} (Gordon and Breach Science Publisher, Amsterdam, The Netherlands, 1998)}
+}
+\end{thebibliography}
+%\nocite*{}
+}
