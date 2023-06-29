@@ -35,13 +35,13 @@
 %-----------------------------------------------------------------------------
 
 %------------------------------------------------------------------------------列出全文 outline ---------------------------------------------------------------------------------
-%\section*{}
-%\frame[allowframebreaks]
-%{
-%  \frametitle{Outline}
-%%  \frametitle{\textcolor{mycolor}{\secname}}
-%  \tableofcontents%[current,currentsection,currentsubsection]
-%}
+\section*{}
+\frame[allowframebreaks]
+{
+  \frametitle{Outline}
+%  \frametitle{\textcolor{mycolor}{\secname}}
+  \tableofcontents%[current,currentsection,currentsubsection]
+}
 %%在每个section之前列出全部Outline
 %%类似的在每个subsection之前列出全部Outline是\AtBeginSubsection[]
 %\AtBeginSection[]
@@ -118,7 +118,7 @@
 
 \frame
 {
-	\frametitle{\textrm{Mott-Hubbard insulator and charge transfer insulator.}}
+	\frametitle{\textrm{Mott-Hubbard vs. charge transfer insulator.}}
 \begin{figure}[h!]
 \centering
 \vspace*{-0.10in}
@@ -130,7 +130,19 @@
 
 \frame
 {
-	\frametitle{\textrm{L(S)DA}方法的不足}
+	\frametitle{密度\textrm{vs.}粒子与泛函表示}
+\begin{figure}[h!]
+\vskip -10pt
+\centering
+\includegraphics[height=2.65in,width=3.8in,viewport=0 0 362 275,clip]{Figures/DFT-particle-density.png}
+\caption{\fontsize{6.0pt}{4.5pt}\selectfont{\textrm{Properties of a quantum mechanical system can be calculated by solving the SE (left). A more tractable, formally equivalent way is to solve the DFT KS equations (right).}}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Schrodinger-equation-vs-Kohn-Sham-equation}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{密度\textrm{vs.}粒子与泛函表示}
 \begin{itemize}
 \setlength{\itemsep}{12pt}
 	\item 精确密度泛函具有当电子数在整数值前后改变的时候，体系能量的改变是不连续的属性，单电子能量的不连续对能带的带隙有很大贡献
@@ -274,6 +286,7 @@
 %	\end{itemize}
 %}
 
+\subsection{$U$值的物理含义}
 \frame
 {
 	\frametitle{从晶体场的角度看待能带列分}
@@ -287,7 +300,6 @@
 \end{figure}
 }
  
-\subsection{\rm{LDA+}$U$与自能校正}
 \frame
 {
 \frametitle{$U$值的物理含义}
@@ -341,6 +353,7 @@ $$U=E(d^{n+1})+E(d^{n-1})-2E(d^n)$$
 \end{figure}
 }
 
+\subsection{自相互作用校正}
 \frame
 {
 	\frametitle{自相互作用校正}
