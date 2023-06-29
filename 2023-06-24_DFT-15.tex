@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  不使用 authblk 包制作标题  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %-------------------------------PPT Title-------------------------------------
-\title{15-\rm{GGA/LDA}+$U$与自相互作用校正}
+\title{15-\rm{LDA/GGA}+$U$与自相互作用校正}
 %-----------------------------------------------------------------------------
 %----------------------------Author & Date------------------------------------
 
@@ -15,7 +15,7 @@
 \date[\today] % (optional, should be abbreviation of conference name)
 {%	{\fontsize{6.2pt}{4.2pt}\selectfont{\textcolor{blue}{E-mail:~}\url{jiangjun@bcc.ac.cn}}}
 \vskip 45 pt {\fontsize{8.2pt}{6.2pt}\selectfont{%清华大学\;\;物理系% 报告地点
-	\vskip 5 pt \textrm{2023.04.22}}}
+	\vskip 5 pt \textrm{2023.07.01}}}
 }
 
 %% - Either use conference name or its abbreviation
@@ -78,14 +78,53 @@
 	\frametitle{\textrm{L(S)DA}方法的不足}
 	\begin{itemize}
 		\item 一般对只含$s$、$p$价电子体系，基于\textrm{DFT(L(S)DA/GGA)\,}的结构、能带计算都能给出令人满意的结果
+	\end{itemize}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.25in}
+\includegraphics[height=2.25in,width=3.1in,viewport=0 0 630 560,clip]{Figures/Combination-of-atomic-orbital-to-molecular-orbital-and-to-band-gap-of-silicon-molecule.png}
+\caption{\tiny \textrm{Combination of atomic orbital to molecular orbital and to band gap of silicon molecule.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{LDA_U-1}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{L(S)DA}方法的不足}
+	\begin{itemize}
 		\item 但是对价电子包含$d$和$f$局域电子体系，特别是过渡金属氧化物或氮化物(\textcolor{orange}{如\textrm{Mott}\,绝缘体})，在“金属/绝缘体”的定性判断上，\textrm{L(S)DA/GGA}\,计算结果常常出错
 	\end{itemize}
 \begin{figure}[h!]
 \centering
-\vspace*{-0.35in}
-\includegraphics[height=2.05in,width=3.2in,viewport=0 0 1200 880,clip]{Figures/LDA_U-3.png}
-\caption{\tiny \textrm{The schematic band structure (a) and DOS (b) of systems including localized electrons calculated based on LDA.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\vspace*{-0.20in}
+%\includegraphics[height=2.05in,width=3.2in,viewport=0 0 1200 880,clip]{Figures/LDA_U-3.png}
+\includegraphics[height=2.05in,width=3.1in,viewport=0 0 205 140,clip]{Figures/Band-diagram-of-Mott-Hubbard-Insulator.jpg}
+\caption{\tiny \textrm{The schematic band structure of Mott-Hubbard-Insulator:~independent electron (left) correlation electron (right).}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{LDA_U-3}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{Mott-Hubbard Insulator}}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.20in}
+\includegraphics[height=2.70in,width=2.2in,viewport=0 0 660 840,clip]{Figures/Band-Mott_Hubard-Insulator.jpeg}
+\caption{\tiny \textrm{The schematic bandwidth vs. filling-controlled in Mott-Hubbard system of Perovskite structure.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Bandwidth-Mott_Hubard-Insulator}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{Mott-Hubbard insulator and charge transfer insulator.}}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.10in}
+\includegraphics[height=2.30in,width=4.0in,viewport=0 0 320 170,clip]{Figures/Schematic-energy-band-diagrams-of-a-Mott-Hubbard-insulator-and-a-charge-transfer-insulator-independent_left-correlation_right.jpg}
+\caption{\tiny \textrm{Schematic energy band diagrams of a Mott-Hubbard insulator (a) and a charge transfer insulator (b): independent electrons(left)  and correlation electrons (right).}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Band-Mott_Hubard_vs_charge-Insulator}
 \end{figure}
 }
 
@@ -107,8 +146,8 @@
 	\textrm{Perdew}指出\upcite{PRL49-1691_1982}，尽管交换-相关泛函的精确形式不知，但总能量泛函对电子数的依赖$E(N)$应该具有折线形式
 \begin{figure}[h!]
 \centering
-\vspace*{-0.4in}
-\includegraphics[height=2.4in,width=2.8in,viewport=0 0 1000 880,clip]{Figures/exact-DFT.png}
+\vspace*{-0.1in}
+\includegraphics[height=2.2in,width=3.1in,viewport=0 0 1200 890,clip]{Figures/Koopmans-condition_LDA-U.png}
 \caption{\tiny \textrm{The dependence of the total energy on the number of electron is a series of straight-line segments.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{exact-DFT}
 \end{figure}
@@ -235,6 +274,19 @@
 %	\end{itemize}
 %}
 
+\frame
+{
+	\frametitle{从晶体场的角度看待能带列分}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.22in}
+\includegraphics[height=1.45in,width=2.82in,viewport=0 0 585 350,clip]{Figures/Crystal-Field-Theory.jpg}
+\includegraphics[height=1.25in,width=3.32in,viewport=0 0 315 170,clip]{Figures/Crystal-Field-Theory_energy.jpg}
+\caption{\tiny \textrm{The schematic illustration of Crystal Field Theory (CFT) for the splitting of \textit{d}-orbital.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{CFT_d-splitting}
+\end{figure}
+}
+ 
 \subsection{\rm{LDA+}$U$与自能校正}
 \frame
 {
@@ -242,8 +294,9 @@
 \textrm{Hubbard}模型(\textrm{Anderson晶格模型}):\\含有$n$个$d$、$f$\,电子的强关联体系中，关联电子间最重要的相互作用是原子内在位(\textrm{on-site})相互作用$U$
 \begin{figure}[h!]
 \centering
-\includegraphics[height=1.35in,width=0.92in,viewport=1 1 240 375,clip]{Figures/LDA_U-1.png}
-\includegraphics[height=1.35in,width=2.32in,viewport=110 210 545 455,clip]{Figures/LDA_U.pdf}
+\includegraphics[height=1.25in,width=0.92in,viewport=1 1 240 375,clip]{Figures/LDA_U-1.png}
+\includegraphics[height=1.25in,width=2.32in,viewport=110 210 545 455,clip]{Figures/LDA_U.pdf}
+\includegraphics[height=0.72in,width=2.42in,viewport=0 0 1430 460,clip]{Figures/correalation-energy.png}
 \caption{\tiny \textrm{The meaning of $U$, when the Coulomb-interaction of each electron is taken into account.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Tetrahedron_weight}
 \end{figure}
@@ -281,7 +334,7 @@ $$U=E(d^{n+1})+E(d^{n-1})-2E(d^n)$$
 	\end{displaymath}
 \begin{figure}[h!]
 \centering
-\vspace*{-0.3in}
+\vspace*{-0.25in}
 \includegraphics[height=2.0in,width=3.1in,viewport=0 0 1250 880,clip]{Figures/LDA_U-4.png}
 \caption{\tiny \textrm{The schematic band structure (a) and DOS (b) of systems including localized electrons calculated based on LDA.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{LDA_U-4}
@@ -532,3 +585,19 @@ $$U=E(d^{n+1})+E(d^{n-1})-2E(d^n)$$
 %	\item \textrm{LDA+$U$}方法是平均场近似，对含有近似芯层的局域4$f$\,电子的镧系元素离子还是过渡金属的氧化物(金属的3$d$\,电子与氧原子2$p$\,电子有很强的相互作用)体系都有效。如\textrm{FeSi}和\textrm{LaCaO$_3$}等体系，\textrm{LDA+$U$}能给出有关于金属-绝缘体转变的有用信息。甚至用于含有5$f$\,电子的化合物的研究也取得一定的成功。
 %\end{itemize}
 %}
+%------------------------------------------------------------------------Reference----------------------------------------------------------------------------------------------
+		\frame[allowframebreaks]
+{
+\begin{thebibliography}{99}
+\frametitle{主要参考文献}
+{\tiny
+	\bibitem{PRL49-1691_1982}\textrm{P. Perdew, R. G. Parr, M. Levy and J. L. Balduz, Jr., \textit{Phys. Rev. Lett.} \textbf{49} (1982), 1691}
+	\bibitem{PRB44-943_1991}\textrm{V. I. Anisimov, J. Zaanen and O.K. Andersen. \textit{Phys. Rev.} B, \textbf{44} (1991), 943}
+	\bibitem{PRB48-16929_1993}\textrm{V.I. Anisimov, I.V. Solovyev, M.A. Korotin, M.T. Czyzyk and G.A. Sawatzky. \textit{Phys. Rev.} B, \textbf{48} (1993), 16929}
+	\bibitem{PRB52-R5467_1995}\textrm{A. I. Liechtenstein, V. I. Anisimov and J. Zaanen., \textit{Phys. Rev.} B, \textbf{52} (1995), R5467}
+	\bibitem{PRB57-1505_1998}\textrm{S. L. Dudarev, G. A. Botton, S. Y. Savrasov, C. J. Humphreys and A. P. Sutton., \textit{Phys. Rev.} B, \textbf{57} (1998), 1505}
+}
+\end{thebibliography}
+\nocite*{}
+}
+%-----------------------------------------------------------------------------------------------------------------------------------------------------------------------%
