@@ -293,7 +293,7 @@
 \begin{figure}[h!]
 \centering
 \vspace*{-0.22in}
-\includegraphics[height=1.45in,width=2.82in,viewport=0 0 585 350,clip]{Figures/Crystal-Field-Theory.jpg}
+\includegraphics[height=1.45in,width=2.62in,viewport=0 0 585 350,clip]{Figures/Crystal-Field-Theory.jpg}
 \includegraphics[height=1.25in,width=3.32in,viewport=0 0 315 170,clip]{Figures/Crystal-Field-Theory_energy.jpg}
 \caption{\tiny \textrm{The schematic illustration of Crystal Field Theory (CFT) for the splitting of \textit{d}-orbital.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{CFT_d-splitting}
@@ -423,7 +423,7 @@ $$U=E(d^{n+1})+E(d^{n-1})-2E(d^n)$$
 	最后得到自相互作用校正的总能量泛函
 	\begin{displaymath}
 		\begin{aligned}
-			E=E_{\mathrm{LDA}}+&\big[UN(N-1)/2-JN(N-2)/4\big]\\
+			\textcolor{blue}{E}=\textcolor{red}{E_{\mathrm{LDA}}}+&\big[UN(N-1)/2-JN(N-2)/4\big]\\
 			+&\frac12\sum_{m,m^{\prime},\sigma}U_{mm^{\prime}}n_{m,\sigma}n_{m^{\prime},-\sigma}\\
 			+&\frac12\sum_{m,m^{\prime},\sigma\atop(m\neq m^{\prime})}(U_{mm^{\prime}}-J_{mm^{\prime}})n_{m,\sigma}n_{m^{\prime},\sigma}
 		\end{aligned}
@@ -495,7 +495,7 @@ $$U=E(d^{n+1})+E(d^{n-1})-2E(d^n)$$
 	这里$V_{ee}$是$nl$电子间的屏蔽\textrm{Coulomb}相互作用
 \begin{displaymath}
 	\begin{aligned}
-		E_{\mathrm{dc}}[\{n^{\sigma}\}]=\frac12Un(n-1)-\frac12[n^{\uparrow}(n^{\uparrow}-1)+n^{\downarrow}(n^{\downarrow}-1)]
+		E_{\mathrm{dc}}[\{n^{\sigma}\}]=\frac12Un(n-1)-\frac12[(U-J)n^{\uparrow}(n^{\uparrow}-1)+Un^{\downarrow}(n^{\downarrow}-1)]
 	\end{aligned}
 \end{displaymath}
 其中$n^{\sigma}=\mathrm{Tr}(n_{mm^{\prime}}^{\sigma})$并且$n=n^{\uparrow}+n^{\downarrow}$，$U$和$J$是屏蔽\textrm{Coulomb}和交换参数
@@ -584,9 +584,9 @@ $$U=E(d^{n+1})+E(d^{n-1})-2E(d^n)$$
 	\end{displaymath}
 	当总能量用\textrm{Kohn-Sham}本征值$\{\varepsilon_j\}$表示
 	\begin{displaymath}
-		E_{\textrm{LSDA+}U}=E_{\textrm{LSDA}}[\{\varepsilon_j\}]+\frac{(\bar U-\bar J)}2\sum_{l,j,\sigma}\rho_{lj}^{\sigma}\rho_{jl}^{\sigma}
+		E_{\textrm{LSDA+}U}=\textcolor{blue}{E_{\textrm{LSDA}}[\textcolor{red}{\{\varepsilon_j\}}]}+\frac{(\bar U-\bar J)}2\sum_{l,j,\sigma}\rho_{lj}^{\sigma}\rho_{jl}^{\sigma}
 	\end{displaymath}
-	这里最后一项是\textrm{double-counting}校正
+	这里最后一项对应的是\textrm{double-counting}校正
 }
 %\frame
 %{
