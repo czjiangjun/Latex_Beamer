@@ -8,12 +8,12 @@
 %% - Use the \inst{?} command only if the authors have different
 %%   affiliation.
 \institute[BCC]{
-	\inst{} \vskip -20pt 北京市计算中心~云平台事业部%~姜骏
+	\inst{} \vskip -20pt 北京市计算中心~云平台事业部~姜骏
 }
 \date[\today] % (optional, should be abbreviation of conference name)
-{	%{\fontsize{6.2pt}{4.2pt}\selectfont{\textcolor{blue}{E-mail:~}\url{jiangjun@bcc.ac.cn}}}
-\vskip 45 pt {\fontsize{8.2pt}{6.2pt}\selectfont{%北京科技大学~理化楼-308% 报告地点
-	\vskip 5 pt \textrm{2023.07.01}}}
+{	{\fontsize{6.2pt}{4.2pt}\selectfont{\textcolor{blue}{E-mail:~}\url{jiangjun@bcc.ac.cn}}}
+\vskip 45 pt {\fontsize{8.2pt}{6.2pt}\selectfont{北京科技大学~理化楼-308% 报告地点
+	\vskip 5 pt \textrm{2023.07.03}}}
 }
 
 %% - Either use conference name or its abbreviation
@@ -1166,6 +1166,18 @@
 \vskip 3pt
 \textcolor{blue}{\textbf{make}} 的可选参数还有很多，有关各选项的具体内容可运行命令\\
 \textcolor{purple}{\textbf{man~make}}~ 查看
+}
+
+\frame
+{
+	\frametitle{\textrm{Makefile}文件详解示例}
+\begin{figure}[h!]
+	\vskip -8pt
+\centering
+\includegraphics[height=2.65in,clip]{Figures/Make_Makefile.jpg}
+%\caption{\small \textrm{软件编译的步骤示意(预编译-编译-汇编-链接).}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:Make_Makefile_example}
+\end{figure}
 }
 
 \frame[allowframebreaks]
