@@ -74,6 +74,53 @@
 \section{磁性与自旋波}
 \frame
 {
+	\frametitle{电子的本征属性:~自旋}
+\begin{figure}[h!]
+\vspace*{-0.08in}
+\centering
+\includegraphics[height=2.05in,width=4.00in,viewport=0 0 580 290,clip]{Figures/electron-spin_2.jpeg}
+\caption{\tiny \textrm{Electron spin is a fundamental property of electrons.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:Electron-spin}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{简单磁结构~\textrm{.VS.}~复杂磁结构}
+\begin{figure}[h!]
+\vspace*{-0.08in}
+\centering
+\includegraphics[height=1.05in,width=0.75in]{Figures/Magnet-simple.png}
+\caption{\tiny \textrm{Simple Magnetic structure:~Ferromagnetism, Anti-Ferromagnetism, Ferrimagnetism}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:Simple-Magnet}
+\end{figure}
+\begin{figure}[h!]
+\vspace*{-0.08in}
+\centering
+\includegraphics[height=1.05in,width=2.35in]{Figures/Magnet-complex-compound.png}
+\hskip 0.5pt
+\includegraphics[height=1.05in,width=1.35in]{Figures/Magnet-complex.png}
+\caption{\tiny \textrm{Complex Magnetic structure:~Spiral magnet, All-in-all-out, 3k-ordered}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:Complex-Magnet}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{电子的自旋与进动}
+\begin{figure}[h!]
+\vspace*{-0.08in}
+\centering
+\includegraphics[height=1.95in,width=1.45in,viewport=0 0 210 270,clip]{Figures/Spin_spinor.jpg}
+\includegraphics[height=1.95in,width=2.50in,viewport=0 0 580 415,clip]{Figures/Quantization-electron-spin.png}
+\caption{\tiny \textrm{Quantisation of electron spin.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:Electron-spin-spinor}
+\end{figure}
+\textcolor{blue}{磁相互作用比电相互作用弱1$\sim$2个数量级}
+}
+
+\frame
+{
 	\frametitle{自旋极化与磁振子}
 	\begin{itemize}
 		\item 凝聚态物质中，体系磁性态表现为长程的自旋磁矩有序状态
@@ -155,20 +202,6 @@
 
 \frame
 {
-	\frametitle{铁磁、反铁磁和亚铁磁}
-\begin{figure}[h!]
-	\vspace{-0.20in}
-\centering
-\includegraphics[height=0.95in,width=2.3in,viewport=0 0 350 230,clip]{Figures/Ferromagnetic.jpeg}\\
-\includegraphics[height=0.85in,width=2.3in,viewport=0 -13 350 155,clip]{Figures/Antiferromagnetic.png}\\
-\includegraphics[height=0.88in,width=2.3in,viewport=0 0 350 225,clip]{Figures/Ferrimagnetic.jpeg}
-\caption{\tiny \textrm{The model of Ferromagnetic, Antiferromagnetic and Ferrimagnetic.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{Ferrimagneitic_Model}
-\end{figure} 
-}
-
-\frame
-{
 	\frametitle{\textrm{Stoner}模型}
 	\begin{itemize}
 		\item \textrm{Stoner}将金属的磁性考虑为晶格中巡游的$3d$、$4s$\,电子贡献，其相互作用为$I$，\textrm{Fermi}面附近的\textrm{DOS}为$N(E_{\mathrm F})$
@@ -202,6 +235,58 @@
 				\item \textrm{Hubbard}参数$U$的数量级:~\textrm{10eV}}
 			\end{enumerate}
 	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{铁磁、反铁磁和亚铁磁}
+\begin{figure}[h!]
+	\vspace{-0.20in}
+\centering
+\includegraphics[height=0.95in,width=2.3in,viewport=0 0 350 230,clip]{Figures/Ferromagnetic.jpeg}\\
+\includegraphics[height=0.85in,width=2.3in,viewport=0 -13 350 155,clip]{Figures/Antiferromagnetic.png}\\
+\includegraphics[height=0.88in,width=2.3in,viewport=0 0 350 225,clip]{Figures/Ferrimagnetic.jpeg}
+\caption{\tiny \textrm{The model of Ferromagnetic, Antiferromagnetic and Ferrimagnetic.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Ferrimagneitic_Model}
+\end{figure} 
+}
+
+\frame
+{
+	\frametitle{双交换和超交换模型}
+\begin{figure}[h!]
+	\vspace{-0.35in}
+\centering
+\includegraphics[height=2.50in,width=4.05in,viewport=0 0 205 140,clip]{Figures/Conceptual-representations-of-double-and-super-exchange-interactions-in-Fe3O4-through-d.png}
+\caption{\tiny \textrm{Conceptual representations of double and super exchange interactions in \ch{Fe3O4} through \textit{d} orbitals of \ch{Fe2+} and \ch{Fe3+} cations.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{double-super-exchange-1}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{超交换模型}
+	体系表现出磁有序时，磁性原子的自旋电子与近邻位点磁性原子的电子存在耦合(交换)作用。对于半导体和绝缘体，一般磁性原子(离子)间被其它原子(配位离子)间隔，自旋电子间很难发生直接耦合。这种情况下自旋电子间的相互作用机理称为超交换作用\textrm{(semi-covalent super-exchange interaction)}
+\begin{figure}[h!]
+	\vspace{-3.5pt}
+\centering
+\includegraphics[height=1.80in,width=3.85in,viewport=0 0 660 320,clip]{Figures/Super-exchange-model.jpg}
+%\caption{\tiny \textrm{Conceptual representations of double and super exchange interactions in \ch{Fe3O4} through \textit{d} orbitals of \ch{Fe2+} and \ch{Fe3+} cations.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{super-exchange-O}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{双交换\textrm{vs.}超交换模型}
+\begin{figure}[h!]
+	\vspace{-0.15in}
+\centering
+\includegraphics[height=1.70in,width=3.45in,viewport=0 0 1500 700,clip]{Figures/Double-exchange-model.jpg}
+\includegraphics[height=0.90in,width=3.45in,viewport=0 0 640 200,clip]{Figures/Illustration-of-double-exchange-and-superexchange-interactions-in-Fe-3-O-4.jpg}
+\caption{\tiny \textrm{Illustration of double exchange (a) and super-exchange interactions in \ch{Fe3O4}.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{double-super-exchange-2}
+\end{figure}
 }
 
 \frame
@@ -463,3 +548,17 @@
 		\end{aligned}
 	\end{displaymath}
 }
+
+%------------------------------------------------------------------------Reference----------------------------------------------------------------------------------------------
+\begin{thebibliography}{99}
+\frame[allowframebreaks]
+{
+\frametitle{主要参考文献}
+{\tiny
+\bibitem{JAP63-3482_1988}\textrm{J. K\"ubler, K. H. H\"ock and J. Sticht. \textit{J. Appl. Phys.}, \textbf{63} (1988), 3482}
+\bibitem{PRB62-11556_2000}\textrm{D. Hobbs, G. Kresse and J. Hafner. \textit{Phys. Rev.} B, \textbf{62} (2000), 11556}
+}
+\nocite*{}
+}
+\end{thebibliography}
+
