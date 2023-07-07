@@ -123,6 +123,18 @@
 }
 
 \subsection{密度泛函理论}       %Bookmark
+\frame
+{
+	\frametitle{\rm{Creators of DFT}}
+\begin{figure}[h!]
+\vskip 10pt
+\centering
+\includegraphics[height=1.65in,width=4.0in,viewport=0 0 1562 610,clip]{Figures/Creators_of_DFT.png}
+\caption{\tiny \textrm{Creators of DFT. Walter Kohn(left, in 1962) and his two postdoctoral fellows, Pierre Hohenberg (middle, in 1965) and Lujeu Sham (right).}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Creator_of_DFT}
+\end{figure}
+}
+
 \frame                               %
 {
 \frametitle{密度泛函理论(\textrm{DFT})} %Slide Page Title
@@ -151,20 +163,59 @@
 
 \frame
 {
-	\frametitle{\rm{Creators of DFT}}
+	\frametitle{密度泛函理论(\textrm{DFT})}
+	具体到电子体系
+	\begin{displaymath}
+		\begin{aligned}
+			E[\rho]=&\underbrace{\int\mathrm{d}\vec r\rho(\vec r)V_n(\vec r)}&+\underbrace{\dfrac12\int\int\mathrm{d}\vec r\mathrm{d}\vec r^{\prime}\dfrac{\rho(\vec r)\rho(\vec r^{\prime})}{|\vec r-\vec r^{\prime}|}}&+\textcolor{red}{\mathrm{Everthing~Else}}\\
+			&\mbox{\fontsize{7.0pt}{4.5pt}\selectfont{\textcolor{blue}{\textrm{External~potential}}}} &\mbox{\fontsize{7.0pt}{4.5pt}\selectfont{\textcolor{blue}{\textrm{Hartree~energy ~~~~~~}}}} &
+		\end{aligned}
+	\end{displaymath}
+	\textcolor{purple}{\textrm{WHAT IS Everything Else~?!}}
 \begin{figure}[h!]
-\vskip 10pt
+\vskip -8pt
 \centering
-\includegraphics[height=1.65in,width=4.0in,viewport=0 0 1562 610,clip]{Figures/Creators_of_DFT.png}
-\caption{\tiny \textrm{Creators of DFT. Walter Kohn(left, in 1962) and his two postdoctoral fellows, Pierre Hohenberg (middle, in 1965) and Lujeu Sham (right).}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{Creator_of_DFT}
+\includegraphics[height=1.60in,width=1.8in,viewport=0 0 212 275,clip]{Figures/Edvard_Munch-The-Scream.jpg}
+\caption{\fontsize{6.0pt}{4.5pt}\selectfont{\textrm{Edvard Munch:~The Scream (1893).}}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Edvard_Munch-The-Scream}
 \end{figure}
+}
+
+\frame
+{
+	\frametitle{密度泛函理论(\textrm{DFT}):~\textrm{Kohn-Sham}方程}
+\textrm{Kohn-Sham}\upcite{PR140-A1133_1965}给出的解决方案:
+	{\fontsize{7.0pt}{4.5pt}\selectfont{
+\begin{itemize}
+	\item 存在与真实电荷密度相同的无相互作用体系
+		\begin{displaymath}
+			\rho(\vec r)=\sum_{i\in{\mathrm{occ}}}|\phi_i(\vec r)|^2
+		\end{displaymath}
+	\item 在普适泛函表达式中分离出无相互作用粒子动能项
+		\begin{displaymath}
+			\textcolor{red}{\mathrm{Everything~Else}}=-\sum_i\int\mathrm{d}\vec r\phi_i^{\ast}(\vec r)\dfrac{\nabla^2}2\phi_i(\vec r)+\textcolor{blue}{\mathrm{Unknown~Terms}}
+		\end{displaymath}
+\end{itemize}
+因此可有体系的总能表达式
+\begin{displaymath}
+%	\hspace*{-14pt}
+	E[\rho]=\int\mathrm{d}\vec r\rho(\vec r)V_n(\vec r)+\dfrac12\int\int\mathrm{d}\vec r\mathrm{d}\vec r^{\prime}\dfrac{\rho(\vec r)\rho(\vec r^{\prime})}{|\vec r-\vec r^{\prime}|}-\sum_i\int\mathrm{d}\vec r\phi_i^{\ast}\dfrac{\nabla^2}2\phi_i(\vec r)+E_{\mathrm{XC}}[\rho]
+\end{displaymath}
+根据体系总能在基态密度处取边分极小和波函数正交约束条件
+\begin{displaymath}
+	\begin{aligned}
+		\dfrac{\delta E}{\delta\rho}&=0\\
+		\langle\phi_i|\phi_j\rangle&=\delta_{ij}
+	\end{aligned}
+\end{displaymath}
+可导出\textrm{Kohn-Sham}方程
+}}
 }
 
 \frame                               %
 {
-\frametitle{密度泛函理论(\textrm{DFT})}
-\textrm{Kohn-Sham}方程\upcite{PR140-A1133_1965}：无相互作用体系+交换-相关能的贡献
+	\frametitle{密度泛函理论(\textrm{DFT}):~\textrm{Kohn-Sham}方程}
+\textrm{Kohn-Sham}方程：无相互作用体系+交换-相关能的贡献
 $$(T_S+V_{e\!f\!f})|\varphi_i\rangle=\varepsilon_i|\varphi_i\rangle,\quad i=1,\cdots,N,\cdots$$
 其中$T_S=-\dfrac12\nabla^2$~~是无相互作用体系的动能
 \begin{displaymath}
