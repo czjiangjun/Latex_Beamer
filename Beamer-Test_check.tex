@@ -1,0 +1,98 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  不使用 authblk 包制作标题  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%-------------------------------PPT Title-------------------------------------
+\title{第一原理计算软件简介与应用}
+%-----------------------------------------------------------------------------
+
+%----------------------------Author & Date------------------------------------
+%\author[\textrm{Jun\_Jiang}]{姜\;\;骏\inst{}} %[]{} (optional, use only with lots of authors)
+%% - Give the names in the same order as the appear in the paper.
+%% - Use the \inst{?} command only if the authors have different
+%%   affiliation.
+\institute[BCC]{\inst{}%
+%\institute[Gain~Strong]{\inst{}%
+\vskip -20pt 北京市计算中心~云平台事业部~姜骏}
+%\vskip -20pt {\large 格致斯创~科技}}
+\date[\today] % (optional, should be abbreviation of conference name)
+{	{\fontsize{6.2pt}{4.2pt}\selectfont{\textcolor{blue}{E-mail:~}\url{jiangjun@bcc.ac.cn}}}
+\vskip 45 pt {\fontsize{8.2pt}{6.2pt}\selectfont{北京科技大学~理化楼-308% 报告地点
+	\vskip 5 pt \textrm{2023.07.12}}}
+}
+
+%% - Either use conference name or its abbreviation
+%% - Not really information to the audience, more for people (including
+%%   yourself) who are reading the slides onlin%%   yourself) who are reading the slides onlin%%   yourself) who are reading the slides onlineee
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subject{}
+% This is only inserted into the PDF information catalog. Can be left
+% out.
+%\maketitle
+\frame
+{
+%	\frametitle{\fontsize{9.5pt}{5.2pt}\selectfont{\textcolor{orange}{“高通量并发式材料计算算法与软件”年度检查}}}
+\titlepage
+}
+%-----------------------------------------------------------------------------
+
+%------------------------------------------------------------------------------列出全文 outline ---------------------------------------------------------------------------------
+\section*{}
+\frame[allowframebreaks]
+{
+  \frametitle{Outline}
+%  \frametitle{\textcolor{mycolor}{\secname}}
+  \tableofcontents%[current,currentsection,currentsubsection]
+}
+%%在每个section之前列出全部Outline
+%%类似的在每个subsection之前列出全部Outline是\AtBeginSubsection[]
+%\AtBeginSection[]
+%{
+%  \frame<handout:0>%[allowframebreaks]
+%  {
+%    \frametitle{Outline}
+%%全部Outline中，本部分加亮
+%    \tableofcontents[current,currentsection]
+%  }
+%}
+
+%-----------------------------------------------PPT main Body------------------------------------------------------------------------------------
+\small
+\frame
+{
+	\frametitle{现有高通量计算平台概览}
+\begin{table}[!h]
+\tabcolsep 0pt \vspace*{-12pt}
+%\caption{}
+\label{Table-Cost}
+\begin{minipage}{0.85\textwidth}
+%\begin{center}
+\centering
+\def\temptablewidth{1.1\textwidth}
+\renewcommand\arraystretch{0.8} %表格宽度控制(普通表格宽度的两倍)
+\rule{\temptablewidth}{1pt}
+\begin{tabular*} {\temptablewidth}{@{\extracolsep{\fill}}c@{\extracolsep{\fill}}c@{\extracolsep{\fill}}c@{\extracolsep{\fill}}c@{\extracolsep{\fill}}c@{\extracolsep{\fill}}c@{\extracolsep{\fill}}c}
+%-------------------------------------------------------------------------------------------------------------------------
+	&\multirow{2}{*}{\fontsize{7.2pt}{5.2pt}\selectfont{编程语言}}	&\fontsize{7.2pt}{5.2pt}\selectfont{建模} &\multicolumn{2}{|c|}{\fontsize{6.2pt}{5.2pt}\selectfont{任务提交与管理}} &\multirow{2}{*}{\fontsize{7.2pt}{5.2pt}\selectfont{后处理}} &\multirow{2}{*}{\fontsize{6.2pt}{5.2pt}\selectfont{数据组织管理}} \\\cline{4-5}
+	&	&\fontsize{7.2pt}{5.2pt}\selectfont{功能} &\multicolumn{1}{|l}{\fontsize{7.2pt}{5.2pt}\selectfont{软件接口}} &\multicolumn{1}{r|}{\fontsize{7.2pt}{5.2pt}\selectfont{运行容错}} & & \\\hline
+	\fontsize{7.2pt}{5.2pt}\selectfont{{AFLOW}} &\fontsize{7.2pt}{5.2pt}\selectfont{C++} &\checkmark &$\triangle$ &\FiveStarOpen &\FiveStarOpen &\fontsize{7.2pt}{5.2pt}\selectfont{{Django}} \\
+	\fontsize{7.2pt}{5.2pt}\selectfont{{MP}} &\fontsize{7.2pt}{5.2pt}\selectfont{Python} &\checkmark &\checkmark &\FiveStarOpen &\FiveStarOpen &\fontsize{7.2pt}{5.2pt}\selectfont{{MongoDB}} \\
+	\multirow{2}{*}{\fontsize{7.2pt}{5.2pt}\selectfont{{QMIP}}} &\fontsize{7.2pt}{5.2pt}\selectfont{JavaScript/SVG} &\multirow{2}{*}{\checkmark} &\multirow{2}{*}{\checkmark} &\multirow{2}{*}{--} &\multirow{2}{*}{\checkmark} &\multirow{2}{*}{--} \\
+	&\fontsize{7.2pt}{5.2pt}\selectfont{+html/Python} & & & & & \\
+	\fontsize{7.2pt}{5.2pt}\selectfont{{CEP}} &\fontsize{7.2pt}{5.2pt}\selectfont{Python} &\checkmark &\checkmark &-- &\checkmark &\fontsize{7.2pt}{5.2pt}\selectfont{{Django/MySQL}} \\
+	\fontsize{7.2pt}{5.2pt}\selectfont{{ASE}} &\fontsize{7.2pt}{5.2pt}\selectfont{Python} &\FiveStarOpen &\FiveStarOpen &-- &$\triangle$ &-- \\
+	\multirow{2}{*}{\fontsize{7.2pt}{5.2pt}\selectfont{{MatCloud}}} &\fontsize{7.2pt}{5.2pt}\selectfont{JavaScript} &\multirow{2}{*}{\checkmark} &\multirow{2}{*}{$\triangle$} &\multirow{2}{*}{\checkmark} &\multirow{2}{*}{\checkmark} &\multirow{2}{*}{\fontsize{7.2pt}{5.2pt}\selectfont{{MongoDB}}} \\
+	&\fontsize{7.2pt}{5.2pt}\selectfont{+.NETCore} & & & & &
+\end{tabular*}
+\rule{\temptablewidth}{1pt}
+\end{minipage}
+%\vskip -15pt
+\fontsize{7.2pt}{5.2pt}\selectfont{
+\begin{description}
+	\item[\FiveStarOpen]~该功能较突出
+	\item[\checkmark]~该功能基本满足需求
+	\item[$\triangle$]~该功能存在不足
+\end{description}}
+%\end{center}
+\end{table}
+\fontsize{8.2pt}{6.2pt}\selectfont{
+	\textrm{Lin L. \textit{Materials databases infrastructure constructed by first principles calculations:~a review.} \textbf{Mater. Perform. Character.}, 2015, 4(1):148.}}
+}
