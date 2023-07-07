@@ -355,6 +355,55 @@
 \section{第一原理分子动力学}
 \frame
 {
+	\frametitle{分子动力学\textrm{(MD)}}
+	分子动力学\textrm{(Molecular dynamics,~MD)}主要用于各类化学反应、合金与复杂材料状态方程研究，着重关注体系的反应或状态随温度、压力变化规律和动力学性质
+\vskip 5pt
+\textcolor{blue}{分子动力学模拟的基本框架}
+	\begin{itemize}
+		\item 结构优化:~根据体系的初始构型\textrm{(initial configuration)}，遵从能量最低原理，得到体系基态结构(确定基态时原子的位置)
+		\item 原子运动计算:~在一定环境(温度、压力等)条件下，计算各原子的受力，并依据运动方程得到设定时间步长下的原子的运动，进而获得得体系的当前构型
+		\item 径迹计算:~在设定的时间范围内，根据原子运动和体系构型的变化，组合成体系随时间演化的径迹\textrm{(the trajectory of time evolution)}
+		\item 结果分析:~分析体系的径迹变化规律，得到体系的动力学和热力学性质
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{原子间相互作用力的表示}
+	分子动力学模拟中影响结果最主要因素之一是\textcolor{purple}{原子间相互作用力}的准确度
+\vskip 5pt
+\begin{itemize}
+	\item 经典分子动力学模拟中，原子间相互作用力是根据经验势函数得到的\footnote{\fontsize{6.2pt}{4.2pt}\selectfont{经验势函数也称为力场，是参数化形式给出的原子间相互作用，一般通过对实验数据拟合或小体系的第一原理计算得到}}。构建一套高精度的经验势函数代价很高，而且经验势函数一般不具备可移植性
+\end{itemize}
+\vskip 5pt
+	当动力学过程必须考虑量子效应(如电子影响的贡献不可忽略时)，必须采用第一原理分子动力学\textrm{(Ab initio~MD,~AIMD)}
+	\begin{itemize}
+		\item 所谓第一原理分子动力学，就是在计算原子运动时，将电子结构变化的贡献考虑进来，因此在每一时间步长，体系实时构型下的原子受力计算，都必须伴随电子结构计算
+	\end{itemize}
+	一般电子结构计算采用\textrm{DFT}计算，不难想见，第一原理分子动力学模拟的代价极高
+}
+
+\frame
+{
+	\frametitle{第一原理分子动力学的分类}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.05in}
+%\hspace*{-10pt}
+\includegraphics[height=2.3in,width=4.0in,viewport=0 0 440 230,clip]{Figures/Molecular-dynamics_Claaified.png}
+\caption{\fontsize{5.2pt}{4.2pt}\selectfont{\textrm{The major differences between the methods of aiMD simulations.}}}%
+\label{Molecular-dynamics_Claaified}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{第一原理分子动力学中的近似}
+	由于分子动力学模拟的复杂性，
+}
+
+\frame
+{
 	\frametitle{第一原理分子动力学\textrm{AIMD}}
 	1985年\textrm{Car}和\textrm{Parrinello}在密度泛函理论基础上，将第一原理方法应用到分子动力学研究中，形成第一原理分子动力学\textrm{(Ab~initio Molecular dynamics, AIMD)}
 	\begin{itemize}
