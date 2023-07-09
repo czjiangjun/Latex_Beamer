@@ -383,6 +383,29 @@
 	一般电子结构计算采用\textrm{DFT}计算，不难想见，第一原理分子动力学模拟的代价极高
 }
 
+\frame
+{
+	\frametitle{第一原理分子动力学\textrm{AIMD}}
+	\begin{itemize}
+		\item \textrm{AIMD}将电子结构与原子和经典轨迹计算在同一基础上完成
+		\item 每个原子运动步的受力都是在电子结构计算基础上获得的
+%		\item 基于\textrm{B-O}近似，原子运动径迹的每一步上，电子运动都达到收敛
+		\item 扩展的\textrm{Lagrangian}方法:~根据体系几何结构构造体系波函数\\
+			\textcolor{blue}{\textrm{Car-Parinello}}:\\
+			平面波基，构成分子轨道\\
+			\textcolor{blue}{\textrm{Atom-centered Density Matrix Progation~(ADMP)}}:\\
+			原子中心基，构成密度矩阵
+	\end{itemize}
+	\textrm{AIMD}计算内容
+	\begin{itemize}
+		\item 可用于复杂体系的电子结构计算
+		\item 几何结构优化(能量最小化)
+		\item 描述系统演化
+		\item 模拟时长规模$\approx{\mathrm{ps}}(10^{-12}\mathrm{s})$~(经典分子动力学 $\approx\mathrm{ns}(10^{-9}\mathrm{s})$)
+	\end{itemize}
+}
+
+
 %\frame
 %{
 %	\frametitle{第一原理分子动力学的分类}
@@ -447,12 +470,12 @@
 		\item $\textcolor{blue}{\sum\limits_{i,j}\Lambda_{ij}\dfrac{\partial}{\partial \mathbf{R}_I}\langle\psi_i|\psi_j\rangle}$是\textrm{Pulay}力$\vec F_{\mathrm{WF}}$\\
 			{\fontsize{6.2pt}{4.2pt}\selectfont{源于电子波函数正交要求，且只有当基函数为局域函数(依赖于$\mathbf{R}$时)才有贡献}}
 		\item $\textcolor{magenta}{\sum\limits_i\dfrac{\partial\langle\psi_i|}{\partial\mathbf{R}_I}\bigg[\dfrac{\delta E}{\delta\langle\psi_i|}-\sum\limits_j\Lambda_{ij}|\psi_j\rangle\bigg]}$表示非自洽电子态的影响$\vec F_{\mathrm{NSC}}$\\
-			{\fontsize{6.2pt}{4.2pt}\selectfont{对非局域基(如平面波)，由于波函数非显式依赖$\mathbf{R}$，因此展开系数$c_{ij}(\mathbf{R})$依赖于原子核位置
+			{\fontsize{6.2pt}{4.2pt}\selectfont{源自非局域基(如平面波)，由于波函数非显式依赖$\mathbf{R}$，因此展开系数$c_{ij}(\mathbf{R})$依赖于原子核位置
 			\begin{displaymath}
 				\psi_i(\mathbf{R})=\sum\limits_jc_{ij}(\mathbf{R})\phi_i
 			\end{displaymath}
-			前面\textrm{MOE}中的系数\textrm{2}是当\textrm{K-S}轨道波函数为实数时的简化表示\\
-			这一项的贡献比起$F_{\mathrm{HF}}$小很多，\textcolor{blue}{只有当$\psi_i(\mathbf{R})$是体系精确的电子的本征态波函数，该项才会消失}——换言之，只要是非完全自洽的电子计算，都需要考虑该项的贡献。显然，所有数值计算中，都将存在不等式
+			前面\textrm{MOE}中的系数\textrm{2}源于\textrm{K-S}轨道波函数为实数时的简化表示\\
+			这一项的贡献比起$F_{\mathrm{HF}}$小很多，\textcolor{blue}{只要当$\psi_i(\mathbf{R})$是体系精确的电子的本征态波函数，该项就会消失}——换言之，只有非完全自洽的电子计算，才需要考虑该项的贡献。显然，所有数值计算中，都将存在不等式
 	\begin{displaymath}
 			0\leqslant-\dfrac{\delta E}{\delta\langle\psi_i|}+\sum_j\Lambda_{ij}|\psi_j\rangle=-\hat{H_{\mathrm{e}}}\langle\psi_j|+\sum_j\Lambda_{ij}|\psi_j\rangle
 		\end{displaymath} }}
@@ -529,30 +552,85 @@
 {
 	\frametitle{其它\textrm{AIMD}:~\textrm{PIMD}和\textrm{Ehrenfest~MD}}
 	\begin{itemize}
-		\item \textrm{Path Integral~MD~(PIMD)}\\
-
+		\item \textrm{Path Integral~MD~(PIMD)}\footnote{\fontsize{6.2pt}{4.2pt}\selectfont{基于量子统计的第一原理路径积分称为\textrm{Feynman}路径积分\textrm{(path integrals)}}}\\
+			\textrm{PIMD}用量子力学计算电子和原子核运动，因此该方法比\textrm{BOMD}和\textrm{CPMD}方法精确，特别是对于含有轻元素体系——计算量也要大得多
 		\item \textrm{Ehrenfest~MD}\\
+			电子自由度通过求解含时\textrm{(Time-dependent)~Schr\"odinger}方程得到，当$\Delta t\rightarrow0$，自由度变化对应于电子的幺正传播\textrm{(unitary propagation)}\footnote{\fontsize{6.2pt}{4.2pt}\selectfont{\textrm{Ehrenfest~MD}的幺正变换确保波函数保持正交，但代价是积分时间步长必须极小，因此\textrm{Ehrenfest~MD}模拟时间尺度仅达\textrm{atto}$(10^{-18})$秒尺度}}
+	\end{itemize}
+	\textcolor{blue}{\textrm{CPMD}结合了\textrm{BOMD}与\textrm{Ehrenfest~MD}的优点}:
+	\begin{itemize}
+		\item 计算体系受力由总能对粒子位置的求导，并非求电子态的$\langle\Psi_0|\hat H_{\mathrm{e}}|\Psi_0\rangle$极小值
+		\item 因为选择平面波基，$\vec F_{\mathrm{NSC}}$自然为0
 	\end{itemize}
 }
+
 \frame
 {
-	\frametitle{第一原理分子动力学\textrm{AIMD}}
-	\begin{itemize}
-		\item \textrm{AIMD}将电子结构与原子和经典轨迹计算在同一基础上完成
-		\item 每个原子运动步的受力都是在电子结构计算基础上获得的
-		\item 基于\textrm{B-O}近似，原子运动径迹的每一步上，电子运动都达到收敛
-		\item 扩展的\textrm{Lagrangian}方法:~根据体系几何结构变化构造体系波函数\\
-			\textrm{Car-Parinello}:~平面波基，构成分子轨道
-			\textrm{ADMP}:~原子中心基，构成密度矩阵
-	\end{itemize}
-	\textrm{AIMD}计算内容
-	\begin{itemize}
-		\item 可用于复杂体系的电子结构计算
-		\item 几何结构优化(能量最小化)
-		\item 描述系统演化
-		\item 模拟时长达到$\approx{\mathrm{ps}}$~(经典分子动力学 $\approx\mathrm{ns}$)
-	\end{itemize}
-
+	\frametitle{平衡态统计基础}
+	系综(\textrm{Ensembles})是在一定的宏观条件下，由大量微观粒子组成的性质和结构完全相同的、处于各种运动状态的、各自独立的系统整体的集合。简言之，系综是给定宏观条件下，所有微观状态的集合。
+%	应用\textrm{Verlet}算法，完成单粒子运动的数值积分，可以得到动力学体系的\textrm{Hamiltonian}对应的能量，进而应用统计力学的统计系综，获得宏观体系的物理量
+	\vskip 3pt
+	\textcolor{blue}{等概率原理}\textrm{(Principle of equal weights)}:\\
+	一个热力学体系有相同的概率到达每个可能经历的微观态。\\
+	等概率原理导出\textrm{Boltzmann}分布
+	\begin{displaymath}
+		P_j=\dfrac{\mathrm{e}^{-\beta\varepsilon_j}}Q
+	\end{displaymath}
+	这里$Q$称为配分函数\textrm{(partition function)}
+	\begin{displaymath}
+		\begin{aligned}
+			Q=&\sum_i\mathrm{e}^{(-\beta\varepsilon_i)}\\
+			\beta=&1/k_{\mathrm{B}}T
+		\end{aligned}
+	\end{displaymath}
+	物理量的系综平均
+	\begin{displaymath}
+		\langle A\rangle=\sum_jA_j\mathrm{e}^{(-\beta\varepsilon_j)}/Q
+	\end{displaymath}
 }
 
+\frame
+{
+	\frametitle{常用统计系综}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.20in}
+%\includegraphics[height=1.60in,width=3.85in,viewport=0 0 1420 570,clip]{Figures/Statistical_Ensembles.png}
+\includegraphics[height=1.20in,width=3.75in,viewport=0 0 1420 470,clip]{Figures/Statistical_Ensembles.png}
+\caption{\tiny \textrm{The Statistical Ensembles.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Statistical_Ensembles}
+\end{figure}
+\vskip -15pt
+\begin{itemize}
+		{\fontsize{7.2pt}{1.2pt}\selectfont{
+		\item 微正则系综\textrm{(Mircocanonical Ensemble)}\footnote{\fontsize{4.5pt}{1.2pt}\selectfont{\textrm{canonical}，汉译作``正则''，出自《楚辞\textperiodcentered 离骚》``皇揽揆余於初度兮，肇锡余以嘉名;~名余曰\textcolor{red}{正则}兮，字余曰灵均''，《楚辞章句》\upcite{Chucizhangju}:~``正，平也;~则，法也;~灵，神也;~均，调也。言正平可法则者，莫过于天;~养物均调者，莫神于地。高平曰原，故父伯庸名我为平以法天，字我为原以法地。言己上之能安君，下之能养民也。''意思是说``正则''、``灵均''隐喻着某种意义，即平正是天的象征，原均是地的象征。因此正则的含义是``\textcolor{blue}{符合天道}''，与\textrm{canonical}的意思\textrm{of, relating to, or forming a canon}意义一致。}}:~\textrm{NVE}皆为常数
+		\item 正则系综\textrm{(Canonical Ensemble)}:~\textrm{NVT}皆为常数
+		\item 巨正则系综\textrm{(Grandcanonical Ensemble)}:~\textrm{$\mu$VT}皆为常数，粒子数不固定
+		\item 等压-等温系综\textrm{(Isobaric-Isothermal Ensemble)}:~\textrm{NPT}皆为常数
+		\item 等焓-等压系综\textrm{(Isoenthalpic-Isobaric Ensemble)}:~\textrm{NPH}皆为常数
+		\item 等张力-等温系综\textrm{(Isotension-Isothermal Ensemble)}:~容器形状可变 }}
+\end{itemize}
+}
 
+\frame
+{
+	\frametitle{常用热力学量}
+	\begin{itemize}
+{\fontsize{7.8pt}{1.2pt}\selectfont{
+		\item 动能 ~$E_{\mathrm{k}}=\bigg\langle\sum\limits_{i=1}^N\dfrac12m_iv_i^2\bigg\rangle$
+		\item 势能 ~$E_{\mathrm{p}}=\bigg\langle\sum\limits_{i=1}^NE_{\mathrm{p}i}\bigg\rangle$
+		\item 温度 ~$T=\dfrac1{\mathrm{d}Nk_{\mathrm{B}}}\bigg\langle\sum\limits_{i=1}^Nm_iv_i^2\bigg\rangle$ ~~~~ 其中$\mathrm{d}$是空间维度
+		\item 压强 ~$p=\dfrac{k_{\mathrm{B}}TN}{V}+\dfrac1{\mathrm{d}V}\bigg\langle\sum\limits_{i<j}\vec f_{ij}\cdot\vec r_{ij}\bigg\rangle$
+		\item 焓 ~$H=E+pV$ ~~~~ 相当于\textrm{NPT}下的有效总内能
+		\item 熵 ~$S=k_{\mathrm{B}}\ln\Omega(N,V,E)$ ~~~~ $\Omega$是系统的总的微观状态数
+		\item \textrm{Helmholtz}自由能:~\textcolor{blue}{\textrm{NVT}下的自由能}
+			\begin{displaymath}
+				F=E-TS=-k_{\mathrm{B}}T\ln{Q}
+			\end{displaymath}
+		\item \textrm{Gibbs}自由能:~\textcolor{blue}{\textrm{NPT}下的自由能}
+			\begin{displaymath}
+				G=F+pV=E-TS+pV
+			\end{displaymath}
+		\item 化学势 ~$\mu=\dfrac{\partial G}{\partial N}\bigg|_{T,p}=\dfrac{\partial F}{\partial N}\bigg|_{T,V}$}}
+	\end{itemize}
+}
