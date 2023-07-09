@@ -383,29 +383,160 @@
 	一般电子结构计算采用\textrm{DFT}计算，不难想见，第一原理分子动力学模拟的代价极高
 }
 
+%\frame
+%{
+%	\frametitle{第一原理分子动力学的分类}
+%\begin{figure}[h!]
+%\centering
+%\vspace*{-0.05in}
+%%\hspace*{-10pt}
+%\includegraphics[height=2.3in,width=4.0in,viewport=0 0 440 230,clip]{Figures/Molecular-dynamics_Claaified.png}
+%\caption{\fontsize{5.2pt}{4.2pt}\selectfont{\textrm{The major differences between the methods of aiMD simulations.}}}%
+%\label{Molecular-dynamics_Claaified}
+%\end{figure}
+%}
+%
 \frame
 {
-	\frametitle{第一原理分子动力学的分类}
+	\frametitle{第一原理分子动力学中的近似}
+	由于分子动力学模拟的复杂性，必须做出适当的近似。具体到第一原理分子动力学，一般有两类重要的近似:
+	\begin{itemize}
+		\item \textcolor{blue}{绝热近似\textrm{(adiabatic approximation)}}\\
+			{\fontsize{6.2pt}{4.2pt}\selectfont{假设电子-原子核在能量层面上完全分离，彼此间没有能量传递}}
+		\item \textcolor{blue}{\textrm{Born-Oppenheimer}近似}\\
+			{\fontsize{6.2pt}{4.2pt}\selectfont{假设电子和原子核的运动完全解耦，对应每个时间步长的原子构型，电子可以实时处于基态\footnote{\fontsize{5.2pt}{4.2pt}\selectfont{\textrm{B-O}近似也是一种绝热近似，\textcolor{red}{但\textrm{B-O}近似下的绝热强调电子对核运动的瞬时响应}。讨论电子计算时，\textrm{B-O}近似下假设原子核是固定不动的;~在分子动力学讨论中，绝热近似强调的是电子-核运动在能量上的完整分离，而\textrm{B-O}近似则明确要求电子-核运动彼此完全解耦，且电子实时处于基态}}}}
+	\end{itemize}
 \begin{figure}[h!]
 \centering
-\vspace*{-0.05in}
+\vspace*{-0.25in}
 %\hspace*{-10pt}
-\includegraphics[height=2.3in,width=4.0in,viewport=0 0 440 230,clip]{Figures/Molecular-dynamics_Claaified.png}
-\caption{\fontsize{5.2pt}{4.2pt}\selectfont{\textrm{The major differences between the methods of aiMD simulations.}}}%
-\label{Molecular-dynamics_Claaified}
+\includegraphics[height=1.55in,width=2.6in,viewport=0 0 440 230,clip]{Figures/Molecular-dynamics_Claaified.png}
+%\caption{\fontsize{5.2pt}{4.2pt}\selectfont{\textrm{The major differences between the methods of aiMD simulations.}}}%
+\label{Molecular-dynamics_Classified}
 \end{figure}
 }
 
 \frame
 {
-	\frametitle{第一原理分子动力学中的近似}
-	由于分子动力学模拟的复杂性，
+	\frametitle{第一原理分子动力学:~\textrm{BOMD}}
+	如果绝热近似和\textrm{Born-Oppenheimer}近似同时满足，称为\textrm{Born-Oppenheimer}分子动力学\textrm{(BOMD)}
+	\begin{itemize}
+		\item 原子核运动的势函数为$E[\{\psi_i\};\mathbf{R}]$，并且每个时间步长内，势函数对$\{\psi_i(\vec r)\}$取极小值\\
+			\begin{displaymath}
+				\begin{aligned}
+					L_{\mathrm{BO}}(\{\psi_i\};~\mathbf{R},\dot{\mathbf{R}})=&\dfrac12\sum_{I=1}^NM_I\dot{\mathbf{R}}^2_I-\underset{\{\psi_i\}}{\textcolor{red}{\min}}~E[\{\psi_i\};\mathbf{R}]\\
+					&+\sum_{ij}\Lambda_{ij}(\langle\psi_i|\psi_j\rangle-\delta_{ij})
+				\end{aligned}
+			\end{displaymath}
+		\item 运动方程\textrm{(Equations of Motion,~EOM)}
+			\begin{displaymath}
+				\begin{aligned}
+					\hspace*{-40pt}
+					M_I\ddot{\mathbf{R}}_I=&-\nabla_{\mathbf{R}_I}\bigg[\underset{\{\psi_i\}}{\textcolor{red}{\min}}~E[\{\psi_i\};\mathbf{R}]\bigg|_{\{\langle\psi_i|\psi_j\rangle=\delta_{ij}\}}\bigg]\\
+					=&\textcolor{purple}{-\dfrac{\partial E}{\partial\mathbf{R}_I}}\textcolor{blue}{+\sum_{i,j}\Lambda_{ij}\dfrac{\partial}{\partial \mathbf{R}_I}\langle\psi_i|\psi_j\rangle}\textcolor{magenta}{-2\sum_i\dfrac{\partial\langle\psi_i|}{\partial\mathbf{R}_I}\bigg[\dfrac{\delta E}{\delta\langle\psi_i|}-\sum_j\Lambda_{ij}|\psi_j\rangle\bigg]}
+				\end{aligned}
+			\end{displaymath}
+	\end{itemize}
 }
 
 \frame
 {
+	\frametitle{第一原理分子动力学:~\textrm{BOMD}}
+	\begin{itemize}
+		\item $\textcolor{purple}{\dfrac{\partial E}{\partial\mathbf{R}_I}}$表示\textrm{Hellmann-Feynman}力$\vec F_{\mathrm{HF}}$
+		\item $\textcolor{blue}{\sum\limits_{i,j}\Lambda_{ij}\dfrac{\partial}{\partial \mathbf{R}_I}\langle\psi_i|\psi_j\rangle}$是\textrm{Pulay}力$\vec F_{\mathrm{WF}}$\\
+			{\fontsize{6.2pt}{4.2pt}\selectfont{源于电子波函数正交要求，且只有当基函数为局域函数(依赖于$\mathbf{R}$时)才有贡献}}
+		\item $\textcolor{magenta}{\sum\limits_i\dfrac{\partial\langle\psi_i|}{\partial\mathbf{R}_I}\bigg[\dfrac{\delta E}{\delta\langle\psi_i|}-\sum\limits_j\Lambda_{ij}|\psi_j\rangle\bigg]}$表示非自洽电子态的影响$\vec F_{\mathrm{NSC}}$\\
+			{\fontsize{6.2pt}{4.2pt}\selectfont{对非局域基(如平面波)，由于波函数非显式依赖$\mathbf{R}$，因此展开系数$c_{ij}(\mathbf{R})$依赖于原子核位置
+			\begin{displaymath}
+				\psi_i(\mathbf{R})=\sum\limits_jc_{ij}(\mathbf{R})\phi_i
+			\end{displaymath}
+			前面\textrm{MOE}中的系数\textrm{2}是当\textrm{K-S}轨道波函数为实数时的简化表示\\
+			这一项的贡献比起$F_{\mathrm{HF}}$小很多，\textcolor{blue}{只有当$\psi_i(\mathbf{R})$是体系精确的电子的本征态波函数，该项才会消失}——换言之，只要是非完全自洽的电子计算，都需要考虑该项的贡献。显然，所有数值计算中，都将存在不等式
+	\begin{displaymath}
+			0\leqslant-\dfrac{\delta E}{\delta\langle\psi_i|}+\sum_j\Lambda_{ij}|\psi_j\rangle=-\hat{H_{\mathrm{e}}}\langle\psi_j|+\sum_j\Lambda_{ij}|\psi_j\rangle
+		\end{displaymath} }}
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{第一原理分子动力学:~\textrm{BOMD}}
+	另一方面，如果忽略$\vec F_{\mathrm{WF}}$和$\vec F_{\mathrm{NSC}}$的贡献，仅对体系电子的非本征态波函数应用\textrm{Hellmann-Feynman}定理，得到的结果和精确计算的原子受力
+	\begin{displaymath}
+		\vec F=\vec F_{\mathrm{HF}}+\vec F_{\mathrm{WF}}+\vec F_{\mathrm{NSC}}
+	\end{displaymath}
+	计算相比，也只有微小的偏差
+	\vskip 1.5pt
+	这是因为在\textrm{DFT}框架下，能量是电荷密度的非线性函数，因此$H_{\mathrm{e}}$必须通过迭代求解;~而原子受力的误差则随电荷密度线性变化——这也解释了为什么一般\textrm{BOMD}计算的原子受力比体系总能要精确得多
+
+	\vskip 5pt
+	在\textrm{BOMD}中，\textrm{Born-Oppenheimer}近似下核与电子的运动完全解耦，在此基础上考虑绝热近似，将不再有对动力学模拟的时间步长限制，相比于其它\textrm{AIMD}方法，\textrm{BOMD}模拟允许的时间步长要长得多
+}
+
+\frame
+{
+	\frametitle{第一原理分子动力学:~\textrm{CPMD}}
+	1985年\textrm{Car}和\textrm{Parrinello}在密度泛函理论基础上，将第一原理方法应用到分子动力学研究中，形成\textrm{Car-Parrinello Molecular dynamics~(CPMD)}
+	\begin{itemize}
+		\item 与\textrm{BOMD}不同，在\textrm{CPMD}中，电子自由度存在于经典\textrm{Lagrangian}中
+			\begin{displaymath}
+				\begin{aligned}
+					L_{\mathrm{CP}}(\{\psi_i\};~\mathbf{R},\dot{\mathbf{R}})=&\textcolor{blue}{\dfrac12\mu\sum_i\langle\dot{\psi}_i|\dot{\psi}_i\rangle}+\dfrac12\sum_{I=1}^NM_I\dot{\mathbf{R}}^2_I\\
+					-&\textcolor{red}{E}[\{\psi_i\};\mathbf{R}]\\
+					&+\sum_{ij}\Lambda_{ij}(\langle\psi_i|\psi_j\rangle-\delta_{ij})
+				\end{aligned}
+			\end{displaymath}
+			{\fontsize{6.2pt}{4.2pt}\selectfont{在经典\textrm{Lagrangian}中考虑电子自由度，人为地引入了傀电子质量参数$\mu$和傀轨道速度$\dot{\psi}_i$}}
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{第一原理分子动力学:~\textrm{CPMD}}
+	\begin{itemize}
+		\item \textrm{CPMD}下的运动方程表示为
+			\begin{displaymath}
+				\begin{aligned}
+					M_I\ddot{\mathbf{R}}_I=&-\nabla_{\mathbf{R}_I}\bigg[E[\{\psi_i\};\mathbf{R}]\bigg|_{\{\langle\psi_i|\psi_j\rangle=\delta_{ij}\}}\bigg]\\
+					=&\textcolor{purple}{-\dfrac{\partial E}{\partial\mathbf{R}_I}}\textcolor{blue}{+\sum_{i,j}\Lambda_{ij}\dfrac{\partial}{\partial \mathbf{R}_I}\langle\psi_i|\psi_j\rangle}\\
+					\mu\ddot{\psi}_i(\vec r,t)=&-\dfrac{\delta E}{\delta\langle\psi_i|}+\sum_j\Lambda_{ij}|\psi_j\rangle\\
+					=&-\hat{H_{\mathrm{e}}}\langle\psi_j|+\sum_j\Lambda_{ij}|\psi_j\rangle
+				\end{aligned}
+			\end{displaymath}
+			{\fontsize{6.2pt}{4.2pt}\selectfont{$-\dfrac{\delta E}{\delta\langle\psi|}$表示经典力学框架下的电子受力，用来描述分子动力学范畴内电子自由度随原子核运动的情况 }}
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{\textrm{CPMD}计算的特点}
+	\begin{itemize}
+		\item 计算成本大大节约\\
+			{\fontsize{8.2pt}{4.2pt}\selectfont{相比于\textrm{BOMD},\textrm{CPMD}无需在每个分子动力学时间步长执行电子自洽计算}}
+		\item 计算时间步长不能太长\\
+			{\fontsize{8.2pt}{4.2pt}\selectfont{绝热近似要求电子-核运动能量彼此分离，\textcolor{blue}{声子最高频率}$\omega_{\mathrm I}$必须远小于\textcolor{blue}{傀电子最低振动频率}$\omega_{\mathrm e}$
+			\begin{displaymath}
+				\omega_{\mathrm e}\propto\sqrt{\dfrac{\Delta E_{\mathrm{gap}}}{\mu}}
+			\end{displaymath}
+			$\Delta E_{\mathrm{gap}}$是\textrm{K-S}单粒子的带隙，许可最大时间步长$\Delta t_{\mathrm{max}}<1/\omega_{\mathrm{e}}$，大小主要由$\sqrt{\mu}$}}确定
+		\item $\mu$物理上没有意义，但通过调节$\mu$可以平衡\textrm{AIMD}的效率和精度，一般选取$\mu$使得$\omega_{\mathrm{I}}<<\omega_{\mathrm{I}}$成立
+		\item 对于金属/导体的\textrm{CPMD}计算，由于$\Delta E_{\mathrm{gap}}=0$，必须要求体系通过恒温条件平衡交换能或者泛函允许分数占据
+		\end{itemize}
+}
+
+\frame
+{
+	\frametitle{其它\textrm{AIMD}:~\textrm{PIMD}和\textrm{Ehrenfest~MD}}
+	\begin{itemize}
+		\item \textrm{Path Integral~MD~(PIMD)}\\
+
+		\item \textrm{Ehrenfest~MD}\\
+	\end{itemize}
+}
+\frame
+{
 	\frametitle{第一原理分子动力学\textrm{AIMD}}
-	1985年\textrm{Car}和\textrm{Parrinello}在密度泛函理论基础上，将第一原理方法应用到分子动力学研究中，形成第一原理分子动力学\textrm{(Ab~initio Molecular dynamics, AIMD)}
 	\begin{itemize}
 		\item \textrm{AIMD}将电子结构与原子和经典轨迹计算在同一基础上完成
 		\item 每个原子运动步的受力都是在电子结构计算基础上获得的
