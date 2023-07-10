@@ -75,11 +75,25 @@
 \subsection{晶格振动与简谐振动}
 \frame
 {
+	\frametitle{晶格振动}
+		晶体中的格点表示原子的平衡位置，晶格振动是原子在格点附近的振动
+\begin{figure}[h!]
+\centering
+%\hspace*{-10pt}
+\vspace*{-0.1in}
+\includegraphics[height=1.9in,width=4.0in,viewport=0 0 400 185,clip]{Figures/Schematic-diagrams-of-the-crystal-structures-and-longitudinal-optical-lattice-vibration-modes-(LO_modes)-of-diamonds.jpg}
+\caption{\tiny \textrm{Schematic diagrams of the crystal structures and longitudinal optical lattice vibration modes (LO modes) of diamonds. (a) Crystal structure of a diamond. (b) 3D view of a LO mode. (c) Top view of a LO mode.}}%
+\label{lattice-virbration}
+\end{figure} 
+}
+
+\frame
+{
 	\frametitle{简谐近似}
 	\begin{itemize}
-		\item 晶体中的格点表示原子的平衡位置，晶格振动是原子在格点附近的振动
-		\item 红外、Raman光谱、中子衍射谱，热容、热导，电阻、超导和电-声耦合等都与晶格振动有关
-		\item 绝热近似(\textrm{Born-Oppenheimer}近似)下，原子核是在电子总能量$E(\mathbf{R})$形成的势能面上运动
+		\item 红外、\textrm{Raman}光谱、中子衍射谱，热容、热导，电阻、超导和电-声耦合等都与晶格振动有关
+		\item 绝热近似%(\textrm{Born-Oppenheimer}近似)
+			下，原子核是在电子能量函数$E(\mathbf{R})$构成的势能面上运动
 	\end{itemize}
 	含有$N$个原子，平衡位置是$\mathbf{R}_i^0$，偏移位置矢量$\mathbf{\mu}_i(t)$，体系的势能函数在平衡位置作\textrm{Taylor~}级数展开
 	\begin{displaymath}
@@ -87,12 +101,14 @@
 		V=V_0+\sum_{i=1}^{3N}\left( \frac{\partial V}{\partial \mu_i} \right)_0\mu_i+\underline{\textcolor{red}{\frac12\sum_{i,j=1}^{3N}\left( \frac{\partial^2V}{\partial\mu_i\partial\mu_j} \right)_0\mu_i\mu_j}}+\mbox{高阶项}
 %		\end{aligned}
 	\end{displaymath}
-	平衡位置$\left( \frac{\partial V}{\partial\mu_i} \right)_0=0$，\textcolor{blue}{简谐近似}保留到$\mu_i$的二次项
+	平衡位置$\left( \frac{\partial V}{\partial\mu_i} \right)_0=0$\\
+	\textcolor{blue}{简谐近似}保留到$\mu_i$的二次项\\
+	引入高阶项，则势函数可以包括\textcolor{purple}{非简谐近似}的贡献
 }
 
 \frame
 {
-	\frametitle{简正坐标与简谐振动}
+	\frametitle{简谐振动与简正坐标}
 	$N$原子体系的动能函数
 	\begin{displaymath}
 		T=\frac12\sum_{i=1}^{3N}m_i\dot{\mu}_i^2
@@ -186,6 +202,19 @@
 	\end{aligned}\right\}
 	=\beta\frac{m+M}{mM}\left\{ 1\pm\left[ 1-\frac{4mM}{(m+M)^2}\sin^2aq \right]^{1/2} \right\}
 \end{displaymath}
+}
+
+\frame
+{
+	\frametitle{声子振动模式的横向传播与纵向传播}
+\begin{figure}[h!]
+\centering
+%\hspace*{-10pt}
+\vspace*{-0.20in}
+\includegraphics[height=2.4in,width=4.0in,viewport=0 0 850 610,clip]{Figures/examples-of-transverse-optical-to-and-longitudinal-optical-lo-phonons-in-1d.png}
+\caption{\tiny \textrm{Schematic examples of transverse optical to and longitudinal optical lo phonons in 1d diatomic lattice.}}%
+\label{To-Lo-1D}
+\end{figure} 
 }
 
 \frame
