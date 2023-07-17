@@ -15,7 +15,7 @@
 \date[\today] % (optional, should be abbreviation of conference name)
 {%	{\fontsize{6.2pt}{4.2pt}\selectfont{\textcolor{blue}{E-mail:~}\url{jiangjun@bcc.ac.cn}}}
 \vskip 45 pt {\fontsize{8.2pt}{6.2pt}\selectfont{%清华大学\;\;物理系% 报告地点
-	\vskip 5 pt \textrm{2023.04.22}}}
+	\vskip 5 pt \textrm{2023.07.15}}}
 }
 
 %% - Either use conference name or its abbreviation
@@ -171,6 +171,20 @@
 
 \frame
 {
+	\frametitle{铁磁、反铁磁和亚铁磁}
+\begin{figure}[h!]
+	\vspace{-0.20in}
+\centering
+\includegraphics[height=0.95in,width=2.3in,viewport=0 0 350 230,clip]{Figures/Ferromagnetic.jpeg}\\
+\includegraphics[height=0.85in,width=2.3in,viewport=0 -13 350 155,clip]{Figures/Antiferromagnetic.png}\\
+\includegraphics[height=0.88in,width=2.3in,viewport=0 0 350 225,clip]{Figures/Ferrimagnetic.jpeg}
+\caption{\tiny \textrm{The model of Ferromagnetic, Antiferromagnetic and Ferrimagnetic.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Ferrimagneitic_Model}
+\end{figure} 
+}
+
+\frame
+{
 	\frametitle{\textrm{Heisenberg~}交换模型}
 \begin{figure}[h!]
 %	\vspace{-0.10in}
@@ -198,57 +212,6 @@
 			\end{displaymath}
 			其中$N(0)$是\textrm{Fermi~}能级的态密度，磁化有关的有效外势$V_m=V_m^{ext}+Im$
 	\end{itemize}
-}
-
-\frame
-{
-	\frametitle{\textrm{Stoner}模型}
-	\begin{itemize}
-		\item \textrm{Stoner}将金属的磁性考虑为晶格中巡游的$3d$、$4s$\,电子贡献，其相互作用为$I$，\textrm{Fermi}面附近的\textrm{DOS}为$N(E_{\mathrm F})$
-\begin{figure}[h!]
-\centering
-\vspace*{-0.05in}
-\includegraphics[height=1.0in,width=1.8in,viewport=0 0 800 380,clip]{Figures/Mag_Metal-T0.png}
-\caption{\tiny \textrm{The Stoner model.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{Mag_Metal-T0}
-\end{figure}
-		\item 体系的磁性由转变由\textrm{Fermi}面附近能量变化确定
-			\begin{displaymath}
-				\Delta E=N(E_{\mathrm F})\big[1-IN(E_{\mathrm F})\big](\delta E)^2
-			\end{displaymath}
-	\end{itemize}
-}
-
-\frame
-{
-	\frametitle{\textrm{Stoner}模型}
-	\begin{itemize}
-		\item \textrm{Stoner}模型中参数$I$\,主要反应$3d$电子的紧束缚特征，与晶体结构关系不大
-		\item \textrm{Stoner}用于孤立原子体系，参数$I$描述自旋电子的裂分，要求:
-			\begin{enumerate}
-				\item \textcolor{blue}{对\textrm{LSDA}描述的单行列式态，参数$I$可以精确描述原子态的裂分}
-				\item \textcolor{blue}{\textrm{LSDA}中应用\textrm{Stoner}模型,参数$I$\,与\textrm{Hubbard}规则的交换参数$U$一致}
-			\end{enumerate}
-		\item 参数$U$(或$I$~)、$J$的大小\\
-			\begin{enumerate}
-				\item \textcolor{red}{\textrm{Hund}规则的交换参数$J$的数量级:~ \textrm{1eV}
-				\item \textrm{Hubbard}参数$U$的数量级:~\textrm{10eV}}
-			\end{enumerate}
-	\end{itemize}
-}
-
-\frame
-{
-	\frametitle{铁磁、反铁磁和亚铁磁}
-\begin{figure}[h!]
-	\vspace{-0.20in}
-\centering
-\includegraphics[height=0.95in,width=2.3in,viewport=0 0 350 230,clip]{Figures/Ferromagnetic.jpeg}\\
-\includegraphics[height=0.85in,width=2.3in,viewport=0 -13 350 155,clip]{Figures/Antiferromagnetic.png}\\
-\includegraphics[height=0.88in,width=2.3in,viewport=0 0 350 225,clip]{Figures/Ferrimagnetic.jpeg}
-\caption{\tiny \textrm{The model of Ferromagnetic, Antiferromagnetic and Ferrimagnetic.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{Ferrimagneitic_Model}
-\end{figure} 
 }
 
 \frame
@@ -287,6 +250,43 @@
 \caption{\tiny \textrm{Illustration of double exchange (a) and super-exchange interactions in \ch{Fe3O4}.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{double-super-exchange-2}
 \end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{Stoner}模型}
+	\begin{itemize}
+		\item \textrm{Stoner}将金属的磁性考虑为晶格中巡游的$3d$、$4s$\,电子贡献，其相互作用为$I$，\textrm{Fermi}面附近的\textrm{DOS}为$N(E_{\mathrm F})$
+\begin{figure}[h!]
+\centering
+\vspace*{-0.05in}
+\includegraphics[height=1.0in,width=1.8in,viewport=0 0 800 380,clip]{Figures/Mag_Metal-T0.png}
+\caption{\tiny \textrm{The Stoner model.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Mag_Metal-T0}
+\end{figure}
+		\item 体系的磁性由转变由\textrm{Fermi}面附近能量变化确定
+			\begin{displaymath}
+				\Delta E=N(E_{\mathrm F})\big[1-IN(E_{\mathrm F})\big](\delta E)^2
+			\end{displaymath}
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{\textrm{Stoner}模型}
+	\begin{itemize}
+		\item \textrm{Stoner}模型中参数$I$\,主要反应$3d$电子的紧束缚特征，与晶体结构关系不大
+		\item \textrm{Stoner}用于孤立原子体系，参数$I$描述自旋电子的裂分，要求:
+			\begin{enumerate}
+				\item \textcolor{blue}{对\textrm{LSDA}描述的单行列式态，参数$I$可以精确描述原子态的裂分}
+				\item \textcolor{blue}{\textrm{LSDA}中应用\textrm{Stoner}模型,参数$I$\,与\textrm{Hubbard}规则的交换参数$U$一致}
+			\end{enumerate}
+		\item 参数$U$(或$I$~)、$J$的大小\\
+			\begin{enumerate}
+				\item \textcolor{red}{\textrm{Hund}规则的交换参数$J$的数量级:~ \textrm{1eV}
+				\item \textrm{Hubbard}参数$U$的数量级:~\textrm{10eV}}
+			\end{enumerate}
+	\end{itemize}
 }
 
 \frame
@@ -594,6 +594,7 @@ $E_{\mathrm{AFM}}$:
 {
 \frametitle{主要参考文献}
 {\tiny
+\bibitem{Dai_Qian}戴道生,钱昆明, {\textit{铁磁学}}(上册),\:科学出版社, 北京, 1998
 \bibitem{JAP63-3482_1988}\textrm{J. K\"ubler, K. H. H\"ock and J. Sticht. \textit{J. Appl. Phys.}, \textbf{63} (1988), 3482}
 \bibitem{PRB62-11556_2000}\textrm{D. Hobbs, G. Kresse and J. Hafner. \textit{Phys. Rev.} B, \textbf{62} (2000), 11556}
 }
