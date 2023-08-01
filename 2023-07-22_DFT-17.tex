@@ -75,18 +75,35 @@
 \frame
 {
 \frametitle{旋-轨耦合的起源}
-\begin{itemize}
-	\item 电场对静止的电荷有静电力作用(\textrm{Coulomb}力)
-	\item 电场对运动的电荷除静电力外还有磁场力作用\\
-	 磁场对运动的电荷力的作用(\textrm{Lorentz}力)
-\end{itemize}
-自旋-轨道耦合本质:~\textcolor{red}{外电场对运动自旋磁矩的作用，是相对论效应}
 \begin{figure}[h!]
 \centering
-\includegraphics[height=1.15in,width=2.45in,viewport=0 0 600 270,clip]{Figures/SOC_cor.png}
+\includegraphics[height=1.75in,width=3.95in,viewport=0 0 600 270,clip]{Figures/SOC_cor.png}
 \caption{\tiny \textrm{A schematic coordinate for an electron in atom: (a) atomic coordinate system, (b) electron coordinate ones.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{Muffin_tin}
+\label{Nuclear_Electron}
 \end{figure}
+自旋-轨道耦合本质:~\textcolor{red}{外电场对运动自旋磁矩的作用，是相对论效应}
+}
+
+\frame
+{
+\frametitle{核-电子运动与电-磁场}
+\begin{itemize}
+	\item 静止电荷间的静电力作用(\textrm{Coulomb}力)
+		\begin{displaymath}
+			\begin{aligned}
+				\vec F_1=&\dfrac{q_1q_2}{4\pi\epsilon_0}\dfrac{\hat r_{12}}{|\vec r_{12}|^2}\\
+				\vec F_2=-\vec F_1
+			\end{aligned}
+		\end{displaymath}
+	\item 电场对运动的电荷的作用
+		\begin{displaymath}
+			\vec F=q\vec E
+		\end{displaymath}
+	\item 磁场对运动的电荷力的作用(\textrm{Lorentz}力)
+		\begin{displaymath}
+		\vec F=q\vec v\times\vec B
+		\end{displaymath}
+\end{itemize}
 }
 
 \frame
@@ -145,15 +162,15 @@
 			=&-\frac1{m^2c^2}\nabla V\cdot(\vec S\times\vec p)
 		\end{aligned}
 	\end{displaymath}
-	考虑电子参照系的非惯性系性质，会产生\textrm{Thomas}进动，因此非惯性系中真空自旋-轨道耦合\textrm{Hamiltonian}为
+	由于电子的高速运动，考虑电子参照系的非惯性系性质，会产生\textrm{Thomas}进动，因此非惯性系中真空自旋-轨道耦合\textrm{Hamiltonian}为
 	\begin{displaymath}
-		\vec H_{\mathrm{SO}}=-\frac1{4m^2c^2}(\vec{\sigma\cdot\vec p})\times\nabla V
+		\vec H_{\mathrm{SO}}=-\frac1{4m^2c^2}(\vec{\sigma}\cdot\vec p)\times\nabla V
 	\end{displaymath}
 }
 
 \frame
 {
-	\frametitle{由\textrm{Dirac~}方程导出}
+	\frametitle{\textrm{Dirac~}方程}
 	自旋是相对论量子力学的自然结果，严格地给出自旋-轨道耦合必须要从\textrm{Dirac~}方程出发，由\textrm{Dirac~}方程的非相对论极限可得到旋-轨耦合的具体形式，由\textrm{Dirac~}算符
 	\begin{displaymath}
 		\vec H_{\mathrm D}=c\vec{\alpha}\cdot\vec p+(\vec{\beta}-1)mc^2+V(\vec r)
@@ -232,13 +249,13 @@
 	并有
 	\begin{displaymath}
 		\begin{aligned}
-			\vec pV&=V\vec p-\mathrm{i}\hbar\vec{\nabla}V\\
-			(\vec{\sigma}\vec{\nabla}V)(\vec{\sigma}\cdot\vec p)&=(\vec{\nabla}V\vec p)+\mathrm{i}\vec{\sigma}[\vec{\nabla},\vec p]
+			\vec pV&=V\vec p-\mathrm{i}\hbar\nabla V\\
+			(\vec{\sigma}\nabla V)(\vec{\sigma}\cdot\vec p)&=(\nabla V\vec p)+\mathrm{i}\vec{\sigma}[\nabla,\vec p]
 		\end{aligned}
 	\end{displaymath}
 	由此得$\Phi$的微分方程
 	\begin{displaymath}
-		\hspace*{-10pt}	\left[ \left( 1-\frac{\varepsilon-V}{2mc^2} \right)\frac{\vec p^2}{2m}+V \right]\Phi-\frac{h^2}{4m^2c^2}(\vec{\nabla}V\vec{\nabla}\Phi)+\frac{h^2}{4m^2c^2}(\sigma[\vec{\nabla V},\vec p]\Phi)=\varepsilon\Phi
+		\hspace*{-10pt}	\left[ \left( 1-\frac{\varepsilon-V}{2mc^2} \right)\frac{\vec p^2}{2m}+V \right]\Phi-\frac{h^2}{4m^2c^2}(\nabla V\nabla \Phi)+\frac{h^2}{4m^2c^2}(\sigma[\nabla V,\vec p]\Phi)=\varepsilon\Phi
 	\end{displaymath}
 }
 
@@ -277,7 +294,7 @@
 \frame
 {
 	\frametitle{中心力场的\textrm{Dirac~}方程}
-	球对称下的\textrm{Dirac~}方程解，四分量波函数$\Psi$因此可写成
+	球对称下的\textrm{Dirac~}方程解，二分量波函数$\Psi$因此可写成
 	\begin{displaymath}
 		\Psi=\left( 
 		\begin{matrix}
@@ -348,7 +365,7 @@
 \frame
 {
 	\frametitle{标量相对论近似与旋-轨耦合}
-	标量相对论近似下四分量波函数$\tilde\Psi$可以写成
+	标量相对论近似下二分量波函数$\tilde\Psi$可以写成
 	\begin{displaymath}
 		\tilde\Psi=\left( 
 		\begin{matrix}
@@ -402,7 +419,9 @@
 	\begin{figure}[h!]
 \centering
 \vspace*{-0.10in}
-\includegraphics[height=2.5in,width=4.0in,viewport=0 30 330 250,clip]{Figures/spin_half_mobius.jpg}
+%\includegraphics[height=2.5in,width=4.0in,viewport=0 30 330 250,clip]{Figures/spin_half_mobius.jpg}
+%\includegraphics[height=2.5in,width=4.0in,viewport=0 30 1120 770,clip]{Figures/spin_half_mobius_2.jpg}
+\includegraphics[height=2.7in,width=2.65in,viewport=0 0 1120 1170,clip]{Figures/spin_half_mobius_2.jpg}
 \caption{\tiny \textrm{The geometrical representation of spinor follows the Mobius strip.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Fig:Mobius}
 \end{figure}
