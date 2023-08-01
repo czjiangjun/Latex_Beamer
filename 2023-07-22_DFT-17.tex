@@ -263,12 +263,13 @@
 {
 	\frametitle{中心力场的\textrm{Dirac~}方程}
 	在球形对称势函数条件下
-	\begin{displaymath}
-		\hspace*{-10pt}\left[ \underline{\textcolor{blue}{\frac{p^2}{2m}+V}}-\underline{\textcolor{brown}{\frac{p^4}{8m^3c^2}}}-\underline{\textcolor{brown}{\frac{\hbar^2}{4m^2c^2}\frac{\mathrm{d}V}{\mathrm{d}r}\frac{\partial}{\partial\vec r}}}+\underline{\textcolor{red}{\frac1{2m^2c^2}\frac1r\frac{\mathrm{d}V}{\mathrm{d}r}(\vec l\cdot\vec s)}} \right]\Phi=\varepsilon\Phi
-	\end{displaymath}
+	\fontsize{9.5pt}{5.2pt}\selectfont{\begin{displaymath}
+		\hspace*{-10pt}\left[ \underline{\textcolor{blue}{\frac{p^2}{2m}+V}}-\textcolor{brown}{\dfrac{\hbar}{2m}\vec{\sigma}\cdot\vec B}-\textcolor{magenta}{\frac{p^4}{8m^3c^2}}-\textcolor{magenta}{\frac{\hbar^2}{4m^2c^2}\frac{\mathrm{d}V}{\mathrm{d}r}\frac{\partial}{\partial\vec r}}+\underline{\textcolor{red}{\frac1{2m^2c^2}\frac1r\frac{\mathrm{d}V}{\mathrm{d}r}(\vec l\cdot\vec\sigma)}} \right]\Phi=\varepsilon\Phi
+	\end{displaymath}}
 	\begin{itemize}
 		\item 第一与第二项是非相对论\textrm{Schr\"odinger~}方程
-		\item 第三和第四项是质量和\textrm{Darwin~}校正
+		\item 第三项是自旋与磁场的相互作用:~\textrm{Zeeman}项
+		\item 第四和第五项是相对论效应的质量校正和\textrm{Darwin~}校正
 		\item 最后一项对应于自旋-轨道耦合
 	\end{itemize}
 	考虑旋-轨耦合后，波函数$\Psi$不再是自旋或轨道角动量的本征态，新的好量子数$j$、$j_z$和$\kappa$定义为
