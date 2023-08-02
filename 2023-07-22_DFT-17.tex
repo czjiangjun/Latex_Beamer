@@ -134,7 +134,7 @@
 	\vec H=\frac{(\vec{\sigma}\cdot\vec p)^2}{2m}
 \end{displaymath}
 
-考虑磁场与交变电磁场$\mathbf{A}$:~$\vec B=\nabla\times\mathbf A$，因此
+考虑磁场与交变电磁场$\mathbf{A}$:~$\mathbf B=\nabla\times\mathbf A$，因此
 \begin{displaymath}
 	H=\frac{\left( \vec{\sigma}\cdot\left( \vec p+\dfrac ec\mathbf A \right) \right)^2}{2m}
 \end{displaymath}
@@ -151,11 +151,11 @@
 	自旋磁矩与外场相互作用
 	\begin{displaymath}
 		\begin{aligned}
-			&\frac{\mathrm{i}e}{2mc}\vec{\sigma}\cdot[(\vec p\times\mathbf{A})+(\mathbf{A})\times\vec p]=\frac{\mathrm{i}e}{2mc}\vec{\sigma}\cdot(-\mathrm{i}\hbar\nabla\times\mathbf{A})\\
+			&\frac{\mathrm{i}e}{2mc}\vec\sigma\cdot[(\vec p\times\mathbf{A})+(\mathbf{A}\times\vec p)]=\frac{\mathrm{i}e}{2mc}\vec{\sigma}\cdot(-\mathrm{i}\hbar\nabla\times\mathbf{A})\\
 			=&\frac{e\hbar}{2mc}\vec{\sigma}\cdot\mathbf{B}=-\vec{\mu}_s\cdot\mathbf{B}
 		\end{aligned}
 	\end{displaymath}
-	其中$\vec \mu_s=-g_s\mu_B\vec S$是电子自旋$\vec S$磁矩，$g_s$是电子自旋$g$因子，$\mu_B$是\textrm{Bohr}磁子，$\vec S$是自旋角动量，因此可得自旋-轨道相互作用能量为:
+	其中$\vec \mu_s=-g_s\mu_B\vec S$，是电子自旋$\vec S$磁矩，$g_s$是电子自旋$g$因子，$\mu_B$是\textrm{Bohr}磁子，$\vec S$是自旋角动量，因此可得自旋-轨道相互作用能量为:
 	\begin{displaymath}
 		\begin{aligned}
 			U=&\frac1{m^2c^2}\frac1r\frac{\partial V}{\partial r}\vec L\cdot\vec S\\
@@ -164,7 +164,117 @@
 	\end{displaymath}
 	由于电子的高速运动，考虑电子参照系的非惯性系性质，会产生\textrm{Thomas}进动，因此非惯性系中真空自旋-轨道耦合\textrm{Hamiltonian}为
 	\begin{displaymath}
-		\vec H_{\mathrm{SO}}=-\frac1{4m^2c^2}(\vec{\sigma}\cdot\vec p)\times\nabla V
+		\vec H_{\mathrm{SO}}=-\frac1{4m^2c^2}(\vec S\cdot\vec p)\times\nabla V
+	\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{类\textrm{H}原子旋-轨耦合的估计}
+\begin{minipage}{0.58\textwidth}
+	\begin{displaymath}
+		\begin{aligned}
+			V(r)=&-\dfrac1{4\pi\epsilon_0}\dfrac{Ze^2}r~\quad(\mbox{\textrm{Z}是核电荷数})\\
+			E_n=&-\dfrac{\mu c^2Z^2\alpha^2}{2n^2}\\
+			r_1\approx&\bigg(\dfrac{4\pi\epsilon_0}{e^2}\bigg)\dfrac{\hbar^2}{Zm_e} ~~ \sim Z^{-1}\\
+			v_1=&\dfrac{Ze^2}{4\pi\epsilon_0\hbar}\sim Z\\
+			mv^2=&\dfrac{Ze^2}{4\pi\epsilon_0r_n}~~\sim Z^2\\
+			E=&\nabla V(r)=\dfrac1{4\pi}\dfrac{Ze^2}{r^2}\hat r ~~ \sim Z^3
+		\end{aligned}
+	\end{displaymath}
+\end{minipage}
+\begin{minipage}{0.40\textwidth}
+\begin{figure}[h!]
+\centering
+\vspace{-0.9in}
+\includegraphics[height=1.35in,width=1.3in,viewport=0 0 760 800,clip]{Figures/SOC_hydrogen-H_atom.png}
+%\caption{\textrm{The wave-particle duality and Photoelectric effect}}
+\label{SOC-hydrongen-like-1}
+\end{figure}
+\end{minipage}
+}
+
+\frame
+{
+	\frametitle{类\textrm{H}原子旋-轨耦合的估计}
+\begin{minipage}{0.58\textwidth}
+	\begin{itemize}
+		\item 电子自旋产生的电子磁矩\textrm{(in~SI)}
+			\begin{displaymath}
+				\vec\mu_s=-\dfrac{e}{m}\vec S=-\dfrac{e}{m}\dfrac{h}2\vec\sigma=-\mu_b\vec\sigma=-\dfrac{2\mu_B}{\hbar}\vec S
+			\end{displaymath}
+		\item 轨道角动量形成的轨道磁矩
+			\begin{displaymath}
+				\vec\mu_L=-\dfrac{e}{2m}\vec L=-\dfrac{\mu_B}{\hbar}\vec L=-\mu_B\vec l
+			\end{displaymath}
+			可以理解为电子的轨道运动形成的电流，产生的磁场$\vec H_{\mathrm{eff}}$
+		\item 自旋-轨道相互作用的静态能量
+			\begin{displaymath}
+				E_{\mathrm{SO}}=-\vec\mu_s\cdot\mathbf{B}_{\mathrm{eff}}
+			\end{displaymath}
+			也就是\textcolor{blue}{静电-磁偶极相互作用}
+	\end{itemize}
+\end{minipage}
+\begin{minipage}{0.40\textwidth}
+\begin{figure}[h!]
+\centering
+\vspace{+0.3in}
+\includegraphics[height=1.55in,width=1.38in,viewport=0 0 760 800,clip]{Figures/SOC_spin-orbit.png}
+%\caption{\textrm{The wave-particle duality and Photoelectric effect}}
+\label{SOC_spin-orbit}
+\end{figure}
+\end{minipage}
+}
+
+\frame
+{
+	\frametitle{类\textrm{H}原子旋-轨耦合的估计}
+\begin{minipage}{0.58\textwidth}
+	\begin{displaymath}
+		\begin{aligned}
+			E_n=&-\dfrac{\mu c^2Z^2\alpha^2}{2n^2}~\sim -13.6\bigg(\dfrac{Z^2}{n^2}\bigg)\mathrm{eV}\\
+			r_1\approx&\bigg(\dfrac{4\pi\epsilon_0}{e^2}\bigg)\dfrac{\hbar^2}{Zm_e} ~~ a_0=0.529Z^{-1}\AA\\
+			v_1=&\dfrac{Ze^2}{4\pi\epsilon_0\hbar}\sim \dfrac{Z}{137}c\\
+			\gamma\equiv&\dfrac1{\sqrt{1-v^2/c^2}}~\quad \mbox{\textrm{Lorentz~factor\quad(\textcolor{blue}{Relativistic~effect})}}\\
+			m=&\gamma m_0=m_0/\sqrt{1-(v/c)^2}\\
+			a_0=&\hbar^2/me^2
+		\end{aligned}
+	\end{displaymath}
+\end{minipage}
+\begin{minipage}{0.40\textwidth}
+\begin{figure}[h!]
+\centering
+\vspace{-0.9in}
+\includegraphics[height=1.35in,width=1.38in,viewport=0 0 840 800,clip]{Figures/SOC_hydrogen-H_electron.png}
+%\caption{\textrm{The wave-particle duality and Photoelectric effect}}
+\label{SOC-hydrongen-like-2}
+\end{figure}
+\end{minipage}
+}
+
+\frame
+{
+	\frametitle{类\textrm{H}原子旋-轨耦合的估计}
+	\begin{itemize}
+		\item \textrm{Lorentz~transformation}
+			\begin{displaymath}
+				\begin{aligned}
+					\mathbf{E}_{\parallel}^{\prime}=&\mathbf{E}_{\parallel}\qquad\qquad \mathbf{B}_{\parallel}^{\prime}=\mathbf{B}_{\parallel}\\
+					\mathbf{E}_{\perp}^{\prime}=&\gamma(\mathbf{E}_{\perp}+\vec v\times\mathbf{B})\\
+					\mathbf{B}_{\perp}^{\prime}=&\gamma\bigg(\mathbf{B}_{\perp}-\dfrac1{c^2}\vec v\times\mathbf{E}\bigg)
+				\end{aligned}
+			\end{displaymath}
+	\end{itemize}
+	这里
+	\begin{displaymath}
+		\begin{aligned}
+			\mathbf{B}=&\dfrac1{c^2}\mathbf{E}\times\vec v~\sim Z^4\\
+			\mathbf{E}=&-\dfrac{\vec r}r\phi^{\prime}\qquad\qquad \mathbf{B}=-\dfrac1{rc^2}\phi^{\prime}\vec r\times\vec v
+		\end{aligned}
+	\end{displaymath}
+	注意到$\vec l=\vec r\times\vec p$，因此有$\vec r\times\vec v=\dfrac1{m_e}\vec l$，因此有\textrm{Hamiltonian}
+	\begin{displaymath}
+		h_{\mathrm{SO}}=-\mu_{e}\cdot\mathbf{B}=\dfrac1{m_erc^2}\phi^{\prime}\mu\cdot\vec l=\dfrac{e}{m_e^2c^2}\dfrac{\phi^{\prime}}r\vec\sigma\cdot\vec l \quad\textcolor{blue}{\Longleftarrow\mbox{\textrm{\fontsize{6.5pt}{5.2pt}\selectfont{1/2~Thomas~factor}}}}
 	\end{displaymath}
 }
 
@@ -395,6 +505,19 @@
 %	\textcolor{red}{注意:~这样定义的$H_{\mathrm{SO}}$只是对波函数的大分量有贡献}
 }
 
+\frame
+{
+	\frametitle{旋-轨耦合引起的能带翻转}
+	相比于化合物\textrm{CdTe}，\textrm{HgTe}中相对论效应的贡献更显著，导致\textrm{Hg}-\textrm{6}$s$轨道的收缩，\textrm{Hg}-\textrm{6}$s$能带位于\textrm{Te}-\textrm{5}$p$能带的下方
+	\begin{figure}[h!]
+\centering
+\vspace*{-0.05in}
+\includegraphics[height=2.4in,width=3.80in,viewport=0 5 1350 830,clip]{Figures/SOC_double-group_2.png}
+%\caption{\tiny \textrm{Symmetry classification of the bands in the extended Kane model.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:Relativistic-Effect}
+\end{figure}
+}
+
 \section{旋转矩阵与旋-轨耦合项$\vec s\cdot\vec l$的计算}
 \frame
 {
@@ -554,6 +677,19 @@
 		\right.
 \end{displaymath}
 }}
+}
+
+\frame
+{
+	\frametitle{能带的双值群表示}
+	锌残杂的半导体\textrm{Si},\textrm{Ge},\textrm{GaAs},\textrm{CdTe},\textrm{HgTe}的能带
+	\begin{figure}[h!]
+\centering
+\vspace*{-0.10in}
+\includegraphics[height=2.1in,width=4.00in,viewport=0 0 1490 730,clip]{Figures/SOC_double-group.png}
+\caption{\tiny \textrm{Symmetry classification of the bands in the extended Kane model.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:Double-Group}
+\end{figure}
 }
 
 \frame
@@ -787,4 +923,123 @@
 \caption{\small \textrm{Allocation of the Hamiltonian and overlap matrix.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{WIENNCM_Ham}
 \end{figure}
+}
+
+\section{固体中的旋-轨耦合}
+\frame
+{
+	\frametitle{固体材料中的两类旋-轨耦合}
+	\begin{itemize}
+		\item \textcolor{blue}{对称性无关的旋-轨耦合}\\
+			存在于各类晶体中:\\
+			源于原子轨道本身的旋-轨耦合
+		\item \textcolor{blue}{对称性相关的旋-轨耦合}\\
+			\begin{enumerate}
+		\setlength{\itemsep}{5pt}
+				\item 存在于表面和体相的广义的旋-轨耦合:\\
+					局域空间非对称\textrm{(Local-Space-Asymmetry, LSA)}\\
+				\item 存在于没有倒反对称性\textrm{(inversion~symmetry)}的晶体中:\\
+			表面:~\textrm{Bychkov-Rashba}效应:\\
+			表面诱导的非对称\textrm{(Surface-Induced-Asymmetry, SIA)}\\
+			\vskip 4pt
+			体相:~\textrm{Dresselhaus}相互作用:\\
+			体相诱导的非对称\textrm{(Bulk-Induced-Asymmetry, BIA)}\\
+			\end{enumerate}
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{时间反演与倒反对称性}
+	\begin{itemize}
+		\item 时间反演对称\textrm{(Time-reversal symmetry, TRS)}\\
+			\begin{displaymath}
+			\left.
+				\begin{aligned}
+					\vec s&\rightarrow -\vec s\\
+					\vec l&\rightarrow -\vec l\\
+					\vec s\cdot\vec l&\rightarrow \vec s\cdot\vec l\\
+					\vec k&\rightarrow-\vec k
+				\end{aligned}\right\}\Longrightarrow E_n(\vec s,\vec k)=E_n(-\vec s,-\vec k)
+			\end{displaymath}
+		\item 倒反对称\textrm{(Inversion symmetry, IS)}
+			\begin{displaymath}
+			\left.
+				\begin{aligned}
+					\vec s&\rightarrow \vec s\\
+					\vec l&\rightarrow \vec l\\
+					\vec s\cdot\vec l&\rightarrow \vec s\cdot\vec l\\
+					\vec k&\rightarrow-\vec k
+				\end{aligned}\right\}\Longrightarrow E_n(\vec s,\vec k)=E_n(\vec s,-\vec k)
+			\end{displaymath}
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{时间反演-倒反对称破缺与能带}
+	\begin{itemize}
+		\item 时间反演-倒反对称性
+\begin{figure}[h!]
+\centering
+\vspace*{-0.15in}
+\includegraphics[height=1.25in,width=2.90in,viewport=0 0 1155 530,clip]{Figures/SOC_TRS-IS.png}
+%\caption{\small \textrm{Allocation of the Hamiltonian and overlap matrix.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Symmetry-TRS-IS}
+\end{figure}
+\item 时间反演-倒反对称破缺
+\begin{figure}[h!]
+\centering
+\vspace*{-0.15in}
+\includegraphics[height=1.25in,width=2.90in,viewport=0 0 1155 530,clip]{Figures/SOC_TRS-IS_breaking.png}
+%\caption{\small \textrm{Allocation of the Hamiltonian and overlap matrix.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Symmetry-TRS-IS-breaking}
+\end{figure}
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{\textrm{Rashba}效应}
+	\textrm{Rashba}效应:~界面电场诱导的对称性破缺
+\begin{figure}[h!]
+\centering
+\vspace*{+0.05in}
+\includegraphics[height=1.25in,width=1.20in,viewport=0 0 700 760,clip]{Figures/SOC_Rashba_effect.png}
+\includegraphics[height=1.25in,width=1.40in,viewport=0 0 750 600,clip]{Figures/SOC_Rashba-1.png}
+\includegraphics[height=1.25in,width=1.30in,viewport=0 0 650 590,clip]{Figures/SOC_Rashba-2.png}
+%\caption{\small \textrm{Allocation of the Hamiltonian and overlap matrix.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Rashba_effect}
+\end{figure}
+
+	\begin{itemize}
+	\item \textrm{Rashba~Hamiltonian}起源:~界面产生的电场$\mathbf E~(\mathbf E\parallel \hat z)$%引起的旋-轨耦合的形式为
+		\begin{displaymath}
+			\vec H_{\mathrm{Rashba}}=\alpha(\vec\sigma\times\vec p)\cdot\hat z
+		\end{displaymath}
+		其中:~$\alpha$是\textrm{Rashba}耦合系数 $\alpha=\dfrac{g\mu_BE_z}{2mc^2}$\\
+		$\vec p$是电子的动量\\
+		$\sigma$是自旋(\textrm{Pauli}矩阵中的矢量)
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{\textrm{Rashba}效应}
+	\begin{itemize}
+	\item \textrm{Rashba}效应描述的是动量相关的表面态二维自旋能带裂分，源于
+		\begin{enumerate}
+			\item 沿$\hat z$向(垂直于二维平面)的势倒反对称性破缺时，形成的电场
+				\begin{displaymath}
+					\mathbf E=E_z\hat z=-\dfrac1{e}\nabla V
+				\end{displaymath}
+			\item 旋-轨耦合
+				\begin{displaymath}
+					\begin{aligned}
+						\mathbf B=&\dfrac1{c^2}\mathbf{E}\times\vec v\\
+						\vec H_{\mathrm{SO}}=&\dfrac{g\mu_B}{2c^2}(\vec v\times\mathbf E)\cdot\sigma
+					\end{aligned}
+				\end{displaymath}
+		\end{enumerate}
+	\end{itemize}
 }
