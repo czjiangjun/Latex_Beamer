@@ -15,7 +15,7 @@
 \date[\today] % (optional, should be abbreviation of conference name)
 {%	{\fontsize{6.2pt}{4.2pt}\selectfont{\textcolor{blue}{E-mail:~}\url{jiangjun@bcc.ac.cn}}}
 \vskip 45 pt {\fontsize{8.2pt}{6.2pt}\selectfont{%清华大学\;\;物理系% 报告地点
-	\vskip 5 pt \textrm{2023.04.22}}}
+	\vskip 5 pt \textrm{2023.08.12}}}
 }
 
 %% - Either use conference name or its abbreviation
@@ -150,7 +150,24 @@
 \caption{\tiny \textrm{Schematic example of vibration model of dimethyl.}}%
 \label{virbration_model}
 \end{figure} 
-\textcolor{red}{简谐振动不表示某个原子的振动，表示整个体系所有原子参与的振动。这种体系中所有原子一起参加的共同振动常称为振动模}
+\textcolor{red}{简谐振动不表示某个原子的振动，表示整个体系所有原子参与的振动。这种体系中所有原子一起参加的集体运动常称为振动模}
+}
+
+\frame
+{
+	\frametitle{简谐振动与振动模式}
+\begin{figure}[h!]
+\centering
+%\hspace*{-10pt}
+\vspace*{-0.05in}
+\includegraphics[height=1.1in,width=1.95in,viewport=0 0 520 310,clip]{Figures/Viberation_of_B1u.png}
+\includegraphics[height=1.1in,width=1.95in,viewport=0 0 515 310,clip]{Figures/Viberation_of_A1g.png}
+\vskip 4pt
+\includegraphics[height=1.1in,width=1.95in,viewport=0 0 520 310,clip]{Figures/Viberation_of_B3g.png}
+\includegraphics[height=1.1in,width=1.95in,viewport=0 0 515 310,clip]{Figures/Viberation_of_B2u.png}
+\caption{\tiny \textrm{Schematic example of the symmetry of vibration model.}}%
+\label{virbration_model-symmetry}
+\end{figure} 
 }
 
 \frame
@@ -168,7 +185,8 @@
 \begin{displaymath}
 	\mu_{nq}=A\mathrm{e}^{\mathrm{i}(\omega t-qx)}
 \end{displaymath}
-其中振幅$A$是常数，$\omega$是圆频率，$q=\tfrac{2\pi}{\lambda}$是波数，$\lambda$是波长\\
+其中振幅$A$是常数，$\omega$是圆频率，$q=\tfrac{2\pi}{\lambda}$是波数，$\lambda$是波长
+\vskip 5pt
 \textcolor{blue}{根据量子理论，每种简谐振动的能量是量子化的，可以用声子表示}
 \begin{displaymath}
 	\varepsilon_{nq}=\left( n+\frac12 \right)\hbar\omega_q
@@ -177,16 +195,29 @@
 
 \frame
 {
+	\frametitle{谐振子模型}
+\begin{figure}[h!]
+\centering
+%\hspace*{-10pt}
+\vspace*{-0.15in}
+\includegraphics[height=2.7in,width=2.9in,viewport=0 0 650 800,clip]{Figures/Quantum-viberation.png}
+\caption{\tiny \textrm{Schematic example of quantization of  harmonic oscillator model.}}%
+\label{Harmonic-oscillator-model}
+\end{figure} 
+}
+
+\frame
+{
 	\frametitle{双原子链与光学支和声学支}
 \begin{figure}[h!]
 \centering
 %\hspace*{-10pt}
-\vspace*{-0.25in}
+\vspace*{-0.20in}
 \includegraphics[height=0.7in,width=2.6in,viewport=0 0 1400 400,clip]{Figures/virbration-2.png}
 \caption{\tiny \textrm{Schematic example of vibration of 1D-diatomic chain.}}%
 \label{virbration-2D}
 \end{figure} 
-一维双原子链是最简单的复式晶格，平衡时相邻原子间距为$\mathbf{a}$，每个原胞含有两个不同原子\textrm{P}和\textrm{Q}质量分别是$m$和$M$，原子现在在沿链方向运动，偏离位移用$\cdots,\mu_{2n},\mu_{2n+1},\cdots$\\原子的运动方程
+一维双原子链是最简单的复式晶格，平衡时相邻原子间距为$\mathbf{a}$，每个原胞含有两个不同原子\textrm{P}和\textrm{Q}，质量分别是$m$和$M$，原子现在在沿链方向运动，偏离位移用$\cdots,\mu_{2n},\mu_{2n+1},\cdots$\\原子的运动方程
 \begin{displaymath}
 	\begin{aligned}
 		&\mbox{\textrm{P}原子:~}m\ddot{\mu}_{2n}=-\beta(2\mu_{2n}-\mu_{2n+1}-\mu_{2n-1})\\
@@ -202,19 +233,6 @@
 	\end{aligned}\right\}
 	=\beta\frac{m+M}{mM}\left\{ 1\pm\left[ 1-\frac{4mM}{(m+M)^2}\sin^2aq \right]^{1/2} \right\}
 \end{displaymath}
-}
-
-\frame
-{
-	\frametitle{声子振动模式的横向传播与纵向传播}
-\begin{figure}[h!]
-\centering
-%\hspace*{-10pt}
-\vspace*{-0.20in}
-\includegraphics[height=2.4in,width=4.0in,viewport=0 0 850 610,clip]{Figures/examples-of-transverse-optical-to-and-longitudinal-optical-lo-phonons-in-1d.png}
-\caption{\tiny \textrm{Schematic examples of transverse optical to and longitudinal optical lo phonons in 1d diatomic lattice.}}%
-\label{To-Lo-1D}
-\end{figure} 
 }
 
 \frame
@@ -246,6 +264,19 @@
 \begin{displaymath}
 	\omega_+\approx a\sqrt{\frac{2\beta}{\left( \frac{mM}{m+M} \right)}}\quad\mbox{\textcolor{blue}{两种原子具有相反的相位，质心保持不动}}
 \end{displaymath}
+}
+
+\frame
+{
+	\frametitle{声子振动模式的横向传播与纵向传播}
+\begin{figure}[h!]
+\centering
+%\hspace*{-10pt}
+\vspace*{-0.30in}
+\includegraphics[height=2.5in,width=4.0in,viewport=0 0 850 610,clip]{Figures/examples-of-transverse-optical-to-and-longitudinal-optical-lo-phonons-in-1d.png}
+\caption{\tiny \textrm{Schematic examples of transverse optical to and longitudinal optical phonons in 1d diatomic lattice.}}%
+\label{To-Lo-1D}
+\end{figure} 
 }
 
 \frame
