@@ -904,7 +904,7 @@
 \end{figure}
 考虑旋-轨耦合后，\textrm{LAPW~}基函数表示为
 \begin{displaymath}
-	\footnotesize\hskip -50pt \varphi^{\vec G}_{\sigma}=\left\{
+	\hskip -50pt \varphi^{\vec G}_{\sigma}=\left\{
   \begin{aligned}
 	  &\mathrm{e}^{\mathrm{i}(\vec G+\vec k)\cdot\vec r}\chi_{\sigma}\\
 	  &\sum_{\sigma^{\alpha}}\sum_{lm}[A^{\vec G_{\sigma\sigma^{\alpha}}}_{lm}u_l^{\sigma^{\alpha}}+B^{\vec G_{\sigma\sigma^{\alpha}}}_{lm}\dot u_l^{\sigma^{\alpha}}]Y_{lm}\chi_{\sigma^{\alpha}}
@@ -1000,8 +1000,8 @@
 
 \frame
 {
-	\frametitle{\textrm{Rashba}效应}
-	\textrm{Rashba}效应:~界面电场诱导的对称性破缺
+	\frametitle{\textrm{Rashba}旋-轨耦合}
+	\textrm{Rashba}旋-轨耦合:~界面电场诱导的对称性破缺
 \begin{figure}[h!]
 \centering
 \vspace*{+0.05in}
@@ -1017,7 +1017,7 @@
 		\begin{displaymath}
 			\vec H_{\mathrm{Rashba}}=\alpha(\vec\sigma\times\vec p)\cdot\hat z
 		\end{displaymath}
-		其中:~$\alpha$是\textrm{Rashba}耦合系数 $\alpha=\dfrac{g\mu_BE_z}{2mc^2}$\\
+		其中:~$\alpha$是\textrm{Rashba}耦合系数，$\alpha=\dfrac{g\mu_BE_z}{2mc^2}$\\
 		$\vec p$是电子的动量\\
 		$\sigma$是自旋(\textrm{Pauli}矩阵中的矢量)
 	\end{itemize}
@@ -1025,11 +1025,11 @@
 
 \frame
 {
-	\frametitle{\textrm{Rashba}效应}
+	\frametitle{\textrm{Rashba}旋-轨耦合}
 	\begin{itemize}
-	\item \textrm{Rashba}效应描述的是动量相关的表面态二维自旋能带裂分，源于
+	\item \textrm{Rashba}旋-轨耦合描述的是动量相关的表面态二维自旋能带裂分，源于
 		\begin{enumerate}
-			\item 沿$\hat z$向(垂直于二维平面)的势倒反对称性破缺时，形成的电场
+			\item 沿$\hat z$向(垂直于二维平面)的势函数倒反对称性破缺时，将形成电场
 				\begin{displaymath}
 					\mathbf E=E_z\hat z=-\dfrac1{e}\nabla V
 				\end{displaymath}
@@ -1042,4 +1042,100 @@
 				\end{displaymath}
 		\end{enumerate}
 	\end{itemize}
+	\textrm{Rashba}旋-轨耦合下的\textrm{Hamiltonian}
+	\begin{displaymath}
+		\begin{aligned}
+		\hat H_{\mathrm R}=\dfrac{\vec k^2}{2m}+&\alpha\hat{n}\cdot(\vec\sigma\times\vec k)=\dfrac{k^2}{2m}+\alpha(\sigma^xk_y-\sigma^yk_x)\\
+		&t\rightarrow-t;~\vec k\rightarrow-\vec k,~\sigma\rightarrow-\sigma
+		\end{aligned}
+	\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{\textrm{Rashba}旋-轨耦合}
+	\begin{displaymath}
+		\begin{aligned}
+		H_R=&
+		\begin{pmatrix}
+			k^2/2m &\alpha(k_y+\mathrm{i}k_x)\\
+			\alpha(k_y-\mathrm{i}k_x) &k^2/2m
+		\end{pmatrix}\Rightarrow\left\{
+			\begin{aligned}
+				\varepsilon_{\pm}=&\dfrac{k^2}{2m}\pm\alpha k\\
+				\Psi_{\pm}=&\dfrac1{\sqrt2}
+				\begin{pmatrix}
+					1\\
+					\mp\mathrm{ie}^{\mathrm{i}\phi_k}
+				\end{pmatrix}
+			\end{aligned}\right.\\
+			S_{z,\pm}=&\dfrac12\bar{\Psi}_{\pm}\sigma^z\Psi_{\pm}=0\\ 
+			S_{x,\pm}=&\dfrac12\bar{\Psi}_{\pm}\sigma^x\Psi_{\pm}=\pm\dfrac12\sin\phi_k\\
+			S_{y,\pm}=&\dfrac12\bar{\Psi}_{\pm}\sigma^y\Psi_{\pm}=\mp\dfrac12\cos\phi_k\\
+			\vec k\cdot\vec S_{\pm}=&0
+		\end{aligned}
+	\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{\textrm{Dresselhaus}旋-轨耦合}
+	\textrm{Dresselhaus}旋-轨耦合是\textrm{Dresselhaus}首先在缺少时间反演中心的闪锌矿\textrm{III-V}族半导体化合物中发现的，$\Gamma$点附近的旋-轨耦合形式为
+	\begin{displaymath}
+		\begin{aligned}
+			H_{\mathrm{Ds}}=&D\vec{\Omega}(\vec k)\cdot\vec{\sigma}\\
+			\vec{\Omega}=&(k_x(k_y^2-k_z^2),k_y(k_z^2-k_x^2),k_z(k_x^2-k_y^2))
+		\end{aligned}
+	\end{displaymath}
+	在有沿$(001)$方向(表面/界面)的应变，\textrm{Dresselhaus}的旋-轨耦合会变成线性形式
+	\begin{displaymath}
+		\begin{aligned}
+			&\langle k_z\rangle=0,~\langle k_z^2\rangle\sim1/d^2\\
+			&\langle\vec\Omega\rangle=\bigg(
+				\begin{aligned}
+				&\underbrace{k_xk_y^2}-k_x\langle k_z^2\rangle,k_y\langle k_z^2\rangle-&\underbrace{k_yk_x^2},0\\
+				&{\mbox{\fontsize{6.2pt}{2.2pt}\selectfont{\textrm{cubic}$\rightarrow$0}}} &{\mbox{\fontsize{6.2pt}{2.2pt}\selectfont{\textrm{cubic}$\rightarrow$0}}}
+			\end{aligned}
+			\bigg)
+				=\langle k_z\rangle^2(-k_x,k_y,0)\\
+			&H_{\mathrm{Ds}}=\beta(\sigma^yk_y-\sigma^xk_x)
+		\end{aligned}
+	\end{displaymath}
+$\beta$与$\alpha$类似，是\textrm{Dresselhaus}耦合系数 
+}
+
+\frame
+{
+	\frametitle{\textrm{Rashba-Dresselhaus}旋-轨耦合}
+	更一般的情形，\textrm{Rashba-Dresselhaus}旋-轨耦合的叠加
+	\begin{displaymath}
+		\begin{aligned}
+			H=&\dfrac{k^2}{2m}+\alpha(\sigma^xk_y-\sigma^yk_x)+\beta(\sigma^yk_y-\sigma^xk_x)\\
+			=&\dfrac{k^2}{2m}+\sigma^x(\alpha k_y-\beta k_x)-\sigma^y(\alpha k_x-\beta k_y)
+		\end{aligned}
+	\end{displaymath}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.10in}
+\includegraphics[height=1.9in,width=2.10in,viewport=0 0 850 810,clip]{Figures/SOC_Rashba-Dresselhaus-1.png}
+%\caption{\small \textrm{Allocation of the Hamiltonian and overlap matrix.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Rashba_Dresselhaus}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{Rashba-Dresselhaus}旋-轨耦合}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.05in}
+\includegraphics[height=1.5in,width=1.10in,viewport=0 0 520 770,clip]{Figures/SOC_Rashba-Dresselhaus-2.png}
+\includegraphics[height=1.3in,width=1.30in,viewport=0 0 590 590,clip]{Figures/SOC_Rashba-Dresselhaus-3.png}
+\includegraphics[height=1.1in,width=1.50in,viewport=0 0 750 530,clip]{Figures/SOC_Rashba-Dresselhaus-4.png}
+\includegraphics[height=1.2in,width=1.00in,viewport=0 0 390 500,clip]{Figures/SOC_Rashba-3.png}
+\includegraphics[height=1.2in,width=1.00in,viewport=0 0 390 500,clip]{Figures/SOC_Rashba-4.png}
+\includegraphics[height=1.2in,width=1.05in,viewport=0 0 490 500,clip]{Figures/SOC_Rashba-5.png}
+%\caption{\small \textrm{Allocation of the Hamiltonian and overlap matrix.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Rashba_effect_2}
+\end{figure}
 }
