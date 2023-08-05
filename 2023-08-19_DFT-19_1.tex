@@ -63,8 +63,7 @@
 %	相比于与普通的第一原理计算软件，\textrm{VASP}很好地平衡了计算效率和精度的问题，总的来说，\textrm{VASP}主要通过这几个特色保证了计算的高效能
 %	\begin{itemize}
 %	     \item 迭代与优化算法的多样性\\
-%		     本质上电荷密度迭代 \textrm{\&\&} 体系总能量优化是相同的优化问题，采用了类似的算法\upcite{CMS6-15_1996,PRB54-11169_1996}:\\
-%			\textcolor{blue}{\textrm{Pseudo-Newton、Conjugate-Gradient、Broyden~mix、damping-factor、RMM-DIIS}}
+%		     本质上电荷密度迭代 \textrm{\&\&} 体系总能量优化是相同的优化问、Broyden~mix、damping-factor、RMM-DIIS}}
 %	     \item 尽可能采用局域基(原子轨道基)函数:~\\
 %		     \textcolor{blue}{\textrm{LREAL}}=\textcolor{red}{\textrm{.TRUE.}}\\
 %			优化的投影函数也尽可能在实空间表示
@@ -75,11 +74,11 @@
 \frame
 {
 	\frametitle{电介质材料的极化与\textrm{Berry~}相位}
-	\textcolor{blue}{电极化}:~电介质内部正负电荷的相对位移，会产生电偶极子，这现象称为电极化
+	\textcolor{blue}{电极化}:~电介质内部正负电荷的相对位移，会形成电偶极，这现象称为电极化
 	\begin{itemize}
 \setlength{\itemsep}{10pt}
 		\item \textcolor{red}{压电效应}:~\textcolor{blue}{电介质沿一定方向受外力发生形变时，内部会产生极化现象:~在电解质两个相对表面出现正负相反电荷;当作用力方向改变时，电荷的极性也随之改变;当外力去掉后，又会恢复到不带电的状态}
-		\item \textcolor{red}{热电效应}:~\textcolor{blue}{电介质因为受热，电子(空穴)由高温区往低温区移动时，产生电荷堆积引起极化}
+		\item \textcolor{red}{热电效应}:~\textcolor{blue}{电介质因为受热，电子(空穴)由高温区往低温区移动时，产生电荷堆积，引起极化}
 		\item \textcolor{red}{铁电效应}:~\textcolor{blue}{某些电介质中，晶胞的结构使正负电荷中心不重合而出现电偶极矩，在内部产生非零的电极化强度，使晶体具有自发极化，且电偶极矩方向可以因外电场而改变，呈现出类似于铁磁体的特点}
 	\end{itemize}
 }
@@ -89,16 +88,16 @@
 	\frametitle{外电场下的极化}
 	\begin{itemize}
 		\item 金属在外电场下的极化
+	\end{itemize}
 \begin{figure}[h!]
 \centering
 %\hspace*{-10pt}
 \vspace*{-0.15in}
-\includegraphics[height=1.8in,width=3.3in,viewport=0 0 1100 650,clip]{Figures/Polarize_metal-2.png}
+\includegraphics[height=2.0in,width=3.1in,viewport=0 0 900 650,clip]{Figures/Polarize_metal-2.png}
 \caption{\tiny \textrm{Schematic of a metal in the static electric field.}}%
 \label{Polarization_metal}
 \end{figure} 
 \textcolor{blue}{金属体相的物理性质不会受外场的影响}
-	\end{itemize}
 }
 
 \frame
@@ -106,41 +105,44 @@
 	\frametitle{外电场下的极化}
 	\begin{itemize}
 		\item 绝缘体在外电场下的极化\\
-			根据电磁理论，电场极化强度可定义为
+			根据电磁理论，电极化强度的梯度可表示为
 			\begin{displaymath}
 				\nabla\cdot\vec P(\vec r,t)=-\delta n(\vec r,t)
 			\end{displaymath}
 			利用极化电流守恒条件$\nabla\cdot\mathbf{j}(\vec r,t)=-\mathrm{d}n(\vec r,t)/\mathrm{d}t$\\
-			可得电场极化强度与极化电流密度关系
+			可得电极化强度与极化电流密度关系
 			\begin{displaymath}
 				\frac{\mathrm{d}\vec P(\vec r,t)}{\mathrm{d}t}=\mathbf{j}(\vec r,t)+\nabla\times\mathbf{M}(\vec r,t)
 			\end{displaymath}
 			这里$\mathbf{M}(\vec r,t)$是任意矢量场
 
-			宏观电场极化强度一般定义为:\\\textcolor{blue}{单位体积中分子电偶极矩的矢量和}
+			宏观电极化强度定义为:~\textcolor{blue}{单位体积内电偶极矩的矢量和}
+\begin{displaymath}
+	\vec P=\dfrac1{\Omega}\int_{V_{\Omega}}n_{\mathrm{tot}}(\vec r)\vec r\mathrm{d}\vec r
+\end{displaymath}
 	\end{itemize}
-	\textcolor{red}{这样定义的极化强度存在一定的问题}
+%	\textcolor{red}{对于周期体系，这样定义的极化强度存在一定的问题}
 }
 
 \frame
 {
 	\frametitle{外电场下的极化}
 			\begin{enumerate}
-				\item 对于有限体系，上述定义的电场极化强度是合理的
+				\item 对于有限体系，上述定义的电极化强度是合理的
+			\end{enumerate}
 \begin{figure}[h!]
 \centering
 %\hspace*{-10pt}
-\vspace*{-0.15in}
+\vspace*{-0.08in}
 \includegraphics[height=0.9in,width=2.2in,viewport=0 0 1100 550,clip]{Figures/Polarize_insulator.png}
 \caption{\tiny \textrm{Illustration of finite system for which the total dipole moment is well defined.}}%
 \label{Polarization_insulator}
 \end{figure} 
-考虑到有限体系外$\vec P(\vec r)=0$，宏观电场极化强度$\vec P$可用偶极矩$\vec d$表示
+对有限体系，当外部电场$\vec E(\vec r)=0$，宏观电极化强度$\vec P$可用偶极矩$\vec d$表示
 \begin{displaymath}
-	\vec P\equiv\frac{\vec d}{\Omega}=\frac1{\Omega}\int_{\mathrm{all\;space}}\mathrm{d}\vec rn(\vec r)\vec r
+	\vec P\equiv\frac{\sum\limits_{\mathrm{all\;space}}\vec d_i}{\Omega}=\frac1{\Omega}\int_{\mathrm{all\;space}}\mathrm{d}\vec rn(\vec r)\vec r
 \end{displaymath}
-\textcolor{red}{电场极化强度的变化$\Delta\vec P=\vec P^{(1)}-\vec P^{(0)}$只与电荷密度的改变$\Delta n=n^{(1)}-n^{(0)}$有关，而与电荷密度改变的路径有关}
-			\end{enumerate}
+\textcolor{red}{电极化强度的变化$\Delta\vec P=\vec P^{(1)}-\vec P^{(0)}$只与电荷密度的改变$\Delta n=n^{(1)}-n^{(0)}$有关，而与电荷密度改变的路径有关}
 }
 
 \frame
@@ -148,28 +150,43 @@
 	\frametitle{}
 			\begin{enumerate}
 				\setcounter{enumi}{1}
-				\item 对于周期体系
+				\item 对于周期体系，该定义存在显著的问题\\
+			\end{enumerate}
+以一维周期体系为例
 \begin{figure}[h!]
 \centering
 %\hspace*{-10pt}
-\vspace*{-0.15in}
-\includegraphics[height=0.9in,width=1.6in,viewport=0 0 1100 540,clip]{Figures/Polarize_insulator-2.png}
+\vspace*{-0.05in}
+\includegraphics[height=1.5in,width=3.9in,viewport=0 0 1520 720,clip]{Figures/Berry_Phase-Polarization.png}
+\caption{\textrm{\fontsize{6.5pt}{2.2pt}\selectfont{Schematic illustration of the electric polarization within a one-dimensional crystal, composed by unit cells of volume $\Omega$. The model crystal is constituted by uniformly charged spheres of charge $+e$ and $−e$ (white and black circles, respectively) at distance $R_0$ . In case (a) the electric polarization is $+eR_0/\Omega$; in case (b) and (d) it is zero; in case (c) it is $−eR_0/\Omega$. Other shifts of the unit cell would produce any other value of the polarization between $\mp eR_0/\Omega$.}}}%
+\label{Berry-Phase-Polarization}
+\end{figure} 
+}
+
+\frame
+{
+	\frametitle{}
+				类似地，对于二维、三维周期体系
+\begin{figure}[h!]
+\centering
+%\hspace*{-10pt}
+\vspace*{-0.05in}
+\includegraphics[height=1.0in,width=1.6in,viewport=0 0 950 540,clip]{Figures/Polarize_insulator-2.png}
 \caption{\textrm{\fontsize{7.5pt}{5.2pt}\selectfont{Point charge model of an ionic crystal. The dipole is obviously not unique since the cells shown all have different moments.}}}%
 \label{Polarization_insulator-2}
 \end{figure} 
-正确定义周期体系的宏观电场极化强度，\textcolor{red}{必须用合适的形式代替对$\vec r$的无限积分}\\
+正确定义周期体系的宏观电极化强度，\textcolor{red}{必须用合适的形式代替对$\vec r$的无限积分}\\
 宏观极化电流是极化过程中唯一可观测的物理量，极化强度的变化$\vec P$可由体相极化电流计算
 \begin{displaymath}
 	\vec P(\vec r,t)=\int^t\mathrm{d}t^{\prime}\mathbf{j}_{\mathrm{int}}(\vec r,t^{\prime})
 \end{displaymath}
-			\end{enumerate}
 }
 
 \frame
 {
 	\frametitle{现代极化理论与几何\textrm{Berry~}相位}
 	\begin{itemize}
-		\item 用极化电流计算电场极化定义虽然正确，但不能证明电场极化强度与积分路径无关
+		\item 用极化电流计算电场极化定义虽然正确，但不能证明电极化强度与积分路径无关
 		\item \textrm{King-Smith}和\textrm{Vanderbilt}提出了新的计算方案%\upcite{PRB47-1651_1993}
 			:\\
 		\textcolor{red}{基本假设}:~连续的绝热变化可关联\textrm{Kohn-Sham}方程的\textrm{Hamiltonian}描述的不同态\\如果满足条件
@@ -177,7 +194,7 @@
 		\item 没有任何外部电场存在 
 		\item 体系始终保持绝缘体状态
 	\end{enumerate}
-	宏观电场极化极化强度的变化可表示为
+	宏观电极化极化强度的变化可表示为
 	\begin{displaymath}
 		\Delta\vec P=\int_0^1\mathrm{d}\lambda\frac{\partial\vec P}{\partial\lambda}
 	\end{displaymath}
@@ -229,6 +246,20 @@
 
 \frame
 {
+	\frametitle{几何\textrm{Berry~}相位}
+	\textrm{Berry}相位是一个复向量\textrm{(complex vector)}沿着参数空间中路径移动并回到起点所产生的全局相位演化\textrm{(global phase evolution)}
+\begin{figure}[h!]
+\centering
+%\hspace*{-10pt}
+\vspace*{-0.12in}
+\includegraphics[height=1.5in,width=2.3in,viewport=0 0 800 540,clip]{Figures/Berry_Phase.png}
+\caption{\tiny \textrm{Schematic representation of the sequence of states $\Psi_m(\vec r;\mathbf{R})$ as $\mathbf{R}$ is changed along a circuit \texttt{C} drawn in the parameter space D, where no degeneracy occurs.}}%
+\label{Berry_Phase}
+\end{figure} 
+}
+
+\frame
+{
 	\frametitle{现代极化理论和几何\textrm{Berry~}相位}
 	\textrm{Thouless~}在讨论无相互作用粒子的量子\textrm{Hall~}效应时曾给出类似的积分表达式%\upcite{PRB27-6083_1983}
 	，利用\textrm{Stokes~}定律
@@ -254,7 +285,7 @@
 		\item \textrm{Thouless~}指出上述围道积分对应的是在势$V_{\mathrm{KS}}^{(0)}=V_{\mathrm{KS}}^{(1)}$条件下的积分，\textcolor{blue}{围道积分计算的是实空间波函数点的相位变化}
 		\item 考虑到波函数的周期性，用$(k,\lambda)$表示的相位变化可以加$2n\pi$而不变
 	\end{itemize}
-	利用周期函数$u_{\vec k i}^{(\lambda)}$的“周期标度关系”
+	利用周期函数$u_{\vec k i}^{(\lambda)}$的“周期规范\textrm{gauge}关系”\footnote{规范\textrm{gauge}，}
 	\begin{displaymath}
 		u_{\vec k+\vec G i}^{(\lambda)}(\vec r)=\textcolor{green}{\mathrm{e}^{\mathrm{i}\vec G\cdot\vec r}}u_{\vec k i}^{(\lambda)}(\vec r)
 	\end{displaymath}
@@ -268,7 +299,7 @@
 \frame
 {
 	\frametitle{现代极化理论和几何\textrm{Berry~}相位}
-	利用周期标度关系，可有
+	利用周期规范关系，可有
 	\begin{displaymath}
 		\Delta\vec P=\vec P^{(1)}-\vec P^{(0)}	
 	\end{displaymath}
@@ -278,7 +309,7 @@
 	\end{displaymath}
 	\textrm{Zak~}等指出，\textcolor{red}{上述表达式即能带$i$的\textrm{Berry~}相位}%\upcite{PRL62-2747_1989,EPL18-239_1992}
 	
-	\textcolor{blue}{注意到\textrm{Wannier~}函数的形式与“周期标度”的相位密切相关}，有
+	\textcolor{blue}{注意到\textrm{Wannier~}函数的形式与“周期规范”的相位密切相关}，有
 	\begin{displaymath}
 		u_{\vec k i}^{(\lambda)}(\vec r)=\frac 1{\sqrt N}\sum_{\vec R}\mathrm{e}^{-\mathrm{i}\vec k\cdot(\vec r-\vec R)}w_i^{(\lambda)}(\vec r-\vec R)
 	\end{displaymath}
