@@ -142,7 +142,7 @@
 \begin{displaymath}
 	\vec P\equiv\frac{\sum\limits_{\mathrm{all\;space}}\vec d_i}{\Omega}=\frac1{\Omega}\int_{\mathrm{all\;space}}\mathrm{d}\vec rn(\vec r)\vec r
 \end{displaymath}
-\textcolor{red}{电极化强度的变化$\Delta\vec P=\vec P^{(1)}-\vec P^{(0)}$只与电荷密度的改变$\Delta n=n^{(1)}-n^{(0)}$有关，而与电荷密度改变的路径有关}
+\textcolor{red}{电极化强度的变化$\Delta\vec P=\vec P^{(1)}-\vec P^{(0)}$只与电荷密度的改变$\Delta n=n^{(1)}-n^{(0)}$有关，而与电荷密度改变的途径无关}
 }
 
 \frame
@@ -252,10 +252,73 @@
 \centering
 %\hspace*{-10pt}
 \vspace*{-0.12in}
-\includegraphics[height=1.5in,width=2.3in,viewport=0 0 800 540,clip]{Figures/Berry_Phase.png}
+\includegraphics[height=1.8in,width=2.6in,viewport=0 0 800 540,clip]{Figures/Berry_Phase.png}
 \caption{\tiny \textrm{Schematic representation of the sequence of states $\Psi_m(\vec r;\mathbf{R})$ as $\mathbf{R}$ is changed along a circuit \texttt{C} drawn in the parameter space D, where no degeneracy occurs.}}%
 \label{Berry_Phase}
 \end{figure} 
+}
+
+\frame
+{
+	\frametitle{\textrm{Berry~}相位的推导}
+	一个包含若干参数$(R_1,R_2,\cdots)$的一般\textrm{Hamiltonian}$H(\mathbf{R})$，这里用$\mathbf{R}$代表参数$(R_1,R_2,\cdots)$，即$\mathbf{R}=(R_1,R_2,\cdots)$\\
+	本征态波函数$\psi_n(r;\mathbf{R})$和本征值$E_n(\mathbf{R})$满足\textrm{Schr\"odinger}方程
+	\begin{displaymath}
+		H(\mathbf{R})\psi_n(r;\mathbf{R})=E_n(\mathbf{R})\psi_n(r;\mathbf{R})
+	\end{displaymath}
+	不同参数$\mathbf{R}$下的本征值方程，不能唯一地确定波函数$\psi_n(r;\mathbf{R})$，因为在波函数$\psi_n(r;\mathbf{R})$中含有与$\mathbf{R}$相关的任意相位\footnote{这种相位任意性称为\textcolor{blue}{规范任意性}(\textrm{gauge~abbitariness})}
+
+	在参数$\mathbf{R}$的定义域$D$内，假设波函数$\psi_n(r;\mathbf{R})$由一套连续、单值函数构成，有\textcolor{magenta}{规范变换}
+	\begin{displaymath}
+		\tilde{\psi}_n(r;\mathbf{R})=\mathrm{e}^{\mathrm{i}\alpha_n(\mathbf{R})}\psi_n(r;\mathbf{R})
+	\end{displaymath}
+	可以在参数定义域$D$内定义一套等价的连续、单值波函数，其中$\alpha_n(\mathbf{R})$是连续、单值的实函数
+
+	\textcolor{blue}{\textrm{Berry}针对规范任意性，提出了规范不变性的几何相位计算过程}
+}
+
+\frame
+{
+	\frametitle{\textrm{Berry~}相位的推导}
+	在参数$\mathbf{R}$的定义域内，本征态波函数$\psi_n(r;\mathbf{R})$，对应的本征值$E_n(\mathbf{R})$，可以在不同层$n$间绝热变化。选择闭合回路$C$，如果回路上一点$\mathbf{R}$和临近点$\mathbf{R}+\mathrm{d}\mathbf{I}$的波函数分别为$\psi_n(r;\mathbf{R})$和$\psi_n(r;\mathbf{R}+\mathrm{d}\mathbf{I})$
+
+	两个波函数的相位差(夹角)定义为
+	\begin{displaymath}
+		\mathrm{d}\phi\equiv\arg\langle\psi_n(r;\mathbf{R})|\psi_n(r;\mathbf{R}+\mathrm{d}\mathbf{I})\rangle
+	\end{displaymath}
+	$\mathrm{d}\phi$表示绝热层$n$中量子体系沿回路$C$由$\mathbf{R}$向$\mathbf{R}+\mathrm{d}\mathbf{I}$的相位无穷小的变化
+
+	\textcolor{purple}{这样定义的$\mathrm{d}\phi$并没有明确的物理意义，因为$\mathrm{d}\phi$依赖于$\psi_n(r;\mathbf{R})$和$\psi_n(r;\mathbf{R}+\mathrm{d}\mathbf{I})$自身的相位}
+
+	如果将$\psi_n(r;\mathbf{R}+\mathrm{d}\mathbf{I})$采用\textrm{Taylor}展开，并对$\mathrm{d}\mathbf{I}$近似到一阶有
+	\begin{displaymath}
+		\mathrm{d}\phi=\arg\bigg[1+\langle\psi_n(r;\mathbf{R})|\dfrac{\partial}{\partial\mathbf{R}}\psi_n(r;\mathbf{R})\rangle\cdot\mathrm{d}\mathbf{I}\bigg]
+	\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{\textrm{Berry~}相位的推导}
+	在\textrm{Hellmann-Feynman}定理推导中，有表达式
+	\textcolor{blue}{\begin{displaymath}
+		\langle\psi_n(r;\mathbf{R})|\dfrac{\partial}{\partial\mathbf{R}}\psi_n(r;\mathbf{R})\rangle
+	\end{displaymath}}
+	为\textcolor{blue}{纯虚数}，因此可有
+	\begin{displaymath}
+		\mathrm{d}\phi=\Im\langle\psi_n(r;\mathbf{R})|\dfrac{\partial}{\partial\mathbf{R}}\psi_n(r;\mathbf{R})\rangle\cdot\mathrm{d}\mathbf{I}
+	\end{displaymath}
+	\textcolor{purple}{闭合回路的相位定义}
+	\begin{displaymath}
+		\gamma_n(C)=\Im\oint_C\langle\psi_n(r;\mathbf{R})|\dfrac{\partial}{\partial\mathbf{R}}\psi_n(r;\mathbf{R})\rangle\rangle\cdot\mathrm{d}\mathbf{I}
+	\end{displaymath}
+	记被积函数中虚部为
+	\begin{displaymath}
+		\mathbf{A}_n(\mathbf{R})=\Im\langle\psi_n(r;\mathbf{R})|\nabla_{\mathbf{R}}\psi_n(r;\mathbf{R})\rangle
+	\end{displaymath}
+	可有
+	\begin{displaymath}
+		\gamma_n(C)=\oint_C\mathbf{A}_n(\mathbf{R})\cdot\mathrm{d}\mathbf{I}
+	\end{displaymath}
 }
 
 \frame
