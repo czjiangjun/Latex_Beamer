@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  不使用 authblk 包制作标题  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %-------------------------------PPT Title-------------------------------------
-\title{19-\rm{Berry}相位与\rm{Wannier}函数}
+\title{19-\rm{Berry}相位、\rm{Wannier}函数与极化理论}
 %-----------------------------------------------------------------------------
 %----------------------------Author & Date------------------------------------
 
@@ -70,7 +70,281 @@
 %	     \item \textrm{PAW}原子数据集:\textcolor{blue}{优异的赝势}\upcite{PRB59-1758_1999}
 %	\end{itemize}
 %}
-\section{极化与\rm{Berry~}相位}
+\section{几何\rm{Berry~}相位}
+\frame
+{
+	\frametitle{几何\textrm{Berry~}相位}
+	\textrm{Berry}相位是一个复向量\textrm{(complex vector)}沿着参数空间中路径移动并回到起点所产生的全局相位演化\textrm{(global phase evolution)}
+\begin{figure}[h!]
+\centering
+%\hspace*{-10pt}
+\vspace*{-0.12in}
+\includegraphics[height=1.8in,width=2.6in,viewport=0 0 800 540,clip]{Figures/Berry_Phase.png}
+\caption{\tiny \textrm{Schematic representation of the sequence of states $\Psi_m(\vec r;\mathbf{R})$ as $\mathbf{R}$ is changed along a circuit \texttt{C} drawn in the parameter space D, where no degeneracy occurs.}}%
+\label{Berry_Phase}
+\end{figure} 
+}
+
+\frame
+{
+	\frametitle{\textrm{Berry~}相位的推导}
+	一个包含若干参数$(R_1,R_2,\cdots)$的一般\textrm{Hamiltonian}~$H(\mathbf{R})$，这里用$\mathbf{R}$代表参数$(R_1,R_2,\cdots)$，即$\mathbf{R}=(R_1,R_2,\cdots)$\\
+	本征态波函数$\psi_n(r;\mathbf{R})$和本征值$E_n(\mathbf{R})$满足\textrm{Schr\"odinger}方程
+	\begin{displaymath}
+		H(\mathbf{R})\psi_n(r;\mathbf{R})=E_n(\mathbf{R})\psi_n(r;\mathbf{R})
+	\end{displaymath}
+	不同参数$\mathbf{R}$下的本征值方程，不能唯一地确定波函数$\psi_n(r;\mathbf{R})$，因为在波函数$\psi_n(r;\mathbf{R})$中含有与$\mathbf{R}$相关的任意相位\footnote{\fontsize{6.0pt}{3.2pt}\selectfont{这种相位任意性称为\textcolor{blue}{规范任意性}(\textrm{gauge~abbitariness})。\textrm{gauge}最初是源于北美的一种关于直径的长度计量单位，属于布朗-夏普\textrm{(Brown \& Sharpe)}计量系统。物理学中的“\textrm{gauge}”有基准、参照的意思。}}
+
+	在参数$\mathbf{R}$的定义域$D$内，假设波函数$\psi_n(r;\mathbf{R})$由一套连续、单值函数构成，有\textcolor{magenta}{规范变换}
+	\begin{displaymath}
+		\tilde{\psi}_n(r;\mathbf{R})=\mathrm{e}^{\mathrm{i}\alpha_n(\mathbf{R})}\psi_n(r;\mathbf{R})
+	\end{displaymath}
+	可以在参数定义域$D$内定义一套等价的连续、单值波函数，其中$\alpha_n(\mathbf{R})$是连续、单值的实函数
+
+	\textcolor{blue}{\textrm{Berry}针对规范任意性，提出了规范不变性的几何相位计算过程}
+}
+
+\frame
+{
+	\frametitle{\textrm{Berry~}相位的推导}
+	在参数$\mathbf{R}$的定义域内，本征态波函数$\psi_n(r;\mathbf{R})$，对应的本征值$E_n(\mathbf{R})$，可以在不同层$n$间绝热变化。选择闭合回路$C$，如果回路上一点$\mathbf{R}$和临近点$\mathbf{R}+\mathrm{d}\mathbf{l}$的波函数分别为$\psi_n(r;\mathbf{R})$和$\psi_n(r;\mathbf{R}+\mathrm{d}\mathbf{l})$
+
+	两个波函数的相位差(夹角)定义为
+	\begin{displaymath}
+		\mathrm{d}\phi\equiv\arg\langle\psi_n(r;\mathbf{R})|\psi_n(r;\mathbf{R}+\mathrm{d}\mathbf{l})\rangle
+	\end{displaymath}
+	$\mathrm{d}\phi$表示绝热层$n$中量子体系沿回路$C$由$\mathbf{R}$向$\mathbf{R}+\mathrm{d}\mathbf{l}$的相位无穷小的变化
+
+	\textcolor{purple}{这样定义的$\mathrm{d}\phi$并没有明确的物理意义，因为$\mathrm{d}\phi$依赖于$\psi_n(r;\mathbf{R})$和$\psi_n(r;\mathbf{R}+\mathrm{d}\mathbf{l})$自身的相位}
+
+	如果将$\psi_n(r;\mathbf{R}+\mathrm{d}\mathbf{l})$采用\textrm{Taylor}展开，并对$\mathrm{d}\mathbf{l}$近似到一阶有
+	\begin{displaymath}
+		\mathrm{d}\phi=\arg\bigg[1+\langle\psi_n(r;\mathbf{R})|\dfrac{\partial}{\partial\mathbf{R}}\psi_n(r;\mathbf{R})\rangle\cdot\mathrm{d}\mathbf{l}\bigg]
+	\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{\textrm{Berry~}相位的推导}
+	在\textrm{Hellmann-Feynman}定理推导中，有表达式
+	\textcolor{blue}{\begin{displaymath}
+		\langle\psi_n(r;\mathbf{R})|\dfrac{\partial}{\partial\mathbf{R}}\psi_n(r;\mathbf{R})\rangle
+	\end{displaymath}}
+	为\textcolor{blue}{纯虚数}，因此可有
+	\begin{displaymath}
+		\mathrm{d}\phi=\mathrm{Im}\langle\psi_n(r;\mathbf{R})|\dfrac{\partial}{\partial\mathbf{R}}\psi_n(r;\mathbf{R})\rangle\cdot\mathrm{d}\mathbf{l}
+	\end{displaymath}
+	\textcolor{purple}{闭合回路的相位演化，即\textrm{Berry~}相位，可表示为}
+	\begin{displaymath}
+		\gamma_n(C)=\mathrm{Im}\oint_C\langle\psi_n(r;\mathbf{R})|\dfrac{\partial}{\partial\mathbf{R}}\psi_n(r;\mathbf{R})\rangle\rangle\cdot\mathrm{d}\mathbf{l}
+	\end{displaymath}
+	记被积函数中虚部为
+	\begin{displaymath}
+		\mathbf{A}_n(\mathbf{R})=\mathrm{Im}\langle\psi_n(r;\mathbf{R})|\nabla_{\mathbf{R}}\psi_n(r;\mathbf{R})\rangle
+	\end{displaymath}
+	可有
+	\begin{displaymath}
+		\gamma_n(C)=\oint_C\mathbf{A}_n(\mathbf{R})\cdot\mathrm{d}\mathbf{l}
+	\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{\rm{Berry}相位的规范不变性}
+	不难证明，围道积分中的\textcolor{blue}{被积函数是规范依赖的}，但\textcolor{blue}{\textrm{Berry~}相位是规范不变的}
+	\begin{displaymath}
+		\begin{aligned}
+			\tilde{\mathbf{A}}_n(\mathbf{R})=&\mathrm{Im}\langle\tilde{\psi}_n(r;\mathbf{R})|\nabla_{\mathbf{R}}\tilde{\psi}_n(r;\mathbf{R})\rangle\\
+			=&\mathrm{Im}\langle\mathrm{e}^{\mathrm{i}\alpha_n(\mathbf{R})}\psi_n(r;\mathbf{R})|\nabla_{\mathbf{R}}\mathrm{e}^{\mathrm{i}\alpha_n(\mathbf{R})}\psi_n(r;\mathbf{R})\rangle\\
+			=&\mathrm{Im}\langle\psi_n(r;\mathbf{R})|\nabla_{\mathbf{R}}\psi_n(r;\mathbf{R})\rangle+\nabla_{\mathbf{R}}\alpha_n(\mathbf{R})\\
+			=&\mathbf{A}_n(\mathbf{R})+\nabla_{\mathbf{R}}\alpha_n(\mathbf{R})
+		\end{aligned}
+	\end{displaymath}
+	因此
+	\begin{displaymath}
+		\tilde\gamma_n(C)=\oint_C\tilde{\mathbf{A}}_n(\mathbf{R})\cdot\mathrm{d}\mathbf{l}=\oint_C[\mathbf{A}_n(\mathbf{R})+\nabla_{\mathbf{R}}\alpha_n(\mathbf{R})]\cdot\mathrm{d}\mathbf{l}\textcolor{magenta}{\equiv\gamma_n(C)}
+	\end{displaymath}
+	因此最后一个等式成立:~\textcolor{blue}{\fontsize{8.2pt}{6.2pt}\selectfont{对单值函数$\alpha_n(\mathbf{R})$的梯度，闭合围道积分为零}}
+\vskip 5pt
+	利用\textrm{Stokes}定理，将闭合围道积分变换为表面积分，被积函数也将规范不变
+}
+
+\frame
+{
+	\frametitle{\rm{Berry}相位的规范不变性}
+	在参数定义域$D$内，如果闭合围道$C$对应的曲面为$S$，根据\textrm{Stokes}定理有
+	\begin{displaymath}
+		\gamma_n(C)=\oint_C\mathbf{A}_n(\mathbf{R})\cdot\mathrm{d}\mathbf{l}=\int_S[\mathrm{curl}\mathbf{A}_n(\mathbf{R})]\mathrm{d}\mathbf{S}
+	\end{displaymath}
+	不难看出~$\mathrm{curl}\mathbf{A}_n(\mathbf{R})=\mathrm{curl}\tilde{\mathbf{A}}_n(\mathbf{R})$\\
+	令
+	\begin{displaymath}
+		\mathbf{B}_n(\mathbf{R})=\mathrm{curl}\mathbf{A}_n(\mathbf{R})
+	\end{displaymath}
+	可导出
+	\begin{displaymath}
+		\begin{aligned}
+			\mathbf{B}_n(\mathbf{R})=&\mathrm{Im}~\mathrm{curl}\langle\psi_n(r;\mathbf{R})|\nabla_{\mathbf{R}}\psi_n(r;\mathbf{R})\rangle\\
+			=&\mathrm{Im}\langle\nabla_{\mathbf{R}}\psi_n(r;\mathbf{R})|\nabla_{\mathbf{R}}\psi_n(r;\mathbf{R})\rangle\\
+			=&\mathrm{Im}\sideset{}{^{\prime}}\sum_{m}\langle\nabla_{\mathbf{R}}\psi_n(r;\mathbf{R})|\psi_m(r;\mathbf{R})\rangle\times\langle\psi_m(r;\mathbf{R})|\nabla_{\mathbf{R}}\tilde{\psi}_n(r;\mathbf{R})\rangle\\
+		\end{aligned}
+	\end{displaymath}
+	求和仅包括全部$m\neq n$项
+}
+
+\frame
+{
+	\frametitle{\rm{Berry}相位的规范不变性}
+	根据\textrm{Epstein}广义\textrm{Hellmann-Feynman}定理，对所有$m\neq n$
+	\begin{displaymath}
+		\hspace*{-10pt}
+		\mathbf{B}_n(\mathbf{R})=\mathrm{Im}\sideset{}{^{\prime}}\sum_{m}\dfrac{\langle\psi_n(r;\mathbf{R})|\nabla_{\mathbf{R}}H|\psi_m(r;\mathbf{R})\rangle\times\langle\psi_m(r;\mathbf{R})|\nabla_{\mathbf{R}}H|\psi_n(r;\mathbf{R})\rangle}{[E_n(\mathbf{R})-E_m(\mathbf{R})]^2}
+	\end{displaymath}
+	并有
+	\begin{displaymath}
+		\gamma_n(C)=\int_S\mathbf{B}_n(\mathbf{R})\cdot\mathrm{d}\mathbf{S}
+	\end{displaymath}
+	\textrm{Berry~}相位可以视为$\mathbf{B}_n(\mathbf{R})$通过围道$C$对应表面的通量
+\begin{figure}[h!]
+\centering
+%\hspace*{-10pt}
+\vspace*{-0.05in}
+\includegraphics[height=1.1in,width=1.3in,viewport=0 0 500 420,clip]{Figures/Berry_Phase-2.png}
+\caption{\tiny \textrm{The Berry phase $\gamma_n(C)$ can be interpreted as the flux of $\mathbf{B}_n(\mathbf{R})$ across a surface of contour $C$.}}%
+\label{Berry-Phase-2}
+\end{figure} 
+}
+
+\frame
+{
+	\frametitle{\rm{Berry}相位的规范不变性}
+%	不难看出，根据$\mathbf{B}_n(\mathbf{R})$的定义其与电子波函数的相位无关\\
+%	实际计算中通过$\mathbf{B}_n(\mathbf{R})来计算$\textrm{Berry~}的相位
+%	\vskip 5pt
+	$\mathbf{A}_n(\mathbf{R})$和$\mathbf{B}_n(\mathbf{R})$表现出与电磁理论中的物理量类似的特征:
+	\begin{itemize}
+		\item $\mathbf{A}_n(\mathbf{R})$类比于磁矢势\textrm{(magnetic vector potential)}，称为\textcolor{blue}{\textrm{Berry}联络\textrm{(Berry~connection)}或\textrm{Berry potential}}\\
+			\textcolor{red}{\textrm{Berry~}联络不是规范不变的}
+		\item $\mathbf{B}_n(\mathbf{R})$类比于磁场\textrm{(magnetic field)}，称为\textcolor{blue}{\textrm{Berry}曲率\textrm{(Berry~curvature)}}\\
+			\textcolor{red}{\textrm{Berry~}曲率是规范不变的全反对二阶张量}
+	\end{itemize}
+	{\tiny \textrm{Berry~}曲率计算的讨论，也是证明\textrm{Chern}定理的关键
+	\begin{displaymath}
+		\oint_S\mathbf{B}_n(\mathbf{R})\cdot\mathrm{d}\mathbf{S}=2\pi C 
+	\end{displaymath}
+\begin{figure}[h!]
+\centering
+%\hspace*{-10pt}
+\vspace*{-0.15in}
+\includegraphics[height=0.7in,width=1.7in,viewport=0 0 1500 620,clip]{Figures/Berry-Phase_Chern.png}
+\caption{\tiny \textrm{Proof of the Chern theorem for a manifold S having the topology of a sphere. Closed path $P$ traces the boundaries of subregions $A$ and $B$ in the forward and reverse directions respectively. The uniqueness modulo 2$π$ of the Berry phase around loop $P$ is the key to the proof.\cite{Berry-Phase}}}%
+\label{Berry-Phase-Chern}
+\end{figure}} 
+}
+
+
+
+\section{\rm{Wannier function}}
+\frame
+{
+	\frametitle{\textrm{Wannier~}函数}
+	\begin{itemize}
+		\item \textrm{Wannier}函数是\textcolor{blue}{正交化的局域函数}，\textcolor{red}{要求局域函数空间与能带空间完全相同}
+		\item 紧束缚近似下，能带的电子波函数的\underline{\textcolor{blue}{\textrm{Bloch~}和}}
+			\begin{displaymath}
+				\psi_i^{\vec k}(\vec r)=\frac1{\sqrt N}\sum_m\mathrm{e}^{\mathrm{i}\vec k\cdot\vec R_m}\phi_i(\vec r-\vec R_m)
+			\end{displaymath}
+		\textrm{Bloch~}函数可以写类似形式
+		\begin{displaymath}
+			\psi_i^{\vec k}(\vec r)=\frac1{\sqrt N}\sum_m\mathrm{e}^{\mathrm{i}\vec k\cdot\vec R_m}W_i(\vec r-\vec R_m) 
+		\end{displaymath}
+		这里$W_i(\vec r-\vec R_n)$就是\textrm{Wannier~}函数
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{\textrm{Wannier~}函数}
+	\begin{itemize}
+		\item \textrm{Wannier~}函数是\textrm{Bloch~}函数的\textrm{Fourier}变换，对于格点$\vec T_m$有
+			\begin{displaymath}
+				\begin{aligned}
+					&w_i(\vec r-\vec T_m)=\frac{\Omega_{\mathrm{cell}}}{2\pi^3}\int_{\mathrm{BZ}}\mathrm{d}\vec k\mathrm{e}^{-\mathrm{i}\vec k\cdot\vec T_m}\psi_i^{\vec k}(\vec r)\\
+					=&\frac{\Omega_{\mathrm{cell}}}{2\pi^3}\int_{\mathrm{BZ}}\mathrm{d}\vec k\mathrm{e}^{-\mathrm{i}\vec k\cdot\vec T_m}\mathrm{e}^{-\mathrm{i}\vec k\cdot\vec r}u_i^{\vec k}(\vec r)=\frac{\Omega_{\mathrm{cell}}}{2\pi^3}\int_{\mathrm{BZ}}\mathrm{d}\vec k\mathrm{e}^{\mathrm{i}\vec k\cdot(\vec r-\vec T_m)}u_i^{\vec k}(\vec r)
+				\end{aligned}
+			\end{displaymath}
+\begin{figure}[h!]
+\centering
+%\hspace*{-10pt}
+\vspace*{-0.6in}
+\includegraphics[height=1.8in,width=3.1in,viewport=0 0 1400 1000,clip]{Figures/Wannier_function.png}
+\caption{\tiny \textrm{Schematic example of Wannier function that correspond to the Bloch function.}}%
+\label{Wannier-function}
+\end{figure} 
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{\textrm{Wannier~}函数}
+	\begin{itemize}
+		\item 一个能带的\textrm{Wannier~}函数完全由同一能带的\textrm{Bloch~}函数定义
+		\item \textrm{Wannier~}函数完全正交
+			\begin{displaymath}
+				\int_{\textcolor{red}{\mathrm{all\; space}}}\mathrm{d}\vec rw_i^{\ast}(\vec r-\vec T_m)w_j(\vec r-\vec T_{m^{\prime}})=\delta_{ij}\delta_{mm^{\prime}}
+			\end{displaymath}
+			\textrm{Wannier~}函数和\textrm{Bloch~}函数一样，构成完备的正交函数集
+		\item \textrm{Wannier~}函数间由幺正矩阵联系
+			\begin{displaymath}
+				u_{i\vec k}=\sum_jU_{ji}^{\vec k}u_{j\vec k}^{(0)}
+			\end{displaymath}
+			\textcolor{blue}{其中$U_{ji}^{\vec k}$是与$\vec k$~关联的幺正矩阵}
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{\textrm{Wannier~}函数的不唯一}
+	\begin{itemize}
+		\item 对于\textrm{Bloch~}函数
+			\begin{displaymath}
+				\psi_i^{\vec k}(\vec r)=\mathrm{e}^{\mathrm{i}\vec k\cdot\vec r}\mathrm{e}^{-\mathrm{i}\vec k\cdot\vec r}u_i^{\vec k}(\vec r)
+			\end{displaymath}
+			\textcolor{red}{可乘以任意相位，而不改变物理量的值}
+			\begin{displaymath}
+				\psi_i^{\vec k}(\vec r)\rightarrow\tilde\psi_i^{\vec k}(\vec r)=\textcolor{red}{\mathrm{e}^{\mathrm{i}\phi_i(\vec k)}}\psi_i^{\vec k}(\vec r)
+			\end{displaymath}
+		\item \textcolor{blue}{\textrm{Wannier~}函数的表示并不唯一}:\\
+必须通过选择特定的相位$\phi_i(\vec k)$(或特定的幺正变换矩阵)，才能得到确定的\textrm{Wannier~}函数 
+\begin{figure}[h!]
+\centering
+%\hspace*{-10pt}
+\vspace*{-0.3in}
+\includegraphics[height=1.1in,width=1.8in,viewport=0 0 1100 600,clip]{Figures/Wannier_function-Bondcenter_Si.png}
+\caption{\tiny \textrm{Bond-centered Wannier function for Si.}}%
+\label{Bond-Centered Wannier function}
+\end{figure} 
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{\textrm{Wannier~}函数的不唯一}
+\begin{figure}[h!]
+\centering
+\hspace*{-0.35in}
+\subfigure[\textrm{Maximally localized Wannier function}]{
+\label{Wannier-Maxlocal}
+\vspace*{-0.50in}
+\includegraphics[height=1.10in,width=3.20in,viewport=0 0 1000 450,clip]{Figures/Wannier_function-Maxlocal.png}}
+\subfigure[\textrm{Comparison of orthogonal and non-orthogonal maximally locaized orbitals}]{
+\label{Non_orth-Wannier}
+\vspace*{-0.50in}
+\includegraphics[height=1.10in,width=3.00in,viewport=0 0 1200 550,clip]{Figures/Non_orth-Wannier_function.png}}
+\label{Non-local Wannier-function}
+\end{figure}
+}
+\section{现代极化理论与\rm{Berry~}相位}
 \frame
 {
 	\frametitle{电介质材料的极化与\textrm{Berry~}相位}
@@ -138,11 +412,11 @@
 \caption{\tiny \textrm{Illustration of finite system for which the total dipole moment is well defined.}}%
 \label{Polarization_insulator}
 \end{figure} 
-对有限体系，当外部电场$\vec E(\vec r)=0$，宏观电极化强度$\vec P$可用偶极矩$\vec d$表示
+\fontsize{8.5pt}{2.2pt}\selectfont{对有限体系，当外部电场$\vec E(\vec r)=0$，宏观电极化强度$\vec P$可用偶极矩$\vec d$表示}
 \begin{displaymath}
-	\vec P\equiv\frac{\sum\limits_{\mathrm{all\;space}}\vec d_i}{\Omega}=\frac1{\Omega}\int_{\mathrm{all\;space}}\mathrm{d}\vec rn(\vec r)\vec r
+	\vec P\equiv\frac{\sum\limits_{\Omega}\vec d_i}{\Omega}=\frac1{\Omega}\int_{\Omega}\mathrm{d}\vec rn_{\mathrm{tot}}(\vec r)\vec r=\dfrac1{N\Omega}\bigg[\sum_jZ_j\mathbf{R_j}-\int_{\Omega}n(\vec r)\vec r\mathrm{d}\vec r\bigg]
 \end{displaymath}
-\textcolor{red}{电极化强度的变化$\Delta\vec P=\vec P^{(1)}-\vec P^{(0)}$只与电荷密度的改变$\Delta n=n^{(1)}-n^{(0)}$有关，而与电荷密度改变的途径无关}
+\textcolor{red}{电极化强度的变化$\Delta\vec P=\vec P^{(1)}-\vec P^{(0)}$只与电荷密度的改变$\Delta n=n_{\mathrm{tot}}^{(1)}-n_{\mathrm{tot}}^{(0)}$有关，而与电荷密度改变的途径无关}
 }
 
 \frame
@@ -242,83 +516,6 @@
 		\Delta\vec P_{\alpha}=-|e|\frac2{(2\pi)^3}\mathrm{Im}\int_{\mathrm{BZ}}\mathrm{d}\vec k\int_0^1\mathrm{d}\lambda\sum_i^{\mathrm{occ}}\left\langle\frac{\partial u_{\vec k i}^{(\lambda)}}{\partial k_{\alpha}}\right|\left.\frac{\partial u_{\vec k j}^{(\lambda)}}{\partial\lambda}\right\rangle
 	\end{displaymath}
 	对$\vec k$~的积分是倒空间的第一\textrm{Brillouin zone}
-}
-
-\frame
-{
-	\frametitle{几何\textrm{Berry~}相位}
-	\textrm{Berry}相位是一个复向量\textrm{(complex vector)}沿着参数空间中路径移动并回到起点所产生的全局相位演化\textrm{(global phase evolution)}
-\begin{figure}[h!]
-\centering
-%\hspace*{-10pt}
-\vspace*{-0.12in}
-\includegraphics[height=1.8in,width=2.6in,viewport=0 0 800 540,clip]{Figures/Berry_Phase.png}
-\caption{\tiny \textrm{Schematic representation of the sequence of states $\Psi_m(\vec r;\mathbf{R})$ as $\mathbf{R}$ is changed along a circuit \texttt{C} drawn in the parameter space D, where no degeneracy occurs.}}%
-\label{Berry_Phase}
-\end{figure} 
-}
-
-\frame
-{
-	\frametitle{\textrm{Berry~}相位的推导}
-	一个包含若干参数$(R_1,R_2,\cdots)$的一般\textrm{Hamiltonian}$H(\mathbf{R})$，这里用$\mathbf{R}$代表参数$(R_1,R_2,\cdots)$，即$\mathbf{R}=(R_1,R_2,\cdots)$\\
-	本征态波函数$\psi_n(r;\mathbf{R})$和本征值$E_n(\mathbf{R})$满足\textrm{Schr\"odinger}方程
-	\begin{displaymath}
-		H(\mathbf{R})\psi_n(r;\mathbf{R})=E_n(\mathbf{R})\psi_n(r;\mathbf{R})
-	\end{displaymath}
-	不同参数$\mathbf{R}$下的本征值方程，不能唯一地确定波函数$\psi_n(r;\mathbf{R})$，因为在波函数$\psi_n(r;\mathbf{R})$中含有与$\mathbf{R}$相关的任意相位\footnote{这种相位任意性称为\textcolor{blue}{规范任意性}(\textrm{gauge~abbitariness})}
-
-	在参数$\mathbf{R}$的定义域$D$内，假设波函数$\psi_n(r;\mathbf{R})$由一套连续、单值函数构成，有\textcolor{magenta}{规范变换}
-	\begin{displaymath}
-		\tilde{\psi}_n(r;\mathbf{R})=\mathrm{e}^{\mathrm{i}\alpha_n(\mathbf{R})}\psi_n(r;\mathbf{R})
-	\end{displaymath}
-	可以在参数定义域$D$内定义一套等价的连续、单值波函数，其中$\alpha_n(\mathbf{R})$是连续、单值的实函数
-
-	\textcolor{blue}{\textrm{Berry}针对规范任意性，提出了规范不变性的几何相位计算过程}
-}
-
-\frame
-{
-	\frametitle{\textrm{Berry~}相位的推导}
-	在参数$\mathbf{R}$的定义域内，本征态波函数$\psi_n(r;\mathbf{R})$，对应的本征值$E_n(\mathbf{R})$，可以在不同层$n$间绝热变化。选择闭合回路$C$，如果回路上一点$\mathbf{R}$和临近点$\mathbf{R}+\mathrm{d}\mathbf{I}$的波函数分别为$\psi_n(r;\mathbf{R})$和$\psi_n(r;\mathbf{R}+\mathrm{d}\mathbf{I})$
-
-	两个波函数的相位差(夹角)定义为
-	\begin{displaymath}
-		\mathrm{d}\phi\equiv\arg\langle\psi_n(r;\mathbf{R})|\psi_n(r;\mathbf{R}+\mathrm{d}\mathbf{I})\rangle
-	\end{displaymath}
-	$\mathrm{d}\phi$表示绝热层$n$中量子体系沿回路$C$由$\mathbf{R}$向$\mathbf{R}+\mathrm{d}\mathbf{I}$的相位无穷小的变化
-
-	\textcolor{purple}{这样定义的$\mathrm{d}\phi$并没有明确的物理意义，因为$\mathrm{d}\phi$依赖于$\psi_n(r;\mathbf{R})$和$\psi_n(r;\mathbf{R}+\mathrm{d}\mathbf{I})$自身的相位}
-
-	如果将$\psi_n(r;\mathbf{R}+\mathrm{d}\mathbf{I})$采用\textrm{Taylor}展开，并对$\mathrm{d}\mathbf{I}$近似到一阶有
-	\begin{displaymath}
-		\mathrm{d}\phi=\arg\bigg[1+\langle\psi_n(r;\mathbf{R})|\dfrac{\partial}{\partial\mathbf{R}}\psi_n(r;\mathbf{R})\rangle\cdot\mathrm{d}\mathbf{I}\bigg]
-	\end{displaymath}
-}
-
-\frame
-{
-	\frametitle{\textrm{Berry~}相位的推导}
-	在\textrm{Hellmann-Feynman}定理推导中，有表达式
-	\textcolor{blue}{\begin{displaymath}
-		\langle\psi_n(r;\mathbf{R})|\dfrac{\partial}{\partial\mathbf{R}}\psi_n(r;\mathbf{R})\rangle
-	\end{displaymath}}
-	为\textcolor{blue}{纯虚数}，因此可有
-	\begin{displaymath}
-		\mathrm{d}\phi=\Im\langle\psi_n(r;\mathbf{R})|\dfrac{\partial}{\partial\mathbf{R}}\psi_n(r;\mathbf{R})\rangle\cdot\mathrm{d}\mathbf{I}
-	\end{displaymath}
-	\textcolor{purple}{闭合回路的相位定义}
-	\begin{displaymath}
-		\gamma_n(C)=\Im\oint_C\langle\psi_n(r;\mathbf{R})|\dfrac{\partial}{\partial\mathbf{R}}\psi_n(r;\mathbf{R})\rangle\rangle\cdot\mathrm{d}\mathbf{I}
-	\end{displaymath}
-	记被积函数中虚部为
-	\begin{displaymath}
-		\mathbf{A}_n(\mathbf{R})=\Im\langle\psi_n(r;\mathbf{R})|\nabla_{\mathbf{R}}\psi_n(r;\mathbf{R})\rangle
-	\end{displaymath}
-	可有
-	\begin{displaymath}
-		\gamma_n(C)=\oint_C\mathbf{A}_n(\mathbf{R})\cdot\mathrm{d}\mathbf{I}
-	\end{displaymath}
 }
 
 \frame
@@ -490,103 +687,3 @@ $n$和$m$遍历全部电子占据的价带
 	\end{itemize}
 }
 
-\section{\rm{Wannier function}}
-\frame
-{
-	\frametitle{\textrm{Wannier~}函数}
-	\begin{itemize}
-		\item \textrm{Wannier}函数是\textcolor{blue}{正交化的局域函数}，\textcolor{red}{要求局域函数空间与能带空间完全相同}
-		\item 紧束缚近似下，能带的电子波函数的\underline{\textcolor{blue}{\textrm{Bloch~}和}}
-			\begin{displaymath}
-				\psi_i^{\vec k}(\vec r)=\frac1{\sqrt N}\sum_m\mathrm{e}^{\mathrm{i}\vec k\cdot\vec R_m}\phi_i(\vec r-\vec R_m)
-			\end{displaymath}
-		\textrm{Bloch~}函数可以写类似形式
-		\begin{displaymath}
-			\psi_i^{\vec k}(\vec r)=\frac1{\sqrt N}\sum_m\mathrm{e}^{\mathrm{i}\vec k\cdot\vec R_m}W_i(\vec r-\vec R_m) 
-		\end{displaymath}
-		这里$W_i(\vec r-\vec R_n)$就是\textrm{Wannier~}函数
-	\end{itemize}
-}
-
-\frame
-{
-	\frametitle{\textrm{Wannier~}函数}
-	\begin{itemize}
-		\item \textrm{Wannier~}函数是\textrm{Bloch~}函数的\textrm{Fourier}变换，对于格点$\vec T_m$有
-			\begin{displaymath}
-				\begin{aligned}
-					&w_i(\vec r-\vec T_m)=\frac{\Omega_{\mathrm{cell}}}{2\pi^3}\int_{\mathrm{BZ}}\mathrm{d}\vec k\mathrm{e}^{-\mathrm{i}\vec k\cdot\vec T_m}\psi_i^{\vec k}(\vec r)\\
-					=&\frac{\Omega_{\mathrm{cell}}}{2\pi^3}\int_{\mathrm{BZ}}\mathrm{d}\vec k\mathrm{e}^{-\mathrm{i}\vec k\cdot\vec T_m}\mathrm{e}^{-\mathrm{i}\vec k\cdot\vec r}u_i^{\vec k}(\vec r)=\frac{\Omega_{\mathrm{cell}}}{2\pi^3}\int_{\mathrm{BZ}}\mathrm{d}\vec k\mathrm{e}^{\mathrm{i}\vec k\cdot(\vec r-\vec T_m)}u_i^{\vec k}(\vec r)
-				\end{aligned}
-			\end{displaymath}
-\begin{figure}[h!]
-\centering
-%\hspace*{-10pt}
-\vspace*{-0.6in}
-\includegraphics[height=1.8in,width=3.1in,viewport=0 0 1400 1000,clip]{Figures/Wannier_function.png}
-\caption{\tiny \textrm{Schematic example of Wannier function that correspond to the Bloch function.}}%
-\label{Wannier-function}
-\end{figure} 
-	\end{itemize}
-}
-
-\frame
-{
-	\frametitle{\textrm{Wannier~}函数}
-	\begin{itemize}
-		\item 一个能带的\textrm{Wannier~}函数完全由同一能带的\textrm{Bloch~}函数定义
-		\item \textrm{Wannier~}函数完全正交
-			\begin{displaymath}
-				\int_{\textcolor{red}{\mathrm{all\; space}}}\mathrm{d}\vec rw_i^{\ast}(\vec r-\vec T_m)w_j(\vec r-\vec T_{m^{\prime}})=\delta_{ij}\delta_{mm^{\prime}}
-			\end{displaymath}
-			\textrm{Wannier~}函数和\textrm{Bloch~}函数一样，构成完备的正交函数集
-		\item \textrm{Wannier~}函数间由幺正矩阵联系
-			\begin{displaymath}
-				u_{i\vec k}=\sum_jU_{ji}^{\vec k}u_{j\vec k}^{(0)}
-			\end{displaymath}
-			\textcolor{blue}{其中$U_{ji}^{\vec k}$是与$\vec k$~关联的幺正矩阵}
-	\end{itemize}
-}
-
-\frame
-{
-	\frametitle{\textrm{Wannier~}函数的不唯一}
-	\begin{itemize}
-		\item 对于\textrm{Bloch~}函数
-			\begin{displaymath}
-				\psi_i^{\vec k}(\vec r)=\mathrm{e}^{\mathrm{i}\vec k\cdot\vec r}\mathrm{e}^{-\mathrm{i}\vec k\cdot\vec r}u_i^{\vec k}(\vec r)
-			\end{displaymath}
-			\textcolor{red}{可乘以任意相位，而不改变物理量的值}
-			\begin{displaymath}
-				\psi_i^{\vec k}(\vec r)\rightarrow\tilde\psi_i^{\vec k}(\vec r)=\textcolor{red}{\mathrm{e}^{\mathrm{i}\phi_i(\vec k)}}\psi_i^{\vec k}(\vec r)
-			\end{displaymath}
-		\item \textcolor{blue}{\textrm{Wannier~}函数的表示并不唯一}:\\
-必须通过选择特定的相位$\phi_i(\vec k)$(或特定的幺正变换矩阵)，才能得到确定的\textrm{Wannier~}函数 
-\begin{figure}[h!]
-\centering
-%\hspace*{-10pt}
-\vspace*{-0.3in}
-\includegraphics[height=1.1in,width=1.8in,viewport=0 0 1100 600,clip]{Figures/Wannier_function-Bondcenter_Si.png}
-\caption{\tiny \textrm{Bond-centered Wannier function for Si.}}%
-\label{Bond-Centered Wannier function}
-\end{figure} 
-	\end{itemize}
-}
-
-\frame
-{
-	\frametitle{\textrm{Wannier~}函数的不唯一}
-\begin{figure}[h!]
-\centering
-\hspace*{-0.35in}
-\subfigure[\textrm{Maximally localized Wannier function}]{
-\label{Wannier-Maxlocal}
-\vspace*{-0.50in}
-\includegraphics[height=1.10in,width=3.20in,viewport=0 0 1000 450,clip]{Figures/Wannier_function-Maxlocal.png}}
-\subfigure[\textrm{Comparison of orthogonal and non-orthogonal maximally locaized orbitals}]{
-\label{Non_orth-Wannier}
-\vspace*{-0.50in}
-\includegraphics[height=1.10in,width=3.00in,viewport=0 0 1200 550,clip]{Figures/Non_orth-Wannier_function.png}}
-\label{Non-local Wannier-function}
-\end{figure}
-}
