@@ -345,50 +345,115 @@
 			\end{displaymath}
 }
 
-\subsection{绝热近似与电-声耦合}
+\section{绝热近似:~\rm{Hellmann-Feynman}定理与电-声耦合}
 \frame
 {
 	\frametitle{绝热近似}
-	绝热近似(\textrm{Born-Oppenheimer~}近似)下，忽略原子核动能的运动，电子的本征态(本征值$E_i\{\mathbf{R}\}$，波函数$\Psi_i(\{\mathbf{r}\}:\{\mathbf{R}\})$)中原子核坐标是$\{\mathbf{R}\}$参数
+	绝热近似下，电子-原子核的运动能量上完全分离，原子核运动的影响，在电子的本征态(本征值$E_i\{\mathbf{R}\}$，波函数$\Psi_i(\{\mathbf{r}\};\{\mathbf{R}\})$)中表现为含有原子核位置参数$\{\mathbf{R}\}$
 
 	如果考虑核与电子体系，\textrm{Hamiltonian~}算符可以写成
 	\begin{displaymath}
 		\hat H=\hat T_N+\hat T_e+\hat U
 	\end{displaymath}
-	$U$是全部相互作用，可由\textcolor{blue}{电子坐标$\{\mathbf{r}\}$}和\textcolor{blue}{原子核坐标$\{\mathbf{R}\}$}表示
+	$U$是全部相互作用，可由\textcolor{blue}{电子坐标$\{\mathbf{r}\}$}和\textcolor{blue}{原子核位置$\{\mathbf{R}\}$}表示
 
-	核与电子耦合体系的完全解是
+	电子运动的本征态由下式确定
 	\begin{displaymath}
-		\hat H\Psi_s(\{\mathbf{r},\mathbf{R}\})=E_s\Psi_s(\{\mathbf{r},\mathbf{R}\})
+		\hat H(\mathbf{R})\psi_s(\{\mathbf{r};\mathbf{R}\})=E_s(\mathbf{R})\psi_s(\{\mathbf{r};\mathbf{R}\})
 	\end{displaymath}
 	这里$s=1,2,3,\cdots$
-
-	如果对于原子核位于$\{\mathbf{R}\}$的电子态是$\Psi_i(\{\mathbf{r}\}:\{\mathbf{R}\})$
+	电子运动\textrm{Hamiltonian}可由本征态表示为
 	\begin{displaymath}
-		\Psi(\{\mathbf{r},\mathbf{R}\})=\sum_i\chi_{si}(\{\mathbf{R}\})\Psi_i(\{\mathbf{r}\}:\{\mathbf{R}\})
+		\langle\psi_m(\mathbf{r};\mathbf{R})|\hat H(\mathbf{R})|\psi_n(\mathbf{r};\mathbf{R})\rangle=E_s(\mathbf{R})\delta_{mn}
+	\end{displaymath}
+	这里利用了电子本征态波函数的正交关系
+	\begin{displaymath}
+		\langle\psi_m(\mathbf{r};\mathbf{R})|\psi_n(\mathbf{r};\mathbf{R})\rangle=\delta_{mn}
 	\end{displaymath}
 }
 
 \frame
 {
-	\frametitle{绝热近似}
-	包含电子-原子核耦合的$\chi_{si}(\{\mathbf{R}\})$运动方程
+	\frametitle{\textrm{Hellmann-Feynman}定理}
+	根据电子波函数的正交关系，电子波函数对参数$\mathbf{R}$改变的响应有
+	\begin{displaymath}
+		\langle\dfrac{\partial}{\partial{\mathbf{R}_i}}\psi_m(\mathbf{r};\mathbf{R})|\psi_n(\mathbf{r};\mathbf{R})\rangle=-\langle\psi_m(\mathbf{r};\mathbf{R})|\dfrac{\partial}{\partial{\mathbf{R}_i}}\psi_n(\mathbf{r};\mathbf{R})\rangle
+	\end{displaymath}
+	对$m=n$有
+	\textcolor{blue}{
+		\begin{displaymath}
+			\langle\psi_m(\mathbf{r};\mathbf{R})|\dfrac{\partial}{\partial{\mathbf{R}_i}}\psi_m(\mathbf{r};\mathbf{R})\rangle=\mbox{纯虚数}
+		\end{displaymath} }
+		类似地，\textrm{Schr\"odinger}方程对参数$\mathbf{R}$改变的响应有
+		\begin{displaymath}
+			\langle\dfrac{\partial\psi_m}{\partial{\mathbf{R}_i}}|H|\psi_n\rangle+\langle\psi_m|\dfrac{\partial H}{\partial{\mathbf{R}_i}}|\psi_n\rangle+\langle\psi_m|H|\dfrac{\partial\psi_n}{\partial{\mathbf{R}_i}}\rangle=\dfrac{\partial E_n}{\partial\mathbf{R}_i}\delta_{mn}
+		\end{displaymath}
+		注意到$\psi_m(\mathbf{r};\mathbf{R})$和$\psi_n(\mathbf{r};\mathbf{R})$是$H(\mathbf{R})$的本征态，本征值分别是$E_m(\mathbf{R})$和$iE_n(\mathbf{R})$，因此有
+		\begin{displaymath}
+			\langle\psi_m|\dfrac{\partial H}{\partial{\mathbf{R}_i}}|\psi_n\rangle+[E_m-E_n]\langle\psi_m|H|\dfrac{\partial\psi_n}{\partial{\mathbf{R}_i}}\rangle=\dfrac{\partial E_n}{\partial\mathbf{R}_i}\delta_{mn}
+		\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{\textrm{Hellmann-Feynman}定理}
+	当$m=n$时有\textrm{Hellmann-Feynman}定理
+	\textcolor{purple}{
+	\begin{displaymath}
+		\langle\psi_m(\mathbf{r};\mathbf{R})|\dfrac{\partial H(\mathbf{R})}{\partial{\mathbf{R}_i}}|\psi_m(\mathbf{r};\mathbf{R})\rangle=\dfrac{\partial E_m(\mathbf{R})}{\partial\mathbf{R}_i}
+	\end{displaymath}}
+	\textrm{Hellmann-Feynman}定理非常重要，因为它表明，对于确定的势能面，能量对位置导数(广义力)可通过波函数和算符$\partial H(\mathbf{R})/\partial\mathbf{R}_i$的期望值计算得到
+	\vskip 5pt
+	一般地，当势能面不包含任何简并态时，可以有\textrm{Epstein}广义\textrm{Hellmann-Feynman}定理
+	\begin{displaymath}
+		\hspace*{-10pt}
+		\langle\psi_m(\mathbf{r};\mathbf{R})|\dfrac{\partial}{\partial{\mathbf{R}_i}}\psi_n(\mathbf{r};\mathbf{R})\rangle=\dfrac1{E_n(\mathbf{R})-E_m(\mathbf{R})}\langle\psi_m(\mathbf{r};\mathbf{R})|\dfrac{\partial H(\mathbf{R})}{\partial{\mathbf{R}_i}}|\psi_n(\mathbf{r};\mathbf{R})\rangle
+	\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{绝热近似下的原子受力}
+	根据\textrm{Hellmann-Feynman}定理，在\textrm{Born-Oppenheimer}近似下，位于$\mathbf{R}_K$处的原子核的受力
+	\begin{displaymath}
+		\langle\psi(\mathbf{r};\mathbf{R})|\dfrac{\partial}{\partial{\mathbf{R}_K}}H_e(\mathbf{R})|\psi(\mathbf{r};\mathbf{R})\rangle=\dfrac{\partial E(\mathbf{R})}{\partial\mathbf{R}_K}
+	\end{displaymath}
+	这里\textrm{Hamiltonian}的梯度为
+	\begin{displaymath}
+		\dfrac{\partial}{\partial{\mathbf{R}_K}}H_e(\mathbf{R})=-\dfrac{\partial}{\partial{\mathbf{R}_K}}\sum_i\dfrac{Z_Ke^2}{\mathbf{r}_i-\mathbf{R}_K}+\dfrac{\partial}{\partial{\mathbf{R}_K}}\sum_{I(\neq K)}\dfrac{Z_IZ_Ke^2}{\mathbf{R}_I-\mathbf{R}_K}
+	\end{displaymath}
+	由此，原子受力可表示为
+	\textcolor{red}{
+	\begin{displaymath}
+		\vec F_K=-\dfrac{\partial E}{\partial\mathbf{R}_K}=\int n(\mathbf{r};\mathbf{R})\dfrac{\partial}{\partial{\mathbf{R}_K}}\dfrac{Z_Ke^2}{\mathbf{r}_i-\mathbf{R}_K}\mathrm{d}\mathbf{r}-\dfrac{\partial}{\partial{\mathbf{R}_K}}\sum_{I(\neq K)}\dfrac{Z_IZ_Ke^2}{\mathbf{R}_I-\mathbf{R}_K}
+	\end{displaymath}}
+	原子核受力:~\textcolor{blue}{其余原子核的经典静电排斥}和\textcolor{purple}{电子的电荷密度分布}
+}
+
+\frame
+{
+	\frametitle{绝热近似下的核运动}
+	绝热近似下，原子核-电子的波函数可以表示为
+	\begin{displaymath}
+		\Psi(\{\mathbf{r};\mathbf{R}\})=\sum_i\chi_{si}(\{\mathbf{R}\})\psi_i(\{\mathbf{r}\};\{\mathbf{R}\})
+	\end{displaymath}
+	原子核$\chi_{si}(\{\mathbf{R}\})$在电子形成的势能面$E_i(\{\mathbf{R}\})$上的运动方程
 	\begin{displaymath}
 		[T_N+E_i(\{\mathbf{R}\})-E_s]\chi_{si}(\{\mathbf{R}\})=-\sum_{ii^{\prime}}C_{ii^{\prime}}\chi_{si}(\{\mathbf{R}\})
 	\end{displaymath}
 	这里$T_n=-\frac12(\sum\limits_J\nabla_J^2/M_J)$，矩阵元$C_{ii^{\prime}}=A_{ii^{\prime}}+B_{ii^{\prime}}$
 	\begin{displaymath}
 		\begin{aligned}
-			A_{ii^{\prime}}(\{\mathbf{R}\})=&\sum_J\frac1{M_J}\langle\Psi_i(\{\mathbf{r}\}:\{\mathbf{R}\})|\nabla_J|\Psi_{i^{\prime}}(\{\mathbf{r}\}:\{\mathbf{R}\})\rangle\nabla_J\\
-			B_{ii^{\prime}}(\{\mathbf{R}\})=&\sum_J\frac1{2M_J}\langle\Psi_i(\{\mathbf{r}\}:\{\mathbf{R}\})|\nabla_J^2|\Psi_{i^{\prime}}(\{\mathbf{r}\}:\{\mathbf{R}\})\rangle\\
+			A_{ii^{\prime}}(\{\mathbf{R}\})=&\sum_J\frac1{M_J}\langle\psi_i(\{\mathbf{r}\};\{\mathbf{R}\})|\nabla_J|\psi_{i^{\prime}}(\{\mathbf{r}\};\{\mathbf{R}\})\rangle\nabla_J\\
+			B_{ii^{\prime}}(\{\mathbf{R}\})=&\sum_J\frac1{2M_J}\langle\psi_i(\{\mathbf{r}\};\{\mathbf{R}\})|\nabla_J^2|\psi_{i^{\prime}}(\{\mathbf{r}\};\{\mathbf{R}\})\rangle\\
 		\end{aligned}
 	\end{displaymath}
-	这里$\langle\Psi_i(\{\mathbf{r}\}:\{\mathbf{R}\})|\hat O|\Psi_{i^{\prime}}(\{\mathbf{r}\}:\{\mathbf{R}\})\rangle$表示对电子变量$\{\mathbf{r}\}$积分
+	这里$\langle\psi_i(\{\mathbf{r}\};\{\mathbf{R}\})|\hat O|\psi_{i^{\prime}}(\{\mathbf{r}\};\{\mathbf{R}\})\rangle$表示对电子变量$\{\mathbf{r}\}$积分
 }
 
 \frame
 {
-	\frametitle{绝热近似}
+	\frametitle{绝热近似下的核运动}
 	绝热近似下，\textcolor{red}{将忽略矩阵$C_{ii^{\prime}}$的全部非对角元}，可有
 	\begin{itemize}
 		\item \textcolor{blue}{电子能及时响应原子核的运动}
@@ -396,7 +461,7 @@
 		\item $A_{ii^{\prime}}=0$(波函数归一化要求)
 		\item 核运动的势函数$U_i(\{\mathbf{R}\})=E_i(\{\mathbf{R}\})+B_{ii}(\{\mathbf{R}\})$
 	\end{itemize}
-	核运动方程运动方程
+	核运动方程
 	\begin{displaymath}
 		\left[ -\sum_J\frac1{2M_J}\nabla_J^2+U_i(\{\mathbf{R}\})-E_{ni} \right]\chi_{ni}(\{\mathbf{R}\})=0
 	\end{displaymath}
@@ -413,15 +478,16 @@
 		\item $C_{ii^{\prime}}$的非对角元部分描述了\textcolor{red}{原子核运动(振动)引起电子在不同态间跃迁}
 		\item $C_{ii^{\prime}}$的非对角元部分主要来自$A_{ii^{\prime}}$
 			\begin{enumerate}
-				\item 电子波函数$\Psi_i(\{\mathbf{r}\}:\{\mathbf{R}\})$对原子核位置$\{\mathbf{Rj}\}$的梯度
-				\item 梯度算符对声子波函数$\chi_{si}(\{\mathbf{R}\})$的贡献
+\setlength{\itemsep}{7pt}
+				\item 电子波函数$\psi_i(\{\mathbf{r}\};\{\mathbf{R}\})$对原子核位置$\{\mathbf{R}_j\}$的梯度
+				\item 梯度算符对原子核波函数$\chi_{si}(\{\mathbf{R}\})$的贡献
 			\end{enumerate}
 		\item 电子在态$i\rightarrow i^{\prime}$跃迁将会激发或吸收一个声子
 	\end{itemize}
-	线性近似下有
+	根据\textrm{Epstein}推广的\textrm{Hellmann-Feynman}定理线性近似下有
 	\begin{displaymath}
 		\hspace*{-15pt}
-		\langle\Psi_i(\{\mathbf{r}\}:\{\mathbf{R}\})|\nabla_J|\Psi_i^{\prime}(\{\mathbf{r}\}:\{\mathbf{R}\})\rangle=\frac{\langle\Psi_i(\{\mathbf{r}\}:\{\mathbf{R}\})|\tfrac{\nabla_V}{\nabla_{\mathbf{R}_J}}|\Psi_{i^{\prime}}(\{\mathbf{r}\}:\{\mathbf{R}\})\rangle}{E_{i^{\prime}}(\{\mathbf{R}\})-E_i(\{\mathbf{R}\})}
+		\langle\psi_i(\{\mathbf{r}\};\{\mathbf{R}\})|\nabla_J|\psi_i^{\prime}(\{\mathbf{r}\};\{\mathbf{R}\})\rangle=\frac{\langle\psi_i(\{\mathbf{r}\};\{\mathbf{R}\})|\tfrac{\nabla_V}{\nabla_{\mathbf{R}_J}}|\psi_{i^{\prime}}(\{\mathbf{r}\}:\{\mathbf{R}\})\rangle}{E_{i^{\prime}}(\{\mathbf{R}\})-E_i(\{\mathbf{R}\})}
 	\end{displaymath}
 }
 
