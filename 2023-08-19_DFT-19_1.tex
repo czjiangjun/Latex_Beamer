@@ -673,33 +673,44 @@
 	\frametitle{现代极化理论与几何\textrm{Berry~}相位}
 	\begin{itemize}
 		\item \textrm{Resta}指出:~在无限体系中，微扰项$\partial\vec P/\partial\lambda$可以用动量矩阵元表示%\upcite{RMP66-899_1994}
-，根据线性响应理论:
+，根据线性微扰理论:
 	\begin{displaymath}
 		\hspace*{-15pt}
-		\frac{\partial\vec P}{\partial\lambda}=-\mathrm{i}\frac{\mathrm{e}\hbar}{\Omega m_e}\sum_{\vec k}\sum_i\frac{\langle\psi_{\vec k i}^{\lambda}|\hat{\vec p}|\psi_{\vec k j}^{\lambda}\rangle}{(\varepsilon_{\vec k i}^{\lambda}-\varepsilon_{\vec k j}^{\lambda})}\sum_j\frac{\langle\psi_{\vec k i}^{\lambda}|\partial V_{\mathrm{KS}}^{\lambda}/\partial\lambda|\psi_{\vec k j}^{\lambda}\rangle}{(\varepsilon_{\vec k i}^{\lambda}-\varepsilon_{\vec k j}^{\lambda})}+\mathrm{c.c.}
-%		\frac{\partial\vec P}{\partial\lambda}=-\mathrm{i}\frac{\mathrm{e}\hbar}{\Omega m_e}\sum_{\vec k}\sum_i^{\mathrm{occ}}\sum_j^{\mathrm{empty}}\frac{\langle\psi_{\vec k i}^{\lambda}|\hat{\vec p}|\psi_{\vec k j}^{\lambda}\rangle\langle\psi_{\vec k i}^{\lambda}|\partial V_{\mathrm{KS}}^{\lambda}/\partial\lambda|\psi_{\vec k j}^{\lambda}\rangle}{(\varepsilon_{\vec k i}^{\lambda}-\varepsilon_{\vec k j}^{\lambda})^2}+\mathrm{c.c.}
+%		\frac{\partial\vec P}{\partial\lambda}=-\mathrm{i}\frac{\mathrm{e}\hbar}{\Omega m_e}\sum_{\vec k}\sum_i\frac{\langle\psi_{\vec k i}^{\lambda}|\hat{\vec p}|\psi_{\vec k j}^{\lambda}\rangle}{(\varepsilon_{\vec k i}^{\lambda}-\varepsilon_{\vec k j}^{\lambda})}\sum_j\frac{\langle\psi_{\vec k i}^{\lambda}|\partial V_{\mathrm{KS}}^{\lambda}/\partial\lambda|\psi_{\vec k j}^{\lambda}\rangle}{(\varepsilon_{\vec k i}^{\lambda}-\varepsilon_{\vec k j}^{\lambda})}+\mathrm{c.c.}
+		\frac{\partial\vec P}{\partial\lambda}=-\mathrm{i}\frac{\mathrm{e}\hbar}{\Omega m_e}\sum_{\vec k}\sum_i^{\mathrm{occ}}\sum_j^{\mathrm{empty}}\frac{\langle\psi_{\vec k i}^{\lambda}|\hat{\vec p}|\psi_{\vec k j}^{\lambda}\rangle\langle\psi_{\vec k i}^{\lambda}|\partial V_{\mathrm{KS}}^{\lambda}/\partial\lambda|\psi_{\vec k j}^{\lambda}\rangle}{(\varepsilon_{\vec k i}^{\lambda}-\varepsilon_{\vec k j}^{\lambda})^2}+\mathrm{c.c.}
 	\end{displaymath}
 	这里对$i,j$的求和遍历所有自旋态
-	\item 早先\textrm{Thouless}等在讨论量子\textrm{Hall~}效应时曾证明，上述对所有态的求和可变换成只对占据态的求和%\upcite{PRL49-405_1982}
-		\\引入与$\vec k$有关的\textrm{Kohn-Sham~}势$V_{\mathrm{KS}}^{(\lambda)}(\vec r)$，因此周期性\textrm{Hamiltonian~}表示为
+	\vskip 5pt 
+	\item \textrm{Thouless}等%在讨论量子\textrm{Hall~}效应时曾证明，
+		利用\textrm{Bloch}表象的特点，将上述对所有态的求和变换成只对占据态的求和%\upcite{PRL49-405_1982}
+	\vskip 3pt 
+	{\fontsize{8.0pt}{6.2pt}\selectfont{已知\textrm{Bloch~}函数
 	\begin{displaymath}
-		\hat H(\vec k,\lambda)=\frac1{2m_e}\left( -\mathrm{i}\hbar\nabla+\hbar\vec k \right)^2+V_{\mathrm{KS}}^{(\lambda)}(\vec r)
+		\psi_{n\vec k}^{\lambda}=\mathrm{e}^{\mathrm{i}\vec k\cdot\vec r}u_{n\vec k}^{\lambda}(\vec r)
 	\end{displaymath}
+	\textrm{Bloch}表象下\textrm{Hamiltonian}可以写成
+	\begin{displaymath}
+		\hat H(\vec k)=\mathrm{e}^{-\mathrm{i}\vec k\cdot\vec r}\hat H\mathrm{e}^{\mathrm{i}\vec k\cdot\vec r}
+	\end{displaymath}
+	并有
+	\begin{displaymath}
+		\hat H(\vec k)u_{n\vec k}^{\lambda}(\vec r)=E_{n\vec k}u_{n\vec k}^{\lambda}(\vec r) 
+	\end{displaymath}}}
 	\end{itemize}
 }
 
 \frame
 {
 	\frametitle{现代极化理论与几何\textrm{Berry~}相位}
-	利用\textrm{Bloch~}函数
+		引入与$\lambda$有关的周期势$V_{\mathrm{KS}}^{(\lambda)}(\vec r)$，因此有
 	\begin{displaymath}
-		\psi_{\vec k i}^{\lambda}=\mathrm{e}^{\mathrm{i}\vec k\cdot\vec r}u_{\vec k i}^{\lambda}(\vec r)
+		\hat H(\vec k,\lambda)=\frac1{2m_e}\left( -\mathrm{i}\hbar\nabla+\hbar\vec k \right)^2+V_{\mathrm{KS}}^{(\lambda)}(\vec r)
 	\end{displaymath}
-	满足等式
+	和等式
 	\begin{displaymath}
 		\hat H(\vec k,\lambda)u_{\vec k i}^{\lambda}(\vec r)=\left[ -\frac{\hbar}{2m_e}(\nabla+\mathrm{i}\vec k)^2 +V_{\mathrm{KS}}^{(\lambda)}(\vec r)\right]u_{\vec k i}^{\lambda}(\vec r)=\varepsilon_{\vec k i}^{\lambda}u_{\vec k i}^{\lambda}(\vec r)
 	\end{displaymath}
-	根据\textcolor{red}{对易关系}
+	利用\textcolor{red}{对易关系}
 	\begin{displaymath}
 		\langle\psi_{\vec k i}^{\lambda}|\hat{\vec p}|\psi_{\vec k j}^{\lambda}\rangle=\frac{m_e}{\hbar}\langle u_{\vec k i}^{\lambda}|[\partial/\partial\vec k,\hat H(\vec k,\lambda)]|u_{\vec k j}^{\lambda}\rangle
 	\end{displaymath}
@@ -710,12 +721,12 @@
 	\begin{displaymath}
 		\Delta\vec P_{\alpha}=-|e|\frac2{(2\pi)^3}\mathrm{Im}\int_{\mathrm{BZ}}\mathrm{d}\vec k\int_0^1\mathrm{d}\lambda\sum_i^{\mathrm{occ}}\left\langle\frac{\partial u_{\vec k i}^{(\lambda)}}{\partial k_{\alpha}}\right|\left.\frac{\partial u_{\vec k j}^{(\lambda)}}{\partial\lambda}\right\rangle
 	\end{displaymath}
-	对$\vec k$~的积分是倒空间的第一\textrm{Brillouin zone}
 }
 
 \frame
 {
 	\frametitle{现代极化理论和几何\textrm{Berry~}相位}
+	上述对$\vec k$~的积分域是第一\textrm{Brillouin zone}
 %	\textrm{Thouless~}在讨论无相互作用粒子的量子\textrm{Hall~}效应时曾给出类似的积分表达式%\upcite{PRB27-6083_1983}，
 	利用\textrm{Stokes~}定律
 \begin{figure}[h!]
@@ -829,18 +840,19 @@
 \frame
 {
 	\frametitle{现代极化理论和几何\textrm{Berry~}相位}
-	实际计算$\Delta\vec P$有一定的复杂性:\\
-	\textcolor{blue}{\textrm{Brillouin zone}有限$\vec k$点上的本征态\textrm{Blochl~}函数间没有相关系}
-
-	为了回避此困难，采用以下策略
+	实际计算$\Delta\vec P$时，会遇到如何在倒空间中选择离散网格点的问题:
+	\vskip 5pt
+	\textcolor{blue}{如果在\textrm{Brillouin zone}中随机选择有限个$\vec k$点，其本征态\textrm{Blochl~}函数无法形成\textrm{Berry~}相计算的关系} 
+	\vskip 5pt
+	为了回避此困难，采用以下策略\upcite{PRB47-1651_1993}
 	\begin{itemize}
-		\item 选定格矢$\vec G_{\lVert}$平行于倒空间原胞最短的格矢，沿该方向
+		\item 将极化参数$\lambda$的变化方向$\vec G_{\lVert}$选为与倒空间原胞最短的格矢方向平行，电极化矢量的变化可表示为
 			\begin{displaymath}
 				\Delta P_{\lVert}=P_{\lVert}^{(1)}-P_{\lVert}^{(0)}
 			\end{displaymath}
 			并有
 			\begin{displaymath}
-				P_{\lVert}^{(\lambda)}=\mathrm{i}\frac{-|e|}{(2\pi)^3}\int_{\mathrm{A}}\mathrm{d}\vec k_{\bot}\sum_i^{\mathrm{occ}}\int_0^{|\vec G_{\lVert}|}\mathrm{d}k_{\lVert}\left\langle u_{\vec k i}^{(\lambda)}\right|\frac{\partial}{\partial k_{\lVert}}\left|u_{\vec k i}^{(\lambda)}\right\rangle
+				P_{\lVert}^{(\lambda)}=\mathrm{i}\frac{-2|e|}{(2\pi)^3}\textcolor{purple}{\int_{\mathrm{A}}\mathrm{d}\vec k_{\bot}}\sum_i^{\mathrm{occ}}\int_0^{|\vec G_{\lVert}|}\mathrm{d}k_{\lVert}\left\langle u_{\vec k i}^{(\lambda)}\right|\frac{\partial}{\partial k_{\lVert}}\left|u_{\vec k i}^{(\lambda)}\right\rangle
 			\end{displaymath}
 
 	\end{itemize}
@@ -853,7 +865,7 @@
 		\item 为完成积分，$\vec k$~空间的布点离散方案设置如下
 			\begin{enumerate}
 				\item 垂直于$\vec G_{\lVert}$方向的2\textrm{D~}平面上，采用传统的\textrm{Monkhorst-Pack}布点
-				\item 在$\vec k_{\lVert}$方向上离散$J$个$\vec k$点
+				\item 在$\vec G_{\lVert}$方向上离散$J$个$\vec k$点
 \begin{displaymath}
 	\vec k_j=\vec k_{\bot}+j\vec G_{\lVert}/J
 \end{displaymath}
@@ -916,6 +928,10 @@ $n$和$m$遍历全部电子占据的价带
 {\tiny
 	\bibitem{Grosso-Parravicini}\textrm{G. Grosso and G. P. Parravicini \textit{Solid State Physics},  (Academic Press, London, 2000)}
 	\bibitem{Berry-Phase}\textrm{D. Vanderbilt \textit{Berry Phases In Electronic Structure Theory}, (Cambridge University Press, Cambridge, U.K.~2018)}
+	\bibitem{PRB47-1651_1993}\textrm{R. D. King-Smith and D. Vandebilt \textit{Phys. Rev.} B, \textbf{47} (1993), 1651}
+	\bibitem{PRB63-155107_2001}\textrm{R. W. Nunes and X. Gonze \textit{Phys. Rev.} B, \textbf{63} (2001), 155107}
+	\bibitem{Elect_Stru}\textrm{Richard. M. Martin. \textit{Electronic Structure: Basic Theory and Practical Methods} (Cambridge University Press, Cambridge, England, 2004)}
+	\bibitem{PR43-804_1933}\textrm{E. Wigner and F. Seitz \textit{Phys. Rev.}, \textbf{43} (1933), 804}
 }
 \end{thebibliography}
 \nocite*{}
