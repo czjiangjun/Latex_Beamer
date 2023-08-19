@@ -444,11 +444,11 @@
 	这里$T_n=-\frac12(\sum\limits_J\nabla_J^2/M_J)$，矩阵元$C_{ii^{\prime}}=A_{ii^{\prime}}+B_{ii^{\prime}}$
 	\begin{displaymath}
 		\begin{aligned}
-			A_{ii^{\prime}}(\{\mathbf{R}\})=&\sum_J\frac1{M_J}\langle\psi_i(\{\mathbf{r}\};\{\mathbf{R}\})|\hat O|\psi_{i^{\prime}}(\{\mathbf{r}\};\{\mathbf{R}\})\rangle\nabla_J\\
+			A_{ii^{\prime}}(\{\mathbf{R}\})=&\sum_J\frac1{M_J}\langle\psi_i(\{\mathbf{r}\};\{\mathbf{R}\})|\nabla_J|\psi_{i^{\prime}}(\{\mathbf{r}\};\{\mathbf{R}\})\rangle\nabla_J\\
 			B_{ii^{\prime}}(\{\mathbf{R}\})=&\sum_J\frac1{2M_J}\langle\psi_i(\{\mathbf{r}\};\{\mathbf{R}\})|\nabla_J^2|\psi_{i^{\prime}}(\{\mathbf{r}\};\{\mathbf{R}\})\rangle\\
 		\end{aligned}
 	\end{displaymath}
-	这里$\langle\psi_i(\{\mathbf{r}\};\{\mathbf{R}\})|\hat O|\psi_{i^{\prime}}(\{\mathbf{r}\};\{\mathbf{R}\})\rangle$表示对电子变量$\{\mathbf{r}\}$积分
+	\fontsize{8.2pt}{4.2pt}\selectfont{\textcolor{blue}{这里符号$\langle\psi_i(\{\mathbf{r}\};\{\mathbf{R}\})|\hat O|\psi_{i^{\prime}}(\{\mathbf{r}\};\{\mathbf{R}\})\rangle$表示对任意算符$\hat O$，只计算电子变量$\{\mathbf{r}\}$积分的贡献}}
 }
 
 \frame
@@ -459,7 +459,7 @@
 		\item \textcolor{blue}{电子能及时响应原子核的运动}
 		\item \textcolor{blue}{电子由态$i\rightarrow i^{\prime}$的激发，不会影响原子核位置变量${\{\mathbf{R}\}}$}
 		\item $A_{ii^{\prime}}=0$(波函数归一化要求)
-		\item 核运动的势函数$U_i(\{\mathbf{R}\})=E_i(\{\mathbf{R}\})+B_{ii}(\{\mathbf{R}\})$
+		\item 核运动的势函数$U_i(\{\mathbf{R}\})=\textcolor{purple}{E_i(\{\mathbf{R}\})}+B_{ii}(\{\mathbf{R}\})$
 	\end{itemize}
 	核运动方程
 	\begin{displaymath}
