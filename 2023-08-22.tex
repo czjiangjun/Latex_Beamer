@@ -2946,8 +2946,8 @@ $\mathbf{F}_{ji}(\mathbf{R})$的表达式中还包含从电子态$i$到$j$的贡
 	\end{displaymath}
 	\begin{itemize}
 		\item \textcolor{blue}{$\mathbf{Q}_j(\mathbf{R}(t),t)$}是量子势\\
-			它描述了单一电子态下的量子效应，引入非局域属性
-		\item \textcolor{purple}{$\sum_{ji}\mathbf{D}_{ji}(\mathbf{R}(t),t)$}是非绝热量子势\\
+			它描述了单电子态下的量子效应，引入非局域属性
+		\item \textcolor{purple}{$\sum\limits_{ji}\mathbf{D}_{ji}(\mathbf{R}(t),t)$}是非绝热量子势\\
 			它包含一阶和二阶非绝热耦合系数，使得电子态之间发生迁移
 	\end{itemize}
 }
@@ -3019,10 +3019,10 @@ $\mathbf{F}_{ji}(\mathbf{R})$的表达式中还包含从电子态$i$到$j$的贡
 	定义核运动的量子相位$\mathbf{S}_i^{\mathrm{QM}}(\mathbf{R}(t),t)$和量子振幅$\mathbf{A}_j^{\mathrm{QM}}(\mathbf{R}(t),t)$，其演化方程由非决人耦合项贡献确定，即
 	\begin{displaymath}
 		\begin{aligned}
-			-\frac{\partial\mathbf{S}_j^{\mathrm{QM}}(\mathbf{R},t)}{\partial t}=&E_j^{e}(\mathbf{R})\textcolor{purple}{+\sum_{\gamma,i\neq j}\frac{\hbar}{M_{\gamma}}\frac{\mathbf{A}_i^{\mathrm{QM}}(\mathbf{R},t)}{\mathbf{A}_j^{\mathrm{QM}}(\mathbf{R},t)}\\
-			&\times\mathbf{d}_{ji}^{\gamma}(\mathbf{R})\cdot\dot{\mathbf{R}}_{\gamma}(t)\Im\bigg[\mathrm{e}^{\mathrm{i}\phi_{ij}^{\mathrm{QM}}(\mathbf{R},t)}\bigg]}\\
-			\frac{\partial\mathbf{A}_j^{\mathrm{QM}}(\mathbf{R},t)}{\partial t}=&\textcolor{purple}{-\sum_{\gamma,i\neq j}\frac{\hbar}{M_{\gamma}}\mathbf{A}_i^{\mathrm{QM}}(\mathbf{R},t)\\
-			&\times\mathbf{d}_{ji}^{\gamma}(\mathbf{R})\cdot\dot{\mathbf{R}}_{\gamma}(\mathbf{R}(t))\Re\bigg[\mathrm{e}^{\mathrm{i}\phi_{ij}^{\mathrm{QM}}(\mathbf{R},t)}\bigg]}
+			-\frac{\partial\mathbf{S}_j^{\mathrm{QM}}(\mathbf{R},t)}{\partial t}=&E_j^{e}(\mathbf{R})\textcolor{purple}{+\sum_{\gamma,i\neq j}\frac{\hbar}{M_{\gamma}}\frac{\mathbf{A}_i^{\mathrm{QM}}(\mathbf{R},t)}{\mathbf{A}_j^{\mathrm{QM}}(\mathbf{R},t)}}\\
+			&\textcolor{purple}{\times\mathbf{d}_{ji}^{\gamma}(\mathbf{R})\cdot\dot{\mathbf{R}}_{\gamma}(t)\Im\bigg[\mathrm{e}^{\mathrm{i}\phi_{ij}^{\mathrm{QM}}(\mathbf{R},t)}\bigg]}\\
+			\frac{\partial\mathbf{A}_j^{\mathrm{QM}}(\mathbf{R},t)}{\partial t}=&\textcolor{purple}{-\sum_{\gamma,i\neq j}\frac{\hbar}{M_{\gamma}}\mathbf{A}_i^{\mathrm{QM}}(\mathbf{R},t)}\\
+			&\textcolor{purple}{\times\mathbf{d}_{ji}^{\gamma}(\mathbf{R})\cdot\dot{\mathbf{R}}_{\gamma}(\mathbf{R}(t))\Re\bigg[\mathrm{e}^{\mathrm{i}\phi_{ij}^{\mathrm{QM}}(\mathbf{R},t)}\bigg]}
 		\end{aligned}
 	\end{displaymath}
 	其中
@@ -3057,12 +3057,12 @@ $\mathbf{F}_{ji}(\mathbf{R})$的表达式中还包含从电子态$i$到$j$的贡
 
 \frame
 {
-	\frametitle{\textrm{TSH}方法}
+	\frametitle{\textrm{TSH}方法:~跃迁几率}
 	\textrm{Tully}给出$t$时刻统计随后$\Delta t$时间内由$j$向$i$跃迁几率的表达式
 			\begin{displaymath}
 				p_{i\leftarrow j}^{[\alpha]}(t,t+\Delta t)=-2\int_t^{t+\Delta t}\mathrm{d}\tau\frac{\Re\bigg[C_i^{[\alpha]}(\tau)C_j^{[\alpha]\ast}(\tau)\dot{\mathbf{R}}(\tau)\cdot\mathbf{d}_{ij}(\mathbf{R}(\tau))\bigg]}{C_j^{[\alpha]}(\tau)C_j^{[\alpha]\ast}(\tau)}
 			\end{displaymath}
-			实际计算中可以采用\textrm{Monte-Carlo}的思想来确定态间跃迁，比如生成随机数$\zeta\in[0,1]$，只有当满足
+			实际计算中可采用\textrm{Monte-Carlo}的思想来确定态间跃迁，比如生成随机数$\zeta\in[0,1]$，只有当满足
 			\begin{displaymath}
 				\sum_{k\leqslant i-1}p_{k\leftarrow j}^{[\alpha]}<\zeta<\sum_{k\leqslant i}p_{k\leftarrow j}^{[\alpha]}
 			\end{displaymath}
