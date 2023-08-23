@@ -2694,28 +2694,44 @@ $n$和$m$遍历全部电子占据的价带
 \frame
 {
 	\frametitle{核运动方程}
-	原子核的波函数形式
+	\textcolor{blue}{将原子核的波函数用极坐标形式表示
 	\begin{displaymath}
 		\chi(\mathbf{R},t)=A(\mathbf{R},t)\mathrm{exp}\bigg[\frac{\mathrm{i}}{\hbar}S(\mathbf{R},t)\bigg]
-	\end{displaymath}
+	\end{displaymath}}
+	$\mathbf{A}(\mathbf{R},t)$是波函数的振幅，$\mathbf{S}(\mathbf{R},t)/\hbar$是相位
+	\vskip 3pt
 	代入原子核运动方程，在经典近似下(即取$\hbar\rightarrow0$)，有
-	{\fontsize{8.2pt}{4.2pt}\selectfont{
 		\begin{displaymath}
-			\frac{\partial S(\mathbf{R},t)}{\partial t}=-\frac12\sum_{\gamma}M_{\gamma}^{-1}(\nabla_{\gamma}S(\mathbf{R},t))^2-\bigg[\int\mathrm{d}r\psi^{\ast}(\vec r,t)H_e(\vec r;\mathbf{R})\psi(\vec r,t)\bigg]
+			\frac{\partial S(\mathbf{R},t)}{\partial t}=-\frac12\sum_{\gamma}M_{\gamma}^{-1}(\nabla_{\gamma}S(\mathbf{R},t))^2\textcolor{magenta}{-\bigg[\int\mathrm{d}r\psi^{\ast}(\vec r,t)H_e(\vec r;\mathbf{R})\psi(\vec r,t)\bigg]}
 		\end{displaymath}
-		取$\mathbf{P}=\nabla_{\mathbf{R}}S(\mathbf{R})$，可有
+		这是形如经典力学下的\textrm{Hamiloton-Jacobi~(HJ)}方程
+\vskip 3pt
+		方程表明核运动的量子体系在空间的径迹，可以用$\mathbf{S}(\mathbf{R},t)$在构象空间的偏微分方程描述
+	}
+
+\frame
+{
+	\frametitle{核运动方程}
+	根据相空间中动量的定义$\mathbf{P}=\nabla_{\mathbf{R}}S(\mathbf{R})$，得到$\nabla_{\zeta}\mathbf{S}_{\zeta}=\mathbf{v}_{\zeta}$
+	\vskip 3pt
+	形如\textrm{HJ}的方程两侧对$\mathbf{R}_{\zeta}$取梯度$\nabla_{\zeta}$，并利用构象空间$(\mathbf{R},t)$中\textrm{Lagrangian}时间的全微分定义
+		\begin{displaymath}
+			\frac{\mathrm{d}}{\mathrm{d}t}\equiv\frac{\partial}{\partial t}+\sum_{\gamma}M_{\gamma}^{-1}\nabla_{\gamma}\mathbf{S}\cdot\nabla_{\gamma}
+		\end{displaymath}
+		可得到形如\textrm{Newton}方程的运动方程
 		\begin{displaymath}
 			\frac{\mathrm{d}\mathbf{P}_{\gamma}(t)}{\mathrm{d}t}=-\nabla_{\gamma}\bigg[\int\mathrm{d}\vec r\psi^{\ast}(\vec r,t)H_e(\vec r;\mathbf{R})\psi(\vec r,t)\bigg]
 		\end{displaymath}
-		或者
+		或更简单的
 		\begin{displaymath}
 			M_{\gamma}\ddot{\mathbf{R}}_{\gamma}(t)=-\nabla_{\gamma}\bigg\langle H_e(\vec r;\mathbf{R}(t))\bigg\rangle
-		\end{displaymath} }}
+		\end{displaymath} 
 }
 
 \frame
 {
 	\frametitle{电子运动方程}
+{\fontsize{8.2pt}{4.2pt}\selectfont{
 	采用\textrm{Born-Oppenheimer}近似下，原子核波函数近似为
 	\begin{displaymath}
 		|\chi(\mathbf{R},t)|^2=\prod_{\gamma}\delta(\mathbf{R}_{\gamma}-\mathbf{R}_{\gamma}(t))
@@ -2725,16 +2741,21 @@ $n$和$m$遍历全部电子占据的价带
 		\mathrm{i}\hbar\frac{\partial\psi(\vec r;\mathbf{R(t)},t)}{\partial t}=H_e(\vec r;\mathbf{R}(t))\psi(\vec r;\mathbf{R}(t),t)
 	\end{displaymath}
 	\textrm{Hamiltonian}~$H_e(\vec r;\mathbf{R}(t))$和电子波函数$\psi(\vec r;\mathbf{R(t)},t)$参数化地依赖原子核位置$\mathbf{R}(t)$，使得电子运动与原子核运动耦合
-	根据\textrm{Runge-Gross}理论，体系电子密度演化函数为
+	\vskip 3pt
+	\textcolor{purple}{很多情况下，基于\textrm{DFT/TD-DFT}框架计算核-电子运动耦合方程中电子部分的贡献是合适的选择}
+	\vskip 3pt
+	\textcolor{blue}{根据\textrm{Runge-Gross}理论，体系电子密度演化函数为
 	\begin{displaymath}
 		\mathbf{A}[\rho]=\int_{t_0}^{t_1}\mathrm{d}t\bigg\langle\psi[\rho]\bigg|\mathrm{i}\hbar\frac{\partial}{\partial t}-\hat T-H_{ee}\bigg|\psi[\rho]\bigg\rangle
-	\end{displaymath}
+	\end{displaymath}}
 	这里$H_{ee}$表示电子间相互作用，$\psi[\rho](t)$是由电荷密度确定的含时电子态波函数
+}}
 }
 
 \frame
 {
 	\frametitle{含时\textrm{Kohn-Sham}方程}
+{\fontsize{9.2pt}{4.2pt}\selectfont{
 	电荷密度随时间演化函数用单电子\textrm{Kohn-Sham}波函数表示为
 	\begin{displaymath}
 		\begin{aligned}
@@ -2755,6 +2776,7 @@ $n$和$m$遍历全部电子占据的价带
 \begin{displaymath}
 	v_{\mathrm{ext}}(\vec r,t)=-\sum_{\gamma}\frac{Z_{\gamma}}{\vec r-\mathbf{R}_{\gamma}}+\delta_{\mathrm{app}}(\vec r,t)
 \end{displaymath}
+}}
 }
 
 \frame
@@ -2762,10 +2784,10 @@ $n$和$m$遍历全部电子占据的价带
 	\frametitle{含时\textrm{Kohn-Sham}方程}
 	对交换-相关项，考虑绝热近似\footnote{\fontsize{6.2pt}{4.2pt}\selectfont{绝热近似下，交换-相关泛函不随时间变化}}
 \begin{displaymath}
-	\mathbf{A}_{\mathrm{xc}}[\rho]=\int\mathrm{d}r\int_{t_0}^{t_1}\mathrm{d}t~\rho(\vec r,t)\epsilon_{\mathrm{XC}}[\rho(\vec r)]\bigg|_{\rho(\vec r)\leftarrow\rho(\vec r,t)}
+	\mathbf{A}_{\mathrm{XC}}[\rho]=\int\mathrm{d}r\int_{t_0}^{t_1}\mathrm{d}t~\rho(\vec r,t)\epsilon_{\mathrm{XC}}[\rho(\vec r)]\bigg|_{\rho(\vec r)\leftarrow\rho(\vec r,t)}
 \end{displaymath}
 
-此外，如果用静态\textrm{kohn-Sham}轨道来展开\textrm{TDKS}轨道，有
+另外一种基于\textrm{DFT/TD-DFT}框架求解电子运动方程的方案，是用静态\textrm{Kohn-Sham}轨道$\{\phi_p^{\mathrm{opt}}(\vec r;\mathbf{R}(t))\}$来展开\textrm{TDKS}轨道，有
 \begin{displaymath}
 	\phi_i(\vec r,t)=\sum_{j}^{\infty}c_{ip}(t)\phi_p^{\mathrm{opt}}(\vec r;\mathbf{R}(t))
 \end{displaymath}
@@ -2831,7 +2853,7 @@ $\mathbf{F}_{ji}(\mathbf{R})$的表达式中还包含从电子态$i$到$j$的贡
 	\end{displaymath}
 	$\mathbf{F}_{jj}(\mathbf{R})$一般比较小，可以忽略
 
-如果取核波函数为
+	与\textrm{Ehrenfest-MD}中类似，如果取核波函数表示为极坐标形式
 \begin{displaymath}
 	\chi_j(\mathbf{R},t)=\mathbf{A}_j(\mathbf{R},t)\mathrm{exp}\bigg[\frac{\mathrm{i}}{\hbar}\mathbf{S}_j(\mathbf{R},t)\bigg]
 \end{displaymath}
@@ -2930,31 +2952,129 @@ $\mathbf{F}_{ji}(\mathbf{R})$的表达式中还包含从电子态$i$到$j$的贡
 	\end{itemize}
 }
 
-%\frame
-%{
-%	\frametitle{\textrm{TSH}方法}
-%{\fontsize{7.2pt}{4.2pt}\selectfont{
-%	\textrm{Tully}等将上述精确表达式保留到$\mathcal{O}(\hbar)$到一阶则有
-%	\begin{displaymath}
-%		\begin{aligned}
-%			\frac{\partial\mathbf{S}_j(\mathbf{R},t)}{\partial t}=&\sum_{\gamma}\frac1{2M_{\gamma}}(\nabla_{\gamma}\mathbf{S}_j(\mathbf{R},t))^2+E_j^{e}(\mathbf{R})\\
-%			&\textcolor{purple}{+\sum_{\gamma,i\neq j}\frac{\hbar}{M_{\gamma}}\frac{\mathbf{A}_j(\mathbf{R},t)}{\mathbf{A}_j(\mathbf{R},t)}\mathbf{d}_{ji}^{\gamma}(\mathbf{R})\cdot\nabla_{\gamma}\mathbf{S}_i(\mathbf{R},t)\times\Im\bigg[\mathrm{e}^{\mathrm{i}\phi_{ij}(\mathbf{R},t)}\bigg]}\\
-%			\frac{\partial\mathbf{A}_j(\mathbf{R},t)}{\partial t}=&-\sum_{\gamma}\frac{\hbar}{M_{\gamma}}\nabla_{\gamma}\mathbf{A}_j(\mathbf{R},t)\cdot\nabla_{\gamma}\mathbf{S}_j(\mathbf{R},t)\\
-%			&-\sum_{\gamma}\frac{\hbar}{2M_{\gamma}}\mathbf{A}_j(\mathbf{R},t)\nabla_{\gamma}^2\mathbf{S}(\mathbf{R},t)\\
-%			&\textcolor{purple}{-\sum_{\gamma,i\neq j}\frac{\hbar}{M_{\gamma}}\mathbf{A}_i(\mathbf{R},t)\mathbf{d}_{ji}^{\gamma}(\mathbf{R})\cdot\nabla_{\gamma}\mathbf{S}_i(\mathbf{R},t)\times\Re\bigg[\mathrm{e}^{\mathrm{i}\phi_{ij}(\mathbf{R},t)}\bigg]}
-%		\end{aligned}
-%	\end{displaymath}
-%	被称为\textrm{Trajectory Surface-Hopping~(TSH)}方法，介于完全绝热近似和完全精确的\textrm{NABDY}方法之间
-%	\begin{itemize}
-%		\item 每个电子态 下, 核动力学可以分为经典分量和量子分量%分别由对应的相位和振幅描述
-%		\item \textrm{Tully}引入跃迁几率$P_{i\leftarrow j}^{[\alpha]}$，
-%%			\begin{displaymath}
-%%				
-%%			\end{displaymath}<++>
-%			使得经典振幅和量子振幅的平方一致
-%	\end{itemize}
-%}}
-%}
+\frame
+{
+	\frametitle{\textrm{TSH}方法}
+{\fontsize{8.2pt}{4.2pt}\selectfont{
+	\textrm{Tully}等将上述精确表达式保留到$\mathcal{O}(\hbar)$到一阶则有
+	\begin{displaymath}
+		\begin{aligned}
+			\frac{\partial\mathbf{S}_j(\mathbf{R},t)}{\partial t}=&\sum_{\gamma}\frac1{2M_{\gamma}}(\nabla_{\gamma}\mathbf{S}_j(\mathbf{R},t))^2+E_j^{e}(\mathbf{R})\\
+			&\textcolor{purple}{+\sum_{\gamma,i\neq j}\frac{\hbar}{M_{\gamma}}\frac{\mathbf{A}_i(\mathbf{R},t)}{\mathbf{A}_j(\mathbf{R},t)}\mathbf{d}_{ji}^{\gamma}(\mathbf{R})\cdot\nabla_{\gamma}\mathbf{S}_i(\mathbf{R},t)\times\Im\bigg[\mathrm{e}^{\mathrm{i}\phi_{ij}(\mathbf{R},t)}\bigg]}\\
+			\frac{\partial\mathbf{A}_j(\mathbf{R},t)}{\partial t}=&-\sum_{\gamma}\frac{\hbar}{M_{\gamma}}\nabla_{\gamma}\mathbf{A}_j(\mathbf{R},t)\cdot\nabla_{\gamma}\mathbf{S}_j(\mathbf{R},t)\\
+			&-\sum_{\gamma}\frac{\hbar}{2M_{\gamma}}\mathbf{A}_j(\mathbf{R},t)\nabla_{\gamma}^2\mathbf{S}_j(\mathbf{R},t)\\
+			&\textcolor{purple}{-\sum_{\gamma,i\neq j}\frac{\hbar}{M_{\gamma}}\mathbf{A}_i(\mathbf{R},t)\mathbf{d}_{ji}^{\gamma}(\mathbf{R})\cdot\nabla_{\gamma}\mathbf{S}_i(\mathbf{R},t)\times\Re\bigg[\mathrm{e}^{\mathrm{i}\phi_{ij}(\mathbf{R},t)}\bigg]}
+		\end{aligned}
+	\end{displaymath}
+	被称为\textrm{Trajectory Surface-Hopping~(TSH)}方法
+	\vskip 5pt
+	\textrm{TSH}方法是介于完全绝热近似和完全精确的\textrm{NABDY}方法之间的处理方案
+}}
+}
+
+\frame
+{
+	\frametitle{\textrm{TSH}方法:~经典部分}
+{\fontsize{8.2pt}{4.2pt}\selectfont{
+	\textcolor{blue}{核体系演化过程的经典部分}构成构象空间$(\mathbf{R},t)$的轨迹\textrm{(trajectory)}
+
+	在\textrm{TSH}方法中，$\mathbf{S}_j(\mathbf{R},t)$可以视为作用量，因此体系的轨迹由最小作用原理确定，即$\mathbf{S}(\mathbf{R},\mathbf{P},t)=0$，与经典力学的相空间描述类似，假设不同初始态对应的粒子演化轨迹彼此独立(轨迹独立假设，\textrm{ITA})，因此核波函数的密度可用穿过单位空间微元的轨迹数量的比例来计算，即
+	\begin{displaymath}
+		\bigg(\mathbf{A}_j^{\mathrm{CL}}(\mathbf{R}(t),t)\bigg)^2=\frac{N_j(\mathbf{R}(t),\mathrm{d}V,t)}{N_t}\frac1{\mathrm{d}V}
+	\end{displaymath}
+	其中$N_j(\mathbf{R}(t),\mathrm{d}V,t)$表示穿过体积微元$\mathrm{d}V\equiv\mathrm{d}^{3N_n}\mathbf{R}$的径迹总数
+	\vskip 3pt
+	\textcolor{blue}{注意:~这里给出的核经典轨迹由与非绝热耦合系数$\mathbf{d}_{ji}^{\gamma}(\mathbf{R}(t))$无关部分确定}，因此可有
+	\begin{displaymath}
+		\begin{aligned}
+			-\frac{\partial\mathbf{S}_j^{\mathrm{CL}}(\mathbf{R},t)}{\partial t}=&\sum_{\gamma}\frac1{2M_{\gamma}}(\nabla_{\gamma}\mathbf{S}_j(\mathbf{R},t))^2+E_j^{e}(\mathbf{R})\\
+			\frac{\partial\mathbf{A}_j^{\mathrm{CL}}(\mathbf{R},t)}{\partial t}=&-\sum_{\gamma}\frac1{M_{\gamma}}\nabla_{\gamma}\mathbf{A}_j^{\mathrm{CL}}(\mathbf{R},t)\cdot\nabla_{\gamma}\mathbf{S}_j^{\mathrm{CL}}(\mathbf{R},t)\\
+			&-\sum_{\gamma}\frac1{2M_{\gamma}}\mathbf{A}_j^{\mathrm{CL}}(\mathbf{R},t)\nabla_{\gamma}^2\mathbf{S}_j^{\mathrm{CL}}(\mathbf{R},t)
+		\end{aligned}
+	\end{displaymath}
+}}
+}
+
+\frame
+{
+	\frametitle{\textrm{TSH}方法:~经典部分}
+	上述方程确定了核运动的作用量经典部分$\mathbf{S}_j^{\mathrm{CL}}(\mathbf{R},t)$和振幅的经典部分$\mathbf{A}_j^{\mathrm{CL}}(\mathbf{R},t)$的演化过程，不难看出其与\textrm{Newton}运动方程等价
+\begin{displaymath}
+	\frac{\mathrm{d}\mathbf{P}_j^{\beta}(t)}{\mathrm{d}t^j}=-\nabla_{\beta}E_j^{e}(\mathbf{R}(t))
+\end{displaymath}
+其中
+\begin{displaymath}
+	\mathbf{P}_j(t)=\nabla\mathbf{S}_j^{\mathrm{CL}}(\mathrm{R},t)|_{\mathbf{R}(t)}
+\end{displaymath}
+
+\textcolor{red}{在此基础上，考虑非绝热耦合项的贡献，原子核将沿经典轨迹运动时感受到量子效应引起的附加力}
+
+这种附件作用会使得经典概率密度$\bigg(A_j^{\mathrm{CL}}(\mathbf{R}(t),t)\bigg)^2$在电子态间传播(即体系可以在不同势能面之间跃迁)
+}
+
+\frame
+{
+	\frametitle{\textrm{TSH}方法:~量子部分}
+{\fontsize{8.2pt}{4.2pt}\selectfont{
+	定义核运动的量子相位$\mathbf{S}_i^{\mathrm{QM}}(\mathbf{R}(t),t)$和量子振幅$\mathbf{A}_j^{\mathrm{QM}}(\mathbf{R}(t),t)$，其演化方程由非决人耦合项贡献确定，即
+	\begin{displaymath}
+		\begin{aligned}
+			-\frac{\partial\mathbf{S}_j^{\mathrm{QM}}(\mathbf{R},t)}{\partial t}=&E_j^{e}(\mathbf{R})\textcolor{purple}{+\sum_{\gamma,i\neq j}\frac{\hbar}{M_{\gamma}}\frac{\mathbf{A}_i^{\mathrm{QM}}(\mathbf{R},t)}{\mathbf{A}_j^{\mathrm{QM}}(\mathbf{R},t)}\\
+			&\times\mathbf{d}_{ji}^{\gamma}(\mathbf{R})\cdot\dot{\mathbf{R}}_{\gamma}(t)\Im\bigg[\mathrm{e}^{\mathrm{i}\phi_{ij}^{\mathrm{QM}}(\mathbf{R},t)}\bigg]}\\
+			\frac{\partial\mathbf{A}_j^{\mathrm{QM}}(\mathbf{R},t)}{\partial t}=&\textcolor{purple}{-\sum_{\gamma,i\neq j}\frac{\hbar}{M_{\gamma}}\mathbf{A}_i^{\mathrm{QM}}(\mathbf{R},t)\\
+			&\times\mathbf{d}_{ji}^{\gamma}(\mathbf{R})\cdot\dot{\mathbf{R}}_{\gamma}(\mathbf{R}(t))\Re\bigg[\mathrm{e}^{\mathrm{i}\phi_{ij}^{\mathrm{QM}}(\mathbf{R},t)}\bigg]}
+		\end{aligned}
+	\end{displaymath}
+	其中
+	\begin{displaymath}
+		\phi_{ij}^{\mathrm{QM}}(\mathbf{R(t)},t)=\frac1{\hbar}\bigg(\mathbf{S}_i^{\mathrm{QM}}(\mathbf{R}(t),t)-\mathbf{S}_j^{\mathrm{QM}}(\mathbf{R}(t),t)\bigg)
+	\end{displaymath}
+	这是极坐标形式下的\textrm{Tully-TSH}方程
+}}
+}
+
+\frame
+{
+	\frametitle{\textrm{TSH}方法:~量子部分}
+	定义
+\begin{displaymath}
+	C_j(\mathbf{R}(t),t)=\mathbf{A}_j^{\mathrm{QM}}(\mathbf{R}(t),t)\mathrm{exp}\bigg[\frac{\mathrm{i}}{\hbar}\mathbf{S}_j^{\mathrm{QM}}(\mathbf{R}(t),t)\bigg]
+\end{displaymath}
+则有
+\begin{displaymath}
+	\begin{aligned}
+		\mathrm{i}\hbar\frac{\partial C_j(\mathrm{R}(t),t)}{\partial t}=&C_j(\mathbf{R}(t),t)E_n^{e}(\mathbf{R}(t))\\
+		&-\mathrm{i}\hbar\sum_i(\mathbf{d_{ji}}(\mathbf{R}(t)))\cdot\dot{\mathbf{R}}(t)C_i(\mathbf{R}(t,t))
+	\end{aligned}
+\end{displaymath}
+严格说，量子相位$\mathbf{S}_j^{\mathrm{QM}(\mathbf{R}(t),t)}$，量子振幅$\mathbf{A}_j^{\mathrm{QM}(\mathbf{R}(t),t)}$ 和$C_j(\mathbf{R}(t,t))$都不是经典构象空间$(\mathbf{R},t)$的描述量，然而它们依然可以近似与经典轨迹相对应
+
+在\textrm{TSH}动力学中，经典部分和量子部分的方程同时求解，并认为只要统计轨迹足够多，将有
+\begin{displaymath}
+	\bigg(\mathbf{A}_j^{\mathrm{CL}}(\mathbf{R},t),t\bigg)^2=\bigg(\mathbf{A}_j^{\mathrm{QM}}(\mathbf{R},t),t\bigg)^2
+\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{\textrm{TSH}方法}
+	\textrm{Tully}给出$t$时刻统计随后$\Delta t$时间内由$j$向$i$跃迁几率的表达式
+			\begin{displaymath}
+				p_{i\leftarrow j}^{[\alpha]}(t,t+\Delta t)=-2\int_t^{t+\Delta t}\mathrm{d}\tau\frac{\Re\bigg[C_i^{[\alpha]}(\tau)C_j^{[\alpha]\ast}(\tau)\dot{\mathbf{R}}(\tau)\cdot\mathbf{d}_{ij}(\mathbf{R}(\tau))\bigg]}{C_j^{[\alpha]}(\tau)C_j^{[\alpha]\ast}(\tau)}
+			\end{displaymath}
+			实际计算中可以采用\textrm{Monte-Carlo}的思想来确定态间跃迁，比如生成随机数$\zeta\in[0,1]$，只有当满足
+			\begin{displaymath}
+				\sum_{k\leqslant i-1}p_{k\leftarrow j}^{[\alpha]}<\zeta<\sum_{k\leqslant i}p_{k\leftarrow j}^{[\alpha]}
+			\end{displaymath}
+			会认为体系中出现$j$向$i(i\neq j)$的跃迁
+			\vskip 5pt
+			\textrm{TSH}是严格的\textrm{NABDY}的基础上引入假设:
+	\begin{itemize}
+		\item 每个电子态$j$下, 核动力学可以分为经典分量和量子分量%分别由对应的相位和振幅描述
+		\item \textrm{Tully}引入跃迁几率$P_{i\leftarrow j}^{[\alpha]}$，
+			使得经典振幅和量子振幅的平方一致
+	\end{itemize}
+}
 %------------------------------------------------------------------------Reference----------------------------------------------------------------------------------------------
 		\frame[allowframebreaks]
 {
