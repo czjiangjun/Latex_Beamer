@@ -105,7 +105,7 @@ $$\Psi_l^{>}(\varepsilon,r)=C_l\bigg[j_l(\kappa r)-\tan\eta_l(\varepsilon)n_l(\k
 	\frametitle{散射相移与赝势}
 \begin{figure}[h!]
 \centering
-\vspace*{-0.25in}
+\vspace*{-0.20in}
 \includegraphics[height=1.20in,width=1.77in,viewport=0 0 1150 750,clip]{Figures/Pseudo-scatter-2.png}
 \caption{\fontsize{4.5pt}{3.2pt}\selectfont{\textrm{Radial wave-function $\phi=r\psi$ for low-energy scattering as illustrated in a figure from the 1934 and 1935 papers of Fermi and coworkers for low-energy electron scattering from atoms and neutron scattering from nuclei. The node in the wave-function near the origin show that the potential is attractive and strong enough to have bound states. The cross-section for scattering from the localized potential is determined by the phase shift and is the same for weaker pseudo-potential with the same phase shift modulo $2\pi$.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Pseudo-scatter-2}
@@ -144,12 +144,12 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 \frame
 {
 	\frametitle{由\textrm{OPW~}到赝势}
-	\textrm{Phillips-Kleinman}指出，赝势($V^{e\!f\!f}$)-赝波函数(可用$\phi_{PW}^{\vec k+\vec G}$展开)满足\textrm{Schr\"odinger}方程%\upcite{PR116-287_1959}
-	$$\bigg(-\dfrac12\nabla^2+\textcolor{red}{V^{e\!f\!f}}\bigg)|\tilde{\phi}_v\rangle=\textcolor{blue}{\varepsilon_v}|\tilde{\phi}_v\rangle$$
-	其中$\textcolor{red}{V^{e\!f\!f}}=V(\vec r)+\textcolor{blue}{V^R}$
+	\textrm{Phillips-Kleinman}指出，赝势($V^{\mathrm {eff}}$)-赝波函数(可用$\phi_{PW}^{\vec k+\vec G}$展开)满足\textrm{Schr\"odinger}方程%\upcite{PR116-287_1959}
+	$$\bigg(-\dfrac12\nabla^2+\textcolor{red}{V^{\mathrm {eff}}}\bigg)|\tilde{\phi}_v\rangle=\textcolor{blue}{\varepsilon_v}|\tilde{\phi}_v\rangle$$
+	其中$\textcolor{red}{V^{\mathrm {eff}}}=V(\vec r)+\textcolor{blue}{V^R}$
 	\begin{itemize}
-		\item 赝势-赝波函数的本征值$\varepsilon_v$与真实体系的价电子能量本征值等价
-		\item 赝势$\textcolor{red}{V^{e\!f\!f}}$比$V(\vec r)$平滑得多，并且$\textcolor{blue}{V^R}$是非局域的排斥势
+		\item 赝势-赝波函数的本征值$\varepsilon_v$与真实体系的价电子能量本征值\textcolor{purple}{相等}
+		\item 赝势$\textcolor{red}{V^{\mathrm {eff}}}$比$V(\vec r)$平滑得多，并且$\textcolor{blue}{V^R}$是非局域的排斥势
 			\begin{displaymath}
 				\begin{aligned}
 					\textcolor{blue}{V^R}f(\vec r)=&\sum_c(\varepsilon_v-\varepsilon_c)\varphi_c(\vec r)\int\varphi_c^{\ast}(\vec r^{\prime})f(\vec r^{\prime})\mathrm{d}\vec r^{\prime} \\
@@ -187,12 +187,12 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 \frame
 {
 	\frametitle{由\textrm{OPW~}到赝势}
-	\textrm{Phillips-Kleinman}指出，赝势($V^{e\!f\!f}$)-赝波函数(可用$\phi_{PW}^{\vec k+\vec G}$展开)满足\textrm{Schr\"odinger}方程%\upcite{PR116-287_1959}
-	$$\bigg(-\dfrac12\nabla^2+\textcolor{red}{V^{e\!f\!f}}\bigg)|\tilde{\phi}_v\rangle=\textcolor{blue}{\varepsilon_v}|\tilde{\phi}_v\rangle$$
-	其中$\textcolor{red}{V^{e\!f\!f}}=V(\vec r)+\textcolor{blue}{V^R}$
+	\textrm{Phillips-Kleinman}指出，赝势($V^{\mathrm {eff}}$)-赝波函数(可用$\phi_{PW}^{\vec k+\vec G}$展开)满足\textrm{Schr\"odinger}方程%\upcite{PR116-287_1959}
+	$$\bigg(-\dfrac12\nabla^2+\textcolor{red}{V^{\mathrm {eff}}}\bigg)|\tilde{\phi}_v\rangle=\textcolor{blue}{\varepsilon_v}|\tilde{\phi}_v\rangle$$
+	其中$\textcolor{red}{V^{\mathrm {eff}}}=V(\vec r)+\textcolor{blue}{V^R}$
 	\begin{itemize}
 		\item 赝势-赝波函数的本征值$\varepsilon_v$与真实体系的价电子能量本征值等价
-		\item 赝势$\textcolor{red}{V^{e\!f\!f}}$比$V(\vec r)$平滑得多，并且$\textcolor{blue}{V^R}$是非局域的排斥势
+		\item 赝势$\textcolor{red}{V^{\mathrm {eff}}}$比$V(\vec r)$平滑得多，并且$\textcolor{blue}{V^R}$是非局域的排斥势
 			\begin{displaymath}
 				\begin{aligned}
 					\textcolor{blue}{V^R}f(\vec r)=&\sum_c(\varepsilon_v-\varepsilon_c)\varphi_c(\vec r)\int\varphi_c^{\ast}(\vec r^{\prime})f(\vec r^{\prime})\mathrm{d}\vec r^{\prime} \\
@@ -261,7 +261,7 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 	\frametitle{第一原理赝势}
 		由第一原理求解出全电子波函数(径向部分)$P_{n,l}(r)$
 			\begin{displaymath}
-				\bigg[-\dfrac12\dfrac{\mathrm{d}^2}{\mathrm{d}r^2}+\dfrac{l(l+1)}{2r^2}+V(\rho,r)\bigg]P_{n,l}(r)=\varepsilon_{n,l}P_{n,l}(r)
+				\bigg[-\dfrac12\dfrac{\mathrm{d}^2}{\mathrm{d}r^2}\textcolor{blue}{+\dfrac{l(l+1)}{2r^2}}+V(\rho,r)\bigg]P_{n,l}(r)=\varepsilon_{n,l}P_{n,l}(r)
 			\end{displaymath}
 			这里$V(\rho,r)$是自洽单电子势
 			$$V(\rho,r)=-\frac{Z}r+V_{\mathrm H}(\rho,r)+V_{XC}^{\mathrm{LDA}}(\rho(r))$$
@@ -270,7 +270,7 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 			由此构造赝波函数$P_l^{\mathrm{PP}}(r)$，满足
 			$$P_l^{\mathrm{PP}}(r)=P_l^{\mathrm{AE}}(r),\quad r>r_{cl}$$
 			进而构造赝势$V_{\mathrm{src},l}^{\mathrm{PP}}(r)$
-			$$V_{\mathrm{src},l}^{\mathrm{PP}}(r)=\varepsilon_l-\dfrac{l(l+2)}{2r^2}+\dfrac{1}{2P_l^{\mathrm{PP}}(r)}\dfrac{\mathrm{d}^2}{\mathrm{d}r^2}P_l^{\mathrm{AE}}(r),\quad r>r_{cl}$$
+			$$V_{\mathrm{src},l}^{\mathrm{PP}}(r)=\varepsilon_l\textcolor{red}{-\dfrac{l(l+2)}{2r^2}}+\dfrac{1}{2P_l^{\mathrm{PP}}(r)}\dfrac{\mathrm{d}^2}{\mathrm{d}r^2}P_l^{\mathrm{AE}}(r),\quad r>r_{cl}$$
 }
 
 \frame
@@ -303,19 +303,60 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 \subsection{可分离赝势与\rm{Ghost~band}}
 \frame
 {
+\frametitle{角动量$l$相关赝势}
+由原子赝波函数(径向部分)构造赝势类似于求解类\textrm{H}原子波函数
+
+赝原子波函数的径向部分是轨道角动量依赖的
+\begin{displaymath}
+	\psi_l^{\mathrm{PS}}(r)=r\phi_l^{\mathrm{PS}}(r)
+\end{displaymath}
+因此得到赝势函数(径向部分)$V_l(r)$也是角动量依赖的
+
+为提高赝势的可移植性，减少构造赝势对环境的依赖，需要对其进行``去屏蔽''
+\begin{displaymath}
+	V_l(r)\equiv=V_{l,src}^{\mathrm{PP}}-V_{\mathrm{Hartree}}^{\mathrm{PP}}(r)+V_{\mathrm{XC}^{PP}}(r)
+\end{displaymath}
+
+实际应用时习惯将赝势(径向部分)分解为\textcolor{blue}{局域部分(与角动量$l$无关)}和\textcolor{red}{非局域部分}
+\begin{displaymath}
+	V_l(r)=V_{\mathrm{local}}(r)+\delta V_l(\vec r)
+\end{displaymath}
+\textcolor{magenta}{考虑角度部分后，角动量$l$相关的赝势$\delta V_l$将是半局域
+\begin{displaymath}
+	V_{\mathrm{SL}}=V_{\mathrm{local}}(r)+\sum_{lm}|Y_{lm}\rangle\delta V_l\langle Y_{lm}|
+\end{displaymath}}
+}
+
+\frame
+{
 	\frametitle{非局域赝势的变量分离}
-	\textrm{Kleinman-Bylander}提出了非局域赝势的变量分离的近似方案\footnote{即$\delta V(\vec r,\vec r^{\prime})$可以写成$\delta V(\vec r,\vec r^{\prime})=\sum_{i}f_i(\vec r)g_i(\vec r^{\prime})$的形式}:~\\
+	\textrm{Kleinman-Bylander}提出了非局域赝势的变量分离的近似方案\footnote{\fontsize{6.2pt}{5.2pt}\selectfont{即$\delta V(\vec r,\vec r^{\prime})$可以写成$\delta V(\vec r,\vec r^{\prime})=\sum_{i}f_i(\vec r)g_i(\vec r^{\prime})$的形式}}:~\\
 %	引入分离算符$\delta V^{\mathrm{NL}}$满足
-	{\fontsize{7.2pt}{5.2pt}\selectfont{如果选择适当的局域函数$V_{\mathrm{local}}^{\mathrm{PP}}(r)$，赝势将可分解为局域部分与非局域部分之和:
-	$$\hat V_{\mathrm{NL}}^{\mathrm{PP}}(r)=V_{\mathrm{local}}^{\mathrm{PP}}(r)+\sum_{lm}\dfrac{|\psi_{lm}^{\mathrm{PP}}\delta V_l\rangle\langle\delta V_l\psi_{lm}^{\mathrm{PP}}|}{\langle\psi_{lm}^{\mathrm{PP}}|\delta V_l|\psi_{lm}^{\mathrm{PP}}\rangle}$$ 
-	\textcolor{magenta}{$\langle\delta V_l(r)\psi_{lm}^{\mathrm{PP}}|$是投影子}，这种分解称为\textrm{factored pseudo-potential}，方便数值计算
-\vskip 10pt
+	如果选择适当的局域函数$V_{\mathrm{local}}^{\mathrm{PP}}(r)$，赝势将可分解为局域部分与非局域部分之和:
+	$$\hat V_{\mathrm{NL}}^{\mathrm{PP}}(r)=V_{\mathrm{local}}^{\mathrm{PP}}(r)+\sum_{lm}\dfrac{|\psi_{lm}^{\mathrm{PS}}\delta V_l\rangle\langle\delta V_l\psi_{lm}^{\mathrm{PS}}|}{\langle\psi_{lm}^{\mathrm{PS}}|\delta V_l|\psi_{lm}^{\mathrm{PS}}\rangle}$$ 
+	\textcolor{magenta}{$\langle\delta V_l(r)\psi_{lm}^{\mathrm{PP}}|$是投影子}，这种分解称为\textrm{factored pseudo-potential}
+	\begin{displaymath}
+		\langle\delta V_l\psi_{lm}^{\mathrm{PS}}|\psi\rangle=\int\mathrm{d}\vec r\delta V_l(r)\psi_{lm}^{\mathrm{PS}}(\vec r)\psi(\vec r)
+	\end{displaymath}
+	\textcolor{blue}{投影函数局域在截断半径内}，该区域内$\delta V_l$有非零值
+\begin{itemize}
+	\item \textcolor{blue}{投影函数的存在，保证了即使非束缚态也可以作为赝波函数}
+\end{itemize}
+}
+
+\frame
+{
+	\frametitle{非局域赝势的变量分离}
+	应用投影函数，非局域赝势矩阵元的计算也变得更方便
+	\begin{displaymath}
+		\langle\psi_i|\delta V_{\mathrm{NL}}|\psi_j\rangle=\sum_{lm}\langle\psi_i|\psi_{lm}^{\mathrm{PS}}\delta V_l\rangle\frac1{\langle\psi_{lm}^{\mathrm{PS}}|\delta V_l|\psi_{lm}^{\mathrm{PS}}\rangle}\langle\delta V_l\psi_{lm}^{\mathrm{PS}}|\psi_j\rangle
+	\end{displaymath}
 	更一般地，如果允许赝势局域部分$V_{\mathrm{local}}^{\mathrm{PP}}(r)$为任意函数，则可定义辅助函数
-	$$\chi_{lm}^{\mathrm{PP}}(\vec r)=\bigg\{\varepsilon_l-\bigg[-\dfrac12\nabla^2+V_{\mathrm{local}}^{\mathrm{PP}}(\vec r)\bigg]\bigg\}\psi_{lm}^{\mathrm{PP}}(\vec r)$$
+	$$\chi_{lm}^{\mathrm{PS}}(\vec r)=\bigg\{\varepsilon_l-\bigg[-\dfrac12\nabla^2+V_{\mathrm{local}}^{\mathrm{PP}}(\vec r)\bigg]\bigg\}\psi_{lm}^{\mathrm{PS}}(\vec r)$$
 	于是赝势的非局域部分可表示为
-	$$\delta V_{\mathrm{NL}}=\sum_{lm}\dfrac{|\chi_{lm}^{\mathrm{PP}}\rangle\langle\chi_{lm}^{\mathrm{PP}}|}{\langle\chi_{lm}^{\mathrm{PP}}|\psi_{lm}^{\mathrm{PP}}\rangle}$$
+	$$\delta V_{\mathrm{NL}}=\sum_{lm}\dfrac{|\chi_{lm}^{\mathrm{PS}}\rangle\langle\chi_{lm}^{\mathrm{PS}}|}{\langle\chi_{lm}^{\mathrm{PS}}|\psi_{lm}^{\mathrm{PS}}\rangle}$$
+
 但是$V_{\mathrm{local}}^{\mathrm{PP}}(r)$选择的随意性，将增加计算结果出现\textrm{Ghost~band}的风险
-}}
 }
 
 \frame
@@ -618,6 +659,18 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 \subsection{\rm{VASP}中的\rm{PAW~}原子数据集}
 \frame
 {
+%	\frametitle{\textrm{PAW}原子数据集}
+	\frametitle{\textrm{PAW Augmentation}}
+\begin{figure}[h!]
+\centering
+\includegraphics[height=2.3in,width=4.0in,viewport=0 0 1280 745,clip]{Figures/PAW-baseset.png}
+\caption{\tiny \textrm{The Augmentation of PAW.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{PAW_baseset}
+\end{figure}
+}
+
+\frame
+{
 	\frametitle{\textrm{PAW}原子数据集}
 	平滑赝原子分波函数
 	\begin{displaymath}
@@ -639,8 +692,8 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 \frame
 {
 	\frametitle{\textrm{VASP}中的\textrm{PAW}原子数据集}
-	\textcolor{blue}{构造原子局域赝势$\tilde v_{e\!f\!f}^a$}(\textcolor{red}{为防止\textrm{ghost band}}):\\在截断半径$r_{loc}$内的定义为
-	$$\tilde v_{e\!f\!f}^a=A\dfrac{\sin(q_{loc}r)}r\quad r<r_{loc}$$
+	\textcolor{blue}{构造原子局域赝势$\tilde v_{\mathrm {eff}}^a$}(\textcolor{red}{为防止\textrm{ghost band}}):\\在截断半径$r_{loc}$内的定义为
+	$$\tilde v_{\mathrm {eff}}^a=A\dfrac{\sin(q_{loc}r)}r\quad r<r_{loc}$$
 	其中$q_{loc}$和$A$要求局域赝势在截断半径$r_{loc}$处连续到一阶导数
 
 	\textcolor{blue}{构造赝芯电荷密度$\tilde n_c$}:~在截断半径$r_{pc}$内的定义为
@@ -648,7 +701,7 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 	调节系数$q_i$和$B_i$使得赝芯电荷密度$\tilde n_c(r)$在截断半径$r_{pc}$处的两阶导数连续
 
 	局域离子赝势$v_H[\tilde n_{Zc}]$可由原子局域赝势去屏蔽得到
-	$$v_H[\tilde n_{Zc}]=\tilde v_{e\!f\!f}^a-v_H[\tilde n_a^1+\hat n_a]-v_{\mathrm{XC}}[\tilde n_a^1+\hat n_a+\tilde n_c]$$
+	$$v_H[\tilde n_{Zc}]=\tilde v_{\mathrm {eff}}^a-v_H[\tilde n_a^1+\hat n_a]-v_{\mathrm{XC}}[\tilde n_a^1+\hat n_a+\tilde n_c]$$
 	在\textrm{VASP}的\textrm{POTCAR}生成过程中，各截断半径的确定条件
 	$r_{rad}=\max({r_c^l})$,$r_{pc}\approx r_{rad}/1.2$,$r_{loc}<r_{rad}/1.2$
 }
@@ -667,14 +720,12 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 
 \frame
 {
-	\frametitle{赝势方法发展概要}
+	\frametitle{几种赝势方法的关系}
 \begin{figure}[h!]
 \centering
-\vspace*{-0.25in}
-%\hspace*{-0.80in}
-\includegraphics[height=2.80in,width=4.10in,viewport=0 0 1190 875,clip]{Figures/Pseudo_Potential.png}
-%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{Pseudo_Poential}
+\includegraphics[height=1.0in,width=4.1in,clip]{Figures/Pseudo-Potential.png}
+\caption{\tiny \textrm{The relation of Pseudo potential and PAW.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Pseudo_Potential_PAW}
 \end{figure}
 }
 
@@ -768,8 +819,8 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 	\end{displaymath}
 	这里$$p(r)=\sum_{m=0}^6C_mr^{2m}$$
 	可得赝势 
-	$$V_{e\!f\!f}^{PS}(r)=\epsilon_l+\dfrac{\hbar^2}{2m}\bigg(\dfrac{\mathrm{d}^2p}{\mathrm{d}r^2}+(\dfrac{\mathrm{d}p}{\mathrm{d}r})^2+\dfrac{2(L_v+1)}r\dfrac{\mathrm{d}p}{\mathrm{d}r}\bigg)$$
-	于是赝\textrm{Hamiltonian}是$\tilde H(r)=-\dfrac{\hbar^2}{2m}\nabla^2+V_{e\!f\!f}^{PS}(r)$
+	$$V_{\mathrm {eff}}^{PS}(r)=\epsilon_l+\dfrac{\hbar^2}{2m}\bigg(\dfrac{\mathrm{d}^2p}{\mathrm{d}r^2}+(\dfrac{\mathrm{d}p}{\mathrm{d}r})^2+\dfrac{2(L_v+1)}r\dfrac{\mathrm{d}p}{\mathrm{d}r}\bigg)$$
+	于是赝\textrm{Hamiltonian}是$\tilde H(r)=-\dfrac{\hbar^2}{2m}\nabla^2+V_{\mathrm {eff}}^{PS}(r)$
 	\end{itemize}
 }
 \frame
@@ -789,7 +840,7 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 	\end{displaymath}
 	与\textrm{Troullier-Martin NC}方案类似，逆向求解本征方程得到有效赝势
 		\item \textrm{Bessel}方案\\
-			直接构造有效赝势 $V_{e\!f\!f}^{PS}(r)=\alpha\cdot\dfrac{\sin(q\cdot r)}r$
+			直接构造有效赝势 $V_{\mathrm {eff}}^{PS}(r)=\alpha\cdot\dfrac{\sin(q\cdot r)}r$
 	\end{itemize}
 }
 
@@ -840,7 +891,7 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 			\right.
 	\end{displaymath}
 	构造赝分波的辅助函数
-	$$\chi_l(r)=\bigg(\epsilon_l+\dfrac{\hbar^2}{2m}(\dfrac{\mathrm{d}^2}{\mathrm{d}r^2})-\dfrac{l(l+1)}{r^2}-V_{e\!f\!f}^{PS}(r)\bigg)\tilde\phi_l(r)$$
+	$$\chi_l(r)=\bigg(\epsilon_l+\dfrac{\hbar^2}{2m}(\dfrac{\mathrm{d}^2}{\mathrm{d}r^2})-\dfrac{l(l+1)}{r^2}-V_{\mathrm {eff}}^{PS}(r)\bigg)\tilde\phi_l(r)$$
 	和变换矩阵$\mathbf{B}$(其矩阵元$B_{ij}=\int_0^{r_c}\mathrm{d}r\tilde\phi_i(r)\chi_j(r)$)\\
 	由此得到投影子函数$\tilde p_i(\vec r)=\sum\limits_{j}\chi_j(r)(\mathbf{B^{-1}})_{ji}$
 	\end{itemize}
@@ -894,7 +945,7 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 			形状函数$g_{LM}$的定义为$$g_{LM}(r)=N_Lr^Lk(r)Y_{LM}(\hat r)$$
 			根据$k(r)$的不同可以取\textrm{sinc}、\textrm{Gaussian}或\textrm{Bessel}型等几种
 		\item 局域势函数(\textcolor{red}{可移植的“赝势”})
-			{\fontsize{9.5pt}{5.2pt}\selectfont$$\hspace*{-25pt}\tilde v_{loc}(r)=V_{e\!f\!f}^{PS}(r)-e^2\int\mathrm{d}^3r^{\prime}\dfrac{\tilde n_{core}(r^{\prime})+\tilde n(r^{\prime})+\hat n(r^{\prime})}{|r-r^{\prime}|}-\mu_{XC}[\tilde n_{core}(r)+\tilde n(r)]$$}
+			{\fontsize{9.5pt}{5.2pt}\selectfont$$\hspace*{-25pt}\tilde v_{loc}(r)=V_{\mathrm {eff}}^{PS}(r)-e^2\int\mathrm{d}^3r^{\prime}\dfrac{\tilde n_{core}(r^{\prime})+\tilde n(r^{\prime})+\hat n(r^{\prime})}{|r-r^{\prime}|}-\mu_{XC}[\tilde n_{core}(r)+\tilde n(r)]$$}
 	\end{itemize}
 }
 
