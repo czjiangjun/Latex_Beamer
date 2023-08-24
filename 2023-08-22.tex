@@ -2050,17 +2050,19 @@ $\mathbf{F}_{ji}(\mathbf{R})$的表达式中还包含从电子态$i$到$j$的贡
 
 \frame
 {
-	\frametitle{\textrm{TSH}方法:~经典部分}
+	\frametitle{\textrm{TSH}方法:~准经典部分}
 {\fontsize{8.2pt}{4.2pt}\selectfont{
-	\textcolor{blue}{核体系演化过程的经典部分}构成构象空间$(\mathbf{R},t)$的轨迹\textrm{(trajectory)}
+	\textcolor{blue}{核体系波函数演化过程的准经典部分}构成构象空间$(\mathbf{R},t)$的轨迹\textrm{(trajectory)}
 
-	在\textrm{TSH}方法中，$\mathbf{S}_j(\mathbf{R},t)$可以视为作用量，因此体系的轨迹由最小作用原理确定，即$\mathbf{S}(\mathbf{R},\mathbf{P},t)=0$，与经典力学的相空间描述类似，假设不同初始态对应的粒子演化轨迹彼此独立(轨迹独立假设，\textrm{ITA})，因此核波函数的密度可用穿过单位空间微元的轨迹数量的比例来计算，即
+	在\textrm{TSH}方法中，$\mathbf{S}_j(\mathbf{R},t)$可以视为作用量，因此体系的轨迹由最小作用原理确定，即$\mathbf{S}(\mathbf{R},\mathbf{P},t)=0$。与经典力学的相空间描述类似，假设不同初始态对应的粒子演化轨迹彼此独立(轨迹独立假设，\textrm{ITA})，\textcolor{red}{核波函数的概率密度(振幅的平方)可用穿过单位空间微元的轨迹数量的比例来计算}，即
 	\begin{displaymath}
 		\bigg(\mathbf{A}_j^{\mathrm{CL}}(\mathbf{R}(t),t)\bigg)^2=\frac{N_j(\mathbf{R}(t),\mathrm{d}V,t)}{N_t}\frac1{\mathrm{d}V}
 	\end{displaymath}
 	其中$N_j(\mathbf{R}(t),\mathrm{d}V,t)$表示穿过体积微元$\mathrm{d}V\equiv\mathrm{d}^{3N_n}\mathbf{R}$的径迹总数
 	\vskip 3pt
-	\textcolor{blue}{注意:~这里给出的核经典轨迹由与非绝热耦合系数$\mathbf{d}_{ji}^{\gamma}(\mathbf{R}(t))$无关部分确定}，因此可有
+	\textcolor{blue}{注意:~这里给出的核经典轨迹由与非绝热耦合系数$\mathbf{d}_{ji}^{\gamma}(\mathbf{R}(t))$无关部分确定}
+\vskip 3pt
+	因此可有
 	\begin{displaymath}
 		\begin{aligned}
 			-\frac{\partial\mathbf{S}_j^{\mathrm{CL}}(\mathbf{R},t)}{\partial t}=&\sum_{\gamma}\frac1{2M_{\gamma}}(\nabla_{\gamma}\mathbf{S}_j(\mathbf{R},t))^2+E_j^{e}(\mathbf{R})\\
@@ -2073,8 +2075,8 @@ $\mathbf{F}_{ji}(\mathbf{R})$的表达式中还包含从电子态$i$到$j$的贡
 
 \frame
 {
-	\frametitle{\textrm{TSH}方法:~经典部分}
-	上述方程确定了核运动的作用量经典部分$\mathbf{S}_j^{\mathrm{CL}}(\mathbf{R},t)$和振幅的经典部分$\mathbf{A}_j^{\mathrm{CL}}(\mathbf{R},t)$的演化过程，不难看出其与\textrm{Newton}运动方程等价
+	\frametitle{\textrm{TSH}方法:~准经典部分}
+	上述方程确定了核运动的相位准经典部分$\mathbf{S}_j^{\mathrm{CL}}(\mathbf{R},t)$和振幅的准经典部分$\mathbf{A}_j^{\mathrm{CL}}(\mathbf{R},t)$的演化过程，不难看出其与\textrm{Newton}运动方程等价
 \begin{displaymath}
 	\frac{\mathrm{d}\mathbf{P}_j^{\beta}(t)}{\mathrm{d}t^j}=-\nabla_{\beta}E_j^{e}(\mathbf{R}(t))
 \end{displaymath}
@@ -2085,7 +2087,7 @@ $\mathbf{F}_{ji}(\mathbf{R})$的表达式中还包含从电子态$i$到$j$的贡
 
 \textcolor{red}{在此基础上，考虑非绝热耦合项的贡献，原子核将沿经典轨迹运动时感受到量子效应引起的附加力}
 
-这种附件作用会使得经典概率密度$\bigg(A_j^{\mathrm{CL}}(\mathbf{R}(t),t)\bigg)^2$在电子态间传播(即体系可以在不同势能面之间跃迁)
+这种附加作用会使得经典概率密度$\bigg(A_j^{\mathrm{CL}}(\mathbf{R}(t),t)\bigg)^2$在电子态间传播(即体系可以在不同势能面之间跃迁)
 }
 
 \frame
@@ -2125,7 +2127,7 @@ $\mathbf{F}_{ji}(\mathbf{R})$的表达式中还包含从电子态$i$到$j$的贡
 \end{displaymath}
 严格说，量子相位$\mathbf{S}_j^{\mathrm{QM}(\mathbf{R}(t),t)}$，量子振幅$\mathbf{A}_j^{\mathrm{QM}(\mathbf{R}(t),t)}$ 和$C_j(\mathbf{R}(t,t))$都不是经典构象空间$(\mathbf{R},t)$的描述量，然而它们依然可以近似与经典轨迹相对应
 
-在\textrm{TSH}动力学中，经典部分和量子部分的方程同时求解，并认为只要统计轨迹足够多，将有
+在\textrm{TSH}动力学中，准经典部分和量子部分的方程同时求解，并认为只要统计轨迹足够多，将有
 \begin{displaymath}
 	\bigg(\mathbf{A}_j^{\mathrm{CL}}(\mathbf{R},t),t\bigg)^2=\bigg(\mathbf{A}_j^{\mathrm{QM}}(\mathbf{R},t),t\bigg)^2
 \end{displaymath}
