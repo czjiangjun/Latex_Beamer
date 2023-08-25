@@ -126,13 +126,13 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 \begin{itemize}
 %\setlength{\itemsep}{5pt}
 	\item 完全平面波基组\\{\fontsize{7.5pt}{5.5pt}\selectfont{少数平面波就可以很好地描述波函数在原子间的行为，近核波函数则需要大量平面波展开}}%。因此完全平面波基组虽然方便，但求体系本征态对角化的矩阵非常巨大，计算变得异常耗时。
-	\item 正交平面波(\textrm{Orthogonalized plane wave, OPW})方法\\{\fontsize{7.5pt}{5.5pt}\selectfont{价电子用与芯层波函数正交的平面波展开
+	\item 正交平面波(\textrm{Orthogonalized plane wave, OPW})方法\\{\fontsize{7.5pt}{5.5pt}\selectfont{价电子波函数由芯电子波函数和平面波共同展开
 		\begin{displaymath}
-			\phi_{OPW}^{\vec k+\vec G}(\vec r)=\phi_{PW}^{\vec k+\vec G}(\vec r)-\sum_c\langle\varphi_c|\phi_{PW}^{\vec k+\vec G}\rangle\varphi_c(\vec r)
+			\phi_{\mathrm{OPW}}^{\vec k+\vec G}(\vec r)=\phi_{\mathrm{PW}}^{\vec k+\vec G}(\vec r)-\sum_c\langle\varphi_c|\phi_{\mathrm{PW}}^{\vec k+\vec G}\rangle\varphi_c(\vec r)
 		\end{displaymath}}}
-	{\fontsize{7.5pt}{5.5pt}\selectfont{构造赝波函数
+	{\fontsize{7.5pt}{5.5pt}\selectfont{通过价电子和芯电荷波函数叠加构造赝波函数
 		\begin{displaymath}
-			\tilde{\phi}_v(\vec r)=\phi_v(\vec r)+\sum_c\langle\varphi_c|\tilde{\phi}_v\rangle\varphi_c(\vec r)
+			\textcolor{blue}{\tilde{\phi}_v(\vec r)}=\textcolor{red}{\phi_v(\vec r)}+\sum_c\langle\varphi_c|\textcolor{blue}{\tilde{\phi}_v}\rangle\varphi_c(\vec r)
 		\end{displaymath}
 	代入\textrm{Schr\"odinger}方程
 		$$\hat H|\tilde{\phi}_v\rangle-\sum_c\langle\varphi_c|\tilde{\phi}_v\rangle\hat H|\varphi_c\rangle=\varepsilon_v|\tilde{\phi}_v\rangle-\varepsilon_v\sum_c\langle\varphi_c|\tilde{\phi}_v\rangle|\varphi_c\rangle$$
@@ -144,7 +144,7 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 \frame
 {
 	\frametitle{由\textrm{OPW~}到赝势}
-	\textrm{Phillips-Kleinman}指出，赝势($V^{\mathrm {eff}}$)-赝波函数(可用$\phi_{PW}^{\vec k+\vec G}$展开)满足\textrm{Schr\"odinger}方程%\upcite{PR116-287_1959}
+	\textrm{Phillips-Kleinman}指出，赝势($V^{\mathrm {eff}}$)-赝波函数(可用$\phi_{\mathrm{PW}}^{\vec k+\vec G}$展开)满足\textrm{Schr\"odinger}方程%\upcite{PR116-287_1959}
 	$$\bigg(-\dfrac12\nabla^2+\textcolor{red}{V^{\mathrm {eff}}}\bigg)|\tilde{\phi}_v\rangle=\textcolor{blue}{\varepsilon_v}|\tilde{\phi}_v\rangle$$
 	其中$\textcolor{red}{V^{\mathrm {eff}}}=V(\vec r)+\textcolor{blue}{V^R}$
 	\begin{itemize}
@@ -162,44 +162,23 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 
 \frame
 {
-%\frametitle{The methods on band structure calculation}
-	\frametitle{由\textrm{OPW~}到赝势}
-%\vskip 10pt
-%\textrm{The mainly difference of all these methods below: the basis sets and the construction of the potential}
-\begin{itemize}
-%\setlength{\itemsep}{5pt}
-	\item 完全平面波基组\\{\fontsize{7.5pt}{5.5pt}\selectfont{少数平面波就可以很好地描述波函数在原子间的行为，近核波函数则需要大量平面波展开}}%。因此完全平面波基组虽然方便，但求体系本征态对角化的矩阵非常巨大，计算变得异常耗时。
-	\item 正交平面波(\textrm{Orthogonalized plane wave, OPW})方法\\{\fontsize{7.5pt}{5.5pt}\selectfont{价电子用与芯层波函数正交的平面波展开
-		\begin{displaymath}
-			\phi_{OPW}^{\vec k+\vec G}(\vec r)=\phi_{PW}^{\vec k+\vec G}(\vec r)-\sum_c\langle\varphi_c|\phi_{PW}^{\vec k+\vec G}\rangle\varphi_c(\vec r)
-		\end{displaymath}}}
-	{\fontsize{7.5pt}{5.5pt}\selectfont{构造赝波函数
-		\begin{displaymath}
-			\tilde{\phi}_v(\vec r)=\phi_v(\vec r)+\sum_c\langle\varphi_c|\tilde{\phi}_v\rangle\varphi_c(\vec r)
-		\end{displaymath}
-	代入\textrm{Schr\"odinger}方程
-		$$\hat H|\tilde{\phi}_v\rangle-\sum_c\langle\varphi_c|\tilde{\phi}_v\rangle\hat H|\varphi_c\rangle=\varepsilon_v|\tilde{\phi}_v\rangle-\varepsilon_v\sum_c\langle\varphi_c|\tilde{\phi}_v\rangle|\varphi_c\rangle$$
-		可有$$\hat H|\tilde{\phi}_v\rangle+\textcolor{blue}{V^R}|\tilde{\phi}_v\rangle=\textcolor{blue}{\varepsilon_v}|\tilde{\phi}_v\rangle$$
-		这里排斥势是$$V^R(\vec r,\vec r^{\prime})=\sum_c(\varepsilon_v-\varepsilon_c)|\varphi_c(\vec r^{\prime})\rangle\langle\varphi_c(\vec r)|$$}}
-\end{itemize}
-}
-
-\frame
-{
-	\frametitle{由\textrm{OPW~}到赝势}
-	\textrm{Phillips-Kleinman}指出，赝势($V^{\mathrm {eff}}$)-赝波函数(可用$\phi_{PW}^{\vec k+\vec G}$展开)满足\textrm{Schr\"odinger}方程%\upcite{PR116-287_1959}
-	$$\bigg(-\dfrac12\nabla^2+\textcolor{red}{V^{\mathrm {eff}}}\bigg)|\tilde{\phi}_v\rangle=\textcolor{blue}{\varepsilon_v}|\tilde{\phi}_v\rangle$$
-	其中$\textcolor{red}{V^{\mathrm {eff}}}=V(\vec r)+\textcolor{blue}{V^R}$
+	\frametitle{\textrm{PK}型赝势}
+	\textrm{Phillips-Kleinman~(PK)}赝势取为
+	\begin{displaymath}
+		\tilde{V}^{\mathrm{PK}}=V(\vec r)\textcolor{blue}{+\sum_c(E_v-E_c)|\varphi_c\rangle\langle\varphi_c|}
+	\end{displaymath}
+	对应的赝波函数可以表示为
+	\begin{displaymath}
+		|\tilde{\psi}^{\mathrm{PK}}\rangle=|\psi_t\rangle-\sum_c\langle\varphi_c|\psi_t\rangle|\varphi_c\rangle
+	\end{displaymath}
+	\textrm{PK}型赝势的一些不足
 	\begin{itemize}
-		\item 赝势-赝波函数的本征值$\varepsilon_v$与真实体系的价电子能量本征值等价
-		\item 赝势$\textcolor{red}{V^{\mathrm {eff}}}$比$V(\vec r)$平滑得多，并且$\textcolor{blue}{V^R}$是非局域的排斥势
-			\begin{displaymath}
-				\begin{aligned}
-					\textcolor{blue}{V^R}f(\vec r)=&\sum_c(\varepsilon_v-\varepsilon_c)\varphi_c(\vec r)\int\varphi_c^{\ast}(\vec r^{\prime})f(\vec r^{\prime})\mathrm{d}\vec r^{\prime} \\
-					=&\int V^R(\vec r,\vec r^{\prime})f(\vec r^{\prime})\mathrm{d}\vec r^{\prime}
-				\end{aligned}
-			\end{displaymath}
-%			这里$$V^R(\vec r,\vec r^{\prime})=\sum_c(\varepsilon_v-\varepsilon_c)|\varphi_c(\vec r^{\prime})\rangle\langle\varphi_c(\vec r)|$$
+		\item 构造赝波函数时必须有与价电子正交的芯电子波函数:\\
+			因此对于$1s$、$2p$、$3d$等轨道，无法实施\textrm{PK}型赝化方案
+		\item 赝势$\tilde{V}^{\mathrm{PK}}$依赖于能量本征值$\varepsilon_v$:\\
+			源于正交平面波的非正交归一性，导致构建的久期方程的非对角元项对能量依赖
+		\item 与芯电荷区以外，赝波函数与价波函数的模不相等:\\
+			每次计算后必须将波函数重新归一化
 	\end{itemize}
 }
 
@@ -267,10 +246,10 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 			$$V(\rho,r)=-\frac{Z}r+V_{\mathrm H}(\rho,r)+V_{XC}^{\mathrm{LDA}}(\rho(r))$$
 			$V_{\mathrm H}(\rho,r)$是\textrm{Hartree}势，$V_{XC}^{\mathrm{LDA}}(\rho(r))$是交换-相关势
 
-			由此构造赝波函数$P_l^{\mathrm{PP}}(r)$，满足
-			$$P_l^{\mathrm{PP}}(r)=P_l^{\mathrm{AE}}(r),\quad r>r_{cl}$$
+			由此构造赝波函数$P_l^{\mathrm{PS}}(r)$，满足
+			$$P_l^{\mathrm{PS}}(r)=P_l^{\mathrm{AE}}(r),\quad r>r_{cl}$$
 			进而构造赝势$V_{\mathrm{src},l}^{\mathrm{PP}}(r)$
-			$$V_{\mathrm{src},l}^{\mathrm{PP}}(r)=\varepsilon_l\textcolor{red}{-\dfrac{l(l+2)}{2r^2}}+\dfrac{1}{2P_l^{\mathrm{PP}}(r)}\dfrac{\mathrm{d}^2}{\mathrm{d}r^2}P_l^{\mathrm{AE}}(r),\quad r>r_{cl}$$
+			$$V_{\mathrm{src},l}^{\mathrm{PP}}(r)=\varepsilon_l\textcolor{red}{-\dfrac{l(l+2)}{2r^2}}+\dfrac{1}{2P_l^{\mathrm{PS}}(r)}\dfrac{\mathrm{d}^2}{\mathrm{d}r^2}P_l^{\mathrm{AE}}(r),\quad r>r_{cl}$$
 }
 
 \frame
@@ -280,11 +259,11 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 	\begin{enumerate}
 		\item 价电子赝波函数的能量本征值与对应全电子波函数能量本征值相等:~$\varepsilon_l^{\mathrm{PP}}=\varepsilon_l^{\mathrm{AE}}$
 		\item 价电子赝波函数与真实电子波函数的径向部分在截断半径$r_{c,l}$外相同:~$\psi_l^{\mathrm{PP}}(r)=\psi_l^{\mathrm{AE}}(r),\quad r>r_{cl}$
-		\item 价电子赝波函数与真实电子波函数的对数导数在截断半径$r_{c,l}$处相等:~$D_l^{\mathrm{PP}}(r)=D_l^{\mathrm{AE}}(r),\quad r\geqslant r_{cl}$\\
-		这里$D_l(\varepsilon,r)=r\frac{\psi_l^{\prime}(\varepsilon,r)}{\psi_l(\varepsilon,r)}=r\dfrac{\mathrm{d}}{\mathrm{d}r}\ln\psi_l(\varepsilon,r)$
+		\item 价电子赝波函数与真实电子波函数的对数导数在截断半径$r_{c,l}$处相等:~$D_l^{\mathrm{PP}}(r)=D_l^{\mathrm{AE}}(r),\quad r\geqslant r_{cl}$(\textcolor{blue}{可移植性基础})\\
+			这里\textcolor{red}{$D_l(\varepsilon,r)=r\frac{\psi_l^{\prime}(\varepsilon,r)}{\psi_l(\varepsilon,r)}=r\dfrac{\mathrm{d}}{\mathrm{d}r}\ln\psi_l(\varepsilon,r)$}
 		\item 价电子赝波函数与真实电子波函数在截断半径$r_{c,l}$内的积分电荷相等(\textcolor{red}{模守恒条件})
 			$$Q_l=\int_0^{r_{cl}}\mathrm{d}rr^2|\psi_l^{\mathrm{PP}}(r)|^2=\int_0^{r_{cl}}\mathrm{d}rr^2|\psi_l^{\mathrm{AE}}(r)|^2$$
-		\item 价电子赝波函数与真实电子波函数的对数导数一阶能量导数$\mathrm{d}D_l(\varepsilon,r)/\mathrm{d}\varepsilon$在截断半径$r_{c,l}$处及以外相等
+		\item \textcolor{magenta}{价电子赝波函数与真实电子波函数的对数导数一阶能量导数$\mathrm{d}D_l(\varepsilon,r)/\mathrm{d}\varepsilon$在截断半径$r_{c,l}$处及以外相等(强化可移植性)}
 	\end{enumerate}
 }
 
@@ -314,7 +293,7 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 
 为提高赝势的可移植性，减少构造赝势对环境的依赖，需要对其进行``去屏蔽''
 \begin{displaymath}
-	V_l(r)\equiv=V_{l,src}^{\mathrm{PP}}-V_{\mathrm{Hartree}}^{\mathrm{PP}}(r)+V_{\mathrm{XC}^{PP}}(r)
+	V_l(r)\equiv V_{l,src}^{\mathrm{PP}}-V_{\mathrm{Hartree}}^{\mathrm{PP}}(r)+V_{\mathrm{XC}^{PP}}(r)
 \end{displaymath}
 
 实际应用时习惯将赝势(径向部分)分解为\textcolor{blue}{局域部分(与角动量$l$无关)}和\textcolor{red}{非局域部分}
@@ -329,12 +308,30 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 
 \frame
 {
+	\frametitle{角动量$l$相关赝势计算的困难与克服}
+	半局域型赝势在用平面波展开时，需要计算大量的积分项
+	\begin{displaymath}
+		\int j_l(k\cdot r)V_l(r)j_l(k^{\prime}\cdot r)r^2\mathrm{d}rP_l(\cos\theta_{kk^{\prime}})
+	\end{displaymath}
+	这里$j_l$是球\textrm{Bessel}函数\\
+	$P_l(\cos\theta_{kk^{\prime}})$是矢量$\vec k$和$\vec k^{\prime}$夹角的\textrm{Legendre}多项式函数
+\vskip 8pt
+\textrm{Kleinman-Bylander}等注意到:~如果角动量$l$相关的半局域型赝势改写成\textrm{PK}型赝势，则平面波展开可写成
+\begin{displaymath}
+	\int j_l(k\cdot r)\textcolor{blue}{\varphi_l^c(r)}(r)r^2\mathrm{d}r\int j_l(k^{\prime}\cdot r^{\prime})\textcolor{blue}{\varphi_l^c(r^{\prime})}r^{\prime2}\mathrm{d}r^{\prime}P_l(\cos\theta_{kk^{\prime}})
+\end{displaymath}
+显然，大量积分将以乘积形式出现，因此需要独立计算的积分数量将大大减少
+}
+
+\frame
+{
 	\frametitle{非局域赝势的变量分离}
-	\textrm{Kleinman-Bylander}提出了非局域赝势的变量分离的近似方案\footnote{\fontsize{6.2pt}{5.2pt}\selectfont{即$\delta V(\vec r,\vec r^{\prime})$可以写成$\delta V(\vec r,\vec r^{\prime})=\sum_{i}f_i(\vec r)g_i(\vec r^{\prime})$的形式}}:~\\
+	\textrm{Kleinman-Bylander}仿照\textrm{PK}型赝势的特点，提出了非局域赝势的变量分离方案\footnote{\fontsize{7.0pt}{4.2pt}\selectfont{即$\delta V(\vec r,\vec r^{\prime})$可以写成$\delta V(\vec r,\vec r^{\prime})=\sum_{i}f_i(\vec r)g_i(\vec r^{\prime})$的形式}}:~\\
 %	引入分离算符$\delta V^{\mathrm{NL}}$满足
 	如果选择适当的局域函数$V_{\mathrm{local}}^{\mathrm{PP}}(r)$，赝势将可分解为局域部分与非局域部分之和:
 	$$\hat V_{\mathrm{NL}}^{\mathrm{PP}}(r)=V_{\mathrm{local}}^{\mathrm{PP}}(r)+\sum_{lm}\dfrac{|\psi_{lm}^{\mathrm{PS}}\delta V_l\rangle\langle\delta V_l\psi_{lm}^{\mathrm{PS}}|}{\langle\psi_{lm}^{\mathrm{PS}}|\delta V_l|\psi_{lm}^{\mathrm{PS}}\rangle}$$ 
-	\textcolor{magenta}{$\langle\delta V_l(r)\psi_{lm}^{\mathrm{PP}}|$是投影子}，这种分解称为\textrm{factored pseudo-potential}
+	\textcolor{magenta}{这是将$\delta V_l$表示到$\psi_{lm}^{\mathrm{PS}}$构成的空间中，$\langle\delta V_l(r)\psi_{lm}^{\mathrm{PP}}|$是投影子}\\
+	这种分解称为\textrm{factored pseudo-potential}
 	\begin{displaymath}
 		\langle\delta V_l\psi_{lm}^{\mathrm{PS}}|\psi\rangle=\int\mathrm{d}\vec r\delta V_l(r)\psi_{lm}^{\mathrm{PS}}(\vec r)\psi(\vec r)
 	\end{displaymath}
