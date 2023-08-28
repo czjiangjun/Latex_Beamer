@@ -165,7 +165,7 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 	\frametitle{\textrm{PK}型赝势}
 	\textrm{Phillips-Kleinman~(PK)}赝势取为
 	\begin{displaymath}
-		\tilde{V}^{\mathrm{PK}}=V(\vec r)\textcolor{blue}{+\sum_c(E_v-E_c)|\varphi_c\rangle\langle\varphi_c|}
+		\tilde{V}^{\mathrm{PK}}=V(\vec r)\textcolor{blue}{+\sum_c(\varepsilon_v-\varepsilon_c)|\varphi_c\rangle\langle\varphi_c|}
 	\end{displaymath}
 	对应的赝波函数可以表示为
 	\begin{displaymath}
@@ -249,7 +249,7 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 			由此构造赝波函数$P_l^{\mathrm{PS}}(r)$，满足
 			$$P_l^{\mathrm{PS}}(r)=P_l^{\mathrm{AE}}(r),\quad r>r_{cl}$$
 			进而构造赝势$V_{\mathrm{src},l}^{\mathrm{PP}}(r)$
-			$$V_{\mathrm{src},l}^{\mathrm{PP}}(r)=\varepsilon_l\textcolor{red}{-\dfrac{l(l+2)}{2r^2}}+\dfrac{1}{2P_l^{\mathrm{PS}}(r)}\dfrac{\mathrm{d}^2}{\mathrm{d}r^2}P_l^{\mathrm{AE}}(r),\quad r>r_{cl}$$
+			$$V_{\mathrm{src},l}^{\mathrm{PP}}(r)=\textcolor{red}{\varepsilon_l}\textcolor{magenta}{-\dfrac{l(l+2)}{2r^2}}+\dfrac{1}{2P_l^{\mathrm{PS}}(r)}\dfrac{\mathrm{d}^2}{\mathrm{d}r^2}P_l^{\mathrm{AE}}(r),\quad r>r_{cl}$$
 }
 
 \frame
@@ -308,19 +308,35 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 
 \frame
 {
+	\frametitle{角动量$l$相关赝势}
+	赝势是在原子(或离子)条件下构造的，它依赖于能量$\varepsilon_l$的选择
+	\begin{displaymath}
+		V_l(r,\varepsilon_l)=V_{\mathrm{local}}(r)+\delta V_l(r,\varepsilon_l)
+	\end{displaymath}
+	在原子、分子构型下，一般取无穷远为势能零点:~\textcolor{blue}{$\varepsilon<0$}
+	\begin{itemize}
+		\item \textcolor{purple}{在无限扩展的周期体系中，势能平均值(能量的参考零点)是无法确定的}\\
+			构造第一原理赝势时，需要考虑参数$\varepsilon_l$的值无法唯一确定带来的影响
+		\item 构造\textrm{PK}型赝势时，能量参数为$\varepsilon_v-\varepsilon_c$:\\
+			能量差不依赖周期体系势能的平移常数，不存在上述问题
+	\end{itemize}
+}
+
+\frame
+{
 	\frametitle{角动量$l$相关赝势计算的困难与克服}
-	半局域型赝势在用平面波展开时，需要计算大量的积分项
+	半局域型赝势在用平面波展开时，需要计算大量($\vec k$和$\vec k^{\prime}$都相关)的积分项
 	\begin{displaymath}
 		\int j_l(k\cdot r)V_l(r)j_l(k^{\prime}\cdot r)r^2\mathrm{d}rP_l(\cos\theta_{kk^{\prime}})
 	\end{displaymath}
 	这里$j_l$是球\textrm{Bessel}函数\\
 	$P_l(\cos\theta_{kk^{\prime}})$是矢量$\vec k$和$\vec k^{\prime}$夹角的\textrm{Legendre}多项式函数
 \vskip 8pt
-\textrm{Kleinman-Bylander}等注意到:~如果角动量$l$相关的半局域型赝势改写成\textrm{PK}型赝势，则平面波展开可写成
+\textrm{Kleinman-Bylander}等注意到:~如果角动量$l$相关的半局域型赝势可写成类似\textrm{PK}型赝势的形式，则平面波展开可写成
 \begin{displaymath}
 	\int j_l(k\cdot r)\textcolor{blue}{\varphi_l^c(r)}(r)r^2\mathrm{d}r\int j_l(k^{\prime}\cdot r^{\prime})\textcolor{blue}{\varphi_l^c(r^{\prime})}r^{\prime2}\mathrm{d}r^{\prime}P_l(\cos\theta_{kk^{\prime}})
 \end{displaymath}
-显然，大量积分将以乘积形式出现，因此需要独立计算的积分数量将大大减少
+显然，大量积分将以乘积形式出现，因此需要独立计算的积分(仅与$\vec k$相关)数量将大大减少
 }
 
 \frame
@@ -328,10 +344,10 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 	\frametitle{非局域赝势的变量分离}
 	\textrm{Kleinman-Bylander}仿照\textrm{PK}型赝势的特点，提出了非局域赝势的变量分离方案\footnote{\fontsize{7.0pt}{4.2pt}\selectfont{即$\delta V(\vec r,\vec r^{\prime})$可以写成$\delta V(\vec r,\vec r^{\prime})=\sum_{i}f_i(\vec r)g_i(\vec r^{\prime})$的形式}}:~\\
 %	引入分离算符$\delta V^{\mathrm{NL}}$满足
-	如果选择适当的局域函数$V_{\mathrm{local}}^{\mathrm{PP}}(r)$，赝势将可分解为局域部分与非局域部分之和:
+	如果选择适当的局域函数$V_{\mathrm{local}}^{\mathrm{PP}}(r)$，赝势将可分解为局域部分与非局域部分之和(这种分解称为\textrm{factored pseudo-potential})
 	$$\hat V_{\mathrm{NL}}^{\mathrm{PP}}(r)=V_{\mathrm{local}}^{\mathrm{PP}}(r)+\sum_{lm}\dfrac{|\psi_{lm}^{\mathrm{PS}}\delta V_l\rangle\langle\delta V_l\psi_{lm}^{\mathrm{PS}}|}{\langle\psi_{lm}^{\mathrm{PS}}|\delta V_l|\psi_{lm}^{\mathrm{PS}}\rangle}$$ 
-	\textcolor{magenta}{这是将$\delta V_l$表示到$\psi_{lm}^{\mathrm{PS}}$构成的空间中，$\langle\delta V_l(r)\psi_{lm}^{\mathrm{PP}}|$是投影子}\\
-	这种分解称为\textrm{factored pseudo-potential}
+	\textcolor{magenta}{这是将$\delta V_l$表示到$\psi_{lm}^{\mathrm{PS}}$构成的空间中，$\langle\delta V_l(r)\psi_{lm}^{\mathrm{PP}}|$是投影子}
+	
 	\begin{displaymath}
 		\langle\delta V_l\psi_{lm}^{\mathrm{PS}}|\psi\rangle=\int\mathrm{d}\vec r\delta V_l(r)\psi_{lm}^{\mathrm{PS}}(\vec r)\psi(\vec r)
 	\end{displaymath}
