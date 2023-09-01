@@ -153,6 +153,45 @@
 
 \frame
 {
+	\frametitle{\textrm{Green's function}的物理意义}
+\fontsize{7.9pt}{4.2pt}\selectfont{
+	时间序列的\textrm{Green's function}$G(\vec r,\vec r^{\prime},t-t^{\prime})$描述了粒子由$(\vec r,t)$到$\vec r^{\prime},t^{\prime}$的传播\footnote{\fontsize{6.5pt}{4.2pt}\selectfont{因此\textrm{Green's funtion}被称为传播子.}}: 换言之，假设粒子在时-空点$(\vec r,t)$位置出现，则$G(\vec r,\vec r^{\prime},t-t^{\prime})$表示在时-空点$(\vec r^{\prime},t^{\prime})$找到粒子的概率
+	\begin{displaymath}
+		G_{0}(\vec r,\vec r^{\prime};\omega)=\sum_n^{\mathrm{all}}\dfrac{\psi_n^{\ast}(\vec r)\psi_n(\vec r^{\prime})}{\omega-\varepsilon_n+\mathrm{i}\eta\mathrm{sign}(\varepsilon_n-\mu)}
+	\end{displaymath}
+\begin{figure}[h!]
+	\vspace{-0.12in}
+\centering
+\includegraphics[height=0.50in,width=1.74in,viewport=0 0 415 125,clip]{Figures/DFT_GW-3.jpg}
+%\caption{\tiny \textrm{Central idea of multiple scattering theory:~ decomposition of electronic motion into scattering at atomic sites and free-electron like propagation in between. The bottom of the figure gives a sketch for the potential along the dashed line.}}
+\label{Green's_function-physical interpretation}
+\end{figure}
+	\begin{itemize}
+		\item 粒子传播子:$G_0(1,2)=G_0(\vec r_1,\vec r_2,t_2-t_1)$且\textcolor{blue}{$(t_2>t_1)$}
+			\begin{displaymath}
+				G_0(1,2)=\sum_n^{\textcolor{blue}{\mathrm{vir.}}}\psi_n^{\ast}(\vec r_1)\psi_n(\vec r_2)\mathrm{e}^{-\mathrm{i}(\varepsilon_n-\mu)(\textcolor{blue}{t_2-t_1})}
+			\end{displaymath}
+		\item 孔传播子:$G_0(1,2)$且\textcolor{blue}{$(t_1>t_2)$}
+			\begin{displaymath}
+				G_0(1,2)=\sum_n^{\textcolor{blue}{\mathrm{occ.}}}\psi_n^{\ast}(\vec r_1)\psi_n(\vec r_2)\mathrm{e}^{-\mathrm{i}(\varepsilon_n-\mu)(\textcolor{blue}{t_1-t_2})}
+			\end{displaymath}
+	\end{itemize}}
+}
+
+\frame
+{
+	\frametitle{\textrm{Green function}与自能}
+\begin{figure}[h!]
+	\vspace{-0.13in}
+\centering
+\includegraphics[height=2.88in,width=2.10in,viewport=0 0 510 715,clip]{Figures/DFT_GW-4.jpg}
+%\caption{\tiny \textrm{Central idea of multiple scattering theory:~ decomposition of electronic motion into scattering at atomic sites and free-electron like propagation in between. The bottom of the figure gives a sketch for the potential along the dashed line.}}
+\label{Green's_function-physical-interaction}
+\end{figure}
+}
+
+\frame
+{
 	\frametitle{\textrm{Green function}与自能}
 	\textrm{Dyson}方程
 	\begin{displaymath}
@@ -163,42 +202,27 @@
 	\end{displaymath}
 	\begin{itemize}
 		\item \textrm{Dyson}方程描述了相互作用体系$G$通过自能$\Sigma$与近独立体系(传播子)$G_0$关联，自能$\Sigma$是非局域，非\textrm{Hermitian}，并与时间相关
-		\item 通过求解含有自能$\Sigma$的准粒子方程，可以求解得到多体体系中重整化电子的量子态(\textrm{Hedin}方程)
-			$$\bigg[\hat h_0(\vec r_1)+v_H(\vec r_1)\bigg]\Psi(\vec r_1)+\int\Sigma(\vec r_1,\vec r_2;\omega^{\mathrm{QP}})\Psi(\vec r_2)\mathrm{d}\vec r_2=\varepsilon^{\mathrm{QP}}\Psi(\vec r_1)$$
+		\item 通过求解含有自能$\Sigma$的准粒子\textrm{(quasi-particle, QP)}方程，可以求解得到多体体系中重整化电子的量子态(\textrm{Hedin}方程)
+			$$\bigg[\hat h_0(\vec r_1)+v_H(\vec r_1)\bigg]\Psi(\vec r_1)+\int\textcolor{red}{\Sigma(\vec r_1,\vec r_2;\omega^{\mathrm{QP}})}\Psi(\vec r_2)\mathrm{d}\vec r_2=\varepsilon^{\mathrm{QP}}\Psi(\vec r_1)$$
 	\end{itemize}
 }
 
 \frame
 {
-	\frametitle{\textrm{Green's function}的物理意义}
-	时间序列的\textrm{Green's function}$G(\vec r,\vec r^{\prime},t-t^{\prime})$描述了粒子由$(\vec r,t)$到$\vec r^{\prime},t^{\prime}$的传播\footnote{\fontsize{6.5pt}{4.2pt}\selectfont{因此\textrm{Green's funtion}被称为传播子.}}:~换言之，假设粒子在时空点$(\vec r,t)$位置出现，则$G(\vec r,\vec r^{\prime},t-t^{\prime})$表示在时空点$(\vec r^{\prime},t^{\prime})$找到粒子的概率
-	\begin{displaymath}
-		G_{0}(\vec r,\vec r^{\prime};\omega)=\sum_n^{\mathrm{all}}\dfrac{\psi_n^{\ast}(\vec r)\psi_n(\vec r^{\prime})}{\omega-\varepsilon_n+\mathrm{i}\eta\mathrm{sign}(\varepsilon_n-\mu)}
-	\end{displaymath}
+	\frametitle{准粒子:~激发与屏蔽}
 \begin{figure}[h!]
-	\vspace{-0.52in}
+	\vspace{-0.12in}
 \centering
-\includegraphics[height=0.50in,width=1.44in,viewport=0 0 315 125,clip]{Figures/DFT_GW-3.jpg}
-%\caption{\tiny \textrm{Central idea of multiple scattering theory:~ decomposition of electronic motion into scattering at atomic sites and free-electron like propagation in between. The bottom of the figure gives a sketch for the potential along the dashed line.}}
-\label{Green's_function-physical interpretation}
+\includegraphics[height=2.65in,width=2.25in,viewport=0 0 510 575,clip]{Figures/DFT_GW-2.jpg}
+\includegraphics[height=1.80in,width=1.65in,viewport=0 0 455 525,clip]{Figures/DFT_GW-electron.jpg}
+\label{Green's_function-quasi-particle}
 \end{figure}
-\fontsize{7.5pt}{4.2pt}\selectfont{
-	\begin{itemize}
-		\item 粒子传播子:$G_0(1,2)=G_0(\vec r_1,\vec r_2,t_2-t_1)$且\textcolor{blue}{$(t_2>t_1)$}
-			\begin{displaymath}
-				G_0(1,2)=\sum_n^{\textcolor{blue}{\mathrm{vir.}}}\psi_n^{\ast}(\vec r_1)\psi_n(\vec r_2)\mathrm{e}^{-\mathrm{i}(\varepsilon_n-\mu)(\textcolor{blue}{t_2-t_1})}
-			\end{displaymath}
-		\item 孔传播子:$G_0(1,2)=G_0(\vec r_1,\vec r_2,t_2-t_1)$且\textcolor{blue}{$(t_1>t_2)$}
-			\begin{displaymath}
-				G_0(1,2)=\sum_n^{\textcolor{blue}{\mathrm{occ.}}}\psi_n^{\ast}(\vec r_1)\psi_n(\vec r_2)\mathrm{e}^{-\mathrm{i}(\varepsilon_n-\mu)(\textcolor{blue}{t_1-t_2})}
-			\end{displaymath}
-	\end{itemize}}
 }
 
 \frame
 {
 	\frametitle{\textrm{Hedin}方程的求解} 
-	\textrm{Hedin}方程是积分-微分，可以通过迭代求解
+	\textrm{Hedin}方程是积分-微分形式的，只能通过迭代来求解
 \begin{figure}[h!]
 \centering
 \vspace{-10pt}
@@ -242,13 +266,25 @@ $$\Sigma(\vec r_1,\vec r_2;\omega)=\dfrac{\mathrm i}{2\pi}\int \mathrm e^{\mathr
 	\frametitle{由$GW$到$G_0W_0$近似}
 	自洽迭代的$GW$方程求解仍然非常复杂，通常选择足够好的近似的$G$和$W$，作单次计算(即$G_0W_0$近似)得到自能
 	$$\Sigma(\vec r_1,t_1;\vec r_2,t_2)=\mathrm{i}G_0^{\mathrm{KS}}W_0(\vec r_1,t_1+\eta;\vec r_2,t_2)_{\eta\rightarrow0}$$
-	这里$G_0^{\mathrm{KS}}$由独立粒子的\textrm{Kohn-Sham(KS)}Hamiltonian
+	这里$G_0^{\mathrm{KS}}$由独立粒子的\textrm{Kohn-Sham(KS)-Hamiltonian}
 
 	屏蔽相互作用由\textrm{KS}本征态能量和波函数的\textrm{RPA}计算的到
 	$$\chi^0(\vec r_1,t_1;\vec r_2,t_2)=-\mathrm{i}G_0^{\mathrm{KS}}(\vec r_1,t_1;\vec r_2,t_2)G_0^{\mathrm{KS}}(\vec r_1,t_1;\vec r_2,t_2)$$
 	当准粒子波函数用\textrm{KS}轨道近似，本征态$\varepsilon^{\mathrm{KS}}$附近的准粒子能量$\varepsilon^{\mathrm{QP}}$用自能展开
 	$$\varepsilon^{\mathrm{QP}}=\varepsilon^{\mathrm{KS}}+Z\langle\Psi^{\mathrm{KS}}|\Sigma(\varepsilon^{\mathrm{KS}}-v_{\mathrm{XC}})|\Psi^{\mathrm{KS}}\rangle$$
 	这里重整化因子$Z$定义为$$Z\equiv\bigg[1-\langle\Psi^{\mathrm{KS}}\bigg|\dfrac{\partial\Sigma(\varepsilon)}{\partial\varepsilon^{\mathrm{KS}}}\bigg|\Psi^{\mathrm{KS}}\rangle\bigg]^{-1}$$
+}
+
+\frame
+{
+	\frametitle{$G_0W_0$计算流程}
+\begin{figure}[h!]
+	\vspace{-0.17in}
+\centering
+\includegraphics[height=2.78in,width=1.50in,viewport=0 0 510 1035,clip]{Figures/Flowchart-for-a-G0W0-calculation-starting-from-a KS-DFT-calculation.jpg}
+\caption{\tiny \textrm{A flowchart for a $G_0W_0$ calculation starting from a KS-DFT calculation.}}
+\label{G0W0_flowchart}
+\end{figure}
 }
 
 \frame
@@ -310,6 +346,13 @@ $$\Sigma(\vec r_1,\vec r_2;\omega)=\dfrac{\mathrm i}{2\pi}\int \mathrm e^{\mathr
 		\item $\mathrm{GWA}$:~通过复杂的响应函数计算
 	\end{itemize}
 }
+
+\frame
+{
+	\frametitle{\textrm{Bethe-Salpeter}方程}
+	\textrm{Bethe-Salpeter Equation~(BSE)}能够定量描述物质中光激发电子-空穴对的激子效应，用于物质光吸收谱等性质的精确计算
+}
+
 %\frame
 %{
 %\frametitle{发展统一理论框架下的材料计算程序}
