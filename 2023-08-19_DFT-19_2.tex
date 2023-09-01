@@ -74,7 +74,7 @@
 \section{电子相关与多体理论}
 \frame
 {
-	\frametitle{\textrm{Green function}}
+	\frametitle{\textrm{Green's function}}
 	\begin{itemize}
 		\item 时间序列的\textrm{Green's function}定义为$G(\vec r_1,t_1;\vec r_2,t_2)=-\mathrm{i}\langle\Theta_0^N|\hat{\mathbf{T}}[\hat\psi(\vec r_1,t_1)\hat\psi^{\dag}(\vec r_2,t_2)]|\Theta_0^N\rangle$
 		\item \textrm{Green function}的\textrm{Lehmann}表象为$$G(\vec r_1,\vec r_2;\omega)=\sum\limits_i\dfrac{\Psi_i(\vec r_1)\Psi_i^{\dag}(\vec r_2)}{\omega-\varepsilon_i+\mathrm{i}\eta\mathrm{sign}(\varepsilon_i-\mu)}\qquad\eta\rightarrow0^+$$
@@ -91,12 +91,42 @@
 
 \frame
 {
+	\frametitle{\textrm{Green's function}与\textrm{Hamiltonian}}
+	\begin{itemize}
+		\item \textrm{Green's function}是\textrm{Hamiltonian}的\textcolor{blue}{翻转}
+			\begin{displaymath}
+				1=(\omega-H)G\Longleftrightarrow G^{-1}=(\omega -H)
+			\end{displaymath}
+		\item \textrm{Lehmann}表象下，\textrm{Kohn-Sham}(无相互作用的)\textrm{Hamiltonian}对应的\textrm{Green' function}
+			\begin{displaymath}
+				G_{\textcolor{magenta}{0}}(\vec r,\vec r^{\prime};\omega)=\sum_n\dfrac{\psi_n(\vec r)\psi_n^{\ast}(\vec r^{\prime})}{\omega-\varepsilon_n+\mathrm{i}\eta\mathrm{sign}(\varepsilon_n-\mu)}
+			\end{displaymath}
+		\item 相互作用\textrm{Hamiltonian}的\textrm{Green's function}
+		\fontsize{9.5pt}{4.2pt}\selectfont{	\begin{displaymath}
+			\hspace*{-35pt}	\begin{aligned}
+				&\underbrace{\bigg(-\dfrac{\hbar^2}{2m_e}\nabla^2+V_{\mathrm{ion}}(\vec r)+V_H(r)\bigg)}+\Sigma(\vec r,\vec r^{\prime},\omega)=H(\omega)\Longrightarrow H_0+\Sigma(\textcolor{red}{\omega})=H(\textcolor{red}{\omega})\\
+					&\quad\qquad\qquad\mathrm{\textcolor{blue}{non-int.}} %\mathrm{energy/frequency dependent Hamiltonian}
+				\end{aligned}
+			\end{displaymath}}
+	\end{itemize}
+}
+
+\frame
+{
 	\frametitle{多重散射与\textrm{Green's function}}
+	\vspace{-0.2in}
+\begin{displaymath}
+	\begin{aligned}
+		(H_0-\omega)+\Sigma(\omega)&=(H-\omega)\\
+		-G_0^{-1}(\omega)+\Sigma(\omega)&=-G^{-1}-\omega)\\
+		G^{-1}(\omega)&=G_0^{-1}-\omega)-\Sigma(\omega)
+	\end{aligned}
+\end{displaymath}
 \begin{figure}[h!]
+	\vspace{-0.52in}
 \centering
-	\vspace{-20pt}
 %\includegraphics[height=1.80in,width=1.95in,viewport=5 0 515 495,clip]{Figures/multiple-scattering_theory.png}
-\includegraphics[height=2.50in,width=2.64in,viewport=5 0 515 495,clip]{Figures/multiple-scattering_theory.png}
+\includegraphics[height=2.30in,width=2.44in,viewport=5 0 515 495,clip]{Figures/multiple-scattering_theory.png}
 \caption{\tiny \textrm{Central idea of multiple scattering theory:~ decomposition of electronic motion into scattering at atomic sites and free-electron like propagation in between. The bottom of the figure gives a sketch for the potential along the dashed line.}}
 \label{Multi-scattering}
 \end{figure}
@@ -136,6 +166,33 @@
 		\item 通过求解含有自能$\Sigma$的准粒子方程，可以求解得到多体体系中重整化电子的量子态(\textrm{Hedin}方程)
 			$$\bigg[\hat h_0(\vec r_1)+v_H(\vec r_1)\bigg]\Psi(\vec r_1)+\int\Sigma(\vec r_1,\vec r_2;\omega^{\mathrm{QP}})\Psi(\vec r_2)\mathrm{d}\vec r_2=\varepsilon^{\mathrm{QP}}\Psi(\vec r_1)$$
 	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{\textrm{Green's function}的物理意义}
+	时间序列的\textrm{Green's function}$G(\vec r,\vec r^{\prime},t-t^{\prime})$描述了粒子由$(\vec r,t)$到$\vec r^{\prime},t^{\prime}$的传播\footnote{\fontsize{6.5pt}{4.2pt}\selectfont{因此\textrm{Green's funtion}被称为传播子.}}:~换言之，假设粒子在时空点$(\vec r,t)$位置出现，则$G(\vec r,\vec r^{\prime},t-t^{\prime})$表示在时空点$(\vec r^{\prime},t^{\prime})$找到粒子的概率
+	\begin{displaymath}
+		G_{0}(\vec r,\vec r^{\prime};\omega)=\sum_n^{\mathrm{all}}\dfrac{\psi_n^{\ast}(\vec r)\psi_n(\vec r^{\prime})}{\omega-\varepsilon_n+\mathrm{i}\eta\mathrm{sign}(\varepsilon_n-\mu)}
+	\end{displaymath}
+\begin{figure}[h!]
+	\vspace{-0.52in}
+\centering
+\includegraphics[height=0.50in,width=1.44in,viewport=0 0 315 125,clip]{Figures/DFT_GW-3.jpg}
+%\caption{\tiny \textrm{Central idea of multiple scattering theory:~ decomposition of electronic motion into scattering at atomic sites and free-electron like propagation in between. The bottom of the figure gives a sketch for the potential along the dashed line.}}
+\label{Green's_function-physical interpretation}
+\end{figure}
+\fontsize{7.5pt}{4.2pt}\selectfont{
+	\begin{itemize}
+		\item 粒子传播子:$G_0(1,2)=G_0(\vec r_1,\vec r_2,t_2-t_1)$且\textcolor{blue}{$(t_2>t_1)$}
+			\begin{displaymath}
+				G_0(1,2)=\sum_n^{\textcolor{blue}{\mathrm{vir.}}}\psi_n^{\ast}(\vec r_1)\psi_n(\vec r_2)\mathrm{e}^{-\mathrm{i}(\varepsilon_n-\mu)(\textcolor{blue}{t_2-t_1})}
+			\end{displaymath}
+		\item 孔传播子:$G_0(1,2)=G_0(\vec r_1,\vec r_2,t_2-t_1)$且\textcolor{blue}{$(t_1>t_2)$}
+			\begin{displaymath}
+				G_0(1,2)=\sum_n^{\textcolor{blue}{\mathrm{occ.}}}\psi_n^{\ast}(\vec r_1)\psi_n(\vec r_2)\mathrm{e}^{-\mathrm{i}(\varepsilon_n-\mu)(\textcolor{blue}{t_1-t_2})}
+			\end{displaymath}
+	\end{itemize}}
 }
 
 \frame
