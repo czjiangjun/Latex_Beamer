@@ -759,15 +759,20 @@ P(\vec q,\omega)=&\hbar\omega W(\vec q,\omega)\\
 \frame
 {
 	\frametitle{长波极限下的光学函数的计算}
-	在$\vec k$空间计算纵向介电函数时，将遇到大量类似$\langle\psi_{\vec k+\vec q}^{\beta}|\mathrm{e}^{\mathrm{i}\vec q\cdot\vec r}|\psi_{\vec k}^{\alpha}\rangle$和$\langle\psi_{\vec k+\vec q}^{\beta}|\psi_{\vec k}^{\alpha}\rangle$的积分，处理策略是
+	在$\vec k$空间计算纵向介电函数时，将遇到大量的跃迁矩阵元
+	\begin{displaymath}
+		\frac{\vec q}q\cdot\vec p_{\alpha\beta}=(E_{\alpha}-E_{\beta})\frac{m_e}{\hbar}\lim_{\vec q\rightarrow0}\bigg\langle\tilde\psi_{\alpha}\bigg|\frac1q\mathrm{e}^{\mathrm{i}\vec q\cdot\vec r}\bigg|\tilde\psi_{\beta}\bigg\rangle
+	\end{displaymath}
+	%$\langle\psi_{\vec k+\vec q}^{\beta}|\mathrm{e}^{\mathrm{i}\vec q\cdot\vec r}|\psi_{\vec k}^{\alpha}\rangle$和$\langle\psi_{\vec k+\vec q}^{\beta}|\psi_{\vec k}^{\alpha}\rangle$
+	类型的积分，处理策略是
 	\begin{itemize}
 		\item 将$\mathrm{e}^{\mathrm{i}\vec q\cdot\vec r}$对$\vec q$展开到一阶
 			\begin{displaymath}
 				\mathrm{e}^{\mathrm{i}\vec q\cdot(\vec r-\vec R)}=1+\mathrm{i}\vec q\cdot(\vec r-\vec R)+\mathcal{O}(\vec q^2)
 			\end{displaymath}
-		\item 函数$|\psi_{\vec k+\vec q}^n\rangle$利用\textrm{Bloch}定理处理周期函数$|u_{\vec k+\vec q}^n\rangle$，同样对$\vec q$展开到一阶
+		\item 赝波函数$|\tilde\psi_{\vec k+\vec q}^n\rangle$利用\textrm{Bloch}定理处理周期函数$|\tilde{u}_{\vec k+\vec q}^n\rangle$，同样对$\vec q$展开到一阶
 			\begin{displaymath}
-				|u_{\vec k+\vec q}^n\rangle=|u_{\vec k}^n\rangle+\vec q\nabla_{\vec k}|u_{\vec k}^n\rangle+\mathcal{O}(\vec q^2)
+				|\tilde u_{\vec k+\vec q}^n\rangle=|\tilde u_{\vec k}^n\rangle+\vec q\nabla_{\vec k}|\tilde u_{\vec k}^n\rangle+\mathcal{O}(\vec q^2)
 			\end{displaymath}
 		\item 在\textrm{PAW}方法中，投影函数$|\tilde p_{i,\vec k+\vec q}\rangle$也对$\vec q$展开到一阶
 			\begin{displaymath}
@@ -848,16 +853,15 @@ P(\vec q,\omega)=&\hbar\omega W(\vec q,\omega)\\
 \end{figure} 
 }
 
-@ARTICLE{PRB73-045112_2006,
-	author = {M. Gajdo$\check{s}$ and K. Hummer and G. Kresse and J. Furthm\"uller and F. Bechstedt},
-	title = {Linear optical properties in the PAW methodology.},
-	journal = {Phys. Rev. B},
-	year = {2006},
-	volume = {73},
-	number = {},
-	pages = {045112},
-	month = {},
-	note = {},
-	otherinfo = {}
+%------------------------------------------------------------------------Reference----------------------------------------------------------------------------------------------
+\begin{thebibliography}{99}
+\frame[allowframebreaks]
+{
+\frametitle{主要参考文献}
+{\tiny
+\bibitem{PRB73-045112_2006}\textrm{M. Gajdo$\check{s}$, K. Hummer, G. Kresse, J. Furthm\"uller and F. Bechstedt. \textit{Phys. Rev.} B, \textbf{73} (2006), 045112}
 }
+\nocite*{}
+}
+\end{thebibliography}
 
