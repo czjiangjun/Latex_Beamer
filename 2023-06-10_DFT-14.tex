@@ -426,7 +426,7 @@
 \begin{displaymath}
 	\mathbf{A}(\vec r,t)=A_0\mathbf{e}\mathrm{e}^{\mathrm{i}(\vec q\cdot\vec r-\omega t)}+\mathrm{c.c}\quad\textcolor{red}{\mathbf{e}\bot\vec q}
 \end{displaymath}
-准确到$\mathrm{A}$的线性项(忽略$\mathrm{A}$的平方项)\footnote{\fontsize{5.2pt}{4.0pt}\selectfont{偶极近似下，这是合理的近似}}，则体系~\textrm{Hamiltonian}为:
+准确到$\mathbf{A}$的线性项(忽略$\mathbf{A}$的平方项)\footnote{\fontsize{5.2pt}{4.0pt}\selectfont{偶极近似下，这是合理的近似}}，则体系~\textrm{Hamiltonian}为:
 \begin{displaymath}
 	H=\left[ \frac{\vec p^2}{2m}+V(\vec r) \right]+\frac{eA_0}{mc}\mathrm{e}^{\mathrm{i}(\vec q\cdot\vec r-\omega t)}\mathbf{e}\cdot\vec p+\frac{eA_0}{mc}\mathrm{e}^{-\mathrm{i}(\vec q\cdot\vec r-\omega t)}\mathbf{e}\cdot\vec p
 \end{displaymath}
@@ -439,7 +439,7 @@
 在含时微扰\textrm{Hamiltonian}作用下，带间跃迁的能量贡献为
 \begin{displaymath}
 	\begin{aligned}
-		W(\vec q,\omega)=&\frac{2\pi}{\hbar}\left( \frac{eA_0}{m_ec} \right)^2\textcolor{blue}{2}\sum_{i,j}|\langle\psi_j|\mathrm{e}^{\mathrm{i}\vec q\cdot\vec r}\mathbf{e}\cdot\vec p|\psi_i\rangle|^2\\
+		W(\vec q,\omega)=&\frac{2\pi}{\hbar}\left( \frac{eA_0}{m_ec} \right)^2\textcolor{blue}{2}\sum_{i,j}|\langle\psi_j|\textcolor{red}{\mathrm{e}^{\mathrm{i}\vec q\cdot\vec r}\mathbf{e}\cdot\vec p}|\psi_i\rangle|^2\\
 		\times&\delta[E_j-E_i-\hbar\omega][f(E_i)-f(E_j))]
 	\end{aligned}
   \label{eq:optic-27}
@@ -660,7 +660,7 @@ $\varepsilon_2(\omega)$是晶体的光学吸收和能带结构之间的基本关
 \begin{aligned}
 P(\vec q,\omega)=&\hbar\omega W(\vec q,\omega)\\
 =&\hbar\omega\times\frac{2\pi}{\hbar}\textcolor{blue}{2}\sum_{\alpha,\beta}|\langle\psi_{\beta}|A_0\mathrm{e}^{\mathrm{i}\vec q\cdot\vec r}|\psi_{\alpha}\rangle|^2\delta(E_{\beta}-E_{\alpha}-\hbar\omega)[f(E_{\alpha})-f(E_{\beta}))]\\
-=&4\pi\omega|A_0|^2\sum_{\alpha,\beta}|\langle\psi_{\beta}|\mathrm{e}^{\mathrm{i}\vec q\cdot\vec r}|\psi_{\alpha}\rangle|^2\delta(E_{\beta}-E_{\alpha}-\hbar\omega)[f(E_{\alpha})-f(E_{\beta}))]
+=&4\pi\omega|A_0|^2\sum_{\alpha,\beta}|\langle\psi_{\beta}|\textcolor{red}{\mathrm{e}^{\mathrm{i}\vec q\cdot\vec r}}|\psi_{\alpha}\rangle|^2\delta(E_{\beta}-E_{\alpha}-\hbar\omega)[f(E_{\alpha})-f(E_{\beta}))]
 \end{aligned}
 \end{displaymath}}}
 与横波电磁场中的推导类似
@@ -860,6 +860,7 @@ P(\vec q,\omega)=&\hbar\omega W(\vec q,\omega)\\
 \frametitle{主要参考文献}
 {\tiny
 \bibitem{PRB73-045112_2006}\textrm{M. Gajdo$\check{s}$, K. Hummer, G. Kresse, J. Furthm\"uller and F. Bechstedt. \textit{Phys. Rev.} B, \textbf{73} (2006), 045112}
+\bibitem{Grosso_Parravicini}\textrm{Giuseppe Grosso and Giuseppe Pastori Parravicini, {\textit{Solid State Physics}} (Academic Press, Cambridge, U.K., 2000)} 
 }
 \nocite*{}
 }
