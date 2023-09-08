@@ -84,7 +84,7 @@
 \centering
 \vspace{-5pt}
 \includegraphics[height=0.80in,width=2.05in,viewport=30 1 660 265,clip]{Figures/GW-0.png}
-\caption{\textrm{\small{The poles of the time-ordered Green's function.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\caption{\textrm{\tiny{The poles of the time-ordered Green's function.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{GW-0}
 \end{figure}
 }
@@ -104,8 +104,8 @@
 		\item 相互作用\textrm{Hamiltonian}的\textrm{Green's function}
 		\fontsize{9.5pt}{4.2pt}\selectfont{	\begin{displaymath}
 			\hspace*{-35pt}	\begin{aligned}
-				&\underbrace{\bigg(-\dfrac{\hbar^2}{2m_e}\nabla^2+V_{\mathrm{ion}}(\vec r)+V_H(r)\bigg)}+\Sigma(\vec r,\vec r^{\prime},\omega)=H(\omega)\Longrightarrow H_0+\Sigma(\textcolor{red}{\omega})=H(\textcolor{red}{\omega})\\
-					&\quad\qquad\qquad\mathrm{\textcolor{blue}{non-int.}} %\mathrm{energy/frequency dependent Hamiltonian}
+				\underbrace{\bigg(-\dfrac{\hbar^2}{2m_e}\nabla^2+V_{\mathrm{ion}}(\vec r)+V_H(r)\bigg)}_{\mathrm{\textcolor{blue}{non-int.}}}+\Sigma(\vec r,\vec r^{\prime},\omega)=H(\omega)\Longrightarrow H_0+\Sigma(\textcolor{red}{\omega})=H(\textcolor{red}{\omega})
+					 %\mathrm{energy/frequency dependent Hamiltonian}
 				\end{aligned}
 			\end{displaymath}}
 	\end{itemize}
@@ -167,15 +167,75 @@
 \label{Green's_function-physical interpretation}
 \end{figure}
 	\begin{itemize}
-		\item 粒子传播子:$G_0(1,2)=G_0(\vec r_1,\vec r_2,t_2-t_1)$且\textcolor{blue}{$(t_2>t_1)$}
+		\item 粒子传播子:~$G_0(1,2)=G_0(\vec r_1,\vec r_2,t_2-t_1)$且\textcolor{blue}{$(t_2>t_1)$}
 			\begin{displaymath}
 				G_0(1,2)=\sum_n^{\textcolor{blue}{\mathrm{vir.}}}\psi_n^{\ast}(\vec r_1)\psi_n(\vec r_2)\mathrm{e}^{-\mathrm{i}(\varepsilon_n-\mu)(\textcolor{blue}{t_2-t_1})}
 			\end{displaymath}
-		\item 孔传播子:$G_0(1,2)$且\textcolor{blue}{$(t_1>t_2)$}
+		\item 孔传播子:~$G_0(1,2)$且\textcolor{blue}{$(t_1>t_2)$}
 			\begin{displaymath}
 				G_0(1,2)=\sum_n^{\textcolor{blue}{\mathrm{occ.}}}\psi_n^{\ast}(\vec r_1)\psi_n(\vec r_2)\mathrm{e}^{-\mathrm{i}(\varepsilon_n-\mu)(\textcolor{blue}{t_1-t_2})}
 			\end{displaymath}
 	\end{itemize}}
+}
+
+\frame
+{
+	\frametitle{激发与光学带隙}
+\begin{figure}[h!]
+\centering
+\vspace{-10pt}
+\includegraphics[height=1.3in,width=4.00in,viewport=0 0 1470 470,clip]{Figures/Green_function-Gap.png}
+%\caption{\textrm{\small{The relation of the varibous Green's function.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{GW-Optical_Gap}
+\end{figure}
+\begin{displaymath}
+		\underbrace{E_{\textrm{g}}^{\mathrm{KS}}}_{\textrm{\tiny KS~gap}}~=~\varepsilon_{\mathrm{LUMO}}^{\mathrm{KS}}-\varepsilon_{\mathrm{HOMO}}^{\mathrm{KS}}~\ll~\underbrace{\textcolor{green}{E_{\mathrm{g}}^{\mathrm{GW}}}}_{\textcolor{green}{\textrm{\tiny GW~gap}}} ~=~\varepsilon_{\mathrm{LUMO}}^{\mathrm{GW}}-\varepsilon_{\mathrm{HOMO}}^{\mathrm{GW}}
+\end{displaymath}
+\begin{displaymath}
+		\underbrace{\textcolor{blue}{E_{\textrm{g}}^{\mathrm{opt}}}}_{\textcolor{blue}{\textrm{\tiny optical~gap}}}~=~\varepsilon_1^{\mathrm{N}}-\varepsilon_0^{\mathrm{N}}~=~\underbrace{\textcolor{red}{E_{\mathrm{g}}^{\mathrm{fund}}}}_{\textcolor{red}{\textrm{\tiny fundamental~gap}}}+\underbrace{\textcolor{purple}{E_{\mathrm{B}}}}_{\textcolor{purple}{\textrm{\tiny excitionic effect}}}
+\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{\textrm{Green's function}与动态屏蔽}
+	\begin{itemize}
+		\item 单粒子\textrm{Green's~function}:
+	\begin{displaymath}
+		\textcolor{blue}{G}(\vec r_1,\vec r_2;\textcolor{brown}{\omega})=\underbrace{\sum_i\dfrac{\psi_i(\vec r_1)\psi_i(\vec r_2)}{\textcolor{brown}{\omega}-\varepsilon_i-\mathrm{i}\eta}}_{\textcolor{green}{\mathrm{removal~part~=~IPs}}}+\underbrace{\sum_a\dfrac{\psi_a(\vec r_1)\psi_a(\vec r_2)}{\textcolor{brown}{\omega}-\varepsilon_a+\mathrm{i}\eta}}_{\textcolor{red}{\mathrm{addition~part~=~EAs}}}
+	\end{displaymath}
+\item 极化率:
+	\begin{displaymath}
+		P(\vec r_1,\vec r_2;\textcolor{brown}{\omega})=-\dfrac{\mathrm{i}}{\pi}\int\textcolor{blue}{G}(\vec r_1,\vec r_2;\textcolor{brown}{\omega}+\omega^{\prime})\textcolor{blue}{G}(\vec r_1,\vec r_2;\omega^{\prime})\mathrm{d}\omega^{\prime}
+	\end{displaymath}
+\item 介电函数:
+	\begin{displaymath}
+		\epsilon(\vec r_1,\vec r_2;\textcolor{brown}{\omega})=\delta(\vec r_1-\vec r_2)-\int\dfrac{P(\vec r_1,\vec r_2;\textcolor{brown}{\omega})}{|\vec r_2-\vec r_3|}\mathrm{d}\vec r_3
+	\end{displaymath}
+\item 动态屏蔽\textrm{Coulomb}势
+	\begin{displaymath}
+		\textcolor{cyan}{W}(\vec r_1,\vec r_2;\textcolor{brown}{\omega})=\int\dfrac{\epsilon^{-1}(\vec r_1,\vec r_3;\textcolor{brown}{\omega})}{|\vec r_2-\vec r_3|}\mathrm{d}\vec r_3
+	\end{displaymath}
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{原子基表示的动态屏蔽}
+	\begin{itemize}
+		\item 电子排斥积分\textrm{(Electron repulsion integrals~(ERIs))}
+			\begin{displaymath}
+				(pq|rs)=\iint\dfrac{\psi_p(\vec r_1)\psi_q(\vec r_1)\psi_r(\vec r_2)\psi_s(\vec r_2)}{|\vec r_1-\vec r_2|}\mathrm{d}\vec r_1\vec r_2
+			\end{displaymath}
+		\item $\textcolor{cyan}{W}$的谱表象
+\fontsize{7.0pt}{6.2pt}\selectfont{			\begin{displaymath}
+				\begin{aligned}
+					\hspace*{-35pt}
+					\textcolor{cyan}{W}_{pq,rs}(\textcolor{brown}{\omega})=&\iint\psi_p(\vec r_1)\psi_q(\vec r_1)\textcolor{cyan}{W}(\vec r_1,\vec r_2;\textcolor{brown}{\omega})\psi_r(\vec r_2)\psi_s(\vec r_2)\mathrm{d}\vec r_1\mathrm{d}\vec r_2\\
+					=&\underbrace{(pq|rs)}_{\textrm{(static)~exchange~part}}+\underbrace{2\sum_m\textcolor{violet}{(pq|m)(rs|m)}\bigg[\dfrac1{\textcolor{brown}{\omega}-\textcolor{orange}{\Omega_m^{\textrm{RPA}}}+\mathrm{i}\eta}-\dfrac1{\textcolor{brown}{\omega}+\textcolor{orange}{\Omega_m^{\textrm{RPA}}}-\mathrm{i}\eta}\bigg]}_{\mathrm{(dynamical) correlation part \textcolor{cyan}{W}_{pq,rs}^c(\textcolor{brown}{\omega})}}
+				\end{aligned}
+			\end{displaymath}}
+	\end{itemize}
 }
 
 \frame
@@ -226,10 +286,16 @@
 \begin{figure}[h!]
 \centering
 \vspace{-10pt}
-\includegraphics[height=1.0in,width=1.05in,viewport=5 5 330 335,clip]{Figures/GW-1.png}
+\includegraphics[height=2.2in,width=2.25in,viewport=5 5 330 335,clip]{Figures/GW-1.png}
 %\caption{\textrm{\small{The relation of the varibous Green's function.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{GW-1}
 \end{figure}
+	直接求解\textrm{Hedin}方程是非常复杂的，有必要采取近似(把$\Gamma$函数表达成可分离的$\delta$函数)，这就是$GW$近似
+}
+
+\frame
+{
+	\frametitle{}
 	\begin{itemize}
 			\vspace{-15pt}
 		\item 定义不可约极化率$\tilde\chi$，$\tilde\chi(\vec r_1,t_1;\vec r_2,t_2)\equiv\dfrac{\delta n(\vec r_1,t_1)}{\delta U_{e\!f\!f}(\vec r_2,t_2)}=-\mathrm{i}\dfrac{\delta G(\vec r_1,t_1,\vec r_1,t_1+\eta)_{\eta\rightarrow0}}{\delta U_{e\!f\!f}(\vec r_2,t_2)}$
@@ -242,13 +308,11 @@
 				\end{aligned}
 			\end{displaymath}
 	\end{itemize}
-
 }
 
 \frame
 {
 	\frametitle{$GW$近似}
-	直接求解\textrm{Hedin}方程是非常复杂的，有必要采取近似(把\textrm{vertex}函数用局域瞬时函数替代)，这就是$GW$近似
 	$$\Gamma(\vec r_{12},t_{12};\vec r_3t_3)\approx\delta(\vec r_1,t_1;\vec r_2,t_2)\delta(\vec r_1,t_1;\vec r_3,t_3)\equiv\Gamma^{GW}(\vec r_{12},t_{12};\vec r_3,r_3)$$
 \begin{figure}[h!]
 \centering
