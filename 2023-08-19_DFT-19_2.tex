@@ -76,9 +76,15 @@
 {
 	\frametitle{\textrm{Green's function}}
 	\begin{itemize}
-		\item 时间序列的\textrm{Green's function}定义为$G(\vec r_1,t_1;\vec r_2,t_2)=-\mathrm{i}\langle\Theta_0^N|\hat{\mathbf{T}}[\hat\psi(\vec r_1,t_1)\hat\psi^{\dag}(\vec r_2,t_2)]|\Theta_0^N\rangle$
-		\item \textrm{Green function}的\textrm{Lehmann}表象为$$G(\vec r_1,\vec r_2;\omega)=\sum\limits_i\dfrac{\Psi_i(\vec r_1)\Psi_i^{\dag}(\vec r_2)}{\omega-\varepsilon_i+\mathrm{i}\eta\mathrm{sign}(\varepsilon_i-\mu)}\qquad\eta\rightarrow0^+$$
-			由于频率域中时间序列的\textrm{Green's function}包含$(N-1)$个粒子和$(N+1)$个粒子体系的全部激发谱，它们与\textrm{Green's function}在复平面的极值对应
+		\item 时间序列的\textrm{Green's function}定义为$G(\vec x_1,t_1;\vec x_2,t_2)=-\mathrm{i}\langle\Theta_0^N|\hat{\mathbf{T}}[\hat\psi(\vec x_1,t_1)\hat\psi^{\dag}(\vec x_2,t_2)]|\Theta_0^N\rangle$
+		\item \textrm{Green function}的\textcolor{blue}{\textrm{Lehmann}表象}为
+			\begin{displaymath}
+				\hspace*{-35pt}
+				G(\vec x_1,\vec x_2;\omega)=\sum\limits_i\dfrac{\langle\Theta_0^N|\hat\psi_i(\vec x_1)|\Theta_0^{N+1}\rangle\langle\Theta_0^{N+1}|\hat\psi_i^{\dag}(\vec x_2)|\Theta_0^N\rangle}{\omega-\varepsilon_i+\mathrm{i}\eta\mathrm{sign}(\varepsilon_i-\mu)}+\mathrm{c.c.}\quad\eta\rightarrow0^+
+			\end{displaymath}
+			{\fontsize{6.2pt}{6.2pt}\selectfont{存在小的虚部$\eta$保证频率域的\textrm{Fourier}变换收敛}}
+
+			这样表示的\textrm{Green's function}，在复平面中的极点与增加/失去一个粒子体系的能量对应，因此也称为\textcolor{blue}{谱表象\textrm{(Spectral~representation)}}
 	\end{itemize}
 \begin{figure}[h!]
 \centering
@@ -97,7 +103,7 @@
 			\begin{displaymath}
 				1=(\omega-H)G\Longleftrightarrow G^{-1}=(\omega -H)
 			\end{displaymath}
-		\item \textrm{Lehmann}表象下，\textrm{Kohn-Sham}(无相互作用的)\textrm{Hamiltonian}对应的\textrm{Green' function}
+		\item \textrm{Lehmann}表象下，\textrm{Kohn-Sham}(无相互作用、忽略自旋的)\textrm{Hamiltonian}对应的\textrm{Green' function}
 			\begin{displaymath}
 				G_{\textcolor{magenta}{0}}(\vec r,\vec r^{\prime};\omega)=\sum_n\dfrac{\psi_n(\vec r)\psi_n^{\ast}(\vec r^{\prime})}{\omega-\varepsilon_n+\mathrm{i}\eta\mathrm{sign}(\varepsilon_n-\mu)}
 			\end{displaymath}
@@ -228,13 +234,60 @@
 				(pq|rs)=\iint\dfrac{\psi_p(\vec r_1)\psi_q(\vec r_1)\psi_r(\vec r_2)\psi_s(\vec r_2)}{|\vec r_1-\vec r_2|}\mathrm{d}\vec r_1\vec r_2
 			\end{displaymath}
 		\item $\textcolor{cyan}{W}$的谱表象
-\fontsize{7.0pt}{6.2pt}\selectfont{			\begin{displaymath}
+{\fontsize{7.0pt}{6.2pt}\selectfont{			\begin{displaymath}
 				\begin{aligned}
 					\hspace*{-35pt}
 					\textcolor{cyan}{W}_{pq,rs}(\textcolor{brown}{\omega})=&\iint\psi_p(\vec r_1)\psi_q(\vec r_1)\textcolor{cyan}{W}(\vec r_1,\vec r_2;\textcolor{brown}{\omega})\psi_r(\vec r_2)\psi_s(\vec r_2)\mathrm{d}\vec r_1\mathrm{d}\vec r_2\\
-					=&\underbrace{(pq|rs)}_{\textrm{(static)~exchange~part}}+\underbrace{2\sum_m\textcolor{violet}{(pq|m)(rs|m)}\bigg[\dfrac1{\textcolor{brown}{\omega}-\textcolor{orange}{\Omega_m^{\textrm{RPA}}}+\mathrm{i}\eta}-\dfrac1{\textcolor{brown}{\omega}+\textcolor{orange}{\Omega_m^{\textrm{RPA}}}-\mathrm{i}\eta}\bigg]}_{\mathrm{(dynamical) correlation part \textcolor{cyan}{W}_{pq,rs}^c(\textcolor{brown}{\omega})}}
+					=&\underbrace{(pq|rs)}_{\textrm{(static)~exchange~part}}+\underbrace{2\sum_m\textcolor{violet}{(pq|m)(rs|m)}\bigg[\dfrac1{\textcolor{brown}{\omega}-\textcolor{orange}{\Omega_m^{\textrm{RPA}}}+\mathrm{i}\eta}-\dfrac1{\textcolor{brown}{\omega}+\textcolor{orange}{\Omega_m^{\textrm{RPA}}}-\mathrm{i}\eta}\bigg]}_{\mathrm{(dynamical)~correlation~part~~\textcolor{cyan}{W}_{pq,rs}^c(\textcolor{brown}{\omega})}}
 				\end{aligned}
-			\end{displaymath}}
+			\end{displaymath}}}
+		\item 屏蔽电子排斥积分(谱权重)
+			\begin{displaymath}
+				\textcolor{violet}{(pq|m)}=\sum_{ia}(pq|ia)(\textcolor{orange}{\mathbf{X}_m^{\mathrm{RPA}}}+\textcolor{orange}{\mathbf{Y}_m^{\mathrm{RPA}}})_{ia}
+			\end{displaymath}
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{动态屏蔽的计算}
+	\begin{itemize}
+		\item 直接\textrm{RPA}计算\textrm{(pseudo-hermitian linear problem)}
+			\begin{displaymath}
+				\begin{aligned}
+					\begin{pmatrix}
+						\mathbf{A}^{\mathrm{RPA}} &\mathbf{B}^{\mathrm{RPA}}\\
+						-\mathbf{B}^{\mathrm{RPA}} &-\mathbf{A}^{\mathrm{RPA}}\\
+					\end{pmatrix}
+					\cdot
+					\begin{pmatrix}
+						\textcolor{orange}{	\mathbf{X}_m^{\mathrm{RPA}}}\\
+						\textcolor{orange}{\mathbf{Y}_m^{\mathrm{RPA}}}
+					\end{pmatrix}=\Omega_{m}^{\mathrm{RPA}}
+					\begin{pmatrix}
+						\textcolor{orange}{	\mathbf{X}_m^{\mathrm{RPA}}}\\
+						\textcolor{orange}{\mathbf{Y}_m^{\mathrm{RPA}}}
+					\end{pmatrix}
+				\end{aligned}
+			\end{displaymath}
+			{\fontsize{9.0pt}{6.2pt}\selectfont{对于单粒子态，有
+				\begin{displaymath}
+					\mathbf{A}_{ia,ib}^{\mathrm{RPA}}=\delta_{ij}\delta_{ab}(\varepsilon_a-\varepsilon_i)+2(ia|bj)\qquad \mathbf{B}_{ia,ib}^{\mathrm{RPA}}=2(ia|jb)
+				\end{displaymath}}}
+		\item \textrm{Non-hermitian to hermitian}
+			\begin{displaymath}
+				(\mathbf{A}-\mathbf{B})^{1/2}\cdot(\mathbf{A}+\mathbf{B})\cdot(\mathbf{A}-\mathbf{B})^{1/2}\cdot\mathbf{Z}_m=\Omega_m^2\mathbf{Z}_m
+			\end{displaymath}
+			\begin{displaymath}
+				\begin{aligned}
+					(\mathbf{X}_m+\mathbf{Y}_m)=\Omega_m^{-1/2}(\mathbf{A}-\mathbf{B})^{+1/2}\cdot\mathbf{Z}_m\\
+					(\mathbf{X}_m-\mathbf{Y}_m)=\Omega_m^{+1/2}(\mathbf{A}-\mathbf{B})^{-1/2}\cdot\mathbf{Z}_m\\
+				\end{aligned}
+			\end{displaymath}
+		\item \textrm{Tamm-Damcoff}近似\textrm{(TDA)}
+			\begin{displaymath}
+				\mathbf{B}=\mathbf{0}\Longrightarrow \mathbf{A}\cdot\textcolor{orange}{\mathbf{X}_m}=\textcolor{orange}{\Omega_m^{\mathrm{TDA}}\mathbf{X}_m}
+			\end{displaymath}
 	\end{itemize}
 }
 
@@ -252,23 +305,6 @@
 
 \frame
 {
-	\frametitle{\textrm{Green function}与自能}
-	\textrm{Dyson}方程
-	\begin{displaymath}
-		\begin{aligned}
-	&G(\vec r_1,t_1;\vec r_2,t_2)=G_0(\vec r_1,t_1;\vec r_2,t_2)\\
-	&+\int G_0(\vec r_1,t_1;\vec r_3,t_3)\Sigma(\vec r_3,t_3;\vec r_4,t_4)G(\vec r_4,t_4;\vec r_2,t_2)\mathrm{d}t_3\mathrm{d}\vec r_3\mathrm{d}t_4\mathrm{d}\vec r_4
-		\end{aligned}
-	\end{displaymath}
-	\begin{itemize}
-		\item \textrm{Dyson}方程描述了相互作用体系$G$通过自能$\Sigma$与近独立体系(传播子)$G_0$关联，自能$\Sigma$是非局域，非\textrm{Hermitian}，并与时间相关
-		\item 通过求解含有自能$\Sigma$的准粒子\textrm{(quasi-particle, QP)}方程，可以求解得到多体体系中重整化电子的量子态(\textrm{Hedin}方程)
-			$$\bigg[\hat h_0(\vec r_1)+v_H(\vec r_1)\bigg]\Psi(\vec r_1)+\int\textcolor{red}{\Sigma(\vec r_1,\vec r_2;\omega^{\mathrm{QP}})}\Psi(\vec r_2)\mathrm{d}\vec r_2=\varepsilon^{\mathrm{QP}}\Psi(\vec r_1)$$
-	\end{itemize}
-}
-
-\frame
-{
 	\frametitle{准粒子:~激发与屏蔽}
 \begin{figure}[h!]
 	\vspace{-0.12in}
@@ -281,7 +317,30 @@
 
 \frame
 {
-	\frametitle{\textrm{Hedin}方程的求解} 
+	\frametitle{\textrm{Green's function}与自能}
+	即使是单粒子\textrm{Green's function}也无法精确求解，必须作适当近似，一个合理的近似是写成\textrm{Kohn-Sham}本征态和本征值表示的\textrm{Lehmann}形式$G_{\mathrm{KS}}^0(\vec r_1,\vec r_2;\textcolor{brown}{\omega})$，于是\textrm{Dyson}方程可以写成
+	\begin{displaymath}
+		\hspace*{-10pt}
+		[\textcolor{blue}{G}(\vec r_1,\vec r_2;\textcolor{brown}{\omega})]^{-1}=\underbrace{[G_{\mathrm{KS}}^0(\vec r_1;\vec r_2;\textcolor{brown}{\omega})]^{-1}}_{\mathrm{KS~Green's~function}}+\textcolor{red}{\Sigma^{\mathrm{xc}}}(\vec r_1,\vec r_2;\textcolor{brown}{\omega})-\underbrace{v^{\mathrm{XC}}(\vec r_1)}_{\mathrm{KS~potential}}\delta(\vec r_1-\vec r_2)
+	\end{displaymath}
+	\begin{itemize}
+		\item \textrm{Dyson}方程描述了相互作用体系$G$通过自能$\Sigma$与独立体系$G_0$(传播子)关联，自能$\Sigma$含时、非局域、非\textrm{Hermitian}的
+%	\textrm{Dyson}方程
+%	\begin{displaymath}
+%		\begin{aligned}
+%	&G(\vec r_1,t_1;\vec r_2,t_2)=G_0(\vec r_1,t_1;\vec r_2,t_2)\\
+%	&+\int G_0(\vec r_1,t_1;\vec r_3,t_3)\Sigma(\vec r_3,t_3;\vec r_4,t_4)G(\vec r_4,t_4;\vec r_2,t_2)\mathrm{d}t_3\mathrm{d}\vec r_3\mathrm{d}t_4\mathrm{d}\vec r_4
+%		\end{aligned}
+%	\end{displaymath}
+
+		\item 通过求解含有自能$\Sigma$的准粒子\textrm{(quasi-particle, QP)}方程，可以求解得到多体体系中重整化电子的量子态(\textrm{Hedin}方程)
+%			$$\bigg[\hat h_0(\vec r_1)+v_H(\vec r_1)\bigg]\Psi(\vec r_1)+\int\textcolor{red}{\Sigma(\vec r_1,\vec r_2;\omega^{\mathrm{QP}})}\Psi(\vec r_2)\mathrm{d}\vec r_2=\varepsilon^{\mathrm{QP}}\Psi(\vec r_1)$$
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{\textrm{Hedin}方程} 
 	\textrm{Hedin}方程是积分-微分形式的，只能通过迭代来求解
 \begin{figure}[h!]
 \centering
@@ -293,36 +352,48 @@
 	直接求解\textrm{Hedin}方程是非常复杂的，有必要采取近似(把$\Gamma$函数表达成可分离的$\delta$函数)，这就是$GW$近似
 }
 
-\frame
-{
-	\frametitle{}
-	\begin{itemize}
-			\vspace{-15pt}
-		\item 定义不可约极化率$\tilde\chi$，$\tilde\chi(\vec r_1,t_1;\vec r_2,t_2)\equiv\dfrac{\delta n(\vec r_1,t_1)}{\delta U_{e\!f\!f}(\vec r_2,t_2)}=-\mathrm{i}\dfrac{\delta G(\vec r_1,t_1,\vec r_1,t_1+\eta)_{\eta\rightarrow0}}{\delta U_{e\!f\!f}(\vec r_2,t_2)}$
-		\item 定义动态屏蔽相互作用$W(\vec r_1,t_1;\vec r_2,t_2)\equiv\int\epsilon^{-1}(\vec r_1,t_1;\vec r_3,t_3)v(\vec r_3,r_3;\vec r_2,t_2)\mathrm{d}t_3\mathrm{d}\vec r_3$
-		\item 介电矩阵与不可约极化率满足关系:
-			\begin{displaymath}
-				\begin{aligned}
-					&\epsilon(\vec r_1,t_1;\vec r_2,t_2)\\
-					=&\delta(\vec r_1,t_1;\vec r_2,t_2)-\int v(\vec r_,t_1,\vec r_3,t_3)\tilde\chi(\vec r_3,t_3;\vec r_2,t_2)\mathrm{d}t_3\mathrm{d}\vec r_3
-				\end{aligned}
-			\end{displaymath}
-	\end{itemize}
-}
+%\frame
+%{
+%	\frametitle{}
+%	\begin{itemize}
+%			\vspace{-15pt}
+%		\item 定义不可约极化率$\tilde\chi$，$\tilde\chi(\vec r_1,t_1;\vec r_2,t_2)\equiv\dfrac{\delta n(\vec r_1,t_1)}{\delta U_{e\!f\!f}(\vec r_2,t_2)}=-\mathrm{i}\dfrac{\delta G(\vec r_1,t_1,\vec r_1,t_1+\eta)_{\eta\rightarrow0}}{\delta U_{e\!f\!f}(\vec r_2,t_2)}$
+%		\item 定义动态屏蔽相互作用$W(\vec r_1,t_1;\vec r_2,t_2)\equiv\int\epsilon^{-1}(\vec r_1,t_1;\vec r_3,t_3)v(\vec r_3,r_3;\vec r_2,t_2)\mathrm{d}t_3\mathrm{d}\vec r_3$
+%		\item 介电矩阵与不可约极化率满足关系:
+%			\begin{displaymath}
+%				\begin{aligned}
+%					&\epsilon(\vec r_1,t_1;\vec r_2,t_2)\\
+%					=&\delta(\vec r_1,t_1;\vec r_2,t_2)-\int v(\vec r_,t_1,\vec r_3,t_3)\tilde\chi(\vec r_3,t_3;\vec r_2,t_2)\mathrm{d}t_3\mathrm{d}\vec r_3
+%				\end{aligned}
+%			\end{displaymath}
+%	\end{itemize}
+%}
 
 \frame
 {
-	\frametitle{$GW$近似}
+	\frametitle{$GW$近似:~\textrm{Vertex function}函数的简化}
+\vspace{-20pt}
 	$$\Gamma(\vec r_{12},t_{12};\vec r_3t_3)\approx\delta(\vec r_1,t_1;\vec r_2,t_2)\delta(\vec r_1,t_1;\vec r_3,t_3)\equiv\Gamma^{GW}(\vec r_{12},t_{12};\vec r_3,r_3)$$
 \begin{figure}[h!]
+\vspace{-8pt}
 \centering
-\vspace{-15pt}
-\includegraphics[height=1.0in,width=1.65in,viewport=5 5 530 320,clip]{Figures/GW-3.png}
+\includegraphics[height=1.50in,width=2.45in,viewport=5 5 530 320,clip]{Figures/GW-3.png}
 %\caption{\textrm{\small{The relation of the varibous Green's function.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{GW-2}
 \end{figure}
 频率空间内，$GW$近似的自能表示为
-$$\Sigma(\vec r_1,\vec r_2;\omega)=\dfrac{\mathrm i}{2\pi}\int \mathrm e^{\mathrm i\omega^{\prime}\delta^+}G(\vec r_1,\vec r_2;\omega+\omega^{\prime})W(\vec r_1,\vec r_2;\omega^{\prime})\mathrm{d}\omega^{\prime}$$
+%$$\Sigma(\vec r_1,\vec r_2;\omega)=\dfrac{\mathrm i}{2\pi}\int \mathrm e^{\mathrm i\omega^{\prime}\delta^+}G(\vec r_1,\vec r_2;\omega+\omega^{\prime})W(\vec r_1,\vec r_2;\omega^{\prime})\mathrm{d}\omega^{\prime}$$
+{\fontsize{7.2pt}{6.2pt}\selectfont{
+\begin{displaymath}
+	\hspace*{-12pt}
+	\underbrace{\textcolor{red}{\Sigma^{\mathrm{XC}}}(\vec r_1,\vec r_2;\textcolor{brown}{\omega})}_{GW~\mathrm{self-energy}}=\underbrace{\textcolor{purple}{\Sigma^{\mathrm{X}}}(\vec r_1,\vec r_2)}_{\mathrm{exchange}}+\underbrace{\textcolor{red}{\Sigma^{\mathrm{C}}}(\vec r_1,\vec r_2;\textcolor{brown}{\omega})}_{\mathrm{correlation}}=\dfrac{\mathrm i}{2\pi}\int\textcolor{blue}{G}(\vec r_1,\vec r_2;\textcolor{brown}{\omega}+\omega^{\prime})\textcolor{cyan}{W}(\vec r_1,\vec r_2;\omega^{\prime})\mathrm{e}^{\mathrm{i}\eta\omega^{\prime}}\mathrm{d}\omega^{\prime}
+\end{displaymath}
+交换部分(\textcolor{blue}{静态自能}): $\textcolor{purple}{\Sigma_{pq}^{\mathrm{X}}}=-\sum\limits_i(pi|iq)$\\
+相关部分(\textcolor{blue}{动态自能}):
+%\begin{displaymath}
+	$\textcolor{red}{\Sigma_{pq}^{\mathrm{C}}}(\textcolor{brown}{\omega})=2\sum\limits_{im}\frac{\textcolor{violet}{(pi|m)(qi|m)}}{\textcolor{brown}{\omega}-\varepsilon_i+\textcolor{orange}{\Omega_m^{\mathrm{RPA}}}-\mathrm{i}\eta}+2\sum\limits_{am}\frac{\textcolor{violet}{(pa|m)(qa|m)}}{\textcolor{brown}{\omega}-\varepsilon_a-\textcolor{orange}{\Omega_m^{\mathrm{RPA}}}+\mathrm{i}\eta}$
+%\end{displaymath}
+}}
 }
 
 \frame
