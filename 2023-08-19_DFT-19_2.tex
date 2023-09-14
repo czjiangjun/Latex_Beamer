@@ -74,17 +74,40 @@
 \section{电子相关与多体理论}
 \frame
 {
+	\frametitle{多重散射与\textrm{Green's function}}
+\begin{figure}[h!]
+	\vspace{-0.55in}
+\centering
+%\includegraphics[height=1.80in,width=1.95in,viewport=5 0 515 495,clip]{Figures/multiple-scattering_theory.png}
+\includegraphics[height=2.32in,width=2.48in,viewport=5 0 515 475,clip]{Figures/multiple-scattering_theory.png}
+\caption{\tiny \textrm{Central idea of multiple scattering theory:~ decomposition of electronic motion into scattering at atomic sites and free-electron like propagation in between. The bottom of the figure gives a sketch for the potential along the dashed line.}}
+\label{Multi-scattering}
+\end{figure}
+\textcolor{blue}{多重散射:~}入射波是\textcolor{red}{所有来自其他散射中心的出射波叠加}
+			\begin{displaymath}
+				\begin{aligned}
+					\tilde G=&\tilde G_0+\tilde G_0\mathbf{v}\tilde G_0+G_0\mathbf{v}\tilde G_0\mathbf{v}\tilde G_0+\cdots\\
+					=&\tilde G_0+\tilde G_0\mathbf{v}\tilde G \Longrightarrow \tilde G=(\tilde G_0^{-1}-\mathbf{v})^{-1}
+%					\tilde G=&(\tilde G_0^{-1}-\mathbf{t})^{-1}
+				\end{aligned}
+			\end{displaymath}
+}
+
+\frame
+{
 	\frametitle{\textrm{Green's function}}
 	\begin{itemize}
-		\item 时间序列的\textrm{Green's function}定义为$G(\vec x_1,t_1;\vec x_2,t_2)=-\mathrm{i}\langle\Theta_0^N|\hat{\mathbf{T}}[\hat\psi(\vec x_1,t_1)\hat\psi^{\dag}(\vec x_2,t_2)]|\Theta_0^N\rangle$
+\vspace{-7pt}
+		\item 时间序列的\textrm{Green's function}定义为$G(\vec x_1,t_1;\vec x_2,t_2)=-\mathrm{i}\langle\Theta_N^0|\hat{\mathbf{T}}[\hat\psi(\vec x_1,t_1)\hat\psi^{\dag}(\vec x_2,t_2)]|\Theta_N^0\rangle$
 		\item \textrm{Green function}的\textcolor{blue}{\textrm{Lehmann}表象}为
 			\begin{displaymath}
-				\hspace*{-35pt}
-				G(\vec x_1,\vec x_2;\omega)=\sum\limits_i\dfrac{\langle\Theta_0^N|\hat\psi_i(\vec x_1)|\Theta_0^{N+1}\rangle\langle\Theta_0^{N+1}|\hat\psi_i^{\dag}(\vec x_2)|\Theta_0^N\rangle}{\omega-\varepsilon_i+\mathrm{i}\eta\mathrm{sign}(\varepsilon_i-\mu)}+\mathrm{c.c.}\quad\eta\rightarrow0^+
+				\begin{aligned}
+					\hspace*{-35pt}
+					G(\vec x_1,\vec x_2;\omega)=&\sum\limits_i\dfrac{\langle\Theta_N^0|\hat\psi_i(\vec x_1)|\Theta_{N+1}^0\rangle\langle\Theta_{N+1}^0|\hat\psi_i^{\dag}(\vec x_2)|\Theta_N^0\rangle}{\omega-(E_{N+1}^i-E_N^0)+\mathrm{i}\eta}\\
+					+&\sum\limits_i\dfrac{\langle\Theta_N^0|\hat\psi_i^{\dag}(\vec x_2)|\Theta_{N-1}^0\rangle\langle\Theta_{N-1}^0|\hat\psi_i(\vec x_1)|\Theta_N^0\rangle}{\omega+(E_{N-1}^i-E_N^0)-\mathrm{i}\eta}\qquad\eta\rightarrow0^+
+				\end{aligned}
 			\end{displaymath}
-			{\fontsize{6.2pt}{6.2pt}\selectfont{存在小的虚部$\eta$保证频率域的\textrm{Fourier}变换收敛}}
-
-			这样表示的\textrm{Green's function}，在复平面中的极点与增加/失去一个粒子体系的能量对应，因此也称为\textcolor{blue}{谱表象\textrm{(Spectral~representation)}}
+			{\fontsize{6.2pt}{6.2pt}\selectfont{存在小的虚部$\eta$保证频率域的\textrm{Fourier}变换收敛.~这样表示的\textrm{Green's function}，在复平面中的极点与增加/失去一个粒子体系的能量对应，因此也称为\textcolor{blue}{谱表象\textrm{(Spectral~representation)}}}}
 	\end{itemize}
 \begin{figure}[h!]
 \centering
@@ -92,6 +115,48 @@
 \includegraphics[height=0.80in,width=2.05in,viewport=30 1 660 265,clip]{Figures/GW-0.png}
 \caption{\textrm{\tiny{The poles of the time-ordered Green's function.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{GW-0}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{Green's function}}
+	将\textrm{Lehmann}表象的分母改写
+	\begin{displaymath}
+		\begin{aligned}
+			&\omega-(E_{N+1}^i-E_N)+\mathrm{i}\eta\\
+			=&\omega-(E_{N+1}^i-E_{N+1}^0)-(E_{N+1}^0-E_N^0)+\mathrm{i}\eta\\
+			\approx&\omega-(E_{N+1}^i-E_{N+1}^0)-\mu+\mathrm{i}\eta\\
+			&\omega+(E_{N-1}^i-E_N)-\mathrm{i}\eta\\
+			=&\omega+(E_{N-1}^i-E_{N-1}^0)+(E_{N-1}^0-E_N^0)-\mathrm{i}\eta\\
+			\approx&\omega+(E_{N-1}^i-E_{N-1}^0)+\mu-\mathrm{i}\eta
+		\end{aligned}
+	\end{displaymath}
+	这里化学势$\mu$的定义为
+	\begin{displaymath}
+		\dfrac{E_{N+1}^0-E_N^0}{1}\approx\dfrac{\mathrm{d}E}{\mathrm{d}N}\bigg|_N=\mu(N)\approx\mu(N-1):=\mu
+	\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{\textrm{Green's function}与\textrm{Spectral function}}
+	谱函数\textrm{(Spectral function)}的定义为
+	\begin{displaymath}
+		\begin{aligned}
+			A(\vec x,\vec x^{\prime};\omega)=&-\dfrac1{\pi}\mathrm{Im}G(\vec x,\vec x^{\prime};\omega)\\
+			=&\sum_ig_i(\vec x)g_i^{\ast}(\vec x^{\prime})\delta(\omega+E_N^0-E_{N+1}^i)\\
+			&+f_i(\vec x)f_i^{\ast}(\vec x^{\prime})\delta(\omega+E_{N-1}^0-E_{N}^i)
+		\end{aligned}
+	\end{displaymath}
+	物理上，谱函数$A(\vec x,\vec x^{\prime},\omega)$对应局域态密度\textrm{(local density of state)}
+\begin{figure}[h!]
+%	\vspace{-5pt}
+\centering
+%\vspace{-10pt}
+\includegraphics[height=1.4in,width=2.00in,viewport=0 0 1050 800,clip]{Figures/GW_spectral-function.png}
+%\caption{\textrm{\small{The relation of the varibous Green's function.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Spectral_function}
 \end{figure}
 }
 
@@ -105,56 +170,54 @@
 			\end{displaymath}
 		\item \textrm{Lehmann}表象下，\textrm{Kohn-Sham}(无相互作用、忽略自旋的)\textrm{Hamiltonian}对应的\textrm{Green' function}
 			\begin{displaymath}
-				G_{\textcolor{magenta}{0}}(\vec r,\vec r^{\prime};\omega)=\sum_n\dfrac{\psi_n(\vec r)\psi_n^{\ast}(\vec r^{\prime})}{\omega-\varepsilon_n+\mathrm{i}\eta\mathrm{sign}(\varepsilon_n-\mu)}
+				G_{\textcolor{magenta}{0}}(\vec r,\vec r^{\prime};\omega)=\sum_i\dfrac{\psi_i(\vec r)\psi_i^{\ast}(\vec r^{\prime})}{\omega-\varepsilon_i+\mathrm{i}\eta\mathrm{sgn}(\varepsilon_n-\mu)}
 			\end{displaymath}
-		\item 相互作用\textrm{Hamiltonian}的\textrm{Green's function}
+			{\fontsize{6.2pt}{6.2pt}\selectfont{
+				\begin{displaymath}
+					\mbox{这里}\quad\varepsilon_i=\left\{
+					\begin{aligned}
+						&E_{N-1}^0-E_{N-1}^i\\
+						&E_{N+1}^i-E_{N+1}^0
+					\end{aligned}\right.\quad\psi_i(\vec r)\left\{
+						\begin{aligned}
+							&\langle\Theta_{N-1}^i|\hat\psi_i(\vec r)|\Theta_{N}^0\rangle\qquad \varepsilon<\mu\\
+							&\langle\Theta_N^0|\hat\psi_i(\vec r)|\Theta_{N+1}^i\rangle\qquad \varepsilon>\mu
+						\end{aligned}\right.%\qquad\mu\mbox{是体系的化学势}
+				\end{displaymath}
+			}}
+		\item 相互作用体系的\textrm{Hamiltonian}%的\textrm{Green's function}
 		\fontsize{9.5pt}{4.2pt}\selectfont{	\begin{displaymath}
 			\hspace*{-35pt}	\begin{aligned}
-				\underbrace{\bigg(-\dfrac{\hbar^2}{2m_e}\nabla^2+V_{\mathrm{ion}}(\vec r)+V_H(r)\bigg)}_{\mathrm{\textcolor{blue}{non-int.}}}+\Sigma(\vec r,\vec r^{\prime},\omega)=H(\omega)\Longrightarrow H_0+\Sigma(\textcolor{red}{\omega})=H(\textcolor{red}{\omega})
+				\underbrace{\bigg(-\dfrac{\hbar^2}{2m_e}\nabla^2+V_{\mathrm{ion}}(\vec r)+V_H(r)\bigg)}_{\mathrm{\textcolor{blue}{non-int.}}}+\textcolor{magenta}{\Sigma}(\vec r,\vec r^{\prime},\omega)=H(\omega)\Longrightarrow H_0+\textcolor{magenta}{\Sigma}(\textcolor{red}{\omega})=H(\textcolor{red}{\omega})
 					 %\mathrm{energy/frequency dependent Hamiltonian}
-				\end{aligned}
+			\end{aligned}
 			\end{displaymath}}
 	\end{itemize}
 }
 
 \frame
 {
-	\frametitle{多重散射与\textrm{Green's function}}
-	\vspace{-0.2in}
+	\frametitle{\textrm{Dyson}方程}
+	\begin{itemize}
+		\item 相互作用体系的\textrm{Green's function}
 \begin{displaymath}
 	\begin{aligned}
 		(H_0-\omega)+\Sigma(\omega)&=(H-\omega)\\
-		-G_0^{-1}(\omega)+\Sigma(\omega)&=-G^{-1}-\omega)\\
-		G^{-1}(\omega)&=G_0^{-1}-\omega)-\Sigma(\omega)
+		-G_0^{-1}(\omega)+\Sigma(\omega)&=-G^{-1}(\omega)\\
 	\end{aligned}
 \end{displaymath}
-\begin{figure}[h!]
-	\vspace{-0.52in}
-\centering
-%\includegraphics[height=1.80in,width=1.95in,viewport=5 0 515 495,clip]{Figures/multiple-scattering_theory.png}
-\includegraphics[height=2.30in,width=2.44in,viewport=5 0 515 495,clip]{Figures/multiple-scattering_theory.png}
-\caption{\tiny \textrm{Central idea of multiple scattering theory:~ decomposition of electronic motion into scattering at atomic sites and free-electron like propagation in between. The bottom of the figure gives a sketch for the potential along the dashed line.}}
-\label{Multi-scattering}
-\end{figure}
-}
-
-\frame
-{
-	\frametitle{多重散射与\textrm{Green's function}}
+	\end{itemize}
 \begin{figure}[h!]
 	\vspace{-5pt}
 \centering
 \animategraphics[autoplay, loop, height=1.2in]{1}{Figures/Multi_scattering-}{0}{9}
 \label{Multiple_scattering-0-9}
 \end{figure}
-\textcolor{blue}{多重散射:~}入射波是\textcolor{red}{所有来自其他散射中心的出射波叠加}
-			\begin{displaymath}
-				\begin{aligned}
-					\tilde G=&\tilde G_0+G_0\mathbf{t}\tilde G_0+G_0\mathbf{t}\tilde G_0\mathbf{t}\tilde G_0+\cdots\\
-					=&\tilde G_0+\tilde G_0\mathbf{t}\tilde G \Longrightarrow \tilde G=(\tilde G_0^{-1}-\mathbf{t})^{-1}
-%					\tilde G=&(\tilde G_0^{-1}-\mathbf{t})^{-1}
-				\end{aligned}
-			\end{displaymath}
+	\vspace{-0.2in}
+单粒子\textrm{Green's function}传播满足\textrm{Dyson's Equation}
+\begin{displaymath}
+	\textcolor{blue}{G^{-1}(\omega)=G_0^{-1}(\omega)-\Sigma(\omega)}
+\end{displaymath}
 }
 
 \frame
@@ -163,7 +226,7 @@
 \fontsize{7.9pt}{4.2pt}\selectfont{
 	时间序列的\textrm{Green's function}$G(\vec r,\vec r^{\prime},t-t^{\prime})$描述了粒子由$(\vec r,t)$到$\vec r^{\prime},t^{\prime}$的传播\footnote{\fontsize{6.5pt}{4.2pt}\selectfont{因此\textrm{Green's funtion}被称为传播子.}}: 换言之，假设粒子在时-空点$(\vec r,t)$位置出现，则$G(\vec r,\vec r^{\prime},t-t^{\prime})$表示在时-空点$(\vec r^{\prime},t^{\prime})$找到粒子的概率
 	\begin{displaymath}
-		G_{0}(\vec r,\vec r^{\prime};\omega)=\sum_n^{\mathrm{all}}\dfrac{\psi_n^{\ast}(\vec r)\psi_n(\vec r^{\prime})}{\omega-\varepsilon_n+\mathrm{i}\eta\mathrm{sign}(\varepsilon_n-\mu)}
+		G_{0}(\vec r,\vec r^{\prime};\omega)=\sum_n^{\mathrm{all}}\dfrac{\psi_n^{\ast}(\vec r)\psi_n(\vec r^{\prime})}{\omega-\varepsilon_n+\mathrm{i}\eta\mathrm{sgn}(\varepsilon_n-\mu)}
 	\end{displaymath}
 \begin{figure}[h!]
 	\vspace{-0.12in}
@@ -186,6 +249,18 @@
 
 \frame
 {
+	\frametitle{传播子与自能}
+\begin{figure}[h!]
+	\vspace{-0.13in}
+\centering
+\includegraphics[height=2.88in,width=2.10in,viewport=0 0 510 715,clip]{Figures/DFT_GW-4.jpg}
+%\caption{\tiny \textrm{Central idea of multiple scattering theory:~ decomposition of electronic motion into scattering at atomic sites and free-electron like propagation in between. The bottom of the figure gives a sketch for the potential along the dashed line.}}
+\label{Green's_function-physical-interaction}
+\end{figure}
+}
+
+\frame
+{
 	\frametitle{激发与光学带隙}
 \begin{figure}[h!]
 \centering
@@ -195,7 +270,7 @@
 \label{GW-Optical_Gap}
 \end{figure}
 \begin{displaymath}
-		\underbrace{E_{\textrm{g}}^{\mathrm{KS}}}_{\textrm{\tiny KS~gap}}~=~\varepsilon_{\mathrm{LUMO}}^{\mathrm{KS}}-\varepsilon_{\mathrm{HOMO}}^{\mathrm{KS}}~\ll~\underbrace{\textcolor{green}{E_{\mathrm{g}}^{\mathrm{GW}}}}_{\textcolor{green}{\textrm{\tiny GW~gap}}} ~=~\varepsilon_{\mathrm{LUMO}}^{\mathrm{GW}}-\varepsilon_{\mathrm{HOMO}}^{\mathrm{GW}}
+		\underbrace{E_{\textrm{g}}^{\mathrm{KS}}}_{\textrm{\tiny KS~gap}}~=~\varepsilon_{\mathrm{LUMO}}^{\mathrm{KS}}-\varepsilon_{\mathrm{HOMO}}^{\mathrm{KS}}~\ll~\underbrace{\textcolor{green}{E_{\mathrm{g}}^{GW}}}_{\textcolor{green}{\tiny GW~\textrm{gap}}} ~=~\varepsilon_{\mathrm{LUMO}}^{GW}-\varepsilon_{\mathrm{HOMO}}^{GW}
 \end{displaymath}
 \begin{displaymath}
 		\underbrace{\textcolor{blue}{E_{\textrm{g}}^{\mathrm{opt}}}}_{\textcolor{blue}{\textrm{\tiny optical~gap}}}~=~\varepsilon_1^{\mathrm{N}}-\varepsilon_0^{\mathrm{N}}~=~\underbrace{\textcolor{red}{E_{\mathrm{g}}^{\mathrm{fund}}}}_{\textcolor{red}{\textrm{\tiny fundamental~gap}}}+\underbrace{\textcolor{purple}{E_{\mathrm{B}}}}_{\textcolor{purple}{\textrm{\tiny excitionic effect}}}
@@ -205,24 +280,70 @@
 \frame
 {
 	\frametitle{\textrm{Green's function}与动态屏蔽}
+	\vspace*{-15pt}
 	\begin{itemize}
 		\item 单粒子\textrm{Green's~function}:
 	\begin{displaymath}
 		\textcolor{blue}{G}(\vec r_1,\vec r_2;\textcolor{brown}{\omega})=\underbrace{\sum_i\dfrac{\psi_i(\vec r_1)\psi_i(\vec r_2)}{\textcolor{brown}{\omega}-\varepsilon_i-\mathrm{i}\eta}}_{\textcolor{green}{\mathrm{removal~part~=~IPs}}}+\underbrace{\sum_a\dfrac{\psi_a(\vec r_1)\psi_a(\vec r_2)}{\textcolor{brown}{\omega}-\varepsilon_a+\mathrm{i}\eta}}_{\textcolor{red}{\mathrm{addition~part~=~EAs}}}
 	\end{displaymath}
-\item 极化率:
+\item 极化函数:
 	\begin{displaymath}
 		P(\vec r_1,\vec r_2;\textcolor{brown}{\omega})=-\dfrac{\mathrm{i}}{\pi}\int\textcolor{blue}{G}(\vec r_1,\vec r_2;\textcolor{brown}{\omega}+\omega^{\prime})\textcolor{blue}{G}(\vec r_1,\vec r_2;\omega^{\prime})\mathrm{d}\omega^{\prime}
 	\end{displaymath}
 \item 介电函数:
 	\begin{displaymath}
-		\epsilon(\vec r_1,\vec r_2;\textcolor{brown}{\omega})=\delta(\vec r_1-\vec r_2)-\int\dfrac{P(\vec r_1,\vec r_2;\textcolor{brown}{\omega})}{|\vec r_2-\vec r_3|}\mathrm{d}\vec r_3
+		\epsilon(\vec r_1,\vec r_2;\textcolor{brown}{\omega})=\delta(\vec r_1-\vec r_2)-\int\dfrac{P(\vec r_1,\vec r_2;\textcolor{brown}{\omega})}{\textcolor{purple}{|\vec r_2-\vec r_3|}}\mathrm{d}\vec r_3
 	\end{displaymath}
 \item 动态屏蔽\textrm{Coulomb}势
 	\begin{displaymath}
-		\textcolor{cyan}{W}(\vec r_1,\vec r_2;\textcolor{brown}{\omega})=\int\dfrac{\epsilon^{-1}(\vec r_1,\vec r_3;\textcolor{brown}{\omega})}{|\vec r_2-\vec r_3|}\mathrm{d}\vec r_3
+		\textcolor{cyan}{W}(\vec r_1,\vec r_2;\textcolor{brown}{\omega})=\int\dfrac{\epsilon^{-1}(\vec r_1,\vec r_3;\textcolor{brown}{\omega})}{\textcolor{purple}{|\vec r_2-\vec r_3|}}\mathrm{d}\vec r_3
 	\end{displaymath}
 	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{微观介电函数与宏观介电函数}
+	介电函数$\epsilon(\vec r_1,\vec r_2;\omega)$在倒空间表示为
+	\begin{displaymath}
+		\begin{aligned}
+			\epsilon_{\vec G_1,\vec G_2}(\vec q,\omega)=&\delta(\vec G_1-\vec G_2)-\int\textcolor{purple}{\frac{4\pi}{|\vec G_2+\vec q||\vec G_3+\vec q|}}P_{\vec G_1,\vec G_2}(\vec q,\omega)\mathrm{d}\vec G_3\\
+			=&\delta(\vec G_1-\vec G_2)-\textcolor{purple}{v(\vec G_2)}P_{\vec G_1,\vec G_2}\qquad \vec G_1,\vec G_2\neq0
+		\end{aligned}
+	\end{displaymath}
+	\textrm{RPA}近似下，宏观介电函数$\epsilon_M(\omega)$与微观介电函数$\epsilon(\vec q,\omega)$的关系
+	\begin{displaymath}
+		\frac1{\epsilon_M(\omega)}\equiv\mathop{\mathrm{lim}}\limits_{\vec q\rightarrow0}\epsilon_{0,0}^{-1}(\vec q,\omega)
+	\end{displaymath}
+	不难看出，如果微观介电函数矩阵是非对角化的，宏观介电函数的每个矩阵元都有来自微观介电函数的矩阵元的贡献\footnote{\fontsize{7.0pt}{6.2pt}\selectfont{这称为局域场效应\textrm{(local field effects)}}}。特殊地，对于均匀电子气，微观介电函数是对角化的，可有
+	\begin{displaymath}
+		\epsilon_M(\omega)\approx\mathop{\mathrm{lim}}\limits_{\vec q\rightarrow0}\epsilon_{0,0}(\vec q,\omega)
+	\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{宏观介电函数与屏蔽极化函数}
+	宏观介电函数$\epsilon_M(\omega)$还可以用屏蔽极化函数$\bar{P}$表示
+	\begin{displaymath}
+		\epsilon_M(\omega)=1-\mathop{\mathrm{lim}}\limits_{\vec q\rightarrow0}[v_0(\vec q)\bar{P}_{0,0}(\vec q,\omega)]
+	\end{displaymath}
+	这里屏蔽极化函数$\bar{P}$与极化函数$P$满足类似\textrm{Dyson}方程
+	\begin{displaymath}
+		\bar{P}=P+P\bar{v}\bar{P}
+	\end{displaymath}
+	并且在倒空间$\bar{v}$取为
+	\begin{displaymath}
+		\bar{v}_{\vec G}(\vec q)=\left\{
+			\begin{aligned}
+				&0 &\vec G=0\\
+				v_{\vec G}(\vec q)=&\frac{4\pi}{|\vec q+\vec G|^2} \quad&\vec G\neq0
+			\end{aligned}\right.
+	\end{displaymath}
+	在能量损失谱理论中，响应函数$\chi$也有类似\textrm{Dyson}方程的关系式\footnote{\fontsize{6.1pt}{4.2pt}\selectfont{习惯上，吸收/发射光谱中响应函数称极化函数,符号用$P(\omega)$;~电子能量损失谱中响应函数称固有极化函数,符号用$\chi(\omega)$.两者都可以用宏观介电函数表示,没有本质区别.}}
+\begin{displaymath}
+	\chi=P+Pv\chi
+\end{displaymath}
 }
 
 \frame
@@ -293,18 +414,6 @@
 
 \frame
 {
-	\frametitle{\textrm{Green function}与自能}
-\begin{figure}[h!]
-	\vspace{-0.13in}
-\centering
-\includegraphics[height=2.88in,width=2.10in,viewport=0 0 510 715,clip]{Figures/DFT_GW-4.jpg}
-%\caption{\tiny \textrm{Central idea of multiple scattering theory:~ decomposition of electronic motion into scattering at atomic sites and free-electron like propagation in between. The bottom of the figure gives a sketch for the potential along the dashed line.}}
-\label{Green's_function-physical-interaction}
-\end{figure}
-}
-
-\frame
-{
 	\frametitle{准粒子:~激发与屏蔽}
 \begin{figure}[h!]
 	\vspace{-0.12in}
@@ -317,14 +426,20 @@
 
 \frame
 {
-	\frametitle{\textrm{Green's function}与自能}
-	即使是单粒子\textrm{Green's function}也无法精确求解，必须作适当近似，一个合理的近似是写成\textrm{Kohn-Sham}本征态和本征值表示的\textrm{Lehmann}形式$G_{\mathrm{KS}}^0(\vec r_1,\vec r_2;\textcolor{brown}{\omega})$，于是\textrm{Dyson}方程可以写成
+	\frametitle{准粒子与与自能的计算}
+	即使是单粒子\textrm{Green's function}也无法精确求解，必须作适当近似:\\
+	{\fontsize{7.0pt}{6.2pt}\selectfont{一个合理的近似是写成\textrm{Kohn-Sham}本征态和本征值表示的\textrm{Lehmann}形式$G_{\mathrm{KS}}^0(\vec r_1,\vec r_2;\textcolor{brown}{\omega})$}}\\
+	再由\textrm{Dyson}方程得到相互作用的\textrm{Green's function}
 	\begin{displaymath}
-		\hspace*{-10pt}
-		[\textcolor{blue}{G}(\vec r_1,\vec r_2;\textcolor{brown}{\omega})]^{-1}=\underbrace{[G_{\mathrm{KS}}^0(\vec r_1;\vec r_2;\textcolor{brown}{\omega})]^{-1}}_{\mathrm{KS~Green's~function}}+\textcolor{red}{\Sigma^{\mathrm{xc}}}(\vec r_1,\vec r_2;\textcolor{brown}{\omega})-\underbrace{v^{\mathrm{XC}}(\vec r_1)}_{\mathrm{KS~potential}}\delta(\vec r_1-\vec r_2)
+		\hspace*{-13pt}
+		[\textcolor{blue}{G}(\vec r_1,\vec r_2;\textcolor{brown}{\omega})]^{-1}=\underbrace{[G_{\mathrm{KS}}^0(\vec r_1;\vec r_2;\textcolor{brown}{\omega})]^{-1}}_{\mathrm{KS~Green's~function}}+\textcolor{red}{\Sigma^{\mathrm{XC}}}(\vec r_1,\vec r_2;\textcolor{brown}{\omega})-\underbrace{v^{\mathrm{XC}}(\vec r_1)}_{\mathrm{KS~potential}}\delta(\vec r_1-\vec r_2)
 	\end{displaymath}
+	{\fontsize{7.2pt}{6.2pt}\selectfont{\textrm{Dyson}方程描述了相互作用体系$G$通过自能$\Sigma$与独立体系$G_0$(传播子)关联}}
 	\begin{itemize}
-		\item \textrm{Dyson}方程描述了相互作用体系$G$通过自能$\Sigma$与独立体系$G_0$(传播子)关联，自能$\Sigma$含时、非局域、非\textrm{Hermitian}的
+		\item 自能$\Sigma$含时、非局域(非\textrm{Hermitian})，故准粒子能量为复数
+			\begin{displaymath}
+				\textcolor{brown}{\omega}=\varepsilon_p^{\mathrm{KS}}+\textcolor{red}{\Sigma_{pp}^{\mathrm{XC}}}(\textcolor{brown}{\omega})-V_p^{\mathrm{XC}}\qquad{\tiny \mbox{记~~$V_p^{\mathrm{XC}}=\int\psi_p(\vec r)v^{\mathrm{XC}}\psi_p(\vec r)\mathrm{d}\vec r$}}
+			\end{displaymath}
 %	\textrm{Dyson}方程
 %	\begin{displaymath}
 %		\begin{aligned}
@@ -333,7 +448,7 @@
 %		\end{aligned}
 %	\end{displaymath}
 
-		\item 通过求解含有自能$\Sigma$的准粒子\textrm{(quasi-particle, QP)}方程，可以求解得到多体体系中重整化电子的量子态(\textrm{Hedin}方程)
+		\item 求解含有自能$\Sigma$的准粒子\textrm{(quasi-particle, QP)}方程，可以求解得到多体体系中重整化电子的量子态(\textrm{Hedin}方程)
 %			$$\bigg[\hat h_0(\vec r_1)+v_H(\vec r_1)\bigg]\Psi(\vec r_1)+\int\textcolor{red}{\Sigma(\vec r_1,\vec r_2;\omega^{\mathrm{QP}})}\Psi(\vec r_2)\mathrm{d}\vec r_2=\varepsilon^{\mathrm{QP}}\Psi(\vec r_1)$$
 	\end{itemize}
 }
@@ -341,7 +456,29 @@
 \frame
 {
 	\frametitle{\textrm{Hedin}方程} 
-	\textrm{Hedin}方程是积分-微分形式的，只能通过迭代来求解
+	\textrm{Hedin}方程是一系列耦合的积分-微分方程组%，只能通过迭代方式来求解
+	\begin{displaymath}
+		\begin{aligned}
+			\Sigma(\mathbf{12})=&\mathrm{i}\int G(\mathbf{13})\Gamma(\mathbf{234})W(\mathbf{41})\mathrm{d}(\mathbf{34})\\
+			W(\mathbf{12})=&v(\mathbf{12})+\int v(\mathbf{13})P(\mathbf{34})W(\mathbf{42})\mathrm{d}(\mathbf{34})\\
+			P(\mathbf{12})=&-\mathrm{i}\int G(\textcolor{blue}{\mathbf{13}})G(\textcolor{blue}{\mathbf{41}})\Gamma(\mathbf{342})\mathrm{d}(\textcolor{blue}{\mathbf{34}})\\
+			\Gamma(\mathbf{123})=&\delta(\mathbf{12})\delta(\mathbf{13})+\int \frac{\delta\Sigma(\textcolor{red}{\mathbf{12}})}{\delta G(\textcolor{magenta}{\mathbf{45}})}G(\textcolor{magenta}{\mathbf{46}})G(\textcolor{magenta}{\mathbf{75}})\Gamma(\mathbf{673})\mathrm{d}(\textcolor{magenta}{\mathbf{4567}})
+		\end{aligned}
+	\end{displaymath}
+	{\fontsize{7.2pt}{6.2pt}\selectfont{这里$\mathbf{1}=(\vec r_1,t_1,\xi_1)$, $v$表示净的\textrm{Coulomb}相互作用}}
+{\fontsize{9.0pt}{6.2pt}\selectfont{
+	\begin{itemize}
+		\item 极化函数$P$:~包含体系对引入电子或空穴的响应\\
+			$P$通过包括一对粒子-空穴对(两个\textrm{Green's function})来表示
+		\item 顶角函数$\Gamma$:~包含空穴-电子的 相互作用\\
+			反过来，$\Gamma$是由空穴-电子相互作用的激发引起的势函数的变化来确定的
+	\end{itemize}}}
+}
+
+\frame
+{
+	\frametitle{\textrm{Hedin}方程} 
+	耦合的\textrm{Hedin}方程的自洽图示
 \begin{figure}[h!]
 \centering
 \vspace{-10pt}
@@ -399,15 +536,24 @@
 \frame
 {
 	\frametitle{由$GW$到$G_0W_0$近似}
-	自洽迭代的$GW$方程求解仍然非常复杂，通常选择足够好的近似的$G$和$W$，作单次计算(即$G_0W_0$近似)得到自能
+	自洽迭代求解$GW$耦合方程组仍非常复杂，通常须作进一步近似，典型如 $G_0W_0$近似:
+	\vskip 6pt
+{\fontsize{9.0pt}{6.2pt}\selectfont{
+	准粒子的波函数用\textrm{KS}本征态近似，并构造准粒子\textrm{Green's function}~$G_0^{\mathrm{KS}}$，屏蔽极化函数计算采用\textrm{RPA}近似:
+	$$\tilde{\chi}^0(\vec r_1,t_1;\vec r_2,t_2)=-\mathrm{i}G_0^{\mathrm{KS}}(\vec r_1,t_1;\vec r_2,t_2)G_0^{\mathrm{KS}}(\vec r_1,t_1;\vec r_2,t_2)$$
+在此基础上，可得到体系的自能
 	$$\Sigma(\vec r_1,t_1;\vec r_2,t_2)=\mathrm{i}G_0^{\mathrm{KS}}W_0(\vec r_1,t_1+\eta;\vec r_2,t_2)_{\eta\rightarrow0}$$
-	这里$G_0^{\mathrm{KS}}$由独立粒子的\textrm{Kohn-Sham(KS)-Hamiltonian}
-
-	屏蔽相互作用由\textrm{KS}本征态能量和波函数的\textrm{RPA}计算的到
-	$$\chi^0(\vec r_1,t_1;\vec r_2,t_2)=-\mathrm{i}G_0^{\mathrm{KS}}(\vec r_1,t_1;\vec r_2,t_2)G_0^{\mathrm{KS}}(\vec r_1,t_1;\vec r_2,t_2)$$
-	当准粒子波函数用\textrm{KS}轨道近似，本征态$\varepsilon^{\mathrm{KS}}$附近的准粒子能量$\varepsilon^{\mathrm{QP}}$用自能展开
-	$$\varepsilon^{\mathrm{QP}}=\varepsilon^{\mathrm{KS}}+Z\langle\Psi^{\mathrm{KS}}|\Sigma(\varepsilon^{\mathrm{KS}}-v_{\mathrm{XC}})|\Psi^{\mathrm{KS}}\rangle$$
-	这里重整化因子$Z$定义为$$Z\equiv\bigg[1-\langle\Psi^{\mathrm{KS}}\bigg|\dfrac{\partial\Sigma(\varepsilon)}{\partial\varepsilon^{\mathrm{KS}}}\bigg|\Psi^{\mathrm{KS}}\rangle\bigg]^{-1}$$
+\vskip 3pt
+	准粒子能量$\varepsilon^{GW}$则可由$\varepsilon^{\mathrm{KS}}$通过自能线性展开近似
+{\fontsize{7.6pt}{6.2pt}\selectfont{
+	\begin{displaymath}
+		\hspace*{-14pt}
+		\textcolor{red}{\Sigma_{pp}^{\mathrm{XC}}}(\textcolor{brown}{\omega})\approx\textcolor{red}{\Sigma_{pp}^{\mathrm{XC}}}(\varepsilon_p^{\mathrm{KS}})+(\textcolor{brown}{\omega}-\varepsilon_p^{\mathrm{KS}})\frac{\partial\textcolor{red}{\Sigma_{pp}^{\mathrm{XC}}}(\textcolor{brown}{\omega})}{\partial\textcolor{brown}{\omega}}\bigg|_{\textcolor{brown}{\omega}=\varepsilon_p^{\mathrm{KS}}}\Longrightarrow	\textcolor{blue}{\varepsilon_p^{GW}}=\varepsilon_p^{\mathrm{KS}}+\textcolor{green}{Z_p}[\textcolor{red}{\Sigma_{pp}^{\mathrm{XC}}}(\varepsilon_p^{\mathrm{KS}})-v_p^{\mathrm{XC}}]
+	\end{displaymath}}}
+	这里$\textcolor{green}{Z_p}$称为重整化因子
+	\begin{displaymath}
+		\underbrace{\textcolor{green}{Z_p}}_{\mathrm{renormalization~factor}}\equiv\bigg[1-\frac{\partial\textcolor{red}{\Sigma_{pp}^{\mathrm{XC}}}(\textcolor{brown}{\omega})}{\partial\textcolor{brown}{\omega}}\bigg|_{\textcolor{brown}{\omega}=\varepsilon_p^{\mathrm{KS}}}\bigg]^{-1}\qquad{\tiny \mbox{要求~~$0\leqslant\textcolor{green}{Z_p}\leqslant1$}}
+	\end{displaymath}}}
 }
 
 \frame
@@ -485,7 +631,179 @@
 \frame
 {
 	\frametitle{\textrm{Bethe-Salpeter}方程}
-	\textrm{Bethe-Salpeter Equation~(BSE)}能够定量描述物质中光激发电子-空穴对的激子效应，用于物质光吸收谱等性质的精确计算
+	\textrm{Bethe-Salpeter Equation~(BSE)}定量描述物质中电子-空穴对(双粒子激发)的激子效应，用于物质光吸收谱等性质的精确计算
+\begin{figure}[h!]
+\centering
+\vspace{-5pt}
+\includegraphics[height=2.45in,width=3.90in,viewport=0 0 1000 600,clip]{Figures/BSE_GW_DFT.png}
+%\caption{\textrm{\tiny Feynman diagram representing the Bethe-Salpeter equation for $\chi$.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{GW-BSE_GW_DFT}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{Bethe-Salpeter}方程的推导:~顶角函数的修正}
+	简言之，$GW$近似是单粒子激发，极化函数$P=-\mathrm{i}GG$(\textrm{RPA}近似或$\Gamma=\delta$);~双粒子激发意味着要考虑电子-空穴吸引的影响:\\
+	在$GW$基础上，利用$\Sigma=\mathrm{i}GW$，有
+	\begin{displaymath}
+		\Gamma(\mathbf{123})=\delta(\mathbf{12})\delta(\mathbf{13})+\mathrm{i}W(\mathbf{1}^+\mathbf{2})\int \mathrm{d}(\mathbf{67})G(\mathbf{16})G(\mathbf{72})\Gamma(\mathbf{673})
+	\end{displaymath}
+	{\fontsize{8.0pt}{6.2pt}\selectfont{对比\textrm{Hedin}方程，这里引入了近似$\delta\Sigma/\delta G=\mathrm{i}W$，表明:
+	\begin{itemize}
+		\item 激发引起屏蔽相互作用的改变$\mathrm{i}G(\delta W/\delta G)$非常小，可以忽略
+		\item 实际迭代计算$\Gamma$时，可只到考虑两次迭代即可:
+	\begin{displaymath}
+		\Gamma^{(2)}(\mathbf{123})=\delta(\mathbf{12})\delta(\mathbf{13})+\int\mathrm{d}(\mathbf{4567})\underbrace{\textcolor{cyan}{\frac{\delta\Gamma^{(1)}(\mathbf{12})}{\delta G^{(0)}(\mathbf{45})}}}_{\textcolor{cyan}{\mathrm{i}W^{(1)}}}G^{(1)}(\mathbf{46})G^{(1)}(\mathbf{75})\Gamma^{(2)}(\mathbf{673})
+	\end{displaymath}
+	\end{itemize} }}
+	通过$\Gamma$可有广义极化函数$\sideset{^3}{}{\mathop{P}}$
+	\begin{displaymath}
+		\sideset{^3}{}{\mathop{P}}(\mathbf{312})\equiv-\mathrm{i}\int\mathrm{d}(\mathbf{67})G(\mathbf{16})G(\mathbf{72})\Gamma(\mathbf{673})
+	\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{\textrm{Bethe-Salpeter}方程的推导:~四中心积分}
+	对极化函数$\sideset{^3}{}{\mathop{P}}$左乘$-\mathrm{i}G(\mathbf{41})G(\mathbf{25})$并对$\mathrm{d}(\mathbf{12})$积分有
+	\begin{displaymath}
+		\sideset{^3}{}{\mathop{P}}(\mathbf{345})=-\mathrm{i}G(\mathbf{43})G(\mathbf{35})+\mathrm{i}\int\mathrm{d}(\mathbf{12})\textcolor{red}{G(\mathbf{41})G(\mathbf{25})W(\mathbf{1}^{+}\mathbf{2})}\sideset{^3}{}{\mathop{P}}(\mathbf{312})
+	\end{displaymath}
+	被积函数$GGW$是四中心形式，故极化函数可写成四中心积分$\sideset{^4}{}{\mathop{P}}$:\\
+	{\fontsize{8.0pt}{6.2pt}\selectfont{
+		引入屏蔽相互作用的四中心形式
+		\begin{displaymath}
+			\sideset{^4}{}{\mathop{W}}(\mathbf{1234})\equiv W(\mathbf{12})\delta(\mathbf{13})\delta(\mathbf{24})
+		\end{displaymath}
+		于是极化函数写成四中心形式
+		\begin{displaymath}
+			\sideset{^4}{}{\mathop{P}}=\sideset{^4}{_{\mathrm{IQP}}}{\mathop{P}}\sideset{^4}{}{\mathop{W}}\sideset{^4}{_{\mathrm{IQP}}}{\mathop{P}}
+		\end{displaymath}
+		四中心的准粒子极化函数$\sideset{^4}{_{\mathrm{IQP}}}{\mathop{P}}$的定义为
+		\begin{displaymath}
+			\sideset{^4}{_{\mathrm{IQP}}}{\mathop{P}}(\vec r_1,\vec r_2,\vec r_3,\vec r_4;\omega)=\sum_{ij}(f_i-f_j)\frac{\psi_i(\vec r_1)\psi_j^{\ast}(\vec r_2)\psi_j(\vec r_4)\psi_i^{\ast}(\vec r_3)}{\omega-\omega_{ij}+\mathrm{i}\eta}
+		\end{displaymath}
+		这里$\omega_{ij}=(\varepsilon_j-\varepsilon_i)$，$f_{i}$是\textrm{Fermi}占据数 }}
+}
+
+\frame
+{
+	\frametitle{\textrm{Bethe-Salpeter}方程的推导:~极化函数}
+	于是屏蔽极化函数的四中心表示为
+	\begin{displaymath}
+		\begin{aligned}
+			\sideset{^4}{}{\mathop{\bar{P}}}(\mathbf{1234})=&\sideset{^4}{}{\mathop{P}}(\mathbf{1234})\\
+			&+\int\mathrm{d}(\mathbf{5678})\sideset{^4}{}{\mathop{P}}(\mathbf{1256})\delta(\mathbf{56})\delta(\mathbf{78})\bar{v}(\mathbf{57})
+			&\times\sideset{^4}{}{\mathop{\bar{P}}}(\mathbf{7834})
+		\end{aligned}
+	\end{displaymath}
+	由此可有$\sideset{^4}{}{\mathop{\bar{P}}}$的\textrm{Bethe-Salpeter}方程
+	\begin{displaymath}
+		\textcolor{blue}{\sideset{^4}{}{\mathop{\bar{P}}}=\sideset{^4}{_{\mathrm{IQP}}}{\mathop{P}}+\sideset{^4}{_{\mathrm{IQP}}}{\mathop{P}}K\sideset{^4}{}{\mathop{\bar{P}}}}
+	\end{displaymath}
+	这里被积函数$K$包括(1)电子-空穴交换势$\bar{v}$和(2)电子空穴吸引势$-W$
+	\begin{displaymath}
+		K(\mathbf{1234})=\delta(\mathbf{12})\delta(\mathbf{34})\bar{v}(\mathbf{13})-\delta(\mathbf{13})\delta(\mathbf{24})W(\mathbf{12})
+	\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{\textrm{Bethe-Salpeter}方程的推导:~极化函数}
+	与屏蔽极化函数$\sideset{^4}{}{\mathop{\bar{P}}}$类似，极化函数$\sideset{^4}{}{\mathop{\chi}}$类似，只须将函数$v$替换$\bar{v}$即可.$\sideset{^4}{}{\mathop{\chi}}$的\textrm{Bethe-Salpter}方程的\textrm{Feynman}图表示如下
+\begin{figure}[h!]
+\centering
+%\vspace{-16pt}
+\includegraphics[height=1.5in,width=4.00in,viewport=13 15 633 260,clip]{Figures/BSE_Feynman.png}
+\caption{\textrm{\tiny Feynman diagram representing the Bethe-Salpeter equation for $\chi$.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{chi-BSE_solution}
+\end{figure}
+}
+
+\frame[allowframebreaks]
+{
+	\frametitle{四中心的类\textrm{Dyson}方程求解$^{\ast}$}
+{\fontsize{7.0pt}{6.2pt}\selectfont{
+	求解四中心的类\textrm{Dyson}方程可转换成等效本征值问题，假设
+	\begin{itemize}
+		\item 电子-空穴对可以用等效准粒子\textrm{Hamiltonian}的本征态波函数$\psi_n$描述
+		\item 电子-空穴跃迁能对应准粒子的本征值$\varepsilon_n$
+		\item 初始电荷密度可由少量激发的电子-空穴对生成
+		\item 这些激发准粒子的本征波函数$\psi_n$构成正交-完备基
+	\end{itemize}
+	于是，任意四中心函数可记作
+	\begin{displaymath}
+		S(\vec r_1,\vec r_1^{\prime};\vec r_1,\vec r_1^{\prime})=\sum_{n_1,\cdots,n_4}\psi_{n_1}^{\ast}(\vec r_1)\psi_{n_1}^{\ast}(\vec r_1)\psi_{n_1}^{\ast}(\vec r_1)\psi_{n_1}^{\ast}(\vec r_1)S_{(n_1n_2)(n_3n_4)}
+	\end{displaymath}
+	在该基组下，四中心准粒子极化函数
+	\begin{displaymath}
+		\sideset{^4}{_{\mathrm{IQP}}}{\mathop{P}}(\vec r_1,\vec r_2,\vec r_3,\vec r_4)=\sum_{n,n^{\prime}}(f_n-f_{n^{\prime}})\frac{\psi_n^{\ast}(\vec r_1)\psi_{n^{\prime}}(\vec r_2)\psi_{n^{\prime}}(\vec r_4)\psi_{n^{\prime}}^{\ast}(\vec r_3)}{\varepsilon_n-\varepsilon_{n^{\prime}}-\omega}
+	\end{displaymath}
+	是对角化的，可记为
+	\begin{displaymath}
+		\sideset{^4}{_{\mathrm{IQP}}}{\mathop{P}}_{(n_1n_2)(n_3n_4)}=(f_{n_2}-f_{n_1})\delta_{n_1,n_3}\delta_{n_2,n_4}/(\varepsilon_{n_2}-\varepsilon_{n_1}-\omega)
+	\end{displaymath}
+	如果定义函数
+	\begin{displaymath}
+		\bar{\Pi}\equiv[1-\sideset{^4}{_{\mathrm{IQP}}}{\mathop{P}}K]^{-1}
+	\end{displaymath}
+	则类\textrm{Dyson}方程变成$S=\bar{\Pi}\sideset{^4}{_{\mathrm{IQP}}}{\mathop{P}}$，而$\bar{\Pi}$在准粒子空间可表示为
+	\begin{displaymath}
+		\begin{aligned}
+			\bar{\Pi}_{(n_1n_2)(n_3n_4)}=&[(\varepsilon_{m_2}-\varepsilon_{m_1}-\omega)\delta_{m_1,m_3}\delta_{m_2,m_4}\\
+			&+(f_{m_1}-f_{m_2})K_{(m_1m_2)(m_3m_4)}]^{-1}_{(n_1n_2)(n_3n_4)}\\
+			&\times(\varepsilon_{n_4}-\varepsilon_{n_3}-\omega)
+		\end{aligned}
+	\end{displaymath}
+	定义有效双粒子\textrm{Hamiltonian}
+	\begin{displaymath}
+		H_{(n_1n_2)(n_3n_4)}^{2p}\equiv(\varepsilon_{n_2}-\varepsilon_{n_1})\delta_{n_1,n_3}\delta_{n_2,n_4}+(f_{n_1}-f_{n_2})K_{(n_1n_2)(n_3n_4)}
+	\end{displaymath}
+	于是四中心函数可以表示为
+	\begin{displaymath}
+		S_{(n_1n_2)(n_3n_4)}^{2p}=[H^{2p}-I\omega]_{(n_1n_2)(n_3n_4)}^{-1}(f_{n_4}-f_{n_3})
+	\end{displaymath} 
+	而准粒子空间展开的有效\textrm{Hamiltonian}的形式为
+	\begin{displaymath}
+		H_{(n_1n_2)(n_3n_4)}^{2p}=
+		\begin{pmatrix}
+			A &B\\
+			0 &D
+		\end{pmatrix}
+	\end{displaymath}
+	$A$、$B$、$D$的具体表达形式，参阅文献\cite{RMP74-601_2002}}}
+}
+
+\frame
+{
+	\frametitle{\textrm{Bethe-Salpeter}方程的求解}
+	具体求解$\sideset{^4}{}{\mathop{\bar{P}}}$的\textrm{Bethe-Salpter}方程时，如果$W$取为静态屏蔽\textrm{Coulomb}相互作用，则相应地$K$对应于含时屏蔽的\textrm{Hartree-Fock}近似。参照四中心的类\textrm{Dyson}方程求解过程，定义\textrm{Bethe-Salpeter}方程的有效双粒子\textrm{Hamiltonian}，可有本征态方程
+	\begin{displaymath}
+		\begin{aligned}
+			\sum_{n_3n_4}&\{(\varepsilon_{n_2}-\varepsilon_{n_1})\delta_{n_1n_3}\delta_{n_2n_4}+(f_{n_1}-f_{n_2})[\bar{v}_{(n_1n_2)(n_3n_4)}\\
+			&-W_{(n_1n_2)(n_3n_4)}]\}A_{\lambda}^{(n_3n_4)}=E_{\lambda}A_{\lambda}^{(n_1n_2)}
+		\end{aligned}
+	\end{displaymath}
+	其中四中心积分$\bar{v}$和$W$用四个准粒子波函数轨道$n_1,\cdots,n_4$表示为
+	\begin{displaymath}
+		\begin{aligned}
+			\bar{v}_{(n_1n_2)(n_3n_4)}=&\langle n_1n_2|\bar{v}|n_3n_4\rangle\\	
+			W_{(n_1n_2)(n_3n_4)}=&\langle n_1n_2|\bar{v}|n_3n_4\rangle\\	
+		\end{aligned}
+	\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{\textrm{Bethe-Salpeter}方程的求解流程}
+\begin{figure}[h!]
+\centering
+\vspace{-10pt}
+\includegraphics[height=2.75in,width=2.35in,viewport=0 0 600 735,clip]{Figures/BSE_solution.png}
+\caption{\textrm{\tiny Flow diagram sketching the solution of the Bethe-Salpeter equation in practice.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{GW-BSE_solution}
+\end{figure}
 }
 
 %\frame
@@ -495,3 +813,14 @@
 %	\item
 %\end{itemize}
 %}
+%------------------------------------------------------------------------Reference----------------------------------------------------------------------------------------------
+		\frame[allowframebreaks]
+{
+\begin{thebibliography}{99}
+\frametitle{主要参考文献}
+{\tiny
+\bibitem{RMP74-601_2002}\textrm{G. Onida, L. Reining and A. Rubio. \textit{Rev. Mod. Phys.}, \textbf{74} (2002), 601}
+}
+\end{thebibliography}
+%\nocite*{}
+}
