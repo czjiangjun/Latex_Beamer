@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  不使用 authblk 包制作标题  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %-------------------------------PPT Title-------------------------------------
-\title{19-多体相互作用理论}
+\title{20-多体相互作用}
 %-----------------------------------------------------------------------------
 %----------------------------Author & Date------------------------------------
 
@@ -15,7 +15,7 @@
 \date[\today] % (optional, should be abbreviation of conference name)
 {%	{\fontsize{6.2pt}{4.2pt}\selectfont{\textcolor{blue}{E-mail:~}\url{jiangjun@bcc.ac.cn}}}
 \vskip 45 pt {\fontsize{8.2pt}{6.2pt}\selectfont{%清华大学\;\;物理系% 报告地点
-	\vskip 5 pt \textrm{2023.04.22}}}
+	\vskip 5 pt \textrm{2023.09.16}}}
 }
 
 %% - Either use conference name or its abbreviation
@@ -71,7 +71,7 @@
 %	     \item \textrm{PAW}原子数据集:\textcolor{blue}{优异的赝势}\upcite{PRB59-1758_1999}
 %	\end{itemize}
 %}
-\section{电子相关与多体理论}
+\section{\rm{Green's function}}
 \frame
 {
 	\frametitle{多重散射与\textrm{Green's function}}
@@ -98,13 +98,13 @@
 	\frametitle{\textrm{Green's function}}
 	\begin{itemize}
 \vspace{-7pt}
-		\item 时间序列的\textrm{Green's function}定义为$G(\vec x_1,t_1;\vec x_2,t_2)=-\mathrm{i}\langle\Theta_N^0|\hat{\mathbf{T}}[\hat\psi(\vec x_1,t_1)\hat\psi^{\dag}(\vec x_2,t_2)]|\Theta_N^0\rangle$
+		\item 时间序列的\textrm{Green's function}定义为$G(\mathbf{x}_1,t_1;\mathbf{x}_2,t_2)=-\mathrm{i}\langle\Theta_N^0|\hat{\mathbf{T}}[\hat\psi(\mathbf{x}_1,t_1)\hat\psi^{\dag}(\mathbf{x}_2,t_2)]|\Theta_N^0\rangle$
 		\item \textrm{Green function}的\textcolor{blue}{\textrm{Lehmann}表象}为
 			\begin{displaymath}
 				\begin{aligned}
 					\hspace*{-35pt}
-					G(\vec x_1,\vec x_2;\omega)=&\sum\limits_i\dfrac{\langle\Theta_N^0|\hat\psi_i(\vec x_1)|\Theta_{N+1}^0\rangle\langle\Theta_{N+1}^0|\hat\psi_i^{\dag}(\vec x_2)|\Theta_N^0\rangle}{\omega-(E_{N+1}^i-E_N^0)+\mathrm{i}\eta}\\
-					+&\sum\limits_i\dfrac{\langle\Theta_N^0|\hat\psi_i^{\dag}(\vec x_2)|\Theta_{N-1}^0\rangle\langle\Theta_{N-1}^0|\hat\psi_i(\vec x_1)|\Theta_N^0\rangle}{\omega+(E_{N-1}^i-E_N^0)-\mathrm{i}\eta}\qquad\eta\rightarrow0^+
+					G(\mathbf{x}_1,\mathbf{x}_2;\omega)=&\sum\limits_i\dfrac{\langle\Theta_N^0|\hat\psi_i(\mathbf{x}_1)|\Theta_{N+1}^0\rangle\langle\Theta_{N+1}^0|\hat\psi_i^{\dag}(\mathbf{x}_2)|\Theta_N^0\rangle}{\omega-(E_{N+1}^i-E_N^0)+\mathrm{i}\eta}\\
+					+&\sum\limits_i\dfrac{\langle\Theta_N^0|\hat\psi_i^{\dag}(\mathbf{x}_2)|\Theta_{N-1}^0\rangle\langle\Theta_{N-1}^0|\hat\psi_i(\mathbf{x}_1)|\Theta_N^0\rangle}{\omega+(E_{N-1}^i-E_N^0)-\mathrm{i}\eta}\qquad\eta\rightarrow0^+
 				\end{aligned}
 			\end{displaymath}
 			{\fontsize{6.2pt}{6.2pt}\selectfont{存在小的虚部$\eta$保证频率域的\textrm{Fourier}变换收敛.~这样表示的\textrm{Green's function}，在复平面中的极点与增加/失去一个粒子体系的能量对应，因此也称为\textcolor{blue}{谱表象\textrm{(Spectral~representation)}}}}
@@ -121,6 +121,15 @@
 \frame
 {
 	\frametitle{\textrm{Green's function}}
+{\fontsize{7.8pt}{6.2pt}\selectfont{
+	用\textrm{Green's function}表示的电荷密度为
+	\begin{displaymath}
+		\rho(\vec rt)=-\mathrm{i}\mathop{\mathrm{lim}}\limits_{\tau\rightarrow 0^{\dag}}\int G(\mathbf{x}t,\mathbf{x}t+\tau)\mathrm{d}\xi
+	\end{displaymath}
+	体系总能~\textrm{(Galistsii-Migdal公式)}
+	\begin{displaymath}
+		E=\frac12\int\mathrm{d}\mathbf{x}\mathop{\mathrm{lim}}\limits_{t^{\prime}\rightarrow t^{\dag}}\left[\frac{\partial}{\partial t}-\mathrm{i}h(\mathbf{x})\right]G(\mathbf{x},t;\mathbf{x}^{\prime},t^{\prime})_{\mathbf{x}^{\prime}\rightarrow x}
+	\end{displaymath}
 	将\textrm{Lehmann}表象的分母改写
 	\begin{displaymath}
 		\begin{aligned}
@@ -136,6 +145,7 @@
 	\begin{displaymath}
 		\dfrac{E_{N+1}^0-E_N^0}{1}\approx\dfrac{\mathrm{d}E}{\mathrm{d}N}\bigg|_N=\mu(N)\approx\mu(N-1):=\mu
 	\end{displaymath}
+}}
 }
 
 \frame
@@ -144,12 +154,12 @@
 	谱函数\textrm{(Spectral function)}的定义为
 	\begin{displaymath}
 		\begin{aligned}
-			A(\vec x,\vec x^{\prime};\omega)=&-\dfrac1{\pi}\mathrm{Im}G(\vec x,\vec x^{\prime};\omega)\\
-			=&\sum_ig_i(\vec x)g_i^{\ast}(\vec x^{\prime})\delta(\omega+E_N^0-E_{N+1}^i)\\
-			&+f_i(\vec x)f_i^{\ast}(\vec x^{\prime})\delta(\omega+E_{N-1}^0-E_{N}^i)
+			A(\mathbf{x},\mathbf{x}^{\prime};\omega)=&-\dfrac1{\pi}\mathrm{Im}G(\mathbf{x},\mathbf{x}^{\prime};\omega)\\
+			=&\sum_ig_i(\mathbf{x})g_i^{\ast}(\mathbf{x}^{\prime})\delta(\omega+E_N^0-E_{N+1}^i)\\
+			&+f_i(\mathbf{x})f_i^{\ast}(\mathbf{x}^{\prime})\delta(\omega+E_{N-1}^i-E_{N}^0)
 		\end{aligned}
 	\end{displaymath}
-	物理上，谱函数$A(\vec x,\vec x^{\prime},\omega)$对应局域态密度\textrm{(local density of state)}
+	物理上，谱函数$A(\mathbf{x},\mathbf{x}^{\prime},\omega)$对应局域态密度\textrm{(local density of state)}
 \begin{figure}[h!]
 %	\vspace{-5pt}
 \centering
@@ -224,9 +234,9 @@
 {
 	\frametitle{\textrm{Green's function}的物理意义}
 \fontsize{7.9pt}{4.2pt}\selectfont{
-	时间序列的\textrm{Green's function}$G(\vec r,\vec r^{\prime},t-t^{\prime})$描述了粒子由$(\vec r,t)$到$\vec r^{\prime},t^{\prime}$的传播\footnote{\fontsize{6.5pt}{4.2pt}\selectfont{因此\textrm{Green's funtion}被称为传播子.}}: 换言之，假设粒子在时-空点$(\vec r,t)$位置出现，则$G(\vec r,\vec r^{\prime},t-t^{\prime})$表示在时-空点$(\vec r^{\prime},t^{\prime})$找到粒子的概率
+	时间序列的\textrm{Green's function}~$G(\vec r,\vec r^{\prime},t-t^{\prime})$描述了粒子由$(\vec r,t)$到$\vec r^{\prime},t^{\prime}$的传播:~假设粒子在时-空点$(\vec r,t)$位置出现，则$G(\vec r,\vec r^{\prime},t-t^{\prime})$表示在时-空点$(\vec r^{\prime},t^{\prime})$找到粒子的概率\footnote{\fontsize{6.5pt}{4.2pt}\selectfont{因此单粒子\textrm{Green's funtion}被称为传播子.}}
 	\begin{displaymath}
-		G_{0}(\vec r,\vec r^{\prime};\omega)=\sum_n^{\mathrm{all}}\dfrac{\psi_n^{\ast}(\vec r)\psi_n(\vec r^{\prime})}{\omega-\varepsilon_n+\mathrm{i}\eta\mathrm{sgn}(\varepsilon_n-\mu)}
+		G_{0}(\vec r,\vec r^{\prime};\omega)=\sum_n^{\mathrm{all}}\dfrac{\langle N|\psi_n^{\ast}(\vec r)\psi_n^{\dag}(\vec r^{\prime})|N\rangle}{\omega-\varepsilon_n+\mathrm{i}\eta\mathrm{sgn}(\varepsilon_n-\mu)}
 	\end{displaymath}
 \begin{figure}[h!]
 	\vspace{-0.12in}
@@ -240,7 +250,7 @@
 			\begin{displaymath}
 				G_0(1,2)=\sum_n^{\textcolor{blue}{\mathrm{vir.}}}\psi_n^{\ast}(\vec r_1)\psi_n(\vec r_2)\mathrm{e}^{-\mathrm{i}(\varepsilon_n-\mu)(\textcolor{blue}{t_2-t_1})}
 			\end{displaymath}
-		\item 孔传播子:~$G_0(1,2)$且\textcolor{blue}{$(t_1>t_2)$}
+		\item 空穴传播子:~$G_0(1,2)$且\textcolor{blue}{$(t_1>t_2)$}
 			\begin{displaymath}
 				G_0(1,2)=\sum_n^{\textcolor{blue}{\mathrm{occ.}}}\psi_n^{\ast}(\vec r_1)\psi_n(\vec r_2)\mathrm{e}^{-\mathrm{i}(\varepsilon_n-\mu)(\textcolor{blue}{t_1-t_2})}
 			\end{displaymath}
@@ -412,6 +422,7 @@
 	\end{itemize}
 }
 
+\section{\rm{GW}近似}
 \frame
 {
 	\frametitle{准粒子:~激发与屏蔽}
@@ -628,6 +639,7 @@
 	\end{itemize}
 }
 
+\section{\rm{Bethe-Salpeter}方程}
 \frame
 {
 	\frametitle{\textrm{Bethe-Salpeter}方程}
@@ -762,17 +774,69 @@
 	\end{displaymath}
 	于是四中心函数可以表示为
 	\begin{displaymath}
-		S_{(n_1n_2)(n_3n_4)}^{2p}=[H^{2p}-I\omega]_{(n_1n_2)(n_3n_4)}^{-1}(f_{n_4}-f_{n_3})
+		S_{(n_1n_2)(n_3n_4)}=[H^{2p}-I\omega]_{(n_1n_2)(n_3n_4)}^{-1}(f_{n_4}-f_{n_3})
 	\end{displaymath} 
 	而准粒子空间展开的有效\textrm{Hamiltonian}的形式为
 	\begin{displaymath}
 		H_{(n_1n_2)(n_3n_4)}^{2p}=
 		\begin{pmatrix}
-			A &B\\
-			0 &D
+			\textcolor{red}{\mathbf{A}} &\mathbf{B}\\
+			0 &\mathbf{D}
 		\end{pmatrix}
 	\end{displaymath}
-	$A$、$B$、$D$的具体表达形式，参阅文献\cite{RMP74-601_2002}}}
+	$\mathbf{A}$、$\mathbf{B}$、$\mathbf{D}$的具体表达形式，参阅文献\cite{RMP74-601_2002}
+\vskip 3pt
+具体求解$H_{(n_1n_2)(n_3n_4)}^{2p}$的本征态方程时，将仅考虑电子-空穴对贡献有关部分\footnote{\fontsize{6.5pt}{4.2pt}\selectfont{这部分称为共振部分\textrm{(resonsant part)}},描述的是与吸收频率$\omega$对应的价带-导带激发.}记作
+\begin{displaymath}
+	H_{(vc)(v^{\prime}c^{\prime})}^{2p,\mathrm{res}}\equiv(\varepsilon_c-\varepsilon_v)\delta_{vv^{\prime}}\delta_{cc^{\prime}}+K_{(vc)(v^{\prime}c^{\prime})}
+\end{displaymath}
+共振部分仅存在于$\textcolor{red}{\mathbf{A}}$中:
+\begin{displaymath}
+	\textcolor{red}{\mathbf{A}}=
+\begin{pmatrix}
+	H_{(vc)(v^{\prime}c^{\prime})}^{2p,\mathrm{res}} &K_{(vc)(v^{\prime}c^{\prime})}\\
+	-[K_{(vc)(v^{\prime}c^{\prime})}]^{\ast} &-[H_{(vc)(v^{\prime}c^{\prime})}^{2p,\mathrm{res}}]^{\ast}\\
+\end{pmatrix}
+\end{displaymath}
+取$(n_3n_4)=\{c^{\prime}v^{\prime}\}\mbox{\textrm{and}}\{v^{\prime}c^{\prime}\}$，此时任意四中心函数$S_{(n_1n_2)(n_3n_4)}$可以写成形如
+\begin{displaymath}
+	\textcolor{blue}{M_{(n_1n_2)(n_3n_4)}^{-1}}=[\textcolor{blue}{H^{2p}}-I\omega]_{(n_1n_2)(n_3n_4)}^{-1}
+\end{displaymath}
+如果记$\textcolor{cyan}{A_{\omega}}=\textcolor{cyan}{A}-I\omega$，则对照上述对四中心函数$S$的讨论，后面关注的将是$\textcolor{cyan}{A_{\omega}^{-1}}$，换言之，后面只讨论有物理意义的电子-空穴(初始\textrm{Bloch}态占据数分别为1和0)对，因此这里将用有效双粒子\textrm{Hamiltonian}$H^{2p}$指代$\mathbf{A}$部分
+\vskip 3pt
+一般说，$\mathbf{A}$部分具有非\textrm{Hermiitian}性，主要分成四块(两部分):
+\begin{itemize}
+	\item 矩阵对角块的两部分:~由电子-空穴跃迁能$\varepsilon_n$和相互作用项$K$构成
+	\item 矩阵非对角块两部分:~仅有相互作用$K$构成
+\end{itemize}
+\begin{displaymath}
+	H^{2p}=\begin{pmatrix}
+		H^{2p,\mathrm{res}} &\textcolor{blue}{H^{\mathrm{coupling}}}\\	
+		\textcolor{blue}{-[H^{\mathrm{coupling}}]^{\ast}} &\textcolor{magenta}{-[H^{2p,\mathrm{res}}]^{\ast}}
+	\end{pmatrix}
+\end{displaymath}
+{\fontsize{5.0pt}{4.2pt}\selectfont{其中共振部分有\textrm{Hermiitian}性:$(H^{2p,\mathrm{res}})^{\ast}=(H^{2p,\mathrm{res}})^{T}$，耦合部分有对称性:$H^{\mathrm{coupling}}=(H^{\mathrm{coupling}})^{T}$，而$\textcolor{magenta}{-[H^{2p,\mathrm{res}}]^{\ast}}$称为反共振部分。如忽略共振部分，称为\textrm{Tamm-Dancoff}近似}}
+\vskip 3pt
+如果双粒子有效\textrm{Hamiltonian}~$H^{2p}$的本征态$A_{\lambda}$和本征值$E_{\lambda}$满足
+\begin{displaymath}
+	H^{2p}A_{\lambda}=E_{\lambda}A_{\lambda}
+\end{displaymath}
+则该\textcolor{magenta}{双粒子有效\textrm{Hamiltonian}之逆}的谱表示为
+\begin{displaymath}
+	[H^{2p}-I\omega]_{(n_1n_2)(n_3n_4)}^{-1}=\sum_{\lambda,\lambda^{\prime}}\dfrac{A_{\lambda}^{n_1n_2}N_{\lambda,\lambda}^{-1}A_{\lambda}^{\ast(n_3n_4)}}{E_{\lambda}-\omega}
+\end{displaymath}
+这里$N_{\lambda,\lambda^{\prime}}$是重叠矩阵(源于$H^{2p}$的非正交本征态$A_{\lambda}^{(n_1n_2)}$):
+\begin{displaymath}
+	N_{\lambda,\lambda^{\prime}}\equiv\sum_{n_1,n_2}A_{\lambda}^{\ast(n_1n_2)}A_{\lambda}^{(n_1n_2)}
+\end{displaymath} }}
+最后可以宏观介电函数的表达式为
+\begin{displaymath}
+	\begin{aligned}
+		\epsilon_M(\omega)=&1-\mathop{\mathrm{lim}}\limits_{\vec q\rightarrow0}v(\vec q)\sum_{\lambda,\lambda^{\prime}}\left(\sum_{n_1,n_2}\langle n_1|\mathrm{e}^{-\mathrm{i}\vec q\cdot\vec r}|n_2\rangle\right.\\
+		&\times\dfrac{A_{\lambda}^{(n_1n_2)}}{\omega-E_{\lambda}+\mathrm{i}\eta}N_{\lambda,\lambda^{\prime}}^{-1}\\
+		&\left.\times\sum_{n_3,n_4}\langle n_4|\mathrm{e}^{\mathrm{i}\vec q\cdot\vec r^{\prime}}|n_3\rangle A_{\lambda^{\prime}}^{\ast(n_3n_4)}(f_{n_3}-f_{n_4})\right)
+	\end{aligned}
+\end{displaymath}
 }
 
 \frame
@@ -785,13 +849,18 @@
 			&-W_{(n_1n_2)(n_3n_4)}]\}A_{\lambda}^{(n_3n_4)}=E_{\lambda}A_{\lambda}^{(n_1n_2)}
 		\end{aligned}
 	\end{displaymath}
-	其中四中心积分$\bar{v}$和$W$用四个准粒子波函数轨道$n_1,\cdots,n_4$表示为
+	四中心积分$\bar{v}$和$W$用四个准粒子波函数轨道$n_1,\cdots,n_4$表示:
 	\begin{displaymath}
 		\begin{aligned}
 			\bar{v}_{(n_1n_2)(n_3n_4)}=&\langle n_1n_2|\bar{v}|n_3n_4\rangle\\	
-			W_{(n_1n_2)(n_3n_4)}=&\langle n_1n_2|\bar{v}|n_3n_4\rangle\\	
+			W_{(n_1n_2)(n_3n_4)}=&\langle n_1n_2|\bar{v}|n_3n_4\rangle	
 		\end{aligned}
 	\end{displaymath}
+{\fontsize{8.5pt}{6.2pt}\selectfont{
+类似地，有效双粒子\textrm{Hamiltonian}~$H^{2p}$的共振部分有\textrm{Hermitian}属性，且本征态波函数$A_{\lambda}$正交，则宏观介电函数为:
+	\begin{displaymath}
+		\textcolor{red}{\epsilon_M(\omega)=1-\mathop{\mathrm{lim}}\limits_{\vec q\rightarrow0}v_0(\vec q)\sum_{\lambda}\dfrac{\big|\sum\limits_{n_1,n_2}\langle n_1|\mathrm{e}^{-\mathrm{i}\vec q\cdot\vec r}|n_2\rangle A_{\lambda}^{(n_1n_2)}\big|^2}{\omega-E_{\lambda}+\mathrm{i}\eta}}
+	\end{displaymath}}}
 }
 
 \frame
@@ -803,6 +872,226 @@
 \includegraphics[height=2.75in,width=2.35in,viewport=0 0 600 735,clip]{Figures/BSE_solution.png}
 \caption{\textrm{\tiny Flow diagram sketching the solution of the Bethe-Salpeter equation in practice.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{GW-BSE_solution}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{DFT-GW-BSE}的本征方程}
+\begin{figure}[h!]
+\centering
+\vspace{-10pt}
+\includegraphics[height=2.65in,width=4.00in,viewport=0 0 1300 800,clip]{Figures/DFT_GW_BSE-equation.png}
+%\caption{\textrm{\tiny Flow diagram sketching the solution of the Bethe-Salpeter equation in practice.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{DFTGW-BSE_equation}
+\end{figure}
+}
+
+\section{\rm{TD-DFT}}
+\frame{
+	\frametitle{\textrm{TD-DFT}}
+	\begin{itemize}
+		\item 经典的\textrm{DFT}是基态理论，不能处理激发态
+	\end{itemize}
+	{\fontsize{7.5pt}{4.2pt}\selectfont{如果体系所受外势随时间演化，则体系也将随之演化
+			\begin{displaymath}
+				A=\int_{t_0}^{t_1}\mathrm{d}t\langle\Psi(t)|\mathrm{i}\frac{\partial}{\partial t}-\hat{H}(t)|\Psi(t)\rangle
+			\end{displaymath}
+		根据能量最低原理，最终达到基态(体系总能极小态) ，体系演化过程中的径迹将由最小作用量$\int_{t_0}^{t_1}\mathrm{d}t\mathbf{L}(t)$决定，$\mathbf{L}$是\textrm{Lagrangian}}}\\
+	与基态\textrm{DFT}的推导类似，理论上可以证明
+	\begin{itemize}
+		\item \textrm{Runge-Gross}定理:\\
+		含时的势能与含时的密度在演化过程中有一一对应关系
+	\item \textrm{von Leeuwen}定理:\\
+		体系的性质有体系的密度确定，密度可通过含时\textrm{Kohn-Sham}方程得到
+	\end{itemize}
+	这就是含时密度泛函理论\textrm{(TD-DFT)}\\
+	{\fontsize{7.5pt}{4.2pt}\selectfont{与\textrm{DFT}的交换-相关泛函类似，引入含时的交换-相关泛函，包含多体相互作用，并允许随时间演化}}
+}
+
+\frame{
+	\frametitle{含时\textrm{Kohn-Sham}方程}
+	{\fontsize{7.2pt}{4.2pt}\selectfont{
+		\begin{itemize}
+			\item 体系所受作用是密度的泛函$A[\rho]$，因此与$A[\rho]$的极值对应的\textrm{Euler}方程
+	\begin{displaymath}
+		\dfrac{\delta A[\rho]}{\delta\rho(\vec r,t)}=0
+	\end{displaymath}
+	决定了基态的含时密度(与\textrm{Hohenberg-Kohn}定理类似)
+\item 引入密度为$\rho(\vec r,t)$的无相互作用体系，如体系的势函数$v$可由含时密度表示，则\\
+	含时\textrm{Kohn-Sham}方程表示为
+	\begin{displaymath}
+		\begin{aligned}
+			&\left[-\dfrac12\nabla^2+V_{\mathrm{eff}}(\vec r,t)\right]\psi_i(\vec r.t)=\mathrm{i}\dfrac{\partial}{\partial t}\psi_i(\vec r,t)\\
+			&\rho(\vec r,t)=\sum_{i=1}^N|\psi_i(\vec r,t)|^2
+		\end{aligned}
+	\end{displaymath}
+		\end{itemize}
+		其中$V_{\mathrm{eff}}(\vec r,t)=V_{\mathrm{H}}(\vec r,t)+V_{\mathrm{XC}}(\vec r,t)+V_{\mathrm{ext}}(\vec r,t)$，是电子感受到的势，包括:
+		\begin{itemize}
+			\item 随时间演化的外势$V_{\mathrm{ext}}(\vec r,t)$
+			\item 随时间演化的\textrm{Hartree}势$V_{\mathrm{H}}(\vec r,t)$
+			\item 交换相关势(定义为\textcolor{blue}{体系所受作用函数与无相互作用密度的变分}):
+				\begin{displaymath}
+					V_{\mathrm{XC}}(\vec r,t)=\frac{\delta A_{\mathrm{XC}}[\rho]}{\delta\rho(\vec r,t)}
+				\end{displaymath}
+				这里$A_{\mathrm{XC}}[\rho]$是体系所受作用函数的对交换-相关有贡献的部分
+		\end{itemize} }}
+}
+
+\frame
+{
+	\frametitle{\textrm{TD-DFT}的分类}
+	\textcolor{magenta}{\textrm{TD-DFT}广泛用于电子-核体系运动的量子耦合、电磁场的量子本质，以及超导等前沿领域的研究中}
+	\vskip 5pt
+\textrm{TD-DFT}分为两类
+\begin{itemize}
+	\item \textcolor{blue}{\textrm{rt~(Real~Time)-TDDFT}}:\\
+		可用于演化体系，实现动力学模拟\\
+{\fontsize{7.2pt}{4.2pt}\selectfont{
+用定态\textrm{Kohn-Sham}轨道$\{\phi_p^{\mathrm{opt}}(\vec r;\mathbf{R}(t))\}$展开\textrm{TD-KS}轨道，有
+\begin{displaymath}
+	\phi_i(\vec r,t)=\sum_{j}^{\infty}c_{ip}(t)\phi_p^{\mathrm{opt}}(\vec r;\mathbf{R}(t))
+\end{displaymath}}}
+	\item \textcolor{blue}{\textrm{LR~(Linear~Response)-TDDFT}}:\\
+		根据体系的电子结构得到体系的光谱信息:\\
+		{\fontsize{7.2pt}{4.2pt}\selectfont{不产生体系的动力学演化信息}}
+	\begin{itemize}
+{\fontsize{7.2pt}{4.2pt}\selectfont{
+		\item 作为微扰方法，主要研究体系对含时的外部微扰的响应
+		\item 含时响应与单粒子\textrm{Green's function}处理思想类似}}
+	\end{itemize}
+	\textrm{TD-DFT}的自洽迭代过程，可用于多体问题有关的(束缚或非束缚)激发态能量、跃迁几率等的计算
+\end{itemize}
+}
+
+\frame
+{
+	\frametitle{响应函数}
+	{\fontsize{7.8pt}{4.2pt}\selectfont{
+		相互作用体系的固有极化函数(线性响应函数)$\chi$定义为
+\begin{displaymath}
+	\chi(\vec r,t;\vec r^{\prime},t^{\prime})=\frac{\delta\rho(\vec r,t)}{\delta V_{\mathrm{ext}}(\vec r^{\prime},t^{\prime})}\bigg|_{v_{\mathrm{ext}}=0}
+\end{displaymath}
+类似地，假想\textrm{Kohn-Sham}体系(无相互作用体系)的线性响应函数$\chi_0$定义为
+\begin{displaymath}
+	\chi_0(\vec r,t;\vec r^{\prime},t^{\prime})=\frac{\delta\rho(\vec r,t)}{\delta V_{\mathrm{eff}}(\vec r^{\prime},t^{\prime})}\bigg|_{v_{\mathrm{eff}}=0}
+\end{displaymath}
+利用链式关系$\delta\rho/\delta V_{\mathrm{ext}}=(\delta\rho/\delta V_{\mathrm{eff}})\times(\delta V_{\mathrm{eff}}/\delta V_{\mathrm{ext}})\equiv\textcolor{blue}{\chi_0}\delta V_{\mathrm{eff}}/\delta V_{\mathrm{ext}}$，可有
+\begin{displaymath}
+	\begin{aligned}
+		\frac{\delta V_{\mathrm{eff}}(\vec r,t)}{\delta V_{\mathrm{ext}}(\vec r^{\prime},t^{\prime})}=&\delta(\vec r-\vec r^{\prime})\delta(t-t^{\prime})+\int\left[\frac{\delta(t-t^{\prime\prime})}{|\vec r-\vec r^{\prime\prime}|}+f_{\mathrm{XC}}(\vec r,t;\vec r^{\prime\prime},t^{\prime\prime})\right] \\
+		&\times\chi(\vec r^{\prime\prime},t^{\prime\prime};\vec r^{\prime},t^{\prime})\mathrm{d}\vec r^{\prime\prime}\mathrm{d}t^{\prime\prime}
+	\end{aligned}
+\end{displaymath}
+这里含时的单位密度交换-相关势$f_{\mathrm{xc}}$表示为
+\begin{displaymath}
+	f_{\mathrm{XC}}(\vec r,t;\vec r^{\prime},t^{\prime})=\frac{\delta V_{\mathrm{XC}}[\rho(\vec r,t)]}{\delta\rho(\vec r^{\prime},t^{\prime})}\bigg|_{v_{\mathrm{ext}}=0}
+\end{displaymath} }} 
+}
+
+\frame
+{
+	\frametitle{响应函数的\textrm{Dyson}方程}
+	为了计算激发态，将多体相互作用的固有极化函数$\chi$用无相互作用的固有极化函数$\chi_0$表示为类-\textrm{Dyson}方程形式:
+\begin{displaymath}
+	\textcolor{blue}{\chi(\vec r,\vec r^{\prime};\omega)=\chi_0(\vec r,\vec r^{\prime};\omega)+\int\mathrm{d}\vec r_1\mathrm{d}\vec r_2\chi_0(\vec r,\vec r_1,\omega)K(\vec r_1,\vec r_2,\omega)\chi(\vec r_2,\vec r^{\prime};\omega)}
+\end{displaymath}
+{\fontsize{7.8pt}{4.2pt}\selectfont{
+其中
+\begin{displaymath}
+	K(\vec r_1,\vec r_2;\omega)=\frac1{|\vec r_1-\vec r_2|}+f_{\mathrm{XC}}(\vec r_1,\vec r_2;\omega)
+\end{displaymath}}}
+迭代求解$\chi$的类\textrm{Dyson}方程时，通常选定\textrm{LDA}近似下的$f_{\mathrm{XC}}(\vec r_1,\vec r_2;\omega)$(\textrm{TD-LDA})
+\begin{displaymath}
+	f_{\mathrm{XC}}^{\mathrm{TD-LDA}}(\vec r_1,\vec r_2)=\delta(\vec r_1-\vec r_2)\frac{\partial V_{\mathrm{XC}}^{\mathrm{LDA}}(\rho(\vec r_1),\vec r_1)}{\partial\rho(\vec r_1)}
+\end{displaymath}
+通过响应函数可以得到相互作用体系的\textcolor{blue}{密度线性响应}
+\begin{displaymath}
+	\begin{aligned}
+		\rho_1(\vec r,\omega)=&\int\mathrm{d}\vec r^{\prime}\chi_0(\vec r,\vec r^{\prime};\omega)V_{\mathrm{eff}}(\vec r^{\prime},\omega)\\
+	\equiv&\int\mathrm{d}\vec r^{\prime}\chi(\vec r,\vec r^{\prime};\omega)V_{\mathrm{ext}}(\vec r^{\prime},\omega)
+	\end{aligned}
+\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{类\textrm{Dyson}方程的求解}
+	类\textrm{Dyson}方程通过$\chi_0(\omega)$，迭代求解得到$\chi(\omega)$，$\chi(\omega)$的极点($\omega=\Omega_j$)对应的是电子-空穴激发能
+
+	如果将类\textrm{Dyson}方程改写成
+	\begin{displaymath}
+		\chi(\omega)=\textcolor{purple}{[1-\chi_0(\omega)K(\omega)]^{-1}}\chi_0(\omega)=\textcolor{red}{R(\omega)}\chi_0(\omega)
+	\end{displaymath}
+	则对极点的搜索变为求解$\omega=\Omega_i$使得$R(\omega)=0$成立的激发\footnote{\fontsize{5.8pt}{4.2pt}\selectfont{\textcolor{magenta}{注意}:~$\chi$的极点和$\chi_0$的极点并不一致，当$R(\omega)=0$，可以排除$\chi$的奇点(类似地，$R(\omega)^{-1}=0$排除了$\chi_0$的奇点)，这意味着相互作用体系的激发能被无相互作用体系的电子-空穴对重整化\textrm{(renormalized)}了}}
+
+	迭代方程的求解也可以转变为本征值问题，即求解方程
+	\begin{displaymath}
+		\sideset{^4}{}{\mathop{R}}(\omega)|\lambda\rangle=0
+	\end{displaymath}
+	参照\textrm{Bethe-Salpeter}方程的本征方程选择，令
+	\begin{displaymath}
+		\sideset{^4}{}{\mathop{R}}\equiv\bar{\Pi}^{-1}\equiv[1-\sideset{^4}{_0}{\mathop{\chi}}K]
+	\end{displaymath}
+因此有本征方程
+	\begin{displaymath}
+		c_{n_1n_2}-\sum_{n_3n_4}(f_{n_1}-f_{n_2})\frac{K_{(n_1n_2),(n_3n_4)}(\omega)}{\omega-(\varepsilon_{n_2}-\varepsilon_{n_1})}=0
+	\end{displaymath}
+}
+
+\frame[allowframebreaks]
+{
+	\frametitle{本征方程的解$^{\ast}$}
+	{\fontsize{5.8pt}{4.2pt}\selectfont{
+		取$\Phi_{n_1n_2}(\vec r)=\psi_{n_1}(\vec r)\psi_{n_2}^{\ast}(\vec r)$，则有
+		\begin{displaymath}
+			K_{(n_1n_2),(n_3n_4)}(\omega)=\langle \Phi_{n_1n_2}|K(\omega)|\Phi_{n_3n_4}\rangle
+		\end{displaymath}
+		根据$K$的构成可知
+		\begin{itemize}
+			\item \textrm{Coulomb}相互作用的贡献
+		\begin{displaymath}
+			\iint\mathrm{d}\vec r_1\mathrm{d}\vec r_2\Phi_{n_1n_2}^{\ast}(\vec r_1)\frac1{|\vec r_1-\vec r_2|}\Phi_{n_1n_2}(\vec r_2)
+		\end{displaymath}
+\item \textrm 交换-相关作用的贡献
+	\begin{displaymath}
+		\iint\mathrm{d}\vec r_1\mathrm{d}\vec r_2\Phi_{n_1n_2}^{\ast}(\vec r_1)\frac{\partial V_{\mathrm{XC}}(\vec r_1)}{\partial\rho}\Phi_{n_1n_2}(\vec r_2)=\int\mathrm{d}\vec r\rho_{n_1}(\vec r)\frac{\partial V_{\mathrm{XC}}(\vec r)}{\partial\rho}\rho_{n_2}(\vec r)
+	\end{displaymath}
+		\end{itemize} 
+		如果只考虑$1\rightarrow2$的跃迁，本征方程将可以简化，(采用一阶微扰，具体参阅文献\cite{PRL76-1212_1996})可得
+\begin{displaymath}
+	\Omega\approx\omega_{12}+\mathrm{Re}[K_{1\uparrow2\uparrow,1\uparrow2\uparrow}(\omega_{12})\pm K_{1\uparrow2\downarrow,1\uparrow2\downarrow}(\omega_{12})]
+\end{displaymath}
+考虑自旋的影响，取$f_{\mathrm{xc}}^1=0.5(f_{\mathrm{xc}\uparrow\uparrow}+f_{\mathrm{xc}\uparrow\downarrow})$和$f_{\mathrm{xc}}^2=0.5(f_{\mathrm{xc}\uparrow\uparrow}-f_{\mathrm{xc}\uparrow\downarrow})$
+\begin{itemize}
+	\item 单重态部分贡献
+		\begin{displaymath}
+			\omega_{\mathrm{singlet}}=\omega_{12}+2\mathrm{Re}\int\mathrm{d}\vec r_1\mathrm{d}\vec r_2\Phi_{12}^{\ast}(\vec r_1)\left(\frac1{|\vec r_1-\vec r_2|}+f_{\mathrm{XC}}^1(\vec r_1,\vec r_2;\omega_{12})\right)\Phi_{12}(\vec r_2)
+		\end{displaymath}
+	\item 三重态部分贡献
+		\begin{displaymath}
+			\omega_{\mathrm{triplet}}=\omega_{12}+2\mathrm{Re}\int\mathrm{d}\vec r_1\mathrm{d}\vec r_2\Phi_{12}^{\ast}(\vec r_1)f_{\mathrm{XC}}^2(\vec r_1,\vec r_2;\omega_{12})\Phi_{12}(\vec r_2)
+		\end{displaymath}
+\end{itemize} }}
+\begin{figure}[h!]
+\centering
+\vspace{-10pt}
+\includegraphics[height=1.65in,width=1.70in,viewport=0 0 1200 1300,clip]{Figures/lr-TDDFT_flowchart.png}
+%\caption{\textrm{\tiny Flow diagram sketching the solution of the Bethe-Salpeter equation in practice.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{lr-DFT-flowchart}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{TD-DFT}与\textrm{BSE}}
+\begin{figure}[h!]
+\centering
+\vspace{-10pt}
+\includegraphics[height=2.05in,width=4.00in,viewport=50 0 1450 730,clip]{Figures/DFT_GW_BSE-compare.png}
+%\caption{\textrm{\tiny Flow diagram sketching the solution of the Bethe-Salpeter equation in practice.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{DFTGW-BSE_compare}
 \end{figure}
 }
 
@@ -820,6 +1109,8 @@
 \frametitle{主要参考文献}
 {\tiny
 \bibitem{RMP74-601_2002}\textrm{G. Onida, L. Reining and A. Rubio. \textit{Rev. Mod. Phys.}, \textbf{74} (2002), 601}
+\bibitem{PRL76-1212_1996}\textrm{M. Petersilka, U. J. Gossmann and E. K. U. Gross. \textit{Phys. Rev. Lett.}, \textbf{76} (1996), 1212}
+\bibitem{PRL82-3863_1999}\textrm{R. von Leeuwen. \textit{Phys. Rev. Lett.}, \textbf{82} (1999), 3863}
 }
 \end{thebibliography}
 %\nocite*{}
