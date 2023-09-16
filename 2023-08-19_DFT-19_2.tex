@@ -438,7 +438,7 @@
 
 \frame
 {
-	\frametitle{准粒子与与自能的计算}
+	\frametitle{准粒子与自能的计算}
 	即使是单粒子\textrm{Green's function}也无法精确求解，必须作适当近似:\\
 	{\fontsize{7.0pt}{6.2pt}\selectfont{一个合理的近似是写成\textrm{Kohn-Sham}本征态和本征值表示的\textrm{Lehmann}形式$G_{\mathrm{KS}}^0(\vec r_1,\vec r_2;\textcolor{brown}{\omega})$}}\\
 	再由\textrm{Dyson}方程得到相互作用的\textrm{Green's function}
@@ -1089,14 +1089,78 @@
 	\frametitle{\textrm{TD-DFT}与\textrm{BSE}}
 \begin{figure}[h!]
 \centering
-\vspace{-10pt}
+\vspace{-50pt}
 \includegraphics[height=2.05in,width=4.00in,viewport=50 0 1450 730,clip]{Figures/DFT_GW_BSE-compare.png}
 %\caption{\textrm{\tiny Flow diagram sketching the solution of the Bethe-Salpeter equation in practice.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{DFTGW-BSE_compare}
 \end{figure}
+\begin{itemize}
+	\item \textrm{BSE}计算电子-空穴激发能精度较高，但计算量可观(须计算大量多中心积分)\\
+		擅长处理周期体系
+	\item \textrm{TD-DFT}通过线性响应计算激发态，灵活方便，计算量较小\\
+		适合处理有限体系，拙于处理周期体系
+\end{itemize}
 }
 
 \section{动力学平均场理论}
+\frame
+{
+	\frametitle{电子强关联现象}
+	有很多重要的物理现象都与电子强关联有关
+	\begin{itemize}
+		\item \textrm{Mott}绝缘体:\\
+			过渡金属氧化物\textrm{(Transition metal oxides)}\textrm{\ch{V2O3}}
+		\item \textrm{Kondo}效应\\
+			稀磁合金中出现的磁性杂质-非磁性宿主金属之间的对抗引起的低温反常输运行为
+		\item 重\textrm{fermion}行为\\
+			含有~$f$-电子的镧系或者锕系金属间化合物，有效质量比自由电子大$2\sim3$数量级
+		\item 高温超导\textrm{(High-temperature Superconductivity)}\\
+			钇钡铜氧\textrm{(\ch{YBa2Cu3O7-x})}、铁基超导体
+	\end{itemize}
+	电子强关联:~独立粒子图像失效，\textrm{DFT}和电子能带结构都无法描述
+}
+
+\frame
+{
+	\frametitle{\textrm{Hubbard}模型}
+\begin{minipage}[b]{0.58\linewidth}
+	\begin{displaymath}
+		\begin{aligned}
+			H=&-\sum_{\langle ij\rangle,\sigma=\uparrow,\downarrow}\underbrace{t_{ij}c_{i\sigma}^{\dag}c_{j\sigma}}_{\fontsize{6.2pt}{4.2pt}\selectfont{\textcolor{purple}{\mathrm{Kinetic~term}}}}\\
+			&+\underbrace{\textcolor{blue}{U}n_{i\uparrow}n_{i\downarrow}}_{\fontsize{6.2pt}{4.2pt}\selectfont{\textcolor{purple}{\mathrm{Interaction~aterm}}}}~_{\fontsize{3.2pt}{2.2pt}\selectfont{\Longleftarrow\mathrm{(Coulomb)~U>0}}} \\
+			n_{i\sigma}\equiv&c_{i\sigma}^{\dag}c_{i\sigma}\\
+		\end{aligned}
+	\end{displaymath}
+			{\fontsize{7.2pt}{5.2pt}\selectfont{\textrm{Doping~(number~of~charge)}
+			\begin{displaymath}
+				\delta=1-\langle n_{\uparrow}+n_{\downarrow}\rangle
+			\end{displaymath}}}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.40\linewidth}
+\begin{figure}[h!]
+\centering
+\vspace{-120pt}
+\includegraphics[height=2.0in,width=1.65in,viewport=0 0 600 750,clip]{Figures/Hubbard_U-t.png}
+%\caption{\textrm{\tiny Flow diagram sketching the solution of the Bethe-Salpeter equation in practice.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Hubbard-U}
+\end{figure}
+\end{minipage}
+\vspace*{-25pt}
+\begin{itemize}
+	\item 半充满:~\textrm{I}~电子/格点平均:$\delta=0$
+	\item $U/t$小:~\textrm{Fermi}液体
+	\item $t=0$:~原子极限
+	\item \textcolor{red}{$U/t$是中等耦合:~?}
+\end{itemize}
+}
+
+\frame
+{
+	\frametitle{动力学平均场理论}
+	动力学平均场理论\textrm{(Dynamic Mean Field Theory, DMFT)}
+	是一种确定强关联材料电子结构的方法。在这种材料中，用于密度泛函理论和通常的能带结构计算的独立电子近似失效了。动力学平均场理论是对电子之间局部相互作用的非微扰处理，它在近自由电子气极限和凝聚态物理学的原子极限之间架起了桥梁。
+}
 
 %\frame
 %{
