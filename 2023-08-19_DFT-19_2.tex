@@ -1109,15 +1109,27 @@
 	有很多重要的物理现象都与电子强关联有关
 	\begin{itemize}
 		\item \textrm{Mott}绝缘体:\\
-			过渡金属氧化物\textrm{(Transition metal oxides)}\textrm{\ch{V2O3}}
+			过渡金属氧化物\textrm{(Transition metal oxides)}:~\textrm{\ch{V2O3}}
 		\item \textrm{Kondo}效应\\
-			稀磁合金中出现的磁性杂质-非磁性宿主金属之间的对抗引起的低温反常输运行为
+			稀磁合金中出现的磁性杂质-非磁性宿主金属之间的对抗引起的低温反常输运行为(电阻)
 		\item 重\textrm{fermion}行为\\
 			含有~$f$-电子的镧系或者锕系金属间化合物，有效质量比自由电子大$2\sim3$数量级
 		\item 高温超导\textrm{(High-temperature Superconductivity)}\\
-			钇钡铜氧\textrm{(\ch{YBa2Cu3O7-x})}、铁基超导体
+			钇钡铜氧\textrm{(\ch{YBa2Cu3O{7-x}})}、铁基超导体
 	\end{itemize}
-	电子强关联:~独立粒子图像失效，\textrm{DFT}和电子能带结构都无法描述
+	电子强关联:~独立粒子图像失效，\textrm{DFT}无法描述准确电子能带结构
+}
+
+\frame
+{
+	\frametitle{电子相关与能带结构}
+\begin{figure}[h!]
+\centering
+\vspace{-12pt}
+\includegraphics[height=2.5in,width=4.00in,viewport=0 0 1680 1000,clip]{Figures/DFT-DMFT-compare.png}
+\caption{\textrm{\tiny The schematic diagram of electron-structure from DFT, DMFT and DFT+$U$.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{DFT-DMFT-Hubbard}
+\end{figure}
 }
 
 \frame
@@ -1162,6 +1174,17 @@
 	是一种确定强关联材料电子结构的方法。在这种材料中，用于密度泛函理论和通常的能带结构计算的独立电子近似失效了。动力学平均场理论是对电子之间局部相互作用的非微扰处理，它在近自由电子气极限和凝聚态物理学的原子极限之间架起了桥梁。
 }
 
+\frame
+{
+	\frametitle{\textrm{DMFT}的计算流程}
+\begin{figure}[h!]
+\centering
+\vspace{-2pt}
+\includegraphics[height=2.4in,width=4.00in,viewport=0 0 780 420,clip]{Figures/DMFT_flowchart.png}
+\caption{\textrm{\tiny The schematic diagram for a charge self-consistent DFT+DMFT loop.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{DFT-DMFT-Flowchart}
+\end{figure}
+}
 %\frame
 %{
 %\frametitle{发展统一理论框架下的材料计算程序}
