@@ -1236,6 +1236,86 @@
 
 \frame
 {
+	\frametitle{\textrm{Ising}模型的\textrm{Weiss}平均场}
+
+}
+
+\frame
+{
+	\frametitle{\textrm{Ising}模型的\textrm{Weiss}平均场}
+	\begin{itemize}
+		\item 杂质:~平均场效应下包含电子相关效应的单个格点
+		\item 浴:~模仿废弃的晶格位效果的电子海洋
+		\item 杂化:~耦合$b/w$杂质和浴，用$\Delta(\omega)=\frac{V^2}{[\omega-(\varepsilon-\mu)]}$对浴态全部求和来描述
+		\item 杂质\textrm{Green's function}$G(\omega)$:~杂质问题的\textrm{Green's function}
+		\item 浴\textrm{Green's function}$\mathcal{G}(\omega)$:~杂质问题的无相互作用\textrm{Green's function}
+		\item 晶格\textrm{Green's function}$G(\vec k,\omega)$:~特定$\vec k$点上的\textrm{Green's function}
+		\item 局域\textrm{Green's function}$G_{ii}(\omega)$:~全部$\vec k$点的晶格\textrm{Green's function}的求和
+		\item 自能$\Sigma(\omega)$:~一个粒子的能量其实部对应谱学中相互作用诱导引起的移动，虚部对应谱学展宽
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{经典平均场理论}
+%	动力学平均场理论\textrm{(Dynamic Mean Field Theory, DMFT)}
+%	是一种确定强关联材料电子结构的方法。在这种材料中，用于密度泛函理论和通常的能带结构计算的独立电子近似失效了。动力学平均场理论是对电子之间局部相互作用的非微扰处理，它在近自由电子气极限和凝聚态物理学的原子极限之间架起了桥梁。
+	\begin{itemize}
+		\item \textrm{Hartree-Fock}理论\\
+			每个电子都在其它运动电子构成的平均场中运动，感受的是其它电子瞬时作用的平均值
+		\item \textrm{Weiss}平均场理论
+			\begin{itemize}
+				\item 铁磁态的\textrm{CUrie-Weiss}定律:~经典的自旋体系(\textrm{Ising}模型)，每个格点处自旋感受到的磁场源于所有其余各格点自旋的平均
+				\item 当自旋体系的维度$d\rightarrow\infty$时，理论趋于精确(受控近似)
+			\end{itemize}
+\end{itemize}
+}
+
+\frame
+{\frametitle{\textrm{Ising}模型的\textrm{Weiss}平均场}
+\begin{itemize}
+	\item \textrm{Ising}模型
+\begin{figure}[h!]
+\centering
+\vspace{-15pt}
+%\includegraphics[height=1.0in,width=1.15in,viewport=0 0 130 120,clip]{Figures/MC-Ising-model_2.png}
+\includegraphics[height=0.5in,width=0.65in,viewport=0 0 130 120,clip]{Figures/MC-Ising-model_2.png}
+%\caption{\textrm{\tiny The schematic diagram of electron-structure from DFT, DMFT and DFT+$U$.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Ising-Model}
+\end{figure}
+\begin{displaymath}
+	H=-\frac J2\sum_{\langle\mathbf{R}_i\mathbf{R}_j\rangle}S_iS_j-h\sum_{\mathbf{R}_i}S_i
+\end{displaymath}
+{\fontsize{7.2pt}{6.2pt}\selectfont{这里$S=\pm1$;~$h$是均匀外场;~$J>0$表示铁磁耦合}}
+\item 引入\textrm{Weiss}平均场
+	\begin{displaymath}
+		\begin{aligned}
+			H_{\mathrm{MF}}=&-\textcolor{red}{h_{\mathrm{MF}}}\sum_iS_i\\
+			\textcolor{red}{h_{\mathrm{MF}}}=&J\sum_{\mathbf{R}_j}^{(i)}\langle S_j\rangle+h=\textcolor{blue}{Z}J\langle S\rangle+h\\
+			&\mbox{\fontsize{6.2pt}{6.2pt}\selectfont{这里对$\mathbf{R}_j$的求和遍历格点$i$的全部最紧邻点}}
+		\end{aligned}
+	\end{displaymath}
+	{\fontsize{8.2pt}{6.2pt}\selectfont{$Z$:~最近邻格点数(维度数)}}
+\end{itemize}
+}
+
+\frame
+{
+	\frametitle{\textrm{Ising}模型的\textrm{Weiss}平均场}
+	\begin{itemize}
+		\item 杂质:~平均场效应下包含电子相关效应的单个格点
+		\item 浴:~模仿废弃的晶格位效果的电子海洋
+		\item 杂化:~耦合$b/w$杂质和浴，用$\Delta(\omega)=\frac{V^2}{[\omega-(\varepsilon-\mu)]}$对浴态全部求和来描述
+		\item 杂质\textrm{Green's function}$G(\omega)$:~杂质问题的\textrm{Green's function}
+		\item 浴\textrm{Green's function}$\mathcal{G}(\omega)$:~杂质问题的无相互作用\textrm{Green's function}
+		\item 晶格\textrm{Green's function}$G(\vec k,\omega)$:~特定$\vec k$点上的\textrm{Green's function}
+		\item 局域\textrm{Green's function}$G_{ii}(\omega)$:~全部$\vec k$点的晶格\textrm{Green's function}的求和
+		\item 自能$\Sigma(\omega)$:~一个粒子的能量其实部对应谱学中相互作用诱导引起的移动，虚部对应谱学展宽
+	\end{itemize}
+}
+
+\frame
+{
 	\frametitle{\textrm{Anderson}模型}
 	\textrm{Anderson}模型
 	\begin{displaymath}
@@ -1256,22 +1336,6 @@
 反铁磁耦合
 }
 
-\frame
-{
-	\frametitle{\textrm{Ising}模型的\textrm{Weiss}平均场}
-	\begin{itemize}
-		\item 杂质:~平均场效应下包含电子相关效应的单个格点
-		\item 浴:~模仿废弃的晶格位效果的电子海洋
-		\item 杂化:~耦合$b/w$杂质和浴，用$\Delta(\omega)=\frac{V^2}{[\omega-(\varepsilon-\mu)]}$对浴态全部求和来描述
-		\item 杂质\textrm{Green's function}$G(\omega)$:~杂质问题的\textrm{Green's function}
-		\item 浴\textrm{Green's function}$\mathcal{G}(\omega)$:~杂质问题的无相互作用\textrm{Green's function}
-		\item 晶格\textrm{Green's function}$G(\vec k,\omega)$:~特定$\vec k$点上的\textrm{Green's function}
-		\item 局域\textrm{Green's function}$G_{ii}(\omega)$:~全部$\vec k$点的晶格\textrm{Green's function}的求和
-		\item 自能$\Sigma(\omega)$:~一个粒子的能量其实部对应谱学中相互作用诱导引起的移动，虚部对应谱学展宽
-	\end{itemize}
-}
-
-\frame
 {
 	\frametitle{动力学平均场}
 	晶格中的多体相互作用电子态
@@ -1286,18 +1350,11 @@
 %\caption{\textrm{\tiny The schematic diagram of electron-structure from DFT, DMFT and DFT+$U$.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Localized-multiplets}
 \end{figure}
-	将量子多电子问题转成有效场中的量子杂质问题
+	将量子多电子问题转成等效平均场中的量子杂质问题
 	\begin{displaymath}
 		S_{\mathrm{eff}}=-\int_0^{\beta}\underbrace{\mathrm{d}\tau\mathrm{d}\tau^{\prime}\mathrm{d}_{\sigma\sigma^{\prime}}\mathcal{G}_0^{-1}(\tau,\tau^{\prime})\mathrm{d}_{\sigma\sigma^{\prime}}(\tau^{\prime})}_{\textcolor{red}{{\fontsize{6.2pt}{4.2pt}\selectfont{Electron~hopping}}}}+\int\mathrm{d}\tau\underbrace{Un_{0\uparrow}(\tau)n_{0\downarrow}(\tau)}_{\textcolor{green}{{\fontsize{6.2pt}{4.2pt}\selectfont{Multiplets}}}}
 	\end{displaymath}
 	局域近似，不存在平移周期(与$\vec k$无关)，但可以存在非局域延展
-}
-
-\frame
-{
-	\frametitle{动力学平均场理论}
-	动力学平均场理论\textrm{(Dynamic Mean Field Theory, DMFT)}
-	是一种确定强关联材料电子结构的方法。在这种材料中，用于密度泛函理论和通常的能带结构计算的独立电子近似失效了。动力学平均场理论是对电子之间局部相互作用的非微扰处理，它在近自由电子气极限和凝聚态物理学的原子极限之间架起了桥梁。
 }
 
 \frame
