@@ -1109,13 +1109,13 @@
 	有很多重要的物理现象都与电子强关联有关
 	\begin{itemize}
 		\item \textrm{Mott}绝缘体:\\
-			过渡金属氧化物\textrm{(Transition metal oxides)}:~\textrm{\ch{V2O3}}
+			过渡金属氧化物\textrm{(Transition metal oxides)}:~如~\textrm{\ch{V2O3}}
 		\item \textrm{Kondo}效应\\
 			稀磁合金中出现的磁性杂质-非磁性宿主金属之间的对抗引起的低温反常输运行为(电阻)
 		\item 重\textrm{fermion}行为\\
-			含有~$f$-电子的镧系或者锕系金属间化合物，有效质量比自由电子大$2\sim3$数量级
+			含有~$f$-电子的镧系或者锕系金属间化合物，有效质量比自由电子大$2\sim3$数量级:~如~\textrm{\ch{CeAl3}}
 		\item 高温超导\textrm{(High-temperature Superconductivity)}\\
-			钇钡铜氧\textrm{(\ch{YBa2Cu3O{7-x}})}、铁基超导体
+			钇钡铜氧$(\mathrm{YBa}_2\mathrm{Cu}_3\mathrm{O}_{7-x})$、铁基超导体
 	\end{itemize}
 	电子强关联:~独立粒子图像失效，\textrm{DFT}无法描述准确电子能带结构
 }
@@ -1138,8 +1138,8 @@
 \begin{minipage}[b]{0.58\linewidth}
 	\begin{displaymath}
 		\begin{aligned}
-			H=&-\sum_{\langle ij\rangle,\sigma=\uparrow,\downarrow}\underbrace{t_{ij}c_{i\sigma}^{\dag}c_{j\sigma}}_{\fontsize{6.2pt}{4.2pt}\selectfont{\textcolor{purple}{\mathrm{Kinetic~term}}}}\\
-			&+\underbrace{\textcolor{blue}{U}n_{i\uparrow}n_{i\downarrow}}_{\fontsize{6.2pt}{4.2pt}\selectfont{\textcolor{purple}{\mathrm{Interaction~aterm}}}}~_{\fontsize{3.2pt}{2.2pt}\selectfont{\Longleftarrow\mathrm{(Coulomb)~U>0}}} \\
+			H=&\textcolor{cyan}{\varepsilon_d}\sum_{i,\sigma}c_{i\sigma}^{\dag}c_{j\sigma}-\sum_{\langle ij\rangle,\sigma=\uparrow,\downarrow}\underbrace{t_{ij}c_{i\sigma}^{\dag}c_{j\sigma}}_{\fontsize{6.2pt}{4.2pt}\selectfont{\textcolor{purple}{\mathrm{Kinetic~term}}}}\\
+			&+\underbrace{\textcolor{blue}{U}n_{i\uparrow}n_{i\downarrow}}_{\fontsize{6.2pt}{4.2pt}\selectfont{\textcolor{purple}{\mathrm{Interaction~aterm}}}}~_{\fontsize{3.2pt}{2.2pt}\selectfont{\Longleftarrow\mathrm{(Coulomb)~\textcolor{blue}{U}>0}}} \\
 			n_{i\sigma}\equiv&c_{i\sigma}^{\dag}c_{i\sigma}\\
 		\end{aligned}
 	\end{displaymath}
@@ -1160,11 +1160,137 @@
 \end{minipage}
 \vspace*{-25pt}
 \begin{itemize}
-	\item 半充满:~\textrm{I}~电子/格点平均:$\delta=0$
+	\item 半充满:~1~电子/格点平均:~$\delta=0$
 	\item $U/t$小:~\textrm{Fermi}液体
 	\item $t=0$:~原子极限
 	\item \textcolor{red}{$U/t$是中等耦合:~?}
 \end{itemize}
+}
+
+\frame
+{
+	\frametitle{\textrm{Hubbard}模型描述的\textrm{Mott}转变}
+\begin{minipage}[b]{0.42\linewidth}
+	\hspace{45pt} \textrm{Bethe}~晶格
+\begin{figure}[h!]
+\centering
+\vspace{-5pt}
+\includegraphics[height=2.1in,width=2.00in,viewport=0 0 800 950,clip]{Figures/Hubbard_U-W.png}
+\caption{\textrm{\tiny Mott transition within the Hubbard model.From \cite{PT57-53_2004}}}%}}%(图1对比)
+\label{Mott_Hubbard}
+\end{figure}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.56\linewidth}
+	\vspace*{-2.58in}
+	\begin{itemize}
+		\setlength{\itemsep}{14pt}
+		\item \textrm{a}:~自由电子气
+		\item \textrm{b}:~近理想金属:~\textrm{Fermi}液体理论(准粒子图像)有效
+		\item \textrm{c}:~强关联金属:~出现典型的三峰结构({\fontsize{7.2pt}{5.2pt}\selectfont{\textrm{Hubbard}能带+准粒子峰}})
+		\item \textrm{d}:~\textrm{Mott}绝缘体:~准粒子峰消失，出现\textrm{Mott}金属-绝缘体转变
+	\end{itemize}
+\end{minipage}
+}
+
+\frame
+{
+	\frametitle{超越单粒子图像}
+\begin{minipage}[b]{0.49\linewidth}
+	巡游电子~\textrm{vs}~能带 
+\begin{figure}[h!]
+\centering
+\vspace{-5pt}
+\includegraphics[height=1.7in,width=1.45in,viewport=0 0 860 950,clip]{Figures/Itinerant_electrons-bands.png}
+%\caption{\textrm{\tiny The schematic diagram of electron-structure from DFT, DMFT and DFT+$U$.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Itinerant-band}
+\end{figure}
+{\fontsize{7.2pt}{6.2pt}\selectfont{
+\begin{itemize}
+	\item 非简并的基态
+	\item 单\textrm{Slater}行列式
+\end{itemize}}}
+\end{minipage}
+\hfill
+\begin{minipage}[b]{0.49\linewidth}
+	局域电子~\textrm{vs}~多重态(精细结构)
+\begin{figure}[h!]
+\centering
+\vspace{-5pt}
+\includegraphics[height=1.7in,width=1.50in,viewport=0 0 700 770,clip]{Figures/Localized_electrons-multiplets.png}
+%\caption{\textrm{\tiny The schematic diagram of electron-structure from DFT, DMFT and DFT+$U$.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Localized-multiplets}
+\end{figure}
+{\fontsize{7.2pt}{6.2pt}\selectfont{
+\begin{itemize}
+	\item (近)简并的基态
+	\item 多个\textrm{Slater}行列式的线性组合
+\end{itemize}}}
+\end{minipage}
+\begin{itemize}
+\vspace{-12pt}
+	\item 含有开壳层的$d$和$f$电子体系是介于局域态和巡游态之间
+	\item 超越单电子图像才能维持多重态结构
+\end{itemize}
+}
+
+\frame
+{
+	\frametitle{\textrm{Anderson}模型}
+	\textrm{Anderson}模型
+	\begin{displaymath}
+		\begin{aligned}
+			H_{\mathrm{A}}=&\underbrace{\sum_{\vec k}\sum_{\sigma}\varepsilon_{\vec k}n_{\vec k\sigma}}_{\textcolor{blue}{\mathrm{metal}}}+\underbrace{\sum_{\sigma}\varepsilon_fn_{f\uparrow}n_{f\downarrow}+Un_{f\uparrow}n_{f\downarrow}}_{\textcolor{magenta}{\mathrm{impurity}}}\\
+			+&\underbrace{\sum_{\vec k}\sum_{\sigma}\big[V_{\vec k}c_{\vec k\sigma}^{\dag}c_{f\sigma}+h.c.\big]}_{\textcolor{purple}{\mathrm{hybridization}}}
+		\end{aligned}
+	\end{displaymath}
+	\textrm{Kondo}区域:~$n_f\sim1$
+
+	通过正则变换\textrm{(Schrieffer-Wolff~变换)}成为\textrm{Kondo}模型
+	\begin{displaymath}
+		H_{\mathrm{K}}=\sum_{\vec k}\sum_{\sigma}\varepsilon_{\vec k}n_{\vec k\sigma}+\Gamma\mathbf{S}_f\cdot\mathbf{S}_c(\mathbf{0})=H_0+H_{\Gamma}
+	\end{displaymath}
+	\begin{displaymath}
+		\Gamma\sim -2|V_{k_{\mathrm{F}}}|^2\left[\frac1{\varepsilon_f-\frac1{\varepsilon_f+U}}\right]>0
+	\end{displaymath}
+反铁磁耦合
+}
+
+\frame
+{
+	\frametitle{\textrm{Ising}模型的\textrm{Weiss}平均场}
+	\begin{itemize}
+		\item 杂质:~平均场效应下包含电子相关效应的单个格点
+		\item 浴:~模仿废弃的晶格位效果的电子海洋
+		\item 杂化:~耦合$b/w$杂质和浴，用$\Delta(\omega)=\frac{V^2}{[\omega-(\varepsilon-\mu)]}$对浴态全部求和来描述
+		\item 杂质\textrm{Green's function}$G(\omega)$:~杂质问题的\textrm{Green's function}
+		\item 浴\textrm{Green's function}$\mathcal{G}(\omega)$:~杂质问题的无相互作用\textrm{Green's function}
+		\item 晶格\textrm{Green's function}$G(\vec k,\omega)$:~特定$\vec k$点上的\textrm{Green's function}
+		\item 局域\textrm{Green's function}$G_{ii}(\omega)$:~全部$\vec k$点的晶格\textrm{Green's function}的求和
+		\item 自能$\Sigma(\omega)$:~一个粒子的能量其实部对应谱学中相互作用诱导引起的移动，虚部对应谱学展宽
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{动力学平均场}
+	晶格中的多体相互作用电子态
+	\begin{itemize}
+		\item 类局域态电子:~在每个格点上形成多重态
+		\item 类巡游态电子:~电子在格点间跳跃
+	\end{itemize}
+\begin{figure}[h!]
+\centering
+\vspace{-5pt}
+\includegraphics[height=1.7in,width=1.70in,viewport=0 0 800 770,clip]{Figures/Lattice_Many-body-states.png}
+%\caption{\textrm{\tiny The schematic diagram of electron-structure from DFT, DMFT and DFT+$U$.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Localized-multiplets}
+\end{figure}
+	将量子多电子问题转成有效场中的量子杂质问题
+	\begin{displaymath}
+		S_{\mathrm{eff}}=-\int_0^{\beta}\underbrace{\mathrm{d}\tau\mathrm{d}\tau^{\prime}\mathrm{d}_{\sigma\sigma^{\prime}}\mathcal{G}_0^{-1}(\tau,\tau^{\prime})\mathrm{d}_{\sigma\sigma^{\prime}}(\tau^{\prime})}_{\textcolor{red}{{\fontsize{6.2pt}{4.2pt}\selectfont{Electron~hopping}}}}+\int\mathrm{d}\tau\underbrace{Un_{0\uparrow}(\tau)n_{0\downarrow}(\tau)}_{\textcolor{green}{{\fontsize{6.2pt}{4.2pt}\selectfont{Multiplets}}}}
+	\end{displaymath}
+	局域近似，不存在平移周期(与$\vec k$无关)，但可以存在非局域延展
 }
 
 \frame
