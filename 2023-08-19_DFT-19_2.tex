@@ -1300,6 +1300,68 @@
 }
 
 \frame
+{\frametitle{\textrm{Ising}模型的\textrm{Weiss}平均场}
+\textrm{Curie-Weiss}自洽方程为
+\begin{displaymath}
+	\langle S\rangle=\tanh\left[\frac{ZJ\langle S\rangle+h}{k_{\mathrm{B}}T}\right]
+\end{displaymath}
+\begin{minipage}[t]{0.39\linewidth}
+	\vspace*{-2in}
+\begin{itemize}
+		\setlength{\itemsep}{14pt}
+	\item 有限温度下，顺磁态和铁磁态间存在相变
+	\item 当维度$Z\rightarrow\infty$，自洽方程的解是精确的
+	\item $J$的取值:~当$J^{\ast}$是常数，$J=J^{\ast}/Z$
+\end{itemize}
+\end{minipage}
+\hfill
+\begin{minipage}[b]{0.59\linewidth}
+\begin{figure}[h!]
+\centering
+%\vspace{-2pt}
+\includegraphics[height=1.2in,width=2.35in,viewport=0 0 1380 720,clip]{Figures/Ferromagnetic_phase_transition-in-Weiss_molecular-field-theory.png}
+\caption{\textrm{\tiny .The ferromagnetic phase transition in Weiss' molecular-field theory: two sides of Equation self-consistent equation sketched as functions of $\eta$ for three different temperatures:~above T (red), below T (blue), and equal to T (green).}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Ising-Model_Ferromagnetic_phase_transition}
+\end{figure}
+\end{minipage}
+}
+
+\frame
+{
+	\frametitle{$Z\rightarrow\infty$极限}
+\begin{minipage}[b]{0.25\linewidth}
+\begin{figure}[h!]
+\centering
+%\vspace{-2pt}
+\includegraphics[height=1.0in,width=1.05in,viewport=0 0 1980 1980,clip]{Figures/Bethe-Lattice-Ising_Model.png}
+%\caption{\textrm{\tiny .The ferromagnetic phase transition in Weiss' molecular-field theory: two sides of Equation self-consistent equation sketched as functions of $\eta$ for three different temperatures:~above T (red), below T (blue), and equal to T (green).}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Bethe-Lattice_Ising-Model_Limit-1}
+\end{figure}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.14\linewidth}
+	\vspace{-1in} 
+	\begin{displaymath}
+		\xrightarrow[Z\rightarrow\infty]{d\rightarrow\infty}
+	\end{displaymath}
+\end{minipage}
+\hfill
+\begin{minipage}[b]{0.55\linewidth}
+\begin{figure}[h!]
+\centering
+%\vspace{-2pt}
+\includegraphics[height=1.0in,width=2.35in,viewport=0 0 1050 455,clip]{Figures/Bethe-Lattice.png}
+%\caption{\textrm{\tiny .The ferromagnetic phase transition in Weiss' molecular-field theory: two sides of Equation self-consistent equation sketched as functions of $\eta$ for three different temperatures:~above T (red), below T (blue), and equal to T (green).}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Bethe-Lattice_Ising-Model_Limit-2}
+\end{figure}
+\end{minipage}
+\begin{itemize}
+	\item 对于给定的格点$i$，当$d\rightarrow\infty$，单个最紧邻自旋贡献不再重要，取平均值为宜
+	\item 晶格问题也约化为单个格点的平均场问题
+\end{itemize}
+}
+
+\frame
 {
 	\frametitle{\textrm{Ising}模型的\textrm{Weiss}平均场}
 	\begin{itemize}
@@ -1336,6 +1398,7 @@
 反铁磁耦合
 }
 
+\frame
 {
 	\frametitle{动力学平均场}
 	晶格中的多体相互作用电子态
@@ -1346,7 +1409,7 @@
 \begin{figure}[h!]
 \centering
 \vspace{-5pt}
-\includegraphics[height=1.7in,width=1.70in,viewport=0 0 800 770,clip]{Figures/Lattice_Many-body-states.png}
+\includegraphics[height=1.5in,width=1.80in,viewport=0 0 970 820,clip]{Figures/Lattice_Many-body-states.png}
 %\caption{\textrm{\tiny The schematic diagram of electron-structure from DFT, DMFT and DFT+$U$.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Localized-multiplets}
 \end{figure}
@@ -1355,6 +1418,44 @@
 		S_{\mathrm{eff}}=-\int_0^{\beta}\underbrace{\mathrm{d}\tau\mathrm{d}\tau^{\prime}\mathrm{d}_{\sigma\sigma^{\prime}}\mathcal{G}_0^{-1}(\tau,\tau^{\prime})\mathrm{d}_{\sigma\sigma^{\prime}}(\tau^{\prime})}_{\textcolor{red}{{\fontsize{6.2pt}{4.2pt}\selectfont{Electron~hopping}}}}+\int\mathrm{d}\tau\underbrace{Un_{0\uparrow}(\tau)n_{0\downarrow}(\tau)}_{\textcolor{green}{{\fontsize{6.2pt}{4.2pt}\selectfont{Multiplets}}}}
 	\end{displaymath}
 	局域近似，不存在平移周期(与$\vec k$无关)，但可以存在非局域延展
+}
+
+\frame
+{
+	\frametitle{无限维的\textrm{Hubbard}模型}
+	对于非相互作用部分
+	\begin{displaymath}
+		H_0=-t\sum_{\langle i,j\rangle,\sigma}c_{i\sigma}c_{j\sigma}^{\dag}=\sum_{\vec k\sigma}\varepsilon_{\vec k}n_{\vec k\sigma}
+	\end{displaymath}
+	对于超立方晶格
+	\begin{displaymath}
+		\varepsilon=-2t\sum_{i}^d\cos(k_ia)
+	\end{displaymath}
+	非相互作用的态密度
+	\begin{displaymath}
+		D_0(E)=2\sum_{\vec k}\delta(E-\varepsilon_{\vec k})\xrightarrow[]{d\rightarrow\infty}\frac1{t\sqrt{\pi d}}\mathrm{exp}\left[-\left(\frac{E}{2t\sqrt{(d)}}\right)^2\right]
+	\end{displaymath}
+	对于$d\rightarrow\infty$要得到非平凡解，$t$的取值为
+	\begin{displaymath}
+		t=\frac{t^{\ast}}{\sqrt d}\quad t^{\ast}=\mathrm{const}
+	\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{$d\rightarrow\infty$}
+	\begin{displaymath}
+		H=-\frac{t^{\ast}}{\sqrt d}\sum_{\langle i,j\rangle,\sigma}c_{i\sigma}c_{j\sigma}^{\dag}+U\sum_in_{\i\uparrow}n_{i\downarrow}
+	\end{displaymath}
+	当$d\rightarrow\infty$，有$G_{\langle i,j\rangle,\sigma}(\omega)\sim\mathcal{O}\left(\frac1{\sqrt d}\right)$
+	粒子是非局域的
+	\begin{displaymath}
+		\sum_j|G_{\langle i,j\rangle,\sigma}|^2\sim\mathcal{O}(1)
+	\end{displaymath}
+	合理的自能是局域的
+	\begin{displaymath}
+		\Sigma_{ij}(\omega)=\Sigma_{ii}(\omega)\delta_{ij}
+	\end{displaymath}
 }
 
 \frame
