@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  不使用 authblk 包制作标题  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %-------------------------------PPT Title-------------------------------------
-\title{21-选讲专题:~高通量计算材料流程}
+\title{22-选讲专题:~机器学习方法简介}
 %-----------------------------------------------------------------------------
 %----------------------------Author & Date------------------------------------
 
@@ -71,3 +71,45 @@
 %	     \item \textrm{PAW}原子数据集:\textcolor{blue}{优异的赝势}\upcite{PRB59-1758_1999}
 %	\end{itemize}
 %}
+\frame
+{
+	\frametitle{第一原理计算与数据挖掘}
+	\begin{itemize}
+		\item 获取材料完整物性数据的成本，无论是通过实验手段还是计算模拟，代价都是比较高%的，虽然高通量第一原理计算自动流程和数据库解决了材料物性数据的获取问题，但是并未给出现有材料数据基础上的物性优化的方案，因此
+		\item 利用数据挖掘技术，实现数据驱动的材料物性筛选、预测和提升的技术路线，有着特殊重要的意义。
+		\item 机器学习\textrm{(Machine Learning, ML)}技术可以从大量数据中获得有价值的信息，尤其是面对高维复杂数据时，机器学习技术是确定数据间关系的有力的工具
+	\end{itemize}
+几十年来，机器学习的算法已经广泛应用于金融、导航控制、语言处理、游戏竞技、计算机可视化和生物信息学等领域。相反地，如果从非严格角度定义，任何计算机模拟人类智能的算法都可以划归为人工智能，并非一定要应用机器学习算法，也包括决策树、知识库、计算机逻辑等算法。近年来，机器学习领域的深度学习\textrm{(Deep Learning, DL)}异军突起，在很多领域都取得了很好的应用。深度学习是仿照生物神经网络\footnote{神经网络结构意味着输入输出之间允许有多个类似神经的网络层。}结构为主要代表的一种示类学习。
+}
+
+\frame
+{
+	\frametitle{机器学习}
+机器学习是自动完成数据分析并提取数据关系的一类方法的统称，获取的数据关系可用于预测未知数据或辅助不确定条件下的决策过程
+\begin{figure}[h!]
+\centering
+\vspace*{-0.1in}
+\includegraphics[height=2.3in,width=3.8in,viewport=0 0 630 390,clip]{Figures/Machine_Learning.jpg}
+%\caption{\fontsize{7.2pt}{4.2pt}\selectfont{\textrm{人工智能与机器学习和深度学习的层次关系示意图.引自文献\cite{JPM2-032001_2019}}}}%
+\label{Machine-Learning}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{人工智能和机器学习的层次关系}
+传统定义界定的机器学习，是指无须借助解析程序，直接依靠数据来提升任务处理的性能，自从1950年代统计学、计算科学与技术和神经科学的发展，机器学习的研究发展到了更广泛的人工智能\textrm{(Artificial Intelligence, AI)}领域。%图\ref{AI-ML}表明了人工智能和机器学习的层次关系。
+\begin{figure}[h!]
+\centering
+\vspace*{-0.1in}
+\includegraphics[height=1.7in,width=4.0in,viewport=0 0 1275 550,clip]{Figures/Hierarchical_description_AI_ML_DL.png}
+\caption{\fontsize{7.2pt}{4.2pt}\selectfont{\textrm{人工智能与机器学习和深度学习的层次关系示意图.引自文献\cite{JPM2-032001_2019}}}}%
+\label{AI-ML}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{机器学习问题的种类}
+}
+}
