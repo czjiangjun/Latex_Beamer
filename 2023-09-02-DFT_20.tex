@@ -71,7 +71,7 @@
 %	     \item \textrm{PAW}原子数据集:\textcolor{blue}{优异的赝势}\upcite{PRB59-1758_1999}
 %	\end{itemize}
 %}
-\section{附录4:~赝势\rm{Data set}的生成}
+\section{\rm{AtomPAW}的赝势\rm{Data set}的生成}
 %\frame
 %{
 %	\frametitle{\textrm{AtomPAW}程序包简介}
@@ -139,7 +139,7 @@
 {
 	\frametitle{\textrm{AtomPAW}程序的赝势构造}
 	求解原子的价层的全电子分波函数
-	{\fontsize{9.0pt}{5.2pt}\selectfont$$\hspace*{-17pt}\bigg(-\dfrac{\hbar^2}{2m}\nabla^2-\dfrac{Ze^2}r+e^2\int\mathrm{d}^3r^{\prime}\dfrac{n_{core}(r^{\prime})+n(r^{\prime})}{|r-r^{\prime}|}+\mu_{XC}[n_{core}(r)+n(r)]\bigg)|\phi_i\rangle=\epsilon_i|\phi_i\rangle$$}
+	{\fontsize{9.0pt}{5.2pt}\selectfont$$\hspace*{-17pt}\bigg(-\dfrac{\hbar^2}{2m}\nabla^2-\dfrac{Ze^2}r+e^2\int\mathrm{d}^3r^{\prime}\dfrac{n_{\mathrm{core}}(r^{\prime})+n(r^{\prime})}{|r-r^{\prime}|}+\mu_{\mathrm{XC}}[n_{\mathrm{core}}(r)+n(r)]\bigg)|\phi_i\rangle=\epsilon_i|\phi_i\rangle$$}
 	全电子分波电荷密度
 	$$n(r)=\sum_{n,l}c_{n,l}\dfrac{|\phi_{n,l}(r)|^2}{4\pi r^2}$$
 }
@@ -161,8 +161,8 @@
 	\end{displaymath}
 	这里$$p(r)=\sum_{m=0}^6C_mr^{2m}$$
 	可得赝势 
-	$$V_{e\!f\!f}^{PS}(r)=\epsilon_l+\dfrac{\hbar^2}{2m}\bigg(\dfrac{\mathrm{d}^2p}{\mathrm{d}r^2}+(\dfrac{\mathrm{d}p}{\mathrm{d}r})^2+\dfrac{2(L_v+1)}r\dfrac{\mathrm{d}p}{\mathrm{d}r}\bigg)$$
-	于是赝\textrm{Hamiltonian}是$\tilde H(r)=-\dfrac{\hbar^2}{2m}\nabla^2+V_{e\!f\!f}^{PS}(r)$
+	$$V_{\mathrm{eff}}^{\mathrm{PS}}(r)=\epsilon_l+\dfrac{\hbar^2}{2m}\bigg(\dfrac{\mathrm{d}^2p}{\mathrm{d}r^2}+(\dfrac{\mathrm{d}p}{\mathrm{d}r})^2+\dfrac{2(L_v+1)}r\dfrac{\mathrm{d}p}{\mathrm{d}r}\bigg)$$
+	于是赝\textrm{Hamiltonian}是$\tilde H(r)=-\dfrac{\hbar^2}{2m}\nabla^2+V_{\mathrm{eff}}^{\mathrm{PS}}(r)$
 	\end{itemize}
 }
 \frame
@@ -182,7 +182,7 @@
 	\end{displaymath}
 	与\textrm{Troullier-Martin NC}方案类似，逆向求解本征方程得到有效赝势
 		\item \textrm{Bessel}方案\\
-			直接构造有效赝势 $V_{e\!f\!f}^{PS}(r)=\alpha\cdot\dfrac{\sin(q\cdot r)}r$
+			直接构造有效赝势 $V_{\mathrm{eff}}^{\mathrm{PS}}(r)=\alpha\cdot\dfrac{\sin(q\cdot r)}r$
 	\end{itemize}
 }
 
@@ -233,7 +233,7 @@
 			\right.
 	\end{displaymath}
 	构造赝分波的辅助函数
-	$$\chi_l(r)=\bigg(\epsilon_l+\dfrac{\hbar^2}{2m}(\dfrac{\mathrm{d}^2}{\mathrm{d}r^2})-\dfrac{l(l+1)}{r^2}-V_{e\!f\!f}^{PS}(r)\bigg)\tilde\phi_l(r)$$
+	$$\chi_l(r)=\bigg(\epsilon_l+\dfrac{\hbar^2}{2m}(\dfrac{\mathrm{d}^2}{\mathrm{d}r^2})-\dfrac{l(l+1)}{r^2}-V_{\mathrm{eff}}^{\mathrm{PS}}(r)\bigg)\tilde\phi_l(r)$$
 	和变换矩阵$\mathbf{B}$(其矩阵元$B_{ij}=\int_0^{r_c}\mathrm{d}r\tilde\phi_i(r)\chi_j(r)$)\\
 	由此得到投影子函数$\tilde p_i(\vec r)=\sum\limits_{j}\chi_j(r)(\mathbf{B^{-1}})_{ji}$
 	\end{itemize}
@@ -268,10 +268,10 @@
 	$$\tilde n(r)=\sum_{n,l}c_{n,l}\dfrac{|\tilde\phi_{n,l}(r)|^2}{4\pi r^2}$$
 		\item 赝芯波电荷密度的计算
 	\begin{displaymath}
-		4\pi r^2\tilde n_{core}(r)=\left\{
+		4\pi r^2\tilde n_{\mathrm{core}}(r)=\left\{
 			\begin{aligned}
 				&r^2(U_0+U_2r^2+U_4r^4)\quad &\mathrm{for}\quad r\leqslant r_c \\
-				&4\pi r^2n_{core}(r)\quad &\mathrm{for}\quad r>r_c
+				&4\pi r^2n_{\mathrm{core}}(r)\quad &\mathrm{for}\quad r>r_c
 			\end{aligned}
 			\right.
 	\end{displaymath}
@@ -283,11 +283,11 @@
 	\frametitle{\textrm{AtomPAW}程序的赝势构造}
 	\begin{itemize}
 		\item 补充电荷的构造
-			$$\hat n(r)=\bigg(-Z+\int\mathrm{d}^3r[n_{core}(r)+n(r)-\tilde n_{core}(r)-\tilde n(r)]\bigg)g_{00}(r)$$
+			$$\hat n(r)=\bigg(-Z+\int\mathrm{d}^3r[n_{\mathrm{core}}(r)+n(r)-\tilde n_{\mathrm{core}}(r)-\tilde n(r)]\bigg)g_{00}(r)$$
 			形状函数$g_{LM}$的定义为$$g_{LM}(r)=N_Lr^Lk(r)Y_{LM}(\hat r)$$
 			根据$k(r)$的不同可以取\textrm{sinc}、\textrm{Gaussian}或\textrm{Bessel}型等几种
 		\item 局域势函数(\textcolor{red}{可移植的“赝势”})
-			{\fontsize{9.5pt}{5.2pt}\selectfont$$\hspace*{-25pt}\tilde v_{loc}(r)=V_{e\!f\!f}^{PS}(r)-e^2\int\mathrm{d}^3r^{\prime}\dfrac{\tilde n_{core}(r^{\prime})+\tilde n(r^{\prime})+\hat n(r^{\prime})}{|r-r^{\prime}|}-\mu_{XC}[\tilde n_{core}(r)+\tilde n(r)]$$}
+			{\fontsize{9.5pt}{5.2pt}\selectfont$$\hspace*{-25pt}\tilde v_{\mathrm{loc}}(r)=V_{\mathrm{eff}}^{\mathrm{PS}}(r)-e^2\int\mathrm{d}^3r^{\prime}\dfrac{\tilde n_{\mathrm{core}}(r^{\prime})+\tilde n(r^{\prime})+\hat n(r^{\prime})}{|r-r^{\prime}|}-\mu_{\mathrm{XC}}[\tilde n_{\mathrm{core}}(r)+\tilde n(r)]$$}
 	\end{itemize}
 }
 
@@ -296,8 +296,7 @@
 	\frametitle{\textrm{AtomPAW}程序的赝势构造}
 	\begin{itemize}
 		\item 相关矩阵元的计算\\
-			\textrm{AtomPAW}完成了与原子分波、赝分波有关的矩阵元$D_{ij}^{\alpha}$、$O_{ij}^{\alpha}$的计算\\
-			此外还计算了
+			\textrm{AtomPAW}完成了与原子分波、赝分波有关的矩阵元$D_{ij}^{\alpha}$、$O_{ij}^{\alpha}$的计算，此外还计算了
 			$$W_{ij}^{\alpha}=\sum_{nl}c_{n\vec k}\langle\tilde\Psi_{n\vec k}|\tilde p_i^\alpha\rangle\langle\tilde p_j^{\alpha}|\tilde\Psi_{n\vec k}\rangle$$
 			实际计算中，$\tilde\Psi_{n\vec k}$用平面波展开，于是
 			$$\hspace*{-28pt}\langle\tilde p_i^{\alpha}|\tilde\Psi_{n\vec k}\rangle=\sqrt{\dfrac1V}\sum_{\vec G}\bigg(4\pi \mathrm{i}^l_iY^{\ast}_{l_im_i}(\widehat{\vec k+\vec G})\mathrm{e}^{\mathrm{i}(\vec k+\vec G)\cdot\vec R_{\alpha}}\bigg)\tilde{\tilde p}_{n_il_i}(|\vec k+\vec G|)A_{n\vec k}(\vec G)$$
@@ -348,7 +347,7 @@
 \begin{figure}[t!]
 \centering
 \vspace{-0.05in}
-\includegraphics[height=2.35in,width=1.75in,viewport=0 0 350 550, angle=-90, clip]{Figures/PCORE-data.eps}
+\includegraphics[width=2.3in,height=1.75in,viewport=0 0 1150 650, clip]{Figures/POT_G-dat.pdf}
 \label{local-potential}
 \end{figure}
 \end{minipage}
@@ -383,14 +382,27 @@
 \frame
 {
 	\frametitle{\rm{VASP}的\rm{POTCAR}}
+\begin{minipage}{0.58\textwidth}
 \centering
-\vspace{-0.15in}
+\vspace{-0.10in}
 %------------------------------------直-接-插-入-文-件--------------------------------------------------------------------------------------
 %\textcolor{red}{\textbf{直接插入文件}}:
-\fontsize{2.7pt}{1.2pt}\selectfont{
+\fontsize{2.6pt}{1.2pt}\selectfont{
 %\verbatiminput{/home/jiangjun/Documents/Latex_Beamer/Figures/VASP-POTCAR_Si-04-projector-1} %为保险:~选用文件名绝对路径
 \verbatiminput{Figures/VASP-POTCAR_Si-04-projector-1} %为保险:~选用文件名绝对路径
 }
+\end{minipage}
+\hfill
+\begin{minipage}{0.40\textwidth}
+	\begin{displaymath}
+		\begin{aligned}
+			\hat{T}|\psi_i\rangle=&\left[-\nabla^2-\frac{l(l+1)}2\right]|\psi_i\rangle\\
+			D_{ij}^{\mathrm{ion}}=&\langle\psi_i|\hat{T}+V_{\mathrm{eff}}|\psi_j\rangle\\
+			-&\langle\tilde{\psi}_i|\hat{T}+\tilde{V}_{\mathrm{eff}}|\tilde{\psi}_j\rangle\\
+			-&\int\hat{Q}_{ij}^{00}(r)\tilde{V}(r)\mathrm{d}r
+		\end{aligned}
+	\end{displaymath}
+\end{minipage}
 }
 
 \frame
@@ -400,7 +412,7 @@
 \vspace{-0.15in}
 %------------------------------------直-接-插-入-文-件--------------------------------------------------------------------------------------
 %\textcolor{red}{\textbf{直接插入文件}}:
-\fontsize{2.7pt}{1.2pt}\selectfont{
+\fontsize{2.6pt}{1.2pt}\selectfont{
 %\verbatiminput{/home/jiangjun/Documents/Latex_Beamer/Figures/VASP-POTCAR_Si-04-projector-2} %为保险:~选用文件名绝对路径
 \verbatiminput{Figures/VASP-POTCAR_Si-04-projector-2} %为保险:~选用文件名绝对路径
 }
@@ -422,27 +434,22 @@
 \frame
 {
 	\frametitle{\rm{VASP}的\rm{POTCAR}}
+\begin{minipage}{0.58\textwidth}
 \centering
-\vspace{-0.15in}
+\vspace{-0.10in}
 %------------------------------------直-接-插-入-文-件--------------------------------------------------------------------------------------
 %\textcolor{red}{\textbf{直接插入文件}}:
 \fontsize{3.3pt}{1.9pt}\selectfont{
 %\verbatiminput{/home/jiangjun/Documents/Latex_Beamer/Figures/VASP-POTCAR_Si-06-grid} %为保险:~选用文件名绝对路径
 \verbatiminput{Figures/VASP-POTCAR_Si-06-grid} %为保险:~选用文件名绝对路径
 }
-}
-
-\frame
-{
-	\frametitle{\rm{VASP}的\rm{POTCAR}}
-\centering
-\vspace{-0.15in}
-%------------------------------------直-接-插-入-文-件--------------------------------------------------------------------------------------
-%\textcolor{red}{\textbf{直接插入文件}}:
-\fontsize{3.3pt}{1.9pt}\selectfont{
-%\verbatiminput{/home/jiangjun/Documents/Latex_Beamer/Figures/VASP-POTCAR_Si-07-aepotential} %为保险:~选用文件名绝对路径
-\verbatiminput{Figures/VASP-POTCAR_Si-07-aepotential} %为保险:~选用文件名绝对路径
-}
+\end{minipage}
+\hfill
+\begin{minipage}{0.40\textwidth}
+	\begin{displaymath}
+		r(i)=r(1)*10^{(i-1)\cdot\Delta h}
+	\end{displaymath}
+\end{minipage}
 }
 
 \frame
@@ -450,7 +457,31 @@
 	\frametitle{\rm{VASP}的\rm{POTCAR}}
 \begin{minipage}{0.58\textwidth}
 \centering
+\vspace{-0.10in}
+%------------------------------------直-接-插-入-文-件--------------------------------------------------------------------------------------
+%\textcolor{red}{\textbf{直接插入文件}}:
+\fontsize{3.3pt}{1.9pt}\selectfont{
+%\verbatiminput{/home/jiangjun/Documents/Latex_Beamer/Figures/VASP-POTCAR_Si-07-aepotential} %为保险:~选用文件名绝对路径
+\verbatiminput{Figures/VASP-POTCAR_Si-07-aepotential} %为保险:~选用文件名绝对路径
+}
+\end{minipage}
+\hfill
+\begin{minipage}{0.40\textwidth}
+\begin{figure}[t!]
+\centering
 \vspace{-0.05in}
+\includegraphics[height=2.25in,width=1.5in,viewport=0 0 350 550, angle=-90, clip]{Figures/POTAE-data.eps}
+\label{Potential_Function}
+\end{figure}
+\end{minipage}
+}
+
+\frame
+{
+	\frametitle{\rm{VASP}的\rm{POTCAR}}
+\begin{minipage}{0.58\textwidth}
+\centering
+\vspace{-0.10in}
 %------------------------------------直-接-插-入-文-件--------------------------------------------------------------------------------------
 %\textcolor{red}{\textbf{直接插入文件}}:
 \fontsize{3.3pt}{1.9pt}\selectfont{
@@ -458,11 +489,12 @@
 \verbatiminput{Figures/VASP-POTCAR_Si-08-corecharge} %为保险:~选用文件名绝对路径
 }
 \end{minipage}
+\hfill
 \begin{minipage}{0.40\textwidth}
 \begin{figure}[t!]
 \centering
 \vspace{-0.05in}
-\includegraphics[height=2.35in,width=1.75in,viewport=0 0 350 550, angle=-90, clip]{Figures/PCORE-data.eps}
+\includegraphics[height=2.25in,width=1.5in,viewport=0 0 350 550, angle=-90, clip]{Figures/CORE-data.eps}
 \label{core_density_Function}
 \end{figure}
 \end{minipage}
@@ -484,53 +516,97 @@
 \frame
 {
 	\frametitle{\rm{VASP}的\rm{POTCAR}}
+\begin{minipage}{0.58\textwidth}
 \centering
-\vspace{-0.15in}
+\vspace{-0.10in}
 %------------------------------------直-接-插-入-文-件--------------------------------------------------------------------------------------
 %\textcolor{red}{\textbf{直接插入文件}}:
 \fontsize{3.3pt}{1.9pt}\selectfont{
 %\verbatiminput{/home/jiangjun/Documents/Latex_Beamer/Figures/VASP-POTCAR_Si-10-pspotential} %为保险:~选用文件名绝对路径
 \verbatiminput{Figures/VASP-POTCAR_Si-10-pspotential} %为保险:~选用文件名绝对路径
 }
+\end{minipage}
+\hfill
+\begin{minipage}{0.40\textwidth}
+\begin{figure}[t!]
+\centering
+\vspace{-0.05in}
+\includegraphics[height=2.25in,width=1.5in,viewport=0 0 350 550, angle=-90, clip]{Figures/POTPSC-data.eps}
+\label{Pseudopotential-core_Function}
+\end{figure}
+\end{minipage}
 }
 
 \frame
 {
 	\frametitle{\rm{VASP}的\rm{POTCAR}}
+\begin{minipage}{0.58\textwidth}
 \centering
-\vspace{-0.15in}
+\vspace{-0.10in}
 %------------------------------------直-接-插-入-文-件--------------------------------------------------------------------------------------
 %\textcolor{red}{\textbf{直接插入文件}}:
 \fontsize{3.3pt}{1.9pt}\selectfont{
 %\verbatiminput{/home/jiangjun/Documents/Latex_Beamer/Figures/VASP-POTCAR_Si-11-pscoreden} %为保险:~选用文件名绝对路径
 \verbatiminput{Figures/VASP-POTCAR_Si-11-pscoreden} %为保险:~选用文件名绝对路径
 }
+\end{minipage}
+\hfill
+\begin{minipage}{0.40\textwidth}
+\begin{figure}[t!]
+\centering
+\vspace{-0.05in}
+\includegraphics[height=2.25in,width=1.5in,viewport=0 0 350 550, angle=-90, clip]{Figures/PCORE-data.eps}
+\label{psedudocore_density_Function}
+\end{figure}
+\end{minipage}
 }
 
 \frame
 {
 	\frametitle{\rm{VASP}的\rm{POTCAR}}
+\begin{minipage}{0.58\textwidth}
 \centering
-\vspace{-0.15in}
+\vspace{-0.10in}
 %------------------------------------直-接-插-入-文-件--------------------------------------------------------------------------------------
 %\textcolor{red}{\textbf{直接插入文件}}:
 \fontsize{3.3pt}{1.9pt}\selectfont{
 %\verbatiminput{/home/jiangjun/Documents/Latex_Beamer/Figures/VASP-POTCAR_Si-12-pswav-1} %为保险:~选用文件名绝对路径
 \verbatiminput{Figures/VASP-POTCAR_Si-12-pswav-1} %为保险:~选用文件名绝对路径
 }
+\end{minipage}
+\hfill
+\begin{minipage}{0.40\textwidth}
+\begin{figure}[t!]
+\centering
+\vspace{-0.05in}
+\includegraphics[height=2.25in,width=1.4in,viewport=0 0 350 550, angle=-90, clip]{Figures/WAE-data.eps}
+\label{Wave-AE_Function}
+\end{figure}
+\end{minipage}
 }
 
 \frame
 {
 	\frametitle{\rm{VASP}的\rm{POTCAR}}
+\begin{minipage}{0.58\textwidth}
 \centering
-\vspace{-0.15in}
+\vspace{-0.10in}
 %------------------------------------直-接-插-入-文-件--------------------------------------------------------------------------------------
 %\textcolor{red}{\textbf{直接插入文件}}:
 \fontsize{3.3pt}{1.9pt}\selectfont{
 %\verbatiminput{/home/jiangjun/Documents/Latex_Beamer/Figures/VASP-POTCAR_Si-12-aewav-1} %为保险:~选用文件名绝对路径
 \verbatiminput{Figures/VASP-POTCAR_Si-12-aewav-1} %为保险:~选用文件名绝对路径
 }
+\end{minipage}
+\hfill
+\begin{minipage}{0.40\textwidth}
+\begin{figure}[t!]
+\centering
+\vspace{-0.05in}
+\includegraphics[height=2.25in,width=1.4in,viewport=0 0 350 550, angle=-90, clip]{Figures/WPS-data.eps}
+\label{Wave-PS_Function}
+\end{figure}
+\end{minipage}
 }
 
 \frame
