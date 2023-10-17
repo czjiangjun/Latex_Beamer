@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  不使用 authblk 包制作标题  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %-------------------------------PPT Title-------------------------------------
-\title{20-选讲:~赝势与\rm{VASP}的\rm{POTCAR}}
+\title{21-选讲:~赝势与\rm{VASP}的\rm{POTCAR}}
 %-----------------------------------------------------------------------------
 %----------------------------Author & Date------------------------------------
 
@@ -15,7 +15,7 @@
 \date[\today] % (optional, should be abbreviation of conference name)
 {%	{\fontsize{6.2pt}{4.2pt}\selectfont{\textcolor{blue}{E-mail:~}\url{jiangjun@bcc.ac.cn}}}
 \vskip 45 pt {\fontsize{8.2pt}{6.2pt}\selectfont{%清华大学\;\;物理系% 报告地点
-	\vskip 5 pt \textrm{2023.04.22}}}
+	\vskip 5 pt \textrm{2023.10.21}}}
 }
 
 %% - Either use conference name or its abbreviation
@@ -71,6 +71,7 @@
 %	     \item \textrm{PAW}原子数据集:\textcolor{blue}{优异的赝势}\upcite{PRB59-1758_1999}
 %	\end{itemize}
 %}
+
 \section{\rm{AtomPAW}的赝势\rm{Data set}的生成}
 %\frame
 %{
@@ -207,7 +208,7 @@
 	生成初始投影子函数$|\tilde p_i^0(\vec r)\rangle=\dfrac{k(r)|\tilde\phi_i^0(\vec r)\rangle}{\langle\phi_i^0|k|\phi_i^0\rangle}$\\
 	并且\textcolor{blue}{初始投影函数与初始赝分波满足归一化条件}(\textcolor{red}{不要求正交})
 	\begin{displaymath}
-		\langle\psi_i^0|\tilde p_i^0\rangle =1
+		\langle\tilde{\psi}_i^0|\tilde p_i^0\rangle =1
 	\end{displaymath}
 意味着广义本征值方程可以表示为
 \begin{displaymath}
@@ -234,7 +235,8 @@
 	\end{displaymath}
 	构造赝分波的辅助函数
 	$$\chi_l(r)=\bigg(\epsilon_l+\dfrac{\hbar^2}{2m}(\dfrac{\mathrm{d}^2}{\mathrm{d}r^2})-\dfrac{l(l+1)}{r^2}-V_{\mathrm{eff}}^{\mathrm{PS}}(r)\bigg)\tilde\phi_l(r)$$
-	和变换矩阵$\mathbf{B}$(其矩阵元$B_{ij}=\int_0^{r_c}\mathrm{d}r\tilde\phi_i(r)\chi_j(r)$)\\
+	和变换矩阵$\mathbf{B}$(其矩阵元$B_{ij}=\int_0^{r_c}\mathrm{d}r\tilde\phi_i(r)\chi_j(r)$)
+	\vskip 8pt
 	由此得到投影子函数$\tilde p_i(\vec r)=\sum\limits_{j}\chi_j(r)(\mathbf{B^{-1}})_{ji}$
 	\end{itemize}
 }
@@ -317,6 +319,7 @@
 %			{\fontsize{9.5pt}{5.2pt}\selectfont$$\hspace*{-32pt}\tilde v_{Z_c}^{\alpha}(r)=V_{\alpha}^{PS}(r)-e^2\int\mathrm{d}^3r^{\prime}\dfrac{\tilde n^{\alpha}(r^{\prime})+\hat{\hat{n}}^{\alpha}(r^{\prime})}{|r-r^{\prime}|}+\mu_{XC}[\tilde n_{core}^{\alpha}(r)+\hat{\hat{n}}^{\alpha}(r)+\tilde n^{\alpha}(r)]$$} 
 %	\end{itemize}
 %}
+\section{\rm{POTCAR}中的数据分析}
 \frame
 {
 	\frametitle{\rm{VASP}的\rm{POTCAR}}
@@ -344,6 +347,16 @@
 }
 \end{minipage}
 \begin{minipage}{0.58\textwidth}
+{\fontsize{7.2pt}{6.2pt}\selectfont{
+	\begin{displaymath}
+		\begin{aligned}
+%			\tilde{V}(q)=&\frac{4\pi}{q}\int\sin(q\cdot r)\tilde{V}(r)\cdot r\mathrm{d}r\\
+			\tilde{V}(q)\cdot q=&4\pi\int_0^{\infty}\sin(q\cdot r)\tilde{V}(r)\cdot r\mathrm{d}r\\
+			\tilde{V}_{\mathrm{ion}}(q)=&-\frac{4\pi Z_{\mathrm{ion}}(1-\mathrm{e}^{-q^2/4\alpha})}{q^2}\\
+			\tilde{V}(q=0)=&0
+		\end{aligned}
+\end{displaymath}
+}}
 \begin{figure}[t!]
 \centering
 \vspace{-0.05in}
@@ -356,27 +369,52 @@
 \frame
 {
 	\frametitle{\rm{VASP}的\rm{POTCAR}}
+\begin{minipage}{0.40\textwidth}
 \centering
-\vspace{-0.15in}
+\vspace{-0.05in}
 %------------------------------------直-接-插-入-文-件--------------------------------------------------------------------------------------
 %\textcolor{red}{\textbf{直接插入文件}}:
 \fontsize{2.7pt}{1.2pt}\selectfont{
 %\verbatiminput{/home/jiangjun/Documents/Latex_Beamer/Figures/VASP-POTCAR_Si-02-localcorecharge} %为保险:~选用文件名绝对路径
 \verbatiminput{Figures/VASP-POTCAR_Si-02-localcorecharge} %为保险:~选用文件名绝对路径
 }
+\end{minipage}
+\begin{minipage}{0.58\textwidth}
+{\fontsize{7.2pt}{6.2pt}\selectfont{
+	\vskip -5.0in
+	\begin{displaymath}
+		\begin{aligned}
+%			\tilde{V}(q)=&\frac{4\pi}{q}\int\sin(q\cdot r)\tilde{V}(r)\cdot r\mathrm{d}r\\
+			\rho_{\mathrm{core}}(q)\cdot q=&4\pi\int_0^{\infty}\sin(q\cdot r)\rho(r)\cdot r\mathrm{d}r\\
+%			=&\frac{4\pi}{q}\int_0^{\infty}\sin(q\cdot r)V(r)\cdot r\mathrm{d}r
+		\end{aligned}
+\end{displaymath}
+}}
+\end{minipage}
 }
 
 \frame
 {
 	\frametitle{\rm{VASP}的\rm{POTCAR}}
+\begin{minipage}{0.40\textwidth}
 \centering
-\vspace{-0.15in}
+\centering
+\vspace{-0.05in}
 %------------------------------------直-接-插-入-文-件--------------------------------------------------------------------------------------
 %\textcolor{red}{\textbf{直接插入文件}}:
 \fontsize{2.7pt}{1.2pt}\selectfont{
 %\verbatiminput{/home/jiangjun/Documents/Latex_Beamer/Figures/VASP-POTCAR_Si-03-pseudo-charge} %为保险:~选用文件名绝对路径
 \verbatiminput{Figures/VASP-POTCAR_Si-03-pseudo-charge} %为保险:~选用文件名绝对路径
 }
+\end{minipage}
+\begin{minipage}{0.58\textwidth}
+{\fontsize{7.2pt}{6.2pt}\selectfont{
+	\vskip -5.0in
+	\begin{displaymath}
+		\tilde{\rho}(q)=\frac{\tilde{V}(q)}{4\pi}\cdot q^2
+\end{displaymath}
+}}
+\end{minipage}
 }
 
 \frame
@@ -394,6 +432,7 @@
 \end{minipage}
 \hfill
 \begin{minipage}{0.40\textwidth}
+{\fontsize{8.2pt}{6.2pt}\selectfont{
 	\begin{displaymath}
 		\begin{aligned}
 			\hat{T}|\psi_i\rangle=&\left[-\nabla^2-\frac{l(l+1)}2\right]|\psi_i\rangle\\
@@ -401,7 +440,7 @@
 			-&\langle\tilde{\psi}_i|\hat{T}+\tilde{V}_{\mathrm{eff}}|\tilde{\psi}_j\rangle\\
 			-&\int\hat{Q}_{ij}^{00}(r)\tilde{V}(r)\mathrm{d}r
 		\end{aligned}
-	\end{displaymath}
+	\end{displaymath}}}
 \end{minipage}
 }
 
@@ -446,9 +485,11 @@
 \end{minipage}
 \hfill
 \begin{minipage}{0.40\textwidth}
+{\fontsize{8.2pt}{6.2pt}\selectfont{
+	\centering{径向部分的对数布点:}
 	\begin{displaymath}
 		r(i)=r(1)*10^{(i-1)\cdot\Delta h}
-	\end{displaymath}
+	\end{displaymath}}}
 \end{minipage}
 }
 

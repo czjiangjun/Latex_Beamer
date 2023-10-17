@@ -1241,10 +1241,10 @@
 		\item 杂质:~平均场效应下包含电子相关效应的单个格点
 		\item 浴:~模仿废弃的晶格位效果的电子海洋
 		\item 杂化:~耦合$b/w$杂质和浴，用$\Delta(\omega)=\frac{V^2}{[\omega-(\varepsilon-\mu)]}$对浴态全部求和来描述
-		\item 杂质\textrm{Green's function}$G(\omega)$:~杂质问题的\textrm{Green's function}
-		\item 浴\textrm{Green's function}$\mathcal{G}(\omega)$:~杂质问题的无相互作用\textrm{Green's function}
-		\item 晶格\textrm{Green's function}$G(\vec k,\omega)$:~特定$\vec k$点上的\textrm{Green's function}
-		\item 局域\textrm{Green's function}$G_{ii}(\omega)$:~全部$\vec k$点的晶格\textrm{Green's function}的求和
+		\item 杂质\textrm{Green's function}~$G(\omega)$:~杂质问题的\textrm{Green's function}
+		\item 浴\textrm{Green's function}~$\mathcal{G}(\omega)$:~杂质问题的无相互作用\textrm{Green's function}
+		\item 晶格\textrm{Green's function}~$G(\vec k,\omega)$:~特定$\vec k$点上的\textrm{Green's function}
+		\item 局域\textrm{Green's function}~$G_{ii}(\omega)$:~全部$\vec k$点的晶格\textrm{Green's function}的求和
 		\item 自能$\Sigma(\omega)$:~一个粒子的能量其实部对应谱学中相互作用诱导引起的移动，虚部对应谱学展宽
 	\end{itemize}
 }
@@ -1259,7 +1259,7 @@
 			每个电子都在其它运动电子构成的平均场中运动，感受的是其它电子瞬时作用的平均值
 		\item \textrm{Weiss}平均场理论
 			\begin{itemize}
-				\item 铁磁态的\textrm{CUrie-Weiss}定律:~经典的自旋体系(\textrm{Ising}模型)，每个格点处自旋感受到的磁场源于所有其余各格点自旋的平均
+				\item 铁磁态的\textrm{Curie-Weiss}定律:~经典的自旋体系(\textrm{Ising}模型)，每个格点处自旋感受到的磁场源于所有其余各格点自旋的平均
 				\item 当自旋体系的维度$d\rightarrow\infty$时，理论趋于精确(受控近似)
 			\end{itemize}
 \end{itemize}
@@ -1273,7 +1273,7 @@
 \centering
 \vspace{-15pt}
 %\includegraphics[height=1.0in,width=1.15in,viewport=0 0 130 120,clip]{Figures/MC-Ising-model_2.png}
-\includegraphics[height=0.5in,width=0.65in,viewport=0 0 130 120,clip]{Figures/MC-Ising-model_2.png}
+\includegraphics[height=0.5in,width=0.55in,viewport=0 0 130 120,clip]{Figures/MC-Ising-model_2.png}
 %\caption{\textrm{\tiny The schematic diagram of electron-structure from DFT, DMFT and DFT+$U$.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Ising-Model}
 \end{figure}
@@ -1377,11 +1377,12 @@
 	\begin{displaymath}
 		\begin{aligned}
 			H_{\mathrm{A}}=&\underbrace{\sum_{\vec k}\sum_{\sigma}\varepsilon_{\vec k}n_{\vec k\sigma}}_{\textcolor{blue}{\mathrm{metal}}}+\underbrace{\sum_{\sigma}\varepsilon_fn_{f\uparrow}n_{f\downarrow}+Un_{f\uparrow}n_{f\downarrow}}_{\textcolor{magenta}{\mathrm{impurity}}}\\
-			+&\underbrace{\sum_{\vec k}\sum_{\sigma}\big[V_{\vec k}c_{\vec k\sigma}^{\dag}c_{f\sigma}+h.c.\big]}_{\textcolor{purple}{\mathrm{hybridization}}}
+			+&\underbrace{\sum_{\vec k}\sum_{\sigma}\big[V_{\vec k}c_{\vec k\sigma}^{\dag}c_{f\sigma}+\mathrm{h.c.}\big]}_{\textcolor{purple}{\mathrm{hybridization}}}
 		\end{aligned}
 	\end{displaymath}
 	\textrm{Kondo}区域:~$n_f\sim1$
 
+{\fontsize{8.2pt}{6.2pt}\selectfont{
 	通过正则变换\textrm{(Schrieffer-Wolff~变换)}成为\textrm{Kondo}模型
 	\begin{displaymath}
 		H_{\mathrm{K}}=\sum_{\vec k}\sum_{\sigma}\varepsilon_{\vec k}n_{\vec k\sigma}+\Gamma\mathbf{S}_f\cdot\mathbf{S}_c(\mathbf{0})=H_0+H_{\Gamma}
@@ -1389,7 +1390,7 @@
 	\begin{displaymath}
 		\Gamma\sim -2|V_{k_{\mathrm{F}}}|^2\left[\frac1{\varepsilon_f-\frac1{\varepsilon_f+U}}\right]>0
 	\end{displaymath}
-反铁磁耦合
+反铁磁耦合}}
 }
 
 \frame
@@ -1403,13 +1404,13 @@
 \begin{figure}[h!]
 \centering
 \vspace{-5pt}
-\includegraphics[height=1.5in,width=1.80in,viewport=0 0 970 820,clip]{Figures/Lattice_Many-body-states.png}
+\includegraphics[height=1.1in,width=1.40in,viewport=0 0 970 820,clip]{Figures/Lattice_Many-body-states.png}
 %\caption{\textrm{\tiny The schematic diagram of electron-structure from DFT, DMFT and DFT+$U$.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Localized-multiplets}
 \end{figure}
 	将量子多电子问题转成等效平均场中的量子杂质问题
 	\begin{displaymath}
-		S_{\mathrm{eff}}=-\int_0^{\beta}\underbrace{\mathrm{d}\tau\mathrm{d}\tau^{\prime}\mathrm{d}_{\sigma\sigma^{\prime}}\mathcal{G}_0^{-1}(\tau,\tau^{\prime})\mathrm{d}_{\sigma\sigma^{\prime}}(\tau^{\prime})}_{\textcolor{red}{{\fontsize{6.2pt}{4.2pt}\selectfont{Electron~hopping}}}}+\int\mathrm{d}\tau\underbrace{Un_{0\uparrow}(\tau)n_{0\downarrow}(\tau)}_{\textcolor{green}{{\fontsize{6.2pt}{4.2pt}\selectfont{Multiplets}}}}
+		S_{\mathrm{eff}}=-\int_0^{\beta}\underbrace{\mathrm{d}\tau\mathrm{d}\tau^{\prime}\mathrm{d}_{\sigma\sigma^{\prime}}\mathcal{G}_0^{-1}(\tau,\tau^{\prime})\mathrm{d}_{\sigma\sigma^{\prime}}(\tau^{\prime})}_{\textcolor{red}{\fontsize{6.2pt}{4.2pt}\selectfont{\textrm{Electron~hopping}}}}+\int\mathrm{d}\tau\underbrace{Un_{0\uparrow}(\tau)n_{0\downarrow}(\tau)}_{\textcolor{green}{\fontsize{6.2pt}{4.2pt}\selectfont{\textrm{Multiplets}}}}
 	\end{displaymath}
 	局域近似，不存在平移周期(与$\vec k$无关)，但可以存在非局域延展
 }
@@ -1462,6 +1463,7 @@
 			\beta=&k_{\mathrm{B}}T\qquad\mbox{\fontsize{6.2pt}{6.2pt}\selectfont{这里$c_{i\sigma}$和$c_{i\sigma}^{\dag}$称为\textrm{Grassmann~变量}}}
 		\end{aligned}
 	\end{displaymath}
+{\fontsize{8.2pt}{6.2pt}\selectfont{
 \begin{minipage}[b]{0.59\linewidth}
 	\begin{displaymath}
 		\mathrm{e}^{-S_{\mathrm{eff}}[c_0,c_0^{\dag}]}=\int\prod_{i\neq 0,\sigma}Dc_{i\sigma}^{\dag}Dc_{i\sigma}\mathrm{e}^{-S[c_{i\sigma},c_{i\sigma}^{\dag}]}
@@ -1474,7 +1476,7 @@
 \begin{displaymath}
 	G_{\mathrm{eff}}=\int Dc_{0\sigma}^{\dag}Dc_{0\sigma}c_{0\sigma}(\mathrm{i}\omega_n)c_{0\sigma}^{\dag}(\mathrm{i}\omega_n)\mathrm{e}^{-S_{\mathrm{eff}}[c_0,c_0^{\dag}]}
 \end{displaymath}
-\end{minipage}
+\end{minipage}}}
 \hfill
 \begin{minipage}[b]{0.39\linewidth}
 \begin{figure}[h!]
@@ -1524,8 +1526,8 @@
 \end{itemize}
 \begin{figure}[h!]
 \centering
-\vspace{-6pt}
-\includegraphics[height=1.35in,width=1.75in,viewport=0 0 1420 985,clip]{Figures/Quantum_impurity_problem.png}
+\vspace{-9pt}
+\includegraphics[height=1.45in,width=2.15in,viewport=0 0 1420 985,clip]{Figures/Quantum_impurity_problem.png}
 %\caption{\textrm{\tiny .The ferromagnetic phase transition in Weiss' molecular-field theory: two sides of Equation self-consistent equation sketched as functions of $\eta$ for three different temperatures:~above T (red), below T (blue), and equal to T (green).}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Qunatum_impurity_primble}
 \end{figure}
@@ -1559,7 +1561,7 @@
 \begin{figure}[h!]
 \centering
 \vspace{-2pt}
-\includegraphics[height=2.4in,width=4.00in,viewport=0 0 780 420,clip]{Figures/DMFT_flowchart.png}
+\includegraphics[height=2.4in,width=4.05in,viewport=30 10 760 420,clip]{Figures/DMFT_flowchart.png}
 \caption{\textrm{\tiny The schematic diagram for a charge self-consistent DFT+DMFT loop.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{DFT-DMFT-Flowchart}
 \end{figure}
