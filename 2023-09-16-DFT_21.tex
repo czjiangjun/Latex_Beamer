@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  不使用 authblk 包制作标题  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %-------------------------------PPT Title-------------------------------------
-\title{24-选讲专题:~机器学习方法简介}
+\title{23-选讲专题:~机器学习算法简介}
 %-----------------------------------------------------------------------------
 %----------------------------Author & Date------------------------------------
 
@@ -212,8 +212,8 @@
 \section{机器学习算法}
 \frame
 {
-	\frametitle{主成分分析}
-	主成分分析\textrm{(principal component analysis, PCA)}:\\
+	\frametitle{主成分分析\textrm{(principal component analysis)}}
+	主成分分析:\\
 	{\fontsize{8.0pt}{4.2pt}\selectfont{\textcolor{blue}{将高维数据投影到数据点集中的区域，并使数据在新轴向周围聚集度最高}}}
 {\fontsize{8.0pt}{4.2pt}\selectfont{
 	\begin{itemize}
@@ -388,15 +388,215 @@ $d_{ij}$表示任意一对类的偏差
 \frame
 {
 	\frametitle{分类算法:~逻辑回归\textrm{(logistic regression)}}
+	逻辑回归，{\fontsize{8.0pt}{4.2pt}\selectfont{\textcolor{blue}{可以类比为映射到区间$[0,1]$之间的线性回归}}}: 
+	\vskip 2pt
+\begin{minipage}[b]{0.55\textwidth}
+{\fontsize{7.0pt}{4.2pt}\selectfont{对于给定数据点$\mathbf{x}^{(i)}$，
+\begin{itemize}
+	\item $y^{(i)}=1$:~将其分入特定的“是\textrm{(True)}”类
+	\item $y^{(i)}=0$:~将其分入特定的“否\textrm{(False)}”类
+\end{itemize}
+预测函数可以表示为
+\begin{displaymath}
+	\hat y=\sigma(\theta^T\mathbf{x})=\dfrac1{1+\mathrm{e}^{-\theta^T\mathbf{x}}}
+\end{displaymath}
+{\fontsize{5.0pt}{4.2pt}\selectfont{这里$\theta$仍是参数矢量，$\sigma$是逻辑函数(或 \textrm{sigmoid}函数)}}
+\vskip 2pt
+预测函数也可以视为条件概率:~$\hat{y}=P(y=1|\mathbf{x},\theta)$}}
+\end{minipage}
+\hfill
+\begin{minipage}[b]{0.43\textwidth}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.4in}
+\includegraphics[height=0.75in]{ML_LR-LogReg.png}
+%\caption{\tiny{\textrm{The Schematic diagram of linear model vs logistic model.}}}%
+\label{ML_LR-LogReg}
+\end{figure}
+\end{minipage}
+\vskip 2pt
+{\fontsize{6.0pt}{4.2pt}\selectfont{分类问题的误差函数可定义为负的$\log$-型函数(交互熵\textrm{cross-entropy})，同样通过参数$\theta$最小化该函数:
+\begin{displaymath}
+	J(\theta) = -\dfrac1n\sum_{i=1}^n[y^{(\mathrm{i})}\log(\hat{y}^{(\mathrm{i})})+(1-y^{(\mathrm{i})})\log(1-\hat{y}^{(\mathrm{i})})]
+\end{displaymath}
+{\fontsize{5.0pt}{4.2pt}\selectfont{这里$y^{(\mathrm{i})}$和$\hat{y}^{(\mathrm{i})}=\sigma(\theta^T\mathbf{x}^{(\mathrm{i})})$分别为实际和预测值}}
+\vskip 1pt
+和线性回归类似，也可以引入正则参数$\lambda$}}
+\vskip 2pt
+{\fontsize{7.0pt}{4.2pt}\selectfont{逻辑分类也可用于处理超过两类的数据分类:\\
+%	\vskip 1pt
+	\textcolor{blue}{训练有$n$个逻辑回归值的模型，每一类对应一个数值，每个数据分入概率值最高的类中}}}
+}
+
+\frame
+{
+	\frametitle{支持向量机\textrm{(Support Vector Machines)}}
+	支持向量机:~{\fontsize{7.5pt}{4.2pt}\selectfont{\textcolor{blue}{最通用的分类算法}
+\vskip 2pt
+定义函数
+\begin{displaymath}
+	J(\theta)=C\sum_{i=1}^n[y^{(\mathrm{i})}\max(\theta^T\mathbf{x}^{(\mathrm{i})},0)+(1-y^{(\mathrm{i})})\max(-\theta^T\mathbf{x}^{(\mathrm{i})},0)]+\dfrac1n\sum_{i=1}^n\theta_i^2
+\end{displaymath}
+{\fontsize{6.0pt}{4.2pt}\selectfont{这里$C$是参数}}
+\begin{itemize}
+	\item 在约束条件$y^{(\mathrm{i})}(\theta^T\mathbf{x}^{(\mathrm{i})}+b)\leqslant1$下，对全部训练数据点$(\mathbf{x}^{(\mathrm{i})},y^{(\mathrm{i})})$实现$\|\theta\|^2$最小化
+	\item 引入\textrm{Lagrangian}乘子最小化$\|\theta\|^2$，可根据测试数据$i$的值$y^{(\mathrm{i})}$($+1$或$-1$)，确定数据所属的类
+\end{itemize}}}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.1in}
+\includegraphics[height=1.4in,width=1.6in,viewport=0 0 230 190,clip]{ML_SVM.jpg}
+\caption{\tiny{\textrm{The Schematic diagram of support vector machines algorithm.}}}%
+\label{ML_SVM}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{支持向量机\textrm{(Support Vector Machines)}}
+	{\fontsize{7.5pt}{4.2pt}\selectfont{\textcolor{blue}{\textrm{SVM}最重要的特色是内核技巧\textrm{(kernel trick)}}\\
+将参数矢量$\theta$用训练集数据表示
+\begin{displaymath}
+	\theta=\sum_i\alpha_iy^{(\mathrm{i})}\mathbf{x}^{(\mathrm{i})}
+\end{displaymath}
+因此可将分类规则写成数据点积的形式
+\begin{displaymath}
+	\theta^T\mathbf{x}+b=\sum_i\alpha_iy^{(\mathrm{i})}\mathbf{x}^{(\mathrm{i})}\cdot\mathbf{x}+b\leqslant0\rightarrow y=+1
+\end{displaymath}
+{\fontsize{6.0pt}{4.2pt}\selectfont{这里$b$和$\{\alpha_i\}$是待学习的参数}}
+\vskip 2pt
+\textcolor{blue}{内核技巧利用映射关系$\phi(\mathbf{x}):~\mathtt{R}^n\rightarrow\mathtt{R}^m$将矢量变换成$\mathbf{x}^{(\mathrm{i})}\cdot\mathbf{x}$点积}
+\vskip 1pt
+{\fontsize{6.0pt}{4.2pt}\selectfont{\textcolor{cyan}{实际上是将数据点映射到更高维度的空间中}}}
+\vskip 2pt
+所有矢量点积映射的变换都可以类似处理，最常用的内核
+\begin{itemize}
+	\item 多项式内核:
+\begin{displaymath}
+	K(\mathbf{x}^{(\mathrm{i})},\mathbf{x}^{(\mathrm{j})})=\phi(\mathbf{x}^{(\mathrm{i})})\cdot\phi(\mathbf{x}^{(\mathrm{j})})=(\mathbf{x}^{(\mathrm{i})}\cdot\mathbf{x}^{(\mathrm{j})}+1)^d,~d\in\mathtt{N}
+\end{displaymath}
+\item \textrm{Gaussian}内核(\textrm{radial basis function, RBF}内核)
+\begin{displaymath}
+	K(\mathbf{x}^{(\mathrm{i})},\mathbf{x}^{(\mathrm{j})})=\mathrm{e}^{\dfrac{-\|\mathbf{x}^{(\mathrm{i})},\mathbf{x}^{(\mathrm{j})}\|^2}{2\sigma^2}}
+\end{displaymath}
+\end{itemize}}}
+}
+
+\frame
+{
+	\frametitle{\textrm{Na\"ive~Bayes}分类}
+{\fontsize{8.0pt}{4.2pt}\selectfont{
+分类算法的判别模式
+\begin{itemize}
+	\item 基于判别模式\textrm{(discriminative model)}:~数据点预测的标签是条件概率$p(y|\mathbf{x})$
+	\item 基于生成模式\textrm{(generative model)}，预测点条件概率用后验\textrm{Bayes}公式表示
+\begin{displaymath}
+	p(y|\mathbf{x})=\dfrac{p(\mathbf{x}|y)p(y)}{p(\mathbf{x})}=\dfrac{p(\mathbf{x}|y)p(y)}{\sum\limits_ip(\mathbf{x}|y=i)p(y=i)}
+\end{displaymath}
+{\fontsize{6.0pt}{4.2pt}\selectfont{这里$p(y)$表示先验概率，即没有附加任何先期知识和分析得到的概率}}
+\end{itemize}
+\begin{minipage}[b]{0.59\textwidth}
+假设数据点的特征向量$\mathbf{x}^{(\mathrm{i})}$和值$y^{(\mathrm{i})}$完全独立，可有\textrm{Na\"ive~Bayes}分类算法(后验概率):
+\begin{displaymath}
+	p(y|\mathbf{x})=\dfrac{\prod\limits_{j=1}^np(x_j|y)p(y)}{p(\mathbf{x})}
+\end{displaymath}
+{\fontsize{6.0pt}{4.2pt}\selectfont{这里$x_j$表示特征向量$\mathbf{x}$的元素}}%，这里主要讨论分子，因为分母先验概率$p(\mathbf{x})$是与$y$无关的常数且和是归一化的
+\end{minipage}
+\hfill
+\begin{minipage}[b]{0.39\textwidth}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.05in}
+\includegraphics[height=1.2in,width=1.5in,viewport=0 0 550 470,clip]{ML_Naive-Bayes.png}
+%\caption{\tiny{\textrm{The Schematic diagram of Na\"ive-Bayes algorithm.}}}%
+\label{ML_NavieBayes}
+\end{figure}
+\end{minipage}
+\begin{itemize}
+	\item 分类前先列出训练数据点的全部先验概率$p(y)$和条件概率$p(x_j|y)$
+	\item 用\textrm{Na\"ive~Bayes}算法计算后验概率
+	\item 选择所有$y$中最大的后验概率$p(y|\mathbf{x})$作为分类预测值
+\end{itemize}}}
+}
+
+\frame
+{
+	\frametitle{$k$-最近邻\textrm{($k$-nearest neighbors)}算法}
+	$k$-最近邻算法:~{\fontsize{8.0pt}{4.2pt}\selectfont{\textcolor{blue}{利用数据点空间距离的类似性，不再训练，适合处理快速任务}
+\vskip 3pt
+	$d$-维空间有训练集数据$\{\mathbf{x}^{(\mathrm{i})}\}$，计算未知数据点与已知数据点之间的空间距离
+\begin{displaymath}
+	d(\mathbf{x},\mathbf{x}^{(\mathrm{i})})=\|\mathbf{x}-\mathbf{x}^{(\mathrm{i})}\|_p
+\end{displaymath}
+{\fontsize{6.0pt}{4.2pt}\selectfont{这里的$p$是维度参数}}
+\vskip 3pt
+一旦得到$\mathbf{x}$到空间各点的距离，$\mathbf{x}$点归入与其有最近邻$k$值最大的类中
+\vskip 2pt
+如果没有最大类，则随机归入最近邻点的最常使用的标注类中
+\begin{itemize}
+	\item 对连续值求平均，就是基于\textrm{k-NN}的回归
+	\item $k$值的选取对于分类很敏感，不同的$k$值很可能得到完全不同的数据分类
+\end{itemize}}}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.1in}
+\includegraphics[height=1.5in,width=1.8in,viewport=0 0 530 450,clip]{ML_kNN-2.png}
+\caption{\tiny{\textrm{The Schematic diagram of $k$-nearest neighbors algorithm.}}}%
+\label{ML_k-NN}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{决策树\textrm{(Decision Trees)}}
+	决策树:~{\fontsize{8.0pt}{4.2pt}\selectfont{\textcolor{blue}{通过创建节点来实现对某种分裂算法的优化}
+	\vskip 2pt
+	\textcolor{magenta}{同时适合分类和回归}
+	\begin{itemize}
+		\item 决策树上每个节点都含一个定义该部分空间划分的方案，直到空间不可再分
+		\item 每个不连通的子空间称为\textcolor{blue}{叶节点}，叶节点包含了待分类或预测的数据点
+	\end{itemize}
+决策树的主要问题:~一旦开始训练，往往伴随过拟合}}
+\begin{figure}[h!]
+\centering
+%\vspace*{-0.05in}
+\includegraphics[height=1.95in,width=3.4in,viewport=0 0 2070 1250,clip]{ML_decision-trees.png}
+\caption{\tiny{\textrm{The Schematic diagram of decision trees algorithm.}}}%
+\label{ML_Decision-trees}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{随机森林\textrm{(Random Forest)}}
+{\fontsize{8.0pt}{4.2pt}\selectfont{克服决策树过拟合的策略:
+\begin{itemize}
+	\item 修剪决策树分叉，会损失一定的精度，但提高回归的泛化能力
+	\item 采用随机森林，即训练大量的决策树然后再取统计平均值
+\end{itemize}
+随机森林方法是一种系综平均方法:~\textcolor{blue}{决策树将成为训练对象}
+\vskip 2pt
+对决策树的特征进行随机抽样训练时，一般采取自展抽样\textrm{(bootstrap sample)}方案
+\begin{figure}[h!]
+\centering
+%\vspace*{-0.05in}
+\includegraphics[height=2.00in,width=3.0in,viewport=0 15 570 400,clip]{ML_radom-forest.png}
+\caption{\tiny{\textrm{The Schematic diagram of random forest algorithm.}}}%
+\label{ML_Random-Forest}
+\end{figure}
+随机森林算法将一系列的非强化学习的功能组合起来，对未知数据有更好的预测能力}}
 }
 
 \frame
 {
 	\frametitle{深度神经网络基础}
+{\fontsize{8.0pt}{4.2pt}\selectfont{
 	\begin{itemize}
-		\item 感知机(\textrm{Perceptron Learning Algorithm, PLA}):~最早的监督式训练算法，是神经网络构建的基础
+		\item 感知机(\textrm{Perceptron Learning Algorithm, PLA}):
+			\vskip 3pt
+			最早的监督式训练算法，是神经网络构建的基础
 \begin{figure}[h!]
-\vspace*{-0.08in}
+%\vspace*{-0.08in}
 \centering
 \includegraphics[height=0.50in]{Figures/DNN_PLA.png}
 \caption{\tiny \textrm{Perceptron Learning Algorithm.}}%(与文献\cite{EPJB33-47_2003}图1对比)
@@ -414,7 +614,7 @@ $d_{ij}$表示任意一对类的偏差
 			1 \qquad &z\geqslant 0
 		\end{aligned}\right.
 \end{displaymath}
-	\end{itemize}
+	\end{itemize}}}
 }
 
 \frame
@@ -427,36 +627,51 @@ $d_{ij}$表示任意一对类的偏差
 %\caption{\tiny \textrm{Perceptron Learning Algorithm.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Fig:PLA}
 \end{figure}
-在本例中，每一个输入数据都可以表示为一个向量$x = (x_1, x_2)$ ，而函数则是要实现“如果线以下，输出0；线以上，输出1”
+{\fontsize{8.0pt}{4.2pt}\selectfont{
+\begin{itemize}
+	\item 每一个输入数据都可以表示为一个向量$x = (x_1, x_2)$
+	\item 函数则是要实现“如果线以下，输出0；线以上，输出1”
+\end{itemize}}}
 }
 
 \frame
 {
 	\frametitle{深度神经网络基础}
+{\fontsize{8.0pt}{4.2pt}\selectfont{
 感知机模型只能用于二元分类，无法学习较为复杂的非线性模型，神经网络在感知机模型基础上作了扩展
-\vskip 10pt
+%\vskip 10pt
 	\begin{itemize}
-		\item 加入隐藏层(\textrm{hide layer}):~隐藏层可以有很多层，增强模型的表达能力
+		\item 加入隐藏层(\textrm{hide layer}):\\
+			隐藏层可以有很多层，增强模型的表达能力
 		\item 输出层的神经元可以有不止一个输出
 		\item 对激活函数作扩展，如\textrm{Sigmoid}函数
 			\begin{displaymath}
 				f(z)=\dfrac1{1+\mathrm{e}^{-z}}
 			\end{displaymath}
-			其他的激活函数还有\textrm{tanx}、\textrm{softmax}和\textrm{ReLU}等
-	\end{itemize}
+			{\fontsize{6.5pt}{4.2pt}\selectfont{其他的激活函数还有\textrm{tanx}、\textrm{softmax}和\textrm{ReLU}等}}
+\begin{figure}[h!]
+%\vspace*{-0.08in}
+\centering
+\includegraphics[width=2.8in]{Figures/ML_Sigmoid-Gjl-t.png}
+%\caption{\tiny \textrm{Perceptron Learning Algorithm.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:Sigmoid_curve}
+\end{figure}
+	\end{itemize}}}
 }
 
 \frame
 {
-	\frametitle{深度神经网络}
-当前的深度神经网络~\textrm{(Deep Learning Neural Network)}~可以包含上百层神经元，通常有上万个参数，再加上超参数，实际的参数空间几乎是无限大的。如何从海量潜在的可能参数中做选择极具挑战性。
+	\frametitle{深度神经网络\textrm{(Deep Learning Neural Network)}}
+{\fontsize{8.0pt}{4.2pt}\selectfont{
+深度神经网络可以包含上百层神经元，通常有上万个参数，再加上超参数，实际的参数空间几乎是无限大的
 \begin{figure}[h!]
-\vspace*{-0.08in}
+%\vspace*{0.05in}
 \centering
-\includegraphics[height=1.75in,width=3.75in]{Figures/ANN_Algorithm.png}
+\includegraphics[height=1.90in,width=4.05in]{Figures/ANN_Algorithm.png}
 \caption{\tiny \textrm{Deep Learning Neural Network.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Fig:Deep-Learning-NN}
 \end{figure}
+\textcolor{red}{如何从海量潜在的可能参数中做选择极具挑战性}}}
 }
 
 \frame
@@ -464,7 +679,7 @@ $d_{ij}$表示任意一对类的偏差
 	\frametitle{深度神经网络的前馈算法}
 	以三层深度神经网络为例，说明深度神经网络的前馈算法
 \begin{figure}[h!]
-\vspace*{-0.08in}
+%\vspace*{-0.08in}
 \centering
 \includegraphics[width=3.0in]{Figures/DNN_front_pro.jpg}
 %\caption{\tiny \textrm{Perceptron Learning Algorithm.}}%(与文献\cite{EPJB33-47_2003}图1对比)
@@ -474,26 +689,34 @@ $d_{ij}$表示任意一对类的偏差
 
 \frame
 {
-	\frametitle{遗传算法的基本原理}
-	遗传算法\textrm{(Genetic Algorithm, GA)}是模拟生物进化论的自然选择和遗传学机理的计算模型，\textcolor{blue}{通过模拟自然进化过程搜索最优解}
+	\frametitle{遗传算法\textrm{(Genetic Algorithm)}}
+{\fontsize{8.0pt}{4.2pt}\selectfont{
+	遗传算法:~模拟生物进化论的自然选择和遗传学机理的计算模型
+	\vskip 2pt
+	\textcolor{blue}{通过模拟自然进化过程搜索最优解}
 	\begin{enumerate}
-%		\item 优化问题可能潜在的解集构成一个种群(\textrm{population})，该种群由经过基因(\textrm{gene})编码的一定数目的个体(\textrm{individual})组成，每个个体是染色体(\textrm{chromosome})带有特征的实体
-		\item 优化问题可能潜在的解集构成一个种群，该种群由经过基因编码的一定数目的个体组成，每个个体是带有一定的优化特征
-%		\item 种群产生之后，借助于自然遗传学的遗传算子(\textrm{genetic operators})进行组合交叉(\textrm{crossover})和变异(\textrm{mutation})，产生新一代个体
-		\item 种群产生之后，借助于自然遗传学的遗传算子进行组合交叉(\textrm{crossover})和变异(\textrm{mutation})，产生新一代个体
+		\item 优化问题可能潜在的解集构成一个种群(\textrm{population})
+			\vskip 2pt
+			该种群由经过基因(\textrm{gene})编码的一定数目的个体(\textrm{individual})组成，每个个体是染色体(\textrm{chromosome})带有特征的实体
+%		\item 优化问题可能潜在的解集构成一个种群，该种群由经过基因编码的一定数目的个体组成，每个个体是带有一定的优化特征
+		\item 种群产生之后，借助于自然遗传学的遗传算子(\textrm{genetic operators})进行组合\\
+			交叉(\textrm{crossover})和变异(\textrm{mutation})，产生新一代个体
+%		\item 种群产生之后，借助于自然遗传学的遗传算子进行组合交叉(\textrm{crossover})和变异(\textrm{mutation})，产生新一代个体
 \begin{figure}[h!]
-\vspace*{-0.10in}
+\vspace*{-0.05in}
 \centering
-\includegraphics[width=2.5in]{Figures/Genetic_Algorithm_basic.png}
+\includegraphics[width=2.7in]{Figures/Genetic_Algorithm_basic.png}
 %\caption{\tiny \textrm{Perceptron Learning Algorithm.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Fig:PLA}
 \end{figure}
-%		\item 按照适者生存和优胜劣汰的原理，在每一代，根据问题域中个体的适应度(\textrm{fitness})，选择(\textrm{selection})合适的个体，构成代表新的解集的种群
+		\item 适者生存和优胜劣汰:~在每一代，根据问题计算个体的适应度(\textrm{fitness})
+			\vskip 2pt
+			选择(\textrm{selection})合适的个体，构成代表新的解集的种群
 \vspace*{-0.10in}
-		\item 按照适者生存和优胜劣汰的原理，在每一代，根据问题域中个体的适应度，选择合适的个体，构成代表新的解集的种群
-%		\item 逐代(\textrm{generation})演化后，产生出越来越好的近似解(优化目标)
-		\item 逐代演化后，产生出越来越好的近似解(优化目标)
-	\end{enumerate}
+%		\item 按照适者生存和优胜劣汰的原理，在每一代，根据问题域中个体的适应度，选择合适的个体，构成代表新的解集的种群
+		\item 逐代(\textrm{generation})演化后，产生出越来越好的近似解(优化目标)
+%		\item 逐代演化后，产生出越来越好的近似解(优化目标)
+	\end{enumerate}}}
 }
 
 \frame
@@ -501,17 +724,97 @@ $d_{ij}$表示任意一对类的偏差
 	\frametitle{深度神经网络与遗传算法}
 	\textcolor{blue}{深度神经网络类似问题的解决方案:~遗传算法}
 \begin{minipage}[b]{0.49\textwidth}
+	\vskip 10pt
 \includegraphics[height=0.4in,width=2.08in,viewport=0 110 1280 350,clip]{Figures/Genetic_Algorithm-2.png}\\
 \centering{\includegraphics[height=1.0in,width=1.08in,viewport=140 50 820 650,clip]{Figures/Genetic_Algorithm-1.png}}\\
 \vskip 0.02pt
 \includegraphics[height=0.7in,width=2.05in]{Figures/Genetic_Algorithm-3.png}\\
-\centering{\textcolor{red}{\textrm{\tiny GACNN:~利用遗传算法训练深度卷积神经网络}}}
+%\centering{\textcolor{red}{\textrm{\tiny GACNN:~利用遗传算法训练深度卷积神经网络}}}
 \end{minipage}
 \hfill
 \begin{minipage}[b]{0.49\textwidth}
+	\vskip 10pt
 \includegraphics[height=1.2in,width=1.9in]{Figures/Genetic_Algorithm-5.png}\\
 \vskip 0.5pt
 \includegraphics[height=0.55in,width=1.95in]{Figures/Genetic_Algorithm-4.png}\\
-\centering{\textcolor{red}{\textrm{\tiny 多智能体强化学习:~神经网络}}}
+%\centering{\textcolor{red}{\textrm{\tiny 多智能体强化学习:~神经网络}}}
 \end{minipage}
 }
+
+\frame
+{
+	\frametitle{机器学习的验证}
+{\fontsize{8.0pt}{4.2pt}\selectfont{机器学习模型是否仅对训练数据有效，还需要一些数据集来检验\footnote{\fontsize{5.0pt}{4.2pt}\selectfont{模型对训练集的学习，优化的并非全部参数，以神经网络为例，网络隐藏层的数目作为参数在优化过程中就始终保持不变，这类参数称为超参数(\textrm{hyperpameter})。通过验证集检验的主要是模型中未能优化的超参数的性能}}，这一过程称为验证，对应的数据集称为验证集
+\begin{itemize}
+	\item 监督学习的数据集一般分为三类:~训练集、验证集和测试集
+		\vskip 2pt
+	{\fontsize{6.0pt}{4.2pt}\selectfont{这些样本数据最好是具备相同的统计分布特征。为了优化学习模型，建议先对样本数据多次学习，最后才将模型应用到测试数据集上}}
+\item 对比预测数据和实际数据的偏差，可以评估模型的真实预测能力
+\item 当数据非常有限时，最常用的是\textcolor{blue}{~$k$-重交叉验证\textrm{(cross-validation)}}:
+	\vskip 2pt
+	{\fontsize{6.0pt}{4.2pt}\selectfont{将训练集分成$k$个子集，选择$k-1$个子集训练模型，并用剩下的一个未训练的子集验证模型:\\将训练-验证过程执行$K$次，并将$K$次验证的平均损失函数来评估模型性能的平均表现
+\vskip 1pt
+	平均损失函数定义为:
+\begin{displaymath}
+	E_{\mathrm{cv}}^{K}=\dfrac1K\sum_{k=1}^K\sum_{i=1}^{n_k}L(\hat{y}_k^{(\mathrm{i})},y^{(\mathrm{i})})
+\end{displaymath}
+{\fontsize{5.0pt}{4.2pt}\selectfont{这里$L$是验证数据集的损失函数，$\hat{y}_k^{(\mathrm{i})}$是训练子集(不含验证子集$k$)得到的模型，对采样数据$i$预测的值$\hat{y}_k^{(\mathrm{i})}$，训练子集的采样数据共有$n_k$}}\\
+特别地，$K=n$，即训练集划分的子集与其元素个数相同，称为\textrm{leave-one-out cross-validation}}}
+\end{itemize}
+{\fontsize{7.0pt}{4.2pt}\selectfont{\textcolor{purple}{交叉验证也可用于评估训练模型中的超参数}\footnote{\fontsize{5.0pt}{4.2pt}\selectfont{超参数包括正则化参数$\lambda$、\textrm{S\!V\!M}的\textrm{Gaussian}内核参数$\sigma$，二叉树(二元决策)修剪层次和随机森林系综的特征向量等}}:~选择有最小的预测误差时的参数}}}}
+}
+
+\frame
+{
+	\frametitle{机器学习的验证}
+	{\fontsize{8.0pt}{4.2pt}\selectfont{对机器学习模型性能的评估手段有很多
+		\begin{itemize}
+			\item 二元或多元分类可以选用\textcolor{blue}{混同矩阵\textrm{(confusion matrices)}}\footnote{\fontsize{5.0pt}{4.2pt}\selectfont{所谓混同矩阵，就是评估模型预测与抽样吻合程度建立的矩阵，预测吻合度高的元素主要出现在矩阵对角元，预测吻合度低的都在矩阵非对角元}}
+				\vskip 2pt
+				{\fontsize{5.0pt}{4.2pt}\selectfont{比如矩阵的列方向为采用数据的值，行方向是预测数据的值(除了近似单位矩阵表示，也可以用真阳\textrm{(TP)}、真阴\textrm{(TN)}和假阳\textrm{(FP)}假阴\textrm{(FN)}来填充矩阵)}}
+			\item 绘制模型\textcolor{blue}{受试操作特征\textrm{(receiver operating characteristic, ROC)}曲线}\\
+				{\fontsize{5.0pt}{4.2pt}\selectfont{也可以用比如“真阳率”\textrm{(TP rate)}~$\mathrm{TPR}=\frac{\mathrm{TP}}{\mathrm{TP}+\mathrm{FN}}$和“假阳率”\textrm{(FP rate)}~$\mathrm{FPR}=\frac{\mathrm{FP}}{\mathrm{FP}+\mathrm{TN}}$}}
+		\end{itemize}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.1in}
+\includegraphics[height=1.2in]{ML_confusion_matrix.png}
+\hskip 5pt
+\includegraphics[height=1.2in]{ML_ROC.png}
+%\caption{\fontsize{7.2pt}{4.2pt}\selectfont{评估机器学习模型的混同矩阵和\textrm{ROC}示意，理想的混同矩阵是单元阵，\textrm{ROC}以下的面积越大，表示模型的性能越好.}}%
+\label{ML_CM_ROC}
+\end{figure}
+不同阈值下的\textrm{ROC}曲线反应了模型的预测能力}}
+}
+
+\frame
+{
+	\frametitle{机器学习的验证}
+{\fontsize{7.0pt}{4.2pt}\selectfont{回归预测也有很多方案可以评估模型对数据的拟合精度，如:
+\begin{itemize}
+	\item 平均绝对误差\textrm{(mean absolute error, MAE)}
+		\begin{displaymath}
+			\mathrm{MAE}=\dfrac1n\sum_i^n|y_i-\hat{y}_i|
+		\end{displaymath}
+	\item 归一化相对百分误差\textrm{(normalized mean absolute in percentage, MAPE)}
+		\begin{displaymath}
+			\mathrm{MAPE}=\dfrac{100\%}n\sum_i^n\dfrac{y_i-\hat{y}_i}{y_i}
+		\end{displaymath}
+	\item 均方误差\textrm{(mean squared error, MSE)}
+		\begin{displaymath}
+			\mathrm{MSE}=\dfrac1n\sum_i^n(y_i-\hat{y}_i)^2
+		\end{displaymath} 
+{\fontsize{5.0pt}{4.2pt}\selectfont{从使用频率角度说，由分布参数$\theta$估计$\hat{\theta}^m$与\textrm{MSE}密切关联，即
+		\begin{displaymath}
+			\mathrm{MSE}=\mathtt{E}[(\hat{\theta}_m-\theta)^2]=\mathrm{Bias}(\hat{\theta}_m)^2-\mathrm{Var}(\theta)
+		\end{displaymath}
+		一般更常用的是误差的均方根\textrm{(root of MSE, RMSE)}}}
+\end{itemize}
+\vskip 2pt
+		还有用可决统计系数(也称决定系数，\textrm{coefficient of determination})~$\mathrm{R}^2$
+		\vskip 2pt
+		{\fontsize{6.0pt}{4.2pt}\selectfont{可决统计系数的定义为$\mathrm{R}^2=1-\frac{\mathrm{SS}_{\mathrm{res}}}{\mathrm{SS}_{\mathrm{tot}}}$}}\\
+		{\fontsize{5.0pt}{4.2pt}\selectfont{这里$\mathrm{SS}_{\mathrm{res}}=\sum\limits_i(y_i-\bar{y})^2$是总的方差求和，而$\mathrm{SS}_{\mathrm{res}}=\sum\limits_i(y_i-\hat{y}_i)^2$是预测模型误差平方求和}}
+	}} }
+
+\section{数据挖掘与第一原理材料研究}
