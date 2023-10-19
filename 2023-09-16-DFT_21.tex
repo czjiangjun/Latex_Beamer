@@ -818,3 +818,97 @@ $d_{ij}$表示任意一对类的偏差
 	}} }
 
 \section{数据挖掘与第一原理材料研究}
+\frame
+{
+	\frametitle{}
+%信息科学与生物学的交叉形成生物信息学极大地带动了信息学科与基础学科的融合
+材料信息学\textrm{(Materials Informatics)}:~应用数据挖掘特别是机器学习技术推动材料科学研究的深入，经过十多年的发展已渐趋成熟
+材料信息学主要研究材料的内禀特征\textrm{(intrinsic features)}，包括结构、组成、对称性等与材料的性质之间内在的数据关联
+%。通常材料科学研究的习惯思路是已知材料的特征$x_i$，则其影响的材料性质$y_i=f(x_i)$将会如何变化，确定\{\textit{材料}$\rightarrow$\textit{性质}\}的映射关系;~而对于新材料开发领域，往往有逆向式思维，为了获得具有某种性质的材料，则必须使其存在哪些内禀特征。事实上，只有以数据驱动的材料学研究模式，才是能同时回答上述问题的主要形式。
+
+材料科学中数据挖掘特别是机器学习研究的一般思路
+\begin{figure}[h!]
+\centering
+\vspace*{-0.1in}
+\includegraphics[height=1.8in]{Materials_informations_workflow.png}
+\caption{\fontsize{7.2pt}{4.2pt}\selectfont{\textrm{材料科学研究中的数据挖掘方式的一般流程.引自文献\inlinecite{NPJCM3-54_2017}}}}%
+\label{npjCM}
+\end{figure}
+
+材料学研究的数据挖掘主要是监督学习，即材料物性的预测和材料的分类。对材料物性的预测，机器学习的目标是，应用包括回归在内的各种算法，对目标物性(标签)建立函数关系$f(\mathbf{x})$;~对于分类问题，则根据特定的物性目标，将符合要求的材料归入其中。例如，按照磁性和非磁性划分，和按照晶体所属结构分类就属于两种不同的分类方式，每种分类方式内部各部分之间不能存在交集
+}
+
+\frame
+{
+	\frametitle{数据驱动的材料研究主要流程}
+在数据挖掘驱动的材料计算(主要是第一原理材料计算)的主要研究流程为:
+\begin{enumerate}
+	\item 问题的确定:~对于机器学习来说，最重要的就是确定待解决的问题的类型，究竟是分类、回归、优化、分布概率估计等中的哪一类。习惯上要根据\textrm{SMART}原则\footnote{\textrm{SMART}原则是流行在目标管理中的术语，即具体\textrm{(Specific)}、可量化\textrm{(Measurable)}、可达成\textrm{(Attainable)}、相关\textrm{(Relevant)}和时效要求\textrm{(Timely)}的英文缩写。}，平衡效率与精度，确定所选的机器学习算法。此外，很重要的是机器学习所需特征向量的选择，尤其需要慎重选择。
+	\item 材料数据的组织:~作为机器学习的基本对象，数据是最基本的。对于选定的问题，必须要有充足的数据。即使是最小化的数据集，也应该涵盖研究样本的全部特征(机器学习的输入)和目标物性(机器学习的输出)。需要说明的是，对于机器学习而言，数据可以是来自理论计算的，也可以是实验测量的。
+	\item 物性的表示:~选用哪些特征向量来表示材料的物性往往决定了机器学习的性能。习惯上，将用于描述材料物性的特征向量称为描述符\cite{PRL114-105503_2015}(或指纹)。
+	\item 机器学习算法和模型的选定、评估与优化:~根据研究问题的目标，选择合适的机器学习算法并对学习结果予以评估。特别要注意算法的精度-效率/性能和训练时长的平衡，同时也要考虑模型的复杂度/合理性。对模型的评估和优化主要针对超参数的选择，既要防止数据不足也要防止过拟合引起的偏差。
+\end{enumerate}
+机器学习的建模可以简单概述为
+\begin{displaymath}
+	\mbox{机器学习模型=研究对象+数据+表示+机器学习算法+优化}
+\end{displaymath}
+
+\frame
+{
+	\frametitle{机器学习对\textrm{DFT}的促进}
+机器学习除了可作为直接预测材料性质或发现新材料的手段，在第一原理计算方面，更重要的作用是节省或替代获取\textrm{DFT}计算结果或数据所必需的高额成本
+
+在此简要讨论应用机器学习方法来扩展和改进各类模拟计算的主要思路。在类似的计算物理和模拟研究领域，此类机器学习同样有着广泛的应用潜能。
+
+对于复杂电子体系，\textrm{Schr\"odinger}方程直接的迭代数值求解对计算资源和时间成本都比较高。在\textrm{DFT}框架下，使用机器学习加速求解\textrm{Kohn-Sham}方程，可以更高效地获得计算结果且不须牺牲精度，其实现的基本思路如图\ref{ML_QM}所示。通过使用机器学习方法来优化\textrm{DFT}计算里中使用的能量泛函，可以将机器学习方法很方便地与传统\textrm{DFT}计算结合起来使用\cite{PRB94-245129_2016,PRL108-253002_2012,JCP139-224104_2013,IJQC116-819_2016,JCP148-241705_2018}。机器学习优化的泛函并不限于传统\textrm{DFT}的\textrm{Kohn-Sham}方程的交换-相关部分，也可以用于无轨道类型\textrm{(free-orbital)}的能量密度泛函。
+\begin{figure}[h!]
+\centering
+\vspace*{-0.1in}
+\includegraphics[height=1.8in]{ML_DFT-1.png}
+\caption{\fontsize{7.2pt}{4.2pt}\selectfont{\textrm{应用机器学习预测替代高成本量子化学计算的总体思路.引自文献\inlinecite{ML-in-MS_2016}}}}%
+\label{ML_QM}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{机器学习计算材料计算}
+在第一原理计算中，机器方法的思路是直接预测电子密度，从而避免直接求解\textrm{Kohn-Sham}方程，本质上就是从\textrm{DFT}的\textrm{Hohenberg–Kohn}定理出发，但并非以寻找普适泛函为目标，而是通过机器学习获得材料的电子密度-势的映射关系，得到能量泛函后，对能量泛函求变分极小得到基态能量。图\ref{ML_DFT}给出了机器学习支持第一原理计算的三种不同形式。
+\begin{figure}[h!]
+\centering
+\vspace*{-0.1in}
+\includegraphics[height=1.8in]{ML_DFT-2.png}
+\caption{\fontsize{7.2pt}{4.2pt}\selectfont{应用机器学习支持\textrm{DFT}的三种主要形式.引自文献\inlinecite{NC8-872_2017}}}%
+\label{ML_DFT}
+\end{figure}
+
+对于第一原理计算来说，机器学习还可于直接解决更为复杂的量子多体问题\cite{CPC104-1_1997,Science355-602_2017,PRE98-033305_2018}，对于其\textrm{Schr\"odinger}方程\cite{PRA96-042113_2017}的类紧束缚模型可以通过机器学习方法得到\textrm{Hamiltonian}\cite{SR7-42669_2017}。
+
+此外，机器学习在计算材料，特别是在高于电子尺度的物理学研究中的应用，还包括配分函数的确定\cite{JCP149-044118_2018}、寻找相变和序参量\cite{PRB94-195105_2016,NP13-431_2017,PRB96-205146_2017,SR7-8823_2017,PRB97-115453_2018}以及获得模型的格林函数\cite{PRB90-155136_2014}等重要问题。机器学习这些领域的成功应用展示了数据挖掘技术在拓展材料科学研究前沿有着广阔的应用前景，可应用于多种尺度下材料学研究的各类系统和现象。
+}
+
+%\subsection{机器学习在第一原理材料研究中的应用}
+\frame
+{
+\frametitle{新材料发现及稳定性}
+机器学习用于材料学研究的主要目标是通过数据驱动加速新的物质(主要是各类化合物)的发现。具体地说，通过机器学习，可以阐述材料的热力学稳定性，从而有效地预测化合物的形成能。\textrm{Curtarolo}和\textrm{Ceder}等是利用诸如\textrm{PCA}、线性回归等机器学习方法来预测晶体结构\cite{PRL91-135503_2003}、形成能\cite{MST16-296_2005}并优化高通量计算\cite{NM5-641_2006}的先驱，、\textrm{Hautier}等应用机器学习方法，由\textrm{ICSD}的实验数据确定新的三元化合物的主要元素组成，并用高通量计算模拟验证\cite{CM22-3762_2010}。\textrm{Saad}等用二元化合物为样本，介绍了机器学习的基本概念和监督学习与无监督学习降维技术\cite{SR5-13285_2015}。\textrm{Patra}等应用偏倚神经网络遗传算法\textrm{(neural-newwork-biased genetic algorithm, NBGA)}加速特定物性材料的设计\cite{ACSCS19-96_2017}，通过人工神经网络遗传算法的筛选优化，对模拟或实验样本数据按照类似生物进化的多代筛选，获得特定物性的提升。采用随机森林算法，预测\textrm{Heusler}合金时，仅以元素组分为特征向量(描述符)，得到很理想的结果，并且很快得到实验合成的验证\cite{CM28-7324_2016}。\textrm{Faber}等对\textrm{ICSD}数据库中大量化合物的形成能应用\textrm{kernel ridge}回归，发现平均误差在0.1\textrm{eV/atom}的钾冰晶石化合物(\ch{ABC2D6})结构约90种\cite{PRL117-135502_2016}。
+
+%\textrm{Okamoto}在材料科学的化学组分研究中，应用\textrm{Bayesian}方法，只在6\%的搜索空间中就找到了嵌入金属锂的石墨烯稳定化学物\cite{JPCA121-3299_2017}。
+
+%预测晶体结构及其稳定性
+}
+
+%------------------------------------------------------------------------Reference----------------------------------------------------------------------------------------------
+		\frame[allowframebreaks]
+{
+\begin{thebibliography}{99}
+\frametitle{主要参考文献}
+{\tiny
+\bibitem{NPJCM3-54_2017}\textrm{R. Ramprasad and R. Batra and G. Pilania and A. Mannodi-Kanakkithodi and C. Kim. \textit{npj. Comput. Mater.}, \textbf{3} (2017), 54}
+\bibitem{NNature559-547_2018}\textrm{K. T. Butler and D. W. Davies and H. Cartwright and O. Isayev and A. Walsh. \textit{Nature}, \textbf{559} (2018), 547}
+\bibitem{COSSMS21-167_2016}\textrm{L. Ward and C. Wolverton \textit{Curr. Opin. Solid State Mater. Sci.}, \textbf{21} (2016), 167}
+\bibitem{JM3-519_2017}\textrm{Y. Liu and T. Zhao and W. Ju and S. Shi \textit{J. Materiomics.}, \textbf{3} (2017), 519}
+}
+\end{thebibliography}
+%\nocite*{}
+}
