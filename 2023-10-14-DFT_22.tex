@@ -74,6 +74,31 @@
 \section{高通量第一原理自动流程}
 \frame
 {
+	\frametitle{材料计算软件发展现状}
+\begin{figure}[h!]
+\vspace*{-0.16in}
+\centering
+\includegraphics[width=3.30in]{Figures/Softwares_logo.png}
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Softwares}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{国产第一原理计算软件现状}
+\begin{figure}[h!]
+\vspace*{-0.19in}
+\centering
+\includegraphics[width=2.83in]{Figures/Softwares_China-logo.png}
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Software-China}
+\end{figure}
+	\fontsize{6.2pt}{5.2pt}\selectfont{\textcolor{red}{中国学科发展战略\,$\cdot$\,理论与计算化学,~~国家自然科学基金委员会,~中国科学院,~~北京:~科学出版社,~~2016}}
+}
+
+\frame
+{
 	\frametitle{}
 高通量的概念最初在实验领域产生的，早期材料研究和制药研究，一般通过大量备选材料试错，最终才得到合适的材料或药物主要功能成分，这就可以视为是一种高通量筛选。需要明确的是，在文献中常会提到“高通量”和“组合方法”(\textrm{Combinational approach})的概念，但很少区分着两者的区别，这里明确一下，所谓“高通量”是用户产生或处理的数据量极大，没有计算机自动处理是无法完成的;~而“组合方法”是针对影响研究对象的各种可能自由度的分门别类研究。换言之，高通量考虑的是利用计算机“一视同仁”地自动化式处理海量数据，而组合方法更强调对特定影响因素的筛查和组合研究，这是这两个概念的主要区别。
 
@@ -148,6 +173,147 @@
 可见，\textrm{FireWorks}是以任务单元组为基本组成的来实现工作流程的，任务单元组之间依靠数据传递相关联，流程执行完毕也将返回数据，因此\textrm{FWAction}模块主要负责任务单元组之间的数据传递和任务分配。图\ref{FireWorks_FW}右示意了工作流中\textrm{FWAction}的工作模式。不难看出，\textrm{FWAction}允许用户根据需要设计和更改流程参数、增添、删减和改变流程(子)单元组，这一模块大大增加了\textrm{FireWorks}工作流的灵活性。
 
 数据库技术支持的\textrm{FireWorks}解耦了\textrm{DFT}计算软件与计算流程，允许用户根据需要设计出稳定、复杂的材料物性模拟与设计流程。由于不同\textrm{DFT}计算软件的计算控制文件格式存在较大的差别，目前\textrm{FireWorks}流程设计只对特定计算软件(如\textrm{VASP})设计了最常用的计算流程模块(如结构弛豫、基态总能计算、能带和态密度计算等)。更丰富的计算流程有待应用研究中不断开发。
+}
+
+\frame
+{
+	\frametitle{\textrm{MP}自动流程的设计与开发}
+	\begin{itemize}
+		\item \textcolor{red}{设计目标}:~围绕\textrm{VASP~}作业高通量并发提交与过程监控
+		\item \textcolor{red}{设计方案}:~开发针对不同计算场景的功能模块
+			\begin{enumerate}
+    \setlength{\itemsep}{15pt}
+				\item \textcolor{blue}{\textbf{Pymatgen}}\\
+					\textcolor{magenta}{前处理}:~计算模型的分析与预处理\\
+					\textcolor{magenta}{后处理}:~计算结果的可视化
+				\item \textcolor{blue}{\textbf{FireWorks}}\\
+\textcolor{magenta}{计算流程设计与管理}:~数据库支持的计算流程管理
+				\item \textcolor{blue}{\textbf{Custodian}}\\
+\textcolor{magenta}{计算流程容错与应对}:~提供计算过程错误判断接口，由用户提供解决策略和针对性设计
+			\end{enumerate}
+	\end{itemize}
+		%\item 计算过程的控制方式
+}
+
+\frame
+{
+	\frametitle{\textrm{Pymatgen}的模块结构}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.1in}
+\includegraphics[height=2.3in]{Figures/MP_library.png}
+\caption{\fontsize{7.2pt}{4.2pt}\selectfont{\textrm{Overview of a typical workflow for pymatgen.}}}%
+\label{Pymatgen_Lib}
+\end{figure} 
+}
+
+\frame
+{
+	\frametitle{\textrm{Pymatgen}可展示的材料物性}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.1in}
+\includegraphics[height=2.3in]{Figures/MP_vision.png}
+\caption{\fontsize{5.2pt}{4.2pt}\selectfont{\textrm{Top left: Phase; Top right: Pourbaix diagram from the Materials API. \\Bottom left: Calculated bandstructure plot using pymatgen’s parsing and plotting utilities. Bottom right: Arrhenius plot using pymatgen’s Diffusion~Analyzer.}}}%
+\label{Pymatgen_vision}
+\end{figure} 
+}
+
+\frame
+{
+	\frametitle{\textrm{FireWorks}的模块结构}
+\textrm{FireWorks}发布的工作流成由三层嵌套结构组成:
+\fontsize{8.2pt}{6.2pt}\selectfont{
+\begin{itemize}
+	\item \textrm{Firetask}:~基本执行单元，是执行计算的最基本脚本命令或\textrm{Python}命令。
+	\item \textrm{Firework}:~组织基本执行单元构成任务单元组，并指定各基本执行单元所需的参数。
+	\item \textrm{Workflow}:~彼此相关联的任务单元组构成完整的工作流程:\\
+		\textrm{FireWork}之间的数据传递、任务执行序列等由\textrm{FWAction}完成。
+\end{itemize}}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.1in}
+\includegraphics[height=1.5in]{Figures/MP_fireworks.png}
+\hskip 1pt
+\includegraphics[height=1.5in]{Figures/MP_multiple_fw.png}
+\caption{\fontsize{7.2pt}{4.2pt}\selectfont{\textrm{The basic infrastructure of FireWorks.}}}%
+\label{FireWorks_FW}
+\end{figure} 
+}
+
+\frame
+{
+	\frametitle{\textrm{atomate}:~计算流程控制示范}
+%		\textcolor{purple}{\textrm{Atomate}}:~:~适合一定复杂程度的\textrm{~VASP~}计算
+\begin{figure}[h!]
+\centering
+\vspace*{-0.19in}
+\includegraphics[height=1.4in,width=2.2in,viewport=0 0 820 630,clip]{Figures/Atomate_comp.png}
+\vskip 1pt
+\includegraphics[height=1.5in]{Figures/bandstructure_wf.png}
+%\caption{\fontsize{7.2pt}{4.2pt}\selectfont{\textrm{The integrated calculator in ASE (Atomic Simulation Environment).}}}%
+\label{Logo_QM-MM}
+\end{figure} 
+}
+
+\frame
+{
+	\frametitle{\textrm{ASE}自动流程的设计与管理}
+		\textcolor{purple}{\textrm{ASE}}:~模块加载式计算流程控制，更符合复杂多尺度计算场景
+		\begin{itemize}
+			\item \textcolor{magenta}{灵活的建模功能}
+				\begin{enumerate}
+    \setlength{\itemsep}{10pt}
+					\item 简单堆积:~原子直接组成分子
+					\item 理想周期体系(包括一维、二维、三维)
+					\item 表面和表面吸附，可指定吸附位
+				\end{enumerate}
+			\item \textcolor{magenta}{丰富的软件接口}\\
+				提供了包括绝大部分第一原理和分子动力学计算软件接口，方便组合实现多尺度计算
+			\item \textcolor{magenta}{不依赖软件的优化与动力学模拟}\\
+				适合复杂材料物性模拟的优化和多种动力学过程模拟
+			\item \textcolor{magenta}{多样化的数据库类型}
+		\end{itemize} 
+}
+
+\frame
+{
+\frametitle{\textrm{ASE}特色:~材料结构生成模块}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.15in}
+\includegraphics[height=1.2in,width=1.7in,viewport=0 0 820 530,clip]{Figures/ASE_atoms_module.png}
+\includegraphics[height=2.9in,width=2.2in,viewport=0 0 970 1200,clip]{Figures/ASE_atoms_module-examples.png}
+%\caption{\fontsize{7.2pt}{4.2pt}\selectfont{\textrm{The integrated calculator in ASE (Atomic Simulation Environment).}}}%
+\label{Logo_atoms-module}
+\end{figure} 
+}
+
+\frame
+{
+\frametitle{\textrm{ASE}特色:~软件接口丰富}
+\textcolor{purple}{\textrm{ASE}}:~\textrm{Calculator}模块提供的可选的软件接口
+\begin{figure}[h!]
+\centering
+\vspace*{-0.05in}
+%\includegraphics[height=1.0in,width=1.4in,viewport=0 0 638 530,clip]{Figures/ASE_calculator.png}
+\includegraphics[height=2.0in,width=3.2in,viewport=0 0 940 600,clip]{Figures/ASE_calculator-new.png}
+\caption{\fontsize{7.2pt}{4.2pt}\selectfont{\textrm{The integrated calculator in ASE.}}}%
+\label{ASE_Calculator}
+\end{figure} 
+}
+
+\frame
+{
+\frametitle{\textrm{ASE}特色:~提供多种优化算法模块和数据库}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.18in}
+\includegraphics[height=1.3in,width=2.5in,viewport=0 0 838 500,clip]{Figures/ASE_opt_modules.png}
+\vskip 1pt
+\includegraphics[height=1.7in,width=2.5in,viewport=0 0 938 630,clip]{Figures/ASE_database.png}
+\label{ASE_opt-database}
+\end{figure} 
 }
 
 \section{第一原理数据库}
@@ -309,4 +475,21 @@
 \textrm{Atomly}材料科学数据库\cite{ATOMLY_URL}是中国科学院物理研究所开发的第一原理材料数据库，截止到目前已经收录了超过180,000条无机材料的高质量数据。\textrm{Atomly}的目标是为科研领域带来材料数据工具平台，通过数据驱动新材料的筛选、预测和发现，提升材料研发的生产力。截止到撰稿时\textrm{Atomly}共收录232,869种化合物，228,741种能带结构和55,831种相图数据。
 
 \textrm{Atomly}提供了高通量第一原理计算流程框架\cite{arXiv2108_00359v1}，依托中科院物理所的松山湖材料实验室的计算资源，框架支持的高通量计算流程可以支持~$10^3$数量级的材料体系同时计算。同时\textrm{Atomly}的网页前端，提供便捷搜索，能快速定位到指定材料数据，并以友好的方式呈现给用户。此外，\textrm{Atomly}可以实现数据驱动的材料设计，能快速地高通量筛选，获得最优候选材料;~借助人工智能\textrm{(Artificial Intelligence, AI)}算法，\textrm{Atomly}支持材料性质预测，能更快捷、精准地预测材料性质。
+}
+%------------------------------------------------------------------------Reference----------------------------------------------------------------------------------------------
+		\frame[allowframebreaks]
+{
+\begin{thebibliography}{99}
+\frametitle{主要参考文献}
+{\tiny
+	\bibitem{CMS146-319_2018}\textrm{X. Yang, Z. Wang, X. Zhao and H. Liu \textit{Comp. Mater. Sci.}, \textbf{146} (2018), 319}
+	\bibitem{url_Matcloud}\textrm{\url{http://matcloud.cnic.cn}}
+	\bibitem{CMS58-227_2012}\textrm{S. Curtarolo, W. Setyawan, S. Wang, J. Xue, K. Yang, R. H. Taylor, L. J. Nelson, G. L. Hart, S. Sanvito, M. Buongiorno-Nardelli, N. Mingo and O. Levy \textit{Comp. Mater. Sci.}, \textbf{58} (2012), 227}
+	\bibitem{CMS97-209_2015}\textrm{S. P. Ong, S. Cholia, A. Jain, M. Brafman, D. Gunter, G. Ceder and K. A. Persson. \textit{Comp. Mater. Sci.}, \textbf{97} (2015), 209}
+	\bibitem{url_QMIP}\textrm{\url{http://www.qmip.org/qmip.org/Welcome.html}}
+	\bibitem{JPCL2-2241_2011}\textrm{J. Hachmann, R. Olivares-Amaya, S. Atahan-Evrenk, C. Amador-Bedolla, R. S. S$\acute{a}$nchez-Carrera, A. Gold-Parker, L. Vogt, A. M. Brockway and A. Aspuru-Guzik \textit{J. Phys. Chem. Lett.}, \textbf{2} (2011), 2241}
+	\bibitem{MPC4-148_2015}\textrm{L. Lin \textit{Mater. Perform. Character.}, \textbf{4} (2015), 148}
+}
+\end{thebibliography}
+%\nocite*{}
 }
