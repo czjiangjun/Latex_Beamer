@@ -97,6 +97,72 @@
 
 \frame
 {
+	\frametitle{国外已有的计算平台}
+\begin{figure}[h!]
+\centering
+\vspace{-15.5pt}
+\subfigure[\fontsize{6.5pt}{6.2pt}\selectfont{\textrm{Auto-FLOW (AFLOW)}\upcite{CMS58-227_2012}}]{
+\label{AFLOW_data_flow}
+\includegraphics[height=1.2in,width=1.6in,viewport=0 0 720 660,clip]{Figures/AFLOW_database.png}}
+\subfigure[\fontsize{6.5pt}{6.2pt}\selectfont{\textrm{Material Project (MP)}\upcite{CMS97-209_2015}}]{
+\label{MP_commp_infrastructure}
+\includegraphics[height=1.2in,width=1.7in,viewport=0 0 670 530,clip]{Figures/MP_comp_infrastructure.png}}
+\subfigure[\fontsize{3.5pt}{3.2pt}\selectfont{\textrm{Quantum Materials Informatics Project (QMIP)}\upcite{url_QMIP}}]{
+\label{QMIP_Shame}
+\includegraphics[height=1.2in,width=1.7in,viewport=0 0 670 420,clip]{Figures/QMIP_shame.png}}
+\subfigure[\fontsize{6.5pt}{5.2pt}\selectfont{\textrm{Clean Energy Project (CEP)}\upcite{JPCL2-2241_2011}}]{
+\label{CEP_structure_flow}
+\includegraphics[height=1.2in,width=1.6in,viewport=0 0 1020 730,clip]{Figures/CEP_structure_flow.png}}
+%\caption{}%
+\label{Auto_Flow_Platform-1}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{国内已有的计算平台:~\textrm{MatCloud}}
+\begin{figure}[h!]:
+\centering
+\includegraphics[height=1.57in,width=4.95in,viewport=0 0 1800 550,clip]{Figures/Matcloud-login.png}
+\caption{\fontsize{7.2pt}{4.2pt}\selectfont{中科院计算机网络信息中心~杨小渝团队开发}\upcite{CMS146-319_2018,url_Matcloud}}%
+\label{Auto_Flow_Platform-2}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{高通量计算自动流程} 
+当前高通量计算的自动处理流程集中在材料模拟的计算数据收集和实现计算结果自动入库为主
+\vskip 2pt
+{\fontsize{7.5pt}{4.2pt}\selectfont{材料第一原理计算的软件有很多，输出文件的格式千差万别，通过第一原理计算构建相对完善的材料数据库需要耗费相当的计算资源和人力}}
+\vskip 5pt
+自动流程面向的对象是数据，要实现材料计算过程的自动处理，首先需要解决的是数据格式的规范化
+\begin{itemize}
+	\item \textcolor{magenta}{数据规范化类型}:~面向各类软件输出数据的自动化提取与传输
+\vskip 2pt
+{\fontsize{6.5pt}{4.2pt}\selectfont{根据软件的计算特点，组织多种软件实现材料物性计算:~\textcolor{blue}{灵活性较好，但一般只支持相对简单的计算流程}}}
+\item \textcolor{magenta}{流程规范化类型}:~面向材料计算软件的标准化流程，通过数据库支持 
+\vskip 2pt
+{\fontsize{6.5pt}{4.2pt}\selectfont{利用数据库技术将自动流程组织得更复杂多样，并作为数据库条目存储下来:~\textcolor{blue}{稳定性较好，但计算的材料物性受软件能力的限制较多}}}
+\end{itemize}
+\textcolor{purple}{主要的自动流程采用\textrm{Python}语言实现}:~跨平台、模块化组织灵活
+}
+
+\frame
+{
+	\frametitle{计算平台的功能和总体架构}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.35in}
+\includegraphics[height=2.6in,width=4.05in,viewport=0 0 670 460,clip]{Figures/Parallel_computation.png}
+%\includegraphics[height=1.6in,width=2.4in,viewport=0 0 1038 730,clip]{Figures/Auto_Flow.png}
+\caption{\fontsize{7.2pt}{4.2pt}\selectfont{\textrm{The schematic framework and platform of all those project.}}}%
+\label{Auto_Flow}
+\end{figure} 
+}
+
+\frame
+{
 	\frametitle{材料计算软件发展现状}
 \begin{figure}[h!]
 \vspace*{-0.16in}
@@ -122,122 +188,148 @@
 
 \frame
 {
-	\frametitle{高通量计算自动流程} 
-当前高通量计算的自动处理流程集中在材料模拟的计算数据收集和实现计算结果自动入库为主
-\vskip 2pt
-{\fontsize{7.5pt}{4.2pt}\selectfont{材料第一原理计算的软件有很多，输出文件的格式千差万别，通过第一原理计算构建相对完善的材料数据库需要耗费相当的计算资源和人力}}
-\vskip 5pt
-自动流程面向的对象是数据，要实现材料计算过程的自动处理，首先需要解决的是数据格式的规范化
+	\frametitle{\textrm{ASE}自动流程的设计与管理}
+数据规范化型的自动处理以\textrm{ASE}为典型代表，通过各类\textrm{Python}模块，支持多种\textrm{DFT-MD}软件%。根据图\ref{Auto_Flow_Platform-5}可知，\textrm{ASE}的核心模块主要包括\textrm{Atoms}(原子、分子建模)、\textrm{Calculator}(各类计算软件运行支持与控制)和物性计算、功能分析和结果可视化模块。
+\vskip 3pt
+		\textcolor{purple}{\textrm{ASE}特色}:~模块加载式计算流程控制，符合复杂多尺度计算场景
+		\begin{itemize}
+			\item \textcolor{magenta}{灵活的建模功能}
+				\begin{enumerate}
+    \setlength{\itemsep}{7pt}
+					\item 简单组织:~原子直接构成分子
+					\item 理想周期体系(包括一维、二维、三维)
+					\item 表面和表面吸附，可指定吸附位
+				\end{enumerate}
+			\item \textcolor{magenta}{丰富的软件接口}\\
+				提供了包括绝大部分第一原理和分子动力学计算软件接口，方便组合实现多尺度计算
+			\item \textcolor{magenta}{不依赖软件的优化与动力学模拟}\\
+				适合复杂材料物性模拟的优化和多种动力学过程模拟
+			\item \textcolor{magenta}{多样化的数据库类型}
+		\end{itemize} 
+}
+
+\frame
+{
+\frametitle{\textrm{ASE}的结构生成模块}
+\begin{minipage}[b]{0.48\textwidth}
+	{\fontsize{7.8pt}{5.2pt}\selectfont{
+	材料结构生成模块主要功能:}}
+	{\fontsize{6.2pt}{5.2pt}\selectfont{
 \begin{itemize}
-	\item \textcolor{magenta}{数据标准化型}:~面向各类软件输出数据的规范化
-\vskip 2pt
-{\fontsize{6.5pt}{4.2pt}\selectfont{根据软件的计算特点，组织多种软件实现材料物性计算:~\textcolor{blue}{灵活性较好，但一般只支持相对简单的计算流程}}}
-\item \textcolor{magenta}{流程标准化型}:~面向材料计算软件，通过数据库支持 
-\vskip 2pt
-{\fontsize{6.5pt}{4.2pt}\selectfont{利用数据库技术将自动流程组织得更复杂多样，并作为数据库条目存储下来:~\textcolor{blue}{稳定性较好，但计算的材料物性受软件能力的限制较多}}}
-\end{itemize}
-\textcolor{purple}{主要的自动流程都用\textrm{Python}语言实现}:~跨平台、模块化组织灵活
-}
-
-\frame
-{
-	\frametitle{\textrm{ASE}的模块:~\textrm{Atoms}}
-数据规范化型的自动处理以\textrm{ASE/CMR}为典型代表，通过构建各类\textrm{Python}模块，支持多种成熟的\textrm{DFT}计算软件的\textrm{Kohn-Sham}方程求解过程%。根据图\ref{Auto_Flow_Platform-5}可知，\textrm{ASE}的核心模块主要包括\textrm{Atoms}(原子、分子建模)、\textrm{Calculator}(各类计算软件运行支持与控制)和物性计算、功能分析和结果可视化模块。
-
-\textrm{Atoms}是材料计算建模的主要模块，功能包括:
-\begin{itemize}
-	\item 生成各种计算软件所需的结构模型，包括原子、分子、晶体、表面和界面等;
-	\item 读入各种格式的结构模型文件，包括\texttt{xyz}、\textrm{POSCAR}、\texttt{cif}等65种格式;
-	\item 可将各类结构模型统一以\texttt{traj}或\texttt{json}格式写入数据库，实现计算模型数据的标准化。
-\end{itemize}
-}
-
-\frame
-{
-	\frametitle{\textrm{ASE}的模块:~\textrm{Calculator}}
-\textrm{Calculator}是支持各类\textrm{DFT}计算软件运行的主要模块，封装了\textrm{DFT}计算的过程，依次执行以下步骤:
-\begin{enumerate}
-	\item 生成\textrm{DFT}计算软件所需的输入(控制)文件;
-	\item 启动\textrm{DFT}软件，以子进程方式开始计算过程;
-	\item 模块守候直至\textrm{DFT}计算子进程结束;
-	\item 根据要求解析\textrm{DFT}计算软件生成文件，并可将计算结果以\texttt{json}格式写入数据库。
-\end{enumerate}
-类似地，物性计算、功能分析模块通过集成全局结构搜索算法(\textrm{Base-hopping}和\textrm{minima-hopping}算法)、反应动力学模拟\textrm{NEB}算法和势能面鞍点搜索算法、分子动力学模拟算法、几何结构优化算法和分子振动与声子振动分析算法，可完成材料物性的自动化计算，得到的材料物性数据仍将以标准化形式存入数据库。
-
-这样设计的自动处理结构最大的好处是，\textrm{Python}模块与\textrm{DFT}计算软件的交互简单，无须改变\textrm{DFT}计算的任何代码;~只是\textrm{Python}执行过程中会有较多的\textrm{I/O}处理，脚本运行效率不高。
-}
-
-\frame
-{
-	\frametitle{\textrm{ASE}的数据库管理:~\textrm{MySQL}}
-为了增加自动流程的可控和灵活性，\textrm{ASE}引入\textrm{checkpointing}模块，可以协助用户排查计算中的错误定位和重启计算。\textrm{checkpointing}大大增加了\textrm{ASE}对计算流程的控制能力。
-
-和\textrm{ASE}相应的材料数据库\textrm{CMR}采用关系型数据库管理系统\textrm{MySQL}，延续了\textrm{ASE}的思路，先将标准化数据转成数据库文件(称为\textit{cmr}-文件)，要求数据库中的文件名尽可能与原始文件名保持一致，由此用户可以不进入数据库即可对材料数据进行检验。\textrm{CMR}在存储材料数据时也有了更大的兼容性。
-}
-
-\frame
-{
-	\frametitle{高通量计算自动流程}
-流程标准化型的自动处理以\textrm{MP}的流程控制\textrm{FireWorks}为代表。\textrm{FireWorks}是一款开源的通用工作流定义、管理和执行软件，可以支持\textrm{Python}实现与执行，复杂的工作流可以数据形式保存到\textrm{MongoDB}数据库中，用\textrm{FireWorks}设计的工作流具有较高的稳定性。\textrm{FireWorks}的架构如图\ref{FireWorks_FW}左所示，包括流程发布(称为\textrm{LachPad})和流程执行(称为\textrm{FireWorkers})，换言之\textrm{FireWorks}的自动流程是中心化的“发布-执行”模式。\textrm{LaunchPad}是工作流的主管者，主要负责自动流程的定义、分发、排队、增删和对工作流的反馈与响应;~\textrm{FireWorkers}是工作流的执行者，包括一个或多个计算资源(个人计算机、小型工作站、超级计算机等)。\textrm{FireWorkers}从\textrm{LaunchPad}处获得计算任务，执行完毕后再将计算结果返回到\textrm{LaunchPad}。
-}
-
-\frame
-{
-	\frametitle{\textrm{FireWorks}的结构}
-\textrm{FireWorks}的这种“发布-执行”结构使得计算任务与软件、硬件高度解耦，用户可根据需要随时向\textrm{LaunchPad}添加新的工作流，承担计算任务的\textrm{FireWorkers}彼此也可以是完全异构的，具有很好的机动性。
+    \setlength{\itemsep}{4pt}
+	\item 生成各种计算软件所需的结构模型
+		\vskip 1pt
+		包括原子、分子、晶体、表面和界面等
+	\item 读入各种格式的结构模型文件
+		\vskip 1pt
+		包括\texttt{xyz}、\textrm{POSCAR}、\texttt{cif}等\textrm{65}种格式
+	\item 各类结构模型统一以\texttt{traj}或\texttt{json}格式写入数据库
+		\vskip 1pt
+		实现计算模型数据的标准化
+\end{itemize}}}
 \begin{figure}[h!]
 \centering
-\vspace*{-0.1in}
-\includegraphics[height=1.6in]{MP_fireworks.png}
-\hskip 5pt
-\includegraphics[height=1.6in]{MP_multiple_fw.png}
-\hskip 5pt
-\includegraphics[height=1.6in]{MP_Fireworks_fwactions.png}
-\caption{\fontsize{7.2pt}{4.2pt}\selectfont{\textrm{FireWorks}的架构(左)、工作流组成(中)和单元组间数据传递与处理(右)示意.}}%
-\label{FireWorks_FW}
+\vspace*{-0.15in}
+\includegraphics[height=1.3in,width=1.9in,viewport=0 0 820 530,clip]{Figures/ASE_atoms_module.png}
+%\caption{\fontsize{7.2pt}{4.2pt}\selectfont{\textrm{The integrated calculator in ASE (Atomic Simulation Environment).}}}%
+\label{Logo_atoms-module}
+\end{figure} 
+\hfill
+\end{minipage}
+\begin{minipage}[b]{0.50\textwidth}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.15in}
+\includegraphics[height=2.9in,width=2.2in,viewport=0 0 970 1200,clip]{Figures/ASE_atoms_module-examples.png}
+%\caption{\fontsize{7.2pt}{4.2pt}\selectfont{\textrm{The integrated calculator in ASE (Atomic Simulation Environment).}}}%
+\label{Logo_atoms-module}
+\end{figure} 
+\end{minipage}
+}
+
+\frame
+{
+\frametitle{\textrm{ASE}特色:~软件接口丰富}
+\textrm{Calculator}模块支持的可选软件
+\begin{figure}[h!]
+\centering
+\vspace*{-0.05in}
+%\includegraphics[height=1.0in,width=1.4in,viewport=0 0 638 530,clip]{Figures/ASE_calculator.png}
+\includegraphics[height=2.4in,width=3.8in,viewport=0 0 940 600,clip]{Figures/ASE_calculator-new.png}
+\caption{\fontsize{6.2pt}{4.2pt}\selectfont{\textrm{The integrated calculator in ASE.}}}%
+\label{ASE_Calculator}
 \end{figure} 
 }
 
 \frame
 {
-	\frametitle{}
-\textrm{FireWorks}发布的工作流成如图\ref{FireWorks_FW}中所示，由三层嵌套结构组成:
+	\frametitle{\textrm{ASE}的模块:~\textrm{Calculator}和\textrm{checkpointing}}
+\textrm{Calculator}:~支持各类计算软件的主要模块
+	{\fontsize{8.0pt}{5.2pt}\selectfont{
 \begin{itemize}
-	\item \textrm{Firetask}:~基本执行单元，是执行计算的最基本脚本命令或\textrm{Python}命令。
-	\item \textrm{Firework}:~组织基本执行单元构成任务单元组，并指定各基本执行单元所需的参数。
-	\item \textrm{Workflow}:~彼此相关联的任务单元组构成完整的工作流程:\\
-		\textrm{FireWork}之间的数据传递、任务执行序列等由\textrm{FWAction}完成。
+	\item 模块封装了\textrm{DFT-MD}计算软件，支持物性计算、功能分析
+	\item 模块集成了全局结构搜索算法(\textrm{Base-hopping}和\textrm{minima-hopping}算法)、反应动力学模拟\textrm{NEB}算法和势能面鞍点搜索算法、\textrm{MD}模拟算法、几何结构优化算法和分子振动与声子振动分析算法
+	\item 模块支持材料物性自动化计算，数据以标准化形式存入数据库
 \end{itemize}
-对于材料第一原理计算自动流程而言，一个\textrm{DFT}计算过程就是一个\textrm{Firework}，可以分解为:
+		模块启动计算依次执行以下步骤:
 \begin{enumerate}
-	\item 指定计算控制参数(参数在数据库中\texttt{Json}存储，由\textrm{Spec}传入)
-	\item 计算控制文件生成(每个\textrm{Firetask}生成一个控制文件)
-	\item \textrm{DFT}计算作业提交(一个\textrm{Firetask})
-\end{enumerate}
-在此基础上，可以通过\textrm{FWAction}修改控制参数，将\textrm{DFT}计算单元组组织成完整的材料第一原理计算流程，并将最终结果直接导入材料计算数据库。
+	\item 生成计算软件所需的输入(控制)文件
+	\item 启动软件，以子进程方式开始计算过程
+	\item 进程守护直至计算子进程结束
+	\item 根据要求解析计算软件生成文件，并可将计算结果以\texttt{json}格式写入数据库
+\end{enumerate}}}
+{\fontsize{7.5pt}{5.2pt}\selectfont{
+	\begin{itemize}
+		\item \textcolor{red}{优点}:~\textrm{Python}模块与计算软件的交互简单
+		\item \textcolor{red}{缺点}:~\textrm{Python}执行过程中会面向较多的\textrm{I/O}处理，运行效率不高
+	\end{itemize} }}
+\textrm{checkpointing}:~协助用户排查、定位错误和重启计算的模块
+\vskip 2pt
+{\fontsize{7.5pt}{5.2pt}\selectfont{增加\textrm{ASE}对计算流程的控制能力}}
 }
 
 \frame
 {
-	\frametitle{}
-可见，\textrm{FireWorks}是以任务单元组为基本组成的来实现工作流程的，任务单元组之间依靠数据传递相关联，流程执行完毕也将返回数据，因此\textrm{FWAction}模块主要负责任务单元组之间的数据传递和任务分配。图\ref{FireWorks_FW}右示意了工作流中\textrm{FWAction}的工作模式。不难看出，\textrm{FWAction}允许用户根据需要设计和更改流程参数、增添、删减和改变流程(子)单元组，这一模块大大增加了\textrm{FireWorks}工作流的灵活性。
-
-数据库技术支持的\textrm{FireWorks}解耦了\textrm{DFT}计算软件与计算流程，允许用户根据需要设计出稳定、复杂的材料物性模拟与设计流程。由于不同\textrm{DFT}计算软件的计算控制文件格式存在较大的差别，目前\textrm{FireWorks}流程设计只对特定计算软件(如\textrm{VASP})设计了最常用的计算流程模块(如结构弛豫、基态总能计算、能带和态密度计算等)。更丰富的计算流程有待应用研究中不断开发。
+\frametitle{\textrm{ASE}特色:~数据库的良好兼容性}
+\begin{minipage}[b]{0.38\textwidth}
+{\fontsize{7.5pt}{5.2pt}\selectfont{
+\textrm{ASE}的材料数据库\textrm{CMR}采用关系型数据库管理系统\textrm{MySQL}
+\vskip 1pt
+{\fontsize{6.0pt}{5.2pt}\selectfont{将规范化的数据转成数据库文件(称为\textit{cmr}-文件)，并要求数据库中的文件名尽可能与原文件保持一致}}
+\begin{itemize}
+	\item 用户不进入数据库即可对数据进行检验
+	\item 存储数据有更大的兼容性
+	\item 
+	\item
+\end{itemize}}}
+\end{minipage}
+\hfill
+\begin{minipage}[b]{0.60\textwidth}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.10in}
+\includegraphics[height=1.3in,width=2.5in,viewport=0 0 838 500,clip]{Figures/ASE_opt_modules.png}
+\vskip 1pt
+\includegraphics[height=1.7in,width=2.5in,viewport=0 0 938 630,clip]{Figures/ASE_database.png}
+\label{ASE_opt-database}
+\end{figure} 
+\end{minipage}
 }
 
 \frame
 {
-	\frametitle{\textrm{MP}自动流程的设计与开发}
+	\frametitle{\textrm{MP}自动流程的架构}
+流程标准化型的自动处理以\textrm{MP}的流程控制\textrm{FireWorks}为代表
 	\begin{itemize}
 		\item \textcolor{red}{设计目标}:~围绕\textrm{VASP~}作业高通量并发提交与过程监控
 		\item \textcolor{red}{设计方案}:~开发针对不同计算场景的功能模块
 			\begin{enumerate}
-    \setlength{\itemsep}{15pt}
+    \setlength{\itemsep}{7pt}
 				\item \textcolor{blue}{\textbf{Pymatgen}}\\
 					\textcolor{magenta}{前处理}:~计算模型的分析与预处理\\
 					\textcolor{magenta}{后处理}:~计算结果的可视化
 				\item \textcolor{blue}{\textbf{FireWorks}}\\
-\textcolor{magenta}{计算流程设计与管理}:~数据库支持的计算流程管理
+					\textcolor{magenta}{数据库支持的计算流程设计与管理}:~复杂的工作流可以数据形式保存到\textrm{MongoDB}数据库中，用\textrm{FireWorks}设计的工作流具有较高的稳定性
 				\item \textcolor{blue}{\textbf{Custodian}}\\
 \textcolor{magenta}{计算流程容错与应对}:~提供计算过程错误判断接口，由用户提供解决策略和针对性设计
 			\end{enumerate}
@@ -272,7 +364,32 @@
 \frame
 {
 	\frametitle{\textrm{FireWorks}的模块结构}
-\textrm{FireWorks}发布的工作流成由三层嵌套结构组成:
+\textrm{FireWorks}是一款开源的通用工作流定义、管理和执行软件，支持\textrm{Python}运行
+\vskip 3pt
+\textrm{FireWorks}的自动流程采取中心化的“发布-执行”模式
+\begin{itemize}
+    \setlength{\itemsep}{7pt}
+	\item 流程发布(称为\textrm{LachPad}):\\
+		{\fontsize{7.2pt}{4.2pt}\selectfont{\textrm{LaunchPad}是工作流的主管者，主要负责自动流程的定义、分发、排队、增删和对工作流的反馈与响应}}
+	\item 流程执行(称为\textrm{FireWorkers}):\\
+		{\fontsize{7.2pt}{4.2pt}\selectfont{\textrm{FireWorkers}是工作流的执行者，包括一个或多个计算资源(个人计算机、小型工作站、超级计算机等)}}
+\end{itemize}
+\textrm{FireWorkers}从\textrm{LaunchPad}处获得计算任务，执行完毕后再将计算结果返回到\textrm{LaunchPad}
+}
+
+\frame
+{
+	\frametitle{\textrm{FireWorks}的模块结构}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.05in}
+\includegraphics[height=1.5in]{Figures/MP_fireworks.png}
+\hskip 1pt
+\includegraphics[height=1.5in]{Figures/MP_multiple_fw.png}
+\caption{\fontsize{7.2pt}{4.2pt}\selectfont{\textrm{The basic infrastructure of FireWorks.}}}%
+\label{FireWorks_FW}
+\end{figure} 
+\textrm{FireWorks}发布的工作流程由三层嵌套结构组成:
 \fontsize{8.2pt}{6.2pt}\selectfont{
 \begin{itemize}
 	\item \textrm{Firetask}:~基本执行单元，是执行计算的最基本脚本命令或\textrm{Python}命令。
@@ -280,14 +397,22 @@
 	\item \textrm{Workflow}:~彼此相关联的任务单元组构成完整的工作流程:\\
 		\textrm{FireWork}之间的数据传递、任务执行序列等由\textrm{FWAction}完成。
 \end{itemize}}
+}
+
+\frame
+{
+	\frametitle{\textrm{FireWorks}的模块结构}
+\fontsize{8.2pt}{6.2pt}\selectfont{
+	\begin{itemize}
+		\item \textrm{FireWorks}是以任务单元组为基本组成的来实现工作流程的，任务单元组之间依靠数据传递相关联，流程执行完毕也将返回数据，\textrm{FWAction}模块主要负责任务单元组之间的数据传递和任务分配。
+		\item \textrm{FWAction}允许用户根据需要设计和更改流程参数、增添、删减和改变流程(子)单元组，这一模块大大增加了\textrm{FireWorks}工作流的灵活性。
+	\end{itemize}}
 \begin{figure}[h!]
 \centering
-\vspace*{-0.1in}
-\includegraphics[height=1.5in]{Figures/MP_fireworks.png}
-\hskip 1pt
-\includegraphics[height=1.5in]{Figures/MP_multiple_fw.png}
-\caption{\fontsize{7.2pt}{4.2pt}\selectfont{\textrm{The basic infrastructure of FireWorks.}}}%
-\label{FireWorks_FW}
+\vspace*{-0.10in}
+\includegraphics[height=1.9in]{Figures/MP_Fireworks_fwactions.png}
+\caption{\fontsize{7.2pt}{4.2pt}\selectfont{\textrm{FireWorks}的单元组间数据传递与处理示意.}}%
+\label{FireWorks_FWA}
 \end{figure} 
 }
 
@@ -298,9 +423,9 @@
 \vskip 0.25in
 对于材料第一原理计算自动流程而言，一个\textrm{DFT}计算过程就是一个\textrm{Firework}，可以分解为:
 \begin{enumerate}
-	\item 指定计算控制参数(参数在数据库中\texttt{Json}存储，由\textrm{Spec}传入)
-	\item 计算控制文件生成(每个\textrm{Firetask}生成一个控制文件)
-	\item \textrm{DFT}计算作业提交(一个\textrm{Firetask})
+	\item 指定控制参数:~参数在数据库\texttt{Json}中存储，由\textrm{Spec}传入
+	\item 计算控制文件生成:~每个\textrm{Firetask}生成一个控制文件
+	\item \textrm{DFT}计算作业提交:~产生一个\textrm{Firetask}
 \end{enumerate}
 在此基础上，可以通过\textrm{FWAction}修改控制参数，将\textrm{DFT}计算单元组组织成完整的材料第一原理计算流程，并将最终结果直接导入材料计算数据库。
 }
@@ -332,71 +457,11 @@
 \end{figure} 
 }
 
-\frame
-{
-	\frametitle{\textrm{ASE}自动流程的设计与管理}
-		\textcolor{purple}{\textrm{ASE}}:~模块加载式计算流程控制，更符合复杂多尺度计算场景
-		\begin{itemize}
-			\item \textcolor{magenta}{灵活的建模功能}
-				\begin{enumerate}
-    \setlength{\itemsep}{10pt}
-					\item 简单堆积:~原子直接组成分子
-					\item 理想周期体系(包括一维、二维、三维)
-					\item 表面和表面吸附，可指定吸附位
-				\end{enumerate}
-			\item \textcolor{magenta}{丰富的软件接口}\\
-				提供了包括绝大部分第一原理和分子动力学计算软件接口，方便组合实现多尺度计算
-			\item \textcolor{magenta}{不依赖软件的优化与动力学模拟}\\
-				适合复杂材料物性模拟的优化和多种动力学过程模拟
-			\item \textcolor{magenta}{多样化的数据库类型}
-		\end{itemize} 
-}
-
-\frame
-{
-\frametitle{\textrm{ASE}特色:~材料结构生成模块}
-\begin{figure}[h!]
-\centering
-\vspace*{-0.15in}
-\includegraphics[height=1.2in,width=1.7in,viewport=0 0 820 530,clip]{Figures/ASE_atoms_module.png}
-\includegraphics[height=2.9in,width=2.2in,viewport=0 0 970 1200,clip]{Figures/ASE_atoms_module-examples.png}
-%\caption{\fontsize{7.2pt}{4.2pt}\selectfont{\textrm{The integrated calculator in ASE (Atomic Simulation Environment).}}}%
-\label{Logo_atoms-module}
-\end{figure} 
-}
-
-\frame
-{
-\frametitle{\textrm{ASE}特色:~软件接口丰富}
-\textcolor{purple}{\textrm{ASE}}:~\textrm{Calculator}模块提供的可选的软件接口
-\begin{figure}[h!]
-\centering
-\vspace*{-0.05in}
-%\includegraphics[height=1.0in,width=1.4in,viewport=0 0 638 530,clip]{Figures/ASE_calculator.png}
-\includegraphics[height=2.0in,width=3.2in,viewport=0 0 940 600,clip]{Figures/ASE_calculator-new.png}
-\caption{\fontsize{7.2pt}{4.2pt}\selectfont{\textrm{The integrated calculator in ASE.}}}%
-\label{ASE_Calculator}
-\end{figure} 
-}
-
-\frame
-{
-\frametitle{\textrm{ASE}特色:~提供多种优化算法模块和数据库}
-\begin{figure}[h!]
-\centering
-\vspace*{-0.18in}
-\includegraphics[height=1.3in,width=2.5in,viewport=0 0 838 500,clip]{Figures/ASE_opt_modules.png}
-\vskip 1pt
-\includegraphics[height=1.7in,width=2.5in,viewport=0 0 938 630,clip]{Figures/ASE_database.png}
-\label{ASE_opt-database}
-\end{figure} 
-}
-
 \section{第一原理数据库}
 \frame
 {
-	\frametitle{}
-\textrm{SpingerMaterials}\cite{SpringerM_URL}是世界上最古老也是完备的材料数据库，旨在创建集成材料学信息、性质和使用平台。数据库主要由以下部分组成:
+	\frametitle{早期材料数据库:~\tt{SpingerMaterials}}
+\textrm{SpingerMaterials}:~世界上最古老也是完备的材料数据库，旨在创建集成材料学信息、性质和使用平台。数据库主要由以下部分组成:
 \begin{itemize}
 	\item 全部\textrm{Landolt-B{\"o}rnstein}丛书(自1883年起)，是以基础科学为主的大型科学与技术数值与函数关系的工具书
 	\item 全部\textrm{Pauling~File}无机材料数据库，收集了从1900年迄今超过21000种出版物中的无机晶体结构、衍射、相图和物理属性数据
@@ -405,7 +470,11 @@
 	\item 聚合物热力学数据库(\textrm{Polymer Thermodynamics Databse})
 	\item \textrm{MSI}数据库
 \end{itemize}
+}
 
+\frame
+{
+	\frametitle{早期材料数据库:~其它数据库}
 除了\textrm{SpingerMaterials}之外，比较完整的数据有无机晶体结构数据库\textrm{(Inorganic Crystal Structure Database, ICSD)}\cite{ICSD_URL}，其服务器位于德国的\textrm{FIZ~Karlsruhe}，收录了自1913年以来超过185000条矿物、 金属和其他无机固体化合物(包括2000多元素单质、34500多二元化合物、68000多三元化合物、66000多四元及多元化合物)的晶体结构数据。类似的实验材料数据库有%\textrm{CRYSTMET}\cite{CRYSTMET_URL}、
 \textrm{Pauling}无机材料数据库\cite{Pauling_URL}和\textrm{Pearson}晶体数据库\cite{Pearson_URL}等。这些实验数据库对于材料学的结构和物性研究提供很重要的支持，但是仅有这些数据库肯定是不够的，一方面材料的覆盖范围非常广泛，有限的数据库不可能穷尽，更重要的是有很多材料的物性数据很难通过实验直接得到。材料设计和开发是复杂的多维优化问题，注定新材料研发耗时耗力。在这一点上，原子尺度的材料物性数值模拟可以有效补偿实验方法的不足。近年来雨后春笋般的计算材料数据库填补了不少很多实验数据缺乏的空白\cite{CMS58-227_2012}，集成了实验数据和计算数据的新材料数据库为探索新材料合成、性能优化开辟了新的研究思路。
 
@@ -542,6 +611,18 @@
 \textrm{PyChemia}是\textrm{Python}的一个模块，其全部代码在\textrm{GitHub}上找到\cite{PyChemia_Github}，其最初的代码是西弗吉尼亚大学\textrm{(West Virginia University)}于2014年贡献到\textrm{GitHub}网站的，近年来，\textrm{PyChemia}可支持的\textrm{DFT}计算软件有\textrm{VASP}、\textrm{ABINIT}、\textrm{Octopus}、\textrm{DFTB+}和\textrm{Fireball}等，而且利用Python模块的特点，\textrm{PyChemia}完成了对\textrm{Pymatgen}、\textrm{ASE}和\textrm{qmpy}的集成，而且相比于其他高通量材料计算软件，\textrm{PyChemia}更显著的特长是材料结构搜索，而不是简单的材料计算和数据采集。图\ref{PyChemia_FireWork}给出了\textrm{PyChemia}的代码框架。
 
 \textrm{PyChemia}除了提供大的材料数据库作为结构搜索的基础，还可以将每一套结构搜索产生新的小型数据库，为了满足不同\textrm{DFT}计算软件包材料结构以及各种物理性质研究的需要，\textrm{PyChemia}也采用\textrm{MongoDB}的\textrm{NoSQL}数据库而非传统的关联数据库形式，以便产生结构搜索需要的小型数据库。\textrm{PyChemia}由\textrm{Python}、\textrm{Django}和\textrm{MongoDB}搭建而成，其中\textrm{Django}是\textrm{PyChemia}用于显示计算的网页前端。目前\textrm{PyChemia}仍在开发中，并未发布稳定版的软件。
+}
+
+\frame
+{
+	\frametitle{\tt{Atomly}}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.2in}
+\includegraphics[height=2.1in,width=4.1in,viewport=5 0 1608 830,clip]{Figures/Atomly.png}
+\caption{\fontsize{7.2pt}{4.2pt}\selectfont{\textrm{Atomly:~中科院物理所~刘淼等老师开发，数据库包含了17万\!$^+$\!无机晶体材料第一性原理计算结果\textrm{(包含电子结构信息:~DOS~+~energy~bands)}.}}}%
+\label{Logo_Atomly_lib}
+\end{figure} 
 }
 
 \frame
