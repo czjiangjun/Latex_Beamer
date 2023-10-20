@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  不使用 authblk 包制作标题  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %-------------------------------PPT Title-------------------------------------
-\title{21-选讲:~赝势与\rm{VASP}的\rm{POTCAR}}
+\title{21-选讲:~赝势生成与\rm{VASP}的\rm{POTCAR}}
 %-----------------------------------------------------------------------------
 %----------------------------Author & Date------------------------------------
 
@@ -183,7 +183,7 @@
 	\end{displaymath}
 	与\textrm{Troullier-Martin NC}方案类似，逆向求解本征方程得到有效赝势
 		\item \textrm{Bessel}方案\\
-			直接构造有效赝势 $V_{\mathrm{eff}}^{\mathrm{PS}}(r)=\alpha\cdot\dfrac{\sin(q\cdot r)}r$
+			直接构造有效赝势 $V_{\mathrm{eff}}^{\mathrm{PS}}(r)=\alpha\cdot\textcolor{red}{\dfrac{\sin(q\cdot r)}r}$
 	\end{itemize}
 }
 
@@ -338,7 +338,7 @@
 	\frametitle{\rm{VASP}的\rm{POTCAR}}
 \begin{minipage}{0.40\textwidth}
 \centering
-\vspace{-0.05in}
+%\vspace{0.05in}
 %------------------------------------直-接-插-入-文-件--------------------------------------------------------------------------------------
 %\textcolor{red}{\textbf{直接插入文件}}:
 \fontsize{2.7pt}{1.2pt}\selectfont{
@@ -347,7 +347,10 @@
 }
 \end{minipage}
 \begin{minipage}{0.58\textwidth}
-{\fontsize{7.2pt}{6.2pt}\selectfont{
+{\fontsize{5.5pt}{4.2pt}\selectfont{
+	\begin{displaymath}
+		G_{\max}^1
+	\end{displaymath}
 	\begin{displaymath}
 		\begin{aligned}
 %			\tilde{V}(q)=&\frac{4\pi}{q}\int\sin(q\cdot r)\tilde{V}(r)\cdot r\mathrm{d}r\\
@@ -355,11 +358,10 @@
 			\tilde{V}_{\mathrm{ion}}(q)=&-\frac{4\pi Z_{\mathrm{ion}}(1-\mathrm{e}^{-q^2/4\alpha})}{q^2}\\
 			\tilde{V}(q=0)=&0
 		\end{aligned}
-\end{displaymath}
-}}
+\end{displaymath} }}
 \begin{figure}[t!]
 \centering
-\vspace{-0.05in}
+\vspace{-0.15in}
 \includegraphics[width=2.3in,height=1.75in,viewport=0 0 1150 650, clip]{Figures/POT_G-dat.pdf}
 \label{local-potential}
 \end{figure}
@@ -385,7 +387,7 @@
 	\begin{displaymath}
 		\begin{aligned}
 %			\tilde{V}(q)=&\frac{4\pi}{q}\int\sin(q\cdot r)\tilde{V}(r)\cdot r\mathrm{d}r\\
-			\rho_{\mathrm{core}}(q)\cdot q=&4\pi\int_0^{\infty}\sin(q\cdot r)\rho(r)\cdot r\mathrm{d}r\\
+			\tilde{\rho}_{\mathrm{core}}(q)\cdot q=&4\pi\int_0^{\infty}\sin(q\cdot r)\tilde{\rho}_{\mathrm{core}}(r)\cdot r\mathrm{d}r\\
 %			=&\frac{4\pi}{q}\int_0^{\infty}\sin(q\cdot r)V(r)\cdot r\mathrm{d}r
 		\end{aligned}
 \end{displaymath}
@@ -432,7 +434,14 @@
 \end{minipage}
 \hfill
 \begin{minipage}{0.40\textwidth}
-{\fontsize{8.2pt}{6.2pt}\selectfont{
+{\fontsize{5.5pt}{4.2pt}\selectfont{
+	\begin{displaymath}
+		\begin{aligned}
+			& G_{\max}^2 \\
+			& r_{\max,0}^{\mathrm{pro}}
+		\end{aligned}
+	\end{displaymath}
+	\vskip 10pt
 	\begin{displaymath}
 		\begin{aligned}
 			\hat{T}|\psi_i\rangle=&\left[-\nabla^2-\frac{l(l+1)}2\right]|\psi_i\rangle\\
@@ -440,6 +449,10 @@
 			-&\langle\tilde{\psi}_i|\hat{T}+\tilde{V}_{\mathrm{eff}}|\tilde{\psi}_j\rangle\\
 			-&\int\hat{Q}_{ij}^{00}(r)\tilde{V}(r)\mathrm{d}r
 		\end{aligned}
+	\end{displaymath}
+	\vskip 50pt
+	\begin{displaymath}
+		\langle\tilde{p}_i|\tilde\phi_j\rangle=\delta_{ij}	
 	\end{displaymath}}}
 \end{minipage}
 }

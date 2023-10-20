@@ -71,7 +71,30 @@
 %	     \item \textrm{PAW}原子数据集:\textcolor{blue}{优异的赝势}\upcite{PRB59-1758_1999}
 %	\end{itemize}
 %}
-\section{高通量第一原理自动流程}
+\section{高通量计算材料自动流程}
+\frame
+{
+	\frametitle{高通量计算流程}
+高通量\footnote{\fontsize{5.5pt}{4.2pt}\selectfont{高通量的概念最初出现在实验领域，早期的材料研究、制药研究主要通过大量备选材料试错，最终才得到合适的材料或药物重要功能成分，这就是一种高通量筛选。文献中常会提到“高通量”和“组合方法”(\textrm{Combinational approach})，但很少区分两者的区别:~“高通量”指用户产生或处理的数据量极大，没有计算机自动处理无法完成;~而“组合方法”是针对影响研究对象的各种可能自由度的分门别类研究。换言之，高通量考虑的是利用计算机“一视同仁”地自动化式处理海量数据，而组合方法更强调对特定影响因素的筛查和组合研究}}计算流程主要任务包括三方面:
+\begin{itemize}
+	\item \textcolor{blue}{增加材料模拟数据}:~主要包括\textrm{DFT}、\textrm{MD}计算的材料数据
+	\item \textcolor{blue}{存储材料物性数据}:~系统存储材料数据，用以构建材料数据库
+		\vskip 2pt
+		{\fontsize{6.5pt}{4.2pt}\selectfont{材料数据库包括通用材料数据库或特定目标的材料数据库}}
+\item \textcolor{blue}{检索材料数据}:~对存储的材料数据实施检索和分析，服务材料性能提升需求
+\end{itemize}
+高通量计算流程的主要目标之一就是构建材料数据库
+\vskip 2pt
+{\fontsize{7.5pt}{4.2pt}\selectfont{\textcolor{cyan}{高通量计算流程与数据密不可分:~著名的高通量计算流程都有相应的数据库}
+\begin{itemize}
+	\item \textrm{AFLOW}的数据库为\textrm{AFLOWLIB}
+	\item \textrm{MP}的数据库为同名的\textrm{Materials Project}
+	\item \textrm{ASE}的数据库为\textrm{CMR~(The Computational Materials Repository)}
+\end{itemize}
+%，，。中科院物理所也拥有一个通用的材料科学数据库\textrm{Atomly}
+}}
+}
+
 \frame
 {
 	\frametitle{材料计算软件发展现状}
@@ -99,25 +122,27 @@
 
 \frame
 {
-	\frametitle{}
-高通量的概念最初在实验领域产生的，早期材料研究和制药研究，一般通过大量备选材料试错，最终才得到合适的材料或药物主要功能成分，这就可以视为是一种高通量筛选。需要明确的是，在文献中常会提到“高通量”和“组合方法”(\textrm{Combinational approach})的概念，但很少区分着两者的区别，这里明确一下，所谓“高通量”是用户产生或处理的数据量极大，没有计算机自动处理是无法完成的;~而“组合方法”是针对影响研究对象的各种可能自由度的分门别类研究。换言之，高通量考虑的是利用计算机“一视同仁”地自动化式处理海量数据，而组合方法更强调对特定影响因素的筛查和组合研究，这是这两个概念的主要区别。
-
-高通量计算流程主要包括三方面的任务
+	\frametitle{高通量计算自动流程} 
+当前高通量计算的自动处理流程集中在材料模拟的计算数据收集和实现计算结果自动入库为主
+\vskip 2pt
+{\fontsize{7.5pt}{4.2pt}\selectfont{材料第一原理计算的软件有很多，输出文件的格式千差万别，通过第一原理计算构建相对完善的材料数据库需要耗费相当的计算资源和人力}}
+\vskip 5pt
+自动流程面向的对象是数据，要实现材料计算过程的自动处理，首先需要解决的是数据格式的规范化
 \begin{itemize}
-	\item 增加材料模拟的计算数据:~包括采用热力学、电子结构计算获得的材料数据;
-	\item 存储合理的材料数据:~将材料数据系统地保存起来，用以构建材料数据库;
-	\item 表征和筛选材料数据:~为了获得更好的材料或提升材料的特定性能，可实现对材料数据的检索和分析。
+	\item \textcolor{magenta}{数据标准化型}:~面向各类软件输出数据的规范化
+\vskip 2pt
+{\fontsize{6.5pt}{4.2pt}\selectfont{根据软件的计算特点，组织多种软件实现材料物性计算:~\textcolor{blue}{灵活性较好，但一般只支持相对简单的计算流程}}}
+\item \textcolor{magenta}{流程标准化型}:~面向材料计算软件，通过数据库支持 
+\vskip 2pt
+{\fontsize{6.5pt}{4.2pt}\selectfont{利用数据库技术将自动流程组织得更复杂多样，并作为数据库条目存储下来:~\textcolor{blue}{稳定性较好，但计算的材料物性受软件能力的限制较多}}}
 \end{itemize}
-第一原理高通量计算流程就是具体实现上述三个流程开发的计算任务，高通量计算流程的主要目标之一是构建材料数据库(可以是一般的通用材料数据库或特定目标的材料数据库)，所以高通量计算软件与相应的数据库有着密不可分的关联。著名的高通量计算流程都有相应的数据库，如\textrm{AFLOW}的数据库为\textrm{AFLOWLIB}\cite{CMS58-227_2012,AFLOWORG_URL}，\textrm{MP}的数据库为同名的\textrm{Materials Project}\cite{CMS50-2295_2011,MP_URL}，\textrm{ASE}的数据库为\textrm{CMR~(The Computational Materials Repository)}\cite{CSE14-51_2012,CMR_URL}。中科院物理所也拥有一个通用的材料科学数据库\textrm{Atomly}\cite{ATOMLY_URL}。
-
-虽然高通量计算流程包括三个方面，但是由于第一原理材料计算的成本较高，构建一个相对完善的材料数据库需要耗费相当的计算资源和人力。因此当前发展的各种自动处理流程的重点主要集中在收集材料模拟的计算数据和实现计算结果自动入库为主。自动流程面向的对象是数据，鉴于能完成材料第一原理计算的软件有很多，相应的输出文件的格式也是千差万别，因此要实现材料计算过程的自动处理，首先需要解决的是数据格式的规范化问题。习惯的数据处理方案有两种:~一种是面向各类第一原理软件数据的规范化，通过程序语言实现材料计算过程的自动化，不妨称为数据标准化型自动流程;~一种是面向典型的材料计算软件，开发数据库支持的材料自动化计算流程，不妨称为流程标准化型自动流程。这两种策略各有利弊:~前者可以利用数据的规范化，根据计算软件的特色组织丰富多样的材料物性计算，灵活性较好，但一般只支持相对简单的计算流程;~后者可利用数据库技术将自动流程组织得更复杂多样，并作为数据库条目存储下来，稳定性较好，但计算的材料物性受软件能力的限制较多。因为\textrm{Python}\cite{Python_URL}的模块化组织和灵活性，主要的自动流程都采用\textrm{Python}来实现。
+\textcolor{purple}{主要的自动流程都用\textrm{Python}语言实现}:~跨平台、模块化组织灵活
 }
 
 \frame
 {
-	\frametitle{}
-数据规范化型的自动处理以\textrm{ASE/CMR}为典型代表，通过构建各类\textrm{Python}模块，支持多种成熟的\textrm{DFT}计算软件的\textrm{Kohn-Sham}方程求解过程。根据图%\ref{Auto_Flow_Platform-5}
-可知，\textrm{ASE}的核心模块主要包括\textrm{Atoms}(原子、分子建模)、\textrm{Calculator}(各类计算软件运行支持与控制)和物性计算、功能分析和结果可视化模块。
+	\frametitle{\textrm{ASE}的模块:~\textrm{Atoms}}
+数据规范化型的自动处理以\textrm{ASE/CMR}为典型代表，通过构建各类\textrm{Python}模块，支持多种成熟的\textrm{DFT}计算软件的\textrm{Kohn-Sham}方程求解过程%。根据图\ref{Auto_Flow_Platform-5}可知，\textrm{ASE}的核心模块主要包括\textrm{Atoms}(原子、分子建模)、\textrm{Calculator}(各类计算软件运行支持与控制)和物性计算、功能分析和结果可视化模块。
 
 \textrm{Atoms}是材料计算建模的主要模块，功能包括:
 \begin{itemize}
@@ -125,7 +150,11 @@
 	\item 读入各种格式的结构模型文件，包括\texttt{xyz}、\textrm{POSCAR}、\texttt{cif}等65种格式;
 	\item 可将各类结构模型统一以\texttt{traj}或\texttt{json}格式写入数据库，实现计算模型数据的标准化。
 \end{itemize}
+}
 
+\frame
+{
+	\frametitle{\textrm{ASE}的模块:~\textrm{Calculator}}
 \textrm{Calculator}是支持各类\textrm{DFT}计算软件运行的主要模块，封装了\textrm{DFT}计算的过程，依次执行以下步骤:
 \begin{enumerate}
 	\item 生成\textrm{DFT}计算软件所需的输入(控制)文件;
@@ -136,13 +165,25 @@
 类似地，物性计算、功能分析模块通过集成全局结构搜索算法(\textrm{Base-hopping}和\textrm{minima-hopping}算法)、反应动力学模拟\textrm{NEB}算法和势能面鞍点搜索算法、分子动力学模拟算法、几何结构优化算法和分子振动与声子振动分析算法，可完成材料物性的自动化计算，得到的材料物性数据仍将以标准化形式存入数据库。
 
 这样设计的自动处理结构最大的好处是，\textrm{Python}模块与\textrm{DFT}计算软件的交互简单，无须改变\textrm{DFT}计算的任何代码;~只是\textrm{Python}执行过程中会有较多的\textrm{I/O}处理，脚本运行效率不高。
+}
 
+\frame
+{
+	\frametitle{\textrm{ASE}的数据库管理:~\textrm{MySQL}}
 为了增加自动流程的可控和灵活性，\textrm{ASE}引入\textrm{checkpointing}模块，可以协助用户排查计算中的错误定位和重启计算。\textrm{checkpointing}大大增加了\textrm{ASE}对计算流程的控制能力。
 
 和\textrm{ASE}相应的材料数据库\textrm{CMR}采用关系型数据库管理系统\textrm{MySQL}，延续了\textrm{ASE}的思路，先将标准化数据转成数据库文件(称为\textit{cmr}-文件)，要求数据库中的文件名尽可能与原始文件名保持一致，由此用户可以不进入数据库即可对材料数据进行检验。\textrm{CMR}在存储材料数据时也有了更大的兼容性。
+}
 
+\frame
+{
+	\frametitle{高通量计算自动流程}
 流程标准化型的自动处理以\textrm{MP}的流程控制\textrm{FireWorks}为代表。\textrm{FireWorks}是一款开源的通用工作流定义、管理和执行软件，可以支持\textrm{Python}实现与执行，复杂的工作流可以数据形式保存到\textrm{MongoDB}数据库中，用\textrm{FireWorks}设计的工作流具有较高的稳定性。\textrm{FireWorks}的架构如图\ref{FireWorks_FW}左所示，包括流程发布(称为\textrm{LachPad})和流程执行(称为\textrm{FireWorkers})，换言之\textrm{FireWorks}的自动流程是中心化的“发布-执行”模式。\textrm{LaunchPad}是工作流的主管者，主要负责自动流程的定义、分发、排队、增删和对工作流的反馈与响应;~\textrm{FireWorkers}是工作流的执行者，包括一个或多个计算资源(个人计算机、小型工作站、超级计算机等)。\textrm{FireWorkers}从\textrm{LaunchPad}处获得计算任务，执行完毕后再将计算结果返回到\textrm{LaunchPad}。
+}
 
+\frame
+{
+	\frametitle{\textrm{FireWorks}的结构}
 \textrm{FireWorks}的这种“发布-执行”结构使得计算任务与软件、硬件高度解耦，用户可根据需要随时向\textrm{LaunchPad}添加新的工作流，承担计算任务的\textrm{FireWorkers}彼此也可以是完全异构的，具有很好的机动性。
 \begin{figure}[h!]
 \centering
@@ -152,9 +193,14 @@
 \includegraphics[height=1.6in]{MP_multiple_fw.png}
 \hskip 5pt
 \includegraphics[height=1.6in]{MP_Fireworks_fwactions.png}
-\caption{\fontsize{7.2pt}{4.2pt}\selectfont{\textrm{FireWorks}的架构(左)、工作流组成(中)和单元组间数据传递与处理(右)示意.图片引自文献\onlinecite{FireWorks_URL}}}%
+\caption{\fontsize{7.2pt}{4.2pt}\selectfont{\textrm{FireWorks}的架构(左)、工作流组成(中)和单元组间数据传递与处理(右)示意.}}%
 \label{FireWorks_FW}
 \end{figure} 
+}
+
+\frame
+{
+	\frametitle{}
 \textrm{FireWorks}发布的工作流成如图\ref{FireWorks_FW}中所示，由三层嵌套结构组成:
 \begin{itemize}
 	\item \textrm{Firetask}:~基本执行单元，是执行计算的最基本脚本命令或\textrm{Python}命令。
@@ -169,7 +215,11 @@
 	\item \textrm{DFT}计算作业提交(一个\textrm{Firetask})
 \end{enumerate}
 在此基础上，可以通过\textrm{FWAction}修改控制参数，将\textrm{DFT}计算单元组组织成完整的材料第一原理计算流程，并将最终结果直接导入材料计算数据库。
+}
 
+\frame
+{
+	\frametitle{}
 可见，\textrm{FireWorks}是以任务单元组为基本组成的来实现工作流程的，任务单元组之间依靠数据传递相关联，流程执行完毕也将返回数据，因此\textrm{FWAction}模块主要负责任务单元组之间的数据传递和任务分配。图\ref{FireWorks_FW}右示意了工作流中\textrm{FWAction}的工作模式。不难看出，\textrm{FWAction}允许用户根据需要设计和更改流程参数、增添、删减和改变流程(子)单元组，这一模块大大增加了\textrm{FireWorks}工作流的灵活性。
 
 数据库技术支持的\textrm{FireWorks}解耦了\textrm{DFT}计算软件与计算流程，允许用户根据需要设计出稳定、复杂的材料物性模拟与设计流程。由于不同\textrm{DFT}计算软件的计算控制文件格式存在较大的差别，目前\textrm{FireWorks}流程设计只对特定计算软件(如\textrm{VASP})设计了最常用的计算流程模块(如结构弛豫、基态总能计算、能带和态密度计算等)。更丰富的计算流程有待应用研究中不断开发。
@@ -238,6 +288,32 @@
 \includegraphics[height=1.5in]{Figures/MP_multiple_fw.png}
 \caption{\fontsize{7.2pt}{4.2pt}\selectfont{\textrm{The basic infrastructure of FireWorks.}}}%
 \label{FireWorks_FW}
+\end{figure} 
+}
+
+\frame
+{
+	\frametitle{\textrm{FireWorks}的模块结构}
+这种“发布-执行”结构使得计算任务与软件、硬件高度解耦，用户可根据需要随时向\textrm{LaunchPad}添加新的工作流，承担计算任务的\textrm{FireWorkers}彼此也可以是完全异构的，具有很好的机动性。
+\vskip 0.25in
+对于材料第一原理计算自动流程而言，一个\textrm{DFT}计算过程就是一个\textrm{Firework}，可以分解为:
+\begin{enumerate}
+	\item 指定计算控制参数(参数在数据库中\texttt{Json}存储，由\textrm{Spec}传入)
+	\item 计算控制文件生成(每个\textrm{Firetask}生成一个控制文件)
+	\item \textrm{DFT}计算作业提交(一个\textrm{Firetask})
+\end{enumerate}
+在此基础上，可以通过\textrm{FWAction}修改控制参数，将\textrm{DFT}计算单元组组织成完整的材料第一原理计算流程，并将最终结果直接导入材料计算数据库。
+}
+
+\frame
+{
+	\frametitle{\textrm{Custodian}的容错逻辑}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.1in}
+\includegraphics[height=2.7in]{Figures/MP_custodian.png}
+\label{Custodian_over}
+\caption{\fontsize{7.2pt}{4.2pt}\selectfont{\textrm{Overview of the Custodian workflow.}}}%
 \end{figure} 
 }
 
@@ -460,7 +536,7 @@
 \centering
 \vspace*{-0.1in}
 \includegraphics[height=2.6in]{PyChemia_code.png}
-\caption{\fontsize{7.2pt}{4.2pt}\selectfont{\textrm{PyChemia}的代码框架.图片引自文献\onlinecite{PyChemia_Github_IO}}}%
+\caption{\fontsize{7.2pt}{4.2pt}\selectfont{\textrm{PyChemia}的代码框架.}}%
 \label{PyChemia_FireWork}
 \end{figure} 
 \textrm{PyChemia}是\textrm{Python}的一个模块，其全部代码在\textrm{GitHub}上找到\cite{PyChemia_Github}，其最初的代码是西弗吉尼亚大学\textrm{(West Virginia University)}于2014年贡献到\textrm{GitHub}网站的，近年来，\textrm{PyChemia}可支持的\textrm{DFT}计算软件有\textrm{VASP}、\textrm{ABINIT}、\textrm{Octopus}、\textrm{DFTB+}和\textrm{Fireball}等，而且利用Python模块的特点，\textrm{PyChemia}完成了对\textrm{Pymatgen}、\textrm{ASE}和\textrm{qmpy}的集成，而且相比于其他高通量材料计算软件，\textrm{PyChemia}更显著的特长是材料结构搜索，而不是简单的材料计算和数据采集。图\ref{PyChemia_FireWork}给出了\textrm{PyChemia}的代码框架。
