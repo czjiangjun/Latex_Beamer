@@ -573,52 +573,101 @@
 {
 \frametitle{\tt{ESP}}
 %\subsubsection{\tt{ESP}}
-\textrm{ESP}的数据库和官网由\textrm{Uppsala}大学维护和管理，应用\textrm{ICSD}的结构数据来加速无机化合物的电子结构计算，目标是加速新的功能材料的研发进程
+\textrm{ESP}的数据库是\textrm{Uppsala}大学为加速新的功能材料的研发进程而开发的:~\url{http://gurka.fysik.uu.se/ESP/}
+\begin{itemize}
+	\item \textrm{ESP}数据库中的电子结构数据是依据\textrm{ICSD}的无机化合物的结构数据，由\textrm{FP-LMTO}方法通过第一原理计算产生\\
+{\fontsize{6.5pt}{4.2pt}\selectfont{自2002年\textrm{ESP}发布以来，共收录了\textrm{60,000}多条化合物的电子结构数据}}
+\item 用户最多允许查阅含有五种元素的化合物的电子结构信息
+\end{itemize}
+应用数据挖掘技术，由\textrm{ESP}的\textrm{60,000}多条化合物电子结构信息，已经预测了17种潜在可能的强拓扑绝缘体\\%\cite{arXiv1007-4838_2010,APR6-31_2014}，
+{\fontsize{7.5pt}{4.2pt}\selectfont{\textrm{ESP}的官网提供的信息显示:~采用大规模计算结合数据挖掘技术提供的17种可能的化合物中，成功预测到了第一个强拓扑绝缘体\textrm{(toplogical insulator)}\textrm{\ch{Bi2SeTe2}}，而且预测很快就得到验证}}
 
-\textrm{ESP}数据库的数据由\textrm{FP-LMTO}方法计算获得\\
-{\fontsize{6.0pt}{4.2pt}\selectfont{自2002年\textrm{ESP}发布以来，共收录了\textrm{60,000}多条化合物的电子结构数据}}
-用户可以最多查到五种元素组成的化合物的电子结构信息
-
-\textrm{ESP}的官网提供了强拓扑绝缘体筛选的范例:~采用大规模计算结合数据挖掘技术预测的第一个拓扑绝缘体\textrm{(toplogical insulator)}\ch{Bi2SeTe2}。根据60,000多条化合物电子结构，应用数据挖掘技术已经预测了17种可能的强拓扑绝缘体%\cite{arXiv1007-4838_2010,APR6-31_2014}，
-\ch{Bi2SeTe2}是从这17种可能的化合物种筛选出来的，而且该预测很快就得到验证
-
-除了\textrm{FP-LMTO}代码是开源的，\textrm{ESP}的数据库和能带分析工具的代码都没有公开，因此这些年来，\textrm{ESP}开发进展得很缓慢。
+\textrm{ESP}的数据库和能带分析工具的代码都没有公开\\
+近年来，\textrm{ESP}数据库开发进展缓慢
 }
 
 \frame
 {
 \frametitle{\tt{ESTEST}}
 %\subsubsection{\tt{ESTEST}}
-加州大学\textrm{Davis}分校\textrm{(the University of California at Davis)}开发的材料数据库\textrm{ESTEST}\cite{ESTEST_URL,CSD3-015004_2010,CPC183-1744_2010}用于验证和对比电子结构软件\textrm{Qbox}、\textrm{VASP}、\textrm{Quantum Espresso}、\textrm{Siesta}、\textrm{ABINI}的结果和\textrm{Exciting}的计算结果，软件提供的网页界面，可将各类软件的输入/输出文件转换成统一的\textrm{XML}格式，每个\textrm{XML}文件由文件名和数据库存储位置区别。因为采用了相同的\textrm{XML}文件格式，数据存储、比较、分析就容易得多。数据库的网页界面可提供数据、表格和图片形式的电子结构的模拟信息，包括计算参数、原子信息、能量结果和结构应力与光谱信息。但必须是注册用户才能数据库的源代码。
+\textrm{ESTEST}是加州大学\textrm{Davis}分校%\textrm{(the University of California at Davis)}
+开发的材料数据库:\\\url{http://estest.ucdavis.edu/}\\%\cite{ESTEST_URL,CSD3-015004_2010,CPC183-1744_2010}
+{\fontsize{6.5pt}{4.2pt}\selectfont{用于软件\textrm{Qbox}、\textrm{VASP}、\textrm{Quantum Espresso}、\textrm{Siesta}、\textrm{ABINI}的结果和电子结构计算软件\textrm{Exciting}的结果检验和对比}}
 
-\textrm{ESTEST}数据库总共包括400多条\textrm{Qbox}的计算记录，10条左右的\textrm{VASP}计算记录，\textrm{Quantum Espresso}和\textrm{Siesta}计算记录各70多条，150多条\textrm{ABINIT}计算记录，\textrm{Exciting}的记录约30条。\textrm{ESTEST}的网页界面提供了类似\textrm{Google}的简明搜索栏，网页还提供了多个搜索下来菜单，如软件名称、计算元素等。
+通过数据库的网页界面，可将各类软件的输入/输出文件转换成统一的\textrm{XML}格式，便于数据存储、比较、分析\\
+{\fontsize{6.5pt}{4.2pt}\selectfont{每个\textrm{XML}文件由文件名和数据库存储位置区别}}
+{\fontsize{7.5pt}{4.2pt}\selectfont{
+\begin{itemize}
+	\item \textrm{ESTEST}数据库总共包括\textrm{400}多条\textrm{Qbox}的计算记录，\textrm{10}条左右的\textrm{VASP}计算记录，\textrm{Quantum Espresso}和\textrm{Siesta}计算记录各\textrm{70}多条，\textrm{150}多条\textrm{ABINIT}计算记录，\textrm{Exciting}的记录约\textrm{30}条
+	\item \textrm{ESTEST}的网页界面提供了类似\textrm{Google}的简明搜索栏，网页还提供了多个搜索下来菜单，可根据软件名称、计算元素等检索
 
-\textrm{ESTEST}的网页界面还提供了一些插件，可对诸如原子距离、晶格、能带结构、态密度、能量和结构应力或其他记录转换成一种或多种数据格式，例如\textrm{band\_structure\_plot}插件可将\textrm{XML}格式的能量本征值转成电子能带图。这种格式转换插件丰富了\textrm{ESTEST}生成、模拟计算结果的能力。
+	\item 数据库的网页界面可提供数据、表格和图片形式的电子结构的模拟信息:\\
+		{\fontsize{6.5pt}{4.2pt}\selectfont{包括计算参数、原子信息、能量结果和结构应力与光谱信息}}
+
+	\item 网页界面还提供了一些插件，可对诸如原子距离、晶格、能带结构、态密度、能量和结构应力或其他记录转换成一种或多种数据格式\\
+{\fontsize{6.5pt}{4.2pt}\selectfont{例如\textrm{band\_structure\_plot}插件可将\textrm{XML}格式的能量本征值转成电子能带图}}\\
+\end{itemize}
+这种格式转换插件丰富了\textrm{ESTEST}生成、模拟计算结果的能力\\
+需要说明的是:~必须是注册用户才能数据库的源代码}}
 }
 
 \frame
 {
 \frametitle{\tt{MAST}}
 %\subsubsection{\tt{MAST}}
-以完整的高通量框架的角度看，材料模拟工具\textrm{(MAterials Simulation Toolkit, MAST)}，更像是对\textrm{ESTEST}的补充，重点用于工作流管理和后处理\cite{MAST_URL}，它的基本框架\textrm{MP}的\textrm{Pymatgen}和\textrm{Custodian}模块和\textrm{ASE}组合搭配实现的，但\textrm{MAST}开发了自己的自动计算流程以及数据库，而没有使用\textrm{FireWorks}和\textrm{MangoDB}，所以\textrm{MAST}的数据生成和管理主要依赖于操作系统和\textrm{I/O}算法，运行\textrm{MAST}也无须额外安装专门的数据库软件。
+以完整的高通量框架的角度看，\textrm{MAST}更像是对\textrm{ESTEST}的辅助，重点用于工作流管理和后处理:\\
+\url{http://pythonhosted.org/MAST/0_0_introduction.html}
 
-\textrm{MAST}的数据库主要收集了带空位的稳定纯元素的数据，现有面心立方的49种元素和六方密堆积的44种元素。\textrm{MAST}数据库主要用于研究基本的空位扩散，因此收集的数据包括空位形成焓、空位迁移焓、内聚能和体模量\cite{NJP16-015108_2014}。\textrm{MAST}的数据主要来自\textrm{VASP}的数据拟合。\textrm{MAST}的数据目前还不能通过网页界面访问，很多功能还有待完善。
+\textrm{MAST}的基本框架由\textrm{MP}的\textrm{Pymatgen}和\textrm{Custodian}模块和\textrm{ASE}组合搭配实现
+\vskip 2pt
+{\fontsize{6.5pt}{4.2pt}\selectfont{\textrm{MAST}开发了自动计算流程以及数据库，而没有使用\textrm{FireWorks}和\textrm{MangoDB}}}
+\vskip 2pt
+\textrm{MAST}的数据主要来自\textrm{VASP}的数据拟合\\
+
+\begin{itemize}
+	\item \textrm{MAST}的数据库主要收集了带空位的稳定纯元素的数据，现有面心立方的\textrm{49}种元素和六方密堆积的\textrm{44}种元素
+	\item \textrm{MAST}数据库主要用于研究基本的空位扩散，收集的数据包括:~空位形成焓、空位迁移焓、内聚能和体模量
+\end{itemize}
+\textrm{MAST}的数据生成和管理主要依赖于操作系统和\textrm{I/O}性能，运行\textrm{MAST}无须额外配置专门的数据库软件
+
+\textrm{MAST}的数据目前还不能通过网页界面访问，很多功能还有待完善
+
 }
 
 \frame
 {
 \frametitle{\tt{CEPDB}}
 %\subsubsection{\tt{CEPDB}}
-\textrm{CEPDB}是哈佛大学的\textrm{CEP}对应的数据库，主要用于研究有机光电材料\cite{CEPDB_URL,JPCL2-2241_2011}。数据库除了有第一原理计算结果，还收录了文献中的实验数据，用于作为\textrm{CEPDB}的训练和标定数据集。\textrm{CEPDB}使用\textrm{Python}的网页框架\textrm{Django}在\textit{in silico}上开发的高通量计算\textrm{MySQL}数据库，计算数据由量子化学计算软件\textrm{Q-Chem}得到，\textrm{CEPDB}的强大算力主要由\textrm{IBM}的公益分布式计算项目全球社群网格\textrm{(World Community Grid, WCG)}提供，还有一些算力来自\textrm{Harvard}的\textrm{FAS Odyssey}集群、\textrm{NERSC}和\textrm{TeraGrid}的计算资源以及其它一些计算资源。根据\textrm{CEPDB}的网页信息显示，数据库共拥有2,300,000多个分子的图谱信息和22,000,000多个分子结构(由超过150,000,000个\textrm{DFT}计算得到)共计超过400\textrm{TB}的数据，这些数据都是开放的，但是\textrm{CEPDB}的高通量计算软件并未开源，不过\textrm{CEPDB}对全世界各研究组上传自己的实验数据持开放态度。
+\textrm{CEPDB}是哈佛大学的\textrm{CEP}项目的数据库:\\%\cite{CEPDB_URL,JPCL2-2241_2011}。
+\url{https://gist.github.com/jessiegt/5642460f061a39d1820e}\\
+主要服务于研究有机光电材料
+
+根据\textrm{CEPDB}的网页信息显示，
+\begin{itemize}
+	\item 数据库共拥有\textrm{2,300,000}多个分子的图谱信息和\textrm{22,000,000}多个分子结构(由超过\textrm{150,000,000}个\textrm{DFT}计算得到)共计超过\textrm{400~TB}的数据，
+	\item 数据库除了有第一原理计算结果，还收录了文献中的实验数据，用于作为\textrm{CEPDB}的训练和标定数据集
+\end{itemize}
+\textrm{CEPDB}使用\textrm{Python}的网页框架\textrm{Django}在\textit{in silico}上开发的高通量计算\textrm{MySQL}数据库，数据由量子化学计算软件\textrm{Q-Chem}得到\\
+{\fontsize{6.5pt}{4.2pt}\selectfont{\textrm{CEPDB}的强大算力主要由\textrm{IBM}的公益分布式计算项目全球社群网格\textrm{(World Community Grid, WCG)}提供，还有一些算力来自\textrm{Harvard}的\textrm{FAS Odyssey}集群、\textrm{NERSC}和\textrm{TeraGrid}的计算资源以及其它一些计算资源}}
+
+\textrm{CEPDB}的数据都是开放的，但高通量计算软件部分不开源\\不过\textrm{CEPDB}对全世界各研究组上传的实验数据持开放态度
 }
 
 \frame
 {
 \frametitle{\texttt{CCCBDB}}
 %\subsubsection{\texttt{CCCBDB}}
-计算化学对比和基准数据库\textrm{(Computational Chemistry Comparison and Benchmark Database, CCCBDB)}由美国国家标准和技术协会(\textrm{National Institute of Standards and Technology, NIST})提供，汇集了1600多种气相原子和分子的实验和第一原理计算的化学热力学数据\cite{CCCBDB}，这个数据库很好地弥补了常见数据库只有固体材料数据的不足。
+计算化学对比和基准数据库\textrm{(Computational Chemistry Comparison and Benchmark Database, CCCBDB)}归属于美国国家标准和技术协会(\textrm{National Institute of Standards and Technology, NIST})
 
-\textrm{CCCBDB}提供简单的在线服务界面，用户可以检索到指定化合物的实验数据和计算数据，实验和计算数据的对比也验证了数据的可靠性。\textrm{CCCBDB}允许用户优先使用几何结构、振动模式、熵、能量和静电性质而非分子结构作为检索的关键词，这样设计检索方案避免引入复杂的筛选组合，方便用户快速得到检索结果。\textrm{CCCBDB}是一个庞大的数据库，收录了总计有超过460,000个计算条目，但是因为其没有开源，降低了数据库的影响力。
+汇集了\textrm{1600}多种气相原子和分子的实验和第一原理计算的化学热力学数据，很好地弥补了常见数据库只有固体材料数据的不足
+
+\begin{itemize}
+	\item \textrm{CCCBDB}提供简单的在线服务界面，用户可以检索到指定化合物的实验数据和计算数据，实验和计算数据的对比也验证了数据的可靠性
+	\item \textrm{CCCBDB}允许用户优先使用几何结构、振动模式、熵、能量和静电性质而非分子结构作为检索的关键词\\
+		{\fontsize{7.5pt}{4.2pt}\selectfont{避免引入复杂的筛选组合，方便用户快速得到检索结果}}
+	\item \textrm{CCCBDB}是一个庞大的数据库，收录了总计有超过\textrm{460,000}个计算条目\\
+{\fontsize{7.5pt}{4.2pt}\selectfont{因为其没有开源，降低了数据库的影响力}}
+\end{itemize}
 }
 
 \frame
