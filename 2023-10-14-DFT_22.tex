@@ -461,13 +461,15 @@
 \frame
 {
 	\frametitle{早期材料数据库:~\tt{SpingerMaterials}}
-\textrm{SpingerMaterials}:~世界上最古老也是完备的材料数据库，旨在创建集成材料学信息、性质和使用平台。数据库主要由以下部分组成:
+\textrm{SpingerMaterials}:~世界上最古老也是完备的材料数据库，旨在创建集成材料学信息、性质和使用平台
+\vskip 3pt
+数据库主要由以下部分组成:
 \begin{itemize}
-	\item 全部\textrm{Landolt-B{\"o}rnstein}丛书(自1883年起)，是以基础科学为主的大型科学与技术数值与函数关系的工具书
-	\item 全部\textrm{Pauling~File}无机材料数据库，收集了从1900年迄今超过21000种出版物中的无机晶体结构、衍射、相图和物理属性数据
+	\item 全部\textrm{Landolt-B{\"o}rnstein}丛书(自\textrm{1883}年起)，是以基础科学为主的大型科学与技术数值与函数关系的工具书
+	\item 全部\textrm{Pauling~File}无机材料数据库，收集了从\textrm{1900}年迄今超过\textrm{21000}种出版物中的无机晶体结构、衍射、相图和物理属性数据
 	\item \textrm{Dortmud Data Band}中的纯液体和二元混合物的热物理数据
-	\item 吸附材料数据库(\textrm{Adsorption Database})
-	\item 聚合物热力学数据库(\textrm{Polymer Thermodynamics Databse})
+	\item 吸附材料数据库\textrm{(Adsorption Database)}
+	\item 聚合物热力学数据库\textrm{(Polymer Thermodynamics Databse)}
 	\item \textrm{MSI}数据库
 \end{itemize}
 }
@@ -475,50 +477,112 @@
 \frame
 {
 	\frametitle{早期材料数据库:~其它数据库}
-除了\textrm{SpingerMaterials}之外，比较完整的数据有无机晶体结构数据库\textrm{(Inorganic Crystal Structure Database, ICSD)}\cite{ICSD_URL}，其服务器位于德国的\textrm{FIZ~Karlsruhe}，收录了自1913年以来超过185000条矿物、 金属和其他无机固体化合物(包括2000多元素单质、34500多二元化合物、68000多三元化合物、66000多四元及多元化合物)的晶体结构数据。类似的实验材料数据库有%\textrm{CRYSTMET}\cite{CRYSTMET_URL}、
-\textrm{Pauling}无机材料数据库\cite{Pauling_URL}和\textrm{Pearson}晶体数据库\cite{Pearson_URL}等。这些实验数据库对于材料学的结构和物性研究提供很重要的支持，但是仅有这些数据库肯定是不够的，一方面材料的覆盖范围非常广泛，有限的数据库不可能穷尽，更重要的是有很多材料的物性数据很难通过实验直接得到。材料设计和开发是复杂的多维优化问题，注定新材料研发耗时耗力。在这一点上，原子尺度的材料物性数值模拟可以有效补偿实验方法的不足。近年来雨后春笋般的计算材料数据库填补了不少很多实验数据缺乏的空白\cite{CMS58-227_2012}，集成了实验数据和计算数据的新材料数据库为探索新材料合成、性能优化开辟了新的研究思路。
+除\textrm{SpingerMaterials}之外，比较完整的数据有
+{\fontsize{9.0pt}{4.2pt}\selectfont{
+\begin{itemize}
+	\item 无机晶体结构数据库\textrm{(Inorganic Crystal Structure Database, ICSD)}:~\url{http://www.fiz-karlsruhe.com/icsd.html}%\cite{ICSD_URL}，
+		\vskip 2pt
+{\fontsize{6.5pt}{4.2pt}\selectfont{服务器位于德国的\textrm{FIZ~Karlsruhe}，收录了自\textrm{1913}年以来超过\textrm{185000}条矿物、 金属和其他无机固体化合物(含\textrm{2000}多元素单质、\textrm{34500}多二元化合物、\textrm{68000}多三元化合物、\textrm{66000}多四元及多元化合物)的晶体结构数据}}
+%类似的实验材料数据库还有
+\item \textrm{CRYSTMET}数据库%:~\url{http://www.tothcannda.com/database.htm}%\cite{CRYSTMET_URL}、
+\item \textrm{Pauling}无机材料数据库:~\url{http://www.paulingfile.com/}%\cite{Pauling_URL}
+\item \textrm{Pearson}晶体数据库:~\url{http://www.crystalimpact.com/}%\cite{Pearson_URL}
+\item $\cdots$
+\end{itemize}}}
+\textcolor{blue}{这些实验数据库对于材料学研究提供了重要的帮助}
 
-随着高性能计算与\textrm{DFT}相结合推动了第一原理材料模拟数据生成和结果分析的自动化，而随着“材料基因组计划”的实施，为计算材料科学提供了越来越广阔的应用空间，也涌现了越来越多的计算材料数据库，特别是在功能材料领域，高通量\textrm{DFT}计算大大推进了新材料合成的进步。\cite{JCED59-3232_2014, IC53-11849_2014,JPCL4-3607_2013,PCCP16-22073_2014}
+%但是仅有这些数据库肯定是不够的，一方面
+\begin{itemize}
+	\item 材料的覆盖范围非常广泛，有限的数据库不可能穷尽%，更重要的是
+	\item 有很多材料的物性数据很难通过实验直接得到
+\end{itemize}
+
+%材料设计和开发是复杂的多维优化问题，注定新材料研发耗时耗力%。在这一点上，
+原子尺度的材料物性数值模拟可以有效补偿实验方法的不足\\
+%近年来雨后春笋般的计算材料数据库填补了不少很多实验数据缺乏的空白%\cite{CMS58-227_2012}，
+\textcolor{red}{集成了实验数据和计算数据的新材料数据库为探索新材料合成、性能优化开辟了新的研究思路}
+
+%随着高性能计算与\textrm{DFT}相结合推动了第一原理材料模拟数据生成和结果分析的自动化，%而随着“材料基因组计划”的实施，为计算材料科学提供了越来越广阔的应用空间，也
+%涌现了越来越多的计算材料数据库，特别是在功能材料领域，高通量\textrm{DFT}计算大大推进了新材料研发的进步。%\cite{JCED59-3232_2014, IC53-11849_2014,JPCL4-3607_2013,PCCP16-22073_2014}
 }
 
 \frame
 {
 \frametitle{\tt{AFLOWLIB}}
 %\subsubsection{\tt{AFLOWLIB}}
-\textrm{AFLOWLIB}是由高通量\textrm{DFT}计算框架\textrm{AFLOW}\cite{CMS58-218_2012,CMS58-227_2012,Nat-Mater12-191_2013}生成的材料信息数据库，包括相图、电子结构和磁学性质等。\textrm{AFLOWLIB.org}的源代码和材料数据由\textrm{Duke}大学开发\cite{AFLOWORG_URL}，包含了630,000以上的合金热力学条目，涵盖了\textrm{ICSD}中的52,000多种化合物，3,000多种基本化合物，330,000多种二元化合物和262,000多中\textrm{Heuslers}金属间化合物。数据库提供在线的界面搜索，包括计算的细节、电子结构、磁学性质和热力学性质。所有的计算结果都是由\textrm{AFLOW}高通量计算软件生成的，为方便进一步的检索，这些计算数据存入\textrm{SQL}数据库(\textrm{MySQL})。此外\textrm{AFLOWLIB.org}提供了数据交换的应用接口\textrm{RESTful~API}服务\cite{CMS93-178_2014}，可以方便用户更快捷地检索材料数据，数据结果可以表示为多种格式，包括\texttt{HTML/JSON/DUMP/PHP/TEXT/NONE}等，极大地方便了用户对数据库进行挖掘，研发新材料。
+\textrm{AFLOWLIB}是由高通量\textrm{DFT}计算框架\textrm{AFLOW}%\cite{CMS58-218_2012,CMS58-227_2012,Nat-Mater12-191_2013}
+生成的材料信息数据库:~\url{https://www.aflowlib.org}
+\vskip 3pt
+{\fontsize{7.5pt}{4.2pt}\selectfont{该数据库涵盖相图、电子结构和磁学性质等信息，源代码和主要材料数据由\textrm{Duke}大学开发和运维}}%\cite{AFLOWORG_URL}，
+\begin{itemize}
+	\item 数据库包含\textrm{630,000}种以上的合金热力学条目，涵盖了\textrm{ICSD}中的\textrm{52,000}多种化合物，\textrm{3,000}多种基本化合物，\textrm{330,000}多种二元化合物和\textrm{262,000}多种\textrm{Heuslers}金属间化合物
+	\item 数据库提供在线的界面搜索，包括计算的细节、电子结构、磁学性质和热力学性质，所有的计算结果都是由\textrm{AFLOW}高通量计算软件生成的
+	\item 计算数据在数据库种以\textrm{SQL}(\textrm{MySQL})形式存储，检索方便
+		\vskip 2pt
+		{\fontsize{7.5pt}{4.2pt}\selectfont{\url{https://www.aflowlib.org}提供数据交换的应用接口\textrm{RESTful~API}服务}}%\cite{CMS93-178_2014}，
+\end{itemize}
+数据库种的材料数据可以表示为多种格式，包括\texttt{HTML/JSON/DUMP/PHP/TEXT/NONE}等，极大地方便了用户在新材料研发中的数据挖掘需求
 }
 
 \frame
 {
 \frametitle{\tt{MP}}
 %\subsubsection{\tt{MP}}
-\textrm{Materials Project}是材料基因组的高通量第一原理计算的核心软件\cite{MP_URL}，现在在开源软件平台\textrm{GitHub}\cite{MP_Github}上提供全部代码，因此得到越来越多的开发者的支持。根据\textrm{MP}网页提供的信息\cite{MP_URL}，目前可提供的数据包括59,000多种化合物，41,000多种能带结构数据和1,300多种的弹性张量数据，以及2,200多种\ch{Li}的插层电极和19,000多种\ch{Li}的转换电极数据，\textrm{MP}网页由\textrm{Apache}、\textrm{Python}和\textrm{Django}开发。
+\textrm{Materials Project}是美国材料基因组项目项目支持高通量第一原理计算的软件和数据库:~\url{https://www.materialsproject.org}%\cite{MP_URL}，
+\vskip 2pt
+{\fontsize{8.5pt}{4.2pt}\selectfont{\textrm{MP}基于\textrm{Apache}、\textrm{Python}和\textrm{Django}开发，在开源软件平台\textrm{github}上发布全部代码，面向全世界的开发者支持:~\url{https://gitbub.com/materialsproject}}}
+\vskip 3pt
+根据\textrm{MP}官网信息，目前可提供的数据包括:
+\begin{itemize}
+	\item \textrm{59,000}多种化合物的信息，\textrm{41,000}多种能带结构数据和\textrm{1,300}多种材料的弹性张量数据
+	\item \textrm{2,200}多种\textrm{\ch{Li}}的插层电极和\textrm{19,000}多种\textrm{\ch{Li}}的转换电极数据
+	\item \textrm{Materials Project}的扩展性极好\\
+		{\fontsize{8.0pt}{4.2pt}\selectfont{除了\textrm{Pymatgen}、\textrm{FireWorks}和\textrm{Custodian}的支持，其数据库采用基于\textrm{MongoDB}的\textrm{NoSQL}数据格式文件，%因为传统的数据库只是“纵向可扩展”\footnote{\fontsize{5.0pt}{4.2pt}\selectfont{横向可扩展，是指数据库可支持增加数据库的服务器数目;~纵向可扩展是指数据库可支持增加硬盘、内存和\textrm{CPU}的数目}}，\textrm{NoSQL}数据库
+	弥补了传统数据库的扩展性差和灵活性不够的问题}}%，近年来在材料研究数据库技术中特别受到注意
+\end{itemize}
 
-\textrm{Materials Project}的扩展性极好，除了\textrm{Pymatgen}、\textrm{FireWorks}和\textrm{Custodian}的支持，也源自\textrm{MongoDB}的\textrm{NoSQL}数据格式文件，因为传统的数据库只是“纵向可扩展”\footnote{横向可扩展，是指数据库可支持增加数据库的服务器数目;~纵向可扩展是指数据库可支持增加硬盘、内存和\textrm{CPU}的数目}，\textrm{NoSQL}数据库弥补了传统数据库的扩展问题和灵活性问题，因此近年来在材料研究数据库技术中特别受到注意。
-
-\textrm{Materials Project}同样通过\textrm{API}支持\textrm{RESTful}服务\cite{CMS68-314_2013}，根据\textrm{RESTful}的设计，对数据的需求和操作，不须依赖复杂的用户界面，只要直接对数据库的\textrm{URL}完成。\textrm{RESTful}接受到\textrm{URL}，\textrm{Materials Project}材料数据库返回的\textrm{JSON}结构。\textrm{RESTful}服务器有效地提升了数据获取效率，如\textrm{Pymatgen}的结构对象，\textrm{生成能}、\textrm{VASP}计算结果等。对科研工作者而言，\textrm{RESTful}是有效的研究工具。
+\textrm{Materials Project}同样通过\textrm{API}支持\textrm{RESTful}服务%\cite{CMS68-314_2013}，
+%根据\textrm{RESTful}的设计，对数据的需求和操作，不须依赖复杂的用户界面，只要直接对数据库的\textrm{URL}完成。\textrm{RESTful}接受到\textrm{URL}，\textrm{Materials Project}材料数据库返回的\textrm{JSON}结构。\textrm{RESTful}服务器有效地提升了数据获取效率，如\textrm{Pymatgen}的结构对象，\textrm{生成能}、\textrm{VASP}计算结果等。对科研工作者而言，\textrm{RESTful}是有效的研究工具。
 }
 
 \frame
 {
 \frametitle{\tt{CMR}}
 %\subsubsection{\tt{CMR}}
-为方便不同经验的用户存储、检索电子结构计算数据，\textrm{CMR}提供了三种不同的用户界面\textrm{PHP/HTML和Python}\cite{CMR_URL}，\textrm{CMR}和\textrm{ASE}最初都是由\textrm{QMIP}开发的\cite{CSE14-51_2012}，\textrm{ASE}主要侧中第一原理计算任务生成、计算执行、结果分析和可视化模块，\textrm{CMR}则主要针对计算数据存储，代码都由丹麦技术大学维护。
-
-与\textrm{ASE}类似，\textrm{CMR}面向数据库的多元化需求，多元化的需求源自软硬件的兼容性，软件方面主要是面向开源系统，特别是\textrm{Linux}操作系统，\textrm{Apache}浏览器，\textrm{MySQL}数据库，用户界面采用\texttt{PHP/HTML}，合成\textrm{LAMP}(\textrm{Linux,Apache,MySQL,PHP})套装。\textrm{ASE}和\textrm{CMR}所有源代码开发都是基于松耦合模式，方便用户根据自己的要求应用软件。比如用户可以分别只选用\textrm{ASE}或\textrm{CMR};硬件方面，软件可以安装到台式机、集群或超级计算机上，对于小的台式机，因为无须安装数据库和网络服务器，\textrm{CMR}可以使用\textrm{SQLite}数据库模式而不用\textrm{MySQL}服务器模式存储和检索材料数据。如有必要，\textrm{CMR}的数据处理模块可将\textrm{SQLite}数据库文件上传到\textrm{MySQL}服务器上，或者将数据文件转呈\texttt{XML/JSON}格式，以方便数据交换。
-
-\textrm{CMR}提供了超过30,000条数据记录，\textrm{ASE}和\textrm{CMR}仍在开发中，不断发布更新的稳定版本，有比较完整的安装、使用说明文档。
+\textrm{CMR}和\textrm{ASE}都是由丹麦技术大学\textrm{QMIP}项目开发的\\
+{\fontsize{7.5pt}{4.2pt}\selectfont{\textrm{ASE}主要服务第一原理计算任务生成、计算执行、结果分析和可视化}}\\
+\textrm{CMR}则主要面向计算数据存储:~\url{https://cmr.fysik.dtu.dk}
+%{\fontsize{8.5pt}{4.2pt}\selectfont{当前\textrm{ASE}和\textrm{CMR}仍在开发中，不断发布更新的稳定版本}}，有比较完整的安装、使用说明文档。
+\begin{itemize}
+	\item \textrm{CMR}提供了超过\textrm{30,000}条数据记录
+	\item \textrm{CMR}提供了三种不同的用户界面\textrm{PHP/HTML和Python}，方便不同经验的用户存储、检索电子结构计算数据%\cite{CMR_URL}，\cite{CSE14-51_2012}，
+\end{itemize}
+与\textrm{ASE}类似，\textrm{CMR}面向用户对数据库的多元化需求，实现软硬件的尽可能兼容
+{\fontsize{7.5pt}{4.2pt}\selectfont{
+\begin{itemize}
+	\item 软件方面:~\textrm{ASE}和\textrm{CMR}所有源代码开发都是基于松耦合模式，方便用户根据习惯使用软件\\
+		{\fontsize{6.0pt}{4.2pt}\selectfont{主要是面向开源系统，特别是\textrm{Linux}操作系统，\textrm{Apache}浏览器，\textrm{MySQL}数据库，用户界面采用\texttt{PHP/HTML}，合成\textrm{LAMP}(\textrm{Linux,Apache,MySQL,PHP})套装}}
+		%。比如用户可以分别只选用\textrm{ASE}或\textrm{CMR};
+	\item 硬件方面，软件可以安装到台式机、集群或超级计算机上，对于小的台式机则无须安装数据库和网络服务器
+	\item \textrm{CMR}使用\textrm{SQLite}数据库模式而不用\textrm{MySQL}服务器模式存储和检索材料数据\\
+		{\fontsize{6.0pt}{4.2pt}\selectfont{当用户有需要时，\textrm{CMR}的数据处理模块可将\textrm{SQLite}数据库文件上传到\textrm{MySQL}服务器上，或者将数据文件转呈\texttt{XML/JSON}格式，以方便数据交换}}
+\end{itemize}}}
 }
 
 \frame
 {
 \frametitle{\tt{ESP}}
 %\subsubsection{\tt{ESP}}
-和其余的\textrm{DFT}计算数据库类似，电子结构计划\textrm{(Electronic Structure Project, ESP)}利用\textrm{ICSD}的结构数据来加速无机化合物的电子结构计算\cite{ESP_URL,CMS44-1042_2009}，数据库的数据由\textrm{FP-LMTO}方法计算得到，自2002年\textrm{ESP}发布以来，共收录了60,000多条化合物的电子结构。
+\textrm{ESP}的数据库和官网由\textrm{Uppsala}大学维护和管理，应用\textrm{ICSD}的结构数据来加速无机化合物的电子结构计算，目标是加速新的功能材料的研发进程
 
-\textrm{ESP}的目标是加速新的功能材料的研发进程，\textrm{ESP}的官网提供了一个很好的范例:~采用大规模计算结合数据挖掘技术预测的第一个拓扑绝缘体\textrm{(toplogical insulator)}\ch{Bi2SeTe2}。根据60,000多条化合物电子结构，应用数据挖掘技术已经预测了17种可能的强拓扑绝缘体\cite{arXiv1007-4838_2010,APR6-31_2014}，\ch{Bi2SeTe2}是从这17种可能的化合物种筛选出来的，而且该预测很快就得到验证。
+\textrm{ESP}数据库的数据由\textrm{FP-LMTO}方法计算获得\\
+{\fontsize{6.0pt}{4.2pt}\selectfont{自2002年\textrm{ESP}发布以来，共收录了\textrm{60,000}多条化合物的电子结构数据}}
+用户可以最多查到五种元素组成的化合物的电子结构信息
 
-\textrm{ESP}的数据库和官网由\textrm{Uppsala}大学维护和管理，用户可以最多查到五种元素组成的化合物的电子结构信息。除了\textrm{FP-LMTO}代码是开源的，\textrm{ESP}的数据库和能带分析工具的代码都没有公开，因此这些年来，\textrm{ESP}开发进展得很缓慢。
+\textrm{ESP}的官网提供了强拓扑绝缘体筛选的范例:~采用大规模计算结合数据挖掘技术预测的第一个拓扑绝缘体\textrm{(toplogical insulator)}\ch{Bi2SeTe2}。根据60,000多条化合物电子结构，应用数据挖掘技术已经预测了17种可能的强拓扑绝缘体%\cite{arXiv1007-4838_2010,APR6-31_2014}，
+\ch{Bi2SeTe2}是从这17种可能的化合物种筛选出来的，而且该预测很快就得到验证
+
+除了\textrm{FP-LMTO}代码是开源的，\textrm{ESP}的数据库和能带分析工具的代码都没有公开，因此这些年来，\textrm{ESP}开发进展得很缓慢。
 }
 
 \frame
