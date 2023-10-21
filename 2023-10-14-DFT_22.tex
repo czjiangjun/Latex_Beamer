@@ -674,66 +674,153 @@
 {
 \frametitle{\tt{AiiDA}}
 %\subsubsection{\tt{AiiDA}}
-\textrm{AiiDA}\cite{AiiDA_URL}是\textrm{Python}语言开发的用于原子尺度材料自动模拟、管理、共享和复制的软件框架，该软件由\textrm{THEOS-EPFL~(Theory and Simulation of Materials-{\'E}cole~Polytechnique~F{\'e}d{\'e}rale~de~Lausanne)}的实验室和\textrm{BOSCH}公司于2012年开始开发和维护的。\textrm{DiiDA}数据库是用\textrm{Python}的网页编程框架\textrm{Django}开发的\cite{CMS187-110086_2021}，可以满足计算物理、化学和材料科学研究的多种不同需求，数据库可提供\texttt{SQLite/MySQL}和\texttt{PostgreSQL}三种形式的数据，推荐使用\textrm{PostgreSQL}，当用户使用数据库的\textrm{RESTful~API}接口时，数据将以\texttt{JSON}格式呈现。
+\textrm{AiiDA}%\cite{AiiDA_URL}
+是用于原子尺度材料自动模拟、管理、共享和复制的软件框架:~\url{http://www.aiida.net/}
+\vskip3pt
+{\fontsize{8.0pt}{4.2pt}\selectfont{软件由\textrm{THEOS-EPFL~(Theory and Simulation of Materials-{\'E}cole~Polytechnique~F{\'e}d{\'e}rale~de~Lausanne)}的实验室和\textrm{BOSCH}公司于2012年开发和维护}}
+\vskip 3pt
+\textrm{AiiDA}数据库
+\begin{itemize}
+	\item 网页编程框架用\textrm{Python}维护
+	\item 数据库用\textrm{Django}开发\\%\cite{CMS187-110086_2021}，
+		{\fontsize{7.0pt}{4.2pt}\selectfont{可满足计算物理、化学和材料科学研究的多种不同需求}}
+\end{itemize}
+数据库提供\texttt{SQLite/MySQL}和\texttt{PostgreSQL}三种形式的数据
+\vskip 3pt
+{\fontsize{8.0pt}{4.2pt}\selectfont{推荐使用\textrm{PostgreSQL}}}
+\vskip 5pt
+当用户使用数据库的\textrm{RESTful~API}接口时，数据将以\texttt{JSON}格式呈现
 }
 
 \frame
 {
 \frametitle{\tt{Alloy Database}}
 %\subsubsection{\tt{Alloy Database}}
-\textrm{Alloy~Database}数据库提供了用\textrm{VASP}计算的合金结构和结合能数据\cite{AlloyD_URL}，包括200多种二元合金、100多种三元合金和20多种四元合金的材料数据，通过设设在卡内基梅隆大学\textrm{(Carnegie~Mellon~University)}的在线服务器，用户可以检索二元、三元和四元合金的\textrm{VASP}计算数据，此外，数据库还可以提供包括组成合金的元素信息、\textrm{Pearson}符号、合金模型以及计算所需的\textrm{POSCAR}文件、合金\textrm{Pearson}符号，基态总能和生成焓、化学组成和赝势等。
-
-\textrm{Alloy~Data}最早于2006年提供线上服务，但因为其数据库服务代码从未开放，因此该数据库还没有应用到高通量第一原理计算上。
+\textrm{Alloy~Database}数据库
+提供\textrm{VASP}计算的合金结构和结合能数据，%\cite{AlloyD_URL}，
+其在线服务器位于卡内基梅隆大学\textrm{(Carnegie~Mellon~University)}物理系:
+\url{http://alloy.phys.cmu.edu}
+\vskip 3pt
+\textrm{Alloy~Database}数据库的主要功能
+\begin{itemize}
+    \setlength{\itemsep}{5pt}
+	\item 包括\textrm{200}多种二元合金、\textrm{100}多种三元合金和\textrm{20}多种四元合金的材料数据
+	\item 用户可以检索二元、三元和四元合金的\textrm{VASP}计算数据
+	\item 数据库提供包括合金组分的元素信息、\textrm{Pearson}符号、合金模型以及计算所需的\textrm{POSCAR}文件、合金\textrm{Pearson}符号，基态总能和生成焓、化学组成和赝势等
+\end{itemize}
+\textrm{Alloy~Data}最早于\textrm{2006}年提供线上服务，由于其数据库服务代码从未开放，所以该数据库迄今尚未应用于高通量第一原理计算
 }
 
 \frame
 {
 \frametitle{\tt{NoMaD}}
 %\subsubsection{\tt{NoMaD}}
-\textrm{Novel Materials Discovery~(NoMaD)}也是一种重要的材料数据库，用于第一原理计算的电子结构数据生成、组织和交换\cite{NoMaD_URL}。现在\textrm{NoMaD}数据库包含640,000多条数据，其中有250,000多条数据来自\textrm{aflowlib.org}，其余则来自\textrm{cccbdb.nist.gov}。\textrm{NoMaD}通过网页界面~\textrm{\url{http://nomad-repository.edu/gui/\#nomad}}~实现数据库共享。用户可以通过元素、结构和计算方法、作者等数据找到目标数据。供下载的数据除了少量关于计算本身如材料的化学式、空间群、计算软件及版本、作者和参考文献等，主要是计算输入/输出文件的压缩包，\textrm{NoMaD}目前可提供的计算软件包括\textrm{ABINIT}、\textrm{CASTEP}、\textrm{CRYSTAL}、\textrm{Exciting}、\textrm{FHI-aims}、\textrm{Gaussian}、\textrm{Gaussian}、\textrm{Quantum-Espresso}、\textrm{VASP}和\textrm{WIEN2k}等。
-
-\textrm{NoMaD}的注册用户不仅可以浏览和下载材料数据，还允许向\textrm{NoMaD}上传数据，上传数据可以根据用户指定为“开放”\textrm{(open access)}和“限制”\textrm{(restricted)}状态，“开放”态对全体互联网用户开放，“限制”态只对指定用户群开放。\textrm{NoMaD}的绝大部分数据是开放的，约540,000多条是开放的，而“限制”状态的数据最多三年后将转成“开放”状态，这就确保科学材料数据最大限度的共享和交换能力。不过\textrm{NoMaD}除了提供材料计算的输入/输出文件，并未提供高通量计算框架。而且有些重要的和有价值的材料数据，如计算参数以及计算能量数据在数据文件下载之前已被隐去。
+{\fontsize{8.0pt}{4.2pt}\selectfont{
+\textrm{Novel Materials Discovery~(NoMaD)}是面向第一原理计算的电子结构数据生成、组织和交换的重要材料数据库:~\url{http://nomad-repository.edu/cms/}%\cite{NoMaD_URL}。
+\vskip 3pt
+当前\textrm{NoMaD}数据库
+\begin{itemize}
+	\item 包含\textrm{640,000}多条数据\\
+		{\fontsize{6.0pt}{4.2pt}\selectfont{其中有\textrm{250,000}多条数据来自\url{http://aflowlib.org}，其余则来自\url{http://cccbdb.nist.gov}}}
+	\item 通过网页~\url{http://nomad-repository.edu/gui/\#nomad}共享数据
+	\item 用户可通过元素、结构和计算方法、作者等信息检索到目标数据
+	\item 供下载的数据主要是计算所需的输入/输出文件的压缩包\\
+{\fontsize{6.0pt}{4.2pt}\selectfont{少量关于计算本身(如材料的化学式、空间群、计算软件及版本、作者和参考文献等)}}
+\end{itemize}
+{\fontsize{7.0pt}{4.2pt}\selectfont{\textrm{NoMaD}目前可支持的计算软件数据涵盖:~\textrm{ABINIT}、\textrm{CASTEP}、\textrm{CRYSTAL}、\textrm{Exciting}、\textrm{FHI-aims}、\textrm{Gaussian}、\textrm{Quantum-Espresso}、\textrm{VASP}和\textrm{WIEN2k}等}}
+\vskip 3pt
+{\fontsize{7.5pt}{4.2pt}\selectfont{\textrm{NoMaD}的注册用户不仅可以浏览和下载材料数据，还允许向\textrm{NoMaD}上传数据
+\vskip 2pt
+	{\fontsize{6.0pt}{4.2pt}\selectfont{用户可指定上传文件为“开放”\textrm{(open access)}或“限制”\textrm{(restricted)}状态}}
+%\begin{itemize}
+%	\item “开放”态:~对全体互联网用户开放
+%	\item “限制”态:~只对指定用户群开放。
+%\end{itemize}
+\vskip 3pt
+\textrm{NoMaD}的绝大部分数据(约\textrm{540,000}多条)是开放的，而“限制”状态的数据最多三年后自动转成“开放”状态，确保科学材料数据最大限度的共享和交换能力
+\vskip 3pt
+\textrm{NoMaD}除了提供材料计算的输入/输出文件，未提供高通量计算框架，一些重要的和有价值的材料数据{\fontsize{6.0pt}{4.2pt}\selectfont{(如计算参数以及计算能量数据)}}在数据文件下载之前已被隐去}}
+}}
 }
 
 \frame
 {
-\frametitle{\tt{OQMD}与\tt{qmpy}}
+\frametitle{{\tt OQMD}与\tt{qmpy}}
 %\subsubsection{\tt{OQMD}与\tt{qmpy}}
-开放量子材料数据库\textrm{(Open Quantum Materials Database, OQMD)}以在线方式提供收录的\textrm{DFT}计算的材料热力学和结构性质数据的共享\cite{OQMD_URL,NCM1-15010_2015}，\textrm{OQMD}累积的\textrm{DFT}计算化合物约有290,000条，这些化合物中约10\%来自\textrm{ICSD}，约90\%则来自简单化合物雏形组合，而且数据库中的化合物条目还在增加。
+{\fontsize{8.0pt}{4.2pt}\selectfont{
+开放量子材料数据库\textrm{(Open Quantum Materials Database, OQMD)}是\textrm{2013}年前后，由美国西北大学\textrm{(Northwestern University)}的研究团队在超过\textrm{200,000}个\textrm{DFT}计算的晶体结构基础上发展起来的:~\url{http://oqmd.org/}
+\vskip 2pt
+{\fontsize{6.0pt}{4.2pt}\selectfont{数据主要是在西北大学高性能计算队列和美国国家能源研究科学计算中心\textrm{(the National Energy Research Scientific Computing Center, NERSC)}的机器上完成}}
 
-\textrm{OQMD}是2013年前后由美国西北大学\textrm{(Northwestern University)}的研究团队在超过200,000\textrm{DFT}计算的晶体结构基础上发展起来的，这些数据主要是在西北大学高性能计算队列和美国国家能源研究科学计算中心\textrm{(the National Energy Research Scientific Computing Center, NERSC)}的机器上完成的。
-
-\textrm{OQMD}主页提供了\textrm{Python}的\textrm{API}软件\textrm{qmpy}\cite{qmpy_URL}和全部近300,000个结构数据可下载。\textrm{qmpy}用\textrm{Django}开发，数据库是\textrm{MySQL}形式，数据主要都是由\textrm{VASP}计算的。
-
-\textrm{OQMD}没有提供\textrm{RESTful}服务，但允许用户\textrm{URL}地址栏输入检索化合物的字符串，如~\textrm{\url{http://oqmd.org/materials/composition/Al2O3}}~表示\ch{Al2O3}的检索。浏览器得到的检索数据是\texttt{HTML}格式的(而非\texttt{JSON}或\texttt{XML}格式的)。\textrm{OQMD}允许用户将全部数据(约4\textrm{GB})下载到本地并保存成一个文件，对于小型的计算用户，这将提升用户对计算数据的分析。
+\begin{itemize}
+	\item \textrm{OQMD}累积的\textrm{DFT}计算化合物约有\textrm{290,000}条
+\vskip 2pt
+{\fontsize{6.0pt}{4.2pt}\selectfont{这些化合物中约\textrm{10\%}来自\textrm{ICSD}，约\textrm{90\%}来自简单化合物雏形组合，数据库中的化合物条目仍在增加}}
+	\item 数据库收录的\textrm{DFT}计算的材料热力学和结构性质数据可以在线共享%\cite{OQMD_URL,NCM1-15010_2015}，
+	\item 数据库没有提供\textrm{RESTful}服务，但允许用户在\textrm{URL}地址栏输入检索化合物的字符串
+		\vskip 2pt
+		{\fontsize{6.0pt}{4.2pt}\selectfont{如~\textrm{\url{http://oqmd.org/materials/composition/Al2O3}}~表示\textrm{\ch{Al2O3}}的检索}}
+\end{itemize}
+{\fontsize{7.0pt}{4.2pt}\selectfont{软件\textrm{qmpy}是\textrm{OQMD}的\textrm{Python}的\textrm{API}:~\url{http://oqmd.org/static/docs/index.html}%\cite{qmpy_URL}
+%和全部近\textrm{300,000}个结构数据可下载
+\vskip 3pt
+\textrm{qmpy}用\textrm{Django}开发，数据库是\textrm{MySQL}形式，数据主要由\textrm{VASP}计算得到}}
+\vskip 5pt
+通过浏览器得到的\textrm{OQMD}检索数据是\texttt{HTML}格式的(而非\texttt{JSON}或\texttt{XML}格式的)
+\vskip 3pt
+\textrm{OQMD}允许用户将全部数据(约4\textrm{GB})下载到本地并保存成一个文件，对于小型的计算用户，这将提升用户对计算数据的掌控和分析能力}}
 }
 
 \frame
 {
 \frametitle{\tt{PyChemia}}
 %\subsubsection{\tt{PyChemia}}
-\textrm{Python Materials Discovery Framework~(PyChemia)}也是近年来才出现的\textrm{DFT}高通量计算框架。\textrm{PyChemia}的目标是通过涵盖\textrm{DFT}计算和\textrm{Minima Hoping}等各种方法来推动发现新材料，将\textrm{PyChemia}计算的数据存入数据库，作为后续发现新材料的备选化合物。
-
+{\fontsize{8.0pt}{4.2pt}\selectfont{\textrm{Python Materials Discovery Framework~(PyChemia)}是近年来才出现的面向\textrm{DFT}的高通量计算框架
 \begin{figure}[h!]
 \centering
-\vspace*{-0.1in}
-\includegraphics[height=2.6in]{PyChemia_code.png}
-\caption{\fontsize{7.2pt}{4.2pt}\selectfont{\textrm{PyChemia}的代码框架.}}%
+\vspace*{-0.15in}
+\includegraphics[height=2.3in]{PyChemia_code.png}
+%\caption{\fontsize{7.2pt}{4.2pt}\selectfont{\textrm{The Framework of PyChemia.}}}%
 \label{PyChemia_FireWork}
 \end{figure} 
-\textrm{PyChemia}是\textrm{Python}的一个模块，其全部代码在\textrm{GitHub}上找到\cite{PyChemia_Github}，其最初的代码是西弗吉尼亚大学\textrm{(West Virginia University)}于2014年贡献到\textrm{GitHub}网站的，近年来，\textrm{PyChemia}可支持的\textrm{DFT}计算软件有\textrm{VASP}、\textrm{ABINIT}、\textrm{Octopus}、\textrm{DFTB+}和\textrm{Fireball}等，而且利用Python模块的特点，\textrm{PyChemia}完成了对\textrm{Pymatgen}、\textrm{ASE}和\textrm{qmpy}的集成，而且相比于其他高通量材料计算软件，\textrm{PyChemia}更显著的特长是材料结构搜索，而不是简单的材料计算和数据采集。图\ref{PyChemia_FireWork}给出了\textrm{PyChemia}的代码框架。
+\textcolor{red}{目标}:~通过涵盖\textrm{DFT}计算和\textrm{Minima Hoping}等各种方法来推动发现新材料，并将\textrm{PyChemia}计算的数据存入数据库，作为后续发现新材料的备选化合物}}
+}
 
-\textrm{PyChemia}除了提供大的材料数据库作为结构搜索的基础，还可以将每一套结构搜索产生新的小型数据库，为了满足不同\textrm{DFT}计算软件包材料结构以及各种物理性质研究的需要，\textrm{PyChemia}也采用\textrm{MongoDB}的\textrm{NoSQL}数据库而非传统的关联数据库形式，以便产生结构搜索需要的小型数据库。\textrm{PyChemia}由\textrm{Python}、\textrm{Django}和\textrm{MongoDB}搭建而成，其中\textrm{Django}是\textrm{PyChemia}用于显示计算的网页前端。目前\textrm{PyChemia}仍在开发中，并未发布稳定版的软件。
+\frame
+{
+\frametitle{\tt{PyChemia}}
+{\fontsize{8.0pt}{4.2pt}\selectfont{\textrm{PyChemia}作为\textrm{Python}的一个模块，全部代码是最初于\textrm{2014}年由西弗吉尼亚大学\textrm{(West Virginia University)}分享到\textrm{GitHub}网站:\\
+\url{http://github.com/MaterialsDiscovery/PyChemia}%\cite{PyChemia_Github}，
+
+\textrm{PyChemia}的新特色
+\begin{itemize}
+	\item \textrm{PyChemia}可支持的\textrm{DFT}计算软件涵盖\textrm{VASP}、\textrm{ABINIT}、\textrm{Octopus}、\textrm{DFTB+}和\textrm{Fireball}等
+	\item 利用\textrm{Python}模块的特点，\textrm{PyChemia}完成了对\textrm{Pymatgen}、\textrm{ASE}和\textrm{qmpy}的集成
+	\item 相比于其他高通量材料计算软件，\textrm{PyChemia}更显著的特长是材料结构搜索，而不是简单的材料计算和数据采集
+		\vskip 2pt
+		{\fontsize{6.0pt}{4.2pt}\selectfont{\textrm{PyChemia}除了提供大的材料数据库作为结构搜索的基础，还可以将每一套结构搜索产生新的小型数据库}}
+\end{itemize}
+\vskip 3pt
+%图\ref{PyChemia_FireWork}给出了\textrm{PyChemia}的代码框架。
+\textrm{PyChemia}采用\textrm{MongoDB}的\textrm{NoSQL}数据库而非传统的关系型数据库形式，方便产生结构搜索需要的小型数据库
+\vskip 2pt
+{\fontsize{6.0pt}{4.2pt}\selectfont{为兼顾不同\textrm{DFT}计算软件包材料结构以及各种物理性质研究的需要}}
+\vskip 3pt
+\textrm{PyChemia}由\textrm{Python}、\textrm{Django}和\textrm{MongoDB}搭建而成，其中\textrm{Django}是\textrm{PyChemia}用于显示计算的网页前端
+
+目前\textrm{PyChemia}仍在开发中，尚未发布稳定版本的软件}}
 }
 
 \frame
 {
 	\frametitle{\tt{Atomly}}
+\textrm{Atomly}材料科学数据库%\cite{ATOMLY_URL}
+是中国科学院物理研究所刘淼研究员、孟胜研究员开发的第一原理材料数据库:~\url{https://www.atomly.net/}
 \begin{figure}[h!]
 \centering
-\vspace*{-0.2in}
+\vspace*{-0.1in}
 \includegraphics[height=2.1in,width=4.1in,viewport=5 0 1608 830,clip]{Figures/Atomly.png}
-\caption{\fontsize{7.2pt}{4.2pt}\selectfont{\textrm{Atomly:~中科院物理所~刘淼等老师开发，数据库包含了17万\!$^+$\!无机晶体材料第一性原理计算结果\textrm{(包含电子结构信息:~DOS~+~energy~bands)}.}}}%
+%\caption{\fontsize{7.2pt}{4.2pt}\selectfont{\textrm{Atomly:~中科院物理所~刘淼等老师开发，数据库包含了17万\!$^+$\!无机晶体材料第一性原理计算结果\textrm{(包含电子结构信息:~DOS~+~energy~bands)}.}}}%
 \label{Logo_Atomly_lib}
 \end{figure} 
 }
@@ -742,9 +829,19 @@
 {
 \frametitle{\tt{Atomly}}
 %\subsubsection{\tt{Atomly}}
-\textrm{Atomly}材料科学数据库\cite{ATOMLY_URL}是中国科学院物理研究所开发的第一原理材料数据库，截止到目前已经收录了超过180,000条无机材料的高质量数据。\textrm{Atomly}的目标是为科研领域带来材料数据工具平台，通过数据驱动新材料的筛选、预测和发现，提升材料研发的生产力。截止到撰稿时\textrm{Atomly}共收录232,869种化合物，228,741种能带结构和55,831种相图数据。
-
-\textrm{Atomly}提供了高通量第一原理计算流程框架\cite{arXiv2108_00359v1}，依托中科院物理所的松山湖材料实验室的计算资源，框架支持的高通量计算流程可以支持~$10^3$数量级的材料体系同时计算。同时\textrm{Atomly}的网页前端，提供便捷搜索，能快速定位到指定材料数据，并以友好的方式呈现给用户。此外，\textrm{Atomly}可以实现数据驱动的材料设计，能快速地高通量筛选，获得最优候选材料;~借助人工智能\textrm{(Artificial Intelligence, AI)}算法，\textrm{Atomly}支持材料性质预测，能更快捷、精准地预测材料性质。
+%截止到目前已经收录了超过180,000条无机材料的高质量数据。
+\textrm{Atomly}的\textcolor{red}{目标}:~为科研领域带来材料数据工具平台，通过数据驱动新材料的筛选、预测和发现，提升材料研发的生产力
+\vskip 5pt
+\textcolor{purple}{\textrm{Atomly}已收录\textrm{349,000+}种化合物，\textrm{342,00+}种能带结构和\textrm{68,000+}种相图数据}
+\vskip 3pt
+\begin{itemize}
+	\item \textrm{Atomly}提供了性能优异的高通量第一原理计算流程框架\\
+		{\fontsize{6.5pt}{4.2pt}\selectfont{依托中科院物理所的松山湖材料实验室的计算资源，框架支持的高通量计算流程可以支持~$10^3$数量级的材料体系同时计算}}
+	\item \textrm{Atomly}的网页前端，提供便捷搜索，能快速定位到指定材料数据，并以友好的方式呈现给用户
+	\item \textrm{Atomly}初步实践数据驱动的材料设计理念，能快速地完成高通量筛选，发现性能最优的候选材料
+\end{itemize}
+\vskip 5pt
+借助人工智能算法，\textrm{Atomly}支持材料性质预测，能够以更快捷、更精准的范式预测材料结构和性质
 }
 %------------------------------------------------------------------------Reference----------------------------------------------------------------------------------------------
 		\frame[allowframebreaks]
