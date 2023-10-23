@@ -325,8 +325,9 @@
 \vskip 5pt
 \begin{itemize}%[+-| alert@+>]
    \setlength{\itemsep}{8pt}
- \item $E[\rho]=F_{\mathrm{HK}}[\rho]+\displaystyle\int\rho(\vec{r})v(\vec{r})\textrm{d}\vec{r}$ \\
-\vskip 5pt 其中$F_{\mathrm{HK}}[\rho]=\underset{\Psi\to\rho}{\mathrm{Min}}\langle\Psi[\rho]|\hat{T}+\hat{W}|\Psi[\rho]\rangle$
+ \item $E[\rho]=F_{\mathrm{HK}}[\rho]+\displaystyle\int\rho(\vec{r})v(\vec{r})\textrm{d}\vec{r}$ 
+\vskip 5pt 
+其中$F_{\mathrm{HK}}[\rho]=\underset{\Psi\to\rho}{\mathrm{Min}}\langle\Psi[\rho]|\hat{T}+\hat{W}|\Psi[\rho]\rangle$
 是普适的泛函表达式。%，指明多电子体系的基态性质与基态密度间存在一一对应关系
      \textrm{\small{第一定理表明多电子体系的性质完全由体系的基态密度决定}}
    \item 如果$\tilde\Psi\neq\Psi$，
@@ -337,7 +338,7 @@
 \vskip 8pt
  \item 密度泛函理论的优越性：用密度($\rho$)代替波函数($\Psi$)描述体系
 \vskip 5pt
- \item 密度泛函理论的困难：能量密度泛函的精确形式未知
+ \item 密度泛函理论的困难:~能量密度泛函的精确形式未知
    \end{itemize}
 }
 
@@ -384,26 +385,31 @@ $\varepsilon_{\mathrm{X}}[\rho]$和$\varepsilon_{\mathrm{C}}[\rho]$可理解为�
 \frametitle{交换-相关能密度泛函}
 \textcolor{blue}{密度泛函理论的核心问题}:\\
 \textrm{Kohn-Sham}方程用于实际计算，必须知道$E_{XC}[\rho]$或者$V_{XC}[\rho]$与$\rho(\vec r)$的泛函关系
-\vskip 15pt
+\vskip 5pt
 \begin{minipage}[b]{0.59\textwidth}
  \hspace*{-15pt}
- \begin{itemize}%[+-| alert@+>]
-	 \setlength{\itemsep}{10pt}
- \fontsize{7.5pt}{6.0pt}\selectfont{
+ %\begin{itemize}[<+-|alert@+>]
+ \begin{itemize}
+	 \setlength{\itemsep}{15pt}
+		 {\fontsize{7.5pt}{6.0pt}\selectfont{
  \item \textrm{LDA}:泛函只与密度分布的局域值有关
  \item \textrm{GGA}:泛函依赖:局域密度及其梯度
  \item $meta$-\textrm{GGA}:泛函依赖的变量还有动能密度
- \item 杂化(\textrm{hybrid})泛函:泛函与占据轨道有关
+ \item 杂化\textrm{(hybrid)}泛函:泛函与占据轨道有关
  \item 其他的交换-相关能泛函
- \item<1-> 完全非局域泛函:理想泛函，不现实
-}
+ \item 完全非局域泛函:理想泛函，不现实
+ %\item<1-> 完全非局域泛函:理想泛函，不现实
+ }}
  \end{itemize}
 \end{minipage}
 \hfill
 \begin{minipage}[b]{0.39\textwidth}
+\begin{figure}[h!]
 \hspace*{-10pt}
-\includegraphics[height=1.7in,width=3.18in,viewport=10 5 1380 700,clip]{Figures/Jacobi-ladder.png}\\
+\includegraphics[height=1.9in,width=3.28in,viewport=10 5 1380 700,clip]{Figures/Jacobi-ladder.png}\\
 \centering{\textcolor{red}{\textrm{\tiny Jacob's ladder}}}
+\label{Jacobi-Ladder}
+\end{figure}
 \end{minipage}
 % \begin{itemize}%[+-| alert@+>]
 %\item 交换-相关能密度泛函
