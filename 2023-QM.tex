@@ -38,9 +38,11 @@
 \section*{}
 \frame[allowframebreaks]
 {
-  \frametitle{Outline}
+	\frametitle{\textrm{Outline}}
+{\fontsize{9.5pt}{6.2pt}\selectfont{
 %  \frametitle{\textcolor{mycolor}{\secname}}
   \tableofcontents%[current,currentsection,currentsubsection]
+}}
 }
 %%在每个section之前列出全部Outline
 %%类似的在每个subsection之前列出全部Outline是\AtBeginSubsection[]
@@ -529,7 +531,7 @@
 }
 
 %-----------------------------------------------------------------------------
-\section{\rm{Hartree-Fock~}方法}
+\section{{\rm{Hartree-Fock}}~方法}
 \frame
 {
 	\frametitle{\textrm{Born-Oppenheimer~}近似}
@@ -696,10 +698,10 @@
 }
 
 \section{密度泛函理论}       %Bookmark
-\subsection{\rm{Thomas-Fermi~}模型}       %Bookmark
+\subsection{{\rm{Thomas-Fermi~}}模型}       %Bookmark
 \frame
 {
-	\frametitle{\textrm{Thomas-Fermi}模型} 
+	\frametitle{{\textrm{Thomas-Fermi}}模型} 
 	1927年，\textrm{Thomas}和\textrm{Fermi}基于均匀电子气模型上建立\textrm{Thomas-Fermi}模型，\textcolor{blue}{体系能量可用}\textcolor{red}{电子密度}\textcolor{blue}{表示}:
 	\begin{itemize}
 		\item 动能表达式
@@ -717,7 +719,7 @@
 
 \frame
 {
-	\frametitle{\textrm{Thomas-Fermi-Dirac}模型} 
+	\frametitle{{\textrm{Thomas-Fermi-Dirac}}模型} 
 	1930年，\textrm{Dirac}将\textrm{Thomas-Fermi}模型修正，用局域密度近似考虑电子交换作用
 			\begin{displaymath}
 				\begin{aligned}
@@ -808,6 +810,16 @@ $V_{\mathrm{XC}}[\rho]=\dfrac{\delta E_{\mathrm{XC}}}{\delta\rho(\vec r)}$称为
 \textrm{Kohn-Sham}方程的实质：\\\textcolor{red}{将动能泛函的主要部分分离出来，剩余部分放在交换-相关能中}
 }
 
+\frame{
+\begin{figure}[h!]
+\vskip -10pt
+\centering
+\includegraphics[height=2.65in,width=3.8in,viewport=0 0 362 275,clip]{Figures/DFT-particle-density.png}
+\caption{\fontsize{6.0pt}{4.5pt}\selectfont{\textrm{Properties of a quantum mechanical system can be calculated by solving the SE (left). A more tractable, formally equivalent way is to solve the DFT KS equations (right).}}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Schrodinger-equation-vs-Kohn-Sham-equation}
+\end{figure}
+}
+
 \frame
 {
 \frametitle{交换-相关能与交换-相关势}
@@ -835,7 +847,7 @@ $\varepsilon_{\mathrm{X}}[\rho]$和$\varepsilon_{\mathrm{C}}[\rho]$可理解为�
 \begin{minipage}[b]{0.59\textwidth}
  \hspace*{-15pt}
  {\fontsize{7.5pt}{6.0pt}\selectfont\begin{itemize}%[+-| alert@+>]
-	 \setlength{\itemsep}{10pt}
+	 \setlength{\itemsep}{15pt}
  \item \textrm{LDA}:泛函只与密度分布的局域值有关
  \item \textrm{GGA}:泛函依赖:局域密度及其梯度
  \item $meta$-\textrm{GGA}:泛函依赖的变量还有动能密度
@@ -913,7 +925,7 @@ $\varepsilon_{\mathrm{X}}[\rho]$和$\varepsilon_{\mathrm{C}}[\rho]$可理解为�
 		\centering{TV\AE}\\
 		\centering{QVAM}\\
 		\centering{POSSEDISTI}\\
-		\centering{\textcolor{red}{ABINITO}\\}}}
+		\centering{\textcolor{red}{ABINITIO}\\}}}
 \end{minipage}
 \hspace*{5pt}
 \begin{minipage}{0.30\textwidth}
@@ -1046,7 +1058,7 @@ $\varepsilon_{\mathrm{X}}[\rho]$和$\varepsilon_{\mathrm{C}}[\rho]$可理解为�
 \end{figure} 
 }
 
-\subsection{能带、$\vec k$-空间与~\rm{Fermi~}面}
+\subsection{能带、$\vec k$-空间与~\textrm{Fermi~}面}
 \frame
 {
 \frametitle{能带、$\vec k$空间与\textrm{Fermi}面}
@@ -1193,7 +1205,7 @@ $$\mathrm{e}^{\mathrm{i}\vec q\cdot\vec r}=4\pi\sum_{lm}\mathrm{i}^lj_l(\vec q\c
 \vspace*{-0.26in}
 \includegraphics[height=1.85in,width=1.3in,viewport=0 0 750 1050,clip]{Figures/Radial_wave_functions_for_various_square_well_potential.png}
 \caption{\fontsize{5.5pt}{4.2pt}\selectfont{\textrm{The radial wave functions for \textit{l}=0 for various square well potential depths.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{Pseudo-scatter}
+\label{Radial_wave_functions}
 \end{figure}
 \vspace*{-0.1in}
 \fontsize{7.5pt}{6.2pt}\selectfont{
@@ -1252,7 +1264,7 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 }
 
 %-----------------------------------------------------------------------------------------------------------------------------------------------------------------------%
-\section{\rm{PAW}方法}
+\section{{\rm PAW}方法}
 \frame
 {
 %	\frametitle{\textrm{PAW}原子数据集}
@@ -1265,7 +1277,7 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 \end{figure}
 }
 
-\section{\rm{VASP}软件}
+\section{{\rm VASP}软件}
 \frame
 {
 	\frametitle{\textrm{VASP}软件简介}
@@ -1361,7 +1373,7 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 \end{figure}
 \end{frame}
 
-\subsection{小结}
+%\subsection{小结}
 \frame
 {
 	\frametitle{小结}
@@ -1393,7 +1405,7 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 \label{Band_Gap_SrSnO3-2}
 \vspace*{-0.50in}
 \includegraphics[height=2.10in,width=1.95in,viewport=0 0 710 550,clip]{Figures/Band-Struct_SrSnO3.png}}
-\label{Band_Gap_CUB_SrSnO3}
+\label{Band_Gap_CUB_SrSnO3-2}
 \end{figure}
 在固体能带理论中，能量色散关系$\varepsilon(\vec k)$~表示能量在倒空间中分布，其中量子数$\vec k$~(晶体动量)描述平移对称性
 %\textcolor{blue}{能带图表示能量在\textrm{Brillouin-zone~}特定方向的色散关系}
@@ -1674,7 +1686,7 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 	\end{itemize}
 }
 
-\subsection{载流子与\rm{Lorentz-Drude}模型}
+\subsection{载流子与{\rm Lorentz-Drude}模型}
 %\subsection{光子与电子的激发}
 \frame
 {
@@ -1812,7 +1824,7 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 \vspace*{-13pt}
 \includegraphics[height=2.5in,width=3.6in,viewport=0 0 200 155,clip]{Figures/Optical-conductivity-in-the-Drude-relaxation-and-in-the-Lorentz-resonance.png}
 \caption{\fontsize{5.5pt}{4.2pt}\selectfont{\textrm{Optical conductivity in the Drude relaxation and in the Lorentz resonance.}}}%
-\label{Drude-vs-Lorentz}
+\label{Relaxation-Lorentz}
 \end{figure} 
 }
 
@@ -1850,13 +1862,14 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 %	\end{itemize}
 }
 
+\subsection{带间电子的激发}
 \frame
 {
 \frametitle{带间跃迁的计算}
 \begin{itemize}
 \setlength{\itemsep}{10pt}
 	\item 用半经典方法处理周期性体系的光学性质，用量子力学处理介质，对电磁波仍然采用经典电动力学描写
-	\item 以半导体中的带间垂直跃迁(价带$|v,\vec k\rangle$，导带$|c,\vec k\rangle$)为例讨论固体的能带间跃迁
+	\item 以半导体中的带间垂直跃迁(价带$|v,\vec k\rangle$，导带$|c,\vec k\rangle$)为例讨论固体的能带间跃迁(\textcolor{red}{含时微扰})
 \begin{figure}[h!]
 \centering
 %\hspace*{-10pt}
@@ -1868,75 +1881,164 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 \end{itemize}
 }
 
-\subsection{带间电子的激发}
 \frame
 {
-	\frametitle{带间跃迁的计算}
+	\frametitle{\textrm{Lorenz~gauge}}
+	根据\textrm{Lorenz}规范\footnote{\fontsize{4.8pt}{4.0pt}\selectfont{\textrm{Lorenz}在1867年提出的电磁势满足的规范条件:~
+	\begin{displaymath}
+		\nabla\cdot\mathbf{A}+\mu_0\varepsilon_0\frac{\partial\phi}{\partial t}=0
+	\end{displaymath}
+	\textcolor{red}{注}:~\textrm{Ludvig Valentin Lorenz~(1829-1891)}是丹麦人(中译作~\textcolor{blue}{洛伦茨})\\
+  	~~~~~\textrm{Hendrik A. Lorentz~(1853-1928)是荷兰人(中译作~\textcolor{blue}{洛伦兹})}}}，电磁场可以表示为
+\begin{displaymath}
+%  \left\{
+\begin{aligned}
+	\vec E&=-\nabla\phi-\frac{\partial\mathbf{A}}{\partial t}\\
+	\vec B&=\nabla\times\mathbf{A}
+  \end{aligned}%\right. 
+  \label{eq:optic-26}
+\end{displaymath}
+%\end{itemize}
+{\fontsize{8.2pt}{4.0pt}\selectfont{式中$\phi$为是标量势，$\mathbf{A}$是矢量势}}\\
 %\begin{itemize}
-	晶体中动量为$\vec p$的电子在电磁场(电磁场矢量势为$\mathbf{A}$)存在情况下，应用含时微扰理论，
+%频率为$\omega$的平面偏振光，
+当电子体系用单电子\textrm{Hamiltonian}描述时
+\begin{displaymath}
+	H_0=\frac{{\vec p}^2}{2m}+V(\vec r)
+\end{displaymath}
+辐射场$\mathbf{A}$与电子的作用会引起电子动量的改变，应用含时微扰理论，电子的动量将表示为
+	\begin{displaymath}
+		\mathbf{p}\rightarrow\vec p+\frac{e}{c}\mathbf{A}(\vec r,t)
+	\end{displaymath}
+%	{\fontsize{7.2pt}{4.0pt}\selectfont{这里$e$是电子电荷，$c$是光速}}
+}
+
+\frame
+{
+	\frametitle{横波电磁场下的电场与电子的相互作用}
+	当\textcolor{blue}{标量势为零}($\phi=0$)，并且矢量势满足~\textcolor{purple}{\textrm{Coulomb}规范}
+	\begin{displaymath}
+		\nabla\cdot\mathbf{A}=0
+	\end{displaymath}
+	因此\textcolor{blue}{标量积$\mathbf{p}\cdot\mathbf{A}$与$\mathbf{A}\cdot\mathbf{p}$相等}，有
 \begin{displaymath}
 	\hspace*{-10pt}
-	H=\frac1{2m}[\vec p+\frac{e}c\mathbf{A}(\vec r,t)]^2+V(\vec r)=\left[ \frac{\vec p^2}{2m}+V(\vec r) \right]+\frac{e}{mc}\mathbf{A}\cdot\vec p+\frac{e^2}{2mc^2}\mathbf{A}^2
+	H=\frac1{2m}[\vec p+\frac{e}c\mathbf{A}(\vec r,t)]^2+V(\vec r)=\left[ \frac{\vec p^2}{2m}+V(\vec r) \right]+\textcolor{blue}{\frac{e}{mc}\mathbf{A}\cdot\vec p}+\textcolor{magenta}{\frac{e^2}{2mc^2}\mathbf{A}^2}
 \end{displaymath}
-其中电磁波
+其中后两项表示量子尺度内电子与矢量场的相互作用，并忽略电子自旋与磁场的相互作用
+
+\textcolor{blue}{频率为$\omega$的横波}，波矢为$\vec q$，电场极化矢量方向$\mathbf{e}$，则矢量势
 \begin{displaymath}
-	\mathbf{A}(\vec r,t)=A_0\mathbf{e}\mathrm{e}^{\mathrm{i}(\vec q\cdot\vec r-\omega t)}+\mathrm{c.c}\quad\mathbf{e}\bot\vec q
+	\mathbf{A}(\vec r,t)=A_0\mathbf{e}\mathrm{e}^{\mathrm{i}(\vec q\cdot\vec r-\omega t)}+\mathrm{c.c}\quad\textcolor{red}{\mathbf{e}\bot\vec q}
 \end{displaymath}
-准确到$\vec A$的线性项(忽略$\vec A$的平方项)\textrm{Hamiltonian}为:
+准确到$\mathbf{A}$的线性项(忽略$\mathbf{A}$的平方项)\footnote{\fontsize{5.2pt}{4.0pt}\selectfont{偶极近似下，这是合理的近似}}，则体系~\textrm{Hamiltonian}为:
 \begin{displaymath}
 	H=\left[ \frac{\vec p^2}{2m}+V(\vec r) \right]+\frac{eA_0}{mc}\mathrm{e}^{\mathrm{i}(\vec q\cdot\vec r-\omega t)}\mathbf{e}\cdot\vec p+\frac{eA_0}{mc}\mathrm{e}^{-\mathrm{i}(\vec q\cdot\vec r-\omega t)}\mathbf{e}\cdot\vec p
 \end{displaymath}
 %	\item 
-频率为$\omega$的平面偏振光，电场和磁场的强度为
-\begin{displaymath}
-%  \left\{
-\begin{aligned}
-	\vec E&=-\frac1c\frac{\partial\mathbf{A}}{\partial t}\\
-	\vec B&=\nabla\times\mathbf{A}
-  \end{aligned}%\right.
-  \label{eq:optic-26}
-\end{displaymath}
-%\end{itemize}
-%式中$c$为光速。
 }
 
 \frame
 {
-\frametitle{带间跃迁的计算}
-在含时微扰\textrm{Hamiltonian}作用下，带间垂直跃迁为
+\frametitle{带间跃迁与电导}
+在含时微扰\textrm{Hamiltonian}作用下，带间跃迁的能量贡献为
 \begin{displaymath}
 	\begin{aligned}
-		W(\vec q,\omega)=&\frac{2\pi}{\hbar}\left( \frac{eA_0}{m_ec} \right)^22\sum_{i,j}|\langle c,\vec k|\mathrm{e}^{\mathrm{i}\vec q\cdot\vec r}\mathbf{e}\cdot\vec p|v,\vec k\rangle|^2\\
-		\times&\delta[E_c(\vec k)-E_v(\vec k)-\omega][f(E_c(\vec k))-f(E_v(\vec k))]
+		W(\vec q,\omega)=&\frac{2\pi}{\hbar}\left( \frac{eA_0}{m_ec} \right)^2\textcolor{blue}{2}\sum_{i,j}|\langle\psi_j|\textcolor{red}{\mathrm{e}^{\mathrm{i}\vec q\cdot\vec r}\mathbf{e}\cdot\vec p}|\psi_i\rangle|^2\\
+		\times&\delta[E_j-E_i-\hbar\omega][f(E_i)-f(E_j))]
 	\end{aligned}
   \label{eq:optic-27}
 \end{displaymath}
-$\delta$因子表示跃迁过程的能量守恒关系%，矩阵元$\langle c\vec k|H'|v\vec k\rangle$表示\textrm{Bloch}函数间的积分
-。对垂直跃迁，忽略磁场贡献，%矩阵元可以简写成$\dfrac1cA_0\vec e\cdot\vec M_{cv}(\vec k)$，$\vec s$为电磁波矢量势$\vec A_0(=A_0\vec s)$方向的单位矢量。
+\begin{itemize}
+	\item $\delta$因子表示跃迁过程的能量守恒关系
+	\item 系数\textcolor{blue}{$2$}表示自旋简并态求和
+\end{itemize}
+%矩阵元$\langle c\vec k|H'|v\vec k\rangle$表示\textrm{Bloch}函数间的积分
+忽略磁场贡献，%矩阵元可以简写成$\dfrac1cA_0\vec e\cdot\vec M_{cv}(\vec k)$，$\vec s$为电磁波矢量势$\vec A_0(=A_0\vec s)$方向的单位矢量。
 只有满足能量守恒和动量守恒条件的跃迁才对积分有贡献。%$\displaystyle\int W\dfrac{\textrm{d}\vec k}{(2\pi)^3}$为单位体积、单位时间内吸收能量为$\omega$的光子的总数，系数2是考虑两种自旋态。将式\eqref{eq:optic-27}，\eqref{eq:optic-28}代入式\eqref{eq:optic-29}，并应用$\dfrac{A_0}c\vec e\cdot\vec M_{cv}(\vec k)$表示矩阵元，得
 
-电磁波在介质中产生的电场
+在介质中由矢量势产生的电场为
 \begin{displaymath}
-	\mathbf{E}(\vec r,t)=-\frac1c\frac{\partial\mathbf{A}}{\partial t}=E_0\mathbf{e}\mathrm{e}^{\mathrm{i}\vec q\cdot\vec r-\omega t}+\mathrm{c.c}\quad\mbox{其中}E_0=\mathrm{i}\omega\frac{A_0}c
+	\textcolor{red}{\mathbf{E}(\vec r,t)=-\frac1c\frac{\partial\mathbf{A}}{\partial t}}=E_0\mathbf{e}\mathrm{e}^{\mathrm{i}\vec q\cdot\vec r-\omega t}+\mathrm{c.c}\quad\mbox{其中}E_0=\mathrm{i}\omega\frac{A_0}c
 \end{displaymath}
 
-介质中的传导电流
+介质中的传导电流(与电场方向平行)
 \begin{displaymath}
-	\mathbf{J}(\vec r,t)=\sigma(\vec q,\omega)E_0\mathbf{e}\mathrm{e}^{\mathrm{i}(\vec q\cdot\vec r-\omega t)}+\mathrm{c.c}\quad(\mathbf{e}\bot\vec q)
-\end{displaymath}
-由此计算得到吸收功率
-\begin{displaymath}
-	\int_V\mathbf{J}\cdot\mathbf{E}\mathrm{d}\vec r=2\sigma_1(\vec q,\omega)|E_0|^2V=2\sigma_1(\vec q,\omega)\frac1{c^2}\omega^2A_0^2V=\textcolor{blue}{\hbar\omega W(\vec q,\omega)}
+	\mathbf{J}(\vec r,t)=\sigma(\vec q,\omega)E_0\mathbf{e}\mathrm{e}^{\mathrm{i}(\vec q\cdot\vec r-\omega t)}+\mathrm{c.c}\quad(\textcolor{red}{\mathbf{e}\bot\vec q})
 \end{displaymath}
 }
 
 \frame
 {
-	\frametitle{带间跃迁的计算}
-长波极限下($\vec q\rightarrow0$)， 根据光学性质的基本关系，可有介电函数的介电函数虚部表达式
+	\frametitle{横向介电函数\textrm{(transverse dielectric function)}}
+	当存在外电场$\mathbf{E}$，介质中的传导电流$\mathbf{J}$单位时间消耗的能量为$\int_V\mathbf{J}\cdot\mathbf{E}\mathrm{d}\vec r$，因此有
+由此计算得到吸收功率
+{\fontsize{8.2pt}{6.2pt}\selectfont{
 \begin{displaymath}
 	\begin{aligned}
-		\varepsilon_2(\omega)=&\lim_{\vec q\rightarrow0}\frac{8\pi^2e^2}{m_e^2\omega^2}\int\frac{\mathrm{d}\vec k}{(2\pi)^3}|\langle c,\vec k|\mathbf{e}\cdot\vec p|v,\vec k\rangle|^2\\
+		\int_V\mathbf{J}\cdot\mathbf{E}\mathrm{d}\vec r=&\int_V[\sigma(\vec q,\omega)E_0\mathrm{e}^{\vec q\cdot\vec r-\omega t}+\mathrm{c.c}][E_0\mathrm{e}^{\vec q\cdot\vec r-\omega t}+\mathrm{c.c}]\mathrm{d}\vec r=\sigma(\vec q,\omega)|E_0|^2V+\mathrm{c.c}\\
+		=&2\sigma_{\textcolor{blue}{1}}(\vec q,\omega)|E_0|^2V=2\sigma_1(\vec q,\omega)\frac1{c^2}\omega^2A_0^2V=\textcolor{blue}{\hbar\omega W(\vec q,\omega)}
+	\end{aligned}
+\end{displaymath}}}
+因此电导率的实部为
+\begin{displaymath}
+	\sigma_1(\vec q,\omega)=\frac{e^2}{2V}\frac{\hbar\omega W(\vec q,\omega)}{\omega^2A_0^2}
+\end{displaymath}
+根据介电函数与电导率的关系，有
+\begin{displaymath}
+	\varepsilon(\vec q,\omega)=1+\frac{4\pi\mathrm{i}}{\omega}\sigma(\vec q,\omega)
+\end{displaymath}
+于是横向介电函数的虚部为
+\begin{displaymath}
+	\varepsilon_2(\vec q,\omega)=\frac{8\pi^2e^2}{m_e^2\omega^2}\frac1V\sum_{ij}|\langle\psi_j|\mathrm{e}^{\mathrm{i}\vec q\cdot\vec r}\mathbf{e}\cdot\vec p|\psi_i\rangle|^2\delta(E_j-E_i-\hbar\omega)[f(E_i)-f(E_j)]
+\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{$\vec k$空间表示的横向介电函数}
+对于周期体系，横向介电函数的虚部为
+{\fontsize{9.2pt}{6.2pt}\selectfont{
+\begin{displaymath}
+	\hspace*{-13pt}
+	\varepsilon_2(\vec q,\omega)=\frac{8\pi^2e^2}{m_e^2\omega^2}\frac1V\sum_{i,j,\vec k}|\langle\psi_{\vec k+\vec q}^c|\mathrm{e}^{\mathrm{i}\vec q\cdot\vec r}\mathbf{e}\cdot\vec p|\psi_{\vec k}^v\rangle|^2\delta(E_{\vec k+\vec q}^c-E_{\vec k}^v-\hbar\omega)[f(E_{\vec k}^v)-f(E_{\vec k+\vec q}^c)]
+\end{displaymath}}}
+{\fontsize{7.5pt}{6.2pt}\selectfont{
+\textrm{Block}表象下，波函数$|\psi_{\vec k}^n\rangle=\mathrm{e}^{\mathrm{i}\vec k\cdot\vec r}|u_{\vec k}^n\rangle$的周期部分$|u_{\vec k}^n\rangle$对应的\textrm{Hamiltonian}写成
+\begin{displaymath}
+	H_0(\vec k)=-\frac{\hbar^2}{2m_e}(\vec p_{\vec k})^2+V = -\frac{\hbar^2}{2m_e}(\nabla+\mathrm{i}\vec k)^2+V
+\end{displaymath}
+并有$H_0(\vec k)|u_{\vec k}^n\rangle=E_{\vec k}^n|u_{\vec k}^n\rangle$\\
+注意到关系式
+	\begin{displaymath}
+		\begin{aligned}
+			&\dfrac{\partial H(\vec k)}{\partial \vec k}=\mathrm{i}[H_{\vec k},\vec r]=\hbar\vec v_k=\hbar\frac{\vec p_k}{m_e}=-\mathrm{i}\frac{\hbar^2}{m_e}(\nabla+\mathrm{i}\vec k)\\
+			&\Longrightarrow\langle u_{m\vec k}|[\vec r,H_{\vec k}]|u_{n\vec k}\rangle=(E_{n\vec k}-E_{m\vec k})\langle u_{m\vec k}|\vec r|u_{n\vec k}\rangle
+		\end{aligned}
+	\end{displaymath}
+}}
+在$\vec k$空间，横向介电函数的虚部可表示为
+{\fontsize{6.5pt}{6.2pt}\selectfont{
+\begin{displaymath}
+	\hspace*{-10pt}
+	\varepsilon_2(\vec q,\omega)=\frac{8\pi^2e^2}{\omega^2}\frac1V\sum_{i,j,\vec k}|\langle u_{\vec k+\vec q}^c|\mathrm{e}^{\mathrm{i}\vec q\cdot\vec r}\mathbf{e}\cdot\vec r|u_{\vec k}^v\rangle(E_{\vec k+\vec q}^c-E_{\vec k}^v)|^2\delta(E_{\vec k+\vec q}^c-E_{\vec k}^v-\hbar\omega)[f(E_{\vec k}^v)-f(E_{\vec k+\vec q}^c)]
+\end{displaymath}}}
+当$\vec q$足够小时，可引入假设$\psi_{\vec k+\vec q}^c\approx\mathrm{exp}(\mathrm{i}\vec q\cdot\vec r)\psi_{\vec k}^c$，%于是可有
+%{\fontsize{9.5pt}{6.2pt}\selectfont{
+%\begin{displaymath}
+%	\hspace*{-15pt}
+%	\varepsilon_2(\omega)\approx\frac{8\pi^2e^2}{m_e^2\omega^2}\frac1V\sum_{i,j,\vec k}|\langle u_{\vec k}^c|\mathbf{e}\cdot(\mathrm{i}\nabla-\vec k)|u_{\vec k}^v\rangle|^2\delta(E_{\vec k}^c-E_{\vec k}^v-\hbar\omega)[f(E_{\vec k}^v)-f(E_{\vec k}^c)]
+%\end{displaymath}}}
+简化计算
+}
+
+\frame
+{
+	\frametitle{长波极限下的横向介电函数}
+因此，在长波极限下($\vec q\rightarrow0$)，横向介电函数虚部简化为
+\begin{displaymath}
+	\begin{aligned}
+		\varepsilon_2(\omega)=&\lim_{\vec q\rightarrow0}\frac{8\pi^2e^2}{m_e^2\omega^2}\sum_{v}^{\mathrm{occ}}\sum_{c}^{\mathrm{unocc}}\int\frac{\mathrm{d}\vec k}{(2\pi)^3}|\langle c,\vec k|\mathbf{e}\cdot\vec p|v,\vec k\rangle|^2\\
 		\times&\delta(E_c(\vec k)-E_v(\vec k)-\hbar\omega)[f(E_c(\vec k))-f(E_v(\vec k))]
 	\end{aligned}
   \label{eq:optic-varepsilon_2}
@@ -1950,38 +2052,44 @@ $\varepsilon_2(\omega)$是晶体的光学吸收和能带结构之间的基本关
   \label{eq:optic-varepsilon_1}
 \end{displaymath}
 因此介电函数表示为
+{\fontsize{9.5pt}{6.2pt}\selectfont{
 \begin{displaymath}
-	\hspace*{-10pt}
-	\varepsilon(\omega)=1+\frac{8\pi e^2}{m_e^2}\int\frac{\mathrm{d}\vec k}{(2\pi)^3}\frac{|\langle c,\vec k|\mathbf{e}\cdot\vec p|v,\vec k\rangle|^2}{(E_c(\vec k)-E_v(\vec k))/\hbar^2}\frac{(-\mathrm{i})[f(E_c(\vec k))-f(E_v(\vec k))]}{E_c(\vec k)-E_v(\vec k)-\hbar\omega-\mathrm{i}\eta}
+	\hspace*{-13pt}
+	\varepsilon(\omega)=1+\frac{8\pi e^2}{m_e^2}\sum_{v,c}\int\frac{\mathrm{d}\vec k}{(2\pi)^3}\frac{|\langle c,\vec k|\mathbf{e}\cdot\vec p|v,\vec k\rangle|^2}{(E_c(\vec k)-E_v(\vec k))^2/\hbar^2}\frac{[f(E_v(\vec k))-f(E_c(\vec k))]}{E_c(\vec k)-E_v(\vec k)-\hbar\omega-\mathrm{i}\eta}
   \label{eq:optic-varepsilon}
-\end{displaymath}
+\end{displaymath}}}
 }
 
 \frame
 {
-	\frametitle{带间跃迁和带内跃迁的计算}
-电导率函数可表示为
+	\frametitle{带内跃迁$^{\ast}$}
+\fontsize{8.2pt}{6.2pt}\selectfont{
+一般地，带内跃迁的电导率函数可表示为
 \begin{displaymath}
-	\sigma(\omega)=\frac{2e^2}{m_e^2}\int\frac{\mathrm{d}\vec k}{(2\pi)^3}\frac{|\langle c,\vec k|\mathbf{e}\cdot\vec p|v,\vec k\rangle|^2}{(E_c(\vec k)-E_v(\vec k))/\hbar}\frac{(-\mathrm{i})[f(E_c(\vec k))-f(E_v(\vec k))]}{E_c(\vec k)-E_v(\vec k)-\hbar\omega-\mathrm{i}\eta}
-  \label{eq:optic-sigma}
+	\sigma(\vec q,\omega)=\frac{2e^2}{m_e^2}\int\frac{\mathrm{d}\vec k}{(2\pi)^3}\frac{|\langle\psi_{\textcolor{red}{\vec k+\vec q}}|\mathrm{e}^{\mathrm{i}\vec q\cdot\vec r}\mathbf{e}\cdot\vec p|\psi_{\textcolor{red}{\vec k}}\rangle|^2}{(E_{\textcolor{red}{\vec k+\vec q}}-E_{\textcolor{red}{\vec k}})/\hbar}\frac{(-\mathrm{i})[f(E_{\textcolor{red}{\vec k}})-f(E_{\textcolor{red}{\vec k+\vec q}})]}{E_{\textcolor{red}{\vec k+\vec q}}-E_{\textcolor{red}{\vec k}}-\hbar\omega-\mathrm{i}\eta}
+  \label{eq:optic-intra-sigma}
 \end{displaymath}
-
-\textcolor{violet}{推广到长波极限下的带内跃迁}
+%\textcolor{violet}{推广到长波极限下的带内跃迁}
+当$\vec q$足够小，有近似
 \begin{displaymath}
-	f(E_c(\vec k))-f(E_v(\vec k))\approx\frac{\partial f}{\partial E}(f(E_c(\vec k))-f(E_v(\vec k)))
+	f(E_{\vec k+\vec q})-f(E_{\vec k})\approx\frac{\partial f}{\partial E}(E_{\vec k+\vec q}-E_{\vec k})
+\end{displaymath}
+\textcolor{violet}{假设$\psi_{\vec k+\vec q}\approx\mathrm{exp}(\mathrm{i}\vec q\cdot\vec r)\psi_{\vec k}$成立}，于是可有
+\begin{displaymath}
+	\frac1{m_e}\langle\psi_{\vec k+\vec q}|\mathrm{e}^{\mathrm{i}\vec q\cdot\vec r}\vec p|\psi_{\vec k}\rangle\approx\frac1{m_e}\langle\psi_{\vec k}|\vec p|\psi_{\vec k}\rangle=\vec v
 \end{displaymath}
 \begin{displaymath}
-	\sigma(\omega)=\frac{e^2\hbar}{4\pi^3}\int\mathrm{d}\vec k\langle c,\vec k|\mathbf{e}\cdot\vec p|v,\vec k\rangle|^2\frac{-\mathrm{i}}{E_c(\vec k)-E_v(\vec k)-\hbar\omega-\mathrm{i}\eta}\left( -\frac{\partial f}{\partial E} \right)
+	\sigma(\vec q,\omega)=\frac{e^2\hbar}{4\pi^3}\int\mathrm{d}\vec k(\mathbf{e}\cdot\vec v)^2\frac{-\mathrm{i}}{E_{\vec k+\vec q}-E_{\vec k}-\hbar\omega-\mathrm{i}\eta}\left(\textcolor{red}{ -\frac{\partial f}{\partial E}} \right)
 \end{displaymath}
-引入等式$\eta=\hbar/\tau$，并作展开
+注意到%$E_{\mathrm{\vec k+\vec q}}-E_{\mathrm{k}}\approx\vec q\cdot(\partial E/\partial\vec k)=\vec q\cdot\vec v\hbar$，:
 \begin{displaymath}
-	E_{\vec k+\vec q}-E_{\vec k}\approx\vec q\cdot(\partial E/\partial\vec k)=\frac{\hbar}{m_e}\langle c,\vec k|\mathbf{q}\cdot\vec p|v,\vec k\rangle
+	E_{\vec k+\vec q}-E_{\vec k}\approx\vec q\cdot(\partial E/\partial\vec k)=\vec q\cdot\vec v\hbar
 \end{displaymath}
-由此可得
+并引入等式$\eta=\hbar/\tau$可得与\textrm{Boltzmann}输运一致的结果
 \vspace{-5pt}
 \begin{displaymath}
-	\sigma(\vec q,\omega)=\frac{e^2}{4\pi^3}\int\mathrm{d}\vec k\frac{\tau|\langle c,\vec k|\mathbf{e}\cdot\vec p|v,\vec k\rangle|^2}{1-\mathrm{i}\tau(\omega-\langle c,\vec k|\mathbf{q}\cdot\vec p|v,\vec k\rangle)}\left( -\frac{\partial f}{\partial E} \right)
-\end{displaymath}
+	\sigma(\vec q,\omega)=\frac{e^2}{4\pi^3}\int\frac{\tau(\mathbf{e}\cdot\vec v)^2}{1-\mathrm{i}\tau(\omega-\vec q\cdot\vec v)}\left( -\frac{\partial f}{\partial E} \right)\mathrm{d}\vec k
+\end{displaymath}}
 }
 
 \frame
@@ -2013,6 +2121,170 @@ $\varepsilon_2(\omega)$是晶体的光学吸收和能带结构之间的基本关
 \caption{\fontsize{5.2pt}{4.0pt}\selectfont\textrm{Schematic representation of the joint-DOS and the Van-Hove singularity.}}%
 \label{Optic-JDOS}
 \end{figure} 
+}
+
+\frame
+{
+	\frametitle{纵波电磁场下的电场与电子的相互作用}
+仿照横波电磁场，以下讨论纵波电磁场下电子对电场的响应
+
+用于描述电子的单电子\textrm{Hamiltonian}为
+\begin{displaymath}
+	H_0=\frac{\hbar^2{\nabla}^2}{2m}+V(\vec r)
+\end{displaymath}
+
+外加的波矢为$\vec q$频率为$\omega$微扰辐射为
+\begin{displaymath}
+	U(\vec r,t)=A_0\mathrm{e}^{\mathrm{i}(\vec q\cdot\vec r-\omega t)}+\mathrm{c.c.}
+\end{displaymath}
+这里$A_0=A_{\mathrm{tot}}(\vec q,\omega)$表示扰动的振幅
+
+\textcolor{blue}{辐射场贡献的静电势}~(标量势)
+\begin{displaymath}
+	\phi(\vec r,t)=U(\vec r,t)/(-e)
+\end{displaymath}
+相应的\textcolor{red}{纵向电场$\mathbf{E}=-\nabla\phi$}
+\begin{displaymath}
+	\mathbf{E}(\vec r,t)=E_0\mathbf{e}\mathrm{e}^{\mathrm{i}(\vec q\cdot\vec r-\omega t)}+\mathrm{c.c}\quad\textcolor{red}{\mathbf{e}\parallel\vec q}
+\end{displaymath}
+并有$E_0=\mathrm{i}qA_0/e$，\textcolor{blue}{电场矢量与波矢方向平行}
+}
+
+\frame
+{
+	\frametitle{纵波电磁场下的电场与电子的相互作用}
+微扰体系的\textrm{Hamiltonian}
+\begin{displaymath}
+	H=H_0+A_0\mathrm{e}^{\mathrm{i}(\vec q\cdot\vec r-\omega t)}+A_0^{\ast}\mathrm{e}^{-\mathrm{i}(\vec q\cdot\vec r-\omega t)}
+\end{displaymath}
+\textcolor{violet}{微扰项的存在将诱导$H_0$的本征态中的电子发生跃迁}，两个微扰项分别伴随能量$\hbar\omega$的吸收和释放
+
+根据标准\textrm{Fermi-golden}法则，单位时间内发生的全部吸收-释放过程，对应的能量(功率)
+{\fontsize{9.0pt}{6.2pt}\selectfont{
+\begin{displaymath}
+\begin{aligned}
+P(\vec q,\omega)=&\hbar\omega W(\vec q,\omega)\\
+=&\hbar\omega\times\frac{2\pi}{\hbar}\textcolor{blue}{2}\sum_{\alpha,\beta}|\langle\psi_{\beta}|A_0\mathrm{e}^{\mathrm{i}\vec q\cdot\vec r}|\psi_{\alpha}\rangle|^2\delta(E_{\beta}-E_{\alpha}-\hbar\omega)[f(E_{\alpha})-f(E_{\beta}))]\\
+=&4\pi\omega|A_0|^2\sum_{\alpha,\beta}|\langle\psi_{\beta}|\textcolor{red}{\mathrm{e}^{\mathrm{i}\vec q\cdot\vec r}}|\psi_{\alpha}\rangle|^2\delta(E_{\beta}-E_{\alpha}-\hbar\omega)[f(E_{\alpha})-f(E_{\beta}))]
+\end{aligned}
+\end{displaymath}}}
+与横波电磁场中的推导类似
+\begin{itemize}
+	\item $\delta$因子表示跃迁过程的能量守恒关系
+	\item 系数\textcolor{blue}{$2$}表示自旋简并态求和
+\end{itemize}
+}
+
+\frame
+{
+	\frametitle{纵向介电函数\textrm{(longitudinal dielectric function)}}
+	介质中由静电势$\phi$产生的电场$\mathbf{E}(\vec r,t)$，将产生传导电流
+	\begin{displaymath}
+		\mathbf{J}(\vec r,t)=\sigma(\vec q,\omega)E_0\mathbf{e}\mathrm{e}^{\mathrm{i}(\vec q\cdot\vec r-\omega t)}+\mathrm{c.c}\quad(\textcolor{red}{\mathbf{e}\parallel\vec q})
+	\end{displaymath}
+	传导电流$\mathbf{J}$单位时间消耗的能量为$\int_V\mathbf{J}\cdot\mathbf{E}\mathrm{d}\vec r$，因此有
+由此计算得到吸收功率
+{\fontsize{8.2pt}{6.2pt}\selectfont{
+\begin{displaymath}
+	\begin{aligned}
+		\int_V\mathbf{J}\cdot\mathbf{E}\mathrm{d}\vec r=&\int_V[\sigma(\vec q,\omega)E_0\mathrm{e}^{\vec q\cdot\vec r-\omega t}+\mathrm{c.c}][E_0\mathrm{e}^{\vec q\cdot\vec r-\omega t}+\mathrm{c.c}]\mathrm{d}\vec r=\sigma(\vec q,\omega)|E_0|^2V+\mathrm{c.c}\\
+		=&2\sigma_{\textcolor{blue}{1}}(\vec q,\omega)|E_0|^2V=2\sigma_1(\vec q,\omega)\frac{q^2}{e^2}|A_0|^2V=\textcolor{blue}{\hbar\omega W(\vec q,\omega)}
+	\end{aligned}
+\end{displaymath}}}
+因此得到电导率的实部
+\begin{displaymath}
+	\sigma_1(\vec q,\omega)=\frac12\frac{e^2}{q^2}\frac{\hbar\omega W(\vec q,\omega)}{|A_0|^2V}
+\end{displaymath}
+于是纵向介电函数的虚部为
+\begin{displaymath}
+	\varepsilon_2(\vec q,\omega)=\frac{8\pi^2e^2}{q^2V}\sum_{\alpha\beta}|\langle\psi_{\beta}|\mathrm{e}^{\mathrm{i}\vec q\cdot\vec r}|\psi_{\alpha}\rangle|^2\delta(E_{\beta}-E_{\alpha}-\hbar\omega)[f(E_{\alpha})-f(E_{\beta})]
+\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{纵向介电函数\textrm{(longitudinal dielectric function)}}
+	利用介电函数虚部-实部变换的\textrm{(Kramers-Kronig)}关系
+	\begin{displaymath}
+		\varepsilon_1(\vec q,\omega)=1+\frac1{\pi}\mathscr{P}\int_{-\infty}^{+\infty}\frac{\varepsilon_2(\vec q,\omega)}{\omega^{\prime}-\omega}\mathrm{d}\omega^{\prime}
+	\end{displaymath}
+介电函数的实部为
+\begin{displaymath}
+	\varepsilon_1(\vec q,\omega)=1+\frac{8\pi^2e^2}{q^2}\frac1V\sum_{\alpha\beta}|\langle\psi_{\beta}|\mathrm{e}^{\mathrm{i}\vec q\cdot\vec r}|\psi_{\alpha}\rangle|^2\frac{f(E_{\alpha})-f(E_{\beta})}{E_{\beta}-E_{\alpha}-\hbar\omega}
+\end{displaymath}
+因此纵向介电函数为
+	\begin{displaymath}
+		\varepsilon(\vec q,\omega)=1+\frac{8\pi^2e^2}{q^2}\frac1V\sum_{\alpha\beta}\frac{|\langle\psi_{\beta}|\mathrm{e}^{\mathrm{i}\vec q\cdot\vec r}|\psi_{\alpha}\rangle|^2}{E_{\beta}-E_{\alpha}-\hbar\omega-\mathrm{i}\eta}[f(E_{\alpha})-f(E_{\beta})]
+	\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{长波极限下的纵向与横向介电函数}
+	在长波极限下$\vec q\rightarrow0$，此时介电函数的主要贡献来自
+	\begin{displaymath}
+		\langle\psi_{\beta}|\mathrm{e}^{\mathrm{i}\vec q\cdot\vec r}|\psi_{\alpha}\rangle=\mathrm{i}\vec q\cdot\langle\psi_{\beta}|\vec r|\psi_{\alpha}\rangle=\frac{\hbar}{m_e}\frac{\mathrm{i}\vec q\cdot\langle\psi_{\beta}|\vec p|\psi_{\alpha}\rangle}{E_{\beta}-E_{\alpha}}
+	\end{displaymath}
+	推导过程中利用了
+	\begin{itemize}
+		\item 将$\mathrm{e}^{\mathrm{i}\vec q\cdot\vec r}$展开到一阶
+			\begin{displaymath}
+				\mathrm{e}^{\mathrm{i}\vec q\cdot\vec r}=1+\mathrm{i}\vec q\cdot\vec r+\mathcal{O}(\vec q^2)
+			\end{displaymath}
+		\item 对易关系
+			\begin{displaymath}
+				[H_0,\vec r]=-\frac{\mathrm{i}\hbar}{m_e}\vec p
+			\end{displaymath}
+	\end{itemize}
+	引入微扰电场极化矢量$\vec q$的方向$\mathbf{e}$，不难看出:\\
+	\textcolor{purple}{长波极限下，纵向介电函数与横向介电函数趋于一致}
+	\begin{displaymath}
+		\varepsilon(\textcolor{blue}{0},\omega)=1+\frac{8\pi^2e^2}{m^2}\frac1V\sum_{\alpha\beta}\frac{|\langle\psi_{\beta}|\textcolor{red}{\mathbf{e}\cdot\vec p}|\psi_{\alpha}\rangle|^2}{[(E_{\beta}-E_{\alpha})/\hbar]^2}\frac{f(E_{\alpha})-f(E_{\beta})}{E_{\beta}-E_{\alpha}-\hbar\omega-\mathrm{i}\eta}
+	\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{长波极限下的光学函数的计算}
+	原则上，横向介电函数的计算方案较为方便，但是横向介电函数推导时要求矢量场满足\textrm{Coulomb}规范:$\nabla\cdot\mathbf{A}=0$，这是一个大制约
+	\begin{itemize}
+		\item 横向介电函数的计算结果一般不如纵向介电函数
+		\item 只有在局域势条件下，跃迁矩阵元计算才能利用对易关系简化
+	\end{itemize}
+	赝势方法中，由于存在非局域势，对易关系发生改变
+	\begin{displaymath}
+		[H,\vec r]=-\frac{\mathrm{i}\hbar}{m_e}\vec p+\textcolor{red}{\mathrm{i}[v_{\mathrm{nl}},\vec r]}
+	\end{displaymath}
+	\begin{itemize}
+		\item \textcolor{blue}{全势方法的光学函数一般采用横向介电函数计算方案}
+		\item \textcolor{violet}{赝势和\textrm{PAW}方法，光学函数主要采用纵向介电函数方案计算}
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{长波极限下的光学函数的计算}
+	在$\vec k$空间计算纵向介电函数时，将遇到大量的跃迁矩阵元
+	\begin{displaymath}
+		\frac{\vec q}q\cdot\vec p_{\alpha\beta}=(E_{\alpha}-E_{\beta})\frac{m_e}{\hbar}\lim_{\vec q\rightarrow0}\bigg\langle\tilde\psi_{\alpha}\bigg|\frac1q\mathrm{e}^{\mathrm{i}\vec q\cdot\vec r}\bigg|\tilde\psi_{\beta}\bigg\rangle
+	\end{displaymath}
+	%$\langle\psi_{\vec k+\vec q}^{\beta}|\mathrm{e}^{\mathrm{i}\vec q\cdot\vec r}|\psi_{\vec k}^{\alpha}\rangle$和$\langle\psi_{\vec k+\vec q}^{\beta}|\psi_{\vec k}^{\alpha}\rangle$
+	类型的积分，处理策略是
+	\begin{itemize}
+		\item 将$\mathrm{e}^{\mathrm{i}\vec q\cdot\vec r}$对$\vec q$展开到一阶
+			\begin{displaymath}
+				\mathrm{e}^{\mathrm{i}\vec q\cdot(\vec r-\vec R)}=1+\mathrm{i}\vec q\cdot(\vec r-\vec R)+\mathcal{O}(\vec q^2)
+			\end{displaymath}
+		\item 赝波函数$|\tilde\psi_{\vec k+\vec q}^n\rangle$利用\textrm{Bloch}定理处理周期函数$|\tilde{u}_{\vec k+\vec q}^n\rangle$，同样对$\vec q$展开到一阶
+			\begin{displaymath}
+				|\tilde u_{\vec k+\vec q}^n\rangle=|\tilde u_{\vec k}^n\rangle+\vec q\nabla_{\vec k}|\tilde u_{\vec k}^n\rangle+\mathcal{O}(\vec q^2)
+			\end{displaymath}
+		\item 在\textrm{PAW}方法中，投影函数$|\tilde p_{i,\vec k+\vec q}\rangle$也对$\vec q$展开到一阶
+			\begin{displaymath}
+				\tilde p_{i,\vec k+\vec q}\rangle=1-[\mathrm{i}\vec q(\vec r-\vec R_i)]|\tilde p_{i,\vec k}\rangle+\mathcal{O}(\vec q^2)
+			\end{displaymath}
+	\end{itemize}
+	具体可参阅文献\cite{PRB73-045112_2006}
 }
 
 \subsection{复杂的光子与电子相互作用}
@@ -2073,8 +2345,8 @@ $\varepsilon_2(\omega)$是晶体的光学吸收和能带结构之间的基本关
 \end{figure} 
 }
 
-\section{\rm{LDA+}$U$与自相互作用的校正}
-\subsection{\rm{LDA}与精确交换-相关泛函}
+\section{{\rm LDA+}$U$与自相互作用的校正}
+\subsection{{\rm LDA}与精确交换-相关泛函}
 \frame
 {
 	\frametitle{\textrm{L(S)DA}方法的不足}
@@ -2110,7 +2382,7 @@ $\varepsilon_2(\omega)$是晶体的光学吸收和能带结构之间的基本关
 \begin{figure}[h!]
 \centering
 \vspace*{-0.4in}
-\includegraphics[height=2.4in,width=2.8in,viewport=0 0 1000 880,clip]{Figures/exact-DFT.png}
+\includegraphics[height=2.2in,width=3.1in,viewport=0 0 1200 890,clip]{Figures/Koopmans-condition_LDA-U.png}
 \caption{\tiny \textrm{The dependence of the total energy on the number of electron is a series of straight-line segments.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{exact-DFT}
 \end{figure}
@@ -2237,7 +2509,7 @@ $\varepsilon_2(\omega)$是晶体的光学吸收和能带结构之间的基本关
 %	\end{itemize}
 %}
 
-\subsection{\rm{LDA+}$U$与自能校正}
+\subsection{{\rm LDA+}$U$与自能校正}
 \frame
 {
 \frametitle{$U$值的物理含义}
@@ -3563,6 +3835,7 @@ $$\Sigma(\vec r_1,\vec r_2;\omega)=\dfrac{\mathrm i}{2\pi}\int \mathrm e^{\mathr
 	\bibitem{Elect_Stru}\textrm{Richard. M. Martin. \textit{Electronic Structure: Basic Theory and Practical Methods} (Cambridge University Press, Cambridge, England, 2004)}
 	\bibitem{JPC12-4409_1979}\textrm{J. Ihm, A. Zunger and L. Cohen, {\textit{J. Phys. C}} \textbf{12} (1979), 4409}
         \bibitem{Singh}\textrm{D. J. Singh. \textit{Plane Wave, PseudoPotential and the LAPW method} (Kluwer Academic, Boston,USA, 1994)}					%
+	\bibitem{PRB41-7892_1990}\textrm{D. Vanderbilt. \textit{Phys. Rev.} B, \textbf{41} (1990), 7892}
 	\bibitem{JPCM6-8245_1994}\textrm{G. Kresse and J. Hafner. J. Phys: \textit{Condens. Matter}, \textbf{6} (1994), 8245}
 	\bibitem{PRB50-17953_1994}\textrm{P. E. Bl\"ochl. \textit{Phys. Rev.} B, \textbf{50} (1994), 17953}
 	\bibitem{PRB59-1758_1999}\textrm{G. Kresse and D. Joubert \textit{Phys. Rev.} B, \textbf{59} (1999), 1758}
@@ -3577,6 +3850,7 @@ $$\Sigma(\vec r_1,\vec r_2;\omega)=\dfrac{\mathrm i}{2\pi}\int \mathrm e^{\mathr
 	\bibitem{PRB62-11556_2000}\textrm{D. Hobbs, G. Kresse and J. Hafner. \textit{Phys. Rev.} B, \textbf{62} (2000), 11556}
 	\bibitem{VASP_UG}\textrm{G. Kresse, M. Marsman, and J. Furthm\"uller. \textit{VASP the GUIDE}. Computational Physics, Faculty of Physics, Universit\"at Wien, Austria (2012) \\\url{http://cms.mpi.univie.ac.at/VASP/}}
 	\bibitem{PA13-392_1947}\textrm{J. K\"orringa. \textit{Physica}, \textbf{13} (1947), 392}
+\bibitem{PRB73-045112_2006}\textrm{M. Gajdo$\check{s}$, K. Hummer, G. Kresse, J. Furthm\"uller and F. Bechstedt. \textit{Phys. Rev.} B, \textbf{73} (2006), 045112}
 	\bibitem{PRB44-943_1991}\textrm{V. I. Anisimov, J. Zaanen and O.K. Andersen. \textit{Phys. Rev.} B, \textbf{44} (1991), 943}
 	\bibitem{PRB48-16929_1993}\textrm{V.I. Anisimov, I.V. Solovyev, M.A. Korotin, M.T. Czyzyk and G.A. Sawatzky. \textit{Phys. Rev.} B, \textbf{48} (1993), 16929}
 	\bibitem{PRB52-R5467_1995}\textrm{A. I. Liechtenstein, V. I. Anisimov and J. Zaanen., \textit{Phys. Rev.} B, \textbf{52} (1995), R5467}
