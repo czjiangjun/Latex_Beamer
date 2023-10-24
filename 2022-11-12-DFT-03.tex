@@ -61,7 +61,7 @@
 \frame
 {
 	\frametitle{\textrm{Thomas-Fermi}模型} 
-	1927年，\textrm{Thomas}和\textrm{Fermi}基于均匀电子气模型上建立\textrm{Thomas-Fermi}模型，\textcolor{blue}{体系能量可用}\textcolor{red}{电子密度}\textcolor{blue}{表示}:
+	\textrm{1927}年，\textrm{Thomas}和\textrm{Fermi}基于均匀电子气模型上建立\textrm{Thomas-Fermi}模型，\textcolor{blue}{体系能量可用}\textcolor{red}{电子密度}\textcolor{blue}{表示}:
 	\begin{itemize}
 		\item 动能表达式
 			$$T_{\mathrm{TF}}[\rho(\vec r)]=\dfrac3{10}(3\pi^2)^{\frac23}\int\rho^{\frac53}(\vec r)\mathrm{d}\vec r$$
@@ -146,18 +146,18 @@
 \begin{itemize}%[+-| alert@+>]
    \setlength{\itemsep}{8pt}
  \item $E[\rho]=F_{\mathrm{HK}}[\rho]+\displaystyle\int\rho(\vec{r})v(\vec{r})\textrm{d}\vec{r}$ \\
-\vskip 5pt 其中$F_{\mathrm{HK}}[\rho]=\underset{\Psi\to\rho}{\mathrm{Min}}\langle\Psi[\rho]|\hat{T}+\hat{W}|\Psi[\rho]\rangle$
-是普适的泛函表达式。%，指明多电子体系的基态性质与基态密度间存在一一对应关系
-     \textrm{\small{第一定理表明多电子体系的性质完全由体系的基态密度决定}}
+\vskip 5pt 
+{\fontsize{7.2pt}{6.2pt}\selectfont{其中$F_{\mathrm{HK}}[\rho]=\underset{\Psi\to\rho}{\mathrm{Min}}\langle\Psi[\rho]|\hat{T}+\hat{W}|\Psi[\rho]\rangle$
+是普适的泛函表达式}}\\%，指明多电子体系的基态性质与基态密度间存在一一对应关系
+\textcolor{magenta}{\fontsize{8.2pt}{6.2pt}\selectfont{第一定理表明多电子体系的性质完全由体系的基态密度决定}}
    \item 如果$\tilde\Psi\neq\Psi$，
      $E[\tilde\rho]\geqslant E[\rho_0]$\\
-     \textrm{\small{第二定理指出基态总能量泛函在体系基态电子密度处取极小值}}
+     \textcolor{magenta}{\fontsize{8.2pt}{6.2pt}\selectfont{第二定理指出基态总能量泛函在体系基态电子密度处取极小值}}
    \end{itemize}
-%\textrm{\small{第二定理指出基态总能量泛函在体系基态电子密度处取极小值}}
 \vskip 8pt
- \item 密度泛函理论的优越性：用密度($\rho$)代替波函数($\Psi$)描述体系
+ \item 密度泛函理论的优越性:~用密度($\rho$)代替波函数($\Psi$)描述体系
 \vskip 5pt
- \item 密度泛函理论的困难：能量密度泛函的精确形式未知
+ \item 密度泛函理论的困难:~能量密度泛函的精确形式未知
    \end{itemize}
 }
 
@@ -229,7 +229,7 @@ $V_{\mathrm{XC}}[\rho]=\dfrac{\delta E_{\mathrm{XC}}}{\delta\rho(\vec r)}$称为
 \vskip 10pt
 \textrm{Kohn-Sham}方程是形式上的单粒子方程
 \vskip 6pt
-\textrm{Kohn-Sham}方程的实质：\\\textcolor{red}{将动能泛函的主要部分分离出来，剩余部分放在交换-相关能中}
+\textrm{Kohn-Sham}方程的实质:\\\textcolor{red}{将动能泛函的主要部分分离出来，剩余部分放在交换-相关能中}
 }
 
 \frame{
@@ -275,7 +275,7 @@ $\varepsilon_{\mathrm{X}}[\rho]$和$\varepsilon_{\mathrm{C}}[\rho]$可理解为�
 {
 \frametitle{交换-相关能密度泛函}
 \textcolor{blue}{密度泛函理论的核心问题}:\\
-\textrm{Kohn-Sham}方程用于实际计算，必须知道$E_{XC}[\rho]$或者$V_{XC}[\rho]$与$\rho(\vec r)$的泛函关系
+\textrm{Kohn-Sham}方程用于实际计算，必须知道$E_{\textrm{XC}}[\rho]$或者$V_{\textrm{XC}}[\rho]$与$\rho(\vec r)$的泛函关系
 \vskip 15pt
 \begin{minipage}[b]{0.59\textwidth}
  \hspace*{-15pt}

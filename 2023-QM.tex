@@ -15,7 +15,7 @@
 \date[\today] % (optional, should be abbreviation of conference name)
 {%	{\fontsize{6.2pt}{4.2pt}\selectfont{\textcolor{blue}{E-mail:~}\url{jiangjun@bcc.ac.cn}}}
 \vskip 45 pt {\fontsize{8.2pt}{6.2pt}\selectfont{%清华大学\;\;物理系% 报告地点
-	\vskip 5 pt \textrm{2023.05}}}
+	\vskip 5 pt \textrm{2023.11}}}
 }
 
 %% - Either use conference name or its abbreviation
@@ -208,55 +208,7 @@
 
 \frame
 {
-	\frametitle{经典力学\textrm{Classical Mechanics}}
-\begin{figure}[h!]
-\vspace*{-0.18in}
-\centering
-\includegraphics[height=2.65in,width=4.05in,viewport=0 0 715 495,clip]{Figures/Classical_Mechanics.jpg}
-%\includegraphics[height=2.50in,width=4.05in,viewport=0 20 735 470,clip]{Figures/Two-dark-cloud-in-physics-3.jpg}
-%\includegraphics[height=2.40in,width=4.05in,viewport=0 50 735 470,clip]{Figures/Two-dark-cloud-in-physics-2.jpg}
-%\includegraphics[height=2.40in,width=4.05in,viewport=0 0 580 325,clip]{Figures/Two-dark-cloud-in-physics-1.jpg}
-\label{Classical_Mechanics}
-\end{figure}
-}
-
-\frame
-{
-	\frametitle{\textrm{\small Newtonian, Lagrangian and Hamiltonian Mechanics}}
-	\begin{itemize}
-   		\setlength{\itemsep}{10pt}
-		\item \textrm{\textcolor{blue}{Newtonian~Mechanics}}\\
-		牛顿运动定律体系是以力、加速度、动量这些矢量为基本量来描述力学系统在欧氏空间的运动~(用几何方程表述约束)
-	\item \textrm{\textcolor{blue}{Lagrangian~Mechanics}}\\
-		拉格朗日力学是关于研究对象在其对应的约束系统下的运动形式，大大压缩牛顿方程描述需要的约束个数。不需要在另外设未知数目
-	\item \textrm{\textcolor{blue}{Hamiltonian~Mechanics}}\\
-		哈密度力学由拉格朗日力学演变而来，把位置和动量彻底分开，成为两种独立变量，由此诞生相空间。把广义动量和广义坐标放在等同的位置上(正则配对，方程降阶)
-		\vskip 6pt
-		拉格朗日力学和哈密顿力学的基本量是\textcolor{blue}{系统的能量}等标量，通过变分原理建立系统的动力学方程，所以拉格朗日力学和哈密顿力学合称\textcolor{magenta}{分析力学}
-	\end{itemize}
-}
-
-\frame
-{
-	\frametitle{\textrm{Invariante Variationsprobleme}}
-\begin{figure}[h!]
-\centering
-%
-\vspace{-10.5pt}
-\includegraphics[height=0.52\textwidth,width=0.42\textwidth,viewport=0 0 450 580,clip]{Figures/Noether_theorem-1st_page.png}
-\label{Noether_theorem}
-\end{figure}
-\begin{itemize}
-\centering
-	\item \textcolor{red}{能量守恒}~$\Longleftrightarrow$~\textcolor{magenta}{时间平移对称性}
-	\item \textcolor{red}{动量守恒}~$\Longleftrightarrow$~\textcolor{magenta}{空间平移对称性}
-	\item \textcolor{red}{角动量守恒}~$\Longleftrightarrow$~\textcolor{magenta}{空间旋转对称性}
-\end{itemize}
-}
-
-\frame
-{
-	\frametitle{\textrm{驻波}}
+	\frametitle{驻波}
 \begin{figure}[h!]
 \centering
 \vspace{-15.5pt}
@@ -279,30 +231,6 @@
 \includegraphics[height=0.40\textwidth,width=0.9\textwidth,viewport=0 0 1200 550,clip]{Figures/Standing_wave-energy.jpg}
 %\caption{\textrm{ABINIT}的Si.in}
 \label{Standing_Wave_1}
-\end{figure}
-}
-
-\frame
-{
-	\frametitle{驻波方程与势阱}
-\begin{figure}[h!]
-\centering
-\vspace{-5.5pt}
-\includegraphics[height=0.55\textwidth,width=1.0\textwidth,viewport=0 0 720 400,clip]{Figures/Standing_wave-energy_1-5.jpg}
-%\caption{\textrm{ABINIT}的Si.in}
-\label{Standing_Wave_2}
-\end{figure}
-}
-
-\frame
-{
-	\frametitle{驻波方程与势阱}
-\begin{figure}[h!]
-\centering
-\vspace{-0.5pt}
-\includegraphics[height=0.46\textwidth,width=1.0\textwidth,viewport=0 0 650 390,clip]{Figures/Standing_wave_Energy.jpeg}
-%\caption{\textrm{ABINIT}的Si.in}
-\label{Standing_Wave_3}
 \end{figure}
 }
 
@@ -595,23 +523,6 @@
 
 \frame
 {
-	\frametitle{\textrm{RHF~}与\textrm{UHF}} 
-	\begin{itemize}
-		\item \textrm{RHF}:\\
-			针对闭壳层(\textrm{closed shell})体系，占据轨道的电子成对出现，自旋相反，可用一个\textrm{Slater}行列式表示\\
-	%		每对自旋相反的电子有相同的轨道波函数\\
-			对于闭壳层体系，\textrm{Hartree-Fock}方法求解的能量本征值符合\textrm{Koopmans}定理
-			$$E_{ion}^1=-\varepsilon_{\mathrm{HOMO}}$$
-		\item \textrm{UHF}:\\
-			针对开壳层(\textrm{open shell})体系，占据轨道有未成对电子，需要用\textrm{Slater}行列式的线性组合表示\\
-			最低能态用一个\textrm{Slater}行列式，但不同自旋的轨道分别处理
-		$$E_{\mathrm{UHF}}\leqslant E_{\mathrm{RHF}}$$
-			由于\textrm{UHF}包含更多的变分函数，可以处理一些近解离极限的分子体系
-	\end{itemize}
-}
-
-\frame
-{
 	\frametitle{\textrm{Slater~}的$\chi_{\alpha}$方法}
 	由于\textrm{Hartree-Fock~}的交换势计算复杂，\textrm{Slater~}建议用电子密度的加权平均来简化交换势的求解
 	\begin{displaymath}
@@ -702,7 +613,7 @@
 \frame
 {
 	\frametitle{{\textrm{Thomas-Fermi}}模型} 
-	1927年，\textrm{Thomas}和\textrm{Fermi}基于均匀电子气模型上建立\textrm{Thomas-Fermi}模型，\textcolor{blue}{体系能量可用}\textcolor{red}{电子密度}\textcolor{blue}{表示}:
+	\textrm{1927}年，\textrm{Thomas}和\textrm{Fermi}基于均匀电子气模型上建立\textrm{Thomas-Fermi}模型，\textcolor{blue}{体系能量可用}\textcolor{red}{电子密度}\textcolor{blue}{表示}:
 	\begin{itemize}
 		\item 动能表达式
 			$$T_{\mathrm{TF}}[\rho(\vec r)]=\dfrac3{10}(3\pi^2)^{\frac23}\int\rho^{\frac53}(\vec r)\mathrm{d}\vec r$$
@@ -763,18 +674,18 @@
 \begin{itemize}%[+-| alert@+>]
    \setlength{\itemsep}{8pt}
  \item $E[\rho]=F_{\mathrm{HK}}[\rho]+\displaystyle\int\rho(\vec{r})v(\vec{r})\textrm{d}\vec{r}$ \\
-\vskip 5pt 其中$F_{\mathrm{HK}}[\rho]=\underset{\Psi\to\rho}{\mathrm{Min}}\langle\Psi[\rho]|\hat{T}+\hat{W}|\Psi[\rho]\rangle$
-是普适的泛函表达式。%，指明多电子体系的基态性质与基态密度间存在一一对应关系
-     \textrm{\small{第一定理表明多电子体系的性质完全由体系的基态密度决定}}
+\vskip 5pt 
+{\fontsize{7.2pt}{6.2pt}\selectfont{其中$F_{\mathrm{HK}}[\rho]=\underset{\Psi\to\rho}{\mathrm{Min}}\langle\Psi[\rho]|\hat{T}+\hat{W}|\Psi[\rho]\rangle$
+是普适的泛函表达式}}\\%，指明多电子体系的基态性质与基态密度间存在一一对应关系
+\textcolor{magenta}{\fontsize{8.2pt}{6.2pt}\selectfont{第一定理表明多电子体系的性质完全由体系的基态密度决定}}
    \item 如果$\tilde\Psi\neq\Psi$，
      $E[\tilde\rho]\geqslant E[\rho_0]$\\
-     \textrm{\small{第二定理指出基态总能量泛函在体系基态电子密度处取极小值}}
+     \textcolor{magenta}{\fontsize{8.2pt}{6.2pt}\selectfont{第二定理指出基态总能量泛函在体系基态电子密度处取极小值}}
    \end{itemize}
-%\textrm{\small{第二定理指出基态总能量泛函在体系基态电子密度处取极小值}}
 \vskip 8pt
- \item 密度泛函理论的优越性：用密度($\rho$)代替波函数($\Psi$)描述体系
+ \item 密度泛函理论的优越性:~用密度($\rho$)代替波函数($\Psi$)描述体系
 \vskip 5pt
- \item 密度泛函理论的困难：能量密度泛函的精确形式未知
+ \item 密度泛函理论的困难:~能量密度泛函的精确形式未知
    \end{itemize}
 }
 
@@ -842,7 +753,7 @@ $\varepsilon_{\mathrm{X}}[\rho]$和$\varepsilon_{\mathrm{C}}[\rho]$可理解为�
 {
 \frametitle{交换-相关能密度泛函}
 \textcolor{blue}{密度泛函理论的核心问题}:\\
-\textrm{Kohn-Sham}方程用于实际计算，必须知道$E_{XC}[\rho]$或者$V_{XC}[\rho]$与$\rho(\vec r)$的泛函关系
+\textrm{Kohn-Sham}方程用于实际计算，必须知道$E_{\textrm{XC}}[\rho]$或者$V_{\textrm{XC}}[\rho]$与$\rho(\vec r)$的泛函关系
 \vskip 15pt
 \begin{minipage}[b]{0.59\textwidth}
  \hspace*{-15pt}
@@ -942,7 +853,7 @@ $\varepsilon_{\mathrm{X}}[\rho]$和$\varepsilon_{\mathrm{C}}[\rho]$可理解为�
 	\frametitle{\textrm{Bloch~}定理}
 \begin{itemize}%[+-| alert@+>]
    \setlength{\itemsep}{8pt}
-   \item 固体能带理论\upcite{Huang-Han}是固体电子理论的基础，形式上是单电子理论：
+   \item 固体能带理论\upcite{Huang_Han}是固体电子理论的基础，形式上是单电子理论：
     $$\hat H |\psi_i^{\vec k}(\vec r)\rangle=\bigg[-\dfrac{\hbar^2}{2m}\nabla^2+V(\vec r)\bigg]|\psi_i^{\vec k}(\vec r)\rangle=\epsilon_i(\vec k)|\psi_i^{\vec k}(\vec r)\rangle$$
   \item \textrm{Bloch}定理:
 %   \item \textrm{periodic potential:} $$V(\vec r)=V(\vec r+\vec R_n)$$
@@ -3831,6 +3742,7 @@ $$\Sigma(\vec r_1,\vec r_2;\omega)=\dfrac{\mathrm i}{2\pi}\int \mathrm e^{\mathr
 	\bibitem{PR140-A1133_1965}\textrm{W. Kohn and L.J. Sham, \textit{Phys. Rev.} \textbf{140} (1965), A1133}
 	\bibitem{PRL49-1691_1982}\textrm{P. Perdew, R. G. Parr, M. Levy and J. L. Balduz, Jr., \textit{Phys. Rev. Lett.} \textbf{49} (1982), 1691}
 	\bibitem{Parr_Yang}\textrm{R.G. Parr and W. Yang. \textit{Density-Functional Theory of Atoms and Molecules} (Oxford University Press, New York, U.S.A., 1989)}
+	\bibitem{Huang_Han}黄昆\:原著、韩汝琦\:改编, {\textit{固体物理学}}\:高等教育出版社, 北京, 1988
 	\bibitem{Xie-Lu}谢希德、陆栋\:主编, {\textit{固体能带理论}}\:复旦大学出版社, 上海, 1998
 	\bibitem{Elect_Stru}\textrm{Richard. M. Martin. \textit{Electronic Structure: Basic Theory and Practical Methods} (Cambridge University Press, Cambridge, England, 2004)}
 	\bibitem{JPC12-4409_1979}\textrm{J. Ihm, A. Zunger and L. Cohen, {\textit{J. Phys. C}} \textbf{12} (1979), 4409}
