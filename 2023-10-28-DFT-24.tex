@@ -1,6 +1,6 @@
 e%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  不使用 authblk 包制作标题  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %-------------------------------PPT Title-------------------------------------
-\title{01-经典数值优化算法概要}
+\title{24-选讲专题:~经典数值优化算法概要}
 %-----------------------------------------------------------------------------
 
 %----------------------------Author & Date------------------------------------
@@ -56,8 +56,7 @@ e%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  不使用 authblk 包制作标题  %
 
 %-----------------------------------------------PPT main Body------------------------------------------------------------------------------------
 \small
-\appendix
-\section{附录:~经典数值优化算法概要}
+\section{经典数值优化算法概要}
 \frame
 {
 	\frametitle{非线性方程的\textrm{Newton~}法求根}
@@ -909,155 +908,3 @@ x_6 &=1.0430906366 %~\Longrightarrow
 %\nocite*{}
 }
 %-----------------------------------------------------------------------------------------------------------------------------------------------------------------------%
-
-
-\section{附录:~四面体积分方案的各类权重公式}
-\frame
-{
-	\frametitle{四面体积分中\textrm{Fermi}面的确定}
-	已知每个四面体对积分态密度(态数目)$n_T(\varepsilon)$的贡献\upcite{PRB49-16233_1994}
-	\begin{itemize}
-	\item $\varepsilon<\varepsilon_1$
-%		\begin{displaymath}
-		\:	$n_T(\varepsilon)=0$
-%		\end{displaymath}
-	\item $\varepsilon_1<\varepsilon<\varepsilon_2$
-%		\begin{displaymath}
-		\:	$n_T(\varepsilon)=\dfrac{V_T}{V_G}\dfrac{(\varepsilon-\varepsilon_1)^3}{\varepsilon_{21}\varepsilon_{31}\varepsilon_{41}}$
-%		\end{displaymath}
-	\item $\varepsilon_2<\varepsilon<\varepsilon_3$
-		\begin{displaymath}
-			\hspace*{-35pt}	n_T(\varepsilon)=\dfrac{V_T}{V_G}\dfrac1{\varepsilon_{31}\varepsilon_{41}}\left[\varepsilon_{21}^2+3\varepsilon_{21}(\varepsilon-\varepsilon_2)+3(\varepsilon-\varepsilon_2)^2-\dfrac{\varepsilon_{31}+\varepsilon_{42}}{\varepsilon_{32}\varepsilon_{42}}(\varepsilon-\varepsilon_2)^3\right]
-		\end{displaymath}
-	\item $\varepsilon_3<\varepsilon<\varepsilon_4$
-%		\begin{displaymath}
-		\:	$n_T(\varepsilon)=\dfrac{V_T}{V_G}\left[1-\dfrac{(\varepsilon_4-\varepsilon)^3}{\varepsilon_{41}\varepsilon_{42}\varepsilon_{43}}\right]$
-%		\end{displaymath}
-	\item $\varepsilon>\varepsilon_4$
-%		\begin{displaymath}
-		\:	$n_T(\varepsilon)=\frac{V_T}{V_G}$
-%		\end{displaymath}
-	\end{itemize}
-	利用等能面的插值，由约束条件确定\textrm{Fermi}能级$\varepsilon_{\mathrm F}$
-	$$\int_{\varepsilon_0}^{\varepsilon_{\mathrm F}}\sum_{T=1}^{N_{Tet}}n_T(\varepsilon)\mathrm{d}\varepsilon=N_e$$
-}
-
-\frame
-{
-	\frametitle{四面体积分权重的确定}
-\begin{figure}[h!]
-\centering
-\subfigure[\textrm{\small Arrangement of the different secant planes of constant energy in the method of tetrahedrons}]{
-\label{Fig:Tetra-equal-ene}
-\vspace*{-0.25in}
-	\includegraphics[height=1.55in,width=2.03in,viewport=40 125 530 465,clip]{Figures/Tetra-equal-ene.eps}}
-	\hfill
-\subfigure[\textrm{\small Two-dimensional schematic illustration of the function $w_j(\vec k)$.}]{
-\label{Fig:dime_Tetra}
-\vspace*{-0.25in}
-\includegraphics[height=1.75in,width=1.75in,viewport=0 30 565 505,clip]{Figures/dimen_Tetra.pdf}}
-\end{figure}
-根据能量范围的不同，可以推导出不能能量区域内的积分权重的表达式，详见文献\cite{PRB49-16233_1994}的附录
-}
-
-\frame
-{
-	\frametitle{四面体积分权重的确定}
-	不同能量区域内的积分权重的表达式%\upcite{PRB49-16233_1994}
-	\begin{itemize}
-	\item $\varepsilon_F<\varepsilon_1$
-		\begin{displaymath}
-			\omega_1=\omega_2=\omega_3=\omega_4=0
-		\end{displaymath}
-	\item $\varepsilon_1<\varepsilon_F<\varepsilon_2$
-		\begin{displaymath}
-			\begin{aligned}
-				\omega_1=&C\bigg[4-(\varepsilon_F-\varepsilon_1)\bigg(\dfrac1{\varepsilon_{21}}+\dfrac1{\varepsilon_{31}}+\dfrac1{\varepsilon_{41}}\bigg)\bigg]\\
-				\omega_2=&C\dfrac{\varepsilon_F-\varepsilon_1}{\varepsilon_{21}}\\
-				\omega_3=&C\dfrac{\varepsilon_F-\varepsilon_1}{\varepsilon_{31}}\\
-				\omega_4=&C\dfrac{\varepsilon_F-\varepsilon_1}{\varepsilon_{41}}
-			\end{aligned}
-		\end{displaymath}
-		这里
-			$C=\dfrac{V_T}{4V_G}\dfrac{(\varepsilon_F-\varepsilon_1)^3}{\varepsilon_{21}\varepsilon_{31}\varepsilon_{41}}$
-	\end{itemize}
-}
-
-\frame
-{
-	\frametitle{四面体积分权重的确定}
-	\begin{itemize}
-	\item $\varepsilon_2<\varepsilon_F<\varepsilon_3$
-		\begin{displaymath}
-			\begin{aligned}
-				\omega_1=&C_1+(C_1+C_2)\dfrac{\varepsilon_3-\varepsilon_F}{\varepsilon_{31}}+(C_1+C_2+C_3)\dfrac{\varepsilon_4-\varepsilon_F}{\varepsilon_{41}}\\
-				\omega_2=&C_1+C_2+C_3+(C_2+C_3)\dfrac{\varepsilon_3-\varepsilon_F}{\varepsilon_{32}}+C_3\dfrac{\varepsilon_4-\varepsilon_F}{\varepsilon_{42}}\\
-				\omega_3=&(C_1+C_2)\dfrac{\varepsilon_F-\varepsilon_1}{\varepsilon_{31}}+(C_2+C_3)\dfrac{\varepsilon_F-\varepsilon_2}{\varepsilon_{32}}\\
-				\omega_4=&(C_1+C_2+C_3)\dfrac{\varepsilon_F-\varepsilon_1}{\varepsilon_{41}}+C_3\dfrac{\varepsilon_F-\varepsilon_2}{\varepsilon_{42}}
-			\end{aligned}
-		\end{displaymath}
-		这里
-		\vspace*{-10pt}
-		\begin{displaymath}
-			\begin{aligned}
-				C_1&=\dfrac{V_T}{4V_G}\dfrac{(\varepsilon_F-\varepsilon_1)^2}{\varepsilon_{41}\varepsilon_{31}}\\
-				C_2&=\dfrac{V_T}{4V_G}\dfrac{(\varepsilon_F-\varepsilon_1)(\varepsilon_F-\varepsilon_2)(\varepsilon_3-\varepsilon_F)}{\varepsilon_{41}\varepsilon_{32}\varepsilon_{31}}\\
-				C_3&=\dfrac{V_T}{4V_G}\dfrac{(\varepsilon_F-\varepsilon_2)^2(\varepsilon_4-\varepsilon_F)}{\varepsilon_{42}\varepsilon_{32}\varepsilon_{41}}\\
-			\end{aligned}
-		\end{displaymath}
-	\end{itemize}
-}
-
-\frame
-{
-	\frametitle{四面体积分权重的确定}
-	\begin{itemize}
-	\item $\varepsilon_3<\varepsilon_F<\varepsilon_4$
-		\begin{displaymath}
-			\begin{aligned}
-				\omega_1=&\dfrac{V_T}{4V_G}-C\dfrac{\varepsilon_4-\varepsilon_F}{\varepsilon_{41}}\\
-				\omega_2=&\dfrac{V_T}{4V_G}-C\dfrac{\varepsilon_4-\varepsilon_F}{\varepsilon_{42}}\\
-				\omega_3=&\dfrac{V_T}{4V_G}-C\dfrac{\varepsilon_4-\varepsilon_F}{\varepsilon_{43}}\\
-				\omega_4=&\dfrac{V_T}{4V_G}-C\bigg[4-(\varepsilon_4-\varepsilon_F)\bigg(\dfrac1{\varepsilon_{41}}+\dfrac1{\varepsilon_{42}}\dfrac1{\varepsilon_{43}}\bigg)\bigg]
-			\end{aligned}
-		\end{displaymath}
-		这里
-		\begin{displaymath}
-			C=\dfrac{V_T}{4V_G}\dfrac{(\varepsilon_4-\varepsilon_F)^3}{\varepsilon_{41}\varepsilon_{42}\varepsilon_{43}}
-			\label{eq:weight-2-C}
-		\end{displaymath}
-	\item $\varepsilon_F>\varepsilon_1$
-		\begin{displaymath}
-			\omega_1=\omega_2=\omega_3=\omega_4=\dfrac{V_T}{4V_G}
-		\end{displaymath}
-	\end{itemize}
-}
-
-\frame
-{
-	\frametitle{四面体对\textrm{DOS}的贡献}
-	类似地，可以确定每个四面体对态密度(\textrm{DOS})$D_T(\varepsilon)$的贡献，计算方案如下\upcite{PRB49-16233_1994}
-	\begin{itemize}
-	\item $\varepsilon<\varepsilon_1$
-		\begin{displaymath}
-			D_T(\varepsilon)=0
-		\end{displaymath}
-	\item $\varepsilon_1<\varepsilon<\varepsilon_2$
-		\begin{displaymath}
-			D_T(\varepsilon)=\dfrac{V_T}{V_G}\dfrac{3(\varepsilon-\varepsilon_1)^2}{\varepsilon_{21}\varepsilon_{31}\varepsilon_{41}}
-		\end{displaymath}
-	\item $\varepsilon_2<\varepsilon<\varepsilon_3$
-		\begin{displaymath}
-			\hspace*{-25pt}	D_T(\varepsilon)=\dfrac{V_T}{V_G}\dfrac1{\varepsilon_{31}\varepsilon_{41}}\left[3\varepsilon_{21}+6(\varepsilon-\varepsilon_2)-3\dfrac{(\varepsilon_{31}+\varepsilon_{42})(\varepsilon-\varepsilon_2)^2}{\varepsilon_{32}\varepsilon_{42}}\right]
-		\end{displaymath}
-	\item $\varepsilon_3<\varepsilon<\varepsilon_4$
-		\begin{displaymath}
-			D_T(\varepsilon)=\dfrac{V_T}{V_G}\dfrac{3(\varepsilon_4-\varepsilon)^2}{\varepsilon_{41}\varepsilon_{42}\varepsilon_{43}}
-		\end{displaymath}
-	\item $\varepsilon>\varepsilon_4$
-		\begin{displaymath}
-			D_T(\varepsilon)=0
-		\end{displaymath}
-	\end{itemize}
-}
-
