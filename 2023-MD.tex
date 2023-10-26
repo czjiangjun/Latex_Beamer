@@ -832,6 +832,666 @@ $U_2(\vec r_i,\vec r_j)$是双体势，$U_3(\vec r_i,\vec r_j,\vec r_k)$是描�
 \end{figure}
 }
 
+\section{第一原理分子动力学简介}
+\frame
+{
+	\frametitle{第一原理分子动力学\textrm{AIMD}中的近似}
+	由于分子动力学模拟的复杂性，必须做出适当的近似。具体到第一原理分子动力学，一般有两类重要的近似:
+	\begin{itemize}
+		\item \textcolor{blue}{绝热近似\textrm{(adiabatic approximation)}}\\
+			{\fontsize{6.2pt}{4.2pt}\selectfont{假设电子-原子核在能量层面上完全分离，彼此间没有能量传递}}
+		\item \textcolor{blue}{\textrm{Born-Oppenheimer}近似}\\
+			{\fontsize{6.2pt}{4.2pt}\selectfont{假设电子和原子核的运动完全解耦，对应每个时间步长的原子构型，电子可以实时处于基态\footnote{\fontsize{5.2pt}{4.2pt}\selectfont{\textrm{B-O}近似也是一种绝热近似，\textcolor{red}{但\textrm{B-O}近似下的绝热强调电子对核运动的瞬时响应}。讨论电子计算时，\textrm{B-O}近似下假设原子核是固定不动的;~在分子动力学讨论中，绝热近似强调的是电子-核运动在能量上的完整分离，而\textrm{B-O}近似则明确要求电子-核运动彼此完全解耦，且电子实时处于基态}}}}
+	\end{itemize}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.25in}
+%\hspace*{-10pt}
+\includegraphics[height=1.55in,width=2.6in,viewport=0 0 440 230,clip]{Figures/Molecular-dynamics_Claaified.png}
+%\caption{\fontsize{5.2pt}{4.2pt}\selectfont{\textrm{The major differences between the methods of aiMD simulations.}}}%
+\label{Molecular-dynamics_Classified}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{第一原理分子动力学}
+	\begin{itemize}
+		\item \textrm{AIMD}将电子结构与原子和经典轨迹计算在同一基础上完成
+		\item 每个原子运动步的受力都是在电子结构计算基础上获得的
+		\item 基于\textrm{B-O}方法:\\\textcolor{purple}{在计算原子运动径迹的每一步，都要求电子态都收敛到基态}
+		\item 扩展的\textrm{Lagrangian}方法:~\textcolor{purple}{根据体系几何结构构造体系波函数}\\
+			\textcolor{blue}{\textrm{Car-Parinello}}:\\
+			平面波基，构成分子轨道\\
+			\textcolor{blue}{\textrm{Atom-centered Density Matrix Progation~(ADMP)}}:\\
+			原子中心基，构成密度矩阵
+	\end{itemize}
+	\textrm{AIMD}计算内容
+	\begin{itemize}
+		\item 可用于复杂体系的电子结构计算
+		\item 几何结构优化(能量最小化)
+		\item 描述系统演化
+		\item 模拟时长规模$\approx{\mathrm{ps}}(10^{-12}\mathrm{s})$~(经典分子动力学 $\approx\mathrm{ns}(10^{-9}\mathrm{s})$)
+	\end{itemize}
+}
+
+
+%\frame
+%{
+%	\frametitle{第一原理分子动力学的分类}
+%\begin{figure}[h!]
+%\centering
+%\vspace*{-0.05in}
+%%\hspace*{-10pt}
+%\includegraphics[height=2.3in,width=4.0in,viewport=0 0 440 230,clip]{Figures/Molecular-dynamics_Claaified.png}
+%\caption{\fontsize{5.2pt}{4.2pt}\selectfont{\textrm{The major differences between the methods of aiMD simulations.}}}%
+%\label{Molecular-dynamics_Claaified}
+%\end{figure}
+%}
+%
+\subsection{绝热近似:~{\rm Hellmann-Feynman}定理与电-声耦合}
+%\frame
+%{
+%	\frametitle{第一原理分子动力学}
+%	电子结构计算时，体系总能是基于\textrm{Born-Oppenheimer}近似得到，如果变化原子位置，可以得到体系总能随原子位置变化的规律\\
+%	作为原子位置$\vec R_i$函数的电子态总能量$E(\vec R_1,\vec R_2,\cdots,\vec R_N)$称\textcolor{red}{势能面}~(\textrm{potential surface})
+%
+%	对于一套给定原子核位置$\mathbf{S}=(\vec R_1,\cdots,\vec R_N)$，$\vec R_i$表示第$i$个原子核的位置;~如果电子的基态波函数是$\psi_{\mathrm{G}}$则\\电子态能量为
+%	\begin{displaymath}
+%		E=\dfrac{\langle\psi_{\mathrm{G}}|\mathbf{H}(\mathbf{S})|\psi_{\mathrm{G}}\rangle}{\langle\psi_{\mathrm{G}}|\psi_{\mathrm{G}}\rangle}
+%	\end{displaymath}
+%作用在原子核$n$上的经典作用力，可由电子态能量对原子位置$\vec R_n$的梯度$\nabla_n$的负值给出
+%\begin{displaymath}
+%	\vec F_n=-\nabla_nE(\mathbf{S})=-\nabla_n\bigg[\dfrac{\langle\psi_{\mathrm{G}}|\mathbf{H}(\mathbf{S})|\psi_{\mathrm{G}}\rangle}{\langle\psi_{\mathrm{G}}|\psi_{\mathrm{G}}\rangle}\bigg]
+%\end{displaymath}
+%}
+%
+%\frame
+%{
+%	\frametitle{\textrm{Hellmann-Feynman}定理}
+%	如果$\psi_{\mathrm{G}}$是\textrm{Hamiltonian}的本征态，有
+%	\begin{displaymath}
+%		\begin{aligned}
+%			&(\langle\psi_{\mathrm{G}}|\psi_{\mathrm{G}}\rangle)^2\nabla_nE\\
+%			=&\big[\langle(\nabla_n\psi_{\mathrm{G}}|\mathbf{H}|\psi_{\mathrm{G}}\rangle+\langle\psi_{\mathrm{G}}|(\nabla_n\mathbf{H})|\psi_{\mathrm{G}}\rangle+\langle\psi_{\mathrm{G}}|\mathbf{H}|(\nabla_n\psi_{\mathrm{G}})\rangle\big]\langle\psi_{\mathrm{G}}|\psi_{\mathrm{G}}\rangle\\
+%			&-\langle\psi_{\mathrm{G}}|\mathbf{H}|\psi_{\mathrm{G}}\rangle\big[\langle(\nabla_n\psi_{\mathrm{G}})|\psi_{\mathrm{G}}\rangle+\langle\psi_{\mathrm{G}}|(\nabla_n\psi_{\mathrm{G}})\rangle\big]
+%		\end{aligned}
+%	\end{displaymath}
+%	{\fontsize{6.2pt}{5.2pt}\selectfont{这里暂不考虑$\mathbf{H}$对原子核位置$\mathbf{S}$的依赖}}\\
+%	\vskip 5pt
+%	\textrm{Hellmann-Feynman}定理指出:~如果\textrm{Hamiltonian}量$\mathbf{H}$是\textrm{Hermitian}的，并且有
+%	\begin{displaymath}
+%		\mathbf{H}\psi_{\mathrm{G}}=E_{\mathrm{G}}\psi_{\mathrm{G}}
+%	\end{displaymath}
+%则上述表达式中，除了$\langle\psi_{\mathrm{G}}|(\nabla_n\mathbf{H})|\psi_{\mathrm{G}}\rangle$之外，等式右侧其余各项彼此抵消。由此得到能量梯度的表达式
+%\begin{displaymath}
+%	\nabla_nE=\dfrac{\langle\psi_{\mathrm{G}}|(\nabla_n\mathbf{H})|\psi_{\mathrm{G}}\rangle}{\langle\psi_{\mathrm{G}}|\psi_{\mathrm{G}}\rangle}
+%\end{displaymath}
+%}
+%
+\frame
+{
+	\frametitle{绝热近似}
+	绝热近似下，电子-原子核的运动能量上完全分离，原子核运动的影响，在电子的本征态(本征值$E_i\{\mathbf{R}\}$，波函数$\Psi_i(\{\mathbf{r}\};\{\mathbf{R}\})$)中表现为含有原子核位置参数$\{\mathbf{R}\}$
+
+	如果考虑核与电子体系，\textrm{Hamiltonian~}算符可以写成
+	\begin{displaymath}
+		\hat H=\hat T_N+\hat T_e+\hat U
+	\end{displaymath}
+	$U$是全部相互作用，可由\textcolor{blue}{电子坐标$\{\mathbf{r}\}$}和\textcolor{blue}{原子核位置$\{\mathbf{R}\}$}表示
+\vskip 5pt
+	电子态运动的本征态由下式确定
+	\begin{displaymath}
+		H_e(\mathbf{R})\psi_s(\{\mathbf{r};\mathbf{R}\})=E_s(\mathbf{R})\psi_s(\{\mathbf{r};\mathbf{R}\})
+	\end{displaymath}
+	这里$s=1,2,3,\cdots$
+	电子运动\textrm{Hamiltonian}可由本征态表示为
+	\begin{displaymath}
+		\langle\psi_m(\mathbf{r};\mathbf{R})|\hat H_e(\mathbf{R})|\psi_n(\mathbf{r};\mathbf{R})\rangle=E_s(\mathbf{R})\delta_{mn}
+	\end{displaymath}
+	这里利用了电子本征态波函数的正交关系
+	\begin{displaymath}
+		\langle\psi_m(\mathbf{r};\mathbf{R})|\psi_n(\mathbf{r};\mathbf{R})\rangle=\delta_{mn}
+	\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{\textrm{Hellmann-Feynman}定理}
+	根据电子波函数的正交关系，电子波函数对参数$\mathbf{R}$改变的响应有
+	\begin{displaymath}
+		\langle\dfrac{\partial}{\partial{\mathbf{R}_i}}\psi_m(\mathbf{r};\mathbf{R})|\psi_n(\mathbf{r};\mathbf{R})\rangle=-\langle\psi_m(\mathbf{r};\mathbf{R})|\dfrac{\partial}{\partial{\mathbf{R}_i}}\psi_n(\mathbf{r};\mathbf{R})\rangle
+	\end{displaymath}
+	对$m=n$有
+	\textcolor{blue}{
+		\begin{displaymath}
+			\langle\psi_m(\mathbf{r};\mathbf{R})|\dfrac{\partial}{\partial{\mathbf{R}_i}}\psi_m(\mathbf{r};\mathbf{R})\rangle=\mbox{纯虚数}
+		\end{displaymath} }
+		类似地，\textrm{Schr\"odinger}方程对参数$\mathbf{R}$改变的响应有
+		\begin{displaymath}
+			\langle\dfrac{\partial\psi_m}{\partial{\mathbf{R}_i}}|H_e|\psi_n\rangle+\langle\psi_m|\dfrac{\partial H_e}{\partial{\mathbf{R}_i}}|\psi_n\rangle+\langle\psi_m|H_e|\dfrac{\partial\psi_n}{\partial{\mathbf{R}_i}}\rangle=\dfrac{\partial E_n}{\partial\mathbf{R}_i}\delta_{mn}
+		\end{displaymath}
+		注意到$\psi_m(\mathbf{r};\mathbf{R})$和$\psi_n(\mathbf{r};\mathbf{R})$是$H(\mathbf{R})$的本征态，本征值分别是$E_m(\mathbf{R})$和$E_n(\mathbf{R})$，因此有
+		\begin{displaymath}
+			\langle\psi_m|\dfrac{\partial H}{\partial{\mathbf{R}_i}}|\psi_n\rangle+[E_m-E_n]\langle\psi_m|H_e|\dfrac{\partial\psi_n}{\partial{\mathbf{R}_i}}\rangle=\dfrac{\partial E_n}{\partial\mathbf{R}_i}\delta_{mn}
+		\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{\textrm{Hellmann-Feynman}定理}
+	当$m=n$时有\textrm{Hellmann-Feynman}定理
+	\textcolor{purple}{
+	\begin{displaymath}
+		\langle\psi_m(\mathbf{r};\mathbf{R})|\dfrac{\partial H_e(\mathbf{R})}{\partial{\mathbf{R}_i}}|\psi_m(\mathbf{r};\mathbf{R})\rangle=\dfrac{\partial E_m(\mathbf{R})}{\partial\mathbf{R}_i}
+	\end{displaymath}}
+	电子态总能量$E(\mathbf{R})$与原子位置$\{\mathbf{R}_i\}$构成的函数称为\textcolor{red}{势能面}~(\textrm{potential surface})
+	\vskip 8pt
+	\textrm{Hellmann-Feynman}定理表明，对于确定的势能面，能量对位置导数(广义力)可通过波函数和算符$\partial H(\mathbf{R})/\partial\mathbf{R}_i$的期望值计算得到
+	\vskip 5pt
+	一般地，当势能面不包含任何简并态时，可以有\textrm{Epstein}广义\textrm{Hellmann-Feynman}定理
+	\begin{displaymath}
+		\hspace*{-10pt}
+		\langle\psi_m(\mathbf{r};\mathbf{R})|\dfrac{\partial}{\partial{\mathbf{R}_i}}\psi_n(\mathbf{r};\mathbf{R})\rangle=\dfrac1{E_n(\mathbf{R})-E_m(\mathbf{R})}\langle\psi_m(\mathbf{r};\mathbf{R})|\dfrac{\partial H_e(\mathbf{R})}{\partial{\mathbf{R}_i}}|\psi_n(\mathbf{r};\mathbf{R})\rangle
+	\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{绝热近似下的原子受力}
+	根据\textrm{Hellmann-Feynman}定理，在\textrm{Born-Oppenheimer}近似下，位于$\mathbf{R}_K$处的原子核的受力
+	\begin{displaymath}
+		\langle\psi(\mathbf{r};\mathbf{R})|\dfrac{\partial}{\partial{\mathbf{R}_K}}H_e(\mathbf{R})|\psi(\mathbf{r};\mathbf{R})\rangle=\dfrac{\partial E(\mathbf{R})}{\partial\mathbf{R}_K}
+	\end{displaymath}
+	这里\textrm{Hamiltonian}的梯度为
+	\begin{displaymath}
+		\dfrac{\partial}{\partial{\mathbf{R}_K}}H_e(\mathbf{R})=-\dfrac{\partial}{\partial{\mathbf{R}_K}}\sum_i\dfrac{Z_Ke^2}{\mathbf{r}_i-\mathbf{R}_K}+\dfrac{\partial}{\partial{\mathbf{R}_K}}\sum_{I(\neq K)}\dfrac{Z_IZ_Ke^2}{\mathbf{R}_I-\mathbf{R}_K}
+	\end{displaymath}
+	由此，原子受力可表示为
+	\textcolor{red}{
+	\begin{displaymath}
+		\vec F_K=-\dfrac{\partial E}{\partial\mathbf{R}_K}=\int n(\mathbf{r};\mathbf{R})\dfrac{\partial}{\partial{\mathbf{R}_K}}\dfrac{Z_Ke^2}{\mathbf{r}_i-\mathbf{R}_K}\mathrm{d}\mathbf{r}-\dfrac{\partial}{\partial{\mathbf{R}_K}}\sum_{I(\neq K)}\dfrac{Z_IZ_Ke^2}{\mathbf{R}_I-\mathbf{R}_K}
+	\end{displaymath}}
+	原子核受力:~\textcolor{blue}{其余原子核的经典静电排斥}和\textcolor{purple}{电子的电荷密度分布}
+}
+
+\frame
+{
+	\frametitle{绝热近似下的核运动}
+	绝热近似下，原子核-电子的波函数可以表示为
+	\begin{displaymath}
+		\Psi(\{\mathbf{r};\mathbf{R}\})=\sum_i\chi_{si}(\{\mathbf{R}\})\psi_i(\{\mathbf{r}\};\{\mathbf{R}\})
+	\end{displaymath}
+	原子核$\chi_{si}(\{\mathbf{R}\})$在电子形成的势能面$E_i(\{\mathbf{R}\})$上的运动方程
+	\begin{displaymath}
+		[T_N+E_i(\{\mathbf{R}\})-E_s]\chi_{si}(\{\mathbf{R}\})=-\sum_{ii^{\prime}}C_{ii^{\prime}}\chi_{si}(\{\mathbf{R}\})
+	\end{displaymath}
+	这里$T_n=-\frac12(\sum\limits_J\nabla_J^2/M_J)$，矩阵元$C_{ii^{\prime}}=A_{ii^{\prime}}+B_{ii^{\prime}}$
+	\begin{displaymath}
+		\begin{aligned}
+			A_{ii^{\prime}}(\{\mathbf{R}\})=&\sum_J\frac1{M_J}\langle\psi_i(\{\mathbf{r}\};\{\mathbf{R}\})|\nabla_J|\psi_{i^{\prime}}(\{\mathbf{r}\};\{\mathbf{R}\})\rangle\nabla_J\\
+			B_{ii^{\prime}}(\{\mathbf{R}\})=&\sum_J\frac1{2M_J}\langle\psi_i(\{\mathbf{r}\};\{\mathbf{R}\})|\nabla_J^2|\psi_{i^{\prime}}(\{\mathbf{r}\};\{\mathbf{R}\})\rangle\\
+		\end{aligned}
+	\end{displaymath}
+	这里$\langle\psi_i(\{\mathbf{r}\};\{\mathbf{R}\})|\hat O|\psi_{i^{\prime}}(\{\mathbf{r}\};\{\mathbf{R}\})\rangle$表示对电子变量$\{\mathbf{r}\}$积分
+}
+
+\frame
+{
+	\frametitle{绝热近似下的核运动}
+	绝热近似下，\textcolor{red}{将忽略矩阵$C_{ii^{\prime}}$的全部非对角元}，可有
+	\begin{itemize}
+		\item \textcolor{blue}{电子能及时响应原子核的运动}
+		\item \textcolor{blue}{电子由态$i\rightarrow i^{\prime}$的激发，不会影响原子核位置变量${\{\mathbf{R}\}}$}
+		\item $A_{ii^{\prime}}=0$(波函数归一化要求)
+		\item 核运动的势函数$U_i(\{\mathbf{R}\})=E_i(\{\mathbf{R}\})+B_{ii}(\{\mathbf{R}\})$
+	\end{itemize}
+	核运动方程
+	\begin{displaymath}
+		\left[ -\sum_J\frac1{2M_J}\nabla_J^2+U_i(\{\mathbf{R}\})-E_{ni} \right]\chi_{ni}(\{\mathbf{R}\})=0
+	\end{displaymath}
+这里$n=1,2,3,\cdots$
+
+如果忽略$B_{ii}$的贡献，即绝热近似下冻声子(\textrm{frozen phonon})或微扰近似下的声子计算方案
+}
+
+\frame
+{
+	\frametitle{电-声耦合}
+	电子-声子的来源:~\textcolor{blue}{$C_{ii^{\prime}}$的非对角元部分}
+	\begin{itemize}
+		\item $C_{ii^{\prime}}$的非对角元部分描述了\textcolor{red}{原子核运动(振动)引起电子在不同态间跃迁}
+		\item $C_{ii^{\prime}}$的非对角元部分主要来自$A_{ii^{\prime}}$
+			\begin{enumerate}
+\setlength{\itemsep}{7pt}
+				\item 电子波函数$\psi_i(\{\mathbf{r}\};\{\mathbf{R}\})$对原子核位置$\{\mathbf{R}_j\}$的梯度
+				\item 梯度算符对原子核波函数$\chi_{si}(\{\mathbf{R}\})$的贡献
+			\end{enumerate}
+		\item 电子在态$i\rightarrow i^{\prime}$跃迁将会激发或吸收一个声子
+	\end{itemize}
+	根据\textrm{Epstein}推广的\textrm{Hellmann-Feynman}定理线性近似下有
+	\begin{displaymath}
+		\hspace*{-15pt}
+		\langle\psi_i(\{\mathbf{r}\};\{\mathbf{R}\})|\nabla_J|\psi_i^{\prime}(\{\mathbf{r}\};\{\mathbf{R}\})\rangle=\frac{\langle\psi_i(\{\mathbf{r}\};\{\mathbf{R}\})|\tfrac{\nabla_V}{\nabla_{\mathbf{R}_J}}|\psi_{i^{\prime}}(\{\mathbf{r}\}:\{\mathbf{R}\})\rangle}{E_{i^{\prime}}(\{\mathbf{R}\})-E_i(\{\mathbf{R}\})}
+	\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{第一原理分子动力学:~\textrm{BOMD}}
+	如果绝热近似和\textrm{Born-Oppenheimer}近似同时满足，称为\textrm{Born-Oppenheimer}分子动力学\textrm{(BOMD)}
+	\begin{itemize}
+		\item 原子核运动的势函数为$E[\{\psi_i\};\mathbf{R}]$，并且每个时间步长内，势函数对$\{\psi_i(\vec r)\}$取极小值\\
+			\begin{displaymath}
+				\begin{aligned}
+					L_{\mathrm{BO}}(\{\psi_i\};~\mathbf{R},\dot{\mathbf{R}})=&\dfrac12\sum_{I=1}^NM_I\dot{\mathbf{R}}^2_I-\underset{\{\psi_i\}}{\textcolor{red}{\min}}~E[\{\psi_i\};\mathbf{R}]\\
+					&+\sum_{ij}\Lambda_{ij}(\langle\psi_i|\psi_j\rangle-\delta_{ij})
+				\end{aligned}
+			\end{displaymath}
+		\item 运动方程\textrm{(Equations of Motion,~EOM)}
+			\begin{displaymath}
+				\begin{aligned}
+					\hspace*{-40pt}
+					M_I\ddot{\mathbf{R}}_I=&-\nabla_{\mathbf{R}_I}\bigg[\underset{\{\psi_i\}}{\textcolor{red}{\min}}~E[\{\psi_i\};\mathbf{R}]\bigg|_{\{\langle\psi_i|\psi_j\rangle=\delta_{ij}\}}\bigg]\\
+					=&\textcolor{purple}{-\dfrac{\partial E}{\partial\mathbf{R}_I}}\textcolor{blue}{+\sum_{i,j}\Lambda_{ij}\dfrac{\partial}{\partial \mathbf{R}_I}\langle\psi_i|\psi_j\rangle}\textcolor{magenta}{-2\sum_i\dfrac{\partial\langle\psi_i|}{\partial\mathbf{R}_I}\bigg[\dfrac{\delta E}{\delta\langle\psi_i|}-\sum_j\Lambda_{ij}|\psi_j\rangle\bigg]}
+				\end{aligned}
+			\end{displaymath}
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{第一原理分子动力学:~\textrm{BOMD}}
+	\begin{itemize}
+		\item $\textcolor{purple}{\dfrac{\partial E}{\partial\mathbf{R}_I}}$表示\textrm{Hellmann-Feynman}力$\vec F_{\mathrm{HF}}$
+		\item $\textcolor{blue}{\sum\limits_{i,j}\Lambda_{ij}\dfrac{\partial}{\partial \mathbf{R}_I}\langle\psi_i|\psi_j\rangle}$是\textrm{Pulay}力$\vec F_{\mathrm{WF}}$\\
+			{\fontsize{6.2pt}{4.2pt}\selectfont{源于电子波函数正交要求，且只有当基函数为局域函数(依赖于$\mathbf{R}$时)才有贡献}}
+		\item $\textcolor{magenta}{\sum\limits_i\dfrac{\partial\langle\psi_i|}{\partial\mathbf{R}_I}\bigg[\dfrac{\delta E}{\delta\langle\psi_i|}-\sum\limits_j\Lambda_{ij}|\psi_j\rangle\bigg]}$表示非自洽电子态的影响$\vec F_{\mathrm{NSC}}$\\
+			{\fontsize{6.2pt}{4.2pt}\selectfont{源自非局域基(如平面波)，由于波函数非显式依赖$\mathbf{R}$，因此展开系数$c_{ij}(\mathbf{R})$依赖于原子核位置
+			\begin{displaymath}
+				\psi_i(\mathbf{R})=\sum\limits_jc_{ij}(\mathbf{R})\phi_i
+			\end{displaymath}
+			前面\textrm{MOE}中的系数\textrm{2}源于\textrm{K-S}轨道波函数为实数时的简化表示\\
+			这一项的贡献比起$F_{\mathrm{HF}}$小很多，\textcolor{blue}{只要当$\psi_i(\mathbf{R})$是体系精确的电子的本征态波函数，该项就会消失}——换言之，只有非完全自洽的电子计算，才需要考虑该项的贡献。显然，所有数值计算中，都将存在不等式
+	\begin{displaymath}
+			0\leqslant-\dfrac{\delta E}{\delta\langle\psi_i|}+\sum_j\Lambda_{ij}|\psi_j\rangle=-\hat{H_{\mathrm{e}}}\langle\psi_j|+\sum_j\Lambda_{ij}|\psi_j\rangle
+		\end{displaymath} }}
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{第一原理分子动力学:~\textrm{BOMD}}
+	另一方面，如果忽略$\vec F_{\mathrm{WF}}$和$\vec F_{\mathrm{NSC}}$的贡献，仅对体系电子的非本征态波函数应用\textrm{Hellmann-Feynman}定理，得到的结果和精确计算的原子受力
+	\begin{displaymath}
+		\vec F=\vec F_{\mathrm{HF}}+\vec F_{\mathrm{WF}}+\vec F_{\mathrm{NSC}}
+	\end{displaymath}
+	计算相比，也只有微小的偏差
+	\vskip 1.5pt
+	这是因为在\textrm{DFT}框架下，能量是电荷密度的非线性函数，因此$H_{\mathrm{e}}$必须通过迭代求解;~而原子受力的误差则随电荷密度线性变化——这也解释了为什么一般\textrm{BOMD}计算的原子受力比体系总能要精确得多
+
+	\vskip 5pt
+	在\textrm{BOMD}中，\textrm{Born-Oppenheimer}近似下核与电子的运动完全解耦，在此基础上考虑绝热近似，将不再有对动力学模拟的时间步长限制，相比于其它\textrm{AIMD}方法，\textrm{BOMD}模拟允许的时间步长要长得多
+}
+
+\frame
+{
+	\frametitle{第一原理分子动力学:~\textrm{CPMD}}
+	基于\textrm{Born-Oppenheimer}近似的原子-电子耦合的势能面计算，因每一原子步都需要完整的电子结构自洽迭代，故计算量非常可观。
+\vskip 5pt
+\textrm{1985}年，在\textrm{Car-Parrinello}给出的方案中，\textcolor{purple}{电子态将和原子核的运动一样，都用分子动力学算法处理}\\
+在该方案中，\textcolor{blue}{体系的电子态并未能达到当前正电荷环境的真实基态，但体系总能可以与真实基态更为接近}\\
+{\fontsize{6.2pt}{5.2pt}\selectfont{考虑\textcolor{blue}{电子态总能}(即\textcolor{red}{电子态有关能量}+\textcolor{magenta}{原子核静电相互作用能})是作为电子波函数$\psi_k$和原子核坐标$\mathbf{S}$的泛函
+\begin{displaymath}
+	E_{\mathrm{tot}}=E_{\mathrm{tot}}(\{\psi_k\},\mathbf{S})
+\end{displaymath}
+如果波函数可用一套基组$\{\chi_r\}$表示，即
+\begin{displaymath}
+	\psi_k(\vec r)=\sum_rC_{rk}\chi_r(\vec r)
+\end{displaymath}
+则体系总能可表示为
+\begin{displaymath}
+	E_{\mathrm{tot}}=E_{\mathrm{tot}}(\{C_{rk}\},\mathbf{S})
+\end{displaymath}
+考虑到基函数常常选择以原子核为坐标原点，因此也依赖于$\mathbf{S}$
+}}\\
+\textrm{Car-Parrinello}方法通过变量\underline{\textcolor{blue}{$\psi_k$(或$C_{rk}$)和原子核坐标$\mathbf{S}$}}来完成$E_{\mathrm{tot}}$的优化(确定$E_{\mathrm{tot}}$的极小值)
+}
+
+\frame
+{
+	\frametitle{第一原理分子动力学:~\textrm{CPMD}}
+	{\fontsize{6.2pt}{5.2pt}\selectfont{到这里，能量最小化问题可以视为一个抽象的数学问题，原则上，任何一种最小化方法都适用(如模拟退火方法(\textrm{simulated annealing method}))}}
+	\vskip 5pt
+	\textrm{Car-Parrinello}要求原子核坐标随时间变化，还引入虚拟时间，要求波函数随虚拟时间变化，由此构造动态\textrm{Lagrangian}量\\
+	{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{Lagrangian}量包括
+	\begin{itemize}
+		\item 电子态波函数$\{\psi_k\}$
+		\item 原子核坐标$\{\vec R_i\}$
+		\item 电子态波函数时间导数$\dot\psi_k$和原子核坐标时间导数$\{\dot{\vec R}_i\}$
+	\end{itemize}}}
+	电子态总能$E_{\mathrm{tot}}$是该\textrm{Lagrangian}量的势能，形式上这是一个经典力学的问题
+	\begin{itemize}
+		\item 在经典力学体系的运动方程中引入阻尼项贡献，则\\
+			\textcolor{blue}{经过一段时间体系达到平衡态时，许可自由度的值对应体系经典势能达到最小值态时的取值}
+		\item 在模拟体系在非零温下的运动时，可将阻尼项设为零
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{\textrm{CPMD}的\textrm{Lagrangian}}
+	根据\textrm{Car-Parrinello~}定义的经典\textrm{Lagrangian~}量
+			\begin{displaymath}
+				\begin{aligned}
+					L_{\mathrm{CP}}(\{\psi_i\};~\mathbf{R},\dot{\mathbf{R}})=&\textcolor{blue}{\dfrac12\mu\sum_i\langle\dot{\psi}_i|\dot{\psi}_i\rangle}+\dfrac12\sum_{I=1}^NM_I\dot{\mathbf{R}}^2_I\\
+					-&\textcolor{red}{E}[\{\psi_i\};\mathbf{R}]\\
+					&+\sum_{ij}\Lambda_{ij}(\langle\psi_i|\psi_j\rangle-\delta_{ij})
+				\end{aligned}
+			\end{displaymath}
+%	{\fontsize{9.0pt}{5.2pt}\selectfont
+%	\begin{displaymath}
+%		L(\{\psi_k\},\{\vec R_n\})=\frac{\mu}2\sum_k\dot{\psi}_k^2+\sum_n\frac{M_n}2\dot{\vec R}_n^2-E_{\mathrm{tot}}(\{\psi_k\},\{\vec R_n\})+\sum_{kl}\Lambda_{kl}\langle\psi_k|\psi_l\rangle
+%	\end{displaymath}}
+%	这里$\mu$是一个很小的质量(可理解为虚拟电子质量);\\
+%	$M_n$表示位置为$\vec R_n$处原子的真实质量;~\\
+			{\fontsize{6.2pt}{4.2pt}\selectfont{在经典\textrm{Lagrangian}中考虑电子自由度，人为地引入了傀电子质量参数$\mu$和傀轨道速度$\dot{\psi}_i$}\\
+	上式最后一项是要求波函数$\psi_k$正交的约束条件，$\Lambda_{kl}$是引入的\textrm{Lagrangian}乘子}
+\vskip 5pt
+{\fontsize{7.2pt}{5.2pt}\selectfont{$\mu$的选择原则:
+		\begin{enumerate}
+			\item $\mu\ll M$:~使得\textrm{Lagrangian}量中的\textcolor{blue}{电子动能项贡献足够小},因此波函数能随时适应原子核位置的变化
+			\item $\mu$的选择兼顾效率与精度:\\
+				一旦在运动方程中引入阻尼，电子和原子核的动能都将为零，体系总能(即\textrm{Lagrangian}量中的势能)达到极小值，但选择不同的$\mu$，计算过程中会有不同的收敛速度
+		\end{enumerate}
+	}}
+}
+
+\frame
+{
+	\frametitle{\textrm{CPMD}的运动方程}
+由波函数正交约束，体系的\textrm{Euler-Lagrange~}运动方程可表示为
+			{\fontsize{9.0pt}{4.2pt}\selectfont{
+			\begin{displaymath}
+				\begin{aligned}
+					\mu\ddot{\psi}_i(\vec r,t)=&-\dfrac{\delta E}{\delta\langle\psi_i|}+\sum_j\Lambda_{ij}|\psi_j\rangle\\
+					=&-\hat{H_{\mathrm{e}}}\langle\psi_j|+\sum_j\Lambda_{ij}|\psi_j\rangle\\
+					M_I\ddot{\mathbf{R}}_I=&-\nabla_{\mathbf{R}_I}\bigg[E[\{\psi_i\};\mathbf{R}]\bigg|_{\{\langle\psi_i|\psi_j\rangle=\delta_{ij}\}}\bigg]\\
+					=&\textcolor{purple}{-\dfrac{\partial E}{\partial\mathbf{R}_I}}\textcolor{blue}{+\sum_{i,j}\Lambda_{ij}\dfrac{\partial}{\partial \mathbf{R}_I}\langle\psi_i|\psi_j\rangle}
+				\end{aligned}
+			\end{displaymath}}}
+%	\begin{displaymath}
+%		\begin{aligned}
+%			\mu\ddot{\psi}_k=&-\dfrac{\partial E_{\mathrm{tot}}}{\partial\psi_k}+2\sum_i\Lambda_{kl}(t)\psi_l(\vec r)\\
+%			M_n\ddot{\vec R}_n&=-\dfrac{\partial E_{\mathrm{tot}}}{\partial\vec R_n}+\textcolor{red}{\sum_{kl}\Lambda_{kl}(t)\dfrac{\partial\langle\psi_k|\psi_l\rangle}{\partial\vec R_n}}
+%		\end{aligned}
+%	\end{displaymath}
+	{\fontsize{6.5pt}{4.2pt}\selectfont{\begin{itemize}
+		\item 电子态总能$E_{\mathrm{tot}}$是波函数$\psi_k$和原子核位置$\{\mathbf{R}_I\}$的函数 
+			\vskip 3pt
+		如果表示$\psi_k$的基函数不依赖原子核位置$\mathbf{R}_I$，则上述最后一个方程右侧最后一项消失
+		\item $-\dfrac{\delta E}{\delta\langle\psi|}$表示经典力学框架下的电子受力，用来描述分子动力学范畴内电子自由度随原子核运动的情况
+%			当波函数用基函数展开，电子运动方程可用展开系数表示为
+%			\begin{displaymath}
+%				\mu\ddot{\psi}_k=-\dfrac{\partial E_{\mathrm{tot}}}{\partial\psi_k}+2\sum_i\Lambda_{kl}(t)\sum_sS_{rs}(\vec r)C_{sl}
+%			\end{displaymath}
+		只要电子态波函数的基函数可由原子核位置确定，$\mu$的数值受基函数影响不大
+	\end{itemize}}}
+}
+
+\frame
+{
+	\frametitle{\textrm{CPMD}的定态运动方程的求解}
+	如果运动方程中引入阻尼项，则经过一段时间后，方程的解达到定态，前述运动方程等号左侧为零\footnote{\fontsize{6.2pt}{5.2pt}\selectfont{定态，意味着波函数和原子位置不再随时间变化}}，因此可有
+\begin{itemize}
+	\item 电子态的运动方程与\textrm{Kohn-Sham}方程类似\\
+		{\fontsize{6.2pt}{5.2pt}\selectfont{当前方程的矩阵元$\Lambda_{kl}$与\textrm{K-S}方程的能量本征值由$\varepsilon_k$对应}}
+	\item \textrm{Lagrange}参数$\Lambda_{kl}$是时间相关的\\
+		{\fontsize{6.2pt}{5.2pt}\selectfont{
+		因此每个\textrm{MD}步必须重新计算$\Lambda_{kl}$，确保电子态波函数满足正交约束条件}}
+	\item 应用具体的数值算法求解$\Lambda_{kl}$:~\\
+	{\fontsize{6.5pt}{5.2pt}\selectfont
+	应用\textrm{DFT~}框架下的\textrm{Hamiltonian}量，有
+	\begin{displaymath}
+		\psi_k(t+h)=2\psi_k(t)-\psi_k(t-h)-\dfrac{2h^2}{\mu}(H\psi_k-\sum_l\Lambda_{kl}\psi_l)
+	\end{displaymath}
+	该方程表明:~\textcolor{blue}{电子基态也可通过各种优化方法直接求解}}\\
+		{\fontsize{6.2pt}{5.2pt}\selectfont{
+			比如可用\textrm{Verlet~}算法计算;~\textrm{Car-Parrinello}建议用迭代\textrm{SHAKE}算法计算}}
+	\item 对于搜索原子核的平衡位置问题，如果原子初始位置离平衡位置较远，很可能只得到体系的局域极小值\\
+		{\fontsize{6.2pt}{5.2pt}\selectfont{使用模拟退火方法，使体系跃出局域极小点，搜索全局极小值}}
+\end{itemize}
+}
+
+%\frame
+%{
+%	\frametitle{能量泛函的直接优化:~波函数的求解}
+%	在\textrm{DFT~}框架下，有
+%	{\fontsize{9.0pt}{5.2pt}\selectfont
+%	\begin{displaymath}
+%		\psi_k(t+h)=2\psi_k(t)-\psi_k(t-h)-\dfrac{2h^2}{\mu}(H\psi_k-\sum_l\Lambda_{kl}\psi_l)
+%	\end{displaymath}}
+%%	该方程表明:~\textcolor{blue}{电子基态也可通过各种优化方法直接求解}
+%	每个时间步$t$，\textrm{Car-Parrinello~}采用\textrm{SHAKE~}算法迭代确定$\psi_k(t)$
+%}
+%
+\frame
+{
+	\frametitle{\textrm{CPMD}的原子核受力}
+	原子核运动方程的求解主要围绕电子态总能对原子位置$\vec R_i$的求导，对求导有贡献的共三部分
+	\begin{itemize}
+		\item 原子核之间的\textrm{Coulomb}相互作用:\\
+			与原子核间距离反比:~$1/R_{ij}~\quad\vec R_{ij}=|\vec R_i-\vec R_j|$
+		\item 电子\textrm{Hamiltonian}中包括的电子与核之间的\textrm{Coulomb}吸引势\\
+			与原子核位置有关:~$\vec R_i$
+		\item 基函数$\chi_r$对原子核位置$\vec R_i$的依赖\\
+			当基函数的中心选定在原子核$\vec R_i$上时，原子核位置的变化会引起\textrm{Fock}矩阵和重叠矩阵的变化\\
+	{\fontsize{7.2pt}{5.2pt}\selectfont{因原子核位置变化引起基函数改变的贡献称为\textcolor{blue}{\textrm{Pulay}力}}}
+	\end{itemize}
+	\textrm{Car-Parrinello}方法得到的结果与二体势(力场)方法结果等价
+	\vskip 5pt
+	计算得到位于$\vec R_i$的原子核受力，用于描述\textrm{Verlet}模拟原子核的运动状态
+}
+
+\frame
+{
+	\frametitle{\textrm{H}原子\textrm{AIMD}计算示例}
+\begin{figure}[h!]
+	\vspace{-0.25in}
+\centering
+%\includegraphics[height=2.7in,width=4.0in,viewport=0 0 1300 960,clip]{Figures/VASP_procedure-full.png}
+\includegraphics[height=1.5in,width=1.9in,viewport=0 0 740 600,clip]{Figures/Ab-initio-Ene.png}\\
+\includegraphics[height=1.5in,width=1.9in,viewport=0 0 1200 950,clip]{Figures/MD_H-R-rel.png}
+\includegraphics[height=1.5in,width=1.9in,viewport=0 0 1200 950,clip]{Figures/MD_H-R-MD.png}
+\caption{\tiny \textrm{The Flow of calculation for the AIMD.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{PAW_AIMD}
+\end{figure} 
+}
+
+
+\frame
+{
+	\frametitle{波函数正交对计算的影响}
+	{\fontsize{9.0pt}{5.2pt}\selectfont
+	\textrm{Verlet}算法计算电子态波函数的运动方程
+	\begin{displaymath}
+		|\tilde\psi_k(t+h)\rangle=2|\psi_k(t)\rangle-|\psi_k(t-h)\rangle-\dfrac{2h^2}{\mu}(H|\psi_k(t)\rangle-\sum_l\Lambda_{kl}\psi_l)
+	\end{displaymath}}
+	当体系含有多个电子，\textrm{Langrage}乘子确保电子波函数彼此正交\\%，可有
+	{\fontsize{7.0pt}{5.2pt}\selectfont
+	实际上，存在多种正交方案
+	\begin{itemize}
+		\item 一次\textrm{unitary}变换产生一套正交轨道
+			\begin{displaymath}
+				\psi_k^{\prime}=\sum_lU_{kl}\psi_l
+			\end{displaymath}
+			这里基组$\{\psi_k^{\prime}\}$是正交的
+		\item 一次波函数的\textrm{unitary}变化伴随\textrm{Lagtange}乘子的一次类似变换
+			\begin{displaymath}
+				\Lambda_{kl}^{\prime}=\sum_{mn}U_{km}^{\dagger}\Lambda_{mn}U_{nl}
+			\end{displaymath}
+	\end{itemize}
+	不同的正交方案对应张开的空间相同，但张开空间的函数有所旋转
+%	\begin{displaymath}
+%		|\psi_k(t+h)\rangle=|\tilde\psi_k(t+h)\rangle+\sum_lX_{kl}|\psi_l(t)\rangle
+%	\end{displaymath}
+}\\
+%	其中，{\fontsize{9.0pt}{5.2pt}\selectfont$X_{kl}=\dfrac{2h^2}{\mu}\Lambda_{kl}$}，由此$|\psi_k(t+h)\rangle$正交\\
+%	$X_{ij}$要求关于$\mathbf{X}$的矩阵方程
+	{\fontsize{8.0pt}{5.2pt}\selectfont
+	\textcolor{purple}{不同的旋转方式(不同的正交方案)会对\textrm{Verlet}算法的执行效率产生很大的影响}
+%	\begin{displaymath}
+%		\mathbf{X}\mathbf{X}^{\dag}+\mathbf{X}\mathbf{B}+\mathbf{B}^{\dag}\mathbf{X}^{\dag}=\mathbf{I}-\mathbf{A}
+%	\end{displaymath}
+}
+%	能通过以下迭代快速收敛，这里{\fontsize{9.0pt}{5.2pt}\selectfont$A_{kl}=\langle\tilde\psi_k(t+h)|\tilde\psi_l(t+h)\rangle$}，{\fontsize{9.0pt}{5.2pt}\selectfont$B_{kl}=\langle\psi_k(t)|\tilde\psi_l(t+h)\rangle$}
+	{\fontsize{9.0pt}{5.2pt}\selectfont
+%	\begin{displaymath}
+%		\mathbf{X}^{(n+1)}=\frac12[\mathbf{I}-\mathbf{A}+\mathbf{X}^{(n)}(\mathbf{I}-\mathbf{B})+\mathbf{X}^{(n)}(\mathbf{I}-\mathbf{B}^{\dag})-\mathbf{X}^{n}\mathbf{X}^{(n){\dag}}]
+%		\end{displaymath}
+}
+%	取初始{\fontsize{9.0pt}{5.2pt}\selectfont$\mathbf{X}=\frac12(\mathbf{I}-\mathbf{A})$}
+}
+
+%\subsection{电子态能量的最小化}
+\frame[allowframebreaks]
+{
+	\frametitle{\textrm{CPMD}与平面波基}
+	\begin{itemize}
+		\item 推导总能对轨道自由度的受力
+	{\fontsize{6.2pt}{5.2pt}\selectfont{
+			\begin{displaymath}
+				\begin{aligned}
+					\dfrac{\partial E_{\mathrm{total}}}{\partial c_j^{\ast}(\vec K)}=&\dfrac{K^2}2c_j(\vec K)+\sum_{\vec K^{\prime}}V_{\mathrm{loc}}^{\ast}(\vec K-\vec K^{\prime})c_j(\vec K^{\prime})\\
+					&+\sum_n\sum_{lm}F_{jlm}^n\mathrm{e}^{-\mathrm{i}\vec K\cdot\vec R_n}Y_{lm}(\hat{\vec K})h_{lm}^np_m^l(K)
+				\end{aligned}
+			\end{displaymath}
+			这里$V_{\mathrm{loc}^{\mathrm{all}}}$是总局域势
+			\begin{displaymath}
+				V_{loc}(\vec K)=\sum_n\Delta V_{\mathrm{loc}}(\vec K)+V_{\mathrm{xc}}(\vec K)+4\pi\dfrac{n_{\mathrm{tot}}(\vec K)}{K^2}
+			\end{displaymath}
+		}}
+		\item 推导总能对原子核的受力:\\
+{\fontsize{6.2pt}{5.2pt}\selectfont{
+			总能对原子位置坐标的梯度包括
+			\begin{itemize}
+{\fontsize{6.2pt}{5.2pt}\selectfont{
+				\item 局域赝势部分的贡献
+					\begin{displaymath}
+						\nabla_{\vec R_n}E_{\mathrm{local}}=-\Omega\sum_{\vec K}\mathrm{i}\vec KV_{\mathrm{local,n}}(\vec K)\mathrm{e}^{-\mathrm{i}\vec K\cdot\vec R_n}n^{\ast}(\vec K)
+					\end{displaymath}
+				\item 非局域赝势部分的贡献
+					\begin{displaymath}
+						\nabla_{\vec R_n}E_{\mathrm{nonlocal}}=\sum_jf_j\sum_{l,m\varepsilon n}[(F_{jlm}^n)^{\ast}h_{lm}^n\nabla_{\vec R_n}F_{jlm}^n+\nabla_{\vec R_n}(F_{lm}^n)^{\ast}h_{lm}^nF_{lm}^n]
+					\end{displaymath}
+				\item 电子-核静电相互作用部分的贡献
+					\begin{displaymath}
+						\nabla_{\vec R_n}E_{\mathrm{ES}}=-\Omega\sum_{\vec K}\mathrm{i}\vec K\dfrac{n_{\mathrm{tot}}}{K^2}n_{\mathrm{core}}^n(\vec K)\mathrm{e}^{-\mathrm{i}\vec K\cdot\vec R_n}+\nabla_{\vec R_n}E_{\mathrm{ovrl}}
+\end{displaymath}
+				}}
+			\end{itemize}
+			其中
+			\begin{displaymath}
+				\nabla_{\vec R_n}F_{lm}^n=-\dfrac1{\sqrt{\Omega}}\sum_{\vec K}\mathrm{i}\vec K\mathrm{e}^{-\mathrm{i}\vec K\cdot\vec R_n}c_j^{\ast}(\vec K)Y_{lm}(\hat{\vec K})p_{lm}^l(\vec K)
+			\end{displaymath}
+			\begin{displaymath}
+				\begin{aligned}
+					\nabla_{\vec R_n}E_{\mathrm{ovrl}}=&\sideset{}{^{\prime}}\sum_{n^{\prime}}\sum_{\vec L}\bigg\{\dfrac{Z_nZ_{n^{\prime}}}{|\vec R_n-\vec R_{n^{\prime}}-\vec L|^3}\mathrm{erfc}\bigg[\dfrac{|\vec R_n-\vec R_{n^{\prime}}-\vec L|}{\sqrt{2(\xi_n^2+\xi_{n^{\prime}}^2)}}\bigg]\\
+					&+\dfrac2{\sqrt{\pi}}\dfrac1{\sqrt{\xi_n^2+\xi_{n^{\prime}}^2}}\dfrac{Z_nZ_{n^{\prime}}}{|\vec R_n-\vec R_{n^{\prime}}-\vec L|^2}\mathrm{exp}\bigg[\dfrac{|\vec R_n-\vec R_{n^{\prime}}-\vec L|}{\sqrt{2(\xi_n^2+\xi_{n^{\prime}}^2)}}\bigg]\bigg\}\\
+					&\times(\vec R_n-\vec R_{n^{\prime}}-\vec L)
+				\end{aligned}
+			\end{displaymath}
+		}}
+	\end{itemize}
+
+}
+
+\frame
+{
+	\frametitle{\textrm{CPMD}方法总结}
+	\textrm{Car-Parinello~}方法基本思想
+	\begin{itemize}
+		\item 只对原子核位置考虑受力$-\dfrac{\partial E_{\mathrm{tot}}}{\partial\vec R_n}$作用
+		\item 电子结构是通过某种最小化方法确定能量泛函$E_{\mathrm{tot}}[\rho(\vec r)]$的极值得到，而非\textrm{Born-Oppenheimer}近似下的自洽迭代
+		\item \textrm{Verlet}算法确定核位移过程中，并不要求在每一步核位移时，电子步充分弛豫到当前结构的基态
+	\end{itemize}
+	在\textrm{Car-Parinello}方法中，电子结构的计算变成经典的优化问题:~电子密度迭代过程中，约束条件下最小化问题
+	\begin{itemize}
+		\item 电子本征态波函数彼此正交约束下迭代对角化(内循环):\\
+			\textcolor{blue}{子空间旋转}:~不同的正交化方法对迭代计算的影响
+		\item 电荷密度混合过程中电荷数守恒约束(外循环)
+			\begin{displaymath}
+				\sum\limits_{j=0}^i a_j=1
+			\end{displaymath}
+	\end{itemize}
+}
+
+%\frame
+%{
+%	\frametitle{统计系综}
+%	系综(\textrm{Ensembles})是在一定的宏观条件下，由大量微观粒子组成的性质和结构完全相同的、处于各种运动状态的、各自独立的系统整体的集合\footnote{\fontsize{4.2pt}{2.2pt}\selectfont{简言之，系综是系统的集合(\textcolor{magenta}{系统}:~宏观相同，微观不同)。}}。\\
+%	应用\textrm{Verlet}算法，完成单粒子运动的数值积分，可以得到动力学体系的\textrm{Hamiltonian}对应的能量，进而应用统计力学的统计系综，获得宏观体系的物理量
+%\begin{figure}[h!]
+%\centering
+%\vspace*{-0.20in}
+%\includegraphics[height=1.60in,width=3.85in,viewport=0 0 1420 570,clip]{Figures/Statistical_Ensembles.png}
+%%\includegraphics[height=1.30in,width=3.35in,viewport=0 0 1420 570,clip]{Figures/Statistical_Ensembles.png}
+%%\caption{\tiny \textrm{The Statistical Ensembles.\footnote{\fontsize{3.5pt}{1.2pt}\selectfont{\textrm{canonical}，汉译作“正则”，出自《楚辞\textperiodcentered 离骚》“皇揽揆余於初度兮，肇锡余以嘉名;~名余曰\textcolor{red}{正则}兮，字余曰灵均”，《楚辞章句》\upcite{Chucizhangju}:~“正，平也;~则，法也;~灵，神也;~均，调也。言正平可法则者，莫过于天;~养物均调者，莫过于地。高平曰原，故父伯庸名我为平以法天，字我为原以法地。言己上能安君，下能养民也。”，意思是说“正则”、“灵均”隐喻着某种意义，即平正是天的象征，原均是地的象征。因此正则的含义是“符合天道”，与\textrm{canonical}的意思\textrm{of, relating to, or forming a canon}意义一致。}}}}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\label{Statistical_Ensembles}
+%\end{figure}
+%}
+%
+%\frame
+%{
+%	\frametitle{第一原理分子动力学:~\textrm{CPMD}}
+%	1985年\textrm{Car}和\textrm{Parrinello}在密度泛函理论基础上，将第一原理方法应用到分子动力学研究中，形成\textrm{Car-Parrinello Molecular dynamics~(CPMD)}
+%	\begin{itemize}
+%		\item 与\textrm{BOMD}不同，在\textrm{CPMD}中，电子自由度存在于经典\textrm{Lagrangian}中
+%			\begin{displaymath}
+%				\begin{aligned}
+%					L_{\mathrm{CP}}(\{\psi_i\};~\mathbf{R},\dot{\mathbf{R}})=&\textcolor{blue}{\dfrac12\mu\sum_i\langle\dot{\psi}_i|\dot{\psi}_i\rangle}+\dfrac12\sum_{I=1}^NM_I\dot{\mathbf{R}}^2_I\\
+%					-&\textcolor{red}{E}[\{\psi_i\};\mathbf{R}]\\
+%					&+\sum_{ij}\Lambda_{ij}(\langle\psi_i|\psi_j\rangle-\delta_{ij})
+%				\end{aligned}
+%			\end{displaymath}
+%			{\fontsize{6.2pt}{4.2pt}\selectfont{在经典\textrm{Lagrangian}中考虑电子自由度，人为地引入了傀电子质量参数$\mu$和傀轨道速度$\dot{\psi}_i$}}
+%	\end{itemize}
+%}
+%
+%\frame
+%{
+%	\frametitle{第一原理分子动力学:~\textrm{CPMD}}
+%	\begin{itemize}
+%		\item \textrm{CPMD}下的运动方程表示为
+%			\begin{displaymath}
+%				\begin{aligned}
+%					M_I\ddot{\mathbf{R}}_I=&-\nabla_{\mathbf{R}_I}\bigg[E[\{\psi_i\};\mathbf{R}]\bigg|_{\{\langle\psi_i|\psi_j\rangle=\delta_{ij}\}}\bigg]\\
+%					=&\textcolor{purple}{-\dfrac{\partial E}{\partial\mathbf{R}_I}}\textcolor{blue}{+\sum_{i,j}\Lambda_{ij}\dfrac{\partial}{\partial \mathbf{R}_I}\langle\psi_i|\psi_j\rangle}\\
+%					\mu\ddot{\psi}_i(\vec r,t)=&-\dfrac{\delta E}{\delta\langle\psi_i|}+\sum_j\Lambda_{ij}|\psi_j\rangle\\
+%					=&-\hat{H_{\mathrm{e}}}\langle\psi_j|+\sum_j\Lambda_{ij}|\psi_j\rangle
+%				\end{aligned}
+%			\end{displaymath}
+%			{\fontsize{6.2pt}{4.2pt}\selectfont{$-\dfrac{\delta E}{\delta\langle\psi|}$表示经典力学框架下的电子受力，用来描述分子动力学范畴内电子自由度随原子核运动的情况 }}
+%	\end{itemize}
+%}
+
+\frame
+{
+	\frametitle{\textrm{CPMD}计算的特点}
+	\begin{itemize}
+		\item 计算成本大大节约\\
+			{\fontsize{8.2pt}{4.2pt}\selectfont{相比于\textrm{BOMD},\textrm{CPMD}无需在每个分子动力学时间步长执行电子自洽计算}}
+		\item 计算时间步长不能太长\\
+			{\fontsize{8.2pt}{4.2pt}\selectfont{绝热近似要求电子-核运动能量彼此分离，\textcolor{blue}{声子最高频率}$\omega_{\mathrm I}$必须远小于\textcolor{blue}{傀电子最低振动频率}$\omega_{\mathrm e}$
+			\begin{displaymath}
+				\omega_{\mathrm e}\propto\sqrt{\dfrac{\Delta E_{\mathrm{gap}}}{\mu}}
+			\end{displaymath}
+			$\Delta E_{\mathrm{gap}}$是\textrm{K-S}单粒子的带隙，许可最大时间步长$\Delta t_{\mathrm{max}}<1/\omega_{\mathrm{e}}$，大小主要由$\sqrt{\mu}$}}确定
+		\item $\mu$物理上没有意义，但通过调节$\mu$可以平衡\textrm{AIMD}的效率和精度，一般选取$\mu$使得$\omega_{\mathrm{I}}<<\omega_{\mathrm{I}}$成立
+		\item 对于金属/导体的\textrm{CPMD}计算，由于$\Delta E_{\mathrm{gap}}=0$，必须要求体系通过恒温条件平衡交换能或者泛函允许分数占据
+		\end{itemize}
+}
+
 \section{{\rm LAMMPS}软件基础}
 \subsection{{\rm LAMMPS}软件}
 \frame

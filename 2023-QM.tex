@@ -777,6 +777,208 @@ $\varepsilon_{\mathrm{X}}[\rho]$和$\varepsilon_{\mathrm{C}}[\rho]$可理解为�
 %\item 交换-相关能密度泛函
 }
 
+\subsection{常见泛函的一些形式}
+\frame%[allowframebreaks]
+{
+	\frametitle{\rm{LDA}泛函}
+	\begin{itemize}
+		\item 交换能部分
+	\begin{displaymath}
+		\begin{aligned}
+			\varepsilon_{\mathrm{X}}[\rho,\zeta]=&2^{-1/3}C_{\mathrm{X}}^{\sigma}g(\zeta)\rho^{1/3}(\vec r)\\
+			E_{\mathrm{X}}[\rho,\zeta]=&\int\varepsilon_{\mathrm{X}}[\rho,\zeta]\rho(\vec r)\mathrm{d}\vec r\\
+		\end{aligned}
+	\end{displaymath}
+	{\fontsize{7.5pt}{6.0pt}\selectfont{这里:~$C_{\mathrm{X}}^{\sigma}=\dfrac32\bigg(\dfrac3{4\pi}\bigg)^{1/3}$\\
+		$g(\zeta)=\dfrac12\bigg[(1+\zeta)^{4/3}+(1-\zeta)^{4/3}\bigg]$\\
+		$\zeta(\vec r)=\dfrac{[\rho_{\alpha}(\vec r)-\rho_{\beta}(\vec r)]}{[\rho_{\alpha}(\vec r)+\rho_{\beta}(\vec r)]}$}}
+	\end{itemize}
+}
+
+\frame%[allowframebreaks]
+{
+	\frametitle{\rm{LDA}泛函}
+	\begin{itemize}
+		\item 相关能部分
+			\begin{displaymath}
+				\hspace*{-30pt}	\varepsilon_{\mathrm{C}}^{\mathrm{LDA}}(r_s,\zeta)=\varepsilon_{\mathrm{C}}(r_s,0)+a_{\mathrm{c}}(r_s)\dfrac{f(\zeta)}{f^{\prime\prime}(\zeta)}(1-\zeta^4)+[\varepsilon_{\mathrm{c}}(r_s,1)-\varepsilon_{\mathrm{c}}(r_s,0)]f(\zeta)\zeta^4
+			\end{displaymath}
+			{\fontsize{7.5pt}{6.0pt}\selectfont{这里:~$r_s=\bigg[\dfrac3{4\pi}(\rho_{\alpha}+\rho_{\beta})^{-1}\bigg]^{1/3}$~$f(\zeta)=[(1+\zeta)^{4/3}+(1-\zeta)^{4/3}-2]/(2^{4/3}-2)$\\
+			$\varepsilon_{\mathrm{C}(r_s,0)}$、$\varepsilon_{\mathrm{C}(r_s,1)}$、$a_{\mathrm{C}(r_s)}$由经验公式
+			\begin{displaymath}
+				\begin{aligned}
+					&G(r_s,A,\alpha_1,\beta_1,\beta_2+\beta_3+\beta_4)\\
+					=&-2A(1+\alpha_1r_s)\ln\bigg[1+\dfrac1{2A(\beta_1r_s^{1/2}+\beta_2r_s+\beta_2r_s^{3/2}+\beta_1r_s^2)}\bigg]
+				\end{aligned}
+			\end{displaymath}
+		计算。其中$A$、$\alpha_1$、$\beta_1$、$\beta_2$、$\beta_3$、$\beta_4$是参数，通过拟合实验结果确定}}
+		\begin{displaymath}
+			E_{\mathrm{C}}[\rho]=\int\rho(\vec r)\varepsilon_{\mathrm{C}}(\vec r)\mathrm{d}\vec r
+		\end{displaymath}
+	\end{itemize}
+}
+
+\frame%[allowframebreaks]
+{
+	\frametitle{\rm{GGA}泛函}
+	\begin{itemize}
+		\item 交换能泛函:
+			\begin{itemize}
+				\item \textrm{PW91}
+					\begin{displaymath}
+						\begin{aligned}
+							E_{\mathrm{X}}^{\mathrm{PW91}}[\rho_{\alpha},\rho_{\beta}]=&\dfrac12(E_{\mathrm{X}}^{\mathrm{PW91}}[2\rho_{\alpha}]+E_{\mathrm{X}}^{\mathrm{PW91}}[2\rho_{\beta}])\\
+							E_{\mathrm{X}}^{\mathrm{PW91}}[\rho]=&-\dfrac34\bigg(\dfrac3\pi\bigg)^{1/3}\int\rho^{4/3}(\vec r)F(x)\mathrm{d}\vec r
+						\end{aligned}
+					\end{displaymath}
+					\hspace*{-30 pt}{\fontsize{4.5pt}{4.0pt}\selectfont{这里:~$F(x)=\dfrac{1+0.19645(hx)\sinh^{-1}(7.7956hx)+(hx)^2\{0.2743-0.1508\mathrm{exp}[-100(hx)^2]\}}{1+0.19645(hx)\sinh^{-1}(7.7956hx)+0.004(hx)^4}$}\\
+					$h=(24\pi^2)^{-1/3}$,~~~$x=|\nabla\rho|\rho^{-4/3}$}
+				\item \textrm{PBE}
+			\begin{displaymath}
+				E_{\mathrm{X}}^{\mathrm{PBE}}[\rho,x]=E_{\mathrm{X}}^{\mathrm{LDA}}[\rho,x]-C_{\mathrm{X}}\int a\bigg(1-\dfrac1{bx^2}\bigg)\rho^{4/3}(\vec r)\mathrm{d}\vec r
+			\end{displaymath}
+			{\fontsize{4.5pt}{4.0pt}\selectfont{其中:~$C_{\mathrm{X}}=\dfrac34\bigg(\dfrac3\pi\bigg)^{1/3}$\\$a=0.804$,~~~$b=0.273$~是非经验参数}}
+			\end{itemize}
+	\end{itemize}
+}
+
+\frame%[allowframebreaks]
+{
+	\frametitle{\rm{GGA}泛函}
+	\begin{itemize}
+		\item 相关能泛函:
+			\begin{itemize}
+				\item \textrm{PW91}
+					\begin{displaymath}
+						\begin{aligned}
+							E_{\mathrm{C}}^{\mathrm{PW91}}[\rho_{\alpha},\rho_{\beta}]=&\int\mathrm{d}\vec r\rho(\vec r)[\varepsilon_{\mathrm{C}}^{\mathrm{LSDA}}(r_s,\zeta)]+H(t,r_s,\zeta)\\
+							H=&H_0+H_1
+						\end{aligned}
+					\end{displaymath}
+					{\fontsize{4.5pt}{4.0pt}\selectfont{这里:~
+						\begin{displaymath}
+							\begin{aligned}
+								H_0=&f^3(\zeta)\dfrac{\beta^2}{2\alpha}\ln\bigg(1+\dfrac{2\alpha}{\beta}\dfrac{t^2+At^4}{1+At^2+A^2t^4}\bigg)\\
+								A=&\dfrac{2\alpha}{\beta}\dfrac1{\mathrm{exp[-2\alpha\varepsilon_{\mathrm{C}}^{\mathrm{LDA}}(r_s,\zeta)}/f^3(\zeta)\beta^2]-1}\\
+							t=&\dfrac{|\nabla\rho|}{2f(\zeta)k_s\rho}~~~f(\zeta)=\dfrac12\bigg[(1+\zeta)^{2/3}+(1-\zeta)^{2/3}\bigg]\\
+							k_s=&[4(3\pi^{-1}\rho)^{1/3}]^{1/2}
+							\end{aligned}
+						\end{displaymath}
+						参数　$\alpha=0.09$,~~~$\beta=\nu C_{\mathrm{C}}(0)$\\
+						$\nu=(16/\pi)(3\pi^2)^{1/3}$,~~~$C_{\mathrm{C}}(0)=0.004235$
+				}}
+			\end{itemize}
+	\end{itemize}
+}
+
+\frame%[allowframebreaks]
+{
+	\frametitle{\rm{meta-GGA}泛函}
+	\begin{itemize}
+		\item 交换能泛函
+			\begin{itemize}
+				\item \textrm{TPSS}
+					\begin{displaymath}
+						\begin{aligned}
+							E_{\mathrm{X}}^{\mathrm{TPSS}}[\rho]&=\int\mathrm{d}\vec r\rho(\vec r)\varepsilon_{\mathrm{X}}^{\mathrm{LSDA}}(\vec r)F_{\mathrm{X}}^{\mathrm{TPSS}}(p,z)\\
+							F_{\mathrm{X}}^{\mathrm{TPSS}}&=1+\kappa-\dfrac{\kappa}{1+x/\kappa}
+						\end{aligned}
+					\end{displaymath}
+{\fontsize{4.5pt}{4.0pt}\selectfont{这里:~
+	$\rho(\vec r)=\rho_{\alpha}(\vec r)+\rho_{\beta}({\vec r})$,~~~$\varepsilon_{\mathrm{X}}^{\mathrm{LSDA}}(\vec r)=-\dfrac3{4\pi}[3\pi^2\rho(\vec r)]^{1/3}$
+\\
+\begin{displaymath}
+	\begin{aligned}
+		x=&\left\{\bigg[\dfrac{10}{81}+\dfrac{cz^2}{(1+z^2)^2}\bigg]p+\dfrac{146}{2025}\bar{q}_b^2-\dfrac{73}{405}\bar{q}_b\bigg[\dfrac12\bigg(\dfrac35z\bigg)^2+\dfrac12p^2\bigg]^{1/2}\right.\\
+		&+\left.\dfrac1{\kappa}\bigg(\dfrac{10}{81}\bigg)^2p^2\dfrac{20e^{1/2}}{81}\bigg(\dfrac35z\bigg)^2+e\mu p^3\right\}(1+e^{1/2}p)^{-2}\\
+		p=&\dfrac{|\nabla\rho(\vec r)|^2}{4(3\pi^2)^{2/3}\rho^{8/3}(\vec r)}, ~~~ \bar{q}_b=\dfrac{(9/20)(\alpha-1)}{[1+b\alpha(\alpha-1)]^{1/2}}+2p/3
+	\end{aligned}
+\end{displaymath}
+$z=\tau_w/\tau$,~~~$\tau_w=\dfrac{|\nabla\rho(\vec r)|^2}{8\rho(\vec r)}$,~~~$\tau=\sum\limits_{\sigma}\tau_{\sigma}$\\
+$\alpha=(\tau-\tau_w)/\tau_{\mathrm{unif}}=(5p/3)(z^{-1}-1)$,~~~$\tau_{\mathrm{tiff}}=\dfrac3{10}(3\pi^2)^{2/3}[\rho(\vec r)]^{5/3}$
+}}
+			\end{itemize}
+	\end{itemize}
+}
+
+
+\frame%[allowframebreaks]
+{
+	\frametitle{\rm{meta-GGA}泛函}
+	\begin{itemize}
+		\item 相关能泛函
+			\begin{itemize}
+				\item {\textrm{TPSS}}
+					\begin{displaymath}
+						E_{\mathrm{C}}^{\mathrm{TPSS}}[\rho_{\alpha,\rho_{\beta}}]=\int\mathrm{d}\vec r\rho(\vec r)\varepsilon_{\mathrm{C}}^{\mathrm{TPSS0}}[1+\mathrm{d}\varepsilon_{\mathrm{C}}^{\mathrm{TPSS0}}(\tau_w/\tau)^3]
+					\end{displaymath}
+{\fontsize{4.5pt}{4.0pt}\selectfont{这里:~
+	\begin{displaymath}
+		\begin{aligned}
+			\varepsilon_{\mathrm{C}}^{\mathrm{TPSS0}}=&\varepsilon_{\mathrm{C}}^{\mathrm{PBE}}(\rho_{\alpha},\rho_{\beta},\nabla\rho_{\alpha},\nabla\rho_{\beta})[1+C(\zeta,\xi)(\tau_w/\tau)^2]\\
+			&-\bigg[1+C(\zeta,\xi)(\tau_w/\tau)^2\sum\limits_{\sigma}\dfrac{\rho_{\sigma}(\vec r)}{\rho(\vec r)}\bar{\varepsilon}_{\mathrm{C}}\bigg]\\
+			\bar{\varepsilon}_{\mathrm{C}}=&\max[\varepsilon_{\mathrm{C}}^{\mathrm{PBE}}(\rho_{\alpha},0,\nabla\rho_{\alpha},0),\varepsilon_{\mathrm{C}}^{\mathrm{PBE}}(\rho_{\alpha},\rho_{\beta},\nabla\rho_{\alpha},\nabla\rho_{\beta})]\\
+			C(\zeta,\xi)=&\dfrac{C(\zeta,0)}{\{1+\xi^2[(1+\zeta)^{-4/3}+(1-\zeta)^{-4/3}]/2\}^4}
+		\end{aligned}
+	\end{displaymath}
+	$\xi=\dfrac{|\nabla\zeta|}{2[3\pi^2\rho(\vec r)]^{1/3}}$, ~~~$C(\zeta,0)=0.53+0.87\zeta^2+0.50\zeta^4+2.26\zeta^6$
+}}
+			\end{itemize}
+	\end{itemize}
+	\vskip 5pt
+	\textrm{TPSS}泛函的特点:~\\
+	\vskip 3pt
+	{\fontsize{7.5pt}{6.0pt}\selectfont{不包含依靠实验数据的可调参数，数字系数由精确能量泛函满足的条件确定\\
+		\textcolor{blue}{对电子分布较为均匀的晶体体系和电子分布激烈变化的分子体系都有较高的精度} }}
+}
+
+\frame
+{
+	\frametitle{\rm{hybrid}泛函}
+	体系\textrm{Hamilton}算符表示为
+	\begin{displaymath}
+		\hat{H}_{\lambda}=-\dfrac12\sum_i^N\nabla^2+\sum_i^NV_i(\rho,\lambda)+\dfrac{\lambda}2\sum_i^N\sum_{j(j\neq i)}^N\dfrac1{r_{ij}}
+	\end{displaymath}
+	\begin{displaymath}
+		\mbox{\textcolor{blue}{$\lambda$表征电子间相互作用程度}}\left\{
+		\begin{aligned}
+			&\lambda=0:~\mbox{无相互作用的参考体系}\\
+			&\lambda=1:~\mbox{存在相互作用的真实体系}
+		\end{aligned}
+		\right.
+	\end{displaymath}
+	交换-相关能表示为
+	\begin{displaymath}
+		\begin{aligned}
+			E_{\mathrm{XC}}^{\lambda}=&\dfrac12\int\mathrm{d}\vec r_1\rho_1^{\lambda}(\vec r_1)\int\dfrac{h_{\mathrm{XC}}^{\lambda}(\vec r_1,\vec r_2)}{\vec r_1-\vec r_2}\mathrm{d}\vec r_2\\
+			E_{\mathrm{XC}}=&\int E_{\mathrm{XC}}^{\lambda}\mathrm{d}\lambda
+		\end{aligned}
+	\end{displaymath}
+	{\fontsize{4.5pt}{4.0pt}\selectfont{这里:~$h_{\mathrm{XC}}(\vec r_1,\vec r_2)=\dfrac{2\rho_2(\vec r_1,\vec r_2)}{\rho(\vec r_1)}-\rho_1(\vec r_2)$}}
+}
+
+\frame
+{
+	\frametitle{\rm{hybrid}泛函}
+	\begin{itemize}
+		\item \textrm{half-to-half}
+			\begin{displaymath}
+				\begin{aligned}
+					E_{\mathrm{XC}}=&\dfrac12(E_{\mathrm{XC}}^0+E_{\mathrm{XC}}^1)=\dfrac12E_{\mathrm{XC}}^{\mathrm{Exact}}+\dfrac12E_{\mathrm{XC}}^1\\
+					\approx&\dfrac12E_{\mathrm{XC}}^{\mathrm{HF}}+\dfrac12E_{\mathrm{XC}}^{\mathrm{LSDA}}
+				\end{aligned}
+			\end{displaymath}
+		\item \textrm{B3LYP}
+			\begin{displaymath}
+			\hspace*{-20pt}	E_{\mathrm{XC}}^{\mathrm{B3LYP}}=(1-a)E_{\mathrm{X}}^{\mathrm{LSDA}}+aE_{\mathrm{X}}^{\mathrm{HF}}+b\Delta E_{\mathrm{X}}^{\mathrm{VB88}}+cE_{\mathrm{C}}^{\mathrm{LYP}}+(1-c)E_{\mathrm{C}}^{\mathrm{LSDA}}
+			\end{displaymath}
+	\end{itemize}
+	\vskip 8pt
+	\textcolor{blue}{电子间的交换能和相关能都是离域的，但长程作用方向相反，很大程度上彼此抵消，剩余部分主要是局域的，所以将交换能和相关能合在一起处理，用局域近似可以比较好地描述电子行为}\\
+	\vskip 5pt
+	\textcolor{red}{采用精确交换能形式，虽然消除了自相互作用的误差，但剩余的相关能主体是离域的，因此局域形式的泛函不再是好的近似，对电子行为的描述效果会变差}
+}
+
 \frame                               %
 {
 	\frametitle{近似能量泛函$E_{\mathrm{XC}}[\rho]$的主要问题}
@@ -1090,101 +1292,1003 @@ $\varepsilon_{\mathrm{X}}[\rho]$和$\varepsilon_{\mathrm{C}}[\rho]$可理解为�
 \end{figure}
 }
 
+\section{赝势理论}       %Bookmark
+%\section{Induction on DFT and solid-state physics}       %Bookmark
+\subsection{平面波与赝势}       %Bookmark
 \frame
 {
-	\frametitle{球形势对平面波的散射}
-\begin{figure}[h!]
-\centering
-\vspace*{-0.26in}
-\includegraphics[height=1.90in,width=2.48in,viewport=0 0 400 300,clip]{Figures/Pseudo-scatter.jpg}
-\caption{\fontsize{5.5pt}{4.2pt}\selectfont{\textrm{Schematic illustration of scattering of a plane wave by a spherical potential.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{Pseudo-scatter}
-\end{figure}
-\vspace*{-0.1in}
-\fontsize{7.5pt}{6.2pt}\selectfont{
-入射平面波
-$$\mathrm{e}^{\mathrm{i}\vec q\cdot\vec r}=4\pi\sum_{lm}\mathrm{i}^lj_l(\vec q\cdot\vec r)Y_{lm}^{\ast}(\hat{\vec q})Y_{lm}(\hat{\vec r})=\sum_{l}(2l+1)\mathrm{i}^lj_l(qr)P_{l}(\cos\theta)$$
-%$$\mathrm{e}^{\mathrm{i}\vec q\cdot\vec r}=\mathrm{e}^{\mathrm{i}qr\cos(\theta)}=\sum_{l}(2l+1)\mathrm{i}^lj_l(qr)P_{l}[\cos(\theta)]$$
-}
+%\frametitle{The methods on band structure calculation}
+	\frametitle{由\textrm{OPW~}到赝势}
+%\vskip 10pt
+%\textrm{The mainly difference of all these methods below: the basis sets and the construction of the potential}
+\begin{itemize}
+%\setlength{\itemsep}{5pt}
+	\item 完全平面波基组\\{\fontsize{7.5pt}{5.5pt}\selectfont{少数平面波就可以很好地描述波函数在原子间的行为，近核波函数则需要大量平面波展开}}%。因此完全平面波基组虽然方便，但求体系本征态对角化的矩阵非常巨大，计算变得异常耗时。
+	\item 正交平面波(\textrm{Orthogonalized plane wave, OPW})方法\\{\fontsize{7.5pt}{5.5pt}\selectfont{价电子用与芯层波函数正交的平面波展开
+		\begin{displaymath}
+			\phi_{\textrm{OPW}}^{\vec k+\vec G}(\vec r)=\phi_{\textrm{PW}}^{\vec k+\vec G}(\vec r)-\sum_c\langle\varphi_c|\phi_{\textrm{PW}}^{\vec k+\vec G}\rangle\varphi_c(\vec r)
+		\end{displaymath}}}
+	{\fontsize{7.5pt}{5.5pt}\selectfont{构造赝波函数
+		\begin{displaymath}
+			\tilde{\phi}_v(\vec r)=\phi_v(\vec r)+\sum_c\langle\varphi_c|\tilde{\phi}_v\rangle\varphi_c(\vec r)
+		\end{displaymath}
+	代入\textrm{Schr\"odinger}方程
+		$$\hat H|\tilde{\phi}_v\rangle-\sum_c\langle\varphi_c|\tilde{\phi}_v\rangle\hat H|\varphi_c\rangle=\varepsilon_v|\tilde{\phi}_v\rangle-\varepsilon_v\sum_c\langle\varphi_c|\tilde{\phi}_v\rangle|\varphi_c\rangle$$
+		可有$$\hat H|\tilde{\phi}_v\rangle+\textcolor{blue}{V^R}|\tilde{\phi}_v\rangle=\textcolor{blue}{\varepsilon_v}|\tilde{\phi}_v\rangle$$
+		这里排斥势是$$V^R(\vec r,\vec r^{\prime})=\sum_c(\varepsilon_v-\varepsilon_c)|\varphi_c(\vec r^{\prime})\rangle\langle\varphi_c(\vec r)|$$}}
+\end{itemize}
 }
 
 \frame
 {
-	\frametitle{势阱与相移}
+	\frametitle{由\textrm{OPW~}到赝势}
+	\textrm{Phillips-Kleinman}指出，赝势($V^{e\!f\!f}$)-赝波函数(可用$\phi_{PW}^{\vec k+\vec G}$展开)满足\textrm{Schr\"odinger}方程%\upcite{PR116-287_1959}
+	$$\bigg(-\dfrac12\nabla^2+\textcolor{red}{V^{e\!f\!f}}\bigg)|\tilde{\phi}_v\rangle=\textcolor{blue}{\varepsilon_v}|\tilde{\phi}_v\rangle$$
+	其中$\textcolor{red}{V^{e\!f\!f}}=V(\vec r)+\textcolor{blue}{V^R}$
+	\begin{itemize}
+		\item 赝势-赝波函数的本征值$\varepsilon_v$与真实体系的价电子能量本征值等价
+		\item 赝势$\textcolor{red}{V^{e\!f\!f}}$比$V(\vec r)$平滑得多，并且$\textcolor{blue}{V^R}$是非局域的排斥势
+			\begin{displaymath}
+				\begin{aligned}
+					\textcolor{blue}{V^R}f(\vec r)=&\sum_c(\varepsilon_v-\varepsilon_c)\varphi_c(\vec r)\int\varphi_c^{\ast}(\vec r^{\prime})f(\vec r^{\prime})\mathrm{d}\vec r^{\prime} \\
+					=&\int V^R(\vec r,\vec r^{\prime})f(\vec r^{\prime})\mathrm{d}\vec r^{\prime}
+				\end{aligned}
+			\end{displaymath}
+%			这里$$V^R(\vec r,\vec r^{\prime})=\sum_c(\varepsilon_v-\varepsilon_c)|\varphi_c(\vec r^{\prime})\rangle\langle\varphi_c(\vec r)|$$
+	\end{itemize}
+}
+
+\frame
+{
+\frametitle{赝势的评估}
+赝势(\textrm{Pseudo Potential, PP})方法是在正交平面波的基础上发展起来的，构造出平缓的势函数代替核的强吸引作用和芯层电子的排斥作用，用平缓的函数取代波函数近核时的震荡。
+\begin{itemize}
+\setlength{\itemsep}{5pt}
+	\item 赝势-平面波方法，只需要少量平面波可展开赝波函数，大大提升了计算效率；但是赝波函数不能很好地反映与电子近核行为有关的性质。
+	\item 赝势的构造并不唯一，考核构造赝势的两大指标:~\\“柔软程度”\textrm{(Soft)}与“可移植性”\textrm{(transferability)}
+\end{itemize}
 \begin{figure}[h!]
 \centering
-\vspace*{-0.26in}
-\includegraphics[height=1.85in,width=1.3in,viewport=0 0 750 1050,clip]{Figures/Radial_wave_functions_for_various_square_well_potential.png}
-\caption{\fontsize{5.5pt}{4.2pt}\selectfont{\textrm{The radial wave functions for \textit{l}=0 for various square well potential depths.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{Radial_wave_functions}
+\vspace*{-0.10in}
+\includegraphics[height=1.35in,width=1.40in,viewport=154 100 562 508,clip]{Figures/Pseudo.pdf}
+\includegraphics[height=1.35in,width=2.55in,viewport=1 1 980 500,clip]{Figures/Pseudo-2.png}
+\caption{\tiny \textrm{The Pseudo wave function and Pseudo potential.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Pseudo_Potential-Wave}
 \end{figure}
-\vspace*{-0.1in}
-\fontsize{7.5pt}{6.2pt}\selectfont{
-平面波经散射后出射，波函数变为
-$$\Psi_l^{>}(\varepsilon,r)=C_l\bigg[j_l(\kappa r)-\tan\eta_l(\varepsilon)n_l(\kappa r)\bigg]\quad\text{其中}\kappa^2=\varepsilon$$
-根据散射理论，能量为$\varepsilon$的电子经单个势阱散射偏转$\theta$后，波函数的振幅可以表示为
+}
+
+\frame
+{
+	\frametitle{传统赝势的构造}
+	直接由实验数据来确定(模型)赝势，常用的实验数据包括离子对电子的散射角度、离子的光谱实验数据等
+		\begin{itemize}
+			\item 构造离子赝势:~可移植性好
+			\item 构造总赝势(包括全部价电子相互作用):~常用于能带描述
+		\end{itemize}
+%	\begin{itemize}
+%		\item 在指定能量范围内，离子对电子散射的散射角
+%		\item 离子的光谱实验数据
+%	\end{itemize}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.10in}
+\includegraphics[height=1.60in,width=2.57in,viewport=0 0 980 600,clip]{Figures/Pseudo-model-empty_core.png}
+\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Pseudo_model-empty_core}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{传统赝势的构造}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.10in}
+\includegraphics[height=1.30in,width=4.17in,viewport=0 0 1150 350,clip]{Figures/Pseudo-model.png}
+\caption{\tiny \textrm{Left:``Empty core'' model potential of Ashcroft in which the potential is zero inside radius $R_c(l)$ which is different for each $l$. Right: Square well model potential with value $A_l$ inside a cut-off radius $R_c$, proposed by Abarenkov and Heine and fit to atomic data by Animalu and Heine. The fact that the potential are weak, zero, or even positive inside cut-off radius $R_c$ is an illustration of the ``cancellation theorem''.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Pseudo-model}
+\end{figure}
+}
+
+\subsection{模守恒赝势}
+\frame
+{
+	\frametitle{第一原理赝势}
+		由第一原理求解出全电子波函数(径向部分)$P_{n,l}(r)$
+			\begin{displaymath}
+				\bigg[-\dfrac12\dfrac{\mathrm{d}^2}{\mathrm{d}r^2}+\dfrac{l(l+1)}{2r^2}+V(\rho,r)\bigg]P_{n,l}(r)=\varepsilon_{n,l}P_{n,l}(r)
+			\end{displaymath}
+			这里$V(\rho,r)$是自洽单电子势
+			$$V(\rho,r)=-\frac{Z}r+V_{\mathrm H}(\rho,r)+V_{XC}^{\mathrm{LDA}}(\rho(r))$$
+			$V_{\mathrm H}(\rho,r)$是\textrm{Hartree}势，$V_{XC}^{\mathrm{LDA}}(\rho(r))$是交换-相关势
+
+			由此构造赝波函数$P_l^{\mathrm{PP}}(r)$，满足
+			$$P_l^{\mathrm{PP}}(r)=P_l^{\mathrm{AE}}(r),\quad r>r_{l}^c$$
+			进而构造赝势$V_{\mathrm{src},l}^{\mathrm{PP}}(r)$
+			$$V_{\mathrm{src},l}^{\mathrm{PP}}(r)=\varepsilon_l-\dfrac{l(l+2)}{2r^2}+\dfrac{1}{2P_l^{\mathrm{PP}}(r)}\dfrac{\mathrm{d}^2}{\mathrm{d}r^2}P_l^{\mathrm{PP}}(r),\quad r<r_{l}^c$$
+}
+
+\frame
+{
+	\frametitle{模守恒\textrm{(Norm-conserving)}条件}
+%	构造赝势确定参数的边界(构造条件)
+	\begin{enumerate}
+		\item 价电子赝波函数的能量本征值与对应全电子波函数能量本征值相等:~$\varepsilon_l^{\mathrm{PP}}=\varepsilon_l^{\mathrm{AE}}$
+		\item 价电子赝波函数与真实电子波函数的径向部分在截断半径$r_{c,l}$外相同:~$\psi_l^{\mathrm{PP}}(r)=\psi_l^{\mathrm{AE}}(r),\quad r>r_{l}^c$
+		\item 价电子赝波函数与真实电子波函数的对数导数在截断半径$r_{c,l}$处相等:~$D_l^{\mathrm{PP}}(r)=D_l^{\mathrm{AE}}(r),\quad r\geqslant r_{l}^c$\\
+		这里$D_l(\varepsilon,r)=r\frac{\psi_l^{\prime}(\varepsilon,r)}{\psi_l(\varepsilon,r)}=r\dfrac{\mathrm{d}}{\mathrm{d}r}\ln\psi_l(\varepsilon,r)$
+		\item 价电子赝波函数与真实电子波函数在截断半径$r_{l}^c$内的积分电荷相等(\textcolor{red}{模守恒条件})
+			$$Q_l=\int_0^{r_{l}^c}\mathrm{d}rr^2|\psi_l^{\mathrm{PP}}(r)|^2=\int_0^{r_{l}^c}\mathrm{d}rr^2|\psi_l^{\mathrm{AE}}(r)|^2$$
+		\item 价电子赝波函数与真实电子波函数的对数导数一阶能量导数$\mathrm{d}D_l(\varepsilon,r)/\mathrm{d}\varepsilon$在截断半径$r_{l}^c$处及以外相等
+	\end{enumerate}
+}
+
+\frame
+{
+	\frametitle{模守恒\textrm{(Norm-conserving)}条件}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.10in}
+\includegraphics[height=1.30in,width=4.17in,viewport=0 0 1150 350,clip]{Figures/Pseudo-OPW_NCPP.png}
+\caption{\tiny \textrm{Schematic example of a valence function that has the character of a $3s$ orbital near the nucleus and two examples of smooth functions (dashed lines) that equal the full wave-function outside the core region. Left: the smooth part of the valence function defined by OPW-like equation; Right: a smooth pseudo-function that satisfies the norm-conservation condition.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Pseudo-OPW_NCPP}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{赝势去屏蔽}
+	第一原理赝势建立了赝波函数与对应赝势的一一对应关系，但该赝势包含了电子屏蔽(原子、离子环境)信息，去屏蔽后的赝势对环境依赖更低，“可移植性”更好
+	$$V_{\mathrm{ion},l}^{\mathrm{PP}}(r)=V_{\mathrm{src},l}^{\mathrm{PP}}(r)-V_{\mathrm{H},l}^{\mathrm{PP}}(r)-V_{XC,l}^{\mathrm{PP}}(r)$$
+	去屏蔽过程中，特别需要注意$V_{XC,l}^{\mathrm{PP}}(r)$的处理
+	$$V_{XC,l}^{\mathrm{PP}}(r)=V_{XC}^{\mathrm{PP}}([n_l^{\mathrm{PP}}],r)+\big[V_{XC}^{\mathrm{PP}}([n_l^{\mathrm{PP}}+n^{core}],r)-V_{XC}^{\mathrm{PP}}([n_l^{\mathrm{PP}}],r)\big]$$
+}
+
+\frame
+{
+	\frametitle{非局域赝势}
+	当前第一原理赝势径向部分是局域的，但与$l$有关，因此是半局域的(\textrm{semi-local})
 	\begin{displaymath}
-		t(\theta)=\dfrac{4\pi}{\kappa}\sum_l(2l+1)[\mathrm{exp}(2\mathrm{i}\eta_l(\varepsilon))-1]P_l(\cos\theta)
+		\hat{V}^{\mathrm{SL}}=\sum_{lm}|Y_{lm}\rangle V_l(r)\langle Y_{lm}|
 	\end{displaymath}
-%$$t(\theta)=\dfrac{4\pi}{\sqrt\varepsilon}\sum_l(2l+1)\bigg[\mathrm{e}^{2\mathrm{i}\eta_l(\varepsilon)}-1\bigg]P_l(\cos\theta)$$
-%$$\eta_l(\varepsilon)=p_l\pi+\delta_l(\varepsilon)$$
-}
+	将赝势的径向部分分解为局域部分($l$无关)和非局域部分($l$相关)
+	\begin{displaymath}
+		V_{\mathrm{ion},l}^{\mathrm{PP}}(r)=V_{\mathrm{local}}^{\mathrm{PP}}(r)+\delta V_l^{\mathrm{PP}}(r)
+	\end{displaymath}
+	第一原理赝势可以表示为
+	\begin{displaymath}
+		\hat{V}^{\mathrm{SL}}=V_{\mathrm{local}}^{\mathrm{PP}}(r)+\sum_{lm}|Y_{lm}\rangle\delta V_l(r)\langle Y_{lm}|
+	\end{displaymath}
+	赝势的非局域部分可以表示为
+	\begin{displaymath}
+		\delta V(\vec r,\vec r^{\prime})=\sum_{lm}|Y_{lm}\rangle\delta V_l(r)\langle Y_{lm}|
+	\end{displaymath}
 }
 
 \frame
 {
-	\frametitle{球形势散射的相移与赝势}
+	\frametitle{模守恒赝势构造流程}
+\begin{figure}[h!]
+\centering
+%\vspace*{-0.10in}
+\includegraphics[height=2.70in,width=3.77in,viewport=70 40 900 610,clip]{Figures/Pseudo-NC.jpg}
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Pseudo-NC}
+\end{figure}
+}
+
+\subsection{可分离赝势与\rm{Ghost~band}}
+\frame
+{
+	\frametitle{非局域赝势的变量分离}
+	\textrm{Kleinman-Bylander}提出了非局域赝势的变量分离的近似方案\footnote{即$\delta V(\vec r,\vec r^{\prime})$可以写成$\delta V(\vec r,\vec r^{\prime})=\sum_{i}f_i(\vec r)g_i(\vec r^{\prime})$的形式}:~\\
+%	引入分离算符$\delta V^{\mathrm{NL}}$满足
+	{\fontsize{7.2pt}{5.2pt}\selectfont{如果选择适当的局域函数$V_{\mathrm{local}}^{\mathrm{PP}}(r)$，赝势将可分解为局域部分与非局域部分之和:
+	$$\hat V_{\mathrm{NL}}^{\mathrm{PP}}(r)=V_{\mathrm{local}}^{\mathrm{PP}}(r)+\sum_{lm}\dfrac{|\psi_{lm}^{\mathrm{PP}}\delta V_l\rangle\langle\delta V_l\psi_{lm}^{\mathrm{PP}}|}{\langle\psi_{lm}^{\mathrm{PP}}|\delta V_l|\psi_{lm}^{\mathrm{PP}}\rangle}$$ 
+	\textcolor{magenta}{$\langle\delta V_l(r)\psi_{lm}^{\mathrm{PP}}|$是投影子}，这种分解称为\textrm{factored pseudo-potential}，方便数值计算
+\vskip 10pt
+	更一般地，如果允许赝势局域部分$V_{\mathrm{local}}^{\mathrm{PP}}(r)$为任意函数，则可定义辅助函数
+	$$\chi_{lm}^{\mathrm{PP}}(\vec r)=\bigg\{\varepsilon_l-\bigg[-\dfrac12\nabla^2+V_{\mathrm{local}}^{\mathrm{PP}}(\vec r)\bigg]\bigg\}\psi_{lm}^{\mathrm{PP}}(\vec r)$$
+	于是赝势的非局域部分可表示为
+	$$\delta V_{\mathrm{NL}}=\sum_{lm}\dfrac{|\chi_{lm}^{\mathrm{PP}}\rangle\langle\chi_{lm}^{\mathrm{PP}}|}{\langle\chi_{lm}^{\mathrm{PP}}|\psi_{lm}^{\mathrm{PP}}\rangle}$$
+但是$V_{\mathrm{local}}^{\mathrm{PP}}(r)$选择的随意性，将增加计算结果出现\textrm{Ghost~band}的风险
+}}
+}
+
+\frame
+{
+	\frametitle{\textrm{Ghost~band}的表现}
+	\fontsize{9.2pt}{4.2pt}\selectfont{只有价电子的赝波函数与芯电子波函数完全正交，能带计算中才能确保芯层与价层电子的完全分离。但实际计算时，该正交条件很难严格保证，因此一旦赝波函数严重偏离正交条件，计算的能带中会在本不存在能带的区域出现电子结构分布(称为\textrm{Ghost~band})，这部分电子结构源自构造赝波函数的能量参数$\varepsilon_l$与芯层电子能量差别太大，无法保持与芯层电荷严格正交引起的}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.10in}
+\includegraphics[height=1.50in,width=1.98in,viewport=0 0 450 320,clip]{Figures/Ghostband-Vanadium-1.png}
+\includegraphics[height=1.50in,width=1.98in,viewport=0 0 450 320,clip]{Figures/Ghostband-Vanadium-4.png}
+\caption{\fontsize{7.2pt}{4.2pt}\selectfont{\textrm{The band structure of bcc Vanadium. %In the calculation, all electrons up to the 3p states were treated as core electrons, all other electrons as valence electrons. 
+\\Left:~Between 10 and 15 eV above the Fermi energy a strange band with nearly no dispersion can be observed. The vanishing dispersion of the band is a typical property of ghost bands.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Ghost-band}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{Ghost~band}的根源}
+	可分离赝势方法中
+	\begin{displaymath}
+		\hat{\mathbf{H}}=-\dfrac12\nabla^2+V_{\mathrm{local}}(r)+\delta\hat{V}_{\mathrm{NL}}
+	\end{displaymath}
+	赝波函数$\psi_{lm}^{\mathrm{PP}}(r)$是方程
+	\begin{displaymath}
+		\hat{\mathbf{H}}\psi_{lm}^{\mathrm{PP}}(r)=\varepsilon_l\psi_{lm}^{\mathrm{PP}}(r)
+	\end{displaymath}
+	的解。
+\vskip 15pt
+	因为$V_{\mathrm{local}}(r)$可随意选择，因此赝波函数$\psi_{lm}^{\mathrm{PP}}(r)$和能量$\varepsilon_l$不再要求与束缚态波函数相对应，将导致\textrm{Ghost~band}的出现
+}
+
+\frame
+{
+	\frametitle{\textrm{Ghost~band}根源的数学说明$^{\ast}$}
+	{\fontsize{7.2pt}{5.2pt}\selectfont{对于半局域势，求解能量$\varepsilon$对应的径向波函数$u_l(r,\varepsilon)$的方程\textcolor{blue}{是一个常微分方程}
+		\begin{displaymath}
+			-\dfrac12\dfrac{\mathrm{d}^2u_l}{\mathrm{d}r^2}+\overline{V}_l^{\mathrm{loc}}(r)u_l(r,\varepsilon)+\Delta V_l^{\mathrm{SL}}(r)u_l(r,\varepsilon)-\varepsilon u_l(r,\varepsilon)=0
+		\end{displaymath}
+		而对于可分离赝势(如\textrm{KB}势)，方程则为\textcolor{blue}{积分-微分方程}
+		\begin{displaymath}
+			-\dfrac12\dfrac{\mathrm{d}^2u_l}{\mathrm{d}r^2}+\overline{V}_l^{\mathrm{loc}}(r)u_l(r,\varepsilon)+\int\Delta V_l(r,r^{\prime})u_l(r^{\prime},\varepsilon)\mathrm{d}r^{\prime}-\varepsilon u_l(r,\varepsilon)=0
+		\end{displaymath}
+		将可分离赝势代入可有
+		\begin{displaymath}
+			-\dfrac12\dfrac{\mathrm{d}^2u_l}{\mathrm{d}r^2}+\overline{V}_l^{\mathrm{loc}}(r)u_l(r,\varepsilon)+f_l(r)\int g_l(r^{\prime})u_l(r^{\prime},\varepsilon)\mathrm{d}r^{\prime}-\varepsilon u_l(r,\varepsilon)=0
+		\end{displaymath}
+		\begin{itemize}
+			\item \textcolor{blue}{常微分方程解的结构服从\textrm{Wronskian}定理的推论:~本征态能量$\varepsilon_0,\varepsilon_1,\cdots,\varepsilon_n$按升序排列时，对应的本征态波函数(径向)的节点数依次递增}
+			\item \textcolor{red}{积分-微分方程解的结构不要求满足该结论:~波函数的节点数与能量本征态不再有对应的升序关系}
+		\end{itemize}
+		由于积分项的存在，传统的常微分方程求解算法(如\textrm{Runger-Kutta}法等)无法直接用于该积分-微分方程，必须另图别策
+	}}
+}
+
+\frame
+{
+	\frametitle{\textrm{Ghost~band}根源的数学说明$^{\ast}$}
+		{\fontsize{7.2pt}{5.2pt}\selectfont{
+		基本思想:~类似积分方程求解的\textrm{Fredholm}方法
+		\begin{itemize}
+			\item 先将微分方程中的\textcolor{magenta}{积分项近似为常数因子}，\textcolor{blue}{求解非齐次常微分方程}
+			\item 对含有波函数的积分，应用闭路积分公式\textrm{(closure formula)}计算
+		\end{itemize}}}
+		{\fontsize{5.2pt}{5.2pt}\selectfont{具体求解流程
+		\begin{enumerate}
+			\item 采用通用方法分别求解\\\textcolor{blue}{齐次微分方程}
+				\begin{displaymath}
+					-\dfrac12\dfrac{\mathrm{d}^2W_l}{\mathrm{d}r^2}+\overline{V}_l^{\mathrm{loc}}(r)W_l(r,\varepsilon)-\varepsilon W_l(r,\varepsilon)=0
+				\end{displaymath}
+				的通解和\\\textcolor{magenta}{不含积分项的}\textcolor{blue}{非齐次微分方程}
+				\begin{displaymath}
+					-\dfrac12\dfrac{\mathrm{d}^2X_l}{\mathrm{d}r^2}+\overline{V}_l^{\mathrm{loc}}(r)X_l(r,\varepsilon)-\varepsilon X_l(r,\varepsilon)=f_l(r)
+				\end{displaymath}
+				的一个特解
+			\item 构造积分
+				\begin{displaymath}
+					\begin{aligned}
+					\tilde {W}(\varepsilon)=&\int g_l(r)W(r,\varepsilon)\mathrm{d}r\\
+					\tilde {X}(\varepsilon)=&1+\int g_l(r)X(r,\varepsilon)\mathrm{d}r
+					\end{aligned}
+				\end{displaymath}
+			\item 由此得到积分-微分方程的解
+				\begin{displaymath}
+					u(r,\varepsilon)=K[W(r,\varepsilon)\tilde{X}(\varepsilon)-X(r,\varepsilon)\tilde{W}(\varepsilon)]
+				\end{displaymath}
+		这里$K$是归一化因子	
+		\end{enumerate}
+	}}
+}
+
+\frame
+{
+	\frametitle{\textrm{Ghost~band}的克服}
+	{\fontsize{7.2pt}{5.2pt}\selectfont{根据微分方程理论
+	\begin{displaymath}
+		\hat{\mathbf{H}}\psi_{lm}^{\mathrm{PP}}(r)=\varepsilon_l\psi_{lm}^{\mathrm{PP}}(r)
+	\end{displaymath}
+	的解$\psi_{lm}^{\mathrm{PP}}(r)$可表示为(只考虑径向部分)
+	\begin{displaymath}
+		\psi_{l}^{\mathrm{PP}}(r)=u_l^0(r)+\sum_ic_iu_l^i(r)
+	\end{displaymath}
+这里$u_l^0(r)$和$u_l^i(r)$分别是
+齐次微分方程
+	\begin{displaymath}
+		\bigg(-\dfrac12\nabla^2+V_{\mathrm{local}}-\varepsilon_l^0\bigg)u_{l}^0(r)=0
+	\end{displaymath}
+和非齐次微分方程
+	\begin{displaymath}
+		\bigg(-\dfrac12\nabla^2+V_{\mathrm{local}}-\varepsilon_l^j\bigg)u_{l}^j(r)=\chi_{l}^j(r)
+	\end{displaymath}
+的解
+
+引入多个能量参数$\varepsilon_l^i$，通过优化控制参数$c_i$，可以得到理想的局域势函数$V_{\mathrm{local}}(r)$
+}}
+}
+
+\frame
+{
+	\frametitle{广义模守恒条件}
+	为提高模守恒赝势的可移植性\footnote{\tiny{换言之，提升赝波函数能适应的能量变分空间}}，\textrm{Vanderbilt}和\textrm{Bl\"ochl}分别建议:\\
+	在构造可分离赝势时，\textcolor{blue}{引入额外的参考能量$\varepsilon_l$，并要求对每个角动量量子数$l$，所有能量参数$\varepsilon_l$构造的赝波函数$\phi_i^{\mathrm{ps}}$及其辅助函数$\chi_i$都满足
+	\begin{displaymath}
+		|\chi_i\rangle=-(\mathbf{T}+V_{\mathrm{loc}}-\varepsilon)|\phi_i^{\mathrm{ps}}\rangle
+	\end{displaymath}}
+	{\fontsize{7.2pt}{5.2pt}\selectfont{这里$i$表示量子数$l$，$m$和能量参数$\varepsilon$，即$i=(lm,\varepsilon)$}}
+	\vskip 5pt
+	由此出发，可构造出一组与赝波函数$\phi_i^{\mathrm{ps}}$垂直的函数$\beta_i$:~
+{\fontsize{7.2pt}{5.2pt}\selectfont{
+	\begin{itemize}
+		\item 构造矩阵$\mathbf{B}$，其矩阵元$B_{ij}$满足
+			\begin{displaymath}
+				B_{ij}= \langle\phi_j^{\mathrm{ps}}|\chi_i\rangle
+			\end{displaymath}
+		\item 由矩阵$\mathbf{B}$和$\chi$得到函数$\beta_i$
+			\begin{displaymath}
+				|\beta_i\rangle=\sum_j(\mathbf{B}^{-1})_{ij}|\chi_j\rangle
+			\end{displaymath}
+		\item 由此得到的$\beta$与赝波函数$\phi_i^{\mathrm{ps}}$满足正交条件
+	\begin{displaymath}
+		\langle\beta_i|\phi_j^{\mathrm{ps}}\rangle=\delta_{ij}
+	\end{displaymath}
+	\end{itemize}}}
+}
+
+\frame
+{
+	\frametitle{广义模守恒条件}
+	因此可分离赝势的非局域部分表示为
+	\textcolor{blue}{\begin{displaymath}
+		V_{\mathrm{NL}}=\sum_i|\chi_i\rangle\langle\beta_i|=\sum_{ij}B_{ij}|\beta_j\rangle\langle\beta_i|
+	\end{displaymath}}
+	{\fontsize{7.2pt}{5.2pt}\selectfont{不难看出，如果赝波函数满足广义模守恒条件
+	\begin{displaymath}
+		Q_{ij}=\langle\phi_j^{\mathrm{AE}}|\phi_i^{\mathrm{AE}}\rangle-\langle\phi_j^{\mathrm{PS}}|\phi_i^{\mathrm{PS}}\rangle = 0
+	\end{displaymath}
+	亦即
+	\begin{displaymath}
+		Q_{l\varepsilon,l\varepsilon^{\prime}}=\int_0^{R_c}\bigg(\phi_{l\varepsilon}^{\mathrm{AE}}(r)\phi_{l\epsilon^{\prime}}^{\mathrm{AE}}(r)-\phi_{l\varepsilon}^{\mathrm{PS}}(r)\phi_{l\varepsilon^{\prime}}^{\mathrm{PS}}(r)\bigg)\mathrm{d}r=0
+	\end{displaymath}
+	将大大提高赝势的可移植性。
+	\vskip 5pt
+	但实际上，广义模守恒条件看似简单，当能量参数$\varepsilon\neq\varepsilon^{\prime}$，要满足这个条件
+	$$Q_{l\varepsilon,l\varepsilon^{\prime}}=0$$
+	并非易事;~而一旦模守恒条件被破坏，矩阵$\mathbf{B}$(相应地，赝势的非局域部分$V_{\mathrm{NL}}$)就是非\textrm{Hermitian}}}
+}
+
+\subsection{超软赝势}
+\frame
+{
+\frametitle{超软赝势}
+\begin{itemize}
+\setlength{\itemsep}{5pt}
+	\item 赝势构造的模守恒条件
+%		\begin{displaymath}
+%			\int_0^{r_c}\mathrm{d}\vec r\varphi^{\ast PS}(\vec r)\varphi^{PS}(\vec r)=\int_0^{r_c}\mathrm{d}\vec r\varphi^{\ast}(\vec r)\varphi(\vec r)
+%		\end{displaymath}
+	很好地解决了赝势可移植性问题，但对$1s$、$2p$、$3d$等轨道，模守恒方案构造的赝势过于“硬”，所需平面波基组依然非常大
+	\item 超软\textrm{(Ultra-soft)}赝势，解除模守恒条件，实现对第一、第二周期元素的高效计算
+\end{itemize}
+\begin{figure}[h!]
+\vspace*{-0.10in}
+\centering
+\includegraphics[height=1.35in,width=1.40in,viewport=30 55 415 500,clip]{Figures/Norm-US-wave.pdf}
+\caption{\tiny \textrm{Oxygen 2} \textit{p} \textrm{radical wave function (solid), NC-pseudo-wave (dotted) and US-pseudo-wave (dashed).}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Norm-US-wave}
+\end{figure}
+}
+
+\frame
+{
+\frametitle{补偿电荷与多极矩}
+根据电动力学定理:\\\textcolor{blue}{如果球\textrm{S}内的电荷密度分布$\rho(\vec r)$，在球外某点$\vec r$产生的势是由电荷密度的多极矩确定}:
+\begin{figure}[h!]
+\vspace*{-15pt}
+\centering
+\includegraphics[height=1.25in,width=1.32in,viewport=1 22 507 575,clip]{Figures/potential_multipole.jpg}
+%\caption{\tiny \textrm{From Muffin-tin Potential to Full Potential}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Potential-multipole}
+\end{figure}
+\begin{displaymath}
+	V(\vec r)=\sum_{l=0}^{\infty}\sum_{m=-l}^{l}\dfrac{4\pi}{2l+1}q_{lm}\dfrac{Y_{lm}(\hat{\vec r})}{r^{l+1}}
+\end{displaymath}
+其中多极矩$q_{lm}$由下式计算
+\begin{displaymath}
+	q_{lm}=\int_SY_{lm}^{\ast}(\hat{\vec r})r^l\rho(\vec r)\mathrm{d}^3r
+\end{displaymath}
+}
+
+\frame
+{
+\frametitle{超软赝势的构造}
+\textrm{Vanderbilt}建议构造赝波函数时放弃模守恒约束条件，只要求价电子赝波函数与真实电子波函数的径向部分在截断半径$r_{l}^c$外相同，由此得到的赝势显然非\textrm{Hermitian}，但是通过构造\\\textcolor{blue}{\textrm{Hermitian}重叠算符}
+\begin{displaymath}
+	\mathbf{S}=\mathbf{1}+\sum_{i,j}Q_{ij}|\beta_j\rangle\langle\beta_i|
+\end{displaymath}
+以及\textcolor{blue}{\textrm{Hermitian}赝势算符}
+\begin{displaymath}
+	\tilde V^{\mathrm{NL}}=\sum_{i,j}\mathbf{D}_{i,j}|\beta_j\rangle\langle\beta_i|
+\end{displaymath}
+这里\textcolor{blue}{
+\begin{displaymath}
+	\mathbf{D}_{ij}=B_{ij}+\varepsilon_iQ_{ij}
+\end{displaymath}}
+模守恒约束下的标准本征值方程将变成广义本征值方程
+\begin{displaymath}
+	(T+V_{\mathrm{loc}}+\tilde V^{\mathrm{NL}}-\varepsilon\mathbf{S})|\phi\rangle=0
+\end{displaymath}
+}
+
+\frame
+{
+\frametitle{超软赝势的特点}
+\textrm{Vanderbilt}的超软赝势构造方案最大的优点是
+\begin{itemize}
+	\item \textcolor{purple}{解除模守恒约束}:~有助于增加赝波函数的截断半径，系统提高赝势的柔软程度
+	\item \textcolor{purple}{引入多个参考能量$\varepsilon_l$}:~使得模守恒条件下只在特定参考能量$\varepsilon$处成立的对数导数连续条件，扩展到参考能量$\varepsilon_l$区间范围内，这大大提高了赝势的适用范围(可移植性)
+\end{itemize}
+
+相应的，超软赝势计算中，电子密度表达形式为
+\begin{displaymath}
+	n(r)=\sum_nf_n|\phi_n(r)|^2+\sum_{n,ij}f_n\langle\phi_n|\beta_j\rangle\langle\beta_i|\phi_n\rangle Q_{ij}(r)
+\end{displaymath}
+这里补偿电荷$Q_{ij}(r)$定义为
+\begin{displaymath}
+	Q_{ij}(r)=\phi_i^{\mathrm{AE}}(r)\phi_j^{\mathrm{AE}}(r)^{\ast}-\phi_i^{\mathrm{US}}(r)\phi_j^{\mathrm{US}}(r)^{\ast}
+\end{displaymath}
+}
+
+\subsection{基态总能量表达式}
+\frame
+{
+	\frametitle{晶体总能量的一般表示\footnote{本部分参阅文献\cite{JPC-SSP12-4409_1979,Xie_Lu,Elect_Stru}}}
+采用赝势方法计算的晶体总能量$E_T$由晶格中的电子能量$E_{e-e}$与离子实排斥能$E_{N-N}$之和：
+	\begin{displaymath}
+		E_T=E_{e-e}+E_{N-N}=\textcolor{blue}{T[\rho]+E_{ext}+E_{\mathrm{Coul}}}+E_{\mathrm{XC}}+E_{N-N}
+	\end{displaymath}
+根据\textrm{Kohn-Sham}方程，其中动能泛函用单电子能量表示为
+\begin{displaymath}
+	T[{\rho}]=\sum_in_i\langle\psi_i|\varepsilon_i-V_{\mathrm{KS}}|\psi_i\rangle
+\end{displaymath}
+$n_i$是$\psi_i$上的电子占据数，$\varepsilon_i$是其能量本征值，因此有
+\begin{displaymath}
+	\hspace*{-12.0pt}	E_T=\textcolor{blue}{\sum_in_i\varepsilon_i-\dfrac12\iint\mathrm{d}\vec r\mathrm{d}\vec r\dfrac{\rho(\vec r)\rho(\vec r^{\prime})}{|\vec r-\vec r^{\prime}|}}+\int\mathrm{d}\vec r\rho(\vec r)[\epsilon_{\mathrm{XC}}(\vec r)-V_{\mathrm{XC}}(\vec r)]+E_{N-N}
+\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{晶体总能量倒空间的表示}
+周期体系的总能量表达式在动量空间($\vec K$空间)计算更方便
+\begin{displaymath}
+	\hspace*{-15.0pt}	E_T=\textcolor{red}{\sum_in_i\varepsilon_i}-\dfrac{\Omega}2\sum_{\textcolor{red}{\vec k\neq 0}}\rho^{\ast}(\vec k)V_{\mathrm{Coul}}(\vec k)+\Omega\sum_{\vec k}\rho^{\ast}(\vec k)[\epsilon_{\mathrm{XC}}(\vec k)-V_{\mathrm{XC}}(\vec k)]+\textcolor{red}{E_{N-N}}
+\end{displaymath}
+其中$V_{\mathrm{Coul}}(\vec k)$、$\epsilon_{\mathrm{XC}}(\vec k)$与$\rho^{\ast}(\vec k)$分别是\textrm{Coulomb}相互作用、单个电子的交换-相关能、交换-相关势和电子密度的\textrm{Fourier}分量。
+
+由\textrm{Poisson}方程
+\begin{displaymath}
+	\nabla^2V_{\mathrm{Coul}}(\vec r)=-4\pi\rho(\vec r)
+\end{displaymath}
+的\textrm{Fourier}展开有
+\begin{displaymath}
+	V_{\mathrm{Coul}}(\vec k)=\dfrac{4\pi\rho^{\ast}(\vec k)}{|\vec k|^2}
+\end{displaymath}
+交换-相关势和交换-相关能的计算一般先在实空间计算$\epsilon_{\mathrm{XC}}(\vec r)$和$V_{\mathrm{XC}}(\vec r)$后，再通过\textrm{Fourier}变换到动量空间，得到$\epsilon_{\mathrm{XC}}(\vec k)$和$V_{\mathrm{XC}}(\vec k)$
+}
+
+\frame
+{
+	\frametitle{晶体离子相互作用的计算}
+	离子间\textrm{Coulomb}相互作用能之和
+	\begin{displaymath}
+		E_{N-N}=\dfrac12\sum_{\vec R,s}\sideset{}{^{\prime}}\sum_{\vec R^{\prime},\vec s^{\prime}}\dfrac{Z_sZ_{s^{\prime}}}{|\vec R+\vec r_s-\vec R^{\prime}-\vec r_s^{\prime}|}
+	\end{displaymath}
+	这里$Z_s$是离子实的电荷数，$\vec R$表示晶格点的位矢，$\vec r_s$代表元胞内原子的相对位矢。
+
+	\textcolor{red}{\textbf{注意}}:~$E_{N-N}$求和有无穷多项，\textcolor{red}{是发散的};~$V_{\mathrm{Coul}}(\vec k=0)$\textcolor{red}{是发散的}
+	
+	$V_{ext}$在不存在其他外场时，一般只考虑离子-电子的\textrm{Coulomb}相互作用，
+	\begin{displaymath}
+%		\begin{aligned}
+			V_{ext}(\vec r)=\sum_{\vec R,s}\dfrac{-Z_s}{|\vec r-\vec R-\vec r_s|}\equiv\sum_{\vec R,s}v_{ext}^s(\vec r-\vec R-\vec r_s)
+%		\end{aligned}
+	\end{displaymath}
+	$V_{ext}$的\textrm{Fourier}分量在$\vec k=0$\textcolor{red}{也是发散的}
+}
+
+\frame
+{
+	\frametitle{晶体总能量计算的奇点排除}
+这三项单独都是发散的，但因为整个体系出于电中性，所以这些发散项相互抵消，是一个常数。因此求解\textrm{Kohn-Sham}方程时，先将$V_{\mathrm{Coul}}(\vec k=0)$和$V_{ext}(\vec k=0)$同时置为零，这相当于\textcolor{red}{将势能作一平移，或者说重新定义势能零点，而在总能量计算中补偿这一平移。}
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[height=0.65in,width=1.50in,viewport=0 0 1250 565,clip]{Figures/Ewald_method-3.png}
+	\end{center}
+	\caption{\fontsize{5.5pt}{2.2pt}\selectfont{\textrm{A lattice of point charge in a uniform compensating background as considered in the Ewald calculation.}}}
+	\label{fig:Ewald-method-3}
+\end{figure}
+	发散项之和为：
+	\begin{displaymath}
+		\begin{aligned}
+			\lim_{\vec k\rightarrow0}\Omega&\bigg[\dfrac12V_{\mathrm{Coul}}(\vec k)+\sum_sv_{ext}^s(\vec k)\bigg]\rho^{\ast}(\vec k)+\dfrac12\sum_{\vec R,s}\sideset{}{^{\prime}}\sum_{\vec R^{\prime},\vec s^{\prime}}\dfrac{Z_sZ_{s^{\prime}}}{|\vec R+\vec r_s-\vec R^{\prime}-\vec r_s^{\prime}|}\\
+			=&\sum_s\alpha_s\sum_sZ_s+E_{\mathrm{Ewald}}
+		\end{aligned}
+	\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{发散项的处理}
+	对于形如$Z_s/r$的外场，其\textrm{Fourier}分量在$\vec k=0$附近展开
+	\begin{displaymath}
+		v_{ext}^s(\vec k)=-\dfrac{4\pi Z_s}{\Omega|\vec k|^2}+\alpha_s+O(\vec k)； 
+	\end{displaymath}
+	展开$\rho^{\ast}(\vec k)$，有
+	\begin{displaymath}
+		\lim_{\vec k\rightarrow 0}\rho^{\ast}(\vec k)=\dfrac{\sum_sZ_s}{\Omega}+\beta|\vec k|^2+O(\vec k)
+	\end{displaymath}
+去掉高次项，有
+\fontsize{8.5pt}{5.2pt}\selectfont{
+\begin{displaymath}
+	\begin{aligned}
+		\lim_{\vec k\rightarrow 0}&\bigg[\boxed{\textcolor{blue}{\dfrac{\Omega}2\dfrac{4\pi[\rho^{\ast}(\vec k)]^2}{|\vec k|^2}}}+\boxed{\Omega}\bigg(\boxed{\textcolor{blue}{-\dfrac{4\pi\sum_sZ_s}{\Omega|\vec k|^2}}}+\sum_s\alpha_s\bigg)\boxed{\rho^{\ast}(\vec k)}+\boxed{\textcolor{red}{\dfrac12\dfrac{4\pi(\sum_sZ_s)^2}{\Omega|\vec k|^2}}}\bigg]\\
+		&+\boxed{\dfrac12\sum_{\vec R,s}\sideset{}{^{\prime}}\sum_{\vec R^{\prime},\vec s^{\prime}}\dfrac{Z_sZ_{s^{\prime}}}{|\vec R+\vec r_s-\vec R^{\prime}-\vec r_{s^{\prime}}|}-\lim_{\vec k\rightarrow0}\textcolor{red}{\dfrac12\dfrac{4\pi(\sum_sZ_s)^2}{\Omega|\vec k|^2}}}\\
+		=&\sum_s\alpha_s\sum_sZ_s+\textcolor{magenta}{E_{\mathrm{Ewald}}}
+	\end{aligned}
+\end{displaymath}}
+}
+
+\frame
+{
+	\frametitle{离子间相互作用的\textrm{Ewald}求和}
 \begin{figure}[h!]
 \centering
 \vspace*{-0.20in}
-\includegraphics[height=1.20in,width=1.77in,viewport=0 0 1150 750,clip]{Figures/Pseudo-scatter-2.png}
-\caption{\fontsize{4.5pt}{3.2pt}\selectfont{\textrm{Radial wave-function $\phi=r\psi$ for low-energy scattering as illustrated in a figure from the 1934 and 1935 papers of Fermi and coworkers for low-energy electron scattering from atoms and neutron scattering from nuclei. The node in the wave-function near the origin show that the potential is attractive and strong enough to have bound states. The cross-section for scattering from the localized potential is determined by the phase shift and is the same for weaker pseudo-potential with the same phase shift modulo $2\pi$.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{Pseudo-scatter-2}
+\includegraphics[height=2.3in,width=4.12in,viewport=0 0 1800 955,clip]{Figures/Ewald_method-2.png}
+\caption{\fontsize{5.5pt}{2.2pt}\selectfont{\textrm{Each charge be screened by a Gaussian charge distribution of opposite sign and equal magnitude: $\rho_i(r)=\dfrac{Z_i\eta^3}{\pi^{3/2}}\mathrm{e}^{-\eta^2r^2}$.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Ewald_method-2}
 \end{figure}
-\fontsize{7.5pt}{6.2pt}\selectfont{
-对于球形势散射，相移可由径向波函数计算
-$$\tan\eta_l(\varepsilon)=\dfrac{R\frac{\mathrm{d}}{\mathrm{d}r}j_l(\kappa r)|_R-D_l(\varepsilon)j_l(\kappa R)}{R\frac{\mathrm{d}}{\mathrm{d}r}n_l(\kappa r)|_R-D_l(\varepsilon)n_l(\kappa R)}$$
-$$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\mathrm{d}}{\mathrm{d}r}\ln\psi_l(r)$$
-同时相移与波函数节点的关系为:$$\eta_l(\varepsilon)=p_l\pi+\delta(\varepsilon)$$}
 }
-
-%\frame
-%{
-%\begin{figure}[h!]
-%\centering
-%\vskip -3pt
-%\includegraphics[height=2.5in,width=1.7in,viewport=0 0 600 850,clip]{Figures/Ouyang_Xiu-2.jpg}
-%\hskip 20pt
-%\includegraphics[height=2.5in,width=1.7in,viewport=0 0 600 790,clip]{Figures/Sale_Oil_Ouyang.png}
-%\label{Sale_Oil_Ouyang}
-%\caption{\tiny \textrm{欧阳修的《归田录\!$\cdot$\!卖油翁》.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-%\end{figure}
-%}
-%
 
 \frame
 {
-%	\frametitle{\textrm{DFT-SCF}}
+	\frametitle{离子间相互作用的\textrm{Ewald}求和}
 \begin{figure}[h!]
-\vspace*{-0.25in}
 \centering
-\includegraphics[height=2.80in,width=4.95in,viewport=5 3 1250 780,clip]{Figures/Method_Procedure.png}
+%\vspace*{-0.20in}
+\includegraphics[height=1.8in,width=4.12in,viewport=0 0 1100 455,clip]{Figures/Ewald_method.png}
+\caption{\fontsize{5.5pt}{2.2pt}\selectfont{\textrm{Decomposition of the potential $-e^2/r$ (singular at the origin and of long-range nature) into a contribution $-(e^2/r)\mathrm{erf}(\sqrt{\eta}r)$(regular at the origin of long-range) and a contribution $-(e^2/r)\mathrm{erfc}(\sqrt{\eta}r)$ (singular at the origin and of short-range nature). Here $\sqrt{\eta}=1 (\mathrm{Bohr radius unit})$ is chosen.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Error_Function}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{离子间相互作用的\textrm{Ewald}求和}
+	\begin{displaymath}
+		\begin{aligned}
+			E_{\textrm{Ewald}}=&\dfrac12\sum_{\vec R,s}\sideset{}{^{\prime}}\sum_{\vec R^{\prime},\vec s^{\prime}}\dfrac{Z_sZ_{s^{\prime}}}{|\vec R+\vec r_s-\vec R^{\prime}-\vec r_{s^{\prime}}|}-\lim_{\vec k\rightarrow0}\dfrac12\times\dfrac{4\pi(\sum_sZ_s)^2}{\Omega|\vec k|^2}\\
+			=&\dfrac12\sum_{\vec R,s}\sideset{}{^{\prime}}\sum_{\vec R^{\prime},\vec s^{\prime}}\dfrac{Z_sZ_{s^{\prime}}}{|\vec R+\vec r_s-\vec R^{\prime}-\vec r_{s^{\prime}}|}-\dfrac1{2\Omega}\sum_{s,s^{\prime}}\int\mathrm{d}\vec r\dfrac{Z_sZ_{s^{\prime}}}r\\
+			=&\sum_{s,s^{\prime}}Z_sZ_{s^{\prime}}\bigg\{\dfrac{2\pi}{\Omega}\sum_{\vec k\neq 0}\cos[\vec k\cdot(\vec r_s-\vec r_{s^{\prime}})]\dfrac{\mathrm{e}^{-|\vec k|^2/4\eta^2}}{|\vec k|^2}\\
+			&-\dfrac{\pi}{2\eta^2\Omega}+\dfrac12\sum_{\vec R}\dfrac{\mathrm{erf}(\eta x)}x\bigg|_{\vec R+\vec r_s-\vec r_s^{\prime}\neq0}-\dfrac{\eta}{\sqrt{\pi}}\delta_{s,s^{\prime}}\bigg\}
+		\end{aligned}
+	\end{displaymath}
+	$\mathrm{erf}(x)$是误差函数，$\eta$原则上是任意参数。$\alpha_s$由$v_{ext}^s(\vec r)$确定：
+	\begin{displaymath}
+		\alpha_s=\lim_{\vec k\rightarrow0}\bigg[v_{ext}^s(\vec k)+\dfrac{4\pi Z_s}{\Omega|\vec k|^2}\bigg]=\dfrac1{\Omega}\int\mathrm{d}\vec r\bigg[v_{ext}^s(\vec r)+\dfrac{Z_s}r\bigg]
+	\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{总能量表达式}
+\fontsize{6.5pt}{4.2pt}\selectfont{
+由此得到的总能量表达式是
+\begin{displaymath}
+	\begin{aligned}
+		E_T=&\sum_i\varepsilon_i-\dfrac{\Omega}2\sum_{\vec k\neq0}\rho^{\ast}(\vec k)V_{\mathrm{Coul}}(\vec k)\\
+		&+\Omega\sum_{\vec k}\rho^{\ast}(\vec k)[\epsilon_{\mathrm{XC}}(\vec k)-V_{\mathrm{XC}}(\vec k)]\\
+		&+\sum_s\alpha_s\sum_sZ_s+E_{\mathrm{Ewald}}
+	\end{aligned}
+\end{displaymath}
+}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.18in}
+\includegraphics[height=1.85in,width=2.2in,viewport=0 0 600 495,clip]{Figures/VASP_Total_ENE.png}
+\caption{\tiny \textrm{The Total-E calculated by VASP.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{TOTEN_VASP}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{示例:~超软赝势的总能量表示}
+	根据\textrm{D. Vanderbilt}的超软赝势(\textrm{US-PP})方案
+	原子波函数满足$$(T+V_{\mathrm{AE}}-\varepsilon_n)|\psi_n\rangle=0$$
+	据此构造原子赝波函数$\phi_n$，在截断半径$r_c^l$处，$\phi_n$与$\psi_n$平滑衔接(不需要模守恒条件)
+
+	类似地，构造局域平滑势$V_{loc}(r)$，在截断半径$r_c^{loc}$处，$V_{loc}(r)$与$V_{\mathrm{AE}}(r)$平滑衔接
+	
+	构造辅助轨道
+	$$|\chi_n\rangle=(\varepsilon_n-T-V_{loc})|\phi_n\rangle$$
+	由此构造内积矩阵，矩阵元$$B_{nm}=\langle\phi_n|\chi_m\rangle$$
+	并有$$|\beta_n\rangle=\sum_m(B^{-1})_{mn}|\chi_m\rangle$$
+	这里$\beta_n$是局域函数，并与$\phi_n$垂直
+}
+
+\frame
+{
+	\frametitle{\textrm{US-PP}的总能量表示}
+	定义\textcolor{orange}{缀加函数}$$Q_{nm}(\vec r)=\psi_n^{\ast}(\vec r)\psi_m(\vec r)-\phi_n^{\ast}(\vec r)\phi_m(\vec r)$$
+	\textcolor{blue}{可赝化的补偿电荷}$$q_{nm}=\langle\psi_n|\psi_m\rangle_R-\langle\phi_n|\phi_m\rangle_R$$
+	由此可以导出$\phi_n$满足久期方程
+	\begin{displaymath}
+		\begin{aligned}
+			&\left(T+V_{loc}+\sum_{nm}D_{nm}|\beta_n\rangle\langle\beta_m|\right)|\phi_n\rangle\\
+			=&\varepsilon_n\left(1+\sum_{nm}q_{nm}|\beta_n\rangle\langle\beta_m|\right)|\phi_n\rangle
+		\end{aligned}
+	\end{displaymath}
+	其中$$D_{nm}=B_{nm}+\varepsilon_nq_{nm}$$
+}
+
+\frame
+{
+	\frametitle{\textrm{US-PP}的总能量表示}
+	在超软赝势方法中，包含$N_v$个价电子体系的总能量\upcite{PRB47-10142_1993}
+	\begin{displaymath}
+		\begin{aligned}
+			E_{\mathrm{tot}}[\{\phi_i\},\{\vec R_I\}]=&\sum_i\langle\phi_i|-\frac12\nabla^2+V_{\mathrm{NL}}|\phi_i\rangle\\
+			&+\frac12\iint\mathrm{d}\vec r\mathrm{d}\vec r\,^{\prime}\dfrac{n(\vec r)n(\vec r\,^{\prime})}{|\vec r-\vec r\,^{\prime}|}\\
+			&+\int\mathrm{d}\vec r V_{loc}^{\mathrm{ion}}(\vec r)n(\vec r)+E_{\mathrm{XC}}[n]\\
+			&+U(\{\vec R_I\})
+		\end{aligned}
+	\end{displaymath}
+	这里$\phi$是体系波函数，$n(\vec r)$是电子密度，$E_{\mathrm{XC}}$是交换-相关能，$U(\{\vec R_I\})$是离子-离子相互作用能
+}
+
+\frame
+{
+	\frametitle{\textrm{US-PP}的总能量表示}
+	电荷密度$$n(\vec r)=\sum_i\big[|\phi_i(\vec r)|^2+\sum_{nm,I}Q_{nm}^I(\vec r)\langle\phi_i|\beta_n^I\rangle\langle\beta_m^I|\phi_i\rangle\big]$$
+	局域势$$V_{loc}^{\mathrm{ion}}(\vec r)=\sum_IV_{loc}^{\mathrm{ion}}(\vec r-\vec R_I)$$
+	$V_{loc}^{\mathrm{ion}}$由$V_{loc}$去屏蔽后得到$$V_{loc}^{\mathrm{ion}}(r)=V_{loc}(r)-\int\mathrm{d}\vec r\,^{\prime}\dfrac{n(\vec r\,^{\prime})}{|\vec r-\vec r\,^{\prime}|}-\mu_{\mathrm{XC}}(r)$$
+	非局域部分$$V_{\mathrm{NL}}=\sum_{nm,I}D_{nm}^{(0)}|\beta_n^I\rangle\langle\beta_m^I|$$
+	这里$$D_{nm}^{(0)}=D_{nm}-\int\mathrm{d}\vec r\,^{\prime}V_{loc}(\vec r\,^{\prime})n(\vec r\,^{\prime})$$
+}
+
+\frame
+{
+	\frametitle{超软赝势总能量计算}
+	去除价电子屏蔽效应的贡献后，可得最终超软赝势的总能量表达式
+	\begin{displaymath}
+		\begin{aligned}
+			E_{\mathrm{total}}=&\sum_j^{\mathrm{occ}}\langle\phi_{lmj}|\bigg[-\dfrac12\nabla^2+V_{\mathrm{local}}^{\mathrm{ion}}+\sum_{s,s^{\prime}}\mathbf{D}_{s,s^{\prime}}^{\mathrm{ion}}|\beta_s\rangle\langle\beta_{s^{\prime}}|\bigg]|\phi_{lmj}\rangle\\
+			&+E_{H}[n_v]+E_{N-N}+E_{XC}[n_v]
+		\end{aligned}
+	\end{displaymath}
+	{\fontsize{7.2pt}{5.2pt}\selectfont{其中$n_v(r)=\sum\limits_j^{\mathrm{occ}}\phi_{lmj}^{\ast}(r)\phi_{lmj}(r)+\sum\limits_{s,s^{\prime}}\sum\limits_j^{\mathrm{occ}}\langle\phi_{lmj}|\beta_{s^{\prime}}\rangle\langle\beta_s|\phi_{lmj}\rangle Q_{s,s^{\prime}}(r)$
+	$$V_{\mathrm{local}}^{\mathrm{ion}}=V_{\mathrm{local}}-V_{\mathrm H}-V_{XC}$$
+	$$\mathbf{D}_{s,s^{\prime}}^{\mathrm{ion}}=\mathbf{D}_{s,s^{\prime}}-\int\mathrm{d}\vec r\big[V_{\mathrm{H}}(\vec r)+V_{XC}(\vec r)\big]Q_{s,s^{\prime}}(r)$$}}
+	由此可得超软赝势的广义本征值方程
+	$$\bigg[-\dfrac12\nabla^2+V_{\mathrm{local}}+\tilde V_{NL}^{\mathrm{US}}-\varepsilon_i\bigg(\mathbf{1}+\sum_{s,s^{\prime}}Q_{s,s^{\prime}}|\beta_s\rangle\langle\beta_{s^{\prime}}|\bigg)\bigg]|\phi_{lmi}\rangle=0$$
+}
+
+\frame
+{
+	\frametitle{赝势方法发展概要}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.25in}
+%\hspace*{-0.80in}
+\includegraphics[height=2.80in,width=4.10in,viewport=0 0 1190 875,clip]{Figures/Pseudo_Potential.png}
 %\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{Method-Procedure}
+\label{Pseudo_Poential}
 \end{figure}
 }
 
 %-----------------------------------------------------------------------------------------------------------------------------------------------------------------------%
-\section{{\rm PAW}方法}
+\section{\rm{PAW}方法}
 \frame
 {
-%	\frametitle{\textrm{PAW}原子数据集}
-	\frametitle{\textrm{PAW Augmentation}}
+	\frametitle{\textrm{PAW}方法概要}
+\begin{itemize}
+	\item 与芯层态正交的全部价电子构成的\textrm{Hilbert}空间%，价电子彼此的正交使得波函数在\textrm{Muffin-tin}球内振荡
+	\item 作\textcolor{red}{线性空间变换}，全电子波函数$|\Psi\rangle$与赝波函数$|\tilde\Psi\rangle$满足：
+		$$|\Psi\rangle=\mathbf{\tau|}\tilde\Psi\rangle$$
+%	$$\tau=\mathbf{1}+\sum_{\mathrm R}\hat\tau_{\mathrm R}$$
+	\item 在原子核附近的$r_c$范围内，波函数用原子分波函数展开：
+	$$|\Psi\rangle=|\tilde\Psi\rangle+\sum_i(|\phi_i\rangle-|\tilde\phi_i\rangle)\langle\tilde p_i|\tilde\Psi\rangle$$
+	\item 在$r_c$外$|\tilde\Psi\rangle$与$|\Psi\rangle$变换前后保持不变，因此线性变换$\mathbf{\tau}$可表示为：
+	$$\mathbf{\tau}=\mathbf{1}+\sum_i(|\phi_i\rangle-|\tilde\phi_i\rangle)\langle\tilde p_i|$$
+\end{itemize}
+其中$|\tilde p_i\rangle$是\textrm{MT}球内的投影函数\\
+$i$表示原子位置$\vec R$、原子轨道($l,m$)和能级$\epsilon_k$的指标。
+}
+
+\frame
+{
+	\frametitle{\textrm{PAW}方法的基本思想}
+	\vspace{10pt}
 \begin{figure}[h!]
 \centering
-\includegraphics[height=2.3in,width=4.0in,viewport=0 0 1280 745,clip]{Figures/PAW-baseset.png}
-\caption{\tiny \textrm{The Augmentation of PAW.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{PAW_baseset}
+\includegraphics[height=1.8in,width=4.in,viewport=30 210 570 440,clip]{Figures/PAW_projector.eps}
+\caption{\tiny \textrm{The analysis of PAW basic function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{PAW_baisc}
+\end{figure}
+}
+
+\frame
+{
+\frametitle{\textrm{PAW}方法的基本思想}
+	在赝波函数$|\tilde\Psi\rangle$表象下，算符期望值计算满足$$\langle A \rangle=\langle\Psi|\mathbf{A}|\Psi\rangle=\langle\tilde\Psi|\mathbf{\tau}^{\dag}\mathbf{A}\mathbf{\tau}|\tilde\Psi\rangle=\langle\tilde\Psi|\tilde{\mathrm{A}}|\tilde\Psi\rangle$$
+\begin{itemize}
+	\item 一般赝算符$\tilde A$表示为
+		$$\tilde A=\mathbf{A}+\sum_i|\tilde p_i\rangle(\langle\phi_i|\mathbf{A}|\phi_i\rangle-\langle\tilde\phi_i|\mathbf{A}|\tilde\phi_i\rangle)\langle\tilde p_i|$$
+	\item 赝重叠算符$\tilde O$表示为
+		$$\tilde O=\mathbf{1}+\sum_i|\tilde p_i\rangle(\langle\phi_i|\phi_i\rangle-\langle\tilde\phi_i|\tilde\phi_i\rangle)\langle\tilde p_i|$$
+\end{itemize}
+}
+
+\frame
+{
+\frametitle{\textrm{PAW}方法密度计算}
+在\textrm{PAW}框架下，将密度算符$|\vec r\rangle\langle\vec r|$代入，可知密度表达式为
+$$n(\vec r)=\tilde n(\vec r)+n^1(\vec r)-\tilde n^1(\vec r)$$
+这里
+$$\tilde n(\vec r)=\sum_nf_n\langle\tilde\Psi_n|\vec r\rangle\langle\vec r|\tilde\Psi_n\rangle$$ 
+$$n^1(\vec r)=\sum_{n,(i,j)}f_n\langle\tilde\Psi_n|\tilde p_i\rangle\langle\phi_i|\vec r\rangle\langle\vec r|\phi_j\rangle\langle\tilde p_j|\tilde\Psi_n\rangle$$
+$$\tilde n^1(\vec r)=\sum_{n,(i,j)}f_n\langle\tilde\Psi_n|\tilde p_i\rangle\langle\tilde\phi_i|\vec r\rangle\langle\vec r|\tilde\phi_j\rangle\langle\tilde p_j|\tilde\Psi_n\rangle$$
+}
+
+\frame
+{
+\frametitle{\textrm{PAW}方法总能量的计算}
+总能量泛函
+%\begin{displaymath}
+%	\begin{aligned}
+%		E&=\sum_nf_n\langle\Psi_n|-\dfrac12\nabla^2|\Psi_n\rangle\\
+%		 &+\dfrac12\int\mathrm{d}\vec r\int\mathrm{d}\vec r^{\prime}\dfrac{(n+n^Z)(n+n^Z)}{|\vec r-\vec r^{\prime}|}+\int\mathrm{d}\vec r n\epsilon_{\mathrm{XC}}(n)
+%	\end{aligned}
+%\end{displaymath}
+$E=\tilde E+E^1-\tilde E^1$，每一项分别表示为：
+\begin{displaymath}
+	\begin{aligned}
+		\tilde E&=\sum_nf_n\langle\tilde\Psi_n|-\dfrac12\nabla^2|\tilde\Psi_n\rangle\\
+		&+\dfrac12\int\mathrm{d}\vec r\int\mathrm{d}\vec r^{\prime}\dfrac{(\tilde n+\hat n)(\tilde n+\hat n)}{|\vec r-\vec r^{\prime}|}+\int\mathrm{d}\vec r \tilde n\textcolor{blue}{\bar v}+\int\mathrm{d}\vec r \tilde n\epsilon_{\mathrm{XC}}(\tilde n)
+ 	\end{aligned}
+\end{displaymath}
+\begin{displaymath}
+	\begin{aligned}
+		E^1&=\sum_{n,(i,j)}f_n\langle\tilde\Psi_n|\tilde p_i\rangle\langle\phi_i|-\dfrac12\nabla^2|\phi_j\rangle\langle\tilde p_j|\tilde\Psi_n\rangle\\
+		 &+\dfrac12\int\mathrm{d}\vec r\int\mathrm{d}\vec r^{\prime}\dfrac{(n^1+n^Z)(n^1+n^Z)}{|\vec r-\vec r^{\prime}|}+\int\mathrm{d}\vec r n^1\epsilon_{\mathrm{XC}}(n^1)
+ 	\end{aligned}
+\end{displaymath}
+\begin{displaymath}
+	\begin{aligned}
+		\tilde E^1&=\sum_{n,(i,j)}f_n\langle\tilde\Psi_n|\tilde p_i\rangle\langle\tilde\phi_i|-\dfrac12\nabla^2|\tilde\phi_j\rangle\langle\tilde p_j|\tilde\Psi_n\rangle\\
+		&+\dfrac12\int\mathrm{d}\vec r\int\mathrm{d}\vec r^{\prime}\dfrac{(\tilde n^1+\hat n)(\tilde n^1+\hat n)}{|\vec r-\vec r^{\prime}|}+\int\mathrm{d}\vec r \tilde n^1\textcolor{blue}{\bar v}+\int\mathrm{d}\vec r \tilde n^1\epsilon_{\mathrm{XC}}(\tilde n^1)
+ 	\end{aligned}
+\end{displaymath}
+}
+
+%\subsection{\rm{PAW}的实现}
+\frame
+{
+	\frametitle{补偿电荷的表示}
+	补偿电荷$\hat n$要求局域在缀加区(\textrm{Augmentation region})，可表示为
+	$$\hat n=\sum_R\hat n_R$$
+	其中$\hat n_R$是单个原子截断区间的补偿电荷，可以表示为广义的\textrm{Gaussian}函数的求和
+	$$\hat n_R(r)=\sum_{L=(l,m)}g_{RL}(r)Q_{RL}$$
+	其中$g_{RL}(r)$表示为
+	$$g_{RL}(r)=C_l|r-R|^lY_L(r-R)\mathrm{e}^{-(|r-R|/r_c)^2}$$
+	系数$C_l$是归一化系数，由条件
+	$\int\mathrm{d}rr^lY_L(r)g_L(r)=1$
+	确定
+
+	$Q_{RL}$是补偿电荷要满足的多极矩
+	$$Q_{RL}=\int\mathrm{d}r|r-R|^l\big[n_R^1(r)+n_R^Z(r)-\tilde n_R^1(r)\big]Y_L^{\ast}(r-R)$$
+}
+
+\frame
+{
+\frametitle{补偿电荷与多极矩}
+根据电动力学定理:\\\textcolor{blue}{如果球\textrm{S}内的电荷密度分布$\rho(\vec r)$，在球外某点$\vec r$产生的势是由电荷密度的多极矩确定}:
+\begin{figure}[h!]
+\vspace*{-15pt}
+\centering
+\includegraphics[height=1.25in,width=1.32in,viewport=1 22 507 575,clip]{Figures/potential_multipole.jpg}
+%\caption{\tiny \textrm{From Muffin-tin Potential to Full Potential}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Potential-multipole}
+\end{figure}
+\begin{displaymath}
+	V(\vec r)=\sum_{l=0}^{\infty}\sum_{m=-l}^{l}\dfrac{4\pi}{2l+1}q_{lm}\dfrac{Y_{lm}(\hat{\vec r})}{r^{l+1}}
+\end{displaymath}
+其中多极矩$q_{lm}$由下式计算
+\begin{displaymath}
+	q_{lm}=\int_SY_{lm}^{\ast}(\hat{\vec r})r^l\rho(\vec r)\mathrm{d}^3r
+\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{补偿电荷与能量$\tilde E$}
+	如果要求\textrm{Gaussian}函数在缀加区衰减，则需要用很高的\textrm{Fourier}截断，这意味着需要很高的平面波能量截断。引入补偿电荷$\hat n^{\prime}$，要求满足条件
+	\begin{itemize}
+		\item $\hat n^{\prime}$与$\hat n$具有相同的多极矩
+		\item $\hat n^{\prime}$对应的\textrm{Gaussian}函数的衰减半径$r_c^{\prime}$比$r_c$大得多，可以用很少的平面波展开
+	\end{itemize}
+	因此能量$\tilde E$中的\textcolor{blue}{静电相互作用}可以表示为
+	\begin{displaymath}
+		\begin{aligned}
+			&\dfrac12\int\mathrm{d}r\int\mathrm{d}r^{\prime}\dfrac{(\tilde n+\hat n)(\tilde n+\hat n)}{|r-r^{\prime}|}\\
+			=&\underline{\dfrac12\int\mathrm{d}r\int\mathrm{d}r^{\prime}\dfrac{(\tilde n+\hat n^{\prime})(\tilde n+\hat n^{\prime})}{|r-r^{\prime}|}}
+			+\underline{\int\mathrm{d}r\tilde n(r)\hat v(r)}+\underline{\sum_{R,R^{\prime}}U_{R,R^{\prime}}}
+		\end{aligned}
+	\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{能量$\tilde E$的静电相互作用分解}
+	其中第一项是平滑函数，可以在\textrm{Fourier}空间计算
+	$$2\pi V\sum_G\dfrac{|\tilde n(G)+\hat n^{\prime}(G)|^2}{G^2}$$
+	第二项的$\hat v(r)$表示为
+	$$\hat v(r)=\int\mathrm{d}r^{\prime}\dfrac{\hat n(r^{\prime})-\hat n^{\prime}(r^{\prime})}{|r-r^{\prime}|}$$
+	虽然$\hat v(r)$和$n(r)$一样有高\textrm{Fourier}截断，但\textcolor{red}{高阶部分不会对$\int\mathrm{d}r\tilde n(r)\hat v(r)$有贡献}
+
+	最后一项中$U_{R,R^{\prime}}$是原子间的短程成对势
+	$$U_{R,R^{\prime}}=\dfrac12\int\mathrm{d}r\int\mathrm{d}r^{\prime}\dfrac{\hat n_R(r)\hat n_{R^{\prime}}(r^{\prime})-\hat n_R^{\prime}(r)\hat n_{R^{\prime}}^{\prime}(r^{\prime})}{|r-r^{\prime}|}$$
+	这一项\textcolor{blue}{可以通过\textrm{Ewald}求和方法计算}
+}
+
+\frame
+{
+	\frametitle{重叠矩阵和\textrm{Hamiltonian}矩阵}
+重叠算符:
+$$\tilde O=1+\sum_{i,j}|\tilde p_i\rangle\bigg[\langle\phi_i|\phi_j\rangle-\langle\tilde\phi_i|\tilde\phi_j\rangle\bigg]\langle\tilde p_j|$$
+\textrm{Hamilitonian}算符:
+%\begin{itemize}
+%	\item 动能算符：
+%		$$\tilde T=-\dfrac12\nabla^2+\sum_{i,j}|\tilde p_i\rangle[\langle\phi_i|-\dfrac12\nabla^2|\phi_j\rangle-\langle\tilde\phi_i|-\dfrac12\nabla^2|\tilde\phi_j\rangle]\langle\tilde p_j|$$
+%	\item 完全势\textrm{(full-potential)}算符：
+%$$v(\vec r)=\tilde v(\vec r)+v^1(\vec r)-\tilde v^1(\vec r)$$
+%	\item \textrm{Hamilton}算符：
+\begin{displaymath}
+	\begin{aligned}
+		\tilde H=&-\dfrac12\nabla^2+\tilde v+\sum_{i,j}|\tilde p_i\rangle\bigg[\langle\phi_i|-\dfrac12\nabla^2+v^1|\phi_j\rangle\\
+			&-\langle\tilde\phi_i|-\dfrac12\nabla^2+\tilde v^1|\tilde\phi_j\rangle\bigg]\langle\tilde p_j| 
+	\end{aligned}
+\end{displaymath}
+%\end{itemize}
+	完整的势函数\textrm{(full-potential)}算符：
+$$v(\vec r)=\tilde v(\vec r)+v^1(\vec r)-\tilde v^1(\vec r)$$
+因此可以有
+$$\left.\dfrac{\partial E[\tilde\Psi, R]}{\partial\langle\tilde\Psi_n|}\right|_R=\tilde H|\tilde\Psi_n\rangle f_n$$
+}
+
+\frame
+{
+	\frametitle{\textrm{PAW}原子数据集}
+\textrm{PAW}原子数据集是在原子核附近$r_c$范围内将波函数用原子分波展开所需信息的统称，是\textrm{PAW}计算的基础。
+
+\textrm{PAW}原子数据集主要包括
+	\begin{itemize}
+		\item 分波信息：原子分波$\phi_i$、赝分波$\tilde\phi_i$和投影子波函数$\tilde{p}_i$
+		\item 密度信息：$r_c$内的电荷密度$n^1$、赝电荷密度$\tilde n^1$和补充电荷$\hat n$
+		\item 赝势信息：用于赝分布计算的赝势$\tilde v_{\textrm{loc}}(\vec r)$和总能计算中的可移植局域$\textcolor{blue}{\bar v(\vec r)}$
+	\end{itemize}
+	与赝势方法相似，一套原子数据集将用于各种化学环境下的\textrm{PAW}计算，即要求原子数据集有良好的可移植性;~与赝势方法不同之处在于\textrm{PAW}原子集中除了赝原子的信息，还包含了真实原子的信息。
+}
+
+\frame
+{
+	\frametitle{\textrm{PAW}原子数据集:~实现方案}
+	\fontsize{7.2pt}{5.2pt}\selectfont{原子分波:$$\bigg(-\dfrac12\nabla^2+v_{at}-\varepsilon_i^1\bigg)|\phi_i\rangle=0$$
+	赝原子分波:$$\bigg(-\dfrac12\nabla^2+w_i(r)-\varepsilon_i^1\bigg)|\tilde\phi_i\rangle=0$$
+	局域赝势:% $$w_i(r)=\tilde v_{at}(r)+c_ik(r)=\tilde v_{at}(0)\mathrm{e}^{-(r/r_k)^{\lambda}}+[1-k(r)]v_{at}(r)+c_i\mathrm{e}^{-(r/r_k)^{\lambda}}$$
+	\begin{itemize}
+		\item 过渡金属体系:~采用带参数的四阶多项式，要求赝波函数在截断半径处保持与真实波函数相同的连续可微
+		\item 价层不含$d$电子电子体系:引入截断函数
+			\begin{displaymath}
+				k(r)=\exp[-(r/r_k)^{\lambda}]
+			\end{displaymath}
+			定义有效(局域)赝势
+			\begin{displaymath}
+				\textcolor{red}{\tilde v_{\mathrm{at}}(r)} = \tilde v_{\mathrm{at}}(0)k(r)+[1-k(r)]v_{\mathrm{at}}(r)
+			\end{displaymath}
+			调节截断半径$r_k$和指数$\lambda$，使得赝原子势和真实原子势在截断半径外严格相等
+	\end{itemize}
+	\vskip 5pt
+	实际求解赝波函数时的赝势定义为
+\begin{displaymath}
+	w_i(r)=\textcolor{red}{\tilde v_{\mathrm{at}}(r)}+\textcolor{blue}{\boxed{c_ik(r)}~\Leftarrow~{\mathrm{non~local~part~of~the~pseudo potential}}}
+\end{displaymath}
+调节参数$c_i$使得要求赝波函数与真实波函数在截断截断半径外完全相同
+%	$$w_i(r)=\tilde v_{at}(0)\mathrm{e}^{-(r/r_k)^{\lambda}}+[1-\mathrm{e}^{-(r/r_k)^{\lambda}}]v_{at}(r)+c_i\mathrm{e}^{-(r/r_k)^{\lambda}}$$
+}
+}
+
+\frame
+{
+	\frametitle{\textrm{PAW projector}:~实现方案}
+	\textcolor{red}{预设投影函数}:$$\textcolor{red}{|\tilde p_i\rangle}=\bigg(-\dfrac12\nabla^2+\tilde v_{at}-\varepsilon_i^1\bigg)|\tilde\phi_i\rangle$$
+	\textcolor{blue}{当预设投影函数为0时}(对应局域势)，\textcolor{blue}{投影函数即为截断函数$k(r)$}
+\begin{minipage}[t]{0.52\linewidth}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.30in}
+\includegraphics[height=1.2in,width=1.8in,viewport=0 0 1100 745,clip]{Figures/PAW_projector-2.png}
+\caption{\tiny \textrm{The projector of PAW.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{PAW_projector}
+\end{figure}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.43\linewidth}
+\begin{itemize}
+	\item 与分波具有相同的$l$值
+	\item 局域在缀加区域(\textrm{Augmentation region})
+	\item 节点依次增加
+\end{itemize}
+\end{minipage}
+	\fontsize{7.2pt}{5.2pt}\selectfont{\textrm{Gram-Schmidt}正交化
+	$$|\tilde p_i\rangle=|\tilde p_i\rangle-\sum_{j=1}^{i-1}|\tilde p_j\rangle\langle\tilde\phi_j|\tilde p_i\rangle$$
+%	$$|\phi_i\rangle=|\phi_i\rangle-\sum_{j=1}^{i-1}|\phi_j\rangle\langle\tilde p_j|\tilde\phi_i\rangle$$
+%	$$|\tilde\phi_i\rangle=|\tilde\phi_i\rangle-\sum_{j=1}^{i-1}|\tilde\phi_j\rangle\langle\tilde p_j|\tilde\phi_i\rangle$$
+	$$|\phi_i\rangle=|\phi_i\rangle-\sum\limits_{j=1}^{i-1}|\phi_j\rangle\langle\tilde p_j|\phi_i\rangle\quad|\tilde\phi_i\rangle=|\tilde\phi_i\rangle-\sum\limits_{j=1}^{i-1}|\tilde\phi_j\rangle\langle\tilde p_j|\tilde\phi_i\rangle$$}
+}
+
+\frame
+{
+	\frametitle{\textrm{PAW}原子数据集:~示例}
+\begin{figure}[h!]
+\centering
+\includegraphics[height=2.5in,width=3.3in,viewport=0 0 570 545,clip]{Figures/PAW-partical.png}
+\caption{\tiny \textrm{The partical-wave of Fe atom.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{PAW_partical_Fe}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{局域势$\bar v$}}
+	原则上，局域势$\textcolor{blue}{\bar v}$的选择是任意的，但一般要求$\bar v$能使势函数误差足够小(\textcolor{red}{凸显局域势的可移植})\\
+	\fontsize{7.2pt}{5.2pt}\selectfont{参照局域赝势去屏蔽方案，扣除赝势中赝电荷密度部分的贡献，得到可移植局域势:
+	$$\bar v(r)=\tilde v_{at}(r)-\int\mathrm{d}r^{\prime}\dfrac{\tilde n(r^{\prime})+\hat n(r^{\prime})}{|r-r^{\prime}|}-\mu_{xc}[\tilde n(r)]$$
+	由于\textcolor{magenta}{赝分波$\tilde\phi_j$并不一定对应原子束缚态}，但去屏蔽过程的赝电荷密度$\tilde n(r)$必须通过束缚态计算:~即求解广义本征值方程
+	$$\bigg[-\dfrac12\nabla^2+\tilde v_{at}-\varepsilon+\sum_{(i,j)}|\tilde p_i\rangle\big(\mathrm{d}H_{ij}-\varepsilon\mathrm{d}O_{ij}\big)\langle\tilde p_j|\bigg]|\tilde\Psi_j\rangle=0$$
+	其中$\mathrm{d}H_{ij}$和$\mathrm{d}O_{ij}$分别是
+	$$\mathrm{d}H_{ij}=\langle\phi_i|-\dfrac12\nabla^2+v_{at}|\phi_j\rangle-\langle\tilde\phi_i|-\dfrac12\nabla^2+\tilde v_{at}|\tilde\phi_j\rangle$$
+	$$\mathrm{d}O_{ij}=\langle\phi_i|\phi_j\rangle-\langle\tilde\phi_i|\tilde\phi_j\rangle$$}
+	得到函数$\tilde\Psi_j$，结合价电子占据数和芯电荷$\tilde n^c$，得到赝电荷密度$\tilde n$
+}
+
+\frame
+{
+	\frametitle{\textrm{局域势$\bar v$}的优化}
+	上述广义本征值方程是非齐次的，因此其解形式为
+	$$|\tilde\Psi\rangle=|u\rangle+\sum_i|w_i\rangle c_i$$
+	其中$|u\rangle$和$|w_i\rangle$的分别由下式确定
+	$$\big(-\frac12\nabla^2+\tilde v_{\mathrm{at}}-\varepsilon\big)|u\rangle=0$$
+	$$\big(-\frac12\nabla^2+\tilde v_{\mathrm{at}}-\varepsilon\big)|w_i\rangle=|\tilde p_i\rangle$$
+	由此可得到
+	$$c_i=-\sum_{j,l}\bigg[\delta_{ij}+\sum_k\mathrm{d}H_{ik}-\varepsilon\mathrm{d}O_{ik}\langle\tilde p_k|w_j\rangle\bigg]^{-1}\big(\mathrm{d}H_{jl}-\varepsilon\mathrm{d}O_{jl}\big)\langle\tilde p_l|u\rangle$$
+	根据赝势的散射特征，确定参数$c_i$，完成对局域势$\bar v$的优化
+}
+
+\frame
+{
+	\frametitle{几种赝势方法的关系}
+\begin{figure}[h!]
+\centering
+\includegraphics[height=1.0in,width=4.1in,clip]{Figures/Pseudo-Potential.png}
+\caption{\tiny \textrm{The relation of Pseudo potential and PAW.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Pseudo_Potential_PAW}
 \end{figure}
 }
 
@@ -1226,6 +2330,19 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 \includegraphics[height=2.75in,width=2.5in,viewport=0 0 480 630,clip]{Figures/VASP_procedure.png}
 \caption{\tiny \textrm{The Flow of calculation for the KS-ground states.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{PAW_baiseset}
+\end{figure} 
+}
+
+\frame
+{
+	\frametitle{双网格技术}
+\begin{figure}[h!]
+	\vspace{-0.15in}
+\centering
+%\includegraphics[height=2.7in,width=4.0in,viewport=0 0 1180 875,clip]{Figures/dual_grid.png}
+\includegraphics[height=2.75in,width=4.0in,viewport=0 0 800 600,clip]{Figures/dual_grid-2.png}
+\caption{\tiny \textrm{The Schematic description of the dual grid technique.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{PAW_dualgrid}
 \end{figure} 
 }
 
@@ -1284,6 +2401,425 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 \end{figure}
 \end{frame}
 
+\frame
+{
+%	\frametitle{\textrm{PAW}原子数据集}
+	\frametitle{\textrm{PAW Augmentation}}
+\begin{figure}[h!]
+\centering
+\includegraphics[height=2.3in,width=4.0in,viewport=0 0 1280 745,clip]{Figures/PAW-baseset.png}
+\caption{\tiny \textrm{The Augmentation of PAW.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{PAW_baseset}
+\end{figure}
+}
+
+%\frame
+%{
+%	\frametitle{\textrm{PAW Augmentation}}
+%\begin{figure}[h!]
+%\centering
+%\includegraphics[height=2.3in,width=4.0in,viewport=0 0 1100 745,clip]{Figures/PAW-projector.png}
+%\caption{\tiny \textrm{The projector of PAW.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\label{PAW_projector}
+%\end{figure}
+%}
+\subsection{{\rm VASP}中的{\rm PAW}方法} 
+\frame
+{
+\frametitle{电荷密度的重新分解}
+\textrm{PAW}方法提出后有很长一段时间没有能够得到广泛应用，直到\textrm{G. Kresse}等将\textrm{Bl\"ochl}的原始方案中电荷密度计算方案重新组合后，明确了\textrm{PAW}方法与\textrm{USPP}方法的内在联系。
+\begin{itemize}
+	\item 芯层电荷与核电荷构成离子实电荷：$n_{Zc}=n_Z+n_c$
+\end{itemize}
+\begin{figure}[h!]
+\centering
+\vspace{-10.5pt}
+\includegraphics[height=1.5in,width=3.0in,viewport=0 0 380 190,clip]{Figures/Pseudo-potential_charge.png}
+\caption{\tiny \textrm{The difference of the electron-density distributing from P.~Bl\"ochl  and from G.~Kresse.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{PAW_Pseudo-Charge}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{电荷密度重新分解与赝势}
+\begin{itemize}
+	\item 赝离子实电荷要满足的条件$$\int_{\Omega_c}n_{Zc}(\vec r)\mathrm{d}^3\vec r=\int_{\Omega_c}\tilde n_{Zc}(\vec r)\mathrm{d}^3\vec r$$
+\end{itemize}
+在此基础上，\textrm{Bl\"ochl}方案中的电荷可以重新分解为：
+\begin{displaymath}
+	\begin{aligned}
+		n_T=n+n_{Zc}\equiv&\underbrace{(\tilde n+\hat n+\tilde n_{Zc})}\\
+		&\quad\qquad\textcolor{blue}{\tilde n_T}\\
+				  &+\underbrace{(n^1+\hat n+n_{Zc})}-\underbrace{(\tilde n^1+\hat n+\tilde n_{Zc})}\\
+				  &\quad\qquad \textcolor{blue}{n_T^1}\qquad\qquad\qquad\textcolor{blue}{\tilde n_T^1}
+	\end{aligned}
+\end{displaymath}
+\textcolor{red}{注意}:~\textrm{G. Kresse}方案中补偿电荷$\hat n$局域在每个缀加球内。
+}
+
+\frame
+{
+	\frametitle{\textrm{Hartree~}势的分解}
+\begin{displaymath}
+	\begin{aligned}
+		\dfrac12(n_T)(n_T)=&\dfrac12(\tilde n_T)(\tilde n_T)+(n_T^1-\tilde n_T^1)(\tilde n_T)\\
+				&+\dfrac12(n_T^1-\tilde n_T^1)(n_T^1-\tilde n_T)
+	\end{aligned}
+\end{displaymath}
+这里$$(a)(b)=\int\mathrm{d}\vec r\mathrm{d}\vec r^{\prime}\dfrac{a(\vec r)b(\vec r\,^{\prime})}{|\vec r-\vec r\,^{\prime}|}$$
+\textcolor{red}{近似}：$\tilde n_T$用$\tilde n_T^1$替换：
+\begin{displaymath}
+	\dfrac12(n_T)(n_T)=\textcolor{blue}{\dfrac12(\tilde n_T)(\tilde n_T)}\textcolor{magenta}{-\dfrac12\overline{(\tilde n_T^1)(\tilde n_T^1)}}+\textcolor{purple}{\dfrac12\overline{(n_T^1)(n_T^1)}}
+\end{displaymath}
+这里$$\overline{(a)(b)}=\int_0^{\mathrm{r}_c}\mathrm{d}\vec r\mathrm{d}\vec r^{\prime}\dfrac{a(\vec r)b(\vec r\,^{\prime})}{|\vec r-\vec r\,^{\prime}|}$$
+}
+
+\frame
+{
+	\frametitle{}
+	{\fontsize{7.2pt}{5.2pt}\selectfont{具体地，将$\tilde n_T$代入表达式并展开，有
+	\begin{enumerate}
+	\item 第一项	
+	\begin{displaymath}
+		\begin{aligned}
+			&\textcolor{blue}{\dfrac12(\tilde n+\hat n)(\tilde n+\hat n)+(\tilde n_{Zc})(\tilde n+\hat n)+\dfrac12(\tilde n_{Zc})(\tilde n_{Zc})}\\
+			=&\dfrac12(\tilde n+\hat n)(\tilde n+\hat n)+(\tilde n_{Zc})(\tilde n+\hat n)\boxed{\textcolor{red}{+\dfrac12\overline{(\tilde n_{Zc})(\tilde n_{Zc})}}}\\
+			&+U(\mathbf{R},Z_{\mathrm{ion}})
+		\end{aligned}
+	\end{displaymath}
+这里假设不同原子彼此间芯电荷不发生重叠
+	\item 第二项
+	\begin{displaymath}
+		\textcolor{magenta}{-\dfrac12\overline{(\tilde n^1+\hat n)(\tilde n^1+\hat n)}-\overline{(\tilde n_{Zc})(\tilde n^1+\hat n)}}\boxed{\textcolor{red}{-\dfrac12\overline{(\tilde n_{Zc})(\tilde n_{Zc})}}}
+	\end{displaymath}
+	\item 第三项
+\begin{displaymath}
+	\textcolor{purple}{\dfrac12\overline{(\tilde n^1)(\tilde n^1)}+\overline{(\tilde n_{Zc})(\tilde n^1)}}\boxed{\textcolor{red}{+\dfrac12\overline{(\tilde n_{Zc})(\tilde n_{Zc})}}}
+\end{displaymath}
+	\end{enumerate}
+	注意到第一项展开中$U(\mathbf{R},Z_{\mathrm{ion}})$表示的是均匀静电场背景下点电荷$Z_{\mathrm{ion}}$的静电相互作用，$\dfrac12\overline{(\tilde n_{Zc})(\tilde n_{Zc})}$表示离子实的自相互作用，这部分将与第二项展开式中对应部分彼此抵消，而第三项中$\dfrac12\overline{(\tilde n_{Zc})(\tilde n_{Zc})}$并未包括在最后的总能量表达式中，因为这部分能量只是影响了能量零点位置的选择%，最后用\textrm{Ewald}求和计算
+}}}
+
+\frame
+{
+\frametitle{交换-相关能泛函的处理}
+\textrm{G. Kresse}方案中电荷密度分解为
+\begin{displaymath}
+	n_c+n=(\tilde n+\hat n+\tilde n_c)+(n^1+n_c)-(\tilde n^1+\hat n+\tilde n_c)
+\end{displaymath}
+对比原始的\textrm{Bl\"ochl}方案中电荷分解为
+\begin{displaymath}
+	n_c+n=(\tilde n)+(n^1+n_c)-(\tilde n^1)
+\end{displaymath}
+%\textrm{G. Kresse}方案中赝离子实电荷$\tilde n_{Zc}$与\textrm{Bl\"ochl}方案中$\tilde n_c$的约束条件不同，
+
+显然，\textrm{VASP}中的交换-相关能计算表达式
+\begin{displaymath}
+	E_{\mathrm{XC}}[\tilde n+\hat n+\tilde n_c]+\overline{E_{\mathrm{XC}}[n^1+n_c]}-\overline{E_{\mathrm{XC}}[\tilde n^1+\hat n+\tilde n_c]}
+\end{displaymath}
+但由于交换-相关能泛函是非线性的，\textrm{G. Kress}的电荷分解引起的误差则为
+\begin{displaymath}
+	\begin{aligned}
+		&\textcolor{blue}{\overline{E_{\mathrm{XC}}[(\tilde n+\hat n+\tilde n_c)+(n^1+n_c)-(\tilde n^1+\hat n+\tilde n_c)]}}\\
+		&-\overline{E_{\mathrm{XC}}[\tilde n+\hat n+\tilde n_c]}-\overline{E_{\mathrm{XC}}[n^1+n_c]}+\overline{E_{\mathrm{XC}}[\tilde n^1+\hat n+\tilde n_c]}
+	\end{aligned}
+\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{总能量表达式}
+	最终完成体系总能量的表达式，根据总能量表达式$$E=\tilde E+E^1-\tilde E^1$$其中
+	\begin{displaymath}
+		\begin{aligned}
+			\tilde E=&\sum_nf_n\langle\tilde\Psi_n|-\frac12\nabla^2|\tilde\Psi_n\rangle+E_{\mathrm{XC}}[\tilde n+\hat n+\tilde n_c]+E_H[\tilde n+\hat n]\\
+			&+\int \textcolor{magenta}{v_H[\tilde n_{Zc}]}[\tilde n(\vec r)+\hat n(\vec r)]\mathrm{d}\vec r+U(\vec R,Z_{\mathrm{ion}})\\
+			\tilde E^1=&\sum_{(i,j)}\rho_{ij}\langle\tilde\phi_i|-\frac12\nabla^2|\tilde\phi_j\rangle+\textcolor{purple}{\overline{E_{\mathrm{XC}}[\tilde n^1+\hat n+\tilde n_c]}+\overline{E_H[\tilde n^1+\hat n]}}\\
+			&+\int_{\Omega_r}\textcolor{magenta}{v_H[\tilde n_{Zc}]}[\tilde n^1(\vec r)+\hat n(\vec r)]\mathrm{d}\vec r
+		\end{aligned}
+	\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{总能量表达式}
+	\begin{displaymath}
+		\begin{aligned}
+			E^1=&\sum_{(i,j)}\rho_{ij}\langle\phi_i|-\frac12\nabla^2|\phi_j\rangle+\overline{E_{\mathrm{XC}}[n^1+n_c]}+\overline{E_H[n^1]}\\
+			&+\int_{\Omega_r}v_H[n_{Zc}]n^1(\vec r)\mathrm{d}\vec r
+		\end{aligned}
+	\end{displaymath}
+	$v_H$是电荷密度$n$产生的静电势
+	$$v_H[n](\vec r)=\int\dfrac{n(\vec r\,^{\prime})}{|\vec r-\vec r\,^{\prime}|}\mathrm{d}\vec r\,^{\prime}$$
+	$E_H[n]$是对应的静电能
+	$$E_H[n]=\dfrac12(n)(n)=\dfrac12\int\mathrm{d}\vec r\mathrm{d}\vec r\,^{\prime}\dfrac{n(\vec r)n(\vec r\,^{\prime})}{|\vec r-\vec r\,^{\prime}|}$$ 
+	$U(\vec R,Z_{\mathrm{ion}})$\textcolor{blue}{由\textrm{Ewald}求和计算}
+}
+
+\frame
+{
+	\frametitle{补充电荷的构造}
+	根据约束条件
+	\begin{displaymath}
+		\int_{\Omega_c}(n^1-\tilde n^1-\hat n)|\vec r-\vec R|^lY_{lm}^{\ast}(\widehat{\vec r-\vec R})\mathrm{d}\vec r=0
+	\end{displaymath}
+	定义电荷密度差
+	\begin{displaymath}
+		Q_{ij}(\vec r)=\phi_i^{\ast}(\vec r)\phi_j(\vec r)-\tilde\phi_i^{\ast}(\vec r)\tilde\phi_j(\vec r)
+	\end{displaymath}
+	电荷密度差的多极矩为
+	\begin{displaymath}
+		q_{ij}^L(\vec r)=\int_{\Omega_r}Q_{ij}(\vec r)|\vec r-\vec R|^lY_{lm}^{\ast}(\widehat{\vec r-\vec R})\mathrm{d}\vec r
+	\end{displaymath}
+	因此，补充电荷的计算为：
+	\begin{displaymath}
+		\begin{aligned}
+			\hat n=\sum_{(i,j),L}\sum_n f_n\langle\tilde\Psi_n|\tilde p_i\rangle\langle\tilde p_j|\Psi_n\rangle\hat Q_{ij}^L(\vec r)\\
+			\hat Q_{ij}^L(\vec r)=q_{ij}^Lg_l(|\vec r-\vec R|)Y_{lm}(\widehat{\vec r-\vec R})
+		\end{aligned}
+	\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{重叠矩阵和\textrm{Hamiltonian~}的构造}
+重叠矩阵
+	\begin{displaymath}
+		\langle\tilde\Psi_n|\mathbf{S}|\tilde\Psi_m\rangle=\delta_{nm}
+	\end{displaymath}
+	其中重叠矩阵$$S[\{\mathbf{R}\}]=1+\sum_i|\tilde p_i\rangle q_{ij}\langle\tilde p_j|$$
+	而$$q_{ij}=\langle\phi_i|\phi_j\rangle-\langle\tilde\phi_i|\tilde\phi_j\rangle$$
+	\textrm{Hamiltonian}的计算
+	\begin{displaymath}
+		H[\rho,\{\mathbf{R}\}]=-\dfrac12\nabla^2+\tilde v_{e\!f\!f}+\sum_{(i,j)}|\tilde p_i\rangle(\hat D_{ij}+D_{ij}^1-\tilde D_{ij}^1)\langle\tilde p_j|	
+	\end{displaymath}
+	$$\tilde v_{e\!f\!f}=v_H[\tilde n+\hat n+\tilde n_{Zc}]+v_{\mathrm{XC}}[\tilde n+\hat n+\tilde n_{Zc}]$$
+}
+
+\frame
+{
+	\frametitle{重叠矩阵和\textrm{Hamiltonian~}的构造}
+	$$\hat D_{ij}=\dfrac{\partial\tilde E}{\partial\rho_{ij}}=\int\dfrac{\delta\tilde E}{\delta\hat n(\vec  r)}\dfrac{\partial\hat n(\vec r)}{\partial\rho_{ij}}\mathrm{d}\vec r=\sum_{L}\int\tilde v_{e\!f\!f}\hat Q_{ij}^L(\vec r)\mathrm{d}\vec r$$
+	$$D_{ij}^1=\dfrac{\partial E^1}{\partial\rho_{ij}}=\langle\phi_i|-\dfrac12\nabla^2+v_{e\!f\!f}^1|\phi_j\rangle$$
+	其中$$v_{e\!f\!f}^1[n^1]=v_H[n^1+n_{Zc}]+v_{\mathrm{XC}}[n^1+n_c]$$
+	$$\tilde D_{ij}^1=\dfrac{\partial\tilde E^1}{\partial\rho_{ij}}=\langle\tilde\phi_i|-\dfrac12\nabla^2+\tilde v_{e\!f\!f}^1|\tilde\phi_j\rangle+\sum_L\int_{\Omega_r}\mathrm{d}\vec r\tilde v_{e\!f\!f}^1(\vec r)\hat Q_{ij}^L$$
+	其中$$\tilde v_{e\!f\!f}^1[\tilde n^1]=v_H[\tilde n^1+\hat n+\tilde n_{Zc}]+v_{\mathrm{XC}}[\tilde n^1+\hat n+\tilde n_c]$$
+}
+
+\frame
+{
+	\frametitle{\textrm{Double counting correlations}}
+	能带计算中，总能量可通过\textrm{Kohn-Sham}本征值求和扣除\textrm{Double counting}计算更方便，其中修正项
+	\begin{displaymath}
+		\begin{aligned}
+			\tilde E_{dc}=&-E_H[\tilde n+\hat n]+E_{\mathrm{XC}}[\tilde n+\hat n+\tilde n_c]\\
+			&-\int v_{\mathrm{XC}}[\tilde n+\hat n+\tilde n_c](\tilde n+\hat n)\mathrm{d}\vec r\\
+			E_{dc}^1=-\overline{E_H[n^1]}&+\overline{E_{\mathrm{XC}}[n^1+n_c]}-\int_{\Omega_r}v_{\mathrm{XC}}[n^1+n_c]n^1\mathrm{d}\vec r\\
+			\tilde E_{dc}^1=&-\overline{E_H[\tilde n^1+\hat n]}+\overline{E_{\mathrm{XC}}[\tilde n^1+\hat n+\tilde n_c]}\\
+			&-\int v_{\mathrm{XC}}[\tilde n^1+\hat n+\tilde n_c](\tilde n^1+\hat n)\mathrm{d}\vec r
+		\end{aligned}
+	\end{displaymath}
+	因此总能量的计算表达式是
+	$$E=\sum_nf_n\langle\tilde\Psi_n|H|\tilde\Psi_n\rangle+\tilde E_{dc}+E_{dc}^1-\tilde E_{dc}^1+U(\vec R,Z_{\mathrm{ion}})$$
+}
+
+\subsection{\rm{PAW}方法与\rm{US-PP}的关系}
+\frame
+{
+	\frametitle{\textrm{PAW}与\textrm{US-PP}近似}
+	\textrm{G. Kresse}指出只要总能量表达式中$E^1$和$\tilde E^1$在原子构象附近作线性化即可得到\textrm{US-PP}的表达式。
+	
+	如果电子占据数$\rho_{ij}$直接用原子态构象$\rho_{ij}^a$近似，因此电荷密度分布记作$n_a^1$、$\tilde n_a^1$和$\hat n_a$，则$E^1$中的\textcolor{blue}{\underline{\textrm{Hartree}能和交换-相关能项}}在$n_a$附近线性化($n_a\Rightarrow n_a^1$):
+	\begin{displaymath}
+		E_{\mathrm{XC}}(\textcolor{red}{n_a^1+n_c})+E_H(\textcolor{red}{n_a^1})+\int(v_{\mathrm{XC}}[\textcolor{red}{n_a^1+n_c}]+v_H[\textcolor{red}{n_a^1}])[n^1(\vec r)-\textcolor{red}{n_a^1(\vec r)}]\mathrm{d}\vec r
+	\end{displaymath}
+	在\textrm{PAW}方法中，电子密度$n^1(\vec r)$%和$\tilde n^1(\vec r)$
+	的表达式
+	\begin{displaymath}
+		\begin{aligned}
+			n^1(\vec r)=&\sum_{(i,j)}\rho_{ij}\langle\phi_i|\vec r\rangle\langle\vec r|\phi_j\rangle\\
+	%		\tilde n^1(\vec r)=&\sum_{(i,j)}\rho_{ij}\langle\tilde\phi_i|\vec r\rangle\langle\vec r|\tilde\phi_j\rangle 
+		\end{aligned}
+	\end{displaymath}
+	因此，\textrm{Hartree}能和交换-相关能项为
+	$$\textcolor{blue}{C}+\sum_{(i,j)}\rho_{ij}\langle\phi_i|v_{\mathrm{XC}}[\textcolor{red}{n_a^1+n_c}]+v_H[\textcolor{red}{n_a^1}]|\phi_j\rangle$$
+	这里\textcolor{blue}{\textrm{C}}是常数:~{\fontsize{7.1pt}{3.9pt}\selectfont{$\textcolor{blue}{E_{\mathrm{XC}}(\textcolor{red}{n_a^1+n_c})+E_H(\textcolor{red}{n_a^1})-\int(v_{\mathrm{XC}}[\textcolor{red}{n_a^1+n_c}]+v_H[\textcolor{red}{n_a^1}])[\textcolor{red}{n_a^1(\vec r)}]\mathrm{d}\vec r}$}}
+}
+
+\frame
+{
+	\frametitle{\textrm{PAW}与\textrm{US-PP}近似}
+	因此$E^1$用占据数$\rho_{ij}$近似到一阶($\rho_{ij}\Rightarrow\rho_{ij}^1$)，可有
+	\begin{displaymath}
+		E^1\approx\textcolor{blue}{C}+\sum_{(i,j)}\rho_{i,j}\langle\phi_i|-\frac12\nabla^2+\textcolor{blue}{v_{e\!f\!f}^a}|\phi_j\rangle
+	\end{displaymath}
+	这里\textcolor{red}{$v_{e\!f\!f}^a$}是\textcolor{blue}{原子构象下的全电子有效势}
+	\begin{displaymath}
+		v_{e\!f\!f}^a=v_H[\textcolor{red}{n_a^1}+\textcolor{blue}{n_{Zc}}]+v_{\mathrm{XC}}[\textcolor{red}{n_a^1+n_c}]
+	\end{displaymath}
+
+	类似地可有
+	\begin{displaymath}
+		\tilde E^1\approx\textcolor{blue}{\tilde C}+\sum_{(i,j)}\left[\langle\tilde\phi_i|-\frac12\nabla^2+\tilde v_{e\!f\!f}^a|\tilde\phi_j\rangle+\underline{\int\tilde Q_{ij}^L(\vec r)\tilde v_{e\!f\!f}^a(\vec r)\mathrm{d}\vec r}\right]
+	\end{displaymath}
+	这里\textcolor{red}{$\tilde v_{e\!f\!f}^a$}是\textcolor{blue}{原子构象下的局域原子赝势}
+	$$\tilde v_{e\!f\!f}^a=v_H[\tilde n_a^1+\textcolor{blue}{\hat n_a}+\tilde n_{Zc}]+v_{\mathrm{XC}}[\tilde n_a^1+\textcolor{blue}{\hat n_a}+\tilde n_c]$$
+}
+
+\frame
+{
+	\frametitle{\textrm{PAW}与\textrm{US-PP}近似}
+	在此近似下，包含$\tilde E$可得体系总能量$E$:
+	\begin{displaymath}
+		\begin{aligned}
+			E=&\sum_nf_n\langle\tilde\Psi_n|-\frac12\nabla^2+\sum_{(ij)}|\tilde p_i\rangle\langle\tilde p_j|G_{ij}^{\mathrm{US}}|\tilde\Psi_n\rangle\\
+			&+E_{\mathrm{XC}}[\tilde n+\hat n+\tilde n_c]+E_H[\tilde n+\hat n]\\
+			&+\int v_H[\tilde n_{Zc}][\tilde n(\vec r)+\hat n(\vec r)]\mathrm{d}\vec r+U(\vec R,Z_{\mathrm{ion}})
+		\end{aligned}
+	\end{displaymath}
+	其中
+	\begin{displaymath}
+		\begin{aligned}
+			G_{ij}^{\mathrm{US}}=&\langle\phi_i|-\frac12\nabla^2+v_{e\!f\!f}^a|\phi_j\rangle-\langle\tilde\phi_i|-\frac12\nabla^2+\tilde v_{e\!f\!f}^a|\tilde\phi_j\rangle\\
+			&-\int\hat Q_{ij}^L(\vec r)\tilde v_{e\!f\!f}^a(\vec r)\mathrm{d}\vec r
+		\end{aligned}
+	\end{displaymath}
+}
+
+
+\frame
+{
+	\frametitle{\textrm{PAW}与\textrm{US-PP}近似}
+	\textcolor{blue}{当补偿电荷$\hat n$用\textrm{US-PP}方案的赝化补偿电荷表示时}\\%$E\rightarrow E_{\mathrm{tot}}$
+	$G_{ij}^{\mathrm{US}}$的\textcolor{blue}{前两项}与赝势理论中对应的是$\textcolor{blue}{D_{ij}}$，\textcolor{blue}{最后一项}对应的是去\textcolor{blue}{屏蔽部分}
+	\begin{displaymath}
+		\begin{aligned}
+			&\textcolor{blue}{\underbrace{\langle\phi_i|-\frac12\nabla^2+v_{e\!f\!f}^a|\phi_j\rangle-\langle\tilde\phi_i|-\frac12\nabla^2+\tilde v_{e\!f\!f}^a|\tilde\phi_j\rangle}}\\
+			\Longrightarrow\quad\qquad&\textcolor{red}{D_{nm}=B_{nm}+\varepsilon_mq_{nm}} \\
+			\overset{\textcolor{red}{\textrm{\fontsize{4.1pt}{3.9pt}\selectfont{desrceen}}}}{-}&\textcolor{blue}{\underline{\int\hat Q_{ij}^L(\vec r)\tilde v_{e\!f\!f}^a(\vec r)\mathrm{d}\vec r}} \qquad\rightarrow\qquad \textcolor{red}{\int_{\Omega_r}\mathrm{d}\vec r\,^{\prime}\tilde v_{e\!f\!f}^a(\vec r\,^{\prime})Q_{mn}(\vec r\,^{\prime})}\\
+%			&\int\mathrm{d}\vec r\,^{\prime}V_{loc}(\vec r\,^{\prime})n(\vec r\,^{\prime})\\
+			\Longrightarrow\quad\qquad&\textcolor{red}{D_{nm}^{(0)}}
+		\end{aligned}
+	\end{displaymath}
+	\begin{displaymath}
+		\begin{aligned}
+			\therefore D_{ij}^1-\tilde D_{ij}^1+\hat D_{ij}=D_{ij}^{(0)}+&\underbrace{\sum_L\int\tilde v_{e\!f\!f}(\vec r)\hat{Q}_{ij}^L(\vec r)\mathrm{d}\vec r}\\
+			&\qquad{\textcolor{blue}{\fontsize{5.2pt}{4.2pt}\selectfont{\textrm{non-local-terms}}}}
+		\end{aligned}
+	\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{\textrm{PAW}与\textrm{US-PP}近似}
+	在\textrm{PAW}方法中，如果缀加区补偿电荷$\hat n$满足~$\hat n=n^1-\tilde n^1$，并且如果满足$\tilde n_{Zc}=n_{Zc}$和$\tilde n_c=n_c$，则各“在位”(\textrm{on-site})项对体系总能量的贡献，将完全来自动能部分
+	\begin{displaymath}
+		E^1-\tilde E^1=\sum_{(i,j)}\rho_{ij}\big(\langle\phi_i|-\frac12\nabla^2|\phi_j\rangle-\langle\tilde\phi_i|-\frac12\nabla^2|\tilde\phi_j\rangle\big)
+	\end{displaymath}
+	显然，\textcolor{blue}{在这种极限情况下，\textrm{PAW}与\textrm{US-PP}是等价的;~如果考虑冻芯近似，则两种方法都将逼近精确解}\\ 
+	这也意味着\textrm{US-PP}中，用于构造补偿电荷的电荷密度差函数满足
+	$$\textcolor{magenta}{\hat Q_{ij}^L(\vec r)=Q_{ij}(\vec r)}=\phi_i^{\ast}(\vec r)\phi_j(\vec r)-\tilde\phi_i^{\ast}(\vec r)\tilde\phi_j(\vec r)$$
+	由此可见，\textcolor{blue}{在\textrm{US-PP}方案中，如能提高\underline{赝化缀加函数}的精度，有可能系统提升总能量的计算精度}
+
+	{\fontsize{6.5pt}{3.9pt}\selectfont{换言之，如\textrm{US-PP}能使用精确形式的补偿电荷，其总能泛函将逼近冻芯近似下的全电子方法的结果}}
+}
+
+\frame
+{
+	\frametitle{\textrm{PAW}与\textrm{US-PP}近似}
+	\begin{itemize}
+		\item 前面的讨论表明，冻芯近似下，即使仅要求构造补充电荷的$\hat{Q}_{ij}^L(\vec r)$与$Q_{ij}(\vec r)$有相同的多极矩，但\textrm{US-PP}随原子态电荷分布的变化，也能精确到一阶\\
+			{\fontsize{6.5pt}{3.9pt}\selectfont{这从一定程度上解释了为什么\textrm{US-PP}方法具有相当的可靠性}}
+		\item 当电荷密度变化剧烈时，\textrm{US-PP}的可移植性引起的误差也将越来越大(\textcolor{blue}{因为误差与补偿电荷密切关联})为了得到更精确的结果，会要求$\hat{Q}_{ij}^L\textcolor{red}{\rightarrow}Q_{ij}(\vec r)$\\
+			{\fontsize{6.5pt}{3.9pt}\selectfont{即$\hat{Q}_{ij}^L$逼近真实电荷密度差的精确形式，不仅仅是要求多极矩相等}}
+	\end{itemize}
+	\begin{itemize}
+		\item \textrm{PAW}方法:~构造补偿电荷容易
+			\vskip 2pt
+			{\fontsize{6.5pt}{3.9pt}\selectfont{引入了全电子波函数，保持电荷密度差的精度\\
+		通过电荷密度差的多极矩构造补偿电荷\\
+		空间上补偿电荷更延展、更平缓}}
+		\item \textrm{US-PP}方法:~构造补偿电荷的代价更大
+			\vskip 2pt
+			{\fontsize{6.5pt}{3.9pt}\selectfont{越精确的赝势越要求\textcolor{blue}{精确和硬}(\textrm{accurate~and~hard})的电荷密度差\\
+		空间上补偿电荷更收缩、更局域}}
+	\end{itemize}
+
+}
+
+\subsection{\rm{PAW~}原子数据集}
+\frame
+{
+	\frametitle{\textrm{PAW}原子数据集}
+	平滑赝原子分波函数
+	\begin{displaymath}
+		\tilde\phi_{i=Lk}(\vec r)=Y_L(\widehat{\vec r-\vec R})\tilde\phi_{lk}(|\vec r-\vec R|)
+	\end{displaymath}
+	根据\textrm{RRKJ}赝势构造，赝分波函数由球\textrm{Bessel}函数线性组合
+	\begin{displaymath}
+		\tilde\phi_{lk}(r)=\left\{
+		\begin{aligned}
+			&\sum_{i=1}^2\alpha_ij_l(q_ir)\quad &r<r_c^l\\
+			&\phi_{lk}(r)\quad&r>r_c^l
+		\end{aligned}
+		\right.
+	\end{displaymath}
+	调节系数$\alpha_i$和$q_i$，使得赝分波函数$\phi_{lk}(r)$在截断半径$r_c^l$处两阶连续可微\\
+	投影子波函数$\tilde p_i$根据\textrm{Gram-Schmidt}正交条件$\langle\tilde p_i|\tilde\phi_j\rangle=\delta_{ij}$确定
+}
+
+\frame
+{
+	\frametitle{\textrm{PAW}原子数据集}
+	\textcolor{blue}{构造原子局域赝势$\tilde v_{e\!f\!f}^a$}(\textcolor{red}{为防止\textrm{ghost band}}):\\在截断半径$r_{\mathrm{loc}}$内的定义为
+	$$\tilde v_{e\!f\!f}^a=A\dfrac{\sin(q_{\mathrm{loc}}r)}r\quad r<r_{\mathrm{loc}}$$
+	其中$q_{\mathrm{loc}}$和$A$要求局域赝势在截断半径$r_{\mathrm{loc}}$处连续到一阶导数
+
+	\textcolor{blue}{构造赝芯电荷密度$\tilde n_c$}:~在截断半径$r_{\mathrm{pc}}$内的定义为
+	$$\sum_{i=1,2}B_i\dfrac{\sin(q_ir)}r\quad r<r_{\mathrm{pc}}$$
+	调节系数$q_i$和$B_i$使得赝芯电荷密度$\tilde n_c(r)$在截断半径$r_{\mathrm{pc}}$处的两阶导数连续
+
+	局域离子赝势$v_H[\tilde n_{Zc}]$可由原子局域赝势去屏蔽得到
+	$$v_H[\tilde n_{Zc}]=\tilde v_{e\!f\!f}^a-v_H[\tilde n_a^1+\hat n_a]-v_{\mathrm{XC}}[\tilde n_a^1+\hat n_a+\tilde n_c]$$
+	在\textrm{VASP}的\textrm{POTCAR}生成过程中，各截断半径的确定条件
+	$r_{\mathrm{rad}}=\max({r_c^l})$,$r_{pc}\approx r_{\mathrm{rad}}/1.2$,$r_{\mathrm{loc}}<r_{\mathrm{rad}}/1.2$
+}
+
+\frame
+{
+	\frametitle{\textrm{PAW}原子数据集}
+	在每个原子球内用球\textrm{Bessel}函数构造补偿电荷$g_l(r)$
+	$$g_l(r)=\sum_{i=1}^2\alpha_i^lj_l(q_i^lr)$$
+	调节系数$q_i^l$和$\alpha_i^l$使得补偿电荷$g_l(r)$在截断半径$r_{\mathrm{comp}}$处的数值和前两阶导数值都是0，因此可以选择$q_i^l$使得多极矩
+	$$\int_0^{r_{\mathrm{comp}}}g_l(r)r^{l+2}\mathrm{d}r=1$$
+	并且有
+	$$\dfrac{\mathrm{d}}{\mathrm{d}r}j_l(q_i^lr)\bigg|_{r_{\mathrm{comp}}}=0$$
+	设置$\alpha_i^l$，因此$g_l(r_{\mathrm{comp}})=0$，$r_{\mathrm{comp}}=r_{\mathrm{rad}}/1.3\sim r_{\mathrm{rad}}/1.2$
+}
+
+%\frame
+%{
+%\frametitle{发展统一理论框架下的材料计算程序}
+%\begin{itemize}
+%	\item
+%\end{itemize}
+%}
+
+\frame
+{
+	\frametitle{计算流程}
+\begin{figure}[h!]
+	\vspace{-0.2in}
+\centering
+%\includegraphics[height=2.7in,width=4.0in,viewport=0 0 1300 960,clip]{Figures/VASP_procedure-full.png}
+%\includegraphics[height=2.1in,width=1.6in,viewport=0 0 480 630,clip]{Figures/VASP_procedure.png}
+%\includegraphics[height=2.1in,width=2.3in,viewport=0 0 740 600,clip]{Figures/Ab-initio-Ene.png}
+\includegraphics[height=2.5in,width=1.8in,viewport=0 0 480 630,clip]{Figures/VASP_procedure.png}
+\caption{\tiny \textrm{The Flow of calculation for the KS-ground states.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{PAW_baiseset}
+\end{figure} 
+}
 %\subsection{小结}
 \frame
 {
@@ -1300,7 +2836,865 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 			\textcolor{magenta}{有必要探索新的并行和优化策略来提升\textrm{VASP}的计算性能}
 }
 
-%-----------------------------------------------------------------------------------------------------------------------------------------------------------------------%
+\section{\rm{APW~}与\rm{LAPW~}方法}
+\frame
+{
+	\frametitle{\textrm{Muffin-tin}近似}
+\begin{figure}[h!]
+\centering
+\subfigure[\textrm{Muffin-tin Potentional}]{
+\label{Semi-local-potential}
+\includegraphics[height=1.10in,width=1.92in,viewport=1 22 507 295,clip]{Figures/Muffin-tin.png}}
+\subfigure[\textrm{Division of the unit cell into spheres(I) and into interstitial region(II)}]{
+\label{Semi-local-space}
+\includegraphics[height=1.45in,width=1.92in,viewport=1 20 515 435,clip]{Figures/Muffin-Tin.png}}
+%\caption{\tiny \textrm{Division of the unit cell into spheres(I) and into interstitial region(II)}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Muffin_tin-1}
+\end{figure}
+\textrm{Muffin-tin}近似是\textrm{Johnson}采用$\chi_{\alpha}$方法计算分子体系的交换-相关时，引入多重散射(\textrm{Multiple scattering})理论时提出的%，\textrm{Muffin-tin}直译为“松饼罐头”，意思是把分子中的原子看成堆在一起的圆球罐
+
+\textcolor{red}{\textrm{MT}球近似与多重散射理论有密切的关联}
+}
+
+\frame
+{
+\frametitle{\textrm{APW}方法}
+\begin{figure}[h!]
+\centering
+\includegraphics[height=1.10in,width=1.80in,viewport=40 150 545 465,clip]{Figures/Muffin_tin.pdf}
+\includegraphics[height=1.10in,width=1.45in,viewport=1 20 485 435,clip]{Figures/APW.png}
+\caption{\tiny \textrm{Partitioning of the unit cell into atomic spheres(I) and an interstitial region(II)}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Muffin_tin-2}
+\end{figure}
+\begin{displaymath}
+\hskip -28pt\footnotesize \varphi(\vec k_j,\vec r)=\left\{
+  \begin{aligned}
+    &\Omega^{-1/2}\exp[i\vec k_j\cdot\vec r],&|\vec r-\vec r_s|>R_{\mathrm{MT}}^s\\
+    &\sum_{lm}A_{lm}u_l(|\vec r-\vec r_s|,E)Y_{lm}(\widehat{\vec r-\vec r_s}),&|\vec r-\vec r_s|\leqslant R_{\mathrm{MT}}^s
+  \end{aligned}
+\right.
+\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{空间两部分函数在球面上的衔接}
+	\textrm{Huygens}原理:~\textcolor{blue}{平面波可以在各个原子球中心用球谐函数展开}:
+	\begin{displaymath}
+		\mathrm{e}^{\mathrm{i}\vec k\cdot\vec r}=4\pi\sum_{l=0}^{\infty}\sum_{m=-l}^l\mathrm{i}^lj_l(|\vec k|r)Y_{lm}^{\ast}(\hat{\vec k})Y_{lm}(\hat{\vec r})
+	\end{displaymath}
+	其中$j_l(|\vec k|r)$是$l$-阶球\textrm{Bessel}函数，$\hat{\vec k}$和$\hat{\vec r}$分别是矢量$\vec k$和$\vec r$与直角坐标$z$-轴的夹角$\theta$和$\varphi$
+
+	要求空间中不同区域函数在球面上连续，可调参数$A_{lm}^{\vec k}$可为下式确定
+\begin{displaymath}
+	A_{lm}^{\vec k}=4\pi\mathrm{e}^{\mathrm{i}\vec k\cdot\vec r_s}\mathrm{i}^lY_{lm}^{\ast}(\hat{\vec k})j_l(|\vec k|R_{MT}^s)/u_l(R_{MT}^s,E)
+\end{displaymath}
+\textrm{APW}的问题:\textcolor{blue}{球面参数$A_{lm}^{\vec k}$对能量$E$依赖，由此构造的久期方程\footnote{\fontsize{7.2pt}{6.2pt}\selectfont{久期方程\textrm{secular~equation}，\textrm{secular}来自拉丁语\textrm{saeculum}，本意为一代人、一个时期、一个时代、一个世界等意思。其名词在拉丁语中就作为世纪讲。汉译\textrm{secular}为久期，是取\textrm{long-term}的意思(实为慢，\textrm{slow~in~comparison~to~the~annual~motion}的意思)，与期待\textrm{(expectation)}无关\upcite{PhysCN40-477_2011}。}}非线性的}
+}
+
+\frame
+{
+\frametitle{\textrm{LAPW}方法}
+%\small\textrm{APW}方法的困难，久期方程不能化成广义本征值方程的形式(久期方程对能量$E$是非线性的)为了克服这一困难，人们提出线性化方法，
+\textrm{O.~K.~Andersen~}提出\textrm{LAPW}方法\upcite{Singh}:将$u_l(r,E)$在某一合适的$E_l$值附近对$E$的一阶微商{$\left.\dfrac{\textrm{d}u_l(r,E)}{\textrm{d}E}\right|_{E_l}\equiv\dot u_l(r,E_l)$}\\代入\textrm{APW}基函数中可得\textrm{LAPW}方法的基函数：
+{\fontsize{7.5pt}{3.3pt}\selectfont
+$$\hskip -14pt \varphi(\vec k_j,\vec r)=\left\{
+  \begin{aligned}
+    &\Omega^{-1/2}\exp[i\vec k_j\cdot\vec r],&|\vec r-\vec r_s|>R_{\mathrm{MT}}^s\\
+    &\sum_{lm}[A^{\vec k_j}_{lm}u_l(|\vec r-\vec r_s|,E_l)+B^{\vec k_j}_{lm}\dot u_l(|\vec r-\vec r_s|,E_l)]Y_{lm}(\widehat{\vec r-\vec r_s}),&|\vec r-\vec r_s|\leqslant R_{\mathrm{MT}}^s
+  \end{aligned}
+\right.$$
+%$$\Psi_{\vec k}(\vec r)=\int_{\Omega}\tilde G_{\vec k}(\vec r-\vec r\,^\prime;E)V(\vec r\,^\prime)\Psi_{\vec k}(\vec r\,^\prime)\textrm{d}\vec r\,^\prime$$
+根据基函数在\textrm{MT}球面上连续到一阶，确定系数$A^{\vec k}_{lm}$，$B^{\vec k}_{lm}$的值。}
+\begin{figure}[h!]
+	\vskip -3pt
+\centering
+\includegraphics[height=1.10in,width=1.88in,viewport=1 20 585 435,clip]{Figures/WIEN2k-LAPW.png}
+\caption{\tiny \textrm{Partitioning of the unit cell into atomic spheres(I) and an interstitial region(II)}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Muffin_tin-3}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{Ghost~band}的表现}
+	\fontsize{9.2pt}{4.2pt}\selectfont{只有价电子的波函数与芯电子波函数完全正交，能带计算中才能确保芯层与价层电子的完全分离。但实际计算时，该正交条件很难严格保证，因此一旦价电子波函数严重偏离正交条件，计算的能带中会在本不存在能带的区域出现电子结构分布(称为\textrm{Ghost~band})，这部分电子结构源自构造价电子波函数的能量参数$\varepsilon_l$与芯层电子能量差别太大，无法保持与芯层电荷严格正交引起的}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.10in}
+\includegraphics[height=1.50in,width=1.98in,viewport=0 0 450 320,clip]{Figures/Ghostband-Vanadium-1.png}
+\includegraphics[height=1.50in,width=1.98in,viewport=0 0 450 320,clip]{Figures/Ghostband-Vanadium-4.png}
+\caption{\fontsize{7.2pt}{4.2pt}\selectfont{\textrm{The band structure of bcc Vanadium. %In the calculation, all electrons up to the 3p states were treated as core electrons, all other electrons as valence electrons. 
+\\Left:~Between 10 and 15 eV above the Fermi energy a strange band with nearly no dispersion can be observed. The vanishing dispersion of the band is a typical property of ghost bands.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Ghost-band}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{semi-core}与\textrm{Ghost-band}}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.2in}
+\hspace*{-0.2in}
+\subfigure[\textrm{Windows with a semi-core state}]{
+\label{Semi-local-1}
+\includegraphics[height=1.88in,width=2.35in,viewport=0 0 785 615,clip]{Figures/Ghost-Multi_Windows.png}}
+\subfigure[\textrm{Variation of a semi-core and a valence band with $E_l$}]{
+\label{Semi-local-2}
+\includegraphics[height=1.88in,width=1.54in,viewport=0 0 625 650,clip]{Figures/Ghost-Multi_energy.png}}
+\label{Semi-local}
+\end{figure}
+}
+
+\frame
+{
+\frametitle{\textrm{LO}基函数}
+为提高\textrm{LAPW}方法的变分自由度，在同一能量范围处理半芯态(接近价态的能量较高的芯态)和价态，可添加与$\vec k$无关的基函数，称为局域轨道(\textrm{local orbitals, LO})%。据此构造的基函数称为%包含两个指定能量的径向波函数和其中一个能量导数，这样的基函数即LAPW+
+或\textrm{LO}基函数：
+{
+{\fontsize{8.5pt}{4.5pt}\selectfont
+$$\hskip -10pt \phi_{lm}^{\mathrm{LO}}(\vec r)=\left\{
+  \begin{aligned}
+    &[A_{lm}u_l(r,E_{1,l})+B_{lm}\dot u_l(r,E_{1,l})+C_{lm}u_l(r,E_{2,l})]Y_{lm}(\hat{\vec r})\quad&r\leqslant R_{\mathrm{MT}}^s\\
+    &0 &r>R_{\mathrm{MT}}^s
+\end{aligned}
+\right.$$}}
+
+类似地，根据$\phi_{lm}^{\mathrm{LO}}(\vec r)$在\textrm{MT}球面上的数值为零、一阶导数为零，并且$\phi_{lm}^{\mathrm{LO}}(\vec r)$在\textrm{MT}球内归一化的要求，可以确定系数$A_{lm}$，$B_{lm}$，$C_{lm}$的值。
+\begin{figure}[h!]
+	\vspace{-15pt}
+\centering
+\hspace{15pt}
+\includegraphics[height=1.45in,width=1.55in,viewport=50 10 470 415,clip]{Figures/WIEN2k-lo.png}
+\includegraphics[height=1.45in,width=1.45in,viewport=5 1 570 570,clip]{Figures/semi-core.png}
+\caption{\tiny \textrm{}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Muffin_tin_LO}
+\end{figure}
+}
+
+\frame
+{
+\frametitle{\textrm{APW+lo}基函数}
+\textrm{Sj\"ostedt}等发现上述\textrm{LAPW}方法并非是\textrm{APW}方法线性化的最有效方法。采用指定能量参数$E_l$的\textrm{APW}形式的径向波函数，外加\textrm{APW}型局域轨道(\textrm{local orbit, lo})基函数，是更有效的方案，称为\textrm{APW+lo}方法\upcite{SSC114-15_2000}。
+$$  \varphi(\vec k_j,\vec r)=\left\{
+  \begin{aligned}
+    &\sum_{lm}[A^{\vec k_j}_{lm}u_l(r,E_l)]Y_{lm}(\hat{\vec r})\quad&r\leqslant R_{\mathrm{MT}}^s\\
+    &\Omega^{-1/2}\exp(i\vec k_j\cdot\vec r) &r>R_{\mathrm{MT}}^s
+  \end{aligned}\right.
+  \label{eq:APW-basis}
+$$
+$$  \phi_{lm}^{\mathrm{lo}}(\vec r)=\left\{
+  \begin{aligned}
+  &[A_{lm}u_l(r,E_{1,l})+B_{lm}\dot u_l(r,E_{1,l})]Y_{lm}(\hat{\vec r})\quad&r\leqslant R_{\mathrm{MT}}^s\\
+  &0&r>R_{\mathrm{MT}}^s
+  \end{aligned}
+\right.$$
+\textrm{APW+lo}基函数式形式上与标准\textrm{LAPW}基函数式形式非常相似，但\textrm{APW+lo}基函数是平滑且一阶可微的，在\textrm{MT}球面上有动能对\textrm{Hamiltonian}的贡献需要计算。计算表明，采用\textrm{APW+lo}基组比标准\textrm{LAPW}基组计算效率高。
+}
+
+\subsection{全势的基本思想}
+\frame
+{
+\frametitle{全势的基本思想}
+全势\textrm{(Full Potential, FP)}是相对于赝势的概念，即\textcolor{blue}{电子运动过程中感受到其它粒子作用的真实效果}。
+实际计算中，构造\textrm{LAPW}基组的\textrm{MT}势换成晶体势函数。一般地，在每个\textrm{MT}球内，势函数用球谐函数(或者是满足晶体对称性)展开，\textrm{MT}球外的势函数用\textrm{Fourier}级数展开：%\upcite{PRB13-5362_1976}
+{\footnotesize$$ V(\vec r)=\left\{
+  \begin{aligned}
+    &\sum_{a,L}V_L^a(r)Y_L(\hat{\vec r})\quad &r\leqslant R_{\mathrm{MT}}^a\\
+    &\sum_{\vec G_n}V_I(\vec G_n)\textrm{e}^{i\vec G_n\cdot\vec r} &\vec r\in\mathrm{II}
+  \end{aligned}\right.
+  \label{eq:solid-63}
+$$}
+这里$L$\,$\equiv$\,$l,m$，$\vec G_n$为倒格矢，$Y_L(\hat{\vec r})$是球谐函数，\textrm{II}为原子间隙
+\begin{itemize}
+	\item 在\textrm{MT}球内靠近原子核，势能具有原子型势能特征
+	\item 在\textrm{MT}球外，要满足\textrm{Bloch}函数边界条件特征。
+	\item 在\textrm{MT}球内外的势能表象不同，同样要求势能在\textrm{MT}球表面连续。
+\end{itemize}
+}
+
+\frame
+{
+\frametitle{全势的基本思想}
+\vspace*{-13pt}
+\begin{figure}[h!]
+\centering
+\includegraphics[height=2.70in,width=2.02in,viewport=1 22 507 715,clip]{Figures/MT_FP.png}
+\caption{\tiny \textrm{From Muffin-tin Potential to Full Potential}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Muffin_tin_FP}
+\end{figure}
+}
+
+\frame
+{
+\frametitle{全势的基本思想}
+由此得到晶体的势函数为\upcite{Nemoshkalenko-Antonov}
+$$ V(\vec r)=V_{MT}(\vec r)+V_{WMT}(\vec r)+V_{NS}(\vec r)
+  \label{eq:solid-64}
+$$
+\begin{itemize}
+	\item $V_{MT}(\vec r)$是简单的\textrm{MT}势(包括\textrm{MT}球内球对称部分和\textrm{MT}球外常数势)
+	\item $V_{WMT}(\vec r)$表示\textrm{MT}球外势能\textrm{Fourier}展开对\textrm{MT}常数势的偏离，仅在\textrm{MT}球外非零，球内为零
+	\item $V_{NS}(\vec r)$是势能在\textrm{MT}球内对球对称性的偏离，只在\textrm{MT}球内有非零值
+\end{itemize}
+\textbf{\large 为求得交换-相关势$V_{\mathrm{XC}}$，将电荷密度也采用类似的形式展开。}
+}
+
+\frame
+{
+\frametitle{全势方法在$\vec k$空间中的实现}
+根据电动力学定理:\\\textcolor{blue}{如果球\textrm{S}内的电荷密度分布$\rho(\vec r)$，在球外某点$\vec r$产生的势是由电荷密度的多极矩确定}:
+\begin{figure}[h!]
+\vspace*{-15pt}
+\centering
+\includegraphics[height=1.25in,width=1.32in,viewport=1 22 507 575,clip]{Figures/potential_multipole.jpg}
+%\caption{\tiny \textrm{From Muffin-tin Potential to Full Potential}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Potential-multipole}
+\end{figure}
+\begin{displaymath}
+	V(\vec r)=\sum_{l=0}^{\infty}\sum_{m=-l}^{l}\dfrac{4\pi}{2l+1}q_{lm}\dfrac{Y_{lm}(\hat{\vec r})}{r^{l+1}}
+\end{displaymath}
+其中多极矩$q_{lm}$由下式计算
+\begin{displaymath}
+	q_{lm}=\int_SY_{lm}^{\ast}(\hat{\vec r})r^l\rho(\vec r)\mathrm{d}^3r
+\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{全势方法在$\vec k$空间的实现}
+\textrm{Weiner}提出全势计算的实现方法\upcite{JMP22-2433_1981}:~\\
+\begin{itemize}
+	\item 将\textrm{MT}球外的电荷密度$\rho_I(\vec r)$扩展到球内
+	\begin{displaymath}
+		\rho_I(\vec r)=\sum_{\vec K}\rho_I(\vec K)\mathrm{e}^{\mathrm{i}\vec K\cdot\vec r_s}\mathrm{e}^{\mathrm{i}\vec K\cdot(\vec r-\vec r_s)}
+	\end{displaymath}
+	这部分电荷在每个球内的多极矩展开$q_{lm}^{s,PW}$
+	\begin{displaymath}
+		\begin{aligned}
+			q_{lm}^{s,PW}=&\dfrac{\sqrt{4\pi}}3{R_{MT}^s}^3\rho_I^{(\vec K=0)}\delta_{l0}+\sum_{\vec K\neq0}4\pi\mathrm{i}^l\rho_I(\vec K){R_{MT}^s}^{l+3}\\
+			&\times\dfrac{j_{l+1}(|\vec K|R_{MT}^s)}{\vec K\cdot\vec R_{MT}^s}\mathrm{e}^{\mathrm{i}\vec K\cdot\vec r_s}Y_{lm}^{\ast}(\hat{\vec K})
+		\end{aligned}
+	\end{displaymath}
+\end{itemize}
+}
+
+\frame
+{
+	\frametitle{全势方法在$\vec k$空间的实现}
+\begin{itemize}
+	\item 根据\textrm{MT}球内的电荷密度分布，电子密度$\rho_s(\vec r)$在正空间分布的多极矩$q_{lm}^{s,MT}$
+\begin{displaymath}
+	q_{lm}^{s,MT}=\int_0^{R_{MT}^s}Y_{lm}^{\ast}(\hat{\vec r})r^l\rho_s(\vec r)\mathrm{d}^3r
+\end{displaymath}
+由此得到在\textrm{MT}球内，真实电荷密度多极展开多极矩与延伸到球内的平面波电荷多极矩之差
+	\begin{displaymath}
+		\delta q_{lm}^{s,MT}=q_{lm}^{s,MT}-q_{lm}^{s,PW}
+	\end{displaymath}
+\end{itemize}
+}
+
+\frame
+{
+	\frametitle{全势方法在$\vec k$空间的实现}
+\begin{itemize}
+	\item 构造赝电荷密度$\tilde\rho(\vec r)$，要求$\tilde\rho(\vec r)$在空间分布平缓，其多级矩$\tilde q_{lm}^{s,MT}$即为$\delta q_{MT}^s$，由此得到赝电荷密度的\textrm{Flourier}变换为
+	\begin{displaymath}
+		\begin{aligned}
+			\tilde\rho_s(\vec K)=&\dfrac{4\pi}{\Omega}\sum_{lm,s}(-\mathrm{i})^l\left\{\dfrac{(-1)^n\tilde q_{lm}^{s,MT}}{2^nn!a_n{R_{MT}^s}^{2l+2n+3}}\dfrac{(2l+2n+3)!!}{(2l+1)!!}\right\}\\
+			&\times\left\{(-1)^n2^nn!a_n{R_{MT}^s}^{l+2n+3}\dfrac{j_{l+n+1}(|\vec K|R_{MT}^s)}{(\vec K\cdot\vec R_{MT}^s)^{n+1}}\right\}\\
+			&\times\mathrm{e}^{\mathrm{-i}\vec K\cdot\vec r_s}Y_{lm}^{\ast}(\hat{\vec K})
+		\end{aligned}
+	\end{displaymath}
+	这里$a_n$满足
+	\begin{displaymath}
+		\sum_{\eta=\nu}^n\dfrac{a_n\eta!R_i^{2\eta}}{(\eta-\nu)!}=0,\qquad \nu=0,1,\cdots,n-1
+	\end{displaymath}
+	相应的解为
+	$a_{\eta}=(-1)^{n-\eta}R_l^{2(n-\eta)}
+	\begin{pmatrix}
+		n\\\eta
+	\end{pmatrix}
+	a_n$
+\end{itemize}
+}
+
+\frame
+{
+	\frametitle{全势方法在$\vec k$空间的实现}
+%	特殊地，
+	当$\vec K=0$时，有
+%	\begin{displaymath}
+		$\tilde\rho_s(\vec K=0)=\dfrac{\sqrt{4\pi}}{\Omega}\sum\limits_i\tilde{q}_{00}^i$
+%	\end{displaymath}
+\begin{itemize}
+	\item 在$\vec k$空间内，用平面波电荷密度$\rho_I(\vec K)$叠加\textrm{MT}球内赝电荷密度$\tilde\rho_s(\vec K)$:
+		\begin{displaymath}
+			\tilde\rho(\vec K)=\tilde\rho_s(\vec K)+\rho_I(\vec K)
+		\end{displaymath}
+		\textcolor{blue}{这样构造的赝电荷密度，在\textrm{MT}球外产生的势与真实电荷密度分布产生的势相等}:~根据\textrm{Coulomb}定理计算得到\textrm{Coulomb}势在间隙区的表达式$V_I(\vec K)$(\textrm{Poisson}方程)
+		\begin{displaymath}
+			V_I(\vec K)=\dfrac{4\pi\tilde\rho(\vec K)}{|\vec K|^2}
+		\end{displaymath}
+	间隙区在球面处\textrm{Coulomb}势的计算，需要总的赝电荷密度的\textrm{Fourier}变换
+	\begin{displaymath}
+		\tilde\rho(\vec r)=\sum_{\vec K}[\rho_I(\vec K)+\tilde\rho_s(\vec K)]\mathrm{e}^{\mathrm{i}\vec K\cdot\vec r}
+	\end{displaymath}
+\end{itemize}
+}
+
+\frame
+{
+	\frametitle{全势方法在$\vec k$空间的实现}
+\begin{itemize}
+	\item 在\textrm{MT}球面内，根据真实的电荷密度分布$\rho_s(\vec r)$和球面上的电势值(球形\textrm{Dirichlet}边值条件)，计算\textrm{MT}球内电子的\textrm{Coulomb}势$V_s(\vec r)$
+		\begin{displaymath}
+			\begin{aligned}
+				V_s(\vec r)=&\sum_{lm}Y_{lm}(\hat{\vec r})\left[\dfrac{4\pi}{2l+1}\bigg\{\dfrac1{r^l+1}\int_0^r\mathrm{d}r^{\prime}{r^{\prime}}^{l+2}\rho_{lm}(\vec r^{\prime})\right.\\
+					&+r^l\int_r^{R_{MT}^s}\mathrm{d}r^{\prime}(r^{\prime})^{1-l}\rho_{lm}(\vec r^{\prime})\bigg\}\\
+					&+\bigg(\dfrac r{R_{MT}^s}\bigg)^l4\pi\mathrm{i}^l\\
+					&\times\sum_{K\neq0}\left.\dfrac{4\pi}{|\vec K|^2}\tilde\rho_I(\vec K)Y_{lm}^{\ast}(\vec K)\dfrac{\vec K\cdot\vec R_{MT}^sj_{l-1}(|\vec K|R_{MT}^s)}{2l+1}\right]
+			\end{aligned}
+		\end{displaymath}
+\end{itemize}
+}
+
+\subsection{全势方法下的总能量计算}
+\frame
+{
+	\frametitle{总能量的计算}
+	\textrm{Weinert}等利用核\textrm{Coulomb}势的发散项与电子动能-势能项发散项解析抵消属性，提出新的总能量计算方法\upcite{PRB26-4571_1982}:
+	根据\textrm{DFT}，体系总能量分解为
+	\begin{displaymath}
+		E[\rho]=T_s[\rho]+U[\rho]+E_{\mathrm{XC}}[\rho]
+	\end{displaymath}
+	其中$U[\rho]$包含全部(经典)电荷相互作用:~
+	\begin{displaymath}
+		U[\rho]=\dfrac12\left[\int\dfrac{\rho(\vec r)\rho(\vec r^{\prime})}{|\vec r-\vec r^{\prime}|}\mathrm{d}\vec r\mathrm{d}\vec r^{\prime}-2\sum_{\alpha}Z_{\alpha}\int\dfrac{\rho(\vec r)\mathrm{d}\vec r}{|\vec r-\vec R_{\alpha}|}+\sum_{\alpha,\beta}{}^{\prime}\dfrac{Z_{\alpha}Z_{\beta}}{|\vec R_{\alpha}-\vec R_{\beta}|}\right]
+	\end{displaymath}
+	这里$Z_{\alpha}$是位于$R_{\alpha}$的核电荷
+}
+
+\frame
+{
+	\frametitle{\textrm{Madelung}常数与\textrm{Madelung}势}
+\begin{figure}[h!]
+\vspace*{-10pt}
+\centering
+\includegraphics[height=0.75in,width=2.50in,viewport=0 15 950 330,clip]{Figures/Madelung_Constant.jpg}\\
+\includegraphics[height=2.15in,width=2.50in,viewport=0 0 850 750,clip]{Figures/Madelung-potential-V-Mad-for-different-impact-parameters-Y-along-a-grazing-trajectory.png}
+%\caption{\tiny \textrm{From Muffin-tin Potential to Full Potential}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Madelung-Constant_Potential}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{Madelung}常数与\textrm{Madelung}势}
+	以$\mathrm{NaCl}$结构为例，为计算\textrm{Madelung}势，\textrm{Fourier}系数仅与原子核位置处的电荷有关
+\begin{displaymath}
+	\tilde\rho_s(\vec K)=\dfrac{-(2n+3)!!}{\Omega}\dfrac{j_{n+1}(\vec K\cdot\vec R_{MT}^s)}{(\vec K\cdot\vec R_{MT}^s)^{n+1}}(1-\mathrm{e}^{\vec K\cdot\vec\eta})
+\end{displaymath}
+这里默认阴离子$\mathrm{Cl}^{-}$位于原点，阳离子$\mathrm{Na}^{+}$位于$\eta$，阴阳离子半径相等
+\vskip 10pt
+	平面波表示的间隙区电荷在原点处产生的球形势为
+	\begin{displaymath}
+		V_{l=0}(\vec r)=\sqrt{4\pi}\bigg[\sideset{}{^{\prime}}\sum_{\vec K}\dfrac{4\pi}{\vec K^2}\tilde\rho_s(\vec K)j_0(\vec K\cdot\vec R)\bigg]Y_{00}(\hat r)
+	\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{\textrm{Madelung}常数与\textrm{Madelung}势}
+	为计算\textrm{Madelung}常数，须扣除原子核位置的净电荷(此处为$\pm$1)对势能的贡献
+	\begin{displaymath}
+		V_{l=0}^{\prime}(\vec r)=\sqrt{4\pi}\bigg[\sideset{}{^{\prime}}\sum_{\vec K}\dfrac{4\pi}{\vec K^2}\tilde\rho_s(\vec K)j_0(\vec K\cdot\vec R)+\dfrac1r\bigg]Y_{00}(\hat r)
+	\end{displaymath}
+	因此\textcolor{blue}{参考\textrm{Madelung}常数的定义\footnote{\fontsize{7.2pt}{6.2pt}\selectfont{这里离子的\textrm{Madelung}常数和势不考虑\textrm{Muffin-tin}球内电荷的贡献。因此\textrm{Madelung}常数的计算仅须考虑球面处的贡献。}}，周围原子在原点处的贡献为}
+	\begin{displaymath}
+		V(\vec r=0)=\sideset{}{^{\prime}}\sum_{\vec K}\dfrac{4\pi}{\vec K^2}\tilde\rho_s(\vec K)j_0(\vec K\cdot\vec R)+\dfrac1R
+	\end{displaymath}
+	这也就是\textrm{Madelung}常数
+}
+
+\frame
+{
+	\frametitle{总能量的计算}
+	记经典\textrm{Coulomb}势
+	\begin{displaymath}
+		V_c(\vec r)=\int\dfrac{\rho(\vec r^{\prime})}{|\vec r-\vec r^{\prime}|}\mathrm{d}\vec r^{\prime}-\sum_{\alpha}\dfrac{Z_{\alpha}}{|\vec r-\vec R_{\alpha}|}
+	\end{displaymath}
+	定义\underline{\textcolor{red}{广义的\textrm{Madelung}势}}
+	\begin{displaymath}
+		V_M(\gamma_{\nu})=\int\dfrac{\rho(\vec r)\mathrm{d}\vec r}{|\vec r-\vec \gamma_{\nu}|}-\sum_{\alpha}{}^{\prime}\dfrac{Z_{\alpha}}{|R_{\alpha}-\gamma_{\nu}|}
+	\end{displaymath}
+	\textcolor{red}{注意}:~\textcolor{blue}{位于\textrm{$\gamma_{\nu}$的\textrm{Madelung}势是离子除该点核电荷$Z_{\nu}$之外，所有其他电荷在该点产生电势之和}}
+
+	如果体积为$\Omega$的晶体包含$N$个原胞，则$U$表示为
+	\begin{displaymath}
+		U=\dfrac N2\left[\int_{\Omega}\rho(\vec r)V_c(\vec r)\mathrm{d}\vec r-\sum_{\nu}Z_{\nu}V_M(\vec \gamma_{\nu})\right]
+	\end{displaymath}
+	其中对$\nu$的求和遍历原胞中所有的核位置$\gamma_{\nu}$
+}
+
+\frame
+{
+	\frametitle{总能量的计算}
+	假设已知晶体中全部电荷产生\textrm{Coulomb}势，并设原点$\gamma_{\nu}$半径为$R_{\nu}$的球面上的球形平均势是$S_0(R_{\nu})$\footnote{\fontsize{7.2pt}{6.2pt}\selectfont{$S_0(R_{\nu})$就是前面全势方案实现中，\textcolor{blue}{赝电荷密度$\tilde{\rho}(\vec K)$}\textcolor{red}{在\textrm{muffin-tin}球面上}产生的势}}，则除了球面上除核电荷$Z_{\nu}$外的平均势为
+	\begin{displaymath}
+		S(R_{\nu})=S_0(R_{\nu})+Z_{\nu}/R_{\nu}
+	\end{displaymath}
+	根据球形\textrm{Dirichlet}边值条件，$\gamma_{\nu}$处的\textrm{Coulomb}势，可由球内电荷密度分布$\rho(\vec r)$和$S(R_{\nu})$确定。
+%	\frametitle{\textrm{Madelung}常数}
+	球内的电荷密度用球谐函数展开
+	\begin{displaymath}
+		\rho(\vec r_{\nu})=\sum_{lm}\rho_{lm(r_{\nu})}Y_{lm}(\hat{\vec r}_{\nu})
+	\end{displaymath}
+	并记球内电子电荷为$Q_{\nu}$，由此可得离子\textrm{Madelung}势
+	\begin{displaymath}
+		\begin{aligned}
+			\textcolor{red}{V_M(\gamma_{\nu})}=&\dfrac1{R_{\nu}}\big[R_{\nu}S_0(R_{\nu})+Z_{\nu}-Q_{\nu}\big]+\textcolor{magenta}{\sqrt{4\pi}\int_0^{R_{\nu}}\mathrm{d}rr\rho_{00}(r_{\nu})}\\
+			=&\dfrac1{R_{\nu}}\big[R_{\nu}S_0(R_{\nu})+Z_{\nu}-Q_{\nu}\big]+\textcolor{magenta}{\left\langle\dfrac1r\rho(\vec r)\right\rangle_{\nu}}
+		\end{aligned}
+	\end{displaymath}
+}
+
+\frame
+{
+\frametitle{总能量的计算}
+原胞内的电子动能为
+\begin{displaymath}
+	\hspace*{-10pt}
+	T_s[\rho]=\sum_i\varepsilon_i-\int_{\Omega}V_{e\!f\!f}(\vec r)\mathrm{d}\vec r=\sum_i\varepsilon_i-\int_{\Omega}V_c(\vec r)\rho(\vec r)\mathrm{d}\vec r-\int_{\Omega}\mu_{\mathrm{XC}}(\vec r)\rho(\vec r)\mathrm{d}\vec r
+\end{displaymath}
+由此可得\textrm{WS}原胞内的总能量的表达式
+{\fontsize{9.5pt}{5.2pt}\selectfont
+\begin{displaymath}
+\begin{split}
+	E_T=&\sum_i\varepsilon_i-\frac12\int_{\Omega}\underline{\textcolor{blue}{\rho(\vec r)}}[\underline{\textcolor{blue}{V_c(\vec r)}}+2\mu_{XC}(\vec r)]\mathrm{d}\vec r-\frac12\sum_{\nu}\underline{\textcolor{blue}{Z_{\nu}}\textcolor{red}{V_M(\vec r_{\nu})}}+E_{\mathrm{XC}}[\rho] \\
+	=&\sum_i\varepsilon_i-\frac12\left(\underline{\textcolor{blue}{\int_{\Omega}\rho(\vec r)V_c(\vec r)\mathrm{d}\vec r}}+\sum_{\nu}\underline{\textcolor{blue}{Z_{\nu}}\textcolor{magenta}{\bigg\langle\frac1r\rho(\vec r)\bigg\rangle_{\nu}}}\right)-%\dfrac12
+   \int_{\Omega}\rho(\vec r)\mu_{\mathrm{XC}}(\vec r)\mathrm{d}\vec r \\
+   &-\frac12\sum_{\nu}\underline{\textcolor{blue}{\frac{Z_{\nu}}{R_{\nu}}[R_{\nu}S_0(R_{\nu})+Z_{\nu}-Q_{\nu}]}}+E_{\mathrm{XC}}[\rho]
+\end{split}
+\end{displaymath}
+}
+这里$V_c(\vec r)\!=\!\displaystyle\int\dfrac{\rho(\vec r\,^\prime)}{|\vec r-{\vec r}\,^\prime|}\mathrm{d}\vec r\,^\prime-\sum\limits_{\alpha}\dfrac{Z_{\alpha}}{|\vec r-\vec r_{\alpha}|}$，$\mu_{\mathrm{XC}}$为交换-相关势。
+}
+
+\frame
+{
+\frametitle{原子核位置能量奇点排除}
+核吸引势和\textrm{Coulomb}势在原子核位置都存在奇点，单独求和，总能量是发散的。
+
+为排除奇点，将\textrm{Coulomb}势能和电荷密度在各原子核附近用球谐函数展开，在原子核附近，有
+{\fontsize{9.0pt}{5.2pt}\selectfont
+\begin{displaymath}
+  \begin{split}
+    &\int_{\Omega}\rho(\vec r)V_c(\vec r)\mathrm{d}\vec r+Z_{\nu}\sqrt{4\pi}\int_0^{R_{\nu}}\mathrm{d}rr^2\frac{\rho_{00}(r)}r\\
+    =&\sqrt{4\pi}\int_0^{R_{\nu}}\mathrm{d}rr^2\rho_{00}(\vec r)\left(\textcolor{red}{\dfrac1{\sqrt{4\pi}}V_{00}(r)}+\textcolor{magenta}{\frac{Z_{\nu}}r}\right)+\sum_{lm>0}\int_0^{R_{nu}}\mathrm{d}rr^2\rho_{lm}(r)V_{lm}(r)
+  \end{split}
+\end{displaymath}
+}
+\textcolor{blue}{\textrm{Coulomb}势的奇点只出现在$V_{00}(r)$中，将$V_{00}(r)$写成核的点电荷势与\textcolor{red}{源于电子的平缓的势$\hat V_{00}(r)$}两部分之和}:~
+\textcolor{red}{$$V_{00}(r)=-\sqrt{4\pi}\frac{Z_{\nu}}r+\textcolor{blue}{\hat V_{00}(r)}$$}
+可以看出\textrm{Coulomb}势的奇点被消去了。\\有必要指出的是，这样方式可以将总能量中的奇点排除，但是\textcolor{red}{单独每一项在原子核位置仍然是发散的}。
+}
+
+\frame
+{
+	\frametitle{\textrm{LDA~}近似下的总能量表达式}
+\begin{itemize}
+	\item 间隙区的电荷密度用平面波展开：{$\rho(\vec r)=\sum\limits_{\vec G}\rho(\vec G)\mathrm{e}^{i\vec G\cdot\vec r}$}
+	\item 在\textrm{MT}球内，电荷密度用球谐函数展开，在动量空间中的展开形式为：{$\bar\rho_{lm}(r_{\nu})=4\pi i^l\sum\limits_{\vec G}\rho(\vec G)\mathrm{e}^{i\vec G\cdot\vec r_{\nu}}j_l(\vec G\cdot\vec r_{\nu})Y_{lm}^{\ast}(\vec G)$}
+\end{itemize}
+\textrm{LDA}近似下，{\fontsize{7.5pt}{4.2pt}\selectfont$$E_{\mathrm{XC}}[\rho]\approx\int_{\Omega}\rho(\vec r)\varepsilon_{\mathrm{XC}}(\vec r)\textrm{d}\vec r$$}
+因此\textrm{WS}原胞内的晶体总能量可以写成：
+{\fontsize{7.5pt}{4.2pt}\selectfont
+\begin{displaymath}
+  \begin{split}
+\hskip -10pt	  E=&\sum_i\varepsilon_i-\Omega\sum_{\vec G}\rho(\vec G)\tilde V^{\ast}(\vec G)-\frac12\sum_{\nu}\dfrac{Z_{\nu}}{R_{\nu}}[Z_{\nu}-Q_{\nu}+R_{\nu}S_0(R_{\nu})]\\
+    &-\sum_{\nu}\sum_{lm}\int_0^{R_{\nu}}\mathrm{d}rr^2\left[\rho_{lm}(r_{\nu})\left(\tilde V_{lm}^{\ast}(r_{\nu})+\dfrac{\sqrt{4\pi}}{2r_{\nu}}Z_{\nu}\delta_{l0}\right)-\bar\rho_{lm}(\vec r_{\nu})\bar V_{lm}^{\ast}(\vec r_{\nu})\right]
+  \end{split}
+  \label{eq:solid-83}
+\end{displaymath}}
+这里$\tilde V(\vec r)$和$\bar V_{lm}(\vec r)$根据都按下式计算：
+{\fontsize{7.5pt}{4.2pt}\selectfont$$\tilde V(\vec r)=\frac12V_c(\vec r)-\varepsilon_{\mathrm{XC}}(\vec r)+\mu_{\mathrm{XC}}(\vec r)$$}
+}
+
+\section{\rm{MTO~}与\rm{LMTO~}方法}
+\frame
+{
+	\frametitle{多重散射理论}
+\begin{figure}[h!]
+	\vspace{-11pt}
+\centering
+\animategraphics[autoplay, loop, height=1.0in]{1}{Figures/Multi_scattering-}{0}{9}
+\includegraphics[height=1.29in,width=1.91in,viewport=0 0 400 275,clip]{Figures/Pseudo-scatter.jpg}
+\caption{\fontsize{5.5pt}{4.2pt}\selectfont{\textrm{Schematic illustration of scattering of a plane wave by a spherical potential.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Multiple_scattering}
+\end{figure}
+\vspace*{-0.10in}
+\fontsize{7.5pt}{6.2pt}\selectfont{
+	入射平面波用球\textrm{Bessel}函数展开
+$$\mathrm{e}^{\mathrm{i}\vec q\cdot\vec r}=4\pi\sum_{lm}\mathrm{i}^lj_l(\vec q\cdot\vec r)Y_{lm}^{\ast}(\hat{\vec q})Y_{lm}(\hat{\vec r})=\sum_{l}(2l+1)\mathrm{i}^lj_l(qr)P_{l}(\cos\theta)$$
+%$$\mathrm{e}^{\mathrm{i}\vec q\cdot\vec r}=\mathrm{e}^{\mathrm{i}qr\cos(\theta)}=\sum_{l}(2l+1)\mathrm{i}^lj_l(qr)P_{l}[\cos(\theta)]$$
+}
+}
+
+\frame
+{
+	\frametitle{势阱与相移}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.26in}
+\includegraphics[height=1.85in,width=1.3in,viewport=0 0 750 1050,clip]{Figures/Radial_wave_functions_for_various_square_well_potential.png}
+\caption{\fontsize{5.5pt}{4.2pt}\selectfont{\textrm{The radial wave functions for \textit{l}=0 for various square well potential depths.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Pseudo-scatter}
+\end{figure}
+\vspace*{-0.1in}
+\fontsize{7.5pt}{6.2pt}\selectfont{
+平面波经散射后出射，波函数变为
+$$\Psi_l^{>}(\varepsilon,r)=C_l\bigg[j_l(\kappa r)-\tan\eta_l(\varepsilon)n_l(\kappa r)\bigg]\quad\text{其中}\kappa^2=\varepsilon$$
+根据散射理论，能量为$\varepsilon$的电子经单个势阱散射偏转$\eta$后，波函数的振幅可以表示为
+	\begin{displaymath}
+		t(\eta)=\dfrac{4\pi}{\kappa}\sum_l(2l+1)[\mathrm{exp}(2\mathrm{i}\eta_l(\varepsilon))-1]P_l(\cos\eta)
+	\end{displaymath}
+%$$t(\theta)=\dfrac{4\pi}{\sqrt\varepsilon}\sum_l(2l+1)\bigg[\mathrm{e}^{2\mathrm{i}\eta_l(\varepsilon)}-1\bigg]P_l(\cos\theta)$$
+%$$\eta_l(\varepsilon)=p_l\pi+\delta_l(\varepsilon)$$
+}
+}
+
+\subsection{\rm{MTO}方法与\rm{Bessel}函数}
+\frame
+{
+\frametitle{\textrm{MTO}方法}
+\textrm{MTO (Muffin-tin Orbial)}方法是\textrm{Andersen}于\textrm{1971}年提出的局域缀加基函数方案\upcite{Andersen_Book}
+%\textrm{MTO}的
+\vskip 5pt
+\textcolor{blue}{目的:~用最小基组方法解析电子结构}
+\begin{itemize}
+	\item \textcolor{red}{物理图像}:~和\textrm{APW}方法类似，要求基函数在\textrm{MT}球内、外分区域表示，并且在球面上连续
+	\item \textcolor{red}{数学形式}:~基函数是最小优化基组
+\end{itemize}
+\begin{figure}[h!]
+	\vspace{-5pt}
+\centering
+\includegraphics[height=1.20in,width=2.42in,viewport=5 0 1005 495,clip]{Figures/Atomic_sphere-appro.png}
+\caption{\fontsize{6.2pt}{4.2pt}\selectfont\textrm{Atomic sphere approximation (ASA) in which the MT spheres are chosen to have the same volume as the Wigner-Seitz cell, which leads to overlapping spheres.}}
+\label{Atomic_sphere-appro}
+\end{figure}
+}
+
+\frame[allowframebreaks]
+{
+	\frametitle{\textrm{MTO-ASA}的函数形式}
+		\begin{enumerate}
+			\item 根据\textrm{Wigner-Seitz}理论\upcite{PR43-804_1933}，将晶体划分为\textrm{Wigner-Seitz}元胞后，如果每个元胞内的势具有球形对称，则对应能量$\varepsilon$，\textrm{Schr\"odinger}方程解的形式为
+				$$\psi_L(\varepsilon,\vec r)\equiv\mathrm{i}^lu_l(\varepsilon,\vec r)Y_L(\hat{\vec r})$$
+				其中$u_l$是径向\textrm{Schr\"odinger}方程的解，含有相因子$\mathrm{i}^l$是因为球谐函数的\textrm{Condon-Shortley}法则\upcite{Condon-Shortley}。
+%			晶体中价电子波函数的形式为
+%				\begin{displaymath}
+%					\Psi_{\vec k}(\vec r, \varepsilon)=\sum_LC_L(\vec k)\sum_{\vec R}\mathrm{e}^{\mathrm{i}\vec k\cdot\vec R}\theta(\vec r-\vec R)\psi_L(\varepsilon,\vec r-\vec R)
+%				\end{displaymath}
+%				这里$\vec R$是格矢，$\theta(\vec r)$阶梯函数，在\textrm{Wigner-Seitz}取为$1$,在\textrm{Wigner-Seitz}元胞外为$0$。
+
+				对于给定的$\varepsilon$%和$\vec k$，调整系数$C_L$使得$\Psi_{\vec k,\varepsilon}$
+				要求波函数在每个\textrm{Wigner-Seitz}元胞表面上连续到一阶。
+		%	\item \textrm{MT}根据散射理论，\textrm{MT}球外基函数形如$$\psi_l(\varepsilon,\vec r)\propto j_l(q_0r)-\tan(\eta_l(\varepsilon))n_l(q_0r)$$
+
+在原子球近似\textrm{(ASA)}下，该连续条件简化为要求径向分波$u_l(\varepsilon,r)$在球面$r=S$位置的对数导数$D_l(\varepsilon)$连续
+	\begin{displaymath}
+		D_l(\varepsilon)\equiv S\dfrac{u_l^{\prime}(\varepsilon,S)}{u_l(\varepsilon,S)}
+	\end{displaymath}
+	其中球半径取为$S=\sqrt[3]{\frac{3\Omega_0}{4\pi}}$，$\Omega_0$是\textrm{Weiger-Seitz}元胞
+
+\item \textrm{Wigner-Seitz}元胞内取近似球形势是很粗糙的，\textrm{Slater}引入\textrm{MT}球近似，假设间隙区的势是常数$V_{\mathrm{MT}}^I$，则间隙区电子动能为
+				\begin{displaymath}
+					q_0^2=\varepsilon-V_{\mathrm{MT}}^I
+				\end{displaymath}
+				如果间隙区的势$V_{\mathrm{MT}}^I(\vec r)=0$，径向波函数满足
+				\begin{displaymath}
+					\bigg[-\dfrac{\mathrm{d}^2}{\mathrm{d}r^2}+\dfrac{l(l+1)}{r^2}-q_0^2\bigg]ry_l(q_0r)=0
+				\end{displaymath}
+				根据散射理论，散射后波函数%渐近行为近似是\textcolor{purple}{平面波叠加球面波},球面波用\textrm{Neumann~}函数展开，渐近波函数表示为
+				可以表示成两个线性无关解\footnote{\tiny{这是\textrm{Helmholtz}}波动方程的两个解}，可取为球\textrm{Bessel}函数和\textrm{Neumann}函数
+				\begin{displaymath}
+					\psi_l(\varepsilon,q_0,\vec r)\propto n_l(q_0r)-\cot(\eta_l)j_l(q_0r) 
+				\end{displaymath}
+		%	\item 当$\varepsilon<0$，\textrm{Neumann}函数$n_l$可用\textrm{Hankel}函数$h_l=j_l+\mathrm{i}\eta_l$替换，由此\textrm{MT}球外基函数形式为$$\psi_l(\varepsilon,\vec r)\propto\mathrm{i}^{-l}\mathrm{e}^{-|q_0|r}/|q_0|r$$
+			\item 不同区域分波函数的分段表达式
+				\begin{displaymath}
+					\psi_L(\varepsilon,q_0,\vec r)=\mathrm{i}^{l}Y_L(\hat{\vec r})\left\{
+						\begin{aligned}
+							&u_l(\varepsilon,r)\quad &r\leqslant S\\
+							&q_0[n_l(q_0r)-\cot(\eta_l)j_l(q_0r)]\quad &r>S
+						\end{aligned} \right.
+				\end{displaymath}
+				对给定$\varepsilon$，$\psi_L(\varepsilon,q_0,\vec r)$是整个\textrm{Wigner-Seitz}元胞内的解，要求分段函数在\textrm{MT}球面上连续到一阶:\\
+				已知球面上的函数值为$u_l(\varepsilon,S)$，因此有
+				\begin{displaymath}
+					\cot(\eta_l(\varepsilon,q_0))=\dfrac{n_l(q_0r)}{j_l(q_0r)}\cdot\dfrac{D_l(\varepsilon)-q_0rn_l^{\prime}(q_0r)/n_l(q_0r)}{D_l(\varepsilon)-q_0rj_l^{\prime}(q_0r)/j_l(q_0r)}\bigg|_{r=S}
+				\end{displaymath}
+				注意到间隙区电子动能
+				\begin{itemize}
+					\item $q_0^2>0$，对应于非束缚态粒子，可以确定散射分波相移$\eta_l$，渐近函数
+						\begin{displaymath}
+							\psi_l(\varepsilon,q_0,r)\sim-\dfrac{\sin(q_0r+\eta_l-l\pi/2)}{r\sin(\eta_l)}
+						\end{displaymath}
+						表明$r\rightarrow\infty$，波函数是经\textrm{MT}球散射的球函数分波，散射相移为$\eta_l$
+					\item $q_0^2<0$，$q_0=\mathrm{i}\sqrt{|V_c-\varepsilon|}$，对应于束缚态粒子\\
+						这种情况下，如继续使用\textrm{Neumann}函数$n_l$，渐近函数会发散，必须用第一类\textrm{Hankel}函数\footnote{\tiny $h_l^{(1)}$的渐进行为是$\mathrm{i}^l\mathrm{e}^{-|q_0|r}/|q_0|r$}
+						\begin{displaymath}
+							-\mathrm{i}h_l^{(1)}=n_l-\mathrm{i}j_l
+						\end{displaymath}
+代替$n_l$，才能使函数有正确的渐近行为
+				\end{itemize}
+
+			%	鉴于\textrm{Bessel~}函数会发散，当$\varepsilon<0$，\textrm{Neumann}函数$n_l$用\textrm{Hankel}函数$h_l=j_l+\mathrm{i}n_l$替换，\\
+	%			\textcolor{red}{只有$\varepsilon$对应体系本征值时，函数在\textrm{MT}球面上连续}
+				因此\textcolor{red}{分波函数$\psi_L(\varepsilon,q_0,r)$不是描述束缚态好的基函数形式}
+		\end{enumerate}
+%		特别地，当能量$\varepsilon<0$，\textrm{Neumannn}函数$n_l$用\textrm{Hankel}函数$h_l$代替$$h_l^{(1)}=j_l+\mathrm{i}\eta_l$$渐近形式为$\frac{\mathrm{i}^{-l}\mathrm{e}^{-|q_0|r}}{|q_0|r}$\\
+%		此时球\textrm{Bessel}是非约束的，这样的轨道不适合做基函数:~因为当能量$\varepsilon<0$，只有当能量$\varepsilon=\varepsilon_{\vec k}$，球\textrm{Bessel}函数的系数为0，基函数才可能是正交归一
+}
+
+\frame[allowframebreaks]
+{
+\frametitle{\textrm{MTO}方法的基函数}
+%\textcolor{red}{“展开定理”可用来判断具有解析形式的函数是否适宜作为基函数:~}
+%以$R$为中心的函数用临近位置的基函数展开
+%\begin{displaymath}
+%	\chi_{\alpha}(\vec r-\vec R)=\sum_{\alpha^{\prime}}B_{\alpha\alpha^{\prime}}(\vec R,\vec R^{\prime})\chi_{\alpha^{\prime}}(r-R^{\prime})
+%\end{displaymath}
+%该定理对于积分非常有用:~
+%
+上述单重散射模型给出的\textrm{MTO}函数不适宜作为\textrm{MTO~}基函数，\textrm{Andersen~}根据多重散射理论重构了基函数
+		\begin{displaymath}
+			\hspace*{-10pt}\chi_L^{\mathrm{MTO}}(\varepsilon,q_0,\vec r)=\mathrm{i}^lY_L(\hat{\vec r})\left\{
+			\begin{aligned}
+				&u_l(\varepsilon,r)+q_0\cot(\eta_l)j_l(q_0r)&\quad r\leqslant S\\
+				&q_0n_l(q_0r)&\quad r>S
+			\end{aligned}\right.
+		\end{displaymath}
+%		\textrm{Anderson~}构造主要基于两个考虑
+		\textrm{Andersen~}构造的\textrm{MTO}基函数主要考虑
+		\begin{itemize}
+			\item \textrm{MT}球内引入球\textrm{Bessel}函数，抵消径向函数$u_l$的发散部分:\\
+				可以理解为\textrm{MT}球内的函数~\textcolor{red}{$j_l$部分包含了来自其他\textrm{MT}球散射函数的贡献}
+			\item \textcolor{blue}{\textrm{MT}球外部分函数形式简单}:~大大降低对电子动能$q_0^2$的依赖
+		\end{itemize}
+		这样构造出来的\textcolor{blue}{\textrm{MTO}函数有特点}
+		\begin{enumerate}
+			\item $\chi_L^{\mathrm{MTO}}(\varepsilon,q_0,\vec r)$在原点和无穷远处都没有异常发散
+			\item 由于\textrm{MT}球内的分波含有球\textrm{Bessel}函数的贡献，不再是\textrm{MT}球内势$V_{\mathrm{MT}}^S(\vec r)$对应的本征态\\
+				\textcolor{blue}{但是对于束缚态，由于${\cot(\eta_l)=0}$，球内分波仍是$V_{\mathrm{MT}}^S(\vec r)$对应的本征态}
+			\item 对$\psi_L(\varepsilon,q_0,\vec r)$与$\chi_L^{\mathrm{MTO}}(\varepsilon,q_0,\vec r)$的\textrm{Bl\"och}求和是\textcolor{blue}{相等的}:\\
+				因为两个函数的差是\textcolor{magenta}{球\textrm{Bessel}函数的\textrm{Bl\"och}求和，该值为零}
+		\end{enumerate}
+
+		根据多重散射理论，球面波函数延伸到\textrm{MT}球外部分，可用球\textrm{Bessel}函数展开表示
+		\begin{displaymath}
+			n_L(q_0,\vec r-\vec R)=4\pi\sum_{L^{\prime}L^{\prime\prime}}C_{L^{\prime}L^{\prime\prime}}^Ln_{L^{\prime\prime}}^{\ast}(q_0,\vec R-\vec R\,^{\prime})j_{L^{\prime}}(q_0,\vec r-\vec R\,^{\prime})
+		\end{displaymath}
+		其中$C_{L^{\prime}L^{\prime\prime}}^L$是\textrm{Gaunt}系数
+		\begin{displaymath}
+			C_{L^{\prime}L^{\prime\prime}}^L=\int Y_L(\hat{\vec k})Y_{L^{\prime}}(\hat{\vec k})Y_{L^{\prime\prime}}(\hat{\vec k})=\bigg(\dfrac{2l^{\prime\prime}+1}{4\pi}\bigg)^{1/2}c^{l^{\prime\prime}}(l^{\prime}m^{\prime};lm)
+		\end{displaymath}
+%		只有当能量参数$\varepsilon$对应体系的本征值时，用\textrm{MTO}基函数展开的波函数对应于体系本征态
+		%这里参数(衰减常数)$q_0$由$q_0^2=\varepsilon-V_0$确定
+		该展开形式表明:
+		\begin{itemize}
+			\item 位于$\vec R$处的球\textrm{Neumann}函数(含角度部分$\mathrm{i}^lY_L(\hat{\vec r})$)可由位于$\vec R^{\prime}$处的球\textrm{Bessel}函数展开(为简便起见，可取$\vec R^{\prime}=0$)，此时含角度部分的球\textrm{Bessel}函数可以写成
+				\begin{displaymath}
+					j_{L^{\prime}}(\vec k,\vec r)=j_{l^{\prime}}(\vec k\cdot\vec r)\mathrm{i}^{l^{\prime}}Y_{L^{\prime}}(\hat{\vec r})
+				\end{displaymath}
+			\item 考虑到位于$\vec R$的球\textrm{Neumann}函数在原点不发散，必须用\textrm{Helmholtz}方程的正则解\textrm{(regular solutions)}展开，因此在每个\textrm{MT}球内，来自其它球内的函数$\chi_L^{\mathrm{MTO}}(\varepsilon,q_0,\vec r)$的尾巴部分贡献，都有相同的\textrm{Bessel}函数形式
+		\item 不同\textrm{MT}球的尾巴部分实际影响的大小，通过$\cot(\eta_l)$调节
+		\end{itemize}
+
+}
+
+\subsection{正则能带基函数}
+\frame
+{
+	\frametitle{\textrm{MTO}方法的基函数}
+\begin{figure}[h!]
+	\vspace{-13pt}
+\centering
+\includegraphics[height=1.25in,width=1.95in,viewport=0 0 845 635,clip]{Figures/MTO-envelope-1.png}
+\includegraphics[height=1.25in,width=1.95in,viewport=0 0 885 635,clip]{Figures/MTO-envelope-2.png}
+\caption{\tiny \textrm{The radial function of MTO expressed in different region.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{MTO-envelope}
+\end{figure}
+当$q_0=0$时，构成最简单的\textrm{MTO}基函数
+		\begin{displaymath}
+			\hspace*{-12pt}\chi_L^{\mathrm{MTO}}(\varepsilon,0,\vec r)=\mathrm{i}^lY_L(\hat{\vec r})u_l(\varepsilon,S)\left\{
+			\begin{aligned}
+				&\dfrac{u_l(\varepsilon,r)}{u_l(\varepsilon,S)}-\dfrac{D_l(\varepsilon)+l+1}{2l+l}\left(\dfrac rS\right)^l&\, r\leqslant S\\
+				&+\dfrac{l-D_l(\varepsilon)}{2l+1}\left(\dfrac Sr\right)^{l+1}&\, r>S
+			\end{aligned}\right.
+		\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{正则能带基函数}
+%	\begin{displaymath}
+%		\hspace*{-15pt}\begin{aligned}
+%			&\left[\dfrac S{|\vec r-\vec R|}\right]^{l+1}\mathrm{i}^lY_L(\widehat{\vec r-\vec R})\\
+%				=&4\pi\sum_{L^{\prime}}\bigg[\dfrac rS\bigg]^{l^{\prime}}\mathrm{i}^{l^{\prime}}Y_{L^{\prime}}(\hat{\vec r})\left\{\dfrac{(2l^{\prime\prime}-1)!!}{(2l-1)!!(2l^{\prime}+1)!!}C_{L^{\prime}L^{\prime\prime}}^L\bigg[\dfrac S{|\vec R|}\bigg]^{l^{\prime\prime}+1}\mathrm{i}^{-l^{\prime\prime}}Y_{L^{\prime\prime}}^{\ast}(\hat{\vec R})\right\}
+%		\end{aligned}
+%	\end{displaymath}
+
+	\textcolor{blue}{考虑平移周期性}，
+$$\chi_{L,\vec k}^{\mathrm{MTO}}(\varepsilon,0,\vec r)=\sum_{\vec T}\mathrm{e}^{\mathrm{i}\vec k\cdot\vec R}\chi_L^{\mathrm{MTO}}(\varepsilon,0,\vec r)$$
+\textcolor{blue}{\textrm{MT}球内的\textrm{MTO-ASA}的基函数为}
+{\fontsize{7.0pt}{5.2pt}\selectfont
+\begin{displaymath}
+\chi_{L,\vec k}^{\mathrm{MTO}}(\varepsilon,0,\vec r)=\left\{
+	\begin{aligned}
+		&\underline{\textcolor{red}{u_l(\varepsilon,r)\mathrm{i}^lY_L(\hat{\vec r})}}-\dfrac{D_l(\varepsilon)+l+1}{2l+l}u_l(\varepsilon,S)\left(\dfrac rS\right)^l\mathrm{i}^lY_L(\hat{\vec r})&\, r\leqslant S\\
+		&\textcolor{magenta}{+\dfrac{l-D_l(\varepsilon)}{2l+1}u_l(\varepsilon,S)\sum_{L^{\prime}}\left(\dfrac rS\right)^{l^{\prime}}\dfrac1{2(2l^{\prime}+1)}\mathrm{i}^{l^{\prime}}Y_{L^{\prime}}(\hat{\vec r})S_{LL^{\prime}}(\vec k)}&\, r>S
+	\end{aligned}\right.
+\end{displaymath}}
+其中
+\begin{displaymath}
+	\begin{aligned}
+		S_{LL^{\prime}}(\vec k)=&2(2l+1)\dfrac{[D_l(\varepsilon)+l+1]}{[D_l(\varepsilon)-l]}\\
+		=&C_{l^{\prime}m^{\prime},lm}\sum_{\vec T}\mathrm{e}^{\mathrm{i}\vec k\cdot\vec T}\bigg[\dfrac S{|\vec T|}\bigg]^{l^{\prime\prime}+1}\big[\sqrt{4\pi}\mathrm{i}^{l^{\prime\prime}}Y_{L^{\prime\prime}}(\hat{\vec T})\big]^{\ast}
+	\end{aligned}
+\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{正则能带}
+	\textcolor{red}{$u_l(\varepsilon,r)\mathrm{i}^lY_L(\hat{\vec r})$是\textrm{MT}球内满足原子分波函数的形式}
+	\begin{itemize}
+		\item \textcolor{magenta}{在\textrm{MT}球内来自其他原子尾部贡献部分}$$\dfrac{l-D_l(\varepsilon)}{2l+1}u_l(\varepsilon,S)\sum_{L^{\prime}}\left(\dfrac rS\right)^{l^{\prime}}\dfrac1{2(2l^{\prime}+1)}\mathrm{i}^{l^{\prime}}Y_{L^{\prime}}(\hat{\vec r})S_{LL^{\prime}}(\vec k)$$
+		\item \textcolor{blue}{在\textrm{MT}球内非物理贡献部分}$$\dfrac{D_l(\varepsilon)+l+1}{2l+l}u_l(\varepsilon,S)\left(\dfrac rS\right)^l\mathrm{i}^lY_L(\hat{\vec r})$$
+	\end{itemize}
+	\textcolor{red}{这两部分相互抵消}，由此得到\textrm{MTO}中的\textrm{KKR}-型方程
+	\begin{displaymath}
+		\det[S_{LL^{\prime}}(\vec k)-P_l(\varepsilon)\delta_{LL^{\prime}}]=0
+	\end{displaymath}
+	这里$P_l(\varepsilon)$是“势函数”
+	\begin{displaymath}
+		P_l(\varepsilon)=2(2l+1)\dfrac{D_l(\varepsilon)+l+1}{D_l(\varepsilon)-l}
+	\end{displaymath}
+	\textcolor{blue}{作变换$S_{LL^{\prime}}(\vec k)\xrightarrow{\bf{T}\rm{_u}}S_{lm,lm^{\prime}}(\vec k)$，由此确定的$\varepsilon_l(\vec k)$即正则能带}
+}
+
+\frame
+{
+	\frametitle{\textrm{MTO}轨道的“尾部抵消”}
+\begin{figure}[h!]
+	\vspace*{-0.7in}
+\centering
+\includegraphics[height=2.55in,width=3.15in,viewport=0 0 845 635,clip]{Figures/MTO-Tail_cancellation.png}
+\caption{\tiny \textrm{The wavefunction in the spere at the origin is the sum of the ``head function'' in that sphere plus the tails from neighboring spheres. The schematic illustration of the ``tail cancellation'' of the MTO.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{MTO-tail-candellation}
+\end{figure}
+}
+
+\subsection{\rm{LMTO}方法}
+\frame
+{
+	\frametitle{\textrm{LMTO}方法}
+	与\textrm{LAPW}方法类似，在给定能量$\varepsilon_v$和衰减常数$q_0$附近，\textrm{LMTO}的基函数球内部分用函数$\psi_l(\varepsilon_v,r)$及其对能量导数$\dot\psi(\varepsilon_v,r)$表示\\
+\textcolor{blue}{\textrm{LMTO}与\textrm{MTO}基函数的区别}
+	\begin{itemize}
+		\item 球内部分的$\psi(\varepsilon,r)$是主要部分:~由$\psi(\varepsilon_v,r)$和$\dot\psi(\varepsilon_v,r)$线性组合
+		\item 球内来自其它\textrm{MT}球的函数尾部贡献被$\dot\psi(\varepsilon_v,r)$的线性组合替代
+	\end{itemize}
+	由此根据物理直觉，可以把\textrm{LMTO}基函数的形式表示成
+		\begin{displaymath}
+			\hspace*{-12pt}\chi_L^{\mathrm{LMTO}}(\varepsilon,q_0,\vec r)=\mathrm{i}^lY_L(\hat{\vec r})\left\{
+			\begin{aligned}
+				&u_l(\varepsilon,r)-q_0\cot(\eta_l(\varepsilon))J_l(q_0r)&\, r\leqslant S\\
+				&q_0N_l(q_0r)&\, r>S
+			\end{aligned}\right.
+		\end{displaymath}
+		实际应用中，选定函数$J_l$和$N_l$与球\textrm{Bessel}函数$j_l$和\textrm{Neumann}函数$n_l$相似
+}
+
+\frame
+{
+	\frametitle{\textrm{LMTO}方法}
+	根据物理边界要求，在\textrm{MT}球内，基函数$\chi_L^{\mathrm{LMTO}}$对能量$\varepsilon$的导数在$\varepsilon=\varepsilon_v$为0可确定$J_l$
+		\begin{displaymath}
+			J_l(q_0r)=-\dfrac{\dot{\psi}_l(\varepsilon_v,r)}{q_0\frac{\mathrm{d}}{\mathrm{d}\varepsilon}\cot(\eta_l(\varepsilon_v))},\,r\leqslant S
+		\end{displaymath}
+		$N_L$的定义与\textrm{Neumann}函数相似，在极限条件$n_l\rightarrow N_l$，$j_l\rightarrow J_l$，其它\textrm{MT}球的函数尾巴满足多重散射展开方式
+		\begin{displaymath}
+				N_L(q_0,\vec r-\vec R)=4\pi\sum_{L^{\prime},L^{\prime\prime}}C_{L^{\prime}L^{\prime\prime}}^Ln_{L^{\prime\prime}}^{\ast}(q_0,\vec R-\vec R\,^{\prime})J_{L^{\prime}}(q_0,\vec r-\vec R\,^{\prime}),\,r>S
+		\end{displaymath}
+		由此得到的能量无关的\textrm{LMTO}基函数满足
+		\begin{itemize}
+			\item \textcolor{blue}{在\textrm{MT}球内函数由$\psi_l$和$\dot{\psi}_l$的线性组合}
+			\item \textcolor{blue}{\textrm{MT}球内函数光滑延伸到\textrm{MT}外，并能与其余\textrm{MT}球函数能量导数$\dot{\psi}_l$光滑连续}
+		\end{itemize}
+}
+
+\frame
+{
+	\frametitle{\textrm{LMTO}方法}
+	对于周期体系，取$q_0=0$~，\textrm{LMTO}方法的基函数可以表示为
+	\begin{displaymath}
+		\chi_{L,\vec k}^{\mathrm{LMTO}}(\vec r)=\dfrac{\psi_{l-}(\vec r)}{\psi_{l-}(S)}-\dfrac1{\psi_{l+}(S)}\sum_{L^{\prime}}\psi_{l^{\prime}+}(\vec r)\dfrac1{2(2l^{\prime}+1)}S_{LL^{\prime}}(\vec k)
+	\end{displaymath}
+	这里$\psi_{l-}(r)\equiv\psi_l(D=-l-1,r)$，$(r/S)^l\rightarrow\psi_{l+}(r)\equiv\psi_l(D=l,\varepsilon)$
+	$$\psi(D,r)=\psi(r)+\omega(D)\dot\psi(r)$$
+	这里
+	$$\omega(D)=-\dfrac{\psi(S)D-D(\psi)}{\dot\psi(S)D-D(\dot\psi)}$$
+	这里$D(\psi)$和$D(\dot\psi)$分别是$\psi$和$\dot\psi$在\textrm{MT}球面上的对数导数
+
+	由此定义的\textrm{LMTO}基函数
+	\begin{itemize}
+		\item \textcolor{red}{对能量$\varepsilon_v$依赖到一阶}
+		\item \textcolor{red}{径向函数在\textrm{MT}球外的尾巴抵消保持到计算所需要的最低阶}
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{\textrm{LMTO~.vs.~LAPW}}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.15in}
+\includegraphics[height=2.50in,width=3.30in,viewport=0 0 440 350,clip]{Figures/LMTO-vs-LAPW.png}
+\caption{\fontsize{5.5pt}{4.2pt}\selectfont{\textrm{Schematic illustration of LMTO vs LAPW.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{LMTO-vs-LAPW}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{固体计算方法总结}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.25in}
+%\hspace*{-0.80in}
+\includegraphics[height=2.80in,width=4.10in,viewport=0 0 1150 850,clip]{Figures/Pseudo-Full_Potential-2.png}
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Pseudo-Full_Poential}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{固体计算软件概览}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.05in}
+%\hspace*{-0.80in}
+\includegraphics[height=2.30in,width=4.00in,viewport=0 0 920 500,clip]{Figures/DFT-Software.jpg}
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Abinitio-Softwares}
+\end{figure}
+}
+
 \section{$\vec k$~空间布点与积分}
 \frame
 {
@@ -3720,6 +6114,428 @@ $$\Sigma(\vec r_1,\vec r_2;\omega)=\dfrac{\mathrm i}{2\pi}\int \mathrm e^{\mathr
 %	\item
 %\end{itemize}
 %}
+
+\section{\rm{POTCAR}中的数据分析}
+\frame
+{
+	\frametitle{\rm{VASP}的\rm{POTCAR}}
+\centering
+\vspace{-0.15in}
+%------------------------------------直-接-插-入-文-件--------------------------------------------------------------------------------------
+%\textcolor{red}{\textbf{直接插入文件}}:
+\fontsize{4.8pt}{4.2pt}\selectfont{
+%\verbatiminput{/home/jiangjun/Documents/Latex_Beamer/Figures/VASP-POTCAR_Si-00-PSCTR} %为保险:~选用文件名绝对路径
+\verbatiminput{Figures/VASP-POTCAR_Si-00-PSCTR} %为保险:~选用文件名绝对路径
+}
+}
+
+\frame
+{
+	\frametitle{\rm{VASP}的\rm{POTCAR}}
+\begin{minipage}{0.40\textwidth}
+\centering
+%\vspace{0.05in}
+%------------------------------------直-接-插-入-文-件--------------------------------------------------------------------------------------
+%\textcolor{red}{\textbf{直接插入文件}}:
+\fontsize{2.7pt}{1.2pt}\selectfont{
+%\verbatiminput{/home/jiangjun/Documents/Latex_Beamer/Figures/VASP-POTCAR_Si-01-localpotential-part} %为保险:~选用文件名绝对路径
+\verbatiminput{Figures/VASP-POTCAR_Si-01-localpotential-part} %为保险:~选用文件名绝对路径
+}
+\end{minipage}
+\begin{minipage}{0.58\textwidth}
+{\fontsize{5.5pt}{4.2pt}\selectfont{
+	\begin{displaymath}
+		G_{\max}^1
+	\end{displaymath}
+	\begin{displaymath}
+		\begin{aligned}
+%			\tilde{V}(q)=&\frac{4\pi}{q}\int\sin(q\cdot r)\tilde{V}(r)\cdot r\mathrm{d}r\\
+			\tilde{V}(q)\cdot q=&4\pi\int_0^{\infty}\sin(q\cdot r)\tilde{V}(r)\cdot r\mathrm{d}r\\
+			\tilde{V}_{\mathrm{ion}}(q)=&-\frac{4\pi Z_{\mathrm{ion}}(1-\mathrm{e}^{-q^2/4\alpha})}{q^2}\\
+			\tilde{V}(q=0)=&0
+		\end{aligned}
+\end{displaymath} }}
+\begin{figure}[t!]
+\centering
+\vspace{-0.15in}
+\includegraphics[width=2.3in,height=1.75in,viewport=0 0 1150 650, clip]{Figures/POT_G-dat.pdf}
+\label{local-potential}
+\end{figure}
+\end{minipage}
+}
+
+\frame
+{
+	\frametitle{\rm{VASP}的\rm{POTCAR}}
+\begin{minipage}{0.40\textwidth}
+\centering
+\vspace{-0.05in}
+%------------------------------------直-接-插-入-文-件--------------------------------------------------------------------------------------
+%\textcolor{red}{\textbf{直接插入文件}}:
+\fontsize{2.7pt}{1.2pt}\selectfont{
+%\verbatiminput{/home/jiangjun/Documents/Latex_Beamer/Figures/VASP-POTCAR_Si-02-localcorecharge} %为保险:~选用文件名绝对路径
+\verbatiminput{Figures/VASP-POTCAR_Si-02-localcorecharge} %为保险:~选用文件名绝对路径
+}
+\end{minipage}
+\begin{minipage}{0.58\textwidth}
+{\fontsize{7.2pt}{6.2pt}\selectfont{
+	\vskip -5.0in
+	\begin{displaymath}
+		\begin{aligned}
+%			\tilde{V}(q)=&\frac{4\pi}{q}\int\sin(q\cdot r)\tilde{V}(r)\cdot r\mathrm{d}r\\
+			\tilde{\rho}_{\mathrm{core}}(q)\cdot q=&4\pi\int_0^{\infty}\sin(q\cdot r)\tilde{\rho}_{\mathrm{core}}(r)\cdot r\mathrm{d}r\\
+%			=&\frac{4\pi}{q}\int_0^{\infty}\sin(q\cdot r)V(r)\cdot r\mathrm{d}r
+		\end{aligned}
+\end{displaymath}
+}}
+\end{minipage}
+}
+
+\frame
+{
+	\frametitle{\rm{VASP}的\rm{POTCAR}}
+\begin{minipage}{0.40\textwidth}
+\centering
+\centering
+\vspace{-0.05in}
+%------------------------------------直-接-插-入-文-件--------------------------------------------------------------------------------------
+%\textcolor{red}{\textbf{直接插入文件}}:
+\fontsize{2.7pt}{1.2pt}\selectfont{
+%\verbatiminput{/home/jiangjun/Documents/Latex_Beamer/Figures/VASP-POTCAR_Si-03-pseudo-charge} %为保险:~选用文件名绝对路径
+\verbatiminput{Figures/VASP-POTCAR_Si-03-pseudo-charge} %为保险:~选用文件名绝对路径
+}
+\end{minipage}
+\begin{minipage}{0.58\textwidth}
+{\fontsize{7.2pt}{6.2pt}\selectfont{
+	\vskip -5.0in
+	\begin{displaymath}
+		\tilde{\rho}(q)=\frac{\tilde{V}(q)}{4\pi}\cdot q^2
+\end{displaymath}
+}}
+\end{minipage}
+}
+
+\frame
+{
+	\frametitle{\rm{VASP}的\rm{POTCAR}}
+\begin{minipage}{0.58\textwidth}
+\centering
+\vspace{-0.10in}
+%------------------------------------直-接-插-入-文-件--------------------------------------------------------------------------------------
+%\textcolor{red}{\textbf{直接插入文件}}:
+\fontsize{2.6pt}{1.2pt}\selectfont{
+%\verbatiminput{/home/jiangjun/Documents/Latex_Beamer/Figures/VASP-POTCAR_Si-04-projector-1} %为保险:~选用文件名绝对路径
+\verbatiminput{Figures/VASP-POTCAR_Si-04-projector-1} %为保险:~选用文件名绝对路径
+}
+\end{minipage}
+\hfill
+\begin{minipage}{0.40\textwidth}
+{\fontsize{5.5pt}{4.2pt}\selectfont{
+	\begin{displaymath}
+		\begin{aligned}
+			& G_{\max}^2 \\
+			& r_{\max,0}^{\mathrm{pro}}
+		\end{aligned}
+	\end{displaymath}
+	\vskip 10pt
+	\begin{displaymath}
+		\begin{aligned}
+			\hat{T}|\psi_i\rangle=&\left[-\nabla^2-\frac{l(l+1)}2\right]|\psi_i\rangle\\
+			D_{ij}^{\mathrm{ion}}=&\langle\psi_i|\hat{T}+V_{\mathrm{eff}}|\psi_j\rangle\\
+			-&\langle\tilde{\psi}_i|\hat{T}+\tilde{V}_{\mathrm{eff}}|\tilde{\psi}_j\rangle\\
+			-&\int\hat{Q}_{ij}^{00}(r)\tilde{V}(r)\mathrm{d}r
+		\end{aligned}
+	\end{displaymath}
+	\vskip 50pt
+	\begin{displaymath}
+		\langle\tilde{p}_i|\tilde\phi_j\rangle=\delta_{ij}	
+	\end{displaymath}}}
+\end{minipage}
+}
+
+\frame
+{
+	\frametitle{\rm{VASP}的\rm{POTCAR}}
+\centering
+\vspace{-0.15in}
+%------------------------------------直-接-插-入-文-件--------------------------------------------------------------------------------------
+%\textcolor{red}{\textbf{直接插入文件}}:
+\fontsize{2.6pt}{1.2pt}\selectfont{
+%\verbatiminput{/home/jiangjun/Documents/Latex_Beamer/Figures/VASP-POTCAR_Si-04-projector-2} %为保险:~选用文件名绝对路径
+\verbatiminput{Figures/VASP-POTCAR_Si-04-projector-2} %为保险:~选用文件名绝对路径
+}
+}
+
+\frame
+{
+	\frametitle{\rm{VASP}的\rm{POTCAR}}
+\centering
+\vspace{-0.15in}
+%------------------------------------直-接-插-入-文-件--------------------------------------------------------------------------------------
+%\textcolor{red}{\textbf{直接插入文件}}:
+\fontsize{4.8pt}{4.2pt}\selectfont{
+%\verbatiminput{/home/jiangjun/Documents/Latex_Beamer/Figures/VASP-POTCAR_Si-05-augmentcharge} %为保险:~选用文件名绝对路径
+\verbatiminput{Figures/VASP-POTCAR_Si-05-augmentcharge} %为保险:~选用文件名绝对路径
+}
+}
+
+\frame
+{
+	\frametitle{\rm{VASP}的\rm{POTCAR}}
+\begin{minipage}{0.58\textwidth}
+\centering
+\vspace{-0.10in}
+%------------------------------------直-接-插-入-文-件--------------------------------------------------------------------------------------
+%\textcolor{red}{\textbf{直接插入文件}}:
+\fontsize{3.3pt}{1.9pt}\selectfont{
+%\verbatiminput{/home/jiangjun/Documents/Latex_Beamer/Figures/VASP-POTCAR_Si-06-grid} %为保险:~选用文件名绝对路径
+\verbatiminput{Figures/VASP-POTCAR_Si-06-grid} %为保险:~选用文件名绝对路径
+}
+\end{minipage}
+\hfill
+\begin{minipage}{0.40\textwidth}
+{\fontsize{8.2pt}{6.2pt}\selectfont{
+	\centering{径向部分的对数布点:}
+	\begin{displaymath}
+		r(i)=r(1)*10^{(i-1)\cdot\Delta h}
+	\end{displaymath}}}
+\end{minipage}
+}
+
+\frame
+{
+	\frametitle{\rm{VASP}的\rm{POTCAR}}
+\begin{minipage}{0.58\textwidth}
+\centering
+\vspace{-0.10in}
+%------------------------------------直-接-插-入-文-件--------------------------------------------------------------------------------------
+%\textcolor{red}{\textbf{直接插入文件}}:
+\fontsize{3.3pt}{1.9pt}\selectfont{
+%\verbatiminput{/home/jiangjun/Documents/Latex_Beamer/Figures/VASP-POTCAR_Si-07-aepotential} %为保险:~选用文件名绝对路径
+\verbatiminput{Figures/VASP-POTCAR_Si-07-aepotential} %为保险:~选用文件名绝对路径
+}
+\end{minipage}
+\hfill
+\begin{minipage}{0.40\textwidth}
+\begin{figure}[t!]
+\centering
+\vspace{-0.05in}
+\includegraphics[height=2.25in,width=1.5in,viewport=0 0 350 550, angle=-90, clip]{Figures/POTAE-data.eps}
+\label{Potential_Function}
+\end{figure}
+\end{minipage}
+}
+
+\frame
+{
+	\frametitle{\rm{VASP}的\rm{POTCAR}}
+\begin{minipage}{0.58\textwidth}
+\centering
+\vspace{-0.10in}
+%------------------------------------直-接-插-入-文-件--------------------------------------------------------------------------------------
+%\textcolor{red}{\textbf{直接插入文件}}:
+\fontsize{3.3pt}{1.9pt}\selectfont{
+%\verbatiminput{/home/jiangjun/Documents/Latex_Beamer/Figures/VASP-POTCAR_Si-08-corecharge} %为保险:~选用文件名绝对路径
+\verbatiminput{Figures/VASP-POTCAR_Si-08-corecharge} %为保险:~选用文件名绝对路径
+}
+\end{minipage}
+\hfill
+\begin{minipage}{0.40\textwidth}
+\begin{figure}[t!]
+\centering
+\vspace{-0.05in}
+\includegraphics[height=2.25in,width=1.5in,viewport=0 0 350 550, angle=-90, clip]{Figures/CORE-data.eps}
+\label{core_density_Function}
+\end{figure}
+\end{minipage}
+}
+
+\frame
+{
+	\frametitle{\rm{VASP}的\rm{POTCAR}}
+\centering
+\vspace{-0.15in}
+%------------------------------------直-接-插-入-文-件--------------------------------------------------------------------------------------
+%\textcolor{red}{\textbf{直接插入文件}}:
+\fontsize{3.3pt}{1.9pt}\selectfont{
+%\verbatiminput{/home/jiangjun/Documents/Latex_Beamer/Figures/VASP-POTCAR_Si-09-kinetic-ene-den} %为保险:~选用文件名绝对路径
+\verbatiminput{Figures/VASP-POTCAR_Si-09-kinetic-ene-den} %为保险:~选用文件名绝对路径
+}
+}
+
+\frame
+{
+	\frametitle{\rm{VASP}的\rm{POTCAR}}
+\begin{minipage}{0.58\textwidth}
+\centering
+\vspace{-0.10in}
+%------------------------------------直-接-插-入-文-件--------------------------------------------------------------------------------------
+%\textcolor{red}{\textbf{直接插入文件}}:
+\fontsize{3.3pt}{1.9pt}\selectfont{
+%\verbatiminput{/home/jiangjun/Documents/Latex_Beamer/Figures/VASP-POTCAR_Si-10-pspotential} %为保险:~选用文件名绝对路径
+\verbatiminput{Figures/VASP-POTCAR_Si-10-pspotential} %为保险:~选用文件名绝对路径
+}
+\end{minipage}
+\hfill
+\begin{minipage}{0.40\textwidth}
+\begin{figure}[t!]
+\centering
+\vspace{-0.05in}
+\includegraphics[height=2.25in,width=1.5in,viewport=0 0 350 550, angle=-90, clip]{Figures/POTPSC-data.eps}
+\label{Pseudopotential-core_Function}
+\end{figure}
+\end{minipage}
+}
+
+\frame
+{
+	\frametitle{\rm{VASP}的\rm{POTCAR}}
+\begin{minipage}{0.58\textwidth}
+\centering
+\vspace{-0.10in}
+%------------------------------------直-接-插-入-文-件--------------------------------------------------------------------------------------
+%\textcolor{red}{\textbf{直接插入文件}}:
+\fontsize{3.3pt}{1.9pt}\selectfont{
+%\verbatiminput{/home/jiangjun/Documents/Latex_Beamer/Figures/VASP-POTCAR_Si-11-pscoreden} %为保险:~选用文件名绝对路径
+\verbatiminput{Figures/VASP-POTCAR_Si-11-pscoreden} %为保险:~选用文件名绝对路径
+}
+\end{minipage}
+\hfill
+\begin{minipage}{0.40\textwidth}
+\begin{figure}[t!]
+\centering
+\vspace{-0.05in}
+\includegraphics[height=2.25in,width=1.5in,viewport=0 0 350 550, angle=-90, clip]{Figures/PCORE-data.eps}
+\label{psedudocore_density_Function}
+\end{figure}
+\end{minipage}
+}
+
+\frame
+{
+	\frametitle{\rm{VASP}的\rm{POTCAR}}
+\begin{minipage}{0.58\textwidth}
+\centering
+\vspace{-0.10in}
+%------------------------------------直-接-插-入-文-件--------------------------------------------------------------------------------------
+%\textcolor{red}{\textbf{直接插入文件}}:
+\fontsize{3.3pt}{1.9pt}\selectfont{
+%\verbatiminput{/home/jiangjun/Documents/Latex_Beamer/Figures/VASP-POTCAR_Si-12-pswav-1} %为保险:~选用文件名绝对路径
+\verbatiminput{Figures/VASP-POTCAR_Si-12-pswav-1} %为保险:~选用文件名绝对路径
+}
+\end{minipage}
+\hfill
+\begin{minipage}{0.40\textwidth}
+\begin{figure}[t!]
+\centering
+\vspace{-0.05in}
+\includegraphics[height=2.25in,width=1.4in,viewport=0 0 350 550, angle=-90, clip]{Figures/WPS-data.eps}
+\label{Wave-PS_Function}
+\end{figure}
+\end{minipage}
+}
+
+\frame
+{
+	\frametitle{\rm{VASP}的\rm{POTCAR}}
+\begin{minipage}{0.58\textwidth}
+\centering
+\vspace{-0.10in}
+%------------------------------------直-接-插-入-文-件--------------------------------------------------------------------------------------
+%\textcolor{red}{\textbf{直接插入文件}}:
+\fontsize{3.3pt}{1.9pt}\selectfont{
+%\verbatiminput{/home/jiangjun/Documents/Latex_Beamer/Figures/VASP-POTCAR_Si-12-aewav-1} %为保险:~选用文件名绝对路径
+\verbatiminput{Figures/VASP-POTCAR_Si-12-aewav-1} %为保险:~选用文件名绝对路径
+}
+\end{minipage}
+\hfill
+\begin{minipage}{0.40\textwidth}
+\begin{figure}[t!]
+\centering
+\vspace{-0.05in}
+\includegraphics[height=2.25in,width=1.4in,viewport=0 0 350 550, angle=-90, clip]{Figures/WAE-data.eps}
+\label{Wave-AE_Function}
+\end{figure}
+\end{minipage}
+}
+
+\frame
+{
+	\frametitle{\rm{VASP}的\rm{POTCAR}}
+\centering
+\vspace{-0.15in}
+%------------------------------------直-接-插-入-文-件--------------------------------------------------------------------------------------
+%\textcolor{red}{\textbf{直接插入文件}}:
+\fontsize{3.3pt}{1.9pt}\selectfont{
+%\verbatiminput{/home/jiangjun/Documents/Latex_Beamer/Figures/VASP-POTCAR_Si-12-pswav-2} %为保险:~选用文件名绝对路径
+\verbatiminput{Figures/VASP-POTCAR_Si-12-pswav-2} %为保险:~选用文件名绝对路径
+}
+}
+
+\frame
+{
+	\frametitle{\rm{VASP}的\rm{POTCAR}}
+\centering
+\vspace{-0.15in}
+%------------------------------------直-接-插-入-文-件--------------------------------------------------------------------------------------
+%\textcolor{red}{\textbf{直接插入文件}}:
+\fontsize{3.3pt}{1.9pt}\selectfont{
+%\verbatiminput{/home/jiangjun/Documents/Latex_Beamer/Figures/VASP-POTCAR_Si-12-aewav-2} %为保险:~选用文件名绝对路径
+\verbatiminput{Figures/VASP-POTCAR_Si-12-aewav-2} %为保险:~选用文件名绝对路径
+}
+}
+
+\frame
+{
+	\frametitle{\rm{VASP}的\rm{POTCAR}}
+\centering
+\vspace{-0.15in}
+%------------------------------------直-接-插-入-文-件--------------------------------------------------------------------------------------
+%\textcolor{red}{\textbf{直接插入文件}}:
+\fontsize{3.3pt}{1.9pt}\selectfont{
+%\verbatiminput{/home/jiangjun/Documents/Latex_Beamer/Figures/VASP-POTCAR_Si-12-pswav-3} %为保险:~选用文件名绝对路径
+\verbatiminput{Figures/VASP-POTCAR_Si-12-pswav-3} %为保险:~选用文件名绝对路径
+}
+}
+
+\frame
+{
+	\frametitle{\rm{VASP}的\rm{POTCAR}}
+\centering
+\vspace{-0.15in}
+%------------------------------------直-接-插-入-文-件--------------------------------------------------------------------------------------
+%\textcolor{red}{\textbf{直接插入文件}}:
+\fontsize{3.3pt}{1.9pt}\selectfont{
+%\verbatiminput{/home/jiangjun/Documents/Latex_Beamer/Figures/VASP-POTCAR_Si-12-aewav-3} %为保险:~选用文件名绝对路径
+\verbatiminput{Figures/VASP-POTCAR_Si-12-aewav-3} %为保险:~选用文件名绝对路径
+}
+}
+
+\frame
+{
+	\frametitle{\rm{VASP}的\rm{POTCAR}}
+\centering
+\vspace{-0.15in}
+%------------------------------------直-接-插-入-文-件--------------------------------------------------------------------------------------
+%\textcolor{red}{\textbf{直接插入文件}}:
+\fontsize{3.3pt}{1.9pt}\selectfont{
+%\verbatiminput{/home/jiangjun/Documents/Latex_Beamer/Figures/VASP-POTCAR_Si-12-pswav-4} %为保险:~选用文件名绝对路径
+\verbatiminput{Figures/VASP-POTCAR_Si-12-pswav-4} %为保险:~选用文件名绝对路径
+}
+}
+
+\frame
+{
+	\frametitle{\rm{VASP}的\rm{POTCAR}}
+\centering
+\vspace{-0.15in}
+%------------------------------------直-接-插-入-文-件--------------------------------------------------------------------------------------
+%\textcolor{red}{\textbf{直接插入文件}}:
+\fontsize{3.3pt}{1.9pt}\selectfont{
+%\verbatiminput{/home/jiangjun/Documents/Latex_Beamer/Figures/VASP-POTCAR_Si-12-aewav-4} %为保险:~选用文件名绝对路径
+\verbatiminput{Figures/VASP-POTCAR_Si-12-aewav-4} %为保险:~选用文件名绝对路径
+}
+}
 
 %------------------------------------------------------------------------Reference----------------------------------------------------------------------------------------------
 %\frame
