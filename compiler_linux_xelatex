@@ -22,5 +22,8 @@ bibtex  Beamer-Template_Main
 xelatex Beamer-Template_Main
 xelatex Beamer-Template_Main
 rm -rf *.aux  *.bbl  *.dvi *.blg *.bcf *.out *.log *.nav *.thm *.snm *.toc *.*.xml *.*~ *~ .*.*.swp
+cd Beamer_Template/
+rm -rf *.aux  *.bbl  *.dvi *.blg *.bcf *.out *.log *.nav *.thm *.snm *.toc *.*.xml *.*~ *~ .*.*.swp
+cd ..
 mv Beamer-Template_Main.pdf $1.pdf
 evince $1.pdf
