@@ -1,13 +1,16 @@
-\documentclass[cjk,slidestop,compress,mathserif,blue]{beamer}
-%\documentclass[cjk,slidestop,handout,compress,mathserif,blue]{beamer}	%打印PPT用,handout(讲义)可去掉过渡效果，如\pause引起的多页显示，为打印时节省纸张
+%\documentclass[cjk,slidestop,compress,mathserif,blue]{beamer}
+\documentclass[cjk,slidestop,handout,compress,mathserif,blue]{beamer}	%打印PPT用,handout(讲义)可去掉过渡效果，如\pause引起的多页显示，为打印时节省纸张
 %handout去掉过渡效果，如\pause引起的多页显示
 %dvipdfm选项是关键,否则编译统统通不过
 %beamer的颜色选项定义的是导航条和标题的颜色(即关键词structure的颜色)
 
 %%%%%%%%%%%%%%%%仅限于XeTeX可使用的宏包%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NeedsTeXFormat{LaTeX2e}
+\usepackage{silence} \WarningFilter{latex}{movie15_dvipdfmx}
 \usepackage{fontspec,xunicode,xltxtra,beamerthemesplit}
 %\usepackage{beamerthemesplit}
-\usepackage{handoutWithNotes}		%(讲义)在打印PPT的时候会留出给每一页做注释的部分
+%\usepackage{handoutWithNotes}		%(讲义)在打印PPT的时候会留出给每一页做注释的部分
+\usepackage[dvipdfmx]{movie15_dvipdfmx} %插入视频与(讲义)打印有冲突
 \usepackage{xeCJK}
 \setCJKmainfont[BoldFont=黑体, ItalicFont=楷体, BoldItalicFont=仿宋]{黑体}
 %\setsansfont[Mapping=tex-text]{Adobe 黑体 Std}
@@ -156,8 +159,9 @@
 	\frametitle{\textrm{The School of Athens}}
 \begin{figure}[h!]
 \centering
-\vspace{-0.2in}
-\includegraphics[height=0.64\textwidth,width=1.0\textwidth,viewport=0 0 3500 1720,clip]{Figures/The_School_of_Athens-High,jpg}
+\vspace{-0.15in}
+%\includegraphics[height=0.71\textwidth,width=1.0\textwidth,viewport=0 0 1142 720,clip]{Figures/The_School_of_Athens-High.jpg}
+\includegraphics[height=0.71\textwidth,width=1.0\textwidth,viewport=0 0 915 720,clip]{Figures/The_School_of_Athens.jpg}
 \caption{\tiny{\textrm{The School of Athens}}}
 \label{The_School_of_Athens-High}
 \end{figure}
