@@ -35,7 +35,15 @@
 \usepackage{subfigure}           %图片跨页
 \usepackage[controls]{animate}	 %插入动画
 \usepackage{tikz}		 %绘图工具
-\usetikzlibrary{arrows,shapes,chains,shapes,arrows.meta,matrix}
+\usetikzlibrary{%
+    arrows,shapes,chains,shapes,arrows.meta,matrix,
+    graphs, decorations, 
+    decorations.markings, 
+    decorations.pathmorphing, 
+%    graphdrawing,                                       % requires lualatex
+    shapes.geometric, snakes
+}
+%\usegdlibrary{trees,force, layered}                     % requires lualatex
 \usepackage{adjustbox}                                   %绘制跨页流程图形
 \newsavebox{\mysavebox}                                  %绘制跨页流程图形
 \newlength{\myrest}                                      %绘制跨页流程图形
