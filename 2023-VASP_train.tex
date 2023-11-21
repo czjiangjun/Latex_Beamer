@@ -1368,11 +1368,13 @@ $\vec k$空间布点数为$9\times9\times9$，布点方案由\textrm{Monkhorst-P
 \end{figure}
 }
 \section{Si的能带结构}\label{Sec:Si-band}
-在引入能带理论的时候，已知自由电子的能量是$\vec k$的二次函数(开口向上的抛物线)，能量极小值位于$\vec k=0$~($\Gamma$点)，考虑到平移周期性，可以将能量函数平移到第一\textrm{Brillouin}区表示;~实际的周期体系由于周期性势函数的存在，能量在倒空间中的分布存在带隙\textrm{(band gap)}，也不一定关于$\Gamma$点对称，这是和自由电子的最大区别。因为周期势场内的电子既不是完全局域也不是完全的自由的。
+%在引入能带理论的时候，已知自由电子的能量是$\vec k$的二次函数(开口向上的抛物线)，能量极小值位于$\vec k=0$~($\Gamma$点)，考虑到平移周期性，可以将能量函数平移到第一\textrm{Brillouin}区表示;~实际的周期体系由于周期性势函数的存在，能量在倒空间中的分布存在带隙\textrm{(band gap)}，也不一定关于$\Gamma$点对称，这是和自由电子的最大区别。因为周期势场内的电子既不是完全局域也不是完全的自由的。
 
-本次练习，将学习计算半导体\textrm{Si}的能带结构，我们将看到单个的\textrm{Si}原子堆积成固体\textrm{Si}时，原子轨道如何构成能带。该练习也将说明\textrm{Kohn-Sham}方程的能量$\varepsilon_{\vec k}^n$的表示，除了能带记号$n$，还必须包括波矢量子数$\vec k$。
-\subsection{静态计算}
-首先根据\ref{Sec:bulk-Pt}的结构弛豫方法计算确定金刚石结构的\textrm{Si}晶胞为$a_0=5.47\mathrm{\AA}$。为了得到\textrm{Si}的电子结构，必须要完成两组连续计算:~即通过静态计算得到迭代收敛的基态电子密度，随后用获得的电子密度，按特定的对称性方向，直接计算(无需自洽迭代)得到能带。静态计算是获得电子基态信息的重要步骤，在结构弛豫后完成，也是材料电子学性质计算的起点。静态计算时，\textrm{INCAR}中设置参数\textit{ENCUT}=250;~\textrm{KPOINTS}的$\vec k$点数目设为$7\times7\times7$。金刚石结构的\textrm{Si}晶胞可以视为两套\textrm{FCC}结构错开($a$/4,$a$/4,$a$/4)排列，这里$a$即立方晶胞参数。所以\textrm{POSCAR}文件可以写成包含两个\textrm{Si}原子的\textrm{FCC}初基原胞\textrm{(primitive unit cell)}:如图\ref{Si_POSCAR}所示。
+%本次练习，将学习计算半导体\textrm{Si}的能带结构，我们将看到单个的\textrm{Si}原子堆积成固体\textrm{Si}时，原子轨道如何构成能带。该练习也将说明\textrm{Kohn-Sham}方程的能量$\varepsilon_{\vec k}^n$的表示，除了能带记号$n$，还必须包括波矢量子数$\vec k$。
+%\subsection{静态计算}
+首先根据\ref{Sec:bulk-Pt}的结构弛豫方法计算确定金刚石结构的\textrm{Si}晶胞为$a_0=5.47\mathrm{\AA}$。%为了得到\textrm{Si}的电子结构，必须要完成两组连续计算:~即通过静态计算得到迭代收敛的基态电子密度，随后用获得的电子密度，按特定的对称性方向，直接计算(无需自洽迭代)得到能带。
+静态计算是获得电子基态信息的重要步骤，在结构弛豫后完成，也是材料电子学性质计算的起点。
+静态计算时，\textrm{INCAR}中设置参数\textit{ENCUT}=250;~\textrm{KPOINTS}的$\vec k$点数目设为$7\times7\times7$。金刚石结构的\textrm{Si}晶胞可以视为两套\textrm{FCC}结构错开($a$/4,$a$/4,$a$/4)排列，这里$a$即立方晶胞参数。所以\textrm{POSCAR}文件可以写成包含两个\textrm{Si}原子的\textrm{FCC}初基原胞\textrm{(primitive unit cell)}%:如图\ref{Si_POSCAR}所示。
 \begin{figure}[h!]
 \centering
 \includegraphics[height=1.3in,viewport=0 0 370 150,clip]{Si_POSCAR.png}
