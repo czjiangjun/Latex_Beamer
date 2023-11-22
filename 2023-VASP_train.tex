@@ -62,11 +62,15 @@
 	\frametitle{\textrm{INCAR}参数}
 计算设置的参数，说明如下:~
 \begin{itemize}
-	\item \textit{ISMEAR}:~设定\textrm{Fermi~}能级的展宽方法，引入展宽为的是加速收敛
+	\item \textcolor{cyan}{\textit{ISMEAR}}:~设定\textrm{Fermi~}能级的展宽方法
+		\vskip 5pt
+		{\fontsize{7.2pt}{5.2pt}\selectfont{引入展宽为的是加速收敛
 		%本例中参数确定的展宽方法是\textrm{Gaussian}展宽，该方法适用于单原子和局域体系，避免出现\textrm{Fermi}面附近占据数为负值
-		。展宽值由参数\textit{SIGMA}确定
-	\item \textit{ISPIN}:~因为\textrm{Pt}原子的价电子态是$5\mathit{d}^96\mathit{s}^1$，含有未成对电子，因此计算需要考虑自旋极化，相比于非自旋极化的计算量加倍，即两种自旋(\textrm{spin-up/spin-down})下的电荷密度都要计算
-	\item \textit{ISYM}:~这是控制对称性的计算参数。本次计算中不考虑体系的点群对称性
+			。展宽值由参数\textcolor{cyan}{\textit{SIGMA}}确定}}
+	\item \textcolor{cyan}{\textit{ISPIN}}:~因为\textrm{Pt}原子的价电子态是$5\mathit{d}^96\mathit{s}^1$，含有未成对电子，因此计算需要考虑自旋极化
+	\vskip 5pt
+	{\fontsize{7.2pt}{5.2pt}\selectfont{相比于非自旋极化的计算量加倍，即两种自旋(\textrm{spin-up/spin-down})下的电荷密度都要计算}}
+	\item \textcolor{cyan}{\textit{ISYM}}:~控制对称性的计算参数%。本次计算中不考虑体系的点群对称性
 \end{itemize}
 }
 %\subsubsection{\rm{KPOINTS}}
@@ -167,7 +171,7 @@
 {
 	\frametitle{\textrm{OSZICAR}}
 %\textrm{OSZICAR}的第一列表示计算采用\textrm{Davidson}迭代收敛方法\\第二列为迭代次数%，本算例达到默认的收敛条件($\delta\mathrm{E}<1.0\times10^{-4}~\mathrm{eV}$)共迭代了42次。需要指出的是，
-\textrm{Pt}的原子构型为([\ch{Xe}]$4\mathit{f}^{14}5\mathit{d}^96\mathit{s}^1$)
+\textrm{Pt}的原子构型为([\textrm{Xe}]$4\mathit{f}^{14}5\mathit{d}^96\mathit{s}^1$)
 \vskip 5pt
 最后一行$\mathrm{E}_0$的值($-0.522\mathrm{eV}$)就是当前参数设置下，单个\textrm{Pt}原子在真空中的基态能量
 {\fontsize{8.5pt}{5.2pt}\selectfont{
@@ -553,6 +557,154 @@ $\vec k$空间布点数为$9\times9\times9$，布点方案由\textrm{Monkhorst-P
 {\fontsize{6.2pt}{5.2pt}\selectfont{$\vec k$-点收敛测试与\textit{ENCUT}收敛的情形类似}}%，结果如图\ref{Pt_FCC-kpoint-curve}所示。从图中不难看出，对于当前体系，$9\times9\times9$的网格点能保证足够精度。
 %需要指出的是，从文件\textrm{IBZKPT}中的$\vec k$点分布看，采用\textrm{Monkhorst-Pack}布点方案，将每个维度格点剖分成偶数时，$\vec k$空间的网格点分布会更均匀。
 }
+\section{{\rm Si}的能带结构}\label{Sec:Si-band}
+%在引入能带理论的时候，已知自由电子的能量是$\vec k$的二次函数(开口向上的抛物线)，能量极小值位于$\vec k=0$~($\Gamma$点)，考虑到平移周期性，可以将能量函数平移到第一\textrm{Brillouin}区表示;~实际的周期体系由于周期性势函数的存在，能量在倒空间中的分布存在带隙\textrm{(band gap)}，也不一定关于$\Gamma$点对称，这是和自由电子的最大区别。因为周期势场内的电子既不是完全局域也不是完全的自由的。
+
+%本次练习，将学习计算半导体\textrm{Si}的能带结构，我们将看到单个的\textrm{Si}原子堆积成固体\textrm{Si}时，原子轨道如何构成能带。该练习也将说明\textrm{Kohn-Sham}方程的能量$\varepsilon_{\vec k}^n$的表示，除了能带记号$n$，还必须包括波矢量子数$\vec k$。
+%\subsection{静态计算}
+\frame
+{
+	\frametitle{\textrm{Si}能带计算}
+%静态计算是获得电子基态信息的重要步骤，在
+静态计算:~确定基态电荷密度
+\vskip 5pt
+{\fontsize{8.5pt}{5.2pt}\selectfont{\textcolor{blue}{材料电子学性质计算的起点}}}
+%静态计算时，\textrm{INCAR}中设置参数\textit{ENCUT}=250;~\textrm{KPOINTS}的$\vec k$点数目设为$7\times7\times7$。金刚石结构的\textrm{Si}晶胞可以视为两套\textrm{FCC}结构错开($a$/4,$a$/4,$a$/4)排列，这里$a$即立方晶胞参数。所以\textrm{POSCAR}文件可以写成包含两个\textrm{Si}原子的\textrm{FCC}初基原胞\textrm{(primitive unit cell)}%:如图\ref{Si_POSCAR}所示。
+\begin{figure}[h!]
+\centering
+\includegraphics[height=1.2in,viewport=0 0 370 150,clip]{Si_POSCAR.png}
+%\includegraphics[height=1.8in,width=4.in,viewport=30 210 570 440,clip]{PAW_projector.eps}
+\caption{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{Si}的初基原胞的\textrm{POSCAR}文件.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Si_POSCAR}
+\end{figure}
+{\fontsize{7.2pt}{5.2pt}\selectfont{\textrm{Si}晶胞是金刚石结构，晶胞参数$a_0=5.47\mathrm{\AA}$由结构弛豫确定}}%为了得到\textrm{Si}的电子结构，必须要完成两组连续计算:~即通过静态计算得到迭代收敛的基态电子密度，随后用获得的电子密度，按特定的对称性方向，直接计算(无需自洽迭代)得到能带。
+%计算需要的\textrm{Si}原子的\textrm{POTCAR}文件可以从\textrm{VASP}的赝势库中知道并保存到当前目录，内容如图\ref{Si_POTCAR}。
+%\begin{figure}[h!]
+%\centering
+%\includegraphics[height=1.2in,viewport=0 0 400 200,clip]{Si_POTCAR.png}
+%%\includegraphics[height=1.8in,width=4.in,viewport=30 210 570 440,clip]{PAW_projector.eps}
+%\caption{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{Si}的\textrm{POTCAR}.文件(部分)}}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\label{Si_POTCAR}
+%\end{figure}
+\vskip 6pt
+{\fontsize{8.5pt}{5.2pt}\selectfont{静态计算完毕，可以从文件\textrm{OSZICAR}得到体系的基态能量，电荷密度则保存到文件\textrm{CHGCAR}中}}
+}
+%\subsection{Si的能带结构计算}
+\frame
+{
+	\frametitle{能带计算与$\vec k$点选择}
+%一般地，波矢$\vec k $的取值是三维空间(第一\textrm{Brillouin}区)中的矢量。在
+	%表\ref{Tabble-kpath}给出的是\textrm{FCC}结构的第一\textrm{Brillouin}区的高对称性$\vec k$点列表。
+\begin{minipage}{1.0\textwidth}
+\begin{table}[!h]
+\tabcolsep 0pt \vspace*{-12pt}
+\fontsize{7.2pt}{5.2pt}\selectfont{
+%\begin{center}
+\centering
+\caption{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{FCC}的第一\textrm{Brillouin}区中高对称性点的列表}}\label{Table-kpath}
+\def\temptablewidth{0.95\textwidth}
+\renewcommand\arraystretch{0.8} %表格宽度控制(普通表格宽度的两倍)
+\rule{\temptablewidth}{1pt}
+\begin{tabular*} {\temptablewidth}{@{\extracolsep{\fill}}c@{\extracolsep{\fill}}c@{\extracolsep{\fill}}c}
+%-------------------------------------------------------------------------------------------------------------------------
+	&\textrm{Reciprocal coordinates} &\textrm{Cartesian coordinates}\\
+	\textrm{Points}	&\textrm{(unit of $b_1,b_2,b_3$)} &\textrm{unit of $2\pi/a$} \\\hline
+	$\Gamma$ &0~~0~~0 &0~~0~~0 \\
+	X &1/2~~0~~1/2 &0~~1~~0 \\
+	W &3/4~~1/2~~1/4 &0~~1/2~~1 \\
+	L &1/2~~1/2~~1/2 &1/2~~1/2~~1/2 \\
+	$\Delta$ &1/4~~0~~1/4 &0~~1/2~~0 \\
+	$\Lambda$ &1/ 4~~1/4~~1/4 &1/4~~1/4~~1/4 \\
+\end{tabular*}
+\rule{\temptablewidth}{1pt}
+}
+%\end{center}
+\end{table}
+\end{minipage}
+\begin{figure}[h!]
+	\vskip -8pt
+\centering 
+\includegraphics[height=1.7in,viewport=0 0 680 680,clip]{VASP_train-FCC-BZ.png}
+%\includegraphics[height=1.8in,width=4.in,viewport=30 210 570 440,clip]{PAW_projector.eps}
+\caption{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{Brillouin}区为\textrm{FCC}时的空间结构和$\vec k$-点路径关系.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{VASP_train-FCC-BZ}
+\end{figure}
+	{\fontsize{7.5pt}{5.2pt}\selectfont{能带表示中的波矢$\vec k$选择:~沿不可约第一\textrm{Brillouin}区的高对称性点连线}}
+%因此，为了绘制平滑的能带曲线，需要在\textrm{KPOINTS}文件中指定足够多的$\vec k$点，能带计算时，只需针对这些指定的$\vec k$点计算各轨道的能量本征值。%如图\ref{Si_KPOINTS}所示:
+}
+
+\frame
+{
+	\frametitle{\textrm{Si}能带计算}
+
+%为了完成能带计算，主要是\textrm{CHGCAR}文件，其余文件改动极少。
+%\subsubsection{\rm{INCAR}}%如图\ref{Si_Band-INCAR}所示。这里
+%\subsubsection{\rm{KPOINTS}}
+{\fontsize{7.5pt}{5.2pt}\selectfont{由\textrm{Brillouin}区$\vec k$点连线，确定\textrm{KPOINTS}文件的$\vec k$点分布:}}\\%如图所示\ref{VASP_train-FCC-BZ}。
+{\fontsize{6.2pt}{5.2pt}\selectfont{沿$\vec k$点路线$\mathrm{W}-\mathrm{L}-\Gamma-\mathrm{X}-\mathrm{W}$共计80个$\vec k$点(20点/连线$\times$4组连线)}%的\textrm{KPOINTS}文件%，对应
+\begin{figure}[h!]
+	\vskip -5pt
+\centering 
+\includegraphics[width=3.6in,viewport=0 0 540 210,clip]{Si_KPOINTS.png}
+%\includegraphics[height=1.8in,width=4.in,viewport=30 210 570 440,clip]{PAW_projector.eps}
+\caption{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{Si}的能带计算时\textrm{KPOINTS}的设置.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Si_KPOINTS}
+\end{figure}
+%图\ref{Si_KPOINTS}给出的是\textrm{VASP}计算
+}
+\begin{figure}[h!] 
+	\vskip -5pt
+\centering
+\includegraphics[height=0.5in,viewport=0 0 330 80,clip]{Si_Band-INCAR.png}
+%\includegraphics[height=1.8in,width=4.in,viewport=30 210 570 440,clip]{PAW_projector.eps}
+\caption{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{Si}的能带计算中的\textrm{INCAR}设置.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Si_Band-INCAR}
+\end{figure}
+{\fontsize{7.5pt}{5.2pt}\selectfont{静态计算完毕，根据能带计算需要，修改\textrm{INCAR}文件参数:~设置\textcolor{cyan}{\textit{ICHARG}}=11，电荷密度来自静态计算\textrm{CHGCAR}，在计算中保持不变}}
+}
+
+\frame
+{
+	\frametitle{\textrm{Si}能带}
+%图\ref{Si_Band-DOS}给出绘制的能带图，可见按照当前的$\vec k$点路径选择，。
+\begin{figure}[h!]
+	\vskip -8pt
+\centering
+\includegraphics[width=3.5in,viewport=0 10 920 610,clip]{Si_Band-DOS.png}
+%\includegraphics[height=1.8in,width=4.in,viewport=30 210 570 440,clip]{PAW_projector.eps}
+\caption{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{Si}的能带和相应的态密度图，从能带图看出\textrm{Si}是间接带隙半导体.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Si_Band-DOS}
+\end{figure}
+{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{Si}是%间接带隙
+半导体，带隙$E_g=0.61\textrm{eV}$%是$\Gamma$点和$X$点之间的带隙值，同时也是图中所有$\vec k$点之间最小的能量差。
+~(该值仅为实验测得带隙的$1/2$，因\textrm{DFT}先天不足，低估带隙)}}
+%不过除了对带隙的低估，\textrm{DFT}计算的色散关系(能量在倒空间分布关系)是完全正确的，比如\textrm{Fermi}面附近有四个价带，四个导带，能量$\varepsilon_{\vec k}^n$随$\vec k$空间的变化逐渐改变，因此\textrm{DFT}理论的计算定性是完全正确的。实际上，其他物理量(比如波函数和电子密度)，也和能量本征值有类似的倒空间分布关系。表明这样的$\vec k$点采样是合理的，能够表现物理量在不可约\textrm{Brillouin}区的定量变化。
+}
+%\subsubsection{\rm{能带中的本征值}}
+\frame
+{
+	\frametitle{\textrm{Si}能带与本征值}
+%因为能带计算是非自洽迭代计算，计算出来能量本征值$\varepsilon_{\vec k}^n$写入\textrm{EIGENVAL}文件中，用于绘制能带图。如图\ref{Si_Band-EIGENVAL}所示
+	{\fontsize{7.2pt}{5.2pt}\selectfont{由\textrm{OUTCAR}可知\textrm{Fermi}能级为5.6980\textrm{eV}}}%)设为0~\textrm{eV}，可以得到$\vec k$点和能量本征值关系的数据文件\textrm{Si-band.dat}，内容如图\ref{Si_Band-data}所示
+\begin{figure}[h!]
+	\vskip -3pt
+\centering
+\includegraphics[width=4.0in,viewport=0 0 640 375,clip]{Si_Band-EIGENVAL.png}
+%\includegraphics[height=1.8in,width=4.in,viewport=30 210 570 440,clip]{PAW_projector.eps}
+\caption{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{VASP}计算\textrm{Si}的能量本征值文件\textrm{EiGENVAL}(部分).}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Si_Band-EIGENVAL}
+\end{figure}
+%文件\textrm{EIGENVAL}中第一行是倒晶格中的$\vec k$点位置，随后8行是对应的8个能带的能量本征值:~其中前4个(\textrm{No.}~1-4)能级表示价带，是0\textrm{K}下的占据态。从\textrm{EIGENVAL}文件中提取出各$\vec k$点的能量本征值$\varepsilon_{\vec k}^n$，并将\textrm{Fermi}能级设置为0~(可以用本讲义提供的脚本\textcolor{blue}{\textrm{vasp\_to\_image.py}}实现)。运行该脚本，将\textrm{Fermi}能级(
+
+%\begin{figure}[h!]
+%\centering
+%\includegraphics[height=1.2in,viewport=0 0 540 140,clip]{Si_Band-data.png}
+%%\includegraphics[height=1.8in,width=4.in,viewport=30 210 570 440,clip]{PAW_projector.eps}
+%\caption{\small \textrm{用于绘制\textrm{Si}能带结构的数据.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\label{Si_Band-data}
+%\end{figure}
+}
+
 \section{{\rm Pt}超晶胞计算}\label{Sec:bulk-Pt}
 %下面我们将学习由32个\textrm{Pt}原子构成的超晶胞(\textrm{FCC}晶胞按$2\times2\times2$堆积得到)的基本的物理性质计算:~重点掌握内聚能\textrm{(cohesive energy)}和空位形成能\textrm{(vavanvy formation energy)}的计算。为简明起见，前面介绍过的参数，今后不再作详细说明。
 %\subsection{Pt超晶胞的内聚能计算}
@@ -1367,143 +1519,44 @@ $\vec k$空间布点数为$9\times9\times9$，布点方案由\textrm{Monkhorst-P
 \label{Pt_surface_PDOS}
 \end{figure}
 }
-\section{Si的能带结构}\label{Sec:Si-band}
-%在引入能带理论的时候，已知自由电子的能量是$\vec k$的二次函数(开口向上的抛物线)，能量极小值位于$\vec k=0$~($\Gamma$点)，考虑到平移周期性，可以将能量函数平移到第一\textrm{Brillouin}区表示;~实际的周期体系由于周期性势函数的存在，能量在倒空间中的分布存在带隙\textrm{(band gap)}，也不一定关于$\Gamma$点对称，这是和自由电子的最大区别。因为周期势场内的电子既不是完全局域也不是完全的自由的。
-
-%本次练习，将学习计算半导体\textrm{Si}的能带结构，我们将看到单个的\textrm{Si}原子堆积成固体\textrm{Si}时，原子轨道如何构成能带。该练习也将说明\textrm{Kohn-Sham}方程的能量$\varepsilon_{\vec k}^n$的表示，除了能带记号$n$，还必须包括波矢量子数$\vec k$。
-%\subsection{静态计算}
-首先根据\ref{Sec:bulk-Pt}的结构弛豫方法计算确定金刚石结构的\textrm{Si}晶胞为$a_0=5.47\mathrm{\AA}$。%为了得到\textrm{Si}的电子结构，必须要完成两组连续计算:~即通过静态计算得到迭代收敛的基态电子密度，随后用获得的电子密度，按特定的对称性方向，直接计算(无需自洽迭代)得到能带。
-静态计算是获得电子基态信息的重要步骤，在结构弛豫后完成，也是材料电子学性质计算的起点。
-静态计算时，\textrm{INCAR}中设置参数\textit{ENCUT}=250;~\textrm{KPOINTS}的$\vec k$点数目设为$7\times7\times7$。金刚石结构的\textrm{Si}晶胞可以视为两套\textrm{FCC}结构错开($a$/4,$a$/4,$a$/4)排列，这里$a$即立方晶胞参数。所以\textrm{POSCAR}文件可以写成包含两个\textrm{Si}原子的\textrm{FCC}初基原胞\textrm{(primitive unit cell)}%:如图\ref{Si_POSCAR}所示。
-\begin{figure}[h!]
-\centering
-\includegraphics[height=1.3in,viewport=0 0 370 150,clip]{Si_POSCAR.png}
-%\includegraphics[height=1.8in,width=4.in,viewport=30 210 570 440,clip]{PAW_projector.eps}
-\caption{\small \textrm{Si}的初基原胞的\textrm{POSCAR}文件.}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{Si_POSCAR}
-\end{figure}
-
-计算需要的\textrm{Si}原子的\textrm{POTCAR}文件可以从\textrm{VASP}的赝势库中知道并保存到当前目录，内容如图\ref{Si_POTCAR}。
-\begin{figure}[h!]
-\centering
-\includegraphics[height=1.5in,viewport=0 0 400 200,clip]{Si_POTCAR.png}
-%\includegraphics[height=1.8in,width=4.in,viewport=30 210 570 440,clip]{PAW_projector.eps}
-\caption{\small \textrm{Si}的\textrm{POTCAR}.文件(部分)}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{Si_POTCAR}
-\end{figure}
-
-静态计算完毕，可以从文件\textrm{OSZICAR}得到体系的基态能量，电荷密度则保存到文件\textrm{CHGCAR}中。
-\subsection{Si的能带结构计算}
-为了完成能带计算，主要是\textrm{CHGCAR}文件，其余文件改动极少。
-\subsubsection{\rm{INCAR}}
-能带计算无需自洽迭代，\textrm{INCAR}文件中参数设置如图\ref{Si_Band-INCAR}所示。这里设置\textit{ICHARG}=11，要求电荷密度来自此前计算的\textrm{CHGCAR}，并在计算过程中保持不变。
-\begin{figure}[h!] 
-\centering
-\includegraphics[height=0.8in,viewport=0 0 330 80,clip]{Si_Band-INCAR.png}
-%\includegraphics[height=1.8in,width=4.in,viewport=30 210 570 440,clip]{PAW_projector.eps}
-\caption{\small \textrm{Si}的能带计算中的\textrm{INCAR}设置.}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{Si_Band-INCAR}
-\end{figure}
-\subsubsection{\rm{KPOINTS}}
-一般地，波矢$\vec k $的取值是三维空间(第一\textrm{Brillouin}区)中的矢量。在能带表示中的波矢$\vec k$选择为沿不可约第一\textrm{Brillouin}区的高对称性点连线。表\ref{Tabble-kpath}给出的是\textrm{FCC}结构的第一\textrm{Brillouin}区的高对称性$\vec k$点列表。
-
-\begin{table}[!h]
-\tabcolsep 0pt \vspace*{-5pt}
-\begin{minipage}{0.88\textwidth}
-%\begin{center}
-\centering
-\caption{\textrm{FCC}的第一\textrm{Brillouin}区中高对称性点的列表}\label{Table-kpath}
-\def\temptablewidth{0.85\textwidth}
-\renewcommand\arraystretch{0.8} %表格宽度控制(普通表格宽度的两倍)
-\rule{\temptablewidth}{1pt}
-\begin{tabular*} {\temptablewidth}{@{\extracolsep{\fill}}c@{\extracolsep{\fill}}c@{\extracolsep{\fill}}c}
-%-------------------------------------------------------------------------------------------------------------------------
-	&\textrm{Reciprocal coordinates} &\textrm{Cartesian coordinates}\\
-	\textrm{Points}	&\textrm{(unit of $b_1,b_2,b_3$)} &\textrm{unit of $2\pi/a$} \\\hline
-	$\Gamma$ &0~~0~~0 &0~~0~~0 \\
-	X &1/2~~0~~1/2 &0~~1~~0 \\
-	W &1/2~~1/4~~3/4 &1/2~~1~~0 \\
-	L &1/2~~1/2~~1/2 &1/2~~1/2~~1/2 \\
-	$\Delta$ &1/4~~0~~1/4 &0~~1/2~~0 \\
-	$\Lambda$ &1/ 4~~1/4~~1/4 &1/4~~1/4~~1/4 \\
-\end{tabular*}
-\rule{\temptablewidth}{1pt}
-\end{minipage}
-%\end{center}
-\end{table}
-因此，为了绘制平滑的能带曲线，需要在\textrm{KPOINTS}文件中指定足够多的$\vec k$点，能带计算时，只需针对这些指定的$\vec k$点计算各轨道的能量本征值。%如图\ref{Si_KPOINTS}所示:
-\begin{figure}[h!]
-\centering 
-\includegraphics[height=2.0in,viewport=0 0 540 210,clip]{Si_KPOINTS.png}
-%\includegraphics[height=1.8in,width=4.in,viewport=30 210 570 440,clip]{PAW_projector.eps}
-\caption{\small \textrm{Si}的能带计算时\textrm{KPOINTS}的设置.}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{Si_KPOINTS}
-\end{figure}
-图\ref{Si_KPOINTS}给出的是\textrm{VASP}计算沿$\vec k$点路线$\mathrm{W}-\mathrm{L}-\Gamma-\mathrm{X}-\mathrm{W}$共计80个$\vec k$点(20点/连线$\times$4组连线)的\textrm{KPOINTS}文件，对应\textrm{Brillouin}区的$\vec k$点连线如图所示\ref{VASP_train-FCC-BZ}。
-\begin{figure}[h!]
-\centering 
-\includegraphics[height=4.1in,viewport=0 0 680 680,clip]{VASP_train-FCC-BZ.png}
-%\includegraphics[height=1.8in,width=4.in,viewport=30 210 570 440,clip]{PAW_projector.eps}
-\caption{\small \textrm{Brillouin}区为\textrm{FCC}时的空间结构和$\vec k$-点路径关系.}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{VASP_train-FCC-BZ}
-\end{figure}
-
-\subsubsection{\rm{能带中的本征值}}
-因为能带计算是非自洽迭代计算，计算出来能量本征值$\varepsilon_{\vec k}^n$写入\textrm{EIGENVAL}文件中，用于绘制能带图。如图\ref{Si_Band-EIGENVAL}所示
-\begin{figure}[h!]
-\centering
-\includegraphics[height=2.8in,viewport=0 0 640 375,clip]{Si_Band-EIGENVAL.png}
-%\includegraphics[height=1.8in,width=4.in,viewport=30 210 570 440,clip]{PAW_projector.eps}
-\caption{\small \textrm{VASP}计算\textrm{Si}的能量本征值文件\textrm{EiGENVAL}(部分).}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{Si_Band-EIGENVAL}
-\end{figure}
-
-文件\textrm{EIGENVAL}中第一行是倒晶格中的$\vec k$点位置，随后8行是对应的8个能带的能量本征值:~其中前4个(\textrm{No.}~1-4)能级表示价带，是0\textrm{K}下的占据态。从\textrm{EIGENVAL}文件中提取出各$\vec k$点的能量本征值$\varepsilon_{\vec k}^n$，并将\textrm{Fermi}能级设置为0~(可以用本讲义提供的脚本\textcolor{blue}{\textrm{vasp\_to\_image.py}}实现)。运行该脚本，将\textrm{Fermi}能级(由\textrm{OUTCAR}可知\textrm{Fermi}能级为5.6980\textrm{eV})设为0~\textrm{eV}，可以得到$\vec k$点和能量本征值关系的数据文件\textrm{Si-band.dat}，内容如图\ref{Si_Band-data}所示
-
-\begin{figure}[h!]
-\centering
-\includegraphics[height=1.2in,viewport=0 0 540 140,clip]{Si_Band-data.png}
-%\includegraphics[height=1.8in,width=4.in,viewport=30 210 570 440,clip]{PAW_projector.eps}
-\caption{\small \textrm{用于绘制\textrm{Si}能带结构的数据.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{Si_Band-data}
-\end{figure}
-
-图\ref{Si_Band-DOS}给出绘制的能带图，可见按照当前的$\vec k$点路径选择，\textrm{Si}是间接带隙半导体，其带隙为$E_g=0.61\textrm{eV}$。这是$\Gamma$点和$X$点之间的带隙值，同时也是图中所有$\vec k$点之间最小的能量差。该值仅为实验测得的带隙的1/2，这是因为\textrm{DFT}本身存在先天不足，会低估能带的带隙。
-\begin{figure}[h!]
-\centering
-\includegraphics[height=3.5in,viewport=0 10 920 610,clip]{Si_Band-DOS.png}
-%\includegraphics[height=1.8in,width=4.in,viewport=30 210 570 440,clip]{PAW_projector.eps}
-\caption{\small \textrm{Si}的能带和相应的态密度图，从能带图看出\textrm{Si}是间接带隙半导体.}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{Si_Band-DOS}
-\end{figure}
-
-不过除了对带隙的低估，\textrm{DFT}计算的色散关系(能量在倒空间分布关系)是完全正确的，比如\textrm{Fermi}面附近有四个价带，四个导带，能量$\varepsilon_{\vec k}^n$随$\vec k$空间的变化逐渐改变，因此\textrm{DFT}理论的计算定性是完全正确的。实际上，其他物理量(比如波函数和电子密度)，也和能量本征值有类似的倒空间分布关系。表明这样的$\vec k$点采样是合理的，能够表现物理量在不可约\textrm{Brillouin}区的定量变化。
-
-\section{Si的声子计算}
-声子计算除了\textrm{VASP}软件，还需要用到开源声子计算程序\textrm{phonopy}\cite{Phonopy}。声子是描述晶格振动的，通过波矢$\vec q$在固体中传播，其特征频率$\omega(\vec q)$是量子化的。晶格中的原子有序排列，类似于弹簧串联的小球，一个(或多个)原子偏离平衡位置引起的振动，通过“弹簧”传递，会引起一系列的原子产生类似运动，根据晶格动力学理论就产生了力常数\textrm{(force constants)}、动力学矩阵\textrm{(dynamic matrix)}等物理量。根据这些物理量，我们就可以绘制出声子在第一\textrm{Brillouin}区的频率分布$\omega(\vec q)$在$\vec k$空间的色散关系，对于具体的固体研究，声子色散关系非常重要。这里我们学习以\textrm{Si}为例计算简单的声子方式。实验技术中，一般通过中子散射确定固体中的声子分布。
-\subsection{\rm{构建输入文件}}
-根据\textrm{Si}的初基原胞，首先构造\textrm{POSCAR}文件如图\ref{Si_phonon-POSCAR_primitve}所示:~
+\section{{\rm Si}的声子计算}
+\frame
+{
+	\frametitle{\textrm{Si}的声子计算:~初基原胞}
+声子描述的固体晶格振动，其特征频率$\omega(\vec q)$是量子化的%。晶格中的原子有序排列，类似于弹簧串联的小球，一个(或多个)原子偏离平衡位置引起的振动，通过“弹簧”传递，会引起一系列的原子产生类似运动，根据晶格动力学理论就产生了力常数\textrm{(force constants)}、动力学矩阵\textrm{(dynamic matrix)}等物理量。根据这些物理量，我们就可以绘制出声子在第一\textrm{Brillouin}区的频率分布$\omega(\vec q)$在$\vec k$空间的色散关系，对于具体的固体研究，声子色散关系非常重要。
+%这里我们学习以\textrm{Si}为例计算简单的声子方式。实验技术中，一般通过中子散射确定固体中的声子分布。
+%\subsection{\rm{构建输入文件}}
+%根据\textrm{Si}的初基原胞，首先构造\textrm{POSCAR}文件如图\ref{Si_phonon-POSCAR_primitve}所示:~
 \begin{figure}[h!]
 \centering
 \includegraphics[height=1.2in,viewport=0 0 520 160,clip]{Si_phonon-POSCAR_primtive.png}
 %\includegraphics[height=1.8in,width=4.in,viewport=30 210 570 440,clip]{PAW_projector.eps}
-\caption{\small \textrm{用于声子计算的\textrm{Si}的初基原胞的\textrm{POSCAR}文件.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\caption{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{用于声子计算的\textrm{Si}的初基原胞的\textrm{POSCAR}文件.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Si_phonon-POSCAR_primitve}
 \end{figure}
-
-在此基础上，通过\textrm{phonopy}程序产生若干超晶胞(如$2\times2\times2$超晶胞)，%命令如下:~\\
+%在此基础上，
+{\fontsize{7.2pt}{5.2pt}\selectfont{声子计算除了\textrm{VASP}软件，还要用到开源声子计算程序\textrm{phonopy}\upcite{Phonopy}:\\
+\vskip 3pt
+	通过\textrm{phonopy}程序生成若干超晶胞(如$2\times2\times2$超晶胞)，%命令如下:~\\
 %\textcolor{blue}{\textrm{phonopy~-d~--dim=~\`\`~2~2~2~\'\'}}\\
 %该命令
-将产生三组文件，包括\textrm{SPOSCAR}，\textrm{DISP}和\textrm{POSCAR}-\{\textrm{number}\}。其中\textrm{SPOSCAR}保存的是理想超晶胞结构，\textrm{DISP}记录的是各方向的原子偏离信息，而\textrm{POSCAR}-\{\textrm{number}\}是超晶胞中原子发生偏离后的位置。将初基原胞结构文件\textrm{POSCAR}重命名为\textrm{POSCAR1}，而\textrm{SPOSCAR}重命名为\textrm{POSCAR}:~\\
-\textcolor{magenta}{\textrm{mv~POSCAR~POSCAR1}}\\
-\textcolor{magenta}{\textrm{mv~SPOSCAR~POSCAR}}
+将产生三组文件，包括\textrm{SPOSCAR}，\textrm{DISP}和\textrm{POSCAR}-\{\textrm{number}\}}\\
+{\fontsize{6.2pt}{5.2pt}\selectfont{其中\textrm{SPOSCAR}保存理想超晶胞结构，\textrm{DISP}记录各方向的原子偏离信息，而\textrm{POSCAR}-\{\textrm{number}\}是超晶胞中原子发生偏离后的位置}}
+\vskip 4pt
+将初基原胞\textrm{POSCAR}重命名为\textrm{POSCAR1}，而\textrm{SPOSCAR}重命名为\textrm{POSCAR}}%:~\\
+%\textcolor{magenta}{\textrm{mv~POSCAR~POSCAR1}}\\
+%\textcolor{magenta}{\textrm{mv~SPOSCAR~POSCAR}}
+}
 
-为了\textrm{VASP}计算，要求有如下的\textrm{INCAR}文件和\textrm{KPOINTS}文件，分别如图\ref{Si_phonon-INCAR},\ref{Si_phonon-KPOINTS}所示:~
+\frame
+{
+	\frametitle{\textrm{Si}的声子计算:~输入文件}
+	{\fontsize{7.2pt}{5.2pt}\selectfont{准备\textrm{VASP}计算需要的输入文件，开启静态计算}}%\textrm{INCAR}文件和\textrm{KPOINTS}文件，分别如图\ref{Si_phonon-INCAR},\ref{Si_phonon-KPOINTS}所示:~
 \begin{figure}[h!]
 \centering
-\includegraphics[height=0.9in,viewport=0 0 640 110,clip]{Si_phonon-INCAR.png}
+\includegraphics[width=4.0in,viewport=0 0 640 110,clip]{Si_phonon-INCAR.png}
 %\includegraphics[height=1.8in,width=4.in,viewport=30 210 570 440,clip]{PAW_projector.eps}
-\caption{\small \textrm{用于声子计算的\textrm{Si}的输入参数控制\textrm{INCAR}文件.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\caption{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{用于声子计算的\textrm{Si}的输入参数控制\textrm{INCAR}文件.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Si_phonon-INCAR}
 \end{figure}
 \begin{figure}[h!]
@@ -1511,77 +1564,115 @@ $\vec k$空间布点数为$9\times9\times9$，布点方案由\textrm{Monkhorst-P
 \vskip -20pt
 \includegraphics[height=0.9in,viewport=0 20 160 130,clip]{Si_phonon-KPOINTS.png}
 %\includegraphics[height=1.8in,width=4.in,viewport=30 210 570 440,clip]{PAW_projector.eps}
-\caption{\small \textrm{用于声子计算的\textrm{Si}的$\vec k$空间布点\textrm{KPOINTS}文件.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\caption{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{用于声子计算的\textrm{Si}的$\vec k$空间布点\textrm{KPOINTS}文件.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Si_phonon-KPOINTS}
 \end{figure}
-根据上述输入文件，可以开启一个标准的\textrm{VASP}静态计算。
-\subsection{声子计算}
-\textrm{VASP}计算结束，将会产生\textrm{DYNMAT}文件。用以下命令可由该文件提取出力常数数据:\\
+%根据上述输入文件，可以。
+{\fontsize{7.2pt}{5.2pt}\selectfont{\textrm{VASP}计算结束，将会产生\textcolor{blue}{\textrm{DYNMAT}}文件}}
+}
+
+\frame
+{
+	\frametitle{\textrm{Si}的声子计算:~\textrm{Phonopy}处理}
+%\subsection{声子计算}
+%用以下命令可由该文件
+	{\fontsize{8.0pt}{5.2pt}\selectfont{
+	\begin{enumerate}
+		\item 提取出力常数数据:\\
 \textcolor{blue}{\textrm{phonopy~--fc~vasprun.xml}}\\
-将会生成\textrm{FORCE\_CONSTANTS}文件，下一步\textrm{phonopy}的输入文件\textrm{INPHON}文件中会涉及该文件。
-\subsubsection{\rm{INPHON}}
-\textrm{INPHON}内容如图\ref{Si_phonon-INPHON}所示:~
+{\fontsize{6.2pt}{5.2pt}\selectfont{会生成\textcolor{blue}{\textrm{FORCE\_CONSTANTS}}文件}}
+%下一步\textrm{phonopy}的输入文件\textrm{INPHON}文件中会涉及该文件。
+%\subsubsection{\rm{INPHON}}
+\item 准备\textrm{Phonopy}控制文件\textcolor{blue}{\textrm{INPHON}}%内容如图\ref{Si_phonon-INPHON}所示:~
 \begin{figure}[h!]
 \centering
-\includegraphics[height=1.0in,viewport=0 0 810 140,clip]{Si_phonon-INPHON.png}
+\includegraphics[width=3.8in,viewport=0 0 810 140,clip]{Si_phonon-INPHON.png}
 %\includegraphics[height=1.8in,width=4.in,viewport=30 210 570 440,clip]{PAW_projector.eps}
-\caption{\small \textrm{用于声子计算的\textrm{Si}的控制\textrm{INPHON}文件.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\caption{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{用于声子计算的\textrm{Si}的控制\textrm{INPHON}文件.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Si_phonon-INPHON}
 \end{figure}
-
-将\textrm{POSCAR}重命名为\textrm{POSCAR}$2\times2\times2$，\textrm{POSCAR1}重命名为\textrm{POSCAR}，执行声子计算:~\\
+\item 将\textrm{POSCAR}重命名为\textrm{POSCAR}$2\times2\times2$，\textrm{POSCAR1}重命名为\textrm{POSCAR}
+\item 执行声子计算:~\\
 \textcolor{blue}{\textrm{phonopy~-p}}\\
-该计算会产生绘制声子色散关系图所需的文件\textrm{band.yaml}，为了绘制声子色散图，执行以下命令:~\\
+{\fontsize{6.2pt}{5.2pt}\selectfont{会产生绘制声子色散关系图所需的文件\textcolor{blue}{\textrm{band.yaml}}}}
+\item 执行以下命令:~\\
 \textcolor{blue}{\textrm{bandplot~band.yaml}}\\
-注意\textrm{bandplot}命令与\textrm{phonopy}在同一个执行目录\textrm{bin}下，运行后会产生弹出式窗口如图\ref{Fig:Si_pop-out_screen}所示。最后，\textrm{Si}在$2\times2\times2$超晶胞的声子色散分布如图\ref{Fig:Si_phonon}所示，为了表明计算收敛的必要性，$3\times3\times3$和$4\times4\times4$超晶胞的结果也和$2\times2\times2$的结果列在同一张图中，结果表现出了更低的声学支和更高的光学支振动。
+{\fontsize{6.2pt}{5.2pt}\selectfont{绘制声子色散关系图}}
+	\end{enumerate}
+}}
+}
+%注意\textrm{bandplot}命令与\textrm{phonopy}在同一个执行目录\textrm{bin}下，运行后会产生弹出式窗口如图\ref{Fig:Si_pop-out_screen}所示。最后，\textrm{Si}在$2\times2\times2$超晶胞的声子色散分布如图\ref{Fig:Si_phonon}所示，。
+\frame
+{
+	\frametitle{\textrm{Si}的声子谱}
 \begin{figure}[h!]
 \centering
-\includegraphics[height=3.5in,viewport=0 0 1050 650,clip]{Si_pop-out_screen.png}
+\includegraphics[width=4.0in,viewport=0 0 1050 650,clip]{Si_pop-out_screen.png}
 %\includegraphics[height=1.8in,width=4.in,viewport=30 210 570 440,clip]{PAW_projector.eps}
-\caption{\small \textrm{运行\textrm{bandplot}时的弹出界面.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\caption{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{运行\textrm{bandplot}时的弹出界面.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Fig:Si_pop-out_screen}
 \end{figure}
+}
 
+\frame
+{
+	\frametitle{\textrm{Si}的声子谱}
+%为了表明计算收敛的必要性，$3\times3\times3$和$4\times4\times4$超晶胞的结果也和$2\times2\times2$的结果列在同一张图中，
+%结果表现出了更低的声学支和更高的光学支振动
 \begin{figure}[h!]
+	\vskip -12pt
 \centering
-\includegraphics[height=3.5in,viewport=0 0 780 600,clip]{Si_phonon}
+\includegraphics[height=2.4in,viewport=0 0 780 600,clip]{Si_phonon}
 %\includegraphics[height=1.8in,width=4.in,viewport=30 210 570 440,clip]{PAW_projector.eps}
-\caption{\small 不同的超晶胞计算的\textrm{Si}的声子谱曲线.}%(与文献\cite{EPJB33-47_2003}图1对比)
+\caption{\fontsize{6.2pt}{5.2pt}\selectfont{不同的超晶胞计算的\textrm{Si}的声子谱曲线.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Fig:Si_phonon}
 \end{figure}
-
-有了这些声子计算的基本数据，就可以通过计算从理论上估计晶体的熵、自由能和热膨胀等热力学物性数据。当然，这些内容已经超出本讲义的范围，兹不赘言。
+{\fontsize{7.2pt}{5.2pt}\selectfont{有了声子谱的基本数据，就可以估计晶体的熵、自由能和热膨胀等热力学数据}}%。当然，这些内容已经超出本讲义的范围，兹不赘言。
+}
 
 \section{其他计算}
-关于\textrm{VASP}计算材料的\textrm{LDA}+\textit{U}~计算和光学介电函数、\textit{GW}校正的计算参数设置和相关内容，有兴趣的读者可以参阅:~\url{https://www.vasp.at/wiki/index.php/Category:Examples}.这些计算是在结构弛豫之后，完成静态\textrm{DFT}计算基础上的物理性质模拟。
-\subsection{LDA+$U$计算}
-计算反铁磁(\textrm{antiferromagnetic})的\ch{NiO}的\textrm{LSDA+$U$}。其中\textrm{POSCAR}文件和$\vec k$空间布点方案($4\times4\times4$网格点)，如图\ref{NiO-LDA_U-Input}所示:~
+%这些计算是在结构弛豫之后，完成静态\textrm{DFT}计算基础上的物理性质模拟。
+%\subsection{LDA+$U$计算}
+\frame
+{
+	\frametitle{$\mathrm{DFT}+U$计算:~输入文件}
+反铁磁(\textrm{antiferromagnetic})的\textrm{NiO}的\textrm{LSDA+$U$}计算%其中\textrm{POSCAR}文件和$\vec k$空间布点方案($4\times4\times4$网格点)，如图\ref{NiO-LDA_U-Input}所示:~
 \begin{figure}[h!]
 \centering
 \includegraphics[height=2.0in,viewport=0 5 210 260,clip]{NiO-LDA_U-POSCAR.png}
-\includegraphics[height=0.8in,viewport=0 0 100 110,clip]{NiO-LDA_U-KPOINTS.png}
+\includegraphics[height=1.0in,viewport=0 0 100 110,clip]{NiO-LDA_U-KPOINTS.png}
 %\includegraphics[height=1.8in,width=4.in,viewport=30 210 570 440,clip]{PAW_projector.eps}
-\caption{\small \textrm{用于\textrm{LDA}+$U$的反铁磁\ch{NiO}的结构\textrm{POSCAR}文件(左)和$\vec k$空间布点\textrm{KPOINTS}(右).}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\caption{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{用于\textrm{LDA}+$U$的反铁磁\ch{NiO}的结构\textrm{POSCAR}文件(左)和$\vec k$空间布点\textrm{KPOINTS}(右).}}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{NiO-LDA_U-Input}
 \end{figure}
+}
 
-\textrm{INCAR}中的输入控制参数如图\ref{NiO-LDA_U-INCAR}所示。因为是反铁磁计算，初始的原子磁矩(共线磁矩)控制两个\ch{Ni}原子(原子构型为:~\textrm{[Ar]3\textit{d}~$^8$})的磁矩相反(2.0,~-2.0)，\ch{O}原子的净磁矩为0。考虑\textrm{LDA}+$U$的类型为\textrm{Dudarev}近似(\textit{LDAUTYPE}=2)。参数\textit{LDAUL}指定对应元素的角动量\textit{l}~需要考虑轨道的在位相互作用，$-1$表示该元素无需考虑在位相互作用。\textit{LDAUU}和\textit{LDAUJ}是对应的$U$和$J$的数值(单位~\textrm{eV})。为了考察不同角动量对磁性的贡献，对电荷密度按轨道角动量分解，因此设\textit{LORBIT}=11。考虑到反铁磁计算对电荷密度精度混合精度要求较高，因此设置电荷密度混合参数\textit{AMIX}，\textit{BMIX}，\textit{AMIX\_MAG}和\textit{BMIX\_MAG}以及\textit{LMAXMIN}等参数。
-
+\frame
+{
+	\frametitle{$\mathrm{DFT}+U$计算:~输入文件}
 \begin{figure}[h!]
+	\vskip -7pt
 \centering
-\includegraphics[height=3.0in,viewport=0 0 690 615,clip]{NiO-LDA_U-INCAR.png}
+\includegraphics[height=2.6in,viewport=0 0 690 615,clip]{NiO-LDA_U-INCAR.png}
 %\includegraphics[height=1.8in,width=4.in,viewport=30 210 570 440,clip]{PAW_projector.eps}
-\caption{\small \textrm{用于\textrm{LDA}+$U$的反铁磁\ch{NiO}计算的控制文件\textrm{INCAR}文件.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\caption{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{用于\textrm{LDA}+$U$的反铁磁\ch{NiO}计算的控制文件\textrm{INCAR}文件.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{NiO-LDA_U-INCAR}
 \end{figure}
+%\textrm{INCAR}中的输入控制参数如图\ref{NiO-LDA_U-INCAR}所示。因为是反铁磁计算，初始的原子磁矩(共线磁矩)控制两个\ch{Ni}原子(原子构型为:~\textrm{[Ar]3\textit{d}~$^8$})的磁矩相反(2.0,~-2.0)，\ch{O}原子的净磁矩为0。考虑\textrm{LDA}+$U$的类型为\textrm{Dudarev}近似(\textit{LDAUTYPE}=2)。参数\textit{LDAUL}指定对应元素的角动量\textit{l}~需要考虑轨道的在位相互作用，$-1$表示该元素无需考虑在位相互作用。\textit{LDAUU}和\textit{LDAUJ}是对应的$U$和$J$的数值(单位~\textrm{eV})。为了考察不同角动量对磁性的贡献，对电荷密度按轨道角动量分解，因此设\textit{LORBIT}=11。考虑到反铁磁计算对电荷密度精度混合精度要求较高，因此设置电荷密度混合参数\textit{AMIX}，\textit{BMIX}，\textit{AMIX\_MAG}和\textit{BMIX\_MAG}以及\textit{LMAXMIN}等参数。
+}
 
-在\textrm{VASP}中，加$U$的方式有三种:~
+\frame
+{
+	\frametitle{$\mathrm{DFT}+U$计算:~计算模式}
+{\fontsize{8.2pt}{5.2pt}\selectfont{
+	\textrm{VASP}中，$\mathrm{DFT}+U$的方式有三种:}}~
+{\fontsize{7.2pt}{5.2pt}\selectfont{
 \begin{itemize}
-	\item \textit{LDAUTYPE}=1:~\textrm{Liechtenstein}等引入的旋转不变\textrm{LDA}+$U$方法\cite{PRB52-R5467_1995}:~形式为:
+	\item \textcolor{cyan}{\textit{LDAUTYPE}}=1:~\textrm{Liechtenstein}等引入的旋转不变\textrm{DFT}+$U$方法\upcite{PRB52-R5467_1995}:
 		\begin{displaymath}
 			E_{\mathrm{HF}}=\dfrac12\sum_{\gamma}(U_{\gamma_1\gamma_3\gamma_2\gamma_4}-U_{\gamma_1\gamma_3\gamma_4\gamma_2})\hat{n}_{\gamma_1\gamma_2}\hat{n}_{\gamma_3\gamma_4}
 		\end{displaymath}
-		其中在位占据数由\textrm{PAW}方法确定:~
+	{\fontsize{6.2pt}{5.2pt}\selectfont{其中在位占据数由\textrm{PAW}方法确定:~
 		\begin{displaymath}
 			\hat{n}_{\gamma_1\gamma_2}=\langle\Psi^{s_2}|m_2\rangle\langle m_1|\Psi^{s_1}\rangle
 		\end{displaymath}
@@ -1589,88 +1680,125 @@ $\vec k$空间布点数为$9\times9\times9$，布点方案由\textrm{Monkhorst-P
 		\begin{displaymath}
 			U_{\gamma_1\gamma_3\gamma_2\gamma_4}=\langle m_1m_3|\dfrac1{|\vec r-\vec r^{\prime}|}|m_2m_4\rangle]\delta_{s_1s_2}\delta_{s_3s_4}
 		\end{displaymath}
-		这里$|m\rangle$表示球谐函数。
-	\item \textit{LDAUTYPE}=2:~\textrm{Dudarev}等引入的简化旋转不变\textrm{LDA}+$U$方法\cite{PRB57-1505_1998}
+	这里$|m\rangle$表示球谐函数}}
+\item \textcolor{cyan}{\textit{LDAUTYPE}}=2:~\textrm{Dudarev}等引入的简化旋转不变\textrm{LDA}+$U$方法\upcite{PRB57-1505_1998}:
 		\begin{displaymath}
 			E_{\mathrm{LSDA+}U}=E_{\mathrm{LSDA}}+\dfrac{U-J}2+\sum_{\sigma}\bigg[\bigg(\sum_{m_1}n_{m_1,m_1}^{\sigma}\bigg)-\bigg(\sum_{m_1,m_2}n_{m_1,m_2}^{\sigma}n_{m_2,m_1}^{\sigma}\bigg)\bigg]
 		\end{displaymath}
-	\item \textit{LDAUTYPE}=4:~与\textit{LDAUTYPE}=1相似，不过用\textrm{LDA}+$U$代替\textrm{LSDA}+$U$(不再考虑\textrm{LSDA}的自旋分裂)，因此计算表达式为:~
+	\item \textcolor{cyan}{\textit{LDAUTYPE}}=4:~与\textit{LDAUTYPE}=1相似:\\
+		{\fontsize{6.2pt}{5.2pt}\selectfont{用\textrm{LDA}+$U$代替\textrm{LSDA}+$U$(不再考虑\textrm{LSDA}的自旋分裂)}}
 		\begin{displaymath}
 			E_{\mathrm{dc}}(\hat n)=\dfrac{U}2\hat{n}_{\mathrm{tot}}(\hat{n}_{\mathrm{tot}}-1)-\dfrac{J}2\sum_{\sigma}\hat{n}_{\mathrm{tot}}^{\sigma}(\hat{n}_{\mathrm{tot}}^{\sigma}-1)
 		\end{displaymath}
 \end{itemize}
+}}
+}
 
-对比考虑不加$U$时(即$U=0,J=0$)时的\ch{Ni}原子的$d$电子在位占据数(如图\ref{NiO-LDA-onsite_matrix}所示)，\textit{d}~电子分波投影标记在图中已经标出。
+\frame%[allowframebreaks]
+{
+	\frametitle{$\mathrm{DFT}+U$计算:~$U$值对$d$电子占据数的影响}
+%对比考虑不加$U$时(即$U=0,J=0$)时的\ch{Ni}原子的$d$电子在位占据数(如图\ref{NiO-LDA-onsite_matrix}所示)，\textit{d}~电子分波投影标记在图中已经标出。
 \begin{figure}[h!]
+	\vskip -12pt
 \centering
-\includegraphics[height=3.0in,viewport=0 0 700 515,clip]{NiO-LDA-onsit_matrix.png}
+\includegraphics[height=2.5in,viewport=0 0 700 515,clip]{NiO-LDA-onsit_matrix.png}
 %\includegraphics[height=1.8in,width=4.in,viewport=30 210 570 440,clip]{PAW_projector.eps}
-\caption{\small \textrm{不加$U$的反铁磁\ch{NiO}计算的\ch{Ni}的$d$电子在位原子占据数.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\caption{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{不加$U$的反铁磁\textrm{NiO}计算的\textrm{Ni}的$d$电子在位原子占据数.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{NiO-LDA-onsite_matrix}
 \end{figure}
-
-加$U$计算得到的\ch{Ni}原子的$d$电子在位占据数如图\ref{NiO-LDA_U-onsite_matrix}所示，，可以看到$U$值对$d$电子数的影响。
+}
+\frame%[allowframebreaks]
+{
+	\frametitle{$\mathrm{DFT}+U$计算:~$U$值对$d$电子占据数的影响}
+%加$U$计算得到的\ch{Ni}原子的$d$电子在位占据数如图\ref{NiO-LDA_U-onsite_matrix}所示，，可以看到$U$值对$d$电子数的影响。
 \begin{figure}[h!]
+	\vskip -12pt
 \centering
-\includegraphics[height=3.0in,viewport=0 0 700 525,clip]{NiO-LDA_U-onsit_matrix.png}
+\includegraphics[height=2.5in,viewport=0 0 700 525,clip]{NiO-LDA_U-onsit_matrix.png}
 %\includegraphics[height=1.8in,width=4.in,viewport=30 210 570 440,clip]{PAW_projector.eps}
-\caption{\small \textrm{用于\textrm{LDA}+$U$的反铁磁\ch{NiO}计算的\ch{Ni}的$d$电子在位原子占据数.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\caption{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{用于\textrm{LDA}+$U$的反铁磁\textrm{NiO}计算的\textrm{Ni}的$d$电子在位原子占据数.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{NiO-LDA_U-onsite_matrix}
 \end{figure}
+}
 
-类似地，与轨道$l$相关的局域磁矩变化如图\ref{NiO-LDA_U-magnetization}所示:
+\frame%[allowframebreaks]
+{
+	\frametitle{$\mathrm{DFT}+U$计算:~$U$值对轨道$l$局域磁矩的影响}
+%类似地，与轨道$l$相关的局域磁矩变化如图\ref{NiO-LDA_U-magnetization}所示:
 \begin{figure}[h!]
+%	\vskip -12pt
 \centering
-\includegraphics[height=2.5in,viewport=0 0 410 415,clip]{NiO-LDA-magnetization.png}
-\includegraphics[height=2.5in,viewport=0 0 410 415,clip]{NiO-LDA_U-magnetization.png}
+\includegraphics[height=2.0in,viewport=0 0 410 415,clip]{NiO-LDA-magnetization.png}
+\includegraphics[height=2.0in,viewport=0 0 410 415,clip]{NiO-LDA_U-magnetization.png}
 %\includegraphics[height=1.8in,width=4.in,viewport=30 210 570 440,clip]{PAW_projector.eps}
-\caption{\small \textrm{加$U$对反铁磁\ch{NiO}计算的\ch{Ni}的$d$电子数和局域磁矩的影响(左:~未考虑加$U$;~右:~考虑加$U$).}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\caption{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{加$U$对反铁磁\textrm{NiO}计算的\textrm{Ni}的$d$电子数和局域磁矩的影响(左:~未考虑加$U$;~右:~考虑加$U$).}}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{NiO-LDA_U-magnetization}
 \end{figure}
+}
 
-考虑\textrm{LDA}+$U$的态密度和分波态密度如图\ref{NiO-LDA_U-DOS}所示:
+\frame%[allowframebreaks]
+{
+	\frametitle{$\mathrm{DFT}+U$计算:~$U$值对态密度的影响}
+%考虑\textrm{LDA}+$U$的态密度和分波态密度如图\ref{NiO-LDA_U-DOS}所示:
 \begin{figure}[h!]
 \centering
-\includegraphics[height=2.0in,viewport=0 0 2010 680,clip]{NiO-LDA_U-DOS.png}
+\includegraphics[width=4.0in,viewport=0 0 2010 680,clip]{NiO-LDA_U-DOS.png}
 %\includegraphics[height=1.8in,width=4.in,viewport=30 210 570 440,clip]{PAW_projector.eps}
-\caption{\small \textrm{反铁磁\ch{NiO}计算的\ch{Ni}的$d$电子分态密度受$U$的影响(左:~未考虑加$U$;~右:~考虑加$U$).}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\caption{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{反铁磁\ch{NiO}计算的\ch{Ni}的$d$电子分态密度受$U$的影响(左:~未考虑加$U$;~右:~考虑加$U$).}}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{NiO-LDA_U-DOS}
 \end{figure}
+}
 
-考虑\textrm{LDA}+$U$对总能的影响，如图\ref{NiO-LDA_U-tot}所示:~
+\frame%[allowframebreaks]
+{
+	\frametitle{$\mathrm{DFT}+U$计算:~$U$值对总能的影响}
+%考虑\textrm{LDA}+$U$对总能的影响，如图\ref{NiO-LDA_U-tot}所示:~
 \begin{figure}[h!]
+	\vskip -13pt
 \centering
-\includegraphics[height=1.3in,viewport=6.5 0 836 235,clip]{NiO-LDA-OSZICAR.png}
-\includegraphics[height=1.5in,viewport=0 0 830 270,clip]{NiO-LDA_U-OSZICAR.png}
+\includegraphics[height=1.13in,viewport=6.5 0 836 235,clip]{NiO-LDA-OSZICAR.png}
+\includegraphics[height=1.3in,viewport=0 0 830 270,clip]{NiO-LDA_U-OSZICAR.png}
 %\includegraphics[height=1.8in,width=4.in,viewport=30 210 570 440,clip]{PAW_projector.eps}
-\caption{\small \textrm{加$U$对反铁磁\ch{NiO}计算的\ch{Ni}的$d$对基态总能的影响(上:~未考虑加$U$;~下:~考虑加$U$).}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\caption{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{加$U$对反铁磁\ch{NiO}计算的\ch{Ni}的$d$对基态总能的影响(上:~未考虑加$U$;~下:~考虑加$U$).}}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{NiO-LDA_U-tot}
 \end{figure}
-不难看出，对于\textrm{Dudarev}近似，只要$(U-J)>0$，则考虑\textrm{LDA}+$U$的基态总能总会大于不考虑加$U$的情况。因此，如果两次计算中$(U-J)$的数值不等，不能将总能简单对比。
-\subsection{光学介电函数的计算}
-本部分我们将学习如何利用\textrm{VASP}计算\ch{SiC}的光学介电函数，关于\textrm{VASP}中光学介电函数计算主要参见文献\upcite{PRB73-045112_2006}。
+%不难看出，
+{\fontsize{6.2pt}{5.2pt}\selectfont{对于\textrm{Dudarev}近似，只要$(U-J)>0$，则考虑\textrm{LDA}+$U$的基态总能总会大于不考虑加$U$的情况
+\vskip 3pt
+%。因此，
+\textcolor{purple}{如果两次计算中$(U-J)$的数值不等，不能将总能简单对比}}}
+}
 
-计算对象\ch{SiC}的结构和$\vec k$空间布点分别如如图\ref{SiC-optic-Input}所示:
+\frame
+{
+	\frametitle{\textrm{SiC}的光学介电函数计算:~输入文件}
+%\subsection{光学介电函数的计算}
+%本部分我们将学习如何利用\textrm{VASP}计算\ch{SiC}的光学介电函数，关于
+\textrm{VASP}中光学介电函数计算\upcite{PRB73-045112_2006}包括:
+\begin{itemize}
+	\item 静态介电函数(\textrm{\textit{LEPSILON}=.TURE.})
+	\item 动态(频率相关)介电函数(\textrm{\textit{LOPITC}=.TURE.})%两类，这里将分别介绍。
+\end{itemize}
+%	主要参见文献。
+%计算对象\ch{SiC}的结构和$\vec k$空间布点分别如如图\ref{SiC-optic-Input}所示:
 \begin{figure}[h!]
 \centering
 \includegraphics[height=1.5in,viewport=0 15 186 220,clip]{SiC-optic-POSCAR.png}
-\includegraphics[height=0.8in,viewport=0 0 100 110,clip]{SiC-epsilon-KPOINTS.png}
+\includegraphics[height=1.0in,viewport=0 0 100 110,clip]{SiC-epsilon-KPOINTS.png}
 %\includegraphics[height=1.8in,width=4.in,viewport=30 210 570 440,clip]{PAW_projector.eps}
-\caption{\small \textrm{计算\ch{SiC}的光学介电函数时的模型(左)和$\vec k$空间布点方案(右).}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\caption{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{计算\textrm{SiC}的光学介电函数时的\textrm{POSCAR}(左)和\textrm{KPOINTS}(右).}}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{SiC-optic-Input}
 \end{figure}
+}
 
-介电函数包括静态介电函数(\textrm{\textit{LEPSILON}=.TURE.})和动态(频率相关)介电函数(\textrm{\textit{LOPITC}=.TURE.})两类，这里将分别介绍。
-\subsubsection{\rm{静态介电函数的计算}}
-一般静态介电函数计算是通过密度泛函微扰理论(\textrm{Density Functional Perturbation Theory, DFPT})计算的，同时计算的物理量还包括\textrm{Born}有效电荷(\textrm{the Born effective charges})，铁电张量(\textrm{piezoelectric tensors})等。计算控制参数如图\ref{SiC-Epsilon-INCAR}所示。
-\begin{figure}[h!]
-\centering
-\includegraphics[height=1.2in,viewport=0 380 420 540,clip]{SiC-epsilon-INCAR.png}
-%\includegraphics[height=1.8in,width=4.in,viewport=30 210 570 440,clip]{PAW_projector.eps}
-\caption{\small \textrm{计算\ch{SiC}的光学介电函数时的计算控制文件\textrm{INCAR}.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{SiC-Epsilon-INCAR}
-\end{figure}
 
+\frame
+{
+	\frametitle{静态介电函数}
+%\subsubsection{\rm{静态介电函数的计算}}
+%一般
+	{\fontsize{9.0pt}{5.2pt}\selectfont{静态介电函数计算通过密度泛函微扰理论(\textrm{Density Functional Perturbation Theory, DFPT})计算
+	\vskip 5pt
 根据微扰理论，计算静态介电函数时，
 \begin{displaymath}
 	\nabla_{\vec k}|\tilde u_{n\vec k}\rangle=\sum_{n^{\prime}\neq n}\dfrac{|\tilde u_{n^{\prime}\vec k}\rangle\langle\tilde u_{n^{\prime}\vec k}|\frac{\partial(\mathbf{H}(\vec k)-\varepsilon_{n\vec k}\mathbf{S}(\vec k))}{\partial\vec k}|\tilde u_{n\vec k}\rangle}{\varepsilon_{n\vec k}-\varepsilon_{n^{\prime}\vec k}}
@@ -1679,28 +1807,62 @@ $\vec k$空间布点数为$9\times9\times9$，布点方案由\textrm{Monkhorst-P
 \begin{displaymath}
 	(\mathbf{H}(\vec k)-\varepsilon_{n\vec k}\mathbf{S}(\vec k))|\nabla_{\vec k}|\tilde u_{n\vec k}\rangle=-\dfrac{\partial(\mathbf{H}(\vec k)-\varepsilon_{n\vec k}\mathbf{S}(\vec k))}{\partial\vec k}|\tilde u_{n\vec k}\rangle
 \end{displaymath}
-方程的求解过程和自洽迭代的思想类似。
+方程的求解过程和自洽迭代的思想类似}}
+}
 
-在输出文件\textrm{OUTCAR}中计算得到的静态光学介电函数等物理量如图\ref{SiC-Epsilon-OUTCAR}为:~
+\frame
+{
+	\frametitle{静态介电函数计算:~控制参数}
 \begin{figure}[h!]
 \centering
-\includegraphics[height=3.5in,viewport=0 0 1030 845,clip]{SiC-epsilon-OUTCAR.png}
+\includegraphics[height=1.2in,viewport=0 380 420 540,clip]{SiC-epsilon-INCAR.png}
 %\includegraphics[height=1.8in,width=4.in,viewport=30 210 570 440,clip]{PAW_projector.eps}
-\caption{\small \textrm{计算\ch{SiC}的光学介电函数时的计算结果\textrm{OUTCAR}中有关输出内容.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\caption{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{计算\ch{SiC}的光学介电函数时的计算控制文件\textrm{INCAR}.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{SiC-Epsilon-INCAR}
+\end{figure}
+	{\fontsize{8.5pt}{5.2pt}\selectfont{同时计算的物理量还包括\textrm{Born}有效电荷(\textrm{the Born effective charges})，铁电张量(\textrm{piezoelectric tensors})等}}%。计算控制参数如图\ref{SiC-Epsilon-INCAR}所示。
+}
+
+\frame
+{
+	\frametitle{静态介电函数计算:~输出文件}
+%在输出文件\textrm{OUTCAR}中计算得到的静态光学介电函数等物理量如图\ref{SiC-Epsilon-OUTCAR}为:~
+\begin{figure}[h!]
+	\vskip -8pt
+\centering
+\includegraphics[width=4.0in,viewport=0 0 1030 845,clip]{SiC-epsilon-OUTCAR.png}
+%\includegraphics[height=1.8in,width=4.in,viewport=30 210 570 440,clip]{PAW_projector.eps}
+\caption{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{计算\ch{SiC}的光学介电函数时的计算结果\textrm{OUTCAR}中有关输出内容.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{SiC-Epsilon-OUTCAR}
 \end{figure}
+}
 
-如果控制参数中引入\textrm{\textit{LRPA}=.TRUE.}，则可以在无规相近似(\textrm{Random-Phase-Approximation, RPA})下，在静态介电函数计算中引入局域\textrm{Hartree}势场效应(\textrm{local field effect on the Hartree level});~类似地，微扰理论也可以通过有限差分方法计算，控制参数为\textrm{\textit{LPEAD}=.TRUE.}，这两种计算对应的输入文件分别如图\ref{SiC-epsilon-INCARs}所示:~
+\frame
+{
+	\frametitle{静态介电函数计算:~其他近似}
+{\fontsize{7.2pt}{5.2pt}\selectfont{
+	\begin{itemize}
+		\item \textcolor{cyan}{\textit{LRPA}}\textrm{=.TRUE.}:~无规相近似(\textrm{Random-Phase-Approximation, RPA})
+			\vskip 3pt
+			{\fontsize{6.2pt}{5.2pt}\selectfont{在静态介电函数计算中引入局域\textrm{Hartree}势场效应(\textrm{local field effect on the Hartree level})}}
+		\item %~类似地，
+			\textcolor{cyan}{\textit{LPEAD}}\textrm{=.TRUE.}:~微扰通过有限差分方法计算%，这两种计算对应的输入文件分别如图\ref{SiC-epsilon-INCARs}所示:~
+	\end{itemize}
+}}
 \begin{figure}[h!]
 \centering
-\includegraphics[height=1.5in,viewport=0 310 420 540,clip]{SiC-epsilon-INCAR.png}
-\includegraphics[height=1.5in,viewport=0 290 420 520,clip]{SiC-epsilon-INCAR_PEAD.png}
+\includegraphics[height=1.2in,viewport=0 310 420 540,clip]{SiC-epsilon-INCAR.png}
+\includegraphics[height=1.2in,viewport=0 290 420 520,clip]{SiC-epsilon-INCAR_PEAD.png}
 %\includegraphics[height=1.8in,width=4.in,viewport=30 210 570 440,clip]{PAW_projector.eps}
-\caption{\small \textrm{计算\ch{SiC}的静态光学介电函数时\textrm{RPA}近似(左)和有限差分方法(右).}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\caption{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{计算\ch{SiC}的静态光学介电函数时\textrm{RPA}近似(左)和有限差分方法(右).}}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{SiC-epsilon-INCARs}
 \end{figure}
-\subsubsection{\rm{频率相关的介电函数}}
-\textrm{VASP}中动态介电函数虚部计算公式为:
+}
+%\subsubsection{\rm{频率相关的介电函数}}
+\frame
+{
+	\frametitle{动态介电函数}
+{\fontsize{8.5pt}{5.2pt}\selectfont{\textrm{VASP}中动态介电函数虚部计算:
 \begin{displaymath}
 	\varepsilon_{\alpha\beta}^{(2)}(\omega)=\dfrac{4\pi^2e^2}{\Omega}\lim_{q\rightarrow 0}\frac1{q^2}\sum_{c,v,\vec k}2w_{\vec k}\delta(\varepsilon_{c,\vec k}-\varepsilon_{v,\vec k}-\omega)\times\langle u_{c,\vec k+\mathbf{e}_{\alpha}q}|u_{v,\vec k}\rangle\langle u_{c,\vec k+\mathbf{e}_{\beta}q}|u_{v,\vec k}\rangle^{\ast}
 \end{displaymath}
@@ -1708,102 +1870,196 @@ $\vec k$空间布点数为$9\times9\times9$，布点方案由\textrm{Monkhorst-P
 \begin{displaymath}
 	\varepsilon_{\alpha\beta}^{(1)}(\omega)=1+\dfrac2{\pi}\mathcal{P}\int_0^{\infty}\dfrac{\varepsilon_{\alpha\beta}^{(2)}(\omega^{\prime})\omega^{\prime}}{\omega^{\prime2}-\omega^2+\mathrm{i}\eta}\mathrm{d}{\omega^{\prime}}
 \end{displaymath}
-这里$\mathcal{P}$表示取积分主值。$\eta$对应控制参数\textit{CSHIFT}。
+{\fontsize{6.2pt}{5.2pt}\selectfont{这里$\mathcal{P}$表示取积分主值}}
 
-为了计算动态介电函数，首先完成标准\textrm{DFT}计算，控制文件和$\vec k$空间布点方案如图\ref{SiC-optic-Input}所示:~
-\begin{figure}[h!]
+$\eta$对应\textrm{INCAR}中的控制参数\textcolor{cyan}{\textit{CSHIFT}}}}
+}
+
+\frame
+{
+	\frametitle{动态介电函数计算:~计算控制参数}
+%为了
+	{\fontsize{7.5pt}{5.2pt}\selectfont{为计算动态介电函数，完成标准\textrm{DFT}静态计算}}%，控制文件和$\vec k$空间布点方案如图\ref{SiC-optic-Input}所示:~
+\begin{figure}[h!] 
 \centering
-\includegraphics[height=0.9in,viewport=0 10 170 90,clip]{SiC-optic-INCAR.png}
-\includegraphics[height=0.9in,viewport=0 0 100 106,clip]{SiC-optic-KPOINTS.png}
+\includegraphics[height=0.4in,viewport=0 10 170 90,clip]{SiC-optic-INCAR.png}
+\includegraphics[height=0.5in,viewport=0 0 100 106,clip]{SiC-optic-KPOINTS.png}
 %\includegraphics[height=1.8in,width=4.in,viewport=30 210 570 440,clip]{PAW_projector.eps}
-\caption{\small \textrm{为计算\ch{SiC}的动态光学介电函数，完成标准\textrm{DFT}计算的控制文件(左)和$\vec k$空间布点方案(右).}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\caption{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{为计算\textrm{SiC}的动态光学介电函数，完成标准\textrm{DFT}计算的控制文件(左)和$\vec k$空间布点方案(右).}}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{SiC-optic-Input}
 \end{figure}
-
-基于标准\textrm{DFT}计算的\textrm{WAVECAR}，计算独立粒子\textrm{(independent-particle, IP)}图像下的动态介电函数时，注意要引入较多的空轨道，计算控制参数如图\ref{SiC-optic-INCAR}所示:
+	\vskip -8pt
+{\fontsize{7.5pt}{5.2pt}\selectfont{基于静态计算的\textrm{WAVECAR}，计算独立粒子\textrm{(independent-particle, IP)}图像下的动态介电函数，注意要考虑较多的空轨道}}%，计算控制参数如图\ref{SiC-optic-INCAR}所示:
 \begin{figure}[h!]
 \centering
-\includegraphics[height=2.0in,viewport=0 10 500 300,clip]{SiC-optic-INCAR.png}
+\includegraphics[height=1.2in,viewport=0 10 500 300,clip]{SiC-optic-INCAR.png}
 %\includegraphics[height=1.8in,width=4.in,viewport=30 210 570 440,clip]{PAW_projector.eps}
-\caption{\small \textrm{为计算\ch{SiC}的动态光学介电函数的控制文件.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\caption{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{为计算\textrm{SiC}的动态光学介电函数的控制文件.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{SiC-optic-INCAR}
 \end{figure}
+}
 
-在输出文件\textrm{OUTCAR}中，频率相关的介电函数虚部和实部数据如图\ref{SiC-optic-OUTCAR}所示:~
+\frame
+{
+	\frametitle{动态介电函数计算:~输出文件}
+%在输出文件\textrm{OUTCAR}中，频率相关的介电函数虚部和实部数据如图\ref{SiC-optic-OUTCAR}所示:~
 \begin{figure}[h!]
+	\vskip -10pt
 \centering
-\includegraphics[height=4.5in,viewport=0 0 990 1000,clip]{SiC-optic-OUTCAR.png}
+\includegraphics[height=2.6in,viewport=0 0 990 1000,clip]{SiC-optic-OUTCAR.png}
 %\includegraphics[height=1.8in,width=4.in,viewport=30 210 570 440,clip]{PAW_projector.eps}
-\caption{\small \textrm{计算\ch{SiC}输出文件中的动态介电函数的虚部和实部.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\caption{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{计算\textrm{SiC}输出文件中的动态介电函数的虚部和实部.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{SiC-optic-OUTCAR}
 \end{figure}
-与静态介电函数计算类似，可以通过有限差分方法计算$\nabla_{\vec k}\tilde u_{n\vec k}$，进而得到动态介电函数，只要在\textrm{INCAR}中设置控制参数\textrm{\textit{LPEAD}=.TRUE.}，这个留待作为练习。
+{\fontsize{7.5pt}{5.2pt}\selectfont{与静态介电函数计算类似，可通过有限差分方法计算$\nabla_{\vec k}\tilde u_{n\vec k}$，进而得到动态介电函数:}}~
+\vskip 3pt
+{\fontsize{6.2pt}{5.2pt}\selectfont{只要在\textrm{INCAR}中设置控制参数\textcolor{cyan}{\textit{LPEAD}}\textrm=.TRUE.}}%，这个留待作为练习。
+}
 
-\subsection{GW计算}
-本部分我们将学习如何利用\textrm{VASP}完成对\ch{Si}的\textit{GW}计算。为了完成\textit{GW}计算，首先也需要完成标准\textrm{DFT}计算，相关输入文件(\textrm{Si}的结构文件、计算控制文件和$\vec k$空间布点方案)如图\ref{Si-GW-Input}所示:~
+\frame
+{
+	\frametitle{$GW$计算:~静态计算输入文件}
+%\subsection{GW计算}
+%本部分我们将学习如何利用\textrm{VASP}完成对\ch{Si}的\textit{GW}计算。
+	为完成$GW$计算，首先需要完成静态计算:%，相关输入文件(\textrm{Si}的结构文件、计算控制文件和$\vec k$空间布点方案)如图\ref{Si-GW-Input}所示:~
 \begin{figure}[h!]
 \centering
-\includegraphics[height=2.0in,viewport=0 10 160 210,clip]{Si-GW-POSCAR.png}
-\includegraphics[height=1.2in,viewport=0 10 160 90,clip]{SiC-optic-INCAR.png}
-\includegraphics[height=1.2in,viewport=0 0 100 106,clip]{SiC-optic-KPOINTS.png}
+\includegraphics[height=1.5in,viewport=0 10 160 210,clip]{Si-GW-POSCAR.png}
+\includegraphics[height=0.7in,viewport=0 10 160 90,clip]{SiC-optic-INCAR.png}
+\includegraphics[height=0.9in,viewport=0 0 100 106,clip]{SiC-optic-KPOINTS.png}
 %\includegraphics[height=1.8in,width=4.in,viewport=30 210 570 440,clip]{PAW_projector.eps}
-\caption{\small \textrm{为实现\ch{Si}的\textit{GW}计算，所需的标准\textrm{DFT}计算的结构文件(左)、计算控制文件(中)和$\vec k$空间布点方案(右).}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\caption{\fontsize{5.8pt}{5.2pt}\selectfont{\textrm{为实现\ch{Si}的\textit{GW}计算，所需的标准\textrm{DFT}计算的\textrm{POSCAR}(左)、\textrm{INCAR}(中)和\textrm{KPOINTS}(右).}}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Si-GW-Input}
 \end{figure}
+}
 
-在完成标准\textrm{DFT}计算基础上，\textit{GW}计算还需要\textrm{DFT}计算的波函数\textrm{WAVECAR文件(含有大量的空轨道)}和波函数导数\textrm{WAVEDER}文件，因此后续计算与光学动态介电函数的计算类似，控制参数如图\ref{Si-GW-DFT-INCAR}所示:
+\frame
+{
+	\frametitle{$GW$计算:~动态介电函数计算}
+%在完成标准\textrm{DFT}计算基础上，
+	$GW$计算还需要\textrm{DFT}计算的波函数\textrm{WAVECAR(含有大量的空轨道)}和波函数导数\textcolor{blue}{\textrm{WAVEDER}}
+\vskip 5pt
+{\fontsize{7.5pt}{5.2pt}\selectfont{计算与光学动态介电函数的计算类似}}%，控制参数如图\ref{Si-GW-DFT-INCAR}所示:
 \begin{figure}[h!]
+	\vskip -2pt
 \centering
-\includegraphics[height=2.0in,viewport=0 10 490 285,clip]{Si-GW-DFT-INCAR.png}
+\includegraphics[height=1.8in,viewport=0 10 490 285,clip]{Si-GW-DFT-INCAR.png}
 %\includegraphics[height=1.8in,width=4.in,viewport=30 210 570 440,clip]{PAW_projector.eps}
-\caption{\small \textrm{为支持\ch{Si}的\textit{GW}计算，标准\textrm{DFT}后续获得\textrm{WAVECAR}和\textrm{WAVEDER}的控制文件.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\caption{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{为支持\ch{Si}的\textit{GW}计算，动态计算获得\textrm{WAVECAR}和\textrm{WAVEDER}的控制文件.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Si-GW-DFT-INCAR}
 \end{figure}
+}
 
-正式的\textit{GW}计算，如果只是单步计算(不迭代)准粒子(\textrm{quasi-particle, QP})能量，称为$G_0W_0$计算，控制参数如图\ref{Si-G0W0-INCAR}所示。
+\frame
+{
+	\frametitle{$GW$计算:~$G_0W_0$计算控制文件}
+%正式的\textit{GW}计算，
+	只完成单步(不迭代)$GW$计算，得到准粒子(\textrm{quasi-particle, QP})能量，称为$G_0W_0$%，控制参数如图\ref{Si-G0W0-INCAR}所示。
 \begin{figure}[h!]
+	\vskip -5pt
 \centering
-\includegraphics[height=2.7in,viewport=0 10 595 465,clip]{Si-G0W0-INCAR.png}
+\includegraphics[height=2.2in,viewport=0 10 595 465,clip]{Si-G0W0-INCAR.png}
 %\includegraphics[height=1.8in,width=4.in,viewport=30 210 570 440,clip]{PAW_projector.eps}
-\caption{\small \textrm{\ch{Si}的$G_0W_0$计算的控制文件.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\caption{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{\ch{Si}的$G_0W_0$计算的控制文件.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Si-G0W0-INCAR}
 \end{figure}
-在\textit{GW}计算的输出文件\textrm{OUTCAR}中，准粒子能量如图\ref{Si-G0W0-OUTCAR}所示。
+}
+
+\frame
+{
+	\frametitle{$GW$计算:~$G_0W_0$准粒子能量}
+%在\textit{GW}计算的输出文件\textrm{OUTCAR}中，准粒子能量如图\ref{Si-G0W0-OUTCAR}所示。
+	\vskip -10pt
 \begin{figure}[h!]
 \centering
-\includegraphics[height=5.5in,viewport=0 40 1190 1240,clip]{Si-G0W0-OUTCAR.png}
+\includegraphics[height=2.5in,viewport=0 40 1190 1240,clip]{Si-G0W0-OUTCAR.png}
 %\includegraphics[height=1.8in,width=4.in,viewport=30 210 570 440,clip]{PAW_projector.eps}
-\caption{\small \textrm{\ch{Si}的$G_0W_0$计算输出文件中的准粒子能量本征值.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\caption{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{\ch{Si}的$G_0W_0$计算输出文件中的准粒子能量本征值.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Si-G0W0-OUTCAR}
 \end{figure}
+}
 
-如果\textit{GW}计算中，准粒子能量是通过迭代计算得到的，则是$GW_0$计算，只要在$G_0W_0$基础上引入迭代控制参数\textit{NELM}即可。如本算例中，迭代次数为4次(\textit{NELM}=4)，如图\ref{Si-GW0-INCAR}所示。
+\frame
+{
+	\frametitle{$GW$计算:~$GW_0$计算控制文件}
+准粒子能量通过迭代计算得到的，称为$GW_0$计算
+\vskip 5pt
+{\fontsize{7.5pt}{5.2pt}\selectfont{只要在$G_0W_0$基础上引入迭代控制参数\textcolor{cyan}{\textit{NELM}}即可}}%。如本算例中，迭代次数为4次(\textit{NELM}=4)，如图\ref{Si-GW0-INCAR}所示。
 \begin{figure}[h!]
+	\vskip -5pt
 \centering
-\includegraphics[height=2.5in,viewport=0 10 595 465,clip]{Si-GW0-INCAR.png}
+\includegraphics[height=2.1in,viewport=0 10 595 465,clip]{Si-GW0-INCAR.png}
 %\includegraphics[height=1.8in,width=4.in,viewport=30 210 570 440,clip]{PAW_projector.eps}
-\caption{\small \textrm{\ch{Si}的$GW_0$计算的控制文件.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\caption{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{\ch{Si}的$GW_0$计算的控制文件.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Si-GW0-INCAR}
 \end{figure}
+}
 
-图\ref{Si-GW-Band}给出\textit{GW}计算和\textrm{DFT}计算的\ch{Si}的能带变化，可以看出，考虑\textit{GW}影响之后，带隙增大。这部分作为课后练习，留待用户完成。
+\frame
+{
+	\frametitle{$GW$计算:~带隙修正}
+%图\ref{Si-GW-Band}给出\textit{GW}计算和\textrm{DFT}计算的\ch{Si}的能带变化，可以看出，
 \begin{figure}[h!]
+	\vskip -5pt
 \centering
 \includegraphics[height=2.5in, width=2.3in, viewport=0 0 375 490,clip]{Si-BSE-band.png}
 %\includegraphics[height=1.8in,width=4.in,viewport=30 210 570 440,clip]{PAW_projector.eps}
-\caption{\small \textrm{\ch{Si}的\textrm{DFT}和$GW$计算的能带(局部)和$\Gamma$点的带隙变化.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\caption{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{\ch{Si}的\textrm{DFT}和$GW$计算的能带(局部)和$\Gamma$点的带隙变化.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Si-GW-Band}
 \end{figure}
+{\fontsize{7.5pt}{5.2pt}\selectfont{考虑\textit{GW}影响之后，带隙增大}}%。这部分作为课后练习，留待用户完成。
+}
 
-有关旋-轨耦合(\textrm{Spin-Orbital coupling, SOC})、非共线磁性(\textrm{nonlinear magnetization})等相关的计算，与\textrm{LDA}+$U$、光学介电函数和\textit{GW}计算类似，主要是控制参数文件\textrm{INCAR}的修改，有兴趣的用户请参阅有关算例。
+\frame
+{
+	\frametitle{\textrm{VASP}其余算例}
+	\begin{itemize}
+		\item 旋-轨耦合(\textrm{Spin-Orbital coupling, SOC})
+		\item 非共线磁性(\textrm{nonlinear magnetization})
+%		\item 相关的计算
+	\end{itemize}
+	{\fontsize{7.2pt}{5.2pt}\selectfont{与\textrm{DFT}+$U$、光学介电函数和$GW$计算类似，主要是控制参数文件\textrm{INCAR}的修改
+	\vskip 5pt 
+	请参阅\textrm{VASP}官网有关算例\upcite{VASP_tutorial}}}
+	\vskip 10pt
+{\fontsize{7.2pt}{5.2pt}\selectfont{\textcolor{red}{说明:}~
+\vskip 5pt
+本讲义算例主要来源
+\begin{itemize}
+	\item 文献\cite{J.-G._Lee}中的\textrm{VASP}算例
+	\item \textrm{VASP}官网算例部分\cite{VASP_tutorial}
+		\vskip 5pt
+%关于\textrm{VASP}计算材料的
+		{\fontsize{6.2pt}{5.2pt}\selectfont{\textcolor{blue}{\textrm{LDA}+\textit{U}~计算、光学介电函数、\textit{GW}校正的计算参数设置和相关内容}}}%，有兴趣的读者可以参阅
+\end{itemize}
+因\textrm{VASP}版本的不同，及用户用于计算的\textrm{POTCAR}数据差异，所以重复讲义中算例时，计算过程和结果的数据，绝对数值可能会有一点出入，但应该不会差别太大。}
+%\nocite*{}
+}
+}
+\frame
+{
+	\frametitle{卖油翁:~无他但手熟尔}
+%陈康肃公尧咨善射，当世无双 ，公亦以此自矜。尝射于家圃，有卖油翁释担而立，睨之，久而不去。见其发矢十中八、九，但微颔之。康肃问曰：“汝亦知射乎?吾射不亦精乎?”翁曰：“无他，但手熟尔。”康肃忿然曰：“尔安敢轻吾射!”翁曰：“以我酌油知之。”乃取一葫芦置于地，以钱覆其口，徐以杓酌油沥之，自钱孔入而\footnote{一作“而入”}钱不湿。因曰：“\textcolor{red}{我亦无他，惟手熟尔}。”康肃笑而遣之。此与庄生所谓“解牛”、“斫轮”者何异?
+\begin{figure}[h!]
+\centering
+\vspace{-10.5pt}
+\includegraphics[height=0.65\textwidth]{Figures/Sale_Oil_Ouyang.png}
+\hspace{1pt}
+\includegraphics[height=0.65\textwidth]{Figures/Ouyang_Xiu-2.jpg}
+\caption{\fontsize{6.2pt}{5.2pt}\selectfont{欧阳修\textrm{(1007-1072)}~《欧阳文忠公文集$\cdot$归田录》~卷上}}
+\label{Sale_oil}
+\end{figure}
+}
+
+%\frame
 %------------------------------------------------------------------------Reference----------------------------------------------------------------------------------------------
 		\frame[allowframebreaks]
 {
 \frametitle{主要参考文献}
-
 \begin{thebibliography}{99}
 {\tiny
 	\bibitem{J.-G._Lee}\textrm{J.-G. Lee, \textit{Computational Materials Science:~an introduction}}~\textrm{(2nd Edition),~CPC Press}, \textrm{(2017)}
+	\bibitem{VASP_tutorial}\url{https://www.vasp.at/wiki/index.php/Category:Examples}
 	\bibitem{Comp_Phys}\textrm{J. M. Thijssen. \textit{Computational Physics}~\textrm{(2nd Edition)} (Cambridge University Press, Cambridge, England, 2007)}
 	\bibitem{PRB78-205302_2008}\textrm{H. Bentmann and A. A. Demkov and R. Gregory and S. Zollner. \textit{Phys. Rev. B} \textbf{78} (2008), 205302}
 	\bibitem{Landolt-Bornstein}\textrm{Landolt-B\"ornstein, \textit{Structure Data of Elements and Intermetallic Phase},~Springer Inc.}, \textrm{(1991)}
@@ -1813,10 +2069,10 @@ $\vec k$空间布点数为$9\times9\times9$，布点方案由\textrm{Monkhorst-P
 	\bibitem{JMS44-1828_2009}\textrm{J. H. Kim, Y. D. Kwon, P. Yonathan,I. Hidayat,J. G. Lee, J.-H. Choi and S.-C. Lee. \textit{J. Matt. Sci.} \textbf{44} (2009), 1828}
 	\bibitem{Electrochim52-2219_2007}\textrm{M. C. Lischka, C Mosch and A. Gro$\beta$. \textit{Electrochim. Acta..} \textbf{52} (2007), 2219}
 	\bibitem{url_plot-workfunc}\url{https://gist.github.com/Ionizing/1ac92f98e8b00a1cf6f16bd57694ff03}
+	\bibitem{Phonopy}\url{http://phonopy.sourceforge.net/}
+	\bibitem{PRB52-R5467_1995}\textrm{A. I. Liechtenstein, V. I. Anisimov and J. Zaanen., \textit{Phys. Rev.} B, \textbf{52} (1995), R5467}
+	\bibitem{PRB57-1505_1998}\textrm{S. L. Dudarev, G. A. Botton, S. Y. Savrasov, C. J. Humphreys and A. P. Sutton., \textit{Phys. Rev.} B, \textbf{57} (1998), 1505}
+	\bibitem{PRB73-045112_2006}\textrm{M. Gajdo$\check{s}$, K. Hummer, G. Kresse, J. Furthm\"uller and F. Bechstedt. \textit{Phys. Rev.} B, \textbf{73} (2006), 045112}
 }
 \end{thebibliography}
-\vskip 8pt
-{\fontsize{7.2pt}{5.2pt}\selectfont{\textcolor{red}{注意:}~\\
-本讲义算例主要来自文献\cite{J.-G._Lee}。因\textrm{VASP}版本的不同，及用户用于计算的\textrm{POTCAR}数据差异，所以重复讲义中算例时，计算过程和结果的数据，绝对数值可能会有一点出入，但应该不会差别太大。}}
-%\nocite*{}
 }
