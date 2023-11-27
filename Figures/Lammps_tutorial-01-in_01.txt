@@ -1,0 +1,2 @@
+# Find minimum energy fcc configuration
+# Mark Tschopp, 2010

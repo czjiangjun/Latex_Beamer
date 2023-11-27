@@ -1,0 +1,6 @@
+# ---------- Define Interatomic Potential --------------------- 
+pair_style eam/alloy 
+pair_coeff * * Al99.eam.alloy Al
+neighbor 2.0 bin 
+neigh_modify delay 10 check yes 
+ 

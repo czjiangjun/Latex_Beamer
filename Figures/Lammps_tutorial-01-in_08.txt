@@ -1,0 +1,6 @@
+print "Total energy (eV) = ${teng};"
+print "Number of atoms = ${natoms};"
+print "Lattice constant (Angstoms) = ${length};"
+print "Cohesive energy (eV) = ${ecoh};"
+
+print "All done!" 

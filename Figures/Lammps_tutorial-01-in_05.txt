@@ -1,0 +1,4 @@
+# ---------- Define Settings --------------------- 
+compute eng all pe/atom 
+compute eatoms all reduce sum c_eng 
+

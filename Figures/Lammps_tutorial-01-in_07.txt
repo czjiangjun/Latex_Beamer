@@ -1,0 +1,5 @@
+variable natoms equal "count(all)" 
+variable teng equal "c_eatoms"
+variable length equal "lx"
+variable ecoh equal "v_teng/v_natoms"
+
