@@ -1,0 +1,39 @@
+import numpy as np
+import subprocess 
+import shlex
+import glob, os
+import time
+
+start_time = time.time()
+
+j = 0
+x = []
+y = []
+target = "%% "
+for i in list(np.arange(3.00, 5.05, 0.10)):
+    command_line = f'lmp_serial -in calc_fcc_ver2.in -var latconst {i:0.02f} -log log_{j:03d}.lammps'
+    x.append(round(i,3))
+    file = f"log_{j:03d}.lammps"
+    j += 1
+    print(command_line)
+    args = shlex.split(command_line)
+    p = subprocess.Popen(args) # Success!
+    p.wait()
+    with open(file) as f:
+        for line in f:
+            if target in line and "print" not in line:
+#                exec(line.replace("%% ","").replace(";",""))
+                ecoh=line.replace("%% ","").replace(";","").replace("\n","").replace("ecoh =","")
+                y.append(float(ecoh))
+
+print("--- %s seconds ---" % (time.time() - start_time))
+                
+# %matplotlib inline
+import matplotlib.pyplot as plt
+from pylab import *
+figure()
+plot(x, y, 'r*-')
+xlabel('Lattice constant (Angstrom)')
+ylabel('Cohesive Energy (eV)')
+title('aluminum cohesive energy evolution')
+show()

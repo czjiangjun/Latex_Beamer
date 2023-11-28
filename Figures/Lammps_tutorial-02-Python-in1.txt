@@ -1,0 +1,19 @@
+# how do I read each line in script, find the flag, and assign ecoh to a vector Y for plotting
+
+import glob, os
+import time
+
+start_time = time.time()
+target = "%% "
+y = []
+for file in glob.glob("log_*.lammps"):
+    with open(file) as f:
+        for line in f:
+            if target in line and "print" not in line:
+#                exec(line.replace("%% ","").replace(";",""))
+                ecoh= line.replace("%% ","").replace(";","").replace("\n","")
+                y.append(ecoh)
+#                y.append(float(ecoh))
+
+print("--- %s seconds ---" % (time.time() - start_time))
+

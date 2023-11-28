@@ -1,0 +1,12 @@
+# If this works, that would be great: !cat Al_SC_100.def1.txt
+f = open('Al_tens_100.def1.txt', 'r')
+file_contents = f.read()
+print (file_contents)
+f.close()
+
+# If this works, that would be great: !cat dump.tensile_0.cfg
+f = open('dump.tens_0.cfg', 'r')
+file_contents = f.read()
+print (file_contents)
+f.close()
+

@@ -141,7 +141,7 @@
 \verbatiminput{Figures/Lammps_tutorial-01-in_06.txt} %为保险:~选用文件名绝对路径
 }
 \begin{itemize}
-	\item \textcolor{cyan}{\textit{reset\_timestep}}:~设定模拟步数归零\footnote{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{Lammps}模拟中，一般需要设置能量最小化、弛豫、数据采集等阶段，不同阶段模拟步数不同。默认情况下，模拟步数是从模拟开始到模拟结束一直累加计算的}}
+	\item \textcolor{cyan}{\textit{reset\_timestep}}:~设定模拟步数归零\footnote{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{LAMMPS}模拟中，一般需要设置能量最小化、弛豫、数据采集等阶段，不同阶段模拟步数不同。默认情况下，模拟步数是从模拟开始到模拟结束一直累加计算的}}
 	\item \textcolor{cyan}{\textit{fix}}:~设定\textrm{box/relax}，能量最小化过程中对模拟盒施外压，各向同性\textrm{(iso)}都弛豫到\textrm{0.0~Pa}:~\textcolor{blue}{\textrm{vmax}}:~正压压缩，负压膨胀
 	\item \textcolor{cyan}{\textit{thermo}}:~每运行\textcolor{blue}{10}次在屏幕上输出一次运行结果
 	\item \textcolor{cyan}{\textit{thermo\_style}}:~设定屏幕输出信息
@@ -190,7 +190,7 @@
 \frame
 {
 	\frametitle{\textrm{LAMMPS}的输出结果}
-	\textrm{Lammps}执行命令:
+	\textrm{LAMMPS}执行命令:
 	\vskip 5pt
 	\textcolor{blue}{lmp}~\textcolor{magenta}{-in}~calc\_fcc.in
 	\vskip 5pt
@@ -210,7 +210,7 @@
 %\verbatiminput{Figures/Lammps_in_lj.txt} %为保险:~选用文件名绝对路径
 \verbatiminput{Figures/Lammps_tutorial-02-in.txt} %为保险:~选用文件名绝对路径
 }}
-	\textrm{Lammps}执行命令:
+	\textrm{LAMMPS}执行命令:
 	\vskip 5pt
 	\textcolor{blue}{lmp}~\textcolor{magenta}{-in}~calc\_fcc.in~\textcolor{red}{-var~latconst~4}
 }
@@ -233,6 +233,86 @@
 }}
 }
 
+\frame[allowframebreaks]
+{
+	\frametitle{\textrm{LAMMPS}的输入文件:~基于\textrm{Python}的执行}
+	{\fontsize{6.0pt}{4.0pt}\selectfont{
+%\verbatiminput{Figures/Lammps_in_lj.txt} %为保险:~选用文件名绝对路径
+\verbatiminput{Figures/Lammps_tutorial-02-Python-in1.txt} %为保险:~选用文件名绝对路径
+}}
+}
+
+\frame[allowframebreaks]
+{
+	\frametitle{\textrm{LAMMPS}的输入文件:~基于\textrm{Python}的执行}
+	{\fontsize{6.0pt}{4.0pt}\selectfont{
+%\verbatiminput{Figures/Lammps_in_lj.txt} %为保险:~选用文件名绝对路径
+\verbatiminput{Figures/Lammps_tutorial-02-Python-in2.txt} %为保险:~选用文件名绝对路径
+}}
+}
+
+\frame
+{
+	\frametitle{状态方程}
+\begin{figure}[h!]
+\centering
+\vskip -5pt
+\includegraphics[height=2.50in,width=4.0in, viewport=0 0 1050 554,clip]{Lammps-EOS.png}
+\caption{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{Aluminum cohesive energy evolution.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{LAMMPS_output-EOS}
+\end{figure}
+}
+
+\frame[allowframebreaks]
+{
+	\frametitle{\textrm{LAMMPS}的输入文件}
+	{\fontsize{6.0pt}{4.0pt}\selectfont{
+%\verbatiminput{Figures/Lammps_in_lj.txt} %为保险:~选用文件名绝对路径
+\verbatiminput{Figures/Lammps_tutorial-03-Lammps-in.txt} %为保险:~选用文件名绝对路径
+}}
+}
+
+\frame[allowframebreaks]
+{
+	\frametitle{\textrm{LAMMPS}的输入文件:~基于\textrm{Matlab}的执行}
+	{\fontsize{6.0pt}{4.0pt}\selectfont{
+%\verbatiminput{Figures/Lammps_in_lj.txt} %为保险:~选用文件名绝对路径
+\verbatiminput{Figures/Lammps_tutorial-03-Matlab-in.txt} %为保险:~选用文件名绝对路径
+}}
+}
+
+\frame[allowframebreaks]
+{
+	\frametitle{\textrm{LAMMPS}的输入文件:~基于\textrm{Python}的执行}
+	{\fontsize{6.0pt}{4.0pt}\selectfont{
+%\verbatiminput{Figures/Lammps_in_lj.txt} %为保险:~选用文件名绝对路径
+\verbatiminput{Figures/Lammps_tutorial-03-Python-in.txt} %为保险:~选用文件名绝对路径
+}}
+}
+
+\frame
+{
+	\frametitle{应力-应变曲线}
+\begin{figure}[h!]
+\centering
+\vskip -5pt
+\includegraphics[height=2.20in,width=4.0in, viewport=0 0 1050 554,clip]{Lammps-Stress_Strain.png}
+\caption{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{Stress-strain curve for uniaxial tensile loading of single crystal aluminum in the <100> loading direction.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{LAMMPS_output-Stress-Strain}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{拉伸载荷}
+\begin{figure}[h!]
+\centering
+\vskip -5pt
+\animategraphics[autoplay, loop, height=2.40in, width=2.50in,viewport= 0 0 256 256,clip]{1}{Figures/Lammps-simulation-cell-in-tension-}{0}{81}
+\caption{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{Tensile Loading of an Aluminum Single Crystal..}}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{LAMMPS_Tensile-Loading}
+\end{figure}
+}
 %\vskip 5pt
 %\frame
 %------------------------------------------------------------------------Reference----------------------------------------------------------------------------------------------
