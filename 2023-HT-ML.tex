@@ -99,30 +99,73 @@
 \frame
 {
 	\frametitle{高性能计算与高通量计算}
+\begin{figure}[h!]
+%\vspace*{-0.05in}
+\centering
+\includegraphics[height=2.30in,width=4.0in, viewport=0 0 765 367,clip]{HPC_vs_HTC.png}
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{HPC_vs_HTC}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{高性能计算与高通量计算}
 	%\textrm{HTC}和\textrm{HPC}差异的一些特点。
 	\textrm{HPC}和\textrm{HTC}作业可以在相同的集群架构上运行，但它们使用资源的方式不同:
+			\vskip 8pt
+	\begin{minipage}[t]{0.48\textwidth}
+		{\fontsize{8.5pt}{5.2pt}\selectfont{\textrm{HPC}:~在需要时使用:}}
+{\fontsize{6.5pt}{5.2pt}\selectfont{
 	\begin{itemize}
-		\item \textrm{HTC}作业通常涉及在多个处理器上同时运行软件的多个独立实例\\
-			串行系统适用于这些要求
-		\item \textrm{HPC}作业通常涉及在许多处理器上运行并行软件的单个实例\\
-			在计算的各个实例中，结果在处理器之间进行通信，需要并行环境
-	\end{itemize}
-
-	\textrm{HTC}:~在需要时使用
+		\item 运行需要中间结果快速通信以执行计算的作业
+		\item 在相对较短的时间内大量使用计算资源
+	\end{itemize}}}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.48\textwidth}
+	{\fontsize{8.5pt}{5.2pt}\selectfont{\textrm{HTC}:~在需要时使用:}}
+{\fontsize{6.5pt}{5.2pt}\selectfont{
 	\begin{itemize}
 		\item 运行许多通常相似但不高度并行的作业
 		\item 使用不同的输入运行相同的程序
 		\item 运行不相互通信的作业
 		\item 利用使用网格启用技术的物理分布式资源
 		\item 利用多个计算资源在较长时间内执行计算任务
-	\end{itemize}
-	\textrm{HPC}:~在需要时使用：
+	\end{itemize}}}
+\end{minipage}
+			\vskip 8pt
 	\begin{itemize}
-		\item 运行需要中间结果快速通信以执行计算的作业
-		\item 在相对较短的时间内大量使用计算资源
+		\item {\fontsize{8.5pt}{5.2pt}\selectfont{\textrm{HPC}作业通常涉及在许多处理器上运行并行软件的单个实例}}
+			\vskip 1pt
+			{\fontsize{6.5pt}{5.2pt}\selectfont{在计算的各个实例中，结果在处理器之间进行通信，需要并行环境}}
+		\item {\fontsize{8.5pt}{5.2pt}\selectfont{\textrm{HTC}作业通常涉及在多个处理器上同时运行软件的多个独立实例}}
+			\vskip 1pt
+			{\fontsize{6.5pt}{5.2pt}\selectfont{串行系统适用于这些要求}}
 	\end{itemize}
 }
 
+%\frame
+%{
+%	\frametitle{\textrm{High Performance vs High Throughput}}
+%\begin{minipage}{0.47\textwidth}
+%	\textbf{HPC}
+%	\begin{itemize}
+%		\item \textrm{Focus:\,Large workflows of \underline{\textcolor{blue}{highly-interdependent}}}
+%		\item \textrm{More~important:\,persistent access to the fastest cores, CPU homogenity, special coding, shared filesystems, fast networks}
+%	\end{itemize}
+%\end{minipage}
+%\hskip 2pt
+%\begin{minipage}{0.47\textwidth}
+%	\textbf{HTC}
+%	\begin{itemize}
+%		\item \textrm{Focus:\,Large workflows of \textcolor{blue}{\underline{numerous},\underline{relatively small},}and \textcolor{blue}{\underline{independent}} compute tasks}
+%		\item \textrm{More~important:\,maximized number of running tasks}
+%		\item \textrm{Less~important:~ CPU speed, homogeneity}
+%	\end{itemize}
+%\end{minipage}
+%}
+%
 %\frame
 %{
 %	\frametitle{高性能计算与高通量计算}
@@ -135,10 +178,12 @@
 %\centering
 %\def\temptablewidth{1.0\textwidth}
 %\renewcommand\arraystretch{0.8} %表格宽度控制(普通表格宽度的两倍)
-%\rule{\temptablewidth}{1pt}
+%%\rule{\temptablewidth}{1pt}
+%\toprule        %% 绘制顶端线
 %\begin{tabular*} {\temptablewidth}{@{\extracolsep{\fill}}c@{\extracolsep{\fill}}c@{\extracolsep{\fill}}c}
 %%-------------------------------------------------------------------------------------------------------------------------
 %	\textrm{Parameter}&高性能计算\textrm{(HPC)}	&高通量计算\textrm{HTC}\\\hline
+%\midrule        %% 绘制中间线
 %%	\textrm{Stands for} &\textrm{HPC stands for High-Performance Computing} & \textrm{HTC stands for High Throughput Computing}\\\hline
 %%	\textrm{Definition} &\textrm{HPC is defined as the type of computing that makes use of multiple computer processors in order to perform complex computations parallelly.} & \textrm{HTC is defined as a type of computing that parallelly executes a large number of simple and computationally independent tasks.}\\\hline
 %%	\textrm{Workload} &\textrm{HPC consists of running large-scale, complex, and computationally intensive applications that need significant resources and memory. } &\textrm{HTC consists of running a large number of tasks that are independent and small in size and does not require a large amount of memory and resources.}\\\hline
@@ -149,7 +194,8 @@
 %%	\textrm{Applications} &\textrm{HPC can be used in applications such as engineering design, weather forecasting, drug discovery etc.} &\textrm{HTC can be used in applications such as bioinformatics, research applications, etc.}\\%\hline
 %
 %\end{tabular*}
-%\rule{\temptablewidth}{1pt}
+%%\rule{\temptablewidth}{1pt}
+%\bottomrule     %%绘制底部线
 %\end{minipage}
 %%\vskip -15pt
 %%\end{center}
