@@ -1,0 +1,153 @@
+# LAMMPS Input File for Grain Boundaries 
+# Mark Tschopp
+# This file will generate numerous input files for LAMMPS 
+# using a large number of grain boundaries 
+# syntax: lmp_exe -in in.gb_metrics.txt
+# or draw in variables from command line, e.g., 
+# syntax: lmp_exe -var fname gb_metrics -var datfile Fe_110_sig3 -in in.gb_metrics.txt
+
+# ---------- Setup Variables --------------------- 
+variable etol equal 1.0e-10
+variable ftol equal 1.0e-10 
+variable maxiter equal 5000 
+variable maxeval equal 10000 
+variable cutoff equal 3.5 
+variable datfile string "Fe_110_sig3"
+variable fname string "gb_metrics"
+variable potname string "potential_FeC.txt"
+
+log log.${fname}.txt
+
+######################################
+# INITIALIZATION
+units metal
+dimension 3
+boundary p p p
+atom_style atomic
+atom_modify map array
+
+######################################
+# SIMULATION CELL VARIABLES (in Angstroms)
+
+# DATA FILE
+read_data ${datfile}.txt
+
+# DUMP FILE:
+# region box1 prism 0 1 0 1 0 1 0 0 0
+# create_box 5 box1
+# read_dump ${fname} 0 x y z add yes
+
+replicate 1 1 1
+
+# ---------- Define Interatomic Potential --------------------- 
+include ${potname}
+
+# ---------- Define Computes --------------------- 
+compute 1 all pe/atom 
+compute 2 all property/atom fx fy fz
+# or bcc/14 for snn
+# or fcc/18 for snn
+compute 3 all centro/atom bcc
+compute 3a all centro/atom 14
+#compute 3b all centro/atom fcc
+#compute 3c all centro/atom 18
+compute 4 all cna/atom ${cutoff}
+compute 5 all coord/atom cutoff ${cutoff}
+compute 6 all stress/atom NULL
+# compute 7 all voronoi/atom
+
+# UNUSED per-atom computes (but could be used)
+#compute 8 all ackland/atom
+#compute 9 all cnp/atom 3.5
+
+# 0.8535 * latconst (fcc), 1.207 * latconst (bcc), hcp... much more complicated.  0.25 is sigma
+#compute 10 all entropy/atom 0.25 3.5
+
+# entropy for fcc Al (4.05 to 5.7) above.  3 components of unit vector
+#compute 11 all basal/atom
+
+# functions.  require more outputs - 5 of them?
+#compute 12 all orientorder/atom degrees 5 4 6 8 10 12 nnn 8 cutoff 3.5
+
+# Not built with Windows executable (doh! oh snap...):
+# compute 13 all ptm/atom fcc-hcp-bcc-ico 0.15 all
+# compute 14 all snap/atom 1.4 0.95 6 2.0 1.0
+
+dump 1 all custom 10000 dump.${fname}.* id c_1 c_2[1] c_3 c_3a c_4 c_5 & 
+                                           c_6[1] # c_7[1] &
+                                           # c_3b c_3c c_8 c_9 c_10 c_11 c_12
+
+# ---------- Run Minimization --------------------- 
+reset_timestep 0 
+thermo 10 
+thermo_style custom step pe press
+min_style cg 
+minimize ${etol} ${ftol} ${maxiter} ${maxeval} 
+
+# ---------- MATLAB Interface Data --------------------- 
+
+variable natoms equal "count(all)" 
+variable perx equal lx
+variable pery equal ly
+variable perz equal lz
+
+label loopi
+variable i loop ${natoms}
+variable xd equal x[$i]
+variable yd equal y[$i]
+variable zd equal z[$i]
+variable p1 equal c_1[$i]
+variable p2 equal c_2[$i][1]
+variable p3 equal c_2[$i][2]
+variable p4 equal c_2[$i][3]
+variable p5 equal c_3[$i]
+variable p6 equal c_3a[$i]
+variable p7 equal c_4[$i]
+variable p8 equal c_5[$i]
+variable p9 equal c_6[$i][1]
+variable p10 equal c_6[$i][2]
+variable p11 equal c_6[$i][3]
+variable p12 equal c_6[$i][4]
+variable p13 equal c_6[$i][5]
+variable p14 equal c_6[$i][6]
+# variable p15 equal c_7[$i][1]
+# variable p16 equal c_7[$i][2]
+
+# FOR MATLAB
+# This is just an example of how you could draw each individual value into a separate array
+# ...or just modify the below (Python) print to bring into a large array in MATLAB
+# Beware the triple quotes!  Even if you comment them out, they persist...
+#print """
+#%%xd($i) = ${xd}; yd($i) = ${yd}; zd($i) = ${zd};
+#%%p_pe($i) = ${p1}; p_f($i,1) = ${p2}; p_f($i,2) = ${p3}; p_f($i,3) = ${p4};
+#%%p_centro_fnn($i) = ${p5}; p_centro_snn($i) = ${p6}; p_cna($i) = ${p7}; p_coord($i) = ${p8};
+#%%p_stress($i,1) = ${p9};p_stress($i,2) = ${p10};p_stress($i,3) = ${p11};
+#%%p_stress($i,4) = ${p12};p_stress($i,5) = ${p13};p_stress($i,6) = ${p14};
+#%%p_voronoi($i,1) = ${p15};p_voronoi($i,2) = ${p16};
+#"""
+
+# FOR PYTHON
+# Define a list, i.e., data = []
+# run through each line, flagging the %% (ignores the ones with "print" in them)
+# exec(line.replace("%%","data.append(")+")")    (print)
+# ... OR FOR MATLAB
+# just draw this straight into an array
+# exec([replace(line,"%%","data=[data,"),"];"])  (print)
+print "%%[$i,${xd},${yd},${zd},${p1},${p2},${p3},${p4},${p5},${p6},${p7},${p8},${p9},${p10},${p11},${p12},${p13},${p14}]" # ,${p15},${p16}]"
+
+next i
+jump in.${fname}.txt loopi
+variable i delete
+
+# FOR MATLAB uncomment
+# print "%%natoms = ${natoms};perx = ${perx};pery = ${pery};perz = ${perz};"
+
+# FOR PYTHON uncomment
+print "%%natoms,perx,pery,perz = ${natoms},${perx},${pery},${perz}"
+
+shell rm dump.${fname}.0
+
+######################################
+# SIMULATION DONE
+print "All done"
+

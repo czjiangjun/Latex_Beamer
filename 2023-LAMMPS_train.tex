@@ -203,6 +203,7 @@
 \end{figure}
 }
 
+\subsection{状态方程}
 \frame[allowframebreaks]
 {
 	\frametitle{\textrm{LAMMPS}的输入文件}
@@ -263,6 +264,7 @@
 \end{figure}
 }
 
+\subsection{拉伸与压力下的形变模拟}
 \frame[allowframebreaks]
 {
 	\frametitle{\textrm{LAMMPS}的输入文件}
@@ -313,6 +315,93 @@
 \label{LAMMPS_Tensile-Loading}
 \end{figure}
 }
+
+\frame[allowframebreaks]
+{
+	\frametitle{\textrm{LAMMPS}的输入文件}
+	{\fontsize{6.0pt}{4.0pt}\selectfont{
+%\verbatiminput{Figures/Lammps_in_lj.txt} %为保险:~选用文件名绝对路径
+\verbatiminput{Figures/Lammps_tutorial-04-Lammps-in.txt} %为保险:~选用文件名绝对路径
+}}
+}
+
+\frame
+{
+	\frametitle{应力-应变曲线}
+\begin{figure}[h!]
+\centering
+\vskip -5pt
+\includegraphics[height=2.40in,width=4.0in, viewport=0 0 450 354,clip]{Lammps-Compressive-Stress_Strain.png}
+\caption{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{Compressive Stress-strain curve for uniaxial compression loading of single crystal aluminum in the <100> loading direction.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{LAMMPS_output-Stress-Strain}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{压缩载荷}
+\begin{figure}[h!]
+\centering
+\vskip -5pt
+\animategraphics[autoplay, loop, height=2.40in, width=2.50in,viewport= 0 0 256 256,clip]{1}{Figures/Lammps-simulation-cell-in-compression-}{0}{80}
+\caption{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{Compression Loading of an Aluminum Single Crystal..}}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{LAMMPS_Compression-Loading}
+\end{figure}
+}
+
+\frame[allowframebreaks]
+{
+	\frametitle{\textrm{LAMMPS}的输入文件}
+	{\fontsize{6.0pt}{4.0pt}\selectfont{
+%\verbatiminput{Figures/Lammps_in_lj.txt} %为保险:~选用文件名绝对路径
+\verbatiminput{Figures/Lammps_tutorial-05-Lammps-in.txt} %为保险:~选用文件名绝对路径
+}}
+}
+
+\frame[allowframebreaks]
+{
+	\frametitle{\textrm{LAMMPS}的输入文件}
+	{\fontsize{6.0pt}{4.0pt}\selectfont{
+%\verbatiminput{Figures/Lammps_in_lj.txt} %为保险:~选用文件名绝对路径
+\verbatiminput{Figures/Lammps_tutorial-06-Lammps-in.txt} %为保险:~选用文件名绝对路径
+}}
+}
+
+\frame[allowframebreaks]
+{
+	\frametitle{\textrm{LAMMPS}的输入文件}
+	{\fontsize{6.0pt}{4.0pt}\selectfont{
+%\verbatiminput{Figures/Lammps_in_lj.txt} %为保险:~选用文件名绝对路径
+\verbatiminput{Figures/Lammps_tutorial-07-Lammps-in.txt} %为保险:~选用文件名绝对路径
+}}
+}
+
+\frame[allowframebreaks]
+{
+	\frametitle{\textrm{LAMMPS}的\textrm{data}文件}
+	{\fontsize{6.0pt}{4.0pt}\selectfont{
+%\verbatiminput{Figures/Lammps_in_lj.txt} %为保险:~选用文件名绝对路径
+\verbatiminput{Figures/Lammps_tutorial-07-Lammps-data.txt} %为保险:~选用文件名绝对路径
+}}
+}
+
+\frame[allowframebreaks]
+{
+	\frametitle{\textrm{LAMMPS}的输入文件}
+	{\fontsize{6.0pt}{4.0pt}\selectfont{
+%\verbatiminput{Figures/Lammps_in_lj.txt} %为保险:~选用文件名绝对路径
+\verbatiminput{Figures/Lammps_tutorial-08-Lammps-in.txt} %为保险:~选用文件名绝对路径
+}}
+}
+
+\frame[allowframebreaks]
+{
+	\frametitle{\textrm{LAMMPS}的力场(势函数)文件}
+	{\fontsize{6.0pt}{4.0pt}\selectfont{
+%\verbatiminput{Figures/Lammps_in_lj.txt} %为保险:~选用文件名绝对路径
+\verbatiminput{Figures/Lammps_tutorial-08-Lammps-potentials.txt} %为保险:~选用文件名绝对路径
+}}
+}
 %\vskip 5pt
 %\frame
 %------------------------------------------------------------------------Reference----------------------------------------------------------------------------------------------
@@ -323,6 +412,11 @@
 {\tiny
 	\bibitem{J.-G._Lee}\textrm{J.-G. Lee, \textit{Computational Materials Science:~an introduction}}~\textrm{(2nd Edition),~CPC Press}, \textrm{(2017)}
 	\bibitem{url_lammps-tutorials}\url{https://github.com/mrkllntschpp/lammps-tutorials}
+%	\bibitem{url_Atom-Eye}\url{http://li.mit.edu/Archive/Graphics/A/}
+\bibitem{url_Atom-Eye_download}\url{http://li.mit.edu/Archive/Graphics/A/#download}
+%\bibitem{url_ImageJ}\url{https://imagej.net/ij/}
+\bibitem{url_ImageJ_download}\url{https://imagej.net/ij/download.html}
+\bibitem{url_ovito_download}\url{https://www.ovito.org/os-downloads/}
 }
 \end{thebibliography}
 }

@@ -1,0 +1,75 @@
+import glob, os
+import time
+
+start_time = time.time()
+target = "%%"
+data = []
+for file in glob.glob("log.gb_metrics.txt"):
+    with open(file) as f:
+        for line in f:
+            if target in line and "print" not in line and "$" not in line:
+                if "[" in line:
+#                    print(line.replace("%%","data.append(")+")")
+                    exec(line.replace("%%","data.append(")+")")
+                else:
+#                    print(line.replace("%%",""))
+                    exec(line.replace("%%",""))
+
+print("--- %s seconds ---" % (time.time() - start_time))
+
+print("natoms:", natoms)
+print("perx:",perx)
+print("pery:",pery)
+print("perz:",perz)
+
+# Fastest to import data to list, but now convert it to an array using numpy
+import numpy as np
+data1 = np.asarray(data)
+print("Data_xyz:",data1[:,1:4])
+print("Data shape:",data1.shape)
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# https://matplotlib.org/3.1.0/tutorials/colors/colormaps.html
+# or look through the dictionary, plt.cm.__dict__
+cmap = plt.cm.get_cmap('hot')
+
+fig, ax = plt.subplots()
+n = np.abs(data1[:,2]) < 5
+cax1 = ax.scatter(data1[n,1], data1[n,2],c=data1[n,3],ec = 'k',s=500,alpha=1,cmap=cmap)
+cax = ax.scatter(data1[n,1]+perx, data1[n,2],c=data1[n,3],ec = 'k',s=500,alpha=1,cmap=cmap)
+#ax.set_aspect('equal')
+ax.set_ylim(data1[n,2].min()-2,data1[n,2].max()+2)
+ax.set_xlim(data1[:,1].min()-2,data1[:,1].max()+perx+2)
+ax.set_axis_off()
+cbar = fig.colorbar(cax, ticks=[0, 2.019], orientation='vertical')
+cbar.ax.set_yticklabels(['0', '$\sqrt{2}$a$_0$/2']) # horizontal colorbar
+cbar.set_label('z-Coordinate (Angstroms)', rotation=90)
+fig.tight_layout()
+plt.show()
+
+print("Lattice Constant, a0:", 2*(data1[:,3].max()-data1[:,3].min())/np.sqrt(2), "Angstroms")
+
+plt.cm.__dict__ # what's in the dictionary?
+plt.cm.datad # data dictionary for colormaps?
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# https://matplotlib.org/3.1.0/tutorials/colors/colormaps.html
+# or look through the dictionary, plt.cm.__dict__
+cmap = plt.cm.get_cmap('Blues')
+
+fig, ax = plt.subplots()
+n = np.abs(data1[:,2]) < 5
+cax = ax.scatter(data1[n,1], data1[n,2],c=data1[n,4],ec = 'k',s=500,alpha=1,cmap=cmap)
+cax = ax.scatter(data1[n,1]+perx, data1[n,2],c=data1[n,4],ec = 'k',s=500,alpha=1,cmap=cmap)
+# ax.set_aspect('equal')
+ax.set_ylim(data1[n,2].min()-2,data1[n,2].max()+2)
+ax.set_xlim(data1[:,1].min()-2,data1[:,1].max()+perx+2)
+ax.set_axis_off()
+cbar = fig.colorbar(cax, orientation='vertical')
+cbar.set_label('Potential Energy (eV)',rotation=90)
+fig.tight_layout()
+plt.show()
