@@ -320,7 +320,7 @@
 \begin{figure}[h!]
 \centering
 \vskip -5pt
-\includegraphics[height=2.20in,width=4.0in, viewport=0 0 1050 554,clip]{Lammps-Stress_Strain.png}
+\includegraphics[height=2.20in,width=3.5in, viewport=0 0 1050 554,clip]{Lammps-Stress_Strain.png}
 \caption{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{Stress-strain curve for uniaxial tensile loading of single crystal aluminum in the <100> loading direction.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{LAMMPS_output-Stress-Strain}
 \end{figure}
@@ -353,7 +353,7 @@
 \begin{figure}[h!]
 \centering
 \vskip -5pt
-\includegraphics[height=2.40in,width=4.0in, viewport=0 0 450 354,clip]{Lammps-Compressive-Stress_Strain.png}
+\includegraphics[height=2.40in,width=3.0in, viewport=0 0 450 354,clip]{Lammps-Compressive-Stress_Strain.png}
 \caption{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{Compressive Stress-strain curve for uniaxial compression loading of single crystal aluminum in the <100> loading direction.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{LAMMPS_output-Stress-Strain}
 \end{figure}
@@ -371,6 +371,7 @@
 \end{figure}
 }
 
+\subsection{模拟晶界的形成}
 \frame[allowframebreaks]
 {
 	\frametitle{\textrm{LAMMPS}的输入文件}
@@ -380,6 +381,7 @@
 }}
 }
 
+\subsection{拉伸晶界直至断裂}
 \frame[allowframebreaks]
 {
 	\frametitle{\textrm{LAMMPS}的输入文件}
@@ -389,6 +391,7 @@
 }}
 }
 
+\subsection{铁的对称倾转晶界断裂的原子模拟}
 \frame[allowframebreaks]
 {
 	\frametitle{\textrm{LAMMPS}的输入文件}
@@ -407,6 +410,29 @@
 }}
 }
 
+\subsection{聚合物链行为模拟}
+\frame[allowframebreaks]
+{
+	\frametitle{\textrm{LAMMPS}的\textrm{data}文件}
+	{\fontsize{6.0pt}{5.0pt}\selectfont{
+%\verbatiminput{Figures/Lammps_in_lj.txt} %为保险:~选用文件名绝对路径
+\verbatiminput{Figures/Lammps_tutorial-08-Lammps-data.txt} %为保险:~选用文件名绝对路径
+}}
+}
+
+\frame
+{
+	\frametitle{\textrm{LAMMPS}中的键角与二面角}
+\begin{figure}[h!]
+\centering
+\vskip -5pt
+\includegraphics[height=1.70in,width=1.9in, viewport=0 0 320 280,clip]{Lammps-Angles_between_atoms.jpeg}
+\includegraphics[height=1.70in,width=1.9in, viewport=0 0 280 250,clip]{Lammps-Dihedral_angles_between_atoms.jpeg}
+\caption{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{A schematic of angles~(left) and dihedral angles~(right) between atoms defined in LAMMPS.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{LAMMPS_Angle-and-Dihedral_angle}
+\end{figure}
+}
+
 \frame[allowframebreaks]
 {
 	\frametitle{\textrm{LAMMPS}的输入文件}
@@ -416,14 +442,6 @@
 }}
 }
 
-\frame[allowframebreaks]
-{
-	\frametitle{\textrm{LAMMPS}的\textrm{data}文件}
-	{\fontsize{6.0pt}{5.0pt}\selectfont{
-%\verbatiminput{Figures/Lammps_in_lj.txt} %为保险:~选用文件名绝对路径
-\verbatiminput{Figures/Lammps_tutorial-08-Lammps-data.txt} %为保险:~选用文件名绝对路径
-}}
-}
 %\vskip 5pt
 \section{模型算例}
 \subsection{金纳米线的断裂模拟}
@@ -558,8 +576,8 @@
 	\frametitle{硅-碳纳米管复合材料的设计}
 \begin{figure}[h!]
 \centering
-\vskip -5pt
-\includegraphics[height=2.40in,width=3.5in, viewport=0 0 1000 620,clip]{Lammps_tutorial-15-design_concept-for-the-Si-CNT.png}
+\vskip -8pt
+\includegraphics[height=2.70in,width=3.6in, viewport=0 0 960 700,clip]{Lammps_tutorial-15-design_concept-for-the-Si-CNT.png}
 \caption{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{Design concept for the Si–CNT composite system.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{LAMMPS_Design_concept-for-Si_CNT.}
 \end{figure}
@@ -578,8 +596,8 @@
 	\frametitle{硅-碳纳米管复合材料的初始结构}
 \begin{figure}[h!]
 \centering
-\vskip -5pt
-\includegraphics[height=2.40in,width=3.5in, viewport=0 0 1000 620,clip]{Lammps_tutorial-15-starting_structure-for-the-Si-CNT.png}
+\vskip -10pt
+\includegraphics[height=2.70in,width=2.1in, viewport=0 0 500 720,clip]{Lammps_tutorial-15-starting_structure-for-the-Si-CNT.png}
 \caption{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{Starting structure of the Si–CNT composite system.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{LAMMPS_Starting-structure-of-Si_CNT.}
 \end{figure}
@@ -600,9 +618,9 @@
 \begin{figure}[h!]
 \centering
 \vskip -5pt
-\includegraphics[height=2.40in,width=3.5in, viewport=0 0 1000 620,clip]{Lammps_tutorial-15-three_potentials-adopted-for_Si-CNT_and_their-interface.png}
+\includegraphics[height=2.40in,width=4.0in, viewport=0 0 940 540,clip]{Lammps_tutorial-15-three_potentials-adopted-for_Si-CNT_and_their-interface.png}
 \caption{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{Three potentials adopted for the study to describe Si, CNT, and their interface.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{LAMMPS_Potential-Si-CNT.}
+\label{LAMMPS_Potential-Si-CNT}
 \end{figure}
 }
 
@@ -611,10 +629,10 @@
 	\frametitle{硅-碳纳米管复合材料的拉伸过程}
 \begin{figure}[h!]
 \centering
-\vskip -5pt
-\includegraphics[height=2.40in,width=3.5in, viewport=0 0 1000 620,clip]{Lammps_tutorial-15-snapshots_of_the Si-CNT_composite_system_under-tension-for-various-strains.png}
+\vskip -10pt
+\includegraphics[height=2.60in,width=2.8in, viewport=0 0 770 820,clip]{Lammps_tutorial-15-snapshots_of_the Si-CNT_composite_system_under-tension-for-various-strains.png}
 \caption{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{Snapshots of the Si–CNT composite system with $\varepsilon=0.5\mathrm{eV}$ under tension for various strains:~10.5\%~(a), 31.5\%~(b), 42\%~(c).}}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{LAMMPS_Si_CNT-under-tension.}
+\label{LAMMPS_Si_CNT-under-tension}
 \end{figure}
 }
 
@@ -624,9 +642,9 @@
 \begin{figure}[h!]
 \centering
 \vskip -5pt
-\includegraphics[height=2.40in,width=3.5in, viewport=0 0 1000 620,clip]{Lammps_tutorial-15-Stress_strain-curves-of-the-Si-CNT.png}
+\includegraphics[height=2.42in,width=4.0in, viewport=0 0 1200 730,clip]{Lammps_tutorial-15-Stress_strain-curves-of-the-Si-CNT.png}
 \caption{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{Stress–strain curves of the Si–CNT nanocomposites with various interfacial bonding strengths.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{LAMMPS_Stress-train-curve.}
+\label{LAMMPS_Stress-train-curve}
 \end{figure}
 }
 
@@ -645,9 +663,9 @@
 \begin{figure}[h!]
 \centering
 \vskip -5pt
-\includegraphics[height=2.40in,width=3.5in, viewport=0 0 1000 620,clip]{Lammps_tutorial-16-sliced-structure-of-ZrO2-8Y2O3-system.png}
+\includegraphics[height=2.40in,width=2.3in, viewport=0 0 640 680,clip]{Lammps_tutorial-16-sliced-structure-of-ZrO2-8Y2O3-system.png}
 \caption{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{Sliced structure of the $\mathrm{ZrO}_2$-8$\mathrm{Y_2O_3}$ system showing a metal ($\mathrm{Zr}$ and $\mathrm{Y}$) layer and an oxygen layer along the [001] direction.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{LAMMPS_slice-structure-of-ZrO2-8Y2O3.}
+\label{LAMMPS_slice-structure-of-ZrO2-8Y2O3}
 \end{figure}
 }
 
@@ -666,9 +684,8 @@
 \begin{figure}[h!]
 \centering
 \vskip -5pt
-\includegraphics[height=2.40in,width=3.5in, viewport=0 0 1000 620,clip]{Lammps_tutorial-16-MSD_plot-with-time_in-the_last_500000-timesteps.png}
-\caption{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{MSD plot with time in the range of the last 500,000 timesteps at vari-
-ous temperatures from 2,000 to 1,000 K.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\includegraphics[height=2.50in,width=3.2in, viewport=0 0 850 780,clip]{Lammps_tutorial-16-MSD_plot-with-time_in-the_last_500000-timesteps.png}
+\caption{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{MSD plot with time in the range of the last 500,000 timesteps at various temperatures from 2,000 to 1,000 K.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{LAMMPS_MSD-ZrO2-8Y2O3.}
 \end{figure}
 }
