@@ -3,6 +3,4 @@ clear
 units metal 
 dimension 3 
 boundary p p p 
-atom_style atomic 
-atom_modify map array
 
