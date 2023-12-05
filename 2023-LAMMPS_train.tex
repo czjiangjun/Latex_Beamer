@@ -50,6 +50,7 @@
 \end{figure}
 }
 
+\subsection{能量最小化}
 \frame
 {
 	\frametitle{\textrm{LAMMPS}的输入参数说明}
@@ -176,7 +177,7 @@
 	\item \textcolor{cyan}{\textit{min\_style}}:~设定优化算法(最小化算法)，\textcolor{blue}{\textrm{cg}}~指定共轭梯度法
 	\item \textcolor{cyan}{\textit{minimize}}:~设定开始最小化过程和最小化收敛精度和最大迭代次数:\\
 		其中1,3项为能量最小化，2,4项为能量梯度(力)\\
-		原胞弛豫的模拟由晶格常数为\textrm{4\AA}到\textrm{4.05\AA}
+		(原胞弛豫的模拟由晶格常数为\textrm{4\AA}到\textrm{4.05\AA})
 \end{itemize}
 }
 }
@@ -372,7 +373,7 @@
 \centering
 \vskip -5pt
 \animategraphics[autoplay, loop, height=2.40in, width=2.50in,viewport= 0 0 256 256,clip]{1}{Figures/Lammps-simulation-cell-in-compression-}{0}{80}
-\caption{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{Compression Loading of an Aluminum Single Crystal..}}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\caption{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{Compression Loading of an Aluminum Single Crystal.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{LAMMPS_Compression-Loading}
 \end{figure}
 }
@@ -387,6 +388,66 @@
 }}
 }
 
+\frame
+{
+	\frametitle{\textrm{LAMMPS}的输出文件}
+\begin{figure}[h!]
+\centering
+\vskip -10pt
+\includegraphics[height=2.40in,width=2.3in, viewport=0 0 780 890,clip]{Lammps-simulation_grain_boundary_structure-1.jpeg}
+\caption{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{The grain boundary structure prior to minimization.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{LAMMPS_output-simulation_grain_boundary_structure-1}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{LAMMPS}的输出文件}
+\begin{figure}[h!]
+\centering
+\vskip -10pt
+\includegraphics[height=2.40in,width=2.3in, viewport=0 0 780 890,clip]{Lammps-simulation_grain_boundary_structure-2.jpeg}
+\caption{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{The grain boundary structure after minimization (overlap distance equals 0.35).}}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{LAMMPS_output-simulation_grain_boundary_structure-2}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{LAMMPS}的输出文件}
+\begin{figure}[h!]
+\centering
+\vskip -10pt
+\includegraphics[height=2.40in,width=2.3in, viewport=0 0 780 890,clip]{Lammps-simulation_grain_boundary_structure-3.jpeg}
+\caption{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{The grain boundary structure after minimization (overlap distance equals 1.50).}}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{LAMMPS_output-simulation_grain_boundary_structure-3}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{LAMMPS}的输出文件}
+\begin{figure}[h!]
+\centering
+\vskip -10pt
+\animategraphics[autoplay, loop, height=2.40in, width=2.00in,viewport= 0 0 400 470,clip]{1}{Figures/Lammps-simulation_grain_boundary-for-aluminum-1-}{0}{31}
+\caption{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{The minimization of the grain boundary structure for an aluminum $\Sigma5(310)$ symmetric tilt grain boundary.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{LAMMPS_output-simulation_fracture-of-Fe}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{LAMMPS}的输出文件}
+\begin{figure}[h!]
+\centering
+\vskip -10pt
+\animategraphics[autoplay, loop, height=2.40in, width=2.00in,viewport= 0 0 400 470,clip]{1}{Figures/Lammps-simulation_grain_boundary-for-aluminum-2-}{0}{16}
+\caption{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{The minimization of the grain boundary structure for an aluminum $\Sigma5(310)$ symmetric tilt grain boundary (with a slightly different starting position.).}}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{LAMMPS_output-simulation_fracture-of-Fe}
+\end{figure}
+}
+
 \subsection{拉伸晶界直至断裂}
 \frame[allowframebreaks]
 {
@@ -395,6 +456,18 @@
 %\verbatiminput{Figures/Lammps_in_lj.txt} %为保险:~选用文件名绝对路径
 \verbatiminput{Figures/Lammps_tutorial-06-Lammps-in.txt} %为保险:~选用文件名绝对路径
 }}
+}
+
+\frame
+{
+	\frametitle{\textrm{LAMMPS}的输出文件}
+\begin{figure}[h!]
+\centering
+\vskip -10pt
+\animategraphics[autoplay, loop, height=2.40in, width=1.10in,viewport= 30 0 170 260,clip]{1}{Figures/Lammps-simulation_fracture-of-Fe-}{0}{120}
+\caption{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{The fracture of a Fe symmetric tilt grain boundary. Atoms are colored by the stress in the y-direction.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{LAMMPS_output-simulation_fracture-of-Fe}
+\end{figure}
 }
 
 \subsection{铁的对称倾转晶界断裂的原子模拟}
@@ -416,6 +489,30 @@
 }}
 }
 
+\frame
+{
+	\frametitle{\textrm{LAMMPS}的输出文件}
+\begin{figure}[h!]
+\centering
+\vskip -5pt
+\includegraphics[height=2.40in,width=3.4in, viewport=0 0 450 354,clip]{Lammps-grain_boundary-for-atoms-1.png}
+\caption{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{The atoms colored by the in-plane coordinate (z-direction:~the black and white grain boundary structure look for atoms that sit on different \{110\} planes).}}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{LAMMPS_output-grain_boundary-for-atoms-1}
+\end{figure}
+}
+
+%\frame
+%{
+%	\frametitle{\textrm{LAMMPS}的输出文件}
+%\begin{figure}[h!]
+%\centering
+%\vskip -5pt
+%\includegraphics[height=2.40in,width=3.0in, viewport=0 0 450 354,clip]{Lammps-grain_boundary-for-atoms-2.png}
+%\caption{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{The atoms colored by the in-plane coordinate (z-direction:~the black and white grain boundary structure look for atoms that sit on different \{110\} planes).}}}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\label{LAMMPS_output-grain_boundary-for-atoms-2}
+%\end{figure}
+%}
+%
 \subsection{长链聚合物行为模拟}
 \frame[allowframebreaks]
 {
@@ -448,6 +545,17 @@
 }}
 }
 
+\frame
+{
+	\frametitle{\textrm{LAMMPS}的输出文件}
+\begin{figure}[h!]
+\centering
+\vskip -5pt
+\animategraphics[autoplay, loop, height=2.40in, width=2.50in,viewport= 0 0 556 536,clip]{1}{Figures/Lammps-simulation_Equilibration-process-followed-by-minimization-}{0}{211}
+\caption{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{Equilibration process followed by minimization for a single polymer chain.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{LAMMPS_output-Equilibration-process-followed-by-minimization}
+\end{figure}
+}
 %\vskip 5pt
 \section{模型算例}
 \subsection{金纳米线的断裂模拟}
