@@ -870,7 +870,7 @@
 	常用的变量类型:
 	\begin{itemize}
 		\item \textrm{\textcolor{magenta}{index}}:~常搭配\textcolor{cyan}{\textit{next}}命令使用%，最开始将第一个字符串12赋予变量x，即x=12；后面遇到next命令时，在依次将后面的值赋予x
-			Eg：\textcolor{cyan}{\textit{variable}} \textrm{x} \textrm{\textcolor{magenta}{index}} \textrm{12 14 19 15 17}
+			\textrm{E.g.:}~\textcolor{cyan}{\textit{variable}} \textrm{x} \textrm{\textcolor{magenta}{index}} \textrm{12 14 19 15 17}
 \item \textrm{\textcolor{magenta}{loop}}:~与\textrm{\textcolor{magenta}{index}}的作用相同，不同的是\textrm{\textcolor{magenta}{index}}后跟的字符串需要一一列出，而\textrm{\textcolor{magenta}{loop}}后面只需要写一个$n$即可\\
 	比如\textcolor{cyan}{\textit{variable}} \textrm{x} \textrm{\textcolor{magenta}{loop}} \textrm{140}代表了从1到140的列表，不需要像\textrm{\textcolor{magenta}{index}}一样一一列出
 	\end{itemize}
@@ -879,36 +879,54 @@
 \frame
 {
 	\frametitle{\textcolor{cyan}{\textit{lattice}}:~定义供其它命令使用的晶格}
-	        语法：lattice style scale keyword values ...
-        style = none or sc or bcc or fcc or hcp or diamond or sq or sq2 or hex or custom；
-        scale = scale factor between lattice and simulation box；对于除了LJ units外的所有其他单元，scale是以距离为单位的晶格常数(lattice constant in distance units).
-        keyword=origin or orient or spacing or a1 or a2 or a3 or bias.
-        介绍
-            在LAMMPS中，晶格仅仅是空间中点的集合，由一个具有基原子的单元细胞决定，该单元细胞在所有维度中无限被复制。lattice命令可以用来定义各式各样的晶格。
-            lattice在lammps以两种方式被应用，第一种是利用create_atoms命令在模拟框的晶格格点上创建原子，create_atom命令是给晶格格点上的基原子分配不同的原子类型；第二种是被create_box、region、velocity等命令用作距离单位。
-            lattice命令需要与模拟维度保持一致，style sc or bcc or fcc or hcp or diamond被用作3D问题，而style sq or sq2 or hex 被用作2D问题。
-
-Eg：lattice fcc 4.05 表示晶格类型是fcc，晶格常数为4.05，单位是埃米。
+	\begin{itemize}
+		\item 语法:~\textcolor{cyan}{\textit{lattice}} \textrm{\textcolor{blue}{style scale keyword values $\cdots$}} 
+			\begin{itemize}
+				\item \textrm{\textcolor{blue}{style}}可以取 \textrm{\textcolor{magenta}{none} or \textcolor{magenta}{sc} or \textcolor{magenta}{bcc} or \textcolor{magenta}{fcc} or \textcolor{magenta}{hcp} or \textcolor{magenta}{diamond} or \textcolor{magenta}{sq} or \textcolor{magenta}{sq2} or \textcolor{magenta}{hex} or \textcolor{magenta}{custom}
+				\item \textrm{\textcolor{blue}{scale}} \footnote{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{scale}表示的标度关系:~\textrm{scale factor between lattice and simulation box}}}:~对于除了\textrm{L-J~units}外的所有其他单位，\textrm{scale}是以距离为单位的晶格常数\textrm{(lattice constant in distance units)}
+				\item \textrm{\textcolor{blue}{keyword}}可以取\textrm{\textcolor{magenta}{origin} or \textcolor{magenta}{orient} or \textcolor{magenta}{spacing} or \textcolor{magenta}{$a_1$} or \textcolor{magenta}{$a_2$} or \textcolor{magenta}{$a_3$} or \textcolor{magenta}{bias}}
+			\end{itemize}
+	\end{itemize}
+	{\fontsize{7.5pt}{5.2pt}\selectfont{\textrm{LAMMPS}中，晶格仅仅是空间中点的集合，模拟对象由最小重复单元(初基原胞)决定，该最小重复单元在所有维度中无限被复制}}\\
+	{\fontsize{6.2pt}{5.2pt}\selectfont{\textcolor{cyan}{\textit{lattice}}命令可定义各式各样的晶格}}
+	{\fontsize{7.5pt}{5.2pt}\selectfont{\textcolor{cyan}{\textit{lattice}}在\textrm{LAMMPS}}中的两种应用方式}}
+	\begin{enumerate}
+		\item 利用\textcolor{cyan}{\textit{create\_atoms}}命令在模拟单元的晶格格点上创建原子，\textcolor{cyan}{\textit{create\_atom}}命令是给晶格格点原子位置上分配不同的原子类型
+		\item 被\textcolor{cyan}{\textit{create\_box}}, \textcolor{cyan}{\textit{region}}, \textcolor{cyan}{\textit{velocity}}等命令用作距离单位
+	\end{enumerate}
+	\textcolor{cyan}{\textit{lattice}}命令需要与模拟维度保持一致:
+	\begin{itemize}
+		\item \textrm{\textcolor{blue}{style}} \textrm{\textcolor{magenta}{sc} or \textcolor{magenta}{bcc} or \textcolor{magenta}{fcc} or \textcolor{magenta}{hcp} or \textcolor{magenta}{diamond}}被用作\textrm{3D}问题
+		\item \textrm{\textcolor{blue}{style}} \textrm{\textcolor{magenta}{sq} or \textcolor{magenta}{sq2} or \textcolor{magenta}{hex}} 被用作\textrm{2D}问题
+	\end{itemize}
+	{\fontsize{7.5pt}{5.2pt}\selectfont{\textcolor{red}{E.g:}~\textcolor{cyan}{\textit{lattice}} \textrm{fcc 4.05} 表示晶格类型是\textrm{fcc}，晶格常数为\textrm{4.05}，单位是\textrm{\AA}}
 }
 
 \frame
 {
 	\frametitle{\textcolor{cyan}{\textit{region}}:~定义空间几何区域}
-	语法：region ID style args keyword arg ...
-
-        ID：用户赋予的名字；这个区域的名字。
-        style：delete or block or cone or cylinder or ellipsoid or plane or prism or sphere or union or intersect
-        delete：没有参数；block: xlo xhi ylo yhi zlo zhi是三个维度上的最小值和最大值；
-        cone：dim c1 c2 radlo radhi lo hi。
-
-举例如下：
-
-lattice fcc 4.05
-region box1 block 0 30 0 30 0 30
-
-意思是创建一个名字为box1的block,其中x，y，z方向上的长度均为30倍的晶格常数。注意：这里的30是30倍的意思，实际长度为30乘以4.05埃米，如果想要让30代表实际长度，既让其单位为埃米，则只需要在后面加上units box即可，如下：
-
-region box1 block 0 30 0 30 0 30 units box
+	\begin{itemize}
+		\item 语法:~\textcolor{cyan}{\textit{region}} \textrm{\textcolor{blue}{ID style keyword $\cdots$}}
+			\begin{itemize}
+				\item \textrm{\textcolor{blue}{ID}}:~用户为区域命的名
+				\item \textrm{\textcolor{blue}{style}}可以取\textrm{\textcolor{magenta}{delete} or \textcolor{magenta}{block} or \textcolor{magenta}{cone} or \textcolor{magenta}{cylinder} or \textcolor{magenta}{ellipsoid} or \textcolor{magenta}{plane} or \textcolor{magenta}{prism} or \textcolor{magenta}{sphere} or \textcolor{magenta}{union} or \textcolor{magenta}{intersect}}
+					\begin{itemize}
+{\fontsize{7.5pt}{5.2pt}\selectfont{
+\item \textrm{\textcolor{magenta}{delete}}:~没有参数
+\item \textrm{\textcolor{magenta}{block}}:~\textrm{xlo xhi ylo yhi zlo zhi}是三个维度上的最小值和最大值
+\item \textrm{\textcolor{magenta}{cone}}:~\textrm{dim c1 c2 radlo radhi lo hi}}}
+					\end{itemize}
+			\end{itemize}
+	\end{itemize}
+{\fontsize{7.5pt}{5.2pt}\selectfont{
+	\textcolor{red}{举例如下}
+	\textcolor{cyan}{\textit{lattice}} \textrm{fcc 4.05}\\
+	\textcolor{cyan}{\textit{region}} \textrm{box1 \textcolor{magenta}{block} 0 30 0 30 0 30}}}\\
+{\fontsize{6.2pt}{5.2pt}\selectfont{
+	意思是创建一个名字为\textrm{box1}的\textrm{\textcolor{magenta}{block}},其中$x$, $y$, $z$方向上的长度均为30倍的晶格常数
+	\textcolor{red}{注意}:~这里的\textrm{30}是\textrm{30}倍的意思，实际长度为\textrm{30}乘以\textrm{4.05}\AA\\
+	如果想要让\textrm{30}代表实际长度，即让其单位为\AA，则只需要在后面加上\textcolor{cyan}{\textit{units}} \textrm{box}即可:\\
+	\textcolor{cyan}{\textit{region}} \textrm{box1 \textcolor{magenta}{block} 0 30 0 30 0 30 \textcolor{cyan}\textit{units} \textrm{box}}}}
 }
 
 \frame
