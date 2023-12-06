@@ -804,6 +804,284 @@
 \end{figure}
 }
 
+\section{\rm{LAMMPS}常用命令}
+\frame
+{
+	\frametitle{\textcolor{cyan}{\textit{units}}:~定义单位类型}
+	\begin{itemize}
+		\item \textcolor{cyan}{\textit{units}}~命令用来定义模拟过程中使用的单位类型\\
+			{\fontsize{7.5pt}{5.2pt}\selectfont{它决定了所有输入脚本、数据文件和所有输出到屏幕、日志文件以及\textrm{dump}文件中物理量的单位}}
+		\item 语法:~\textcolor{cyan}{\textit{units}} \textrm{style}
+\vskip 3pt
+\textrm{styly}可取\textrm{\textcolor{magenta}{lj} or \textcolor{magenta}{real} or \textcolor{magenta}{metal} or \textcolor{magenta}{si} or \textcolor{magenta}{cgs} or \textcolor{magenta}{electron} or \textcolor{magenta}{micro} or \textcolor{magenta}{nano}}\\
+{\fontsize{7.5pt}{5.2pt}\selectfont{金属中一般用\textrm{metal}}}
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{\textcolor{cyan}{\textit{boundary}}:~设置模拟\textrm{box}的边界条件}
+	\begin{itemize}
+		\item 语法:~\textcolor{cyan}{\textit{boundary}} \textrm{$x$~$y$~$z$}
+\vskip 3pt
+\textcolor{cyan}{\textit{boundary}}命令设置box的边界条件，参数\textrm{$x$~$y$~$z$}分别设置该维度的边界条件，最基本的边界条件有四种:~\textrm{\textcolor{blue}{p}~\textcolor{blue}{f}~\textcolor{blue}{s}~\textcolor{blue}{m}}
+	\begin{itemize}
+
+{\fontsize{7.5pt}{5.2pt}\selectfont{
+		\item \textrm{\textcolor{blue}{p}}是周期性边界:~当粒子从一侧飞出，会从相对应的另一侧再次进入\textrm{box}，一般情况下不会发生\textrm{''lost~atoms''}(丢失原子)错误
+		\item \textrm{\textcolor{blue}{f}}是固定边界:~表示\textrm{box}的表面在该方向上被固定住，不因体系压力的变化发生移动，如果原子从一个表面飞出，会提示\textrm{''lost~atoms''}错误\\
+			{\fontsize{6.2pt}{5.2pt}\selectfont{设置\textcolor{cyan}{\textit{thermo\_modify}}~\textrm{\textcolor{blue}{lost}}可以允许原子丢失，否则模拟过程会被终止}}
+		\item \textrm{\textcolor{blue}{s}}是收缩性边界条件:~表示在该方向上，盒子的表面会根据体系的压力大小或原子运动情况发生移动\\
+			{\fontsize{6.2pt}{5.2pt}\selectfont{一般情况下，盒子会配合原子的移动，尽量把原子包含在\textrm{box}内，但是当原子速度过快，位移太大时原子也可能会飞出盒子，造成\textrm{''lost~atoms''}错误}}}}
+	\end{itemize}
+{\fontsize{7.0pt}{5.2pt}\selectfont{
+	\textrm{LAMMPS}支持对同一方向的两个边界设置不同的边界条件，对$y$方向下表面设置\textrm{\textcolor{blue}{f}}边界、上表面设置\textrm{\textcolor{blue}{s}}边界，可以写为:\\
+	\textcolor{cyan}{\textit{boundary}}~ \textcolor{blue}{\textrm{p}}~\textcolor{blue}{\textrm{fs}}~\textcolor{blue}{\textrm{p}}}}
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{\textcolor{cyan}{\textit{atom\_style}}:~定义模拟过程中原子的类型}
+	\begin{itemize}
+		\item 语法:~\textcolor{cyan}{\textit{atom\_style}} \textrm{\textcolor{blue}{style}}\\
+			\textrm{\textcolor{blue}{style}}为\textrm{\textcolor{magenta}{amoeba} or \textcolor{magenta}{angle} or \textcolor{magenta}{atomic} or \textcolor{magenta}{body} or \textcolor{magenta}{bond} or \textcolor{magenta}{charge} or \textcolor{magenta}{dipole} or \textcolor{magenta}{dpd} or \textcolor{magenta}{edpd} or \textcolor{magenta}{electron} or \textcolor{magenta}{ellipsoid} or \textcolor{magenta}{full} or \textcolor{magenta}{line} or \textcolor{magenta}{mdpd} or \textcolor{magenta}{molecular} or \textcolor{magenta}{oxdna} or \textcolor{magenta}{peri} or \textcolor{magenta}{smd} or \textcolor{magenta}{sph} or \textcolor{magenta}{sphere} or \textcolor{magenta}{bpm}/\textcolor{magenta}{sphere} or \textcolor{magenta}{spin} or \textcolor{magenta}{tdpd} or \textcolor{magenta}{tri} or \textcolor{magenta}{template} or \textcolor{magenta}{hybrid}}
+		\item \textcolor{cyan}{atom\_style}命令用来定义模拟过程中原子的类型:~不同的对象粒子所具有的属性不同
+	\end{itemize}
+{\fontsize{7.5pt}{5.2pt}\selectfont{
+	\textcolor{red}{对于某个粒子对象，粒子不存在的属性就不需要设置，以便节省内存，加速运算}}}
+\vskip 5pt
+{\fontsize{6.2pt}{5.2pt}\selectfont{
+当\textrm{style}为\textcolor{blue}{\textrm{full}}时，其属性包括:~粒子编号，粒子所属分子的编号，粒子类别\textrm{(atom type)}，带电电荷量，坐标$x$,$y$,$z$\\
+如果粒子是金属粒子，如\textrm{Fe}，粒子\textrm{style}为\textcolor{blue}{\textrm{atomic}}的属性是:~粒子编号，粒子类别，坐标$x$,$y$,$z$}}
+}
+
+\frame
+{
+	\frametitle{\textcolor{cyan}{\textit{variable}}:~定义一个变量}
+	\begin{itemize}
+		\item 语法:~\textcolor{cyan}{\textit{variable}} \textrm{\textcolor{blue}{name style $\cdots$}}\\
+			{\fontsize{7.5pt}{5.2pt}\selectfont{\textcolor{blue}{\textrm{name}}是用户定义的变量名}}\\
+			\textrm{\textcolor{blue}{style}}是变量类型，可以为\textrm{\textcolor{magenta}{delete} or \textcolor{magenta}{index} or \textcolor{magenta}{loop} or \textcolor{magenta}{world} or \textcolor{magenta}{universe} or \textcolor{magenta}{uloop} or \textcolor{magenta}{string} or \textcolor{magenta}{format} or \textcolor{magenta}{getenv} or \textcolor{magenta}{file} or \textcolor{magenta}{atomfile} or \textcolor{magenta}{python} or \textcolor{magenta}{timer} or \textcolor{magenta}{internal} or \textcolor{magenta}{equal} or \textcolor{magenta}{vector} or \textcolor{magenta}{atom}}
+			\vskip 3pt
+{\fontsize{6.2pt}{5.2pt}\selectfont{
+	\textcolor{cyan}{\textit{variable}}是\textrm{LAMMPS}中定义变量的主要命令，在编写\textcolor{purple}{in}文件时，用于循环程序，条件执行，控制体系运动，变化模拟参数，以及分布计算核心，提高计算效率方面非常有用}}
+	\end{itemize}
+	常用的变量类型:
+	\begin{itemize}
+		\item \textrm{\textcolor{magenta}{index}}:~常搭配\textcolor{cyan}{\textit{next}}命令使用%，最开始将第一个字符串12赋予变量x，即x=12；后面遇到next命令时，在依次将后面的值赋予x
+			Eg：\textcolor{cyan}{\textit{variable}} \textrm{x} \textrm{\textcolor{magenta}{index}} \textrm{12 14 19 15 17}
+\item \textrm{\textcolor{magenta}{loop}}:~与\textrm{\textcolor{magenta}{index}}的作用相同，不同的是\textrm{\textcolor{magenta}{index}}后跟的字符串需要一一列出，而\textrm{\textcolor{magenta}{loop}}后面只需要写一个$n$即可\\
+	比如\textcolor{cyan}{\textit{variable}} \textrm{x} \textrm{\textcolor{magenta}{loop}} \textrm{140}代表了从1到140的列表，不需要像\textrm{\textcolor{magenta}{index}}一样一一列出
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{\textcolor{cyan}{\textit{lattice}}:~定义供其它命令使用的晶格}
+	        语法：lattice style scale keyword values ...
+        style = none or sc or bcc or fcc or hcp or diamond or sq or sq2 or hex or custom；
+        scale = scale factor between lattice and simulation box；对于除了LJ units外的所有其他单元，scale是以距离为单位的晶格常数(lattice constant in distance units).
+        keyword=origin or orient or spacing or a1 or a2 or a3 or bias.
+        介绍
+            在LAMMPS中，晶格仅仅是空间中点的集合，由一个具有基原子的单元细胞决定，该单元细胞在所有维度中无限被复制。lattice命令可以用来定义各式各样的晶格。
+            lattice在lammps以两种方式被应用，第一种是利用create_atoms命令在模拟框的晶格格点上创建原子，create_atom命令是给晶格格点上的基原子分配不同的原子类型；第二种是被create_box、region、velocity等命令用作距离单位。
+            lattice命令需要与模拟维度保持一致，style sc or bcc or fcc or hcp or diamond被用作3D问题，而style sq or sq2 or hex 被用作2D问题。
+
+Eg：lattice fcc 4.05 表示晶格类型是fcc，晶格常数为4.05，单位是埃米。
+}
+
+\frame
+{
+	\frametitle{\textcolor{cyan}{\textit{region}}:~定义空间几何区域}
+	语法：region ID style args keyword arg ...
+
+        ID：用户赋予的名字；这个区域的名字。
+        style：delete or block or cone or cylinder or ellipsoid or plane or prism or sphere or union or intersect
+        delete：没有参数；block: xlo xhi ylo yhi zlo zhi是三个维度上的最小值和最大值；
+        cone：dim c1 c2 radlo radhi lo hi。
+
+举例如下：
+
+lattice fcc 4.05
+region box1 block 0 30 0 30 0 30
+
+意思是创建一个名字为box1的block,其中x，y，z方向上的长度均为30倍的晶格常数。注意：这里的30是30倍的意思，实际长度为30乘以4.05埃米，如果想要让30代表实际长度，既让其单位为埃米，则只需要在后面加上units box即可，如下：
+
+region box1 block 0 30 0 30 0 30 units box
+}
+
+\frame
+{
+	\frametitle{\textcolor{cyan}{\textit{create\_box}}:~创建一个有限区域}
+	该命令还固定了该模拟区域中有几类原子；
+
+create_box N region-ID keyword value ...
+
+    N：本次模拟使用的原子种类数；region-ID：用来模拟的区域的ID；keyword = bond/types or angle/types or dihedral/types or improper/types or extra/bond/per/atom or extra/angle/per/atom or extra/dihedral/per/atom or extra/improper/per/atom or extra/special/per/atom
+
+举例如下：
+
+# 在模拟盒子box1中添加一类原子
+create_box 1 box1
+}
+
+\frame
+{
+	\frametitle{\textcolor{cyan}{\textit{create\_atoms}}:~创建一个有限区域}
+	在指定区域内填充一定数量的原子。其中type与后面定义的模拟原子中的信息(mass)对应。
+
+create_atoms type style args keyword values ...
+
+举例如下：
+
+# 在整个模拟区域中添加类型为1的原子(即添加Al原子)
+create_atoms 1 region whole
+# 模拟环境中的原子信息
+mass 1 26.981   # Al
+mass 2 55.845   # Fe
+}
+
+\frame
+{
+	\frametitle{\textcolor{cyan}{\textit{mass}}:~为某一种或几种类型的原子设置质量}
+}
+
+\frame
+{
+	\frametitle{\textcolor{cyan}{\textit{pair\_style}}和\textcolor{cyan}{\textit{pair\_coeff}}}
+	设置势函数。金属中常用的势函数是EAM势函数。* *是通配符，意思是使原子之间相互作用，假如体系中有两类原子，Al原子和Fe原子，这个通配符的作用就是使Al原子与Al原子相互作用，Fe原子与Fe原子相互作用，Al原子和Fe原子相互作用。
+
+举例如下：
+
+pair_style	eam/alloy
+pair_coeff	* * Al99.eam.alloy Al
+
+其中Al99.eam.alloy是势函数的名称。不同势函数后面的pair_coeff写法不同，EAM势函数需要在后面写出所有原子的名称，且写的顺序要和mass中定义的顺序一一对应。
+}
+
+\frame
+{
+	\frametitle{\textcolor{cyan}{\textit{group}}:~对原子分组}
+	分组后的原子会有一个group-ID，group-ID被用到fix、compute、dump等命令中。例如fix命令中的第二个参数就是group-ID，即使不对原子进行分组，lammps也会设置一个默认的原子组：all，也就是把所有的原子全部划分到all组内。
+}
+
+\frame
+{
+	\frametitle{\textcolor{cyan}{\textit{set}}:~改变原子类型}
+	改变原子类型，可以用来为不同区域设置不同颜色，或者用在高熵合金建模过程中。下面实例是用在高熵合金建模中的，通过
+
+set type type_ID type/ratio type_new fraction seed
+
+type_ID是需要被替换的原子类型，type_new是将要转换的新原子类型，fraction是新原子类型占初始原子类型的比例。seed为随机种子。
+
+# 初始化
+units         metal
+boundary      p p p
+atom_style    atomic
+timestep      0.001
+# 建模
+lattice       fcc 3.56
+region        box block 0 20 0 20 0 20
+create_box    5 box
+create_atoms    1 box
+#将type为1的原子转换为其他原子
+set    type 1 type/ratio 2 0.2 12333
+set    type 1 type/ratio 3 0.5 12333
+set    type 1 type/ratio 4 0.5 12333
+set    type 3 type/ratio 5 0.5 12333
+#设置原子类型
+mass    1 27 #Al
+mass    2 56 #Fe
+mass    3 28 #Si
+mass    4 64 #Cu
+mass    5 24 #Mg
+}
+
+\frame
+{
+	\frametitle{\textcolor{cyan}{\textit{timestep}}:~设置模拟时间步长}
+	设置模拟的时间步长，金属中一般是在atomic单位制下，所以timestep的单位一般是ps。
+
+举例如下：
+
+timestep 0.001
+
+这里设置的是0.001ps，也就是1fs。
+}
+
+\frame
+{
+	\frametitle{\textcolor{cyan}{\textit{velocity}}:~创建初始温度}
+	用来创建初始温度，或者理解为原子组创建初始速度。(在lammps中温度的变化就是对应了速度的变化)
+
+velocity group-ID style args keyword value ...
+
+    group-ID：即将改变速度的原子组的ID。style = create or set or scale or ramp or zero
+        create args = temp seed temp = temperature value (temperature units)
+
+create后面要跟自己创建的初始温度，
+
+举例如下：
+
+velocity all create 300 12345
+
+上述例子中的all是lammps中的关键字，意思是所有原子，也可以改成group-ID。create 300意思是创建初始温度为300K，后面的12345是随机种子。
+}
+
+\frame
+{
+	\frametitle{\textcolor{cyan}{\textit{fix}}}
+	fix ID group-ID style_name keyword value ...
+
+    ID = user-assigned name for the fixgroup-ID = ID of the group of atoms to apply the fix tostyle = one of a long list of possible style names (see below)
+        nvt or npt or nphargs = arguments used by a particular style
+
+举例如下：
+
+fix 1 all npt temp 300 300 0.1 iso 0 0 1 drag 1
+
+1是该fix命令的ID；all意思是对所有原子施加后面的条件；npt是等温等压系综；temp是设置温度的关键字，temp 300 800 0.1命令中，temp后的第一个参数300是初始温度，第二个参数300是截至温度，第三个参数0.1是温度的阻尼系数，设置它的意思是使其在升温或者降温过程中不会出现太大的波动，一般来说阻尼系数是100倍的tempstep。iso是控压的，因为设置的是npt系综，所以温度和压力必须设置，iso是控压方式，与之对应的还有aniso，其中iso是对x，y，z三个方向进行联合控压，或者说是耦合控压，在控压时要改变模拟盒子的大小，x，y，z三个方向同时改变。与之相对的是aniso，是非耦合控压，x，y，z三个方向不是同时改变。iso后跟的是初始压强，结束压强，和阻尼系数(为了使压强在增加或者降低过程中不会出现太大波动)。
+}
+
+\frame
+{
+	\frametitle{\textcolor{cyan}{\textit{thermo}}和\textcolor{cyan}{\textit{thermo\_style}}}
+	设置输出信息/格式。
+
+thermo N
+
+    N = output thermodynamics every N timesteps
+
+thermo_style style args
+
+    style = one or multi or yaml or customargs = list of arguments for a particular style
+
+举例如下：
+
+thermo 1000
+thermo_style custom step lx ly lz press pxx pyy pzz pe temp
+
+thermo 1000意思是每1000步在屏幕上输出一次。thermo_style后面是在屏幕上输出的信息。custom命令后的内容就是在屏幕上输出的，可以看到输出的运行步数step，三个方向上的长度lx，ly，lz，模拟体系的压力press，三个方向上的压力pxx，pyy，pzz，pe是模拟体系的势能，temp是模拟体系的温度。下图中即显示了上述信息，可以看到最后一行是温度，在模拟开始时温度为300k，由于前面fix命令中设置了temp 300 300 0.1，所以截至温度也是300K，中间会有升温和降温过程，如果最终温度没到300K，则可能是运行的步数不够。
+}
+
+
+\frame
+{
+	\frametitle{\textcolor{cyan}{\textit{dump}}:~设置输出}
+	dump ID group-ID style N file attribute1 attribute2 ...
+
+    ID = user-assigned name for the dumpgroup-ID = ID of the group of atoms to be dumpedstyle = atom or atom/adios or atom/gz or atom/zstd or atom/mpiio or cfg or cfg/gz or cfg/zstd or cfg/mpiio or cfg/uef or custom or custom/gz or custom/zstd or custom/mpiio or custom/adios or dcd or grid or grid/vtk or h5md or image or local or local/gz or local/zstd or molfile or movie or netcdf or netcdf/mpiio or vtk or xtc or xyz or xyz/gz or xyz/zstd or xyz/mpiio or yamlN = dump on timesteps which are multiples of Nfile = name of file to write dump info toattribute1,attribute2,… = list of attributes for a particular style
+
+举例如下：
+
+dump 1 all custom 1000 Al.xyz type x y z
+
+其中1是用户指定的dump名字，all是关键字，意思对所有的原子施加后面的操作，custom是自定义输出，1000的意思是每1000步输出一次，输出到后面的Al.xyz文件中，该文件中输出的信息有type(原子类型)，和x，y，z坐标。
+
+整个过程中的所有信息保存在log.lammps文件中
+}
+
 %------------------------------------------------------------------------Reference----------------------------------------------------------------------------------------------
 		\frame[allowframebreaks]
 {
