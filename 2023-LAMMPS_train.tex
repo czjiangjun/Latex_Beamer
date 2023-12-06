@@ -964,6 +964,91 @@ pair_coeff	* * Al99.eam.alloy Al
 {
 	\frametitle{\textcolor{cyan}{\textit{group}}:~对原子分组}
 	分组后的原子会有一个group-ID，group-ID被用到fix、compute、dump等命令中。例如fix命令中的第二个参数就是group-ID，即使不对原子进行分组，lammps也会设置一个默认的原子组：all，也就是把所有的原子全部划分到all组内。
+
+	被group后的原子会被分配一个group-ID，这个group-ID被用到fix、compute、dump等命令中。
+
+例如fix命令中的第二个参数就是group-ID：
+
+fix ID group-ID style_name keyword value ...
+fix 1 water npt temp 300.0 300.0 100.0 iso 0.0 0.0 1000.0
+
+即使不对原子进行分组，lammps也会设置一个默认的原子组：all，也就是把所有的原子全部划分到all组内。
+
+例如对系统所有原子进行温度初始化，可以使用下面的语句，其中all就是默认的group-ID：
+
+velocity all create 300.0 4928459
+
+常用的分组方式有以下几种：
+
+（1）配合region使用，把某一区域的原子归入到一个组中。
+
+例如在纳米铜的拉伸时，需要一端固定，另一端施加一定的速度进行拉伸，这就需要把Cu原子划分为三个组：
+
+left：固定组
+
+right：速度加载组
+
+mobile：中间组
+
+group命令配合union关键字可实现两个组的合并，例如left和right组合并为boundary组，可以写为：
+
+group     boundary union left right
+
+配合substract关键字可实现减法操作，所有原子减去boundary原子即为中间moible原子，可以写为：
+
+group     mobile subtract all boundary
+
+Cu拉伸建模全部代码如下：
+
+#模型基本设置
+units               metal
+dimension           3
+boundary            p s p
+neighbor            0.3 bin
+neigh_modify        delay 0
+timestep            0.001
+#设置晶格参数，生成box
+lattice             fcc 3.61
+region              box block 0 20 0 5 0 5
+create_box          3 box
+create_atoms        1 box
+#设置Cu原子质量
+mass		    1 64
+mass		    2 64
+mass		    3 64
+#设置left和right区域，以此region设置group
+region              left block INF 2 INF INF INF INF
+group               left region left
+set		    group left type 2
+region              right block 18 INF INF INF INF INF
+group               right region right
+set		    group right type 3
+#group组加减操作
+group               boundary union left right
+group               mobile subtract all boundary
+#保存模型数据
+write_data	    Cu.data
+
+（2）配合type命令，可以将多种类型的原子归为一组
+
+#将原子类型为3和4的原子全部归入到water组
+
+group water type 3 4
+
+（3）配合原子id可将特定的原子归入到一组
+
+#原子id为10、25、50的三个原子归入到sub组
+group sub id 10 25 50
+#原子id从500到1000的全部原子归入到sub组
+group sub id 500:1000
+#原子id为100、110、120...10000的原子归入到sub组
+group sub id 100:10000:10
+#原子id小于或等于150的原子归入到sub组
+group sub id <= 150
+
+需要注意的是，lammps最多支持32个group（包含all组），如果定义的组过多，可将不再使用的组删除：
+
+group boundary delete
 }
 
 \frame
