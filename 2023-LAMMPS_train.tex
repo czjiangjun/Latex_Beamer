@@ -35,6 +35,425 @@
 %-----------------------------------------------------------------------------
 
 %------------------------------------------------------------------------------列出全文 outline ---------------------------------------------------------------------------------
+\section{\rm{LAMMPS}常用命令}
+\frame
+{
+	\frametitle{\textcolor{cyan}{\textit{units}}:~定义单位类型}
+	\begin{itemize}
+		\item 语法:~\textcolor{cyan}{\textit{units}} \textrm{\textcolor{blue}{style}}
+		\item \textcolor{cyan}{\textit{units}}~命令用来定义模拟过程中使用的单位类型\\
+			{\fontsize{7.5pt}{5.2pt}\selectfont{决定了所有输入脚本、数据文件和所有输出到屏幕、日志文件以及\textrm{dump}文件中物理量的单位}}
+	\end{itemize}
+\textrm{\textcolor{blue}{style}}可取为
+\vskip 2pt
+\textrm{\textcolor{magenta}{lj} or \textcolor{magenta}{real} or \textcolor{magenta}{metal} or \textcolor{magenta}{si} or \textcolor{magenta}{cgs} or \textcolor{magenta}{electron} or \textcolor{magenta}{micro} or \textcolor{magenta}{nano}}
+\vskip 2pt
+{\fontsize{7.5pt}{5.2pt}\selectfont{金属中一般用\textrm{metal}}}
+}
+
+\frame
+{
+	\frametitle{\textcolor{cyan}{\textit{boundary}}:~设置模拟\textrm{box}的边界条件}
+	\begin{itemize}
+		\item 语法:~\textcolor{cyan}{\textit{boundary}} \textrm{$x$~$y$~$z$}
+		\item \textcolor{cyan}{\textit{boundary}}命令设置\textrm{box}的边界条件，参数\textrm{$x$~$y$~$z$}分别设置该维度的边界条件
+			\vskip 3pt
+			最基本的边界条件有四种:~\textrm{\textcolor{blue}{p}~\textcolor{blue}{f}~\textcolor{blue}{s}~\textcolor{blue}{m}}
+	\begin{itemize}
+			\setlength{\itemsep}{5pt}
+{\fontsize{7.5pt}{5.2pt}\selectfont{
+		\item \textrm{\textcolor{blue}{p}}是周期性边界:~当粒子从一侧飞出，会从相对应的另一侧再次进入\textrm{box}，一般情况下不会发生\textrm{``lost~atoms''}(丢失原子)错误
+		\item \textrm{\textcolor{blue}{f}}是固定边界:~表示\textrm{box}的表面在该方向上被固定住，不因体系压力的变化发生移动，如果原子从一个表面飞出，会提示\textrm{``lost~atoms''}错误
+			\vskip 3pt
+			{\fontsize{6.2pt}{4.5pt}\selectfont{设置\textcolor{cyan}{\textit{thermo\_modify}}~\textrm{\textcolor{blue}{lost}}可以允许原子丢失，否则模拟过程会被终止}}
+		\item \textrm{\textcolor{blue}{s}}是收缩性边界条件:~表示在该方向上，盒子的表面会根据体系的压力大小或原子运动情况发生移动
+			\vskip 3pt
+			{\fontsize{6.2pt}{4.5pt}\selectfont{一般情况下，盒子会配合原子的移动，尽量把原子包含在\textrm{box}内，但是当原子速度过快，位移太大时原子也可能会飞出盒子，造成\textrm{``lost~atoms''}错误}}}}
+	\end{itemize}
+	\end{itemize}
+{\fontsize{7.0pt}{5.2pt}\selectfont{
+	\textrm{LAMMPS}\textcolor{blue}{支持对同一方向的两个边界设置不同的边界条件}:~
+	\vskip 4pt
+	对$y$方向下表面设置\textrm{\textcolor{blue}{f}}边界、上表面设置\textrm{\textcolor{blue}{s}}边界，可以写为:\\
+	\textcolor{cyan}{\textit{boundary}}~ \textcolor{blue}{\textrm{p}}~\textcolor{blue}{\textrm{fs}}~\textcolor{blue}{\textrm{p}}}}
+}
+
+\frame
+{
+	\frametitle{\textcolor{cyan}{\textit{atom\_style}}:~定义模拟过程中原子的类型}
+	\begin{itemize}
+		\item 语法:~\textcolor{cyan}{\textit{atom\_style}} \textrm{\textcolor{blue}{style}}
+		\item \textcolor{cyan}{\textit{atom\_style}}命令用来定义模拟过程中原子的类型:~\\
+			{\fontsize{7.5pt}{5.2pt}\selectfont{\textcolor{red}{不同的对象粒子所具有的属性不同，对于某个粒子对象，粒子不存在的属性就不需要设置，以便节省内存，加速运算}}}
+	\end{itemize}
+			\textrm{\textcolor{blue}{style}}可取为\\
+			\textrm{\textcolor{magenta}{amoeba} or \textcolor{magenta}{angle} or \textcolor{magenta}{atomic} or \textcolor{magenta}{body} or \textcolor{magenta}{bond} or \textcolor{magenta}{charge} or \textcolor{magenta}{dipole} or \textcolor{magenta}{dpd} or \textcolor{magenta}{edpd} or \textcolor{magenta}{electron} or \textcolor{magenta}{ellipsoid} or \textcolor{magenta}{full} or \textcolor{magenta}{line} or \textcolor{magenta}{mdpd} or \textcolor{magenta}{molecular} or \textcolor{magenta}{oxdna} or \textcolor{magenta}{peri} or \textcolor{magenta}{smd} or \textcolor{magenta}{sph} or \textcolor{magenta}{sphere} or \textcolor{magenta}{bpm}/\textcolor{magenta}{sphere} or \textcolor{magenta}{spin} or \textcolor{magenta}{tdpd} or \textcolor{magenta}{tri} or \textcolor{magenta}{template} or \textcolor{magenta}{hybrid}}
+\vskip 3pt
+{\fontsize{6.2pt}{5.2pt}\selectfont{
+	当\textrm{\textcolor{blue}{style}}为\textcolor{magenta}{\textrm{full}}时，其属性包括:~粒子编号，粒子所属分子的编号，粒子类别\textrm{(atom type)}，带电电荷量，坐标$x$,$y$,$z$\\
+如果粒子是金属粒子，如\textrm{Fe}，粒子\textrm{style}为\textcolor{magenta}{\textrm{atomic}}的属性是:~粒子编号，粒子类别，坐标$x$,$y$,$z$}}
+}
+
+\frame
+{
+	\frametitle{\textcolor{cyan}{\textit{variable}}:~定义一个变量}
+	\begin{itemize}
+		\item 语法:~\textcolor{cyan}{\textit{variable}} \textrm{\textcolor{blue}{name style $\cdots$}}\\
+			{\fontsize{7.5pt}{5.2pt}\selectfont{\textcolor{blue}{\textrm{name}}是用户定义的变量名}}
+		\item \textcolor{cyan}{\textit{variable}}是\textrm{LAMMPS}中定义变量的主要命令\\
+			{\fontsize{7.5pt}{5.2pt}\selectfont{在编写\textcolor{purple}{Input}文件时，用于循环程序，条件执行，控制体系运动，变化模拟参数，以及分布计算核心，提高计算效率方面非常有用}}
+	\end{itemize}
+			\textrm{\textcolor{blue}{style}}是变量类型，可取为\\
+			\textrm{\textcolor{magenta}{delete} or \textcolor{magenta}{index} or \textcolor{magenta}{loop} or \textcolor{magenta}{world} or \textcolor{magenta}{universe} or \textcolor{magenta}{uloop} or \textcolor{magenta}{string} or \textcolor{magenta}{format} or \textcolor{magenta}{getenv} or \textcolor{magenta}{file} or \textcolor{magenta}{atomfile} or \textcolor{magenta}{python} or \textcolor{magenta}{timer} or \textcolor{magenta}{internal} or \textcolor{magenta}{equal} or \textcolor{magenta}{vector} or \textcolor{magenta}{atom}}
+			\vskip 3pt
+{\fontsize{7.5pt}{5.2pt}\selectfont{常用的变量类型:}}
+	\begin{itemize}
+{\fontsize{7.5pt}{5.2pt}\selectfont{
+		\item \textrm{\textcolor{magenta}{index}}:~常搭配\textcolor{cyan}{\textit{next}}命令使用%，最开始将第一个字符串12赋予变量x，即x=12；后面遇到next命令时，在依次将后面的值赋予x
+			\\{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{E.g.:}~\textcolor{cyan}{\textit{variable}} \textrm{x} \textrm{\textcolor{magenta}{index}} \textrm{12 14 19 15 17}}}
+\item \textrm{\textcolor{magenta}{loop}}:~与\textrm{\textcolor{magenta}{index}}的作用相同，不同的是\textrm{\textcolor{magenta}{index}}后跟的字符串需要一一列出，而\textrm{\textcolor{magenta}{loop}}后面只需要写一个$n$即可\\
+	{\fontsize{6.2pt}{5.2pt}\selectfont{比如\textcolor{cyan}{\textit{variable}} \textrm{x} \textrm{\textcolor{magenta}{loop}} \textrm{140}代表了从\textrm{1}到\textrm{140}的列表，不需要像\textrm{\textcolor{magenta}{index}}一样一一列出}}}}
+	\end{itemize}
+}
+
+\frame[allowframebreaks]
+{
+	\frametitle{\textcolor{cyan}{\textit{lattice}}:~定义供其它命令使用的晶格}
+	\begin{itemize}
+		\item 语法:~\textcolor{cyan}{\textit{lattice}} \textrm{\textcolor{blue}{style scale keyword $\cdots$}} 
+		\item \textcolor{cyan}{\textit{lattice}}命令定义各式各样的晶格\\
+			{\fontsize{8.5pt}{5.2pt}\selectfont{\textcolor{cyan}{\textit{lattice}}在\textrm{LAMMPS}中的两种应用方式:}}
+	\begin{enumerate}
+{\fontsize{7.5pt}{5.2pt}\selectfont{
+		\item 利用\textcolor{cyan}{\textit{create\_atoms}}命令在模拟单元的晶格格点上创建原子\\
+			{\fontsize{6.2pt}{5.2pt}\selectfont{\textcolor{cyan}{\textit{create\_atom}}命令是给晶格格点原子位置上分配不同的原子类型}}
+		\item 被\textcolor{cyan}{\textit{create\_box}}, \textcolor{cyan}{\textit{region}}, \textcolor{cyan}{\textit{velocity}}等命令用作距离单位}}
+	\end{enumerate}
+\item \textrm{LAMMPS}中，晶格仅仅是空间中点的集合\\
+	模拟对象由最小重复单元(初基原胞)决定
+	\vskip 5pt
+	{\fontsize{8.0pt}{5.2pt}\selectfont{最小重复单元在所有维度中无限被复制}}
+	\end{itemize}
+%			\begin{itemize}
+			%	\item 
+	\textrm{\textcolor{blue}{style}}可取为\\
+					\textrm{\textcolor{magenta}{none} or \textcolor{magenta}{sc} or \textcolor{magenta}{bcc} or \textcolor{magenta}{fcc} or \textcolor{magenta}{hcp} or \textcolor{magenta}{diamond} or \textcolor{magenta}{sq} or \textcolor{magenta}{sq2} or \textcolor{magenta}{hex} or \textcolor{magenta}{custom}}
+\vskip 7pt			%	\item 
+					\textrm{\textcolor{blue}{scale}} \footnote{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{\textcolor{blue}{scale}}表示的标度关系:~\textrm{scale factor between lattice and simulation box}}}:~对于除了\textrm{L-J~units}外的所有其他单位，\textrm{scale}是以距离为单位的晶格常数\textrm{(lattice constant in distance units)}
+\vskip 7pt			%	\item 
+					\textrm{\textcolor{blue}{keyword}}可取为\\
+					\textrm{\textcolor{magenta}{origin} or \textcolor{magenta}{orient} or \textcolor{magenta}{spacing} or \textcolor{magenta}{$a_1$} or \textcolor{magenta}{$a_2$} or \textcolor{magenta}{$a_3$} or \textcolor{magenta}{bias}}
+\vskip 7pt			%	\item 
+	{\fontsize{8.5pt}{5.2pt}\selectfont{\textcolor{cyan}{\textit{lattice}}命令需要与模拟维度保持一致:
+	\begin{itemize}
+		\item \textrm{\textcolor{blue}{style}} \textrm{\textcolor{magenta}{sc} or \textcolor{magenta}{bcc} or \textcolor{magenta}{fcc} or \textcolor{magenta}{hcp} or \textcolor{magenta}{diamond}}被用于\textrm{3D}问题
+		\item \textrm{\textcolor{blue}{style}} \textrm{\textcolor{magenta}{sq} or \textcolor{magenta}{sq2} or \textcolor{magenta}{hex}} 被用于\textrm{2D}问题
+	\end{itemize}}}
+	{\fontsize{6.5pt}{5.2pt}\selectfont{\textcolor{red}{\textrm{E.g:}}
+	\vskip 3pt
+	\textcolor{cyan}{\textit{lattice}} \textrm{fcc 4.05}
+	\vskip 3pt
+	表示晶格类型是\textrm{fcc}，晶格常数为\textrm{4.05}，单位是\textrm{\AA}}}
+}
+
+\frame
+{
+	\frametitle{\textcolor{cyan}{\textit{region}}:~定义空间几何区域}
+	\begin{itemize}
+		\item 语法:~\textcolor{cyan}{\textit{region}} \textrm{\textcolor{blue}{ID style keyword $\cdots$}}
+	\end{itemize}
+%			\begin{itemize}
+%				\item 
+					\textrm{\textcolor{blue}{ID}}:~用户为区域命的名
+\vskip 7pt			%	\item 
+					\textrm{\textcolor{blue}{style}}可取为\textrm{\textcolor{magenta}{delete} or \textcolor{magenta}{block} or \textcolor{magenta}{cone} or \textcolor{magenta}{cylinder} or \textcolor{magenta}{ellipsoid} or \textcolor{magenta}{plane} or \textcolor{magenta}{prism} or \textcolor{magenta}{sphere} or \textcolor{magenta}{union} or \textcolor{magenta}{intersect}}
+					\begin{itemize}
+{\fontsize{7.5pt}{5.2pt}\selectfont{
+\item \textrm{\textcolor{magenta}{delete}}:~没有参数
+\item \textrm{\textcolor{magenta}{block}}:~\textrm{xlo xhi ylo yhi zlo zhi}是三个维度上的最小值和最大值
+\item \textrm{\textcolor{magenta}{cone}}:~\textrm{dim c1 c2 radlo radhi lo hi}}}
+					\end{itemize}
+%			\end{itemize}
+{\fontsize{7.5pt}{5.2pt}\selectfont{
+	\textcolor{red}{举例如下}
+	\vskip 5pt
+	\textcolor{cyan}{\textit{lattice}} \textrm{fcc 4.05}\\
+	\textcolor{cyan}{\textit{region}} \textrm{box1 \textcolor{magenta}{block} 0 30 0 30 0 30}}}
+	\vskip 5pt
+{\fontsize{6.2pt}{5.2pt}\selectfont{
+	创建一个名字为\textrm{box1}的\textrm{\textcolor{magenta}{block}},其中$x$, $y$, $z$方向上的长度均为30倍的晶格常数\\
+	\textcolor{red}{注意}:~这里的\textrm{30}是\textrm{30}倍的意思，实际长度为\textrm{30}乘以\textrm{4.05~\AA}
+	\vskip 4pt
+	如果想要让\textrm{30}代表实际长度，即让其单位为\AA，则只需要在后面加上\textcolor{cyan}{\textit{units}} \textrm{box}即可:\\
+	\textcolor{cyan}{\textit{region}} \textrm{box1 \textcolor{magenta}{block} 0 30 0 30 0 30} \textcolor{cyan}{\textit{units}} \textrm{box}}}
+}
+
+\frame
+{
+	\frametitle{\textcolor{cyan}{\textit{create\_box}}:~创建一个有限区域}
+	\begin{itemize}
+	\item 语法:~\textcolor{cyan}{\textit{create\_box}} \textrm{N region-ID \textcolor{blue}{keyword} $\cdots$}
+	\item 该命令还固定了该模拟区域中原子类型
+	\end{itemize}
+		\textrm{N}:~本次模拟使用的原子种类数
+\vskip 7pt			%	\item 
+		\textrm{region-ID}:~用来模拟的区域的\textrm{ID}
+\vskip 7pt			%	\item 
+		\textrm{\textcolor{blue}{keyword}}可取为\\
+		\textrm{\textcolor{magenta}{bond}/\textcolor{magenta}{types} or \textcolor{magenta}{angle}/\textcolor{magenta}{types} or \textcolor{magenta}{dihedral}/\textcolor{magenta}{types} or \textcolor{magenta}{improper}/\textcolor{magenta}{types} or \textcolor{magenta}{extra}/\textcolor{magenta}{bond}/\textcolor{magenta}{per}/\textcolor{magenta}{atom} or \textcolor{magenta}{extra}/\textcolor{magenta}{angle}/\textcolor{magenta}{per}/\textcolor{magenta}{atom} or \textcolor{magenta}{extra}/\textcolor{magenta}{dihedral}/\textcolor{magenta}{per}/\textcolor{magenta}{atom} or \textcolor{magenta}{extra}/\textcolor{magenta}{improper}/\textcolor{magenta}{per}/\textcolor{magenta}{atom} or \textcolor{magenta}{extra}/\textcolor{magenta}{special}/\textcolor{magenta}{per}/\textcolor{magenta}{atom}}
+		\vskip 4pt
+{\fontsize{7.5pt}{5.2pt}\selectfont{
+	\textcolor{red}{举例如下}
+	\vskip 4pt
+	\textcolor{cyan}{\#}~在模拟盒子\textrm{box1}中添加一类原子\\
+	\textcolor{cyan}{\textit{create\_box}} \textrm{1 box1}}}
+}
+
+\frame
+{
+	\frametitle{\textcolor{cyan}{\textit{create\_atoms}}和\textcolor{cyan}{\textit{mass}}}
+	\begin{itemize}
+		\item \textcolor{cyan}{\textit{create\_atoms}}:~在指定区域内填充一定数量的原子\\
+	语法:~\textcolor{cyan}{\textit{create\_atoms}} \textrm{\textcolor{blue}{type style keyword $\cdots$}}
+	\vskip 4pt
+	{\fontsize{7.5pt}{5.2pt}\selectfont{其中\textrm{\textcolor{blue}{type}}与后面定义的模拟原子中的信息(\textcolor{cyan}{\textit{mass}})对应
+	\vskip 4pt
+	\textcolor{red}{举例如下}
+	\vskip 4pt
+	\textcolor{cyan}{\#} 在整个模拟区域中添加类型为\textrm{1}的原子(即添加\textrm{Al}原子)\\
+	\textcolor{cyan}{\textit{create\_atoms}} \textrm{1} \textcolor{cyan}{\textit{region}} \textrm{\textcolor{magenta}{whole}}
+	\vskip 4pt
+	\textcolor{cyan}{\#} 模拟环境中的原子信息
+	\textcolor{cyan}{\textit{mass}} \textrm{1 26.981   \textcolor{cyan}{\#} Al}\\
+	\textcolor{cyan}{\textit{mass}} \textrm{2 55.845   \textcolor{cyan}{\#} Fe}}}
+
+\item \textcolor{cyan}{\textit{mass}}:~为某一种或几种类型的原子设置质量
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{\textcolor{cyan}{\textit{pair\_style}}和\textcolor{cyan}{\textit{pair\_coeff}}}
+	设置势函数\\
+	{\fontsize{7.5pt}{5.2pt}\selectfont{金属中常用的势函数是\textrm{EAM}势函数}}
+
+	\textrm{\textcolor{magenta}{$\ast$ $\ast$}}~是通配符:~意思是\textcolor{purple}{使原子之间存在相互作用}\footnote{\fontsize{6.2pt}{5.2pt}\selectfont{假如体系中有两类原子，\textrm{Al}和\textrm{Fe}原子，这个通配符的作用就是使\textrm{Al}原子与\textrm{Al}原子相互作用，\textrm{Fe}原子与\textrm{Fe}原子相互作用，\textrm{Al}原子和\textrm{Fe}原子相互作用}}
+	\vskip 4pt
+{\fontsize{7.5pt}{5.2pt}\selectfont{
+	\textcolor{red}{举例如下}
+	\vskip 4pt
+	\textcolor{cyan}{\textit{pair\_style}} \textrm{eam/alloy}\\
+	\textcolor{cyan}{\textit{pair\_coeff}}	\textcolor{magenta}{$\ast$} \textcolor{magenta}{$*$} \textrm{Al99.eam.alloy Al}}}\\
+	{\fontsize{6.2pt}{5.2pt}\selectfont{其中\textrm{Al99.eam.alloy}是势函数的名称}}
+	\vskip 8pt
+	\textcolor{red}{不同势函数后面的\textcolor{cyan}{\textit{pair\_coeff}}写法不同}\\
+{\fontsize{7.5pt}{5.2pt}\selectfont{
+	\textrm{EAM}势函数需要在后面写出所有原子的名称，且写的顺序要和\textcolor{cyan}{\textit{mass}}中定义的顺序一一对应}}
+}
+
+\frame[allowframebreaks]
+{
+	\frametitle{\textcolor{cyan}{\textit{group}}:~对原子分组}
+	\begin{itemize}
+		\item 分组后的原子会有一个\textrm{group-ID}，\textrm{group-ID}被用到\textcolor{cyan}{\textit{fix}}, \textcolor{cyan}{\textit{compute}}, \textcolor{cyan}{\textit{dump}}等命令中\\
+{\fontsize{7.5pt}{5.2pt}\selectfont{
+	如\textcolor{cyan}{\textit{fix}}命令中的第二个参数就是\textrm{group-ID}\\
+	\textcolor{cyan}{\textit{fix}} \textrm{ID group-ID style\_name \textcolor{blue}{keyword} $\cdots$}\\
+	\textcolor{cyan}{\textit{fix}} \textrm{1 water \textcolor{magenta}{npt} \textcolor{magenta}{temp} 300.0 300.0 100.0 \textcolor{magenta}{iso} 0.0 0.0 1000.0}}}
+\item 即使不对原子进行分组，\textrm{LAMMPS}也会设置一个默认的原子组:~\textrm{\textcolor{blue}{all}}，也就是把所有的原子全部划分到\textrm{\textcolor{blue}{all}}组内\\
+{\fontsize{7.5pt}{5.2pt}\selectfont{
+	例如对系统所有原子进行温度初始化，可以使用下面的语句，其中\textrm{\textcolor{blue}{all}}就是默认的\textrm{group-ID}:~\\
+	\textcolor{cyan}{\textit{velocity}} \textrm{\textcolor{blue}{all} create 300.0 300.0 4928459}}}
+	\end{itemize}
+常用的分组方式有以下几种：
+\begin{enumerate}
+	\item 配合\textcolor{cyan}{\textit{region}}使用，把某一区域的原子归入到一个组中\\
+{\fontsize{7.5pt}{5.2pt}\selectfont{
+例如在纳米铜的拉伸时，需要一端固定，另一端施加一定的速度进行拉伸，这就需要把\textrm{Cu}原子划分为三个组:
+\begin{itemize}
+{\fontsize{7.5pt}{5.2pt}\selectfont{
+	\item \textrm{left}:~固定组
+	\item \textrm{right}:~速度加载组
+	\item \textrm{mobile}:~中间组}}
+\end{itemize}
+\textcolor{cyan}{\textit{group}}命令配合 \textcolor{blue}{\textrm{union}}关键字可实现两个组的合并:\\
+{\fontsize{6.2pt}{5.2pt}\selectfont{
+例如\textrm{left}和\textrm{right}组合并为\textrm{boundary}组，可以写成:\\
+\textcolor{cyan}{\textit{group}} \textrm{boundary \textcolor{blue}{union} left right}}}
+\vskip 3pt
+\textcolor{cyan}{\textit{group}}命令配合\textcolor{blue}{\textrm{substract}}关键字可实现减法操作:\\
+{\fontsize{6.2pt}{5.2pt}\selectfont{所有原子减去\textrm{boundary}原子即为中间\textrm{moible}原子，可以写为:\\
+\textcolor{cyan}{\textit{group}} \textrm{mobile subtract \textcolor{blue}{all} boundary}}}
+\vskip 5pt
+		\textrm{Cu}拉伸建模全部代码如下:
+		\verbatiminput{Figures/Lammps_tutorial-command_example.txt}}} %为保险:~选用文件名绝对路径
+\item 配合\textcolor{cyan}{\textit{type}}命令，可以将多种类型的原子归为一组
+	\vskip 3pt
+{\fontsize{7.5pt}{5.2pt}\selectfont{
+	\textcolor{cyan}{\#} 将原子类型为\textrm{3}和\textrm{4}的原子全部归入到\textrm{water}组\\
+	\textcolor{cyan}{\textit{group}} \textrm{water type 3 4}}}
+
+\item 配合原子\textrm{id}可将特定的原子归入到一组
+	{\fontsize{7.5pt}{6.0pt}\selectfont{
+		\verbatiminput{Figures/Lammps_tutorial-command_group.txt}}} %为保险:~选用文件名绝对路径
+\end{enumerate}
+\textcolor{red}{注意}:~\textrm{LAMMPS}最多支持\textrm{32}个\textcolor{cyan}{\textit{group}}(包含\textrm{all}组)\\
+{\fontsize{7.5pt}{6.0pt}\selectfont{
+如果定义的组过多，可将不再使用的组删除:\\
+\textcolor{cyan}{\textit{group}} \textrm{boundary delete}}}
+}
+
+\frame[allowframebreaks]
+{
+	\frametitle{\textcolor{cyan}{\textit{set}}:~改变原子类型}
+	\begin{itemize}
+		\item 改变原子类型，可用来为不同区域设置不同颜色\\
+			{\fontsize{7.5pt}{6.0pt}\selectfont{特别是在高熵合金建模过程中}}
+	\end{itemize}
+{\fontsize{7.5pt}{6.0pt}\selectfont{
+	以下实例是在高熵合金建模中，包含的命令
+	\vskip 4pt
+	\textcolor{cyan}{\textit{set}} \textrm{\textcolor{magenta}{type} type\_ID \textcolor{magenta}{type}/\textcolor{magenta}{ratio} type\_new fraction seed}
+	\begin{itemize}
+		\item \textrm{type\_ID}是需要被替换的原子类型
+		\item \textrm{type\_nea}是将要转换的新原子类型
+		\item \textrm{fraction}是新原子类型占初始原子类型的比例
+		\item \textrm{seed}为随机种子
+	\end{itemize}
+		\verbatiminput{Figures/Lammps_tutorial-command_set.txt}}} %为保险:~选用文件名绝对路径
+}
+
+\frame
+{
+	\frametitle{\textcolor{cyan}{\textit{write\_data}}和\textcolor{cyan}{\textit{timestep}}}
+	\begin{itemize}
+		\item \textcolor{cyan}{\textit{write\_data}}:~保存\textrm{data}文件\\
+			在\textcolor{red}{\textrm{ovitio}}中可视化后可用于验证模型是否正确
+\vskip 4pt
+{\fontsize{7.5pt}{6.0pt}\selectfont{
+	\textcolor{red}{举例如下}\\
+	\textcolor{cyan}{\textit{write\_data}} \textrm{Al\_model.xyz}}}
+
+\item \textcolor{cyan}{\textit{timestep}}:~设置模拟的时间步长\\
+{\fontsize{7.5pt}{6.0pt}\selectfont{
+	金属中一般是在\textcolor{magenta}{\textrm{atomic}}单位制下，所以\textcolor{cyan}{\textit{timestep}}的单位一般是\textrm{ps}
+\vskip 4pt
+	\textcolor{red}{举例如下}\\
+	\textcolor{cyan}{\textit{timestep}} \textrm{0.001}}}\\
+	{\fontsize{6.2pt}{6.0pt}\selectfont{这里设置的是\textrm{0.001ps}，也就是\textrm{1fs}}}
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{\textcolor{cyan}{\textit{velocity}}:~创建初始温度}
+	用来创建初始温度，或者理解为原子组创建初始速度\footnote{\fontsize{6.2pt}{6.0pt}\selectfont{\textrm{LAMMPS}中温度的变化就是对应了速度的变化}}\\
+	\textcolor{cyan}{\textit{velocity}} \textrm{group-ID \textcolor{blue}{style} \textcolor{blue}{keyword} $\cdots$}
+	\begin{itemize}
+		\item \textrm{group-ID}:~即将改变速度的原子组的ID
+		\item  \textrm{\textcolor{blue}{style}}可以取 \textrm{\textcolor{magenta}{create} or \textcolor{magenta}{set} or \textcolor{magenta}{scale} or \textcolor{magenta}{ramp} or \textcolor{magenta}{zero}}\\
+
+{\fontsize{7.5pt}{6.0pt}\selectfont{
+			\textrm{\textcolor{magenta}{create}}后面要跟自己创建的初始温度\textrm{temp seed} \textrm{(其中temp = temperature value (temperature units))}
+
+	\textcolor{red}{举例如下}\\
+	\textcolor{cyan}{\textit{velocity}} \textrm{\textcolor{blue}{all} \textcolor{blue}{create} 300 12345}}}\\
+{\fontsize{6.2pt}{6.0pt}\selectfont{
+	上述例子中的\textrm{\textcolor{blue}{all}是\textrm{LAMMPS}中的关键字，意思是所有原子，也可以改成\textrm{group-ID}\\
+	\textrm{\textcolor{blue}{create} 300}意思是创建初始温度为\textrm{300K}，后面的\textrm{12345}是随机种子}}}
+	\end{itemize}
+}
+
+\frame[allowframebreaks]
+{
+	\frametitle{\textcolor{cyan}{\textit{fix}}}
+	\textcolor{cyan}{\textit{fix}} \textrm{ID group-ID \textcolor{blue}{style} \textcolor{blue}{keyword} $\cdots$}
+	\begin{itemize}
+		\item \textrm{ID:~user-assigned name for the fix}
+		\item \textrm{group-ID: ID of the group of atoms to apply the fix to}
+		\item \textrm{\textcolor{blue}{style}:~ one of a long list of possible style names}\\
+			可以取 \textrm{\textcolor{magenta}{nvt} or \textcolor{magenta}{npt} or \textcolor{magenta}{nph}}
+		\item \textrm{args:~arguments used by a particular style}
+	\end{itemize}
+{\fontsize{7.5pt}{6.0pt}\selectfont{
+	\textcolor{red}{举例如下}\\
+	\textcolor{cyan}{\textit{fix}} \textrm{1 \textcolor{magenta}{all} \textcolor{magenta}{npt} \textcolor{magenta}{temp} 300 300 0.1 \textcolor{magenta}{iso} 0 0 1 drag 1}}}
+	\begin{itemize}
+{\fontsize{6.2pt}{6.0pt}\selectfont{
+\item \textrm{1}是该\textcolor{cyan}{\textit{fix}}命令的\textrm{ID}
+\item \textcolor{blue}{\textrm{all}}是对所有原子施加后面的条件
+\item \textcolor{blue}{\textrm{npt}}是等温等压系综
+\item \textcolor{blue}{\textrm{temp}}是设置温度的关键字\\
+	\textcolor{blue}{\textrm{temp}} \textrm{300 800 0.1}命令中\\
+	第一个参数\textrm{300}是\textcolor{red}{初始温度}\\
+	第二个参数\textrm{300}是截至温度\\
+	第三个参数\textrm{0.1}是温度的阻尼系数，设置它是使其在升温或者降温过程中不会出现太大的波动\footnote{\fontsize{6.2pt}{6.0pt}\selectfont{一般来说阻尼系数是\textrm{100}倍的\textcolor{cyan}{\textit{timestep}}}}\\
+	\textrm{\textcolor{magenta}{iso}}是控压方式，因为设置的是\textrm{npt}系综，所以温度和压力必须设置\\
+	其中\textrm{\textcolor{magenta}{iso}}是对$x$,$y$,$z$三个方向进行联合控压(耦合控压)\footnote{\fontsize{6.2pt}{6.0pt}\selectfont{在控压时要改变模拟盒子的大小，$x$,$y$,$z$三个方向同时改变}}
+	与之相对的是\textrm{\textcolor{magenta}{aniso}}，是非耦合控压($x$,$y$,$z$三个方向不是同时改变)
+	\textrm{\textcolor{magenta}{iso}}后跟的是初始压强，结束压强，和阻尼系数(为了使压强在增加或者降低过程中不会出现太大波动)}}
+	\end{itemize}
+}
+
+\frame[allowframebreaks]
+{
+	\frametitle{\textcolor{cyan}{\textit{thermo}}和\textcolor{cyan}{\textit{thermo\_style}}}
+	设置输出信息/格式
+	\begin{itemize}
+		\item \textcolor{cyan}{\textit{thermo}} \textcolor{blue}{$N$}\\
+			\textcolor{blue}{$N$}:~\textrm{output thermodynamics every \textcolor{blue}{$N$} \textcolor{cyan}{\textit{timesteps}}}
+
+		\item \textcolor{cyan}{\textit{thermo\_style}} \textrm{\textcolor{blue}{style}}\\
+			\textrm{\textcolor{blue}{style}}可以取\textrm{\textcolor{magenta}{one} or \textcolor{magenta}{multi} or \textcolor{magenta}{yaml} or \textcolor{magenta}{custom}}\\
+			\textrm{args:~list of arguments for a particular style}
+	\end{itemize}
+{\fontsize{7.5pt}{6.0pt}\selectfont{
+	\textcolor{red}{举例如下}\\
+	\textcolor{cyan}{\textit{thermoa}} 1000\\
+	\textcolor{cyan}{\textit{thermo\_style}} \textrm{\textcolor{magenta}{custom} \textcolor{magenta}{step} lx ly lz \textcolor{magenta}{press} pxx pyy pzz \textcolor{magenta}{pe} \textcolor{magenta}{temp}}}}\\
+{\fontsize{6.2pt}{6.0pt}\selectfont{
+	\textcolor{cyan}{\textit{thermoa}} \textrm{1000}:~每1000步在屏幕上输出一次
+	\textcolor{cyan}{\textit{thermo\_style}}后面是在屏幕上输出的信息:~\\
+	\textrm{\textcolor{magenta}{custom}}后的内容就是在屏幕上输出的，可以看到
+	输出的运行步数\textrm{\textcolor{magenta}{step}}:~三个方向上的长度\textrm{lx, ly, lz}
+	模拟体系的压力\textrm{\textcolor{magenta}{press}}:~三个方向上的压力\textrm{pxx, pyy, pzz}
+	\textrm{\textcolor{magenta}{pe}}是模拟体系的势能
+	\textrm{\textcolor{magenta}{temp}}是模拟体系的温度
+\begin{figure}[h!]
+\centering
+\vskip -5pt
+\includegraphics[height=1.40in,width=4.0in, viewport=0 1 280 90,clip]{Lammps_tutorial-command_thermo.png}
+%\caption{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{The general workflow for running molecular dynamics simulations using LAMMPS.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Lammps_tutorial-command_thermo}
+\end{figure}
+可以看到最后一行是温度，在模拟开始时温度为\textrm{300K}，由于前面\textcolor{cyan}{\textit{fix}}命令中设置了\textrm{\textcolor{magenta}{temp}} \textrm{300 300 0.1}，所以截至温度也是\textrm{300K}，中间会有升温和降温过程，如果最终温度没到\textrm{300K}，\textcolor{red}{则可能是运行的步数不够}}}
+}
+
+
+\frame[allowframebreaks]
+{
+	\frametitle{\textcolor{cyan}{\textit{dump}}:~设置输出}
+	\textcolor{cyan}{\textit{dump}} \textrm{ID group-ID \textcolor{blue}{style} \textcolor{blue}{$N$} file attribute1 attribute2 $\cdots$}
+	\begin{itemize}
+		\item \textrm{ID:~user-assigned name for the dump}
+		\item \textrm{group-ID:~ID of the group of atoms to be dumped}
+		\item \textrm{\textcolor{blue}{style}} 可以取\textrm{\textcolor{magenta}{atom} or \textcolor{magenta}{atom}/\textcolor{magenta}{adios} or \textcolor{magenta}{atom}/\textcolor{magenta}{gz} or \textcolor{magenta}{atom}/\textcolor{magenta}{zstd} or \textcolor{magenta}{atom}/\textcolor{magenta}{mpiio} or \textcolor{magenta}{cfg} or \textcolor{magenta}{cfg}/\textcolor{magenta}{gz} or \textcolor{magenta}{cfg}/\textcolor{magenta}{zstd} or \textcolor{magenta}{cfg}/\textcolor{magenta}{mpiio} or \textcolor{magenta}{cfg}/\textcolor{magenta}{uef} or \textcolor{magenta}{custom} or \textcolor{magenta}{custom}/\textcolor{magenta}{gz} or \textcolor{magenta}{custom}/\textcolor{magenta}{zstd} or \textcolor{magenta}{custom}/\textcolor{magenta}{mpiio} or \textcolor{magenta}{custom}/\textcolor{magenta}{adios} or \textcolor{magenta}{dcd} or \textcolor{magenta}{grid} or \textcolor{magenta}{grid}/\textcolor{magenta}{vtk} or \textcolor{magenta}{h5md} or \textcolor{magenta}{image} or \textcolor{magenta}{local} or \textcolor{magenta}{local}/\textcolor{magenta}{gz} or \textcolor{magenta}{local}/\textcolor{magenta}{zstd} or \textcolor{magenta}{molfile} or \textcolor{magenta}{movie} or \textcolor{magenta}{netcdf} or \textcolor{magenta}{netcdf}/\textcolor{magenta}{mpiio} or \textcolor{magenta}{vtk} or \textcolor{magenta}{xtc} or \textcolor{magenta}{xyz} or \textcolor{magenta}{xyz}/\textcolor{magenta}{gz} or \textcolor{magenta}{xyz}/\textcolor{magenta}{zstd} or \textcolor{magenta}{xyz}/\textcolor{magenta}{mpiio} or \textcolor{magenta}{yaml}}
+		\item \textcolor{blue}{$N$}: \textrm{dump on timesteps which are multiples of \textcolor{blue}{$N$}}
+		\item \textrm{file:~name of file to write dump info to}
+		\item \textrm{attribute1, attribute2, $\cdots$:~list of attributes for a particular style}
+	\end{itemize}
+{\fontsize{7.5pt}{6.0pt}\selectfont{
+	\textcolor{red}{举例如下}\\
+	\textcolor{cyan}{\textit{dump}} \textrm{1 \textcolor{blue}{all} \textcolor{magenta}{custom} 1000 \textrm{Al.xyz} \textcolor{magenta}{type} $x$ $y$ $z$}}}\\
+{\fontsize{6.2pt}{6.0pt}\selectfont{其中\\
+	\textrm{1}是用户指定的\textcolor{cyan}{\textit{dump}}名字\\
+	\textrm{\textcolor{blue}{all}}是关键字，对所有的原子施加后面的操作\\
+	\textrm{\textcolor{blue}{custom}}是自定义输出\\
+	\textrm{1000}是每\textrm{1000}步输出一次，输出到后面的\textrm{Al.xyz}文件中，该文件中输出的信息有\textrm{\textcolor{blue}{type}}(原子类型)，和$x$, $y$, $z$坐标}}
+
+	整个过程中的所有信息保存在\textcolor{purple}{\textrm{log.lammps}}文件中
+}
+
 \section{基本计算}\label{Sec:General}
 %真空中的孤立原子的基态能量是\textrm{VASP}中最简单的算例，通过学习金属\textrm{Pt}原子基态能量的计算，可以掌握典型的\textrm{VASP}的主体流程\footnote{在所有计算之前，请确认\textrm{VASP}软件已经正确安装。}，了解体系基态能量最小化的基本算法，并熟悉基本的输入/输出文件的内容。此外，还可以了解如何在已完成计算的基础上，进行计算精度提升或完成后续计算等一系列处理方式。
 %\subsection{输入文件}
@@ -802,364 +1221,6 @@
 \caption{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{MSD plot with time in the range of the last 500,000 timesteps at various temperatures from 2,000 to 1,000 K.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{LAMMPS_MSD-ZrO2-8Y2O3.}
 \end{figure}
-}
-
-\section{\rm{LAMMPS}常用命令}
-\frame
-{
-	\frametitle{\textcolor{cyan}{\textit{units}}:~定义单位类型}
-	\begin{itemize}
-		\item \textcolor{cyan}{\textit{units}}~命令用来定义模拟过程中使用的单位类型\\
-			{\fontsize{7.5pt}{5.2pt}\selectfont{它决定了所有输入脚本、数据文件和所有输出到屏幕、日志文件以及\textrm{dump}文件中物理量的单位}}
-		\item 语法:~\textcolor{cyan}{\textit{units}} \textrm{style}
-\vskip 3pt
-\textrm{styly}可取\textrm{\textcolor{magenta}{lj} or \textcolor{magenta}{real} or \textcolor{magenta}{metal} or \textcolor{magenta}{si} or \textcolor{magenta}{cgs} or \textcolor{magenta}{electron} or \textcolor{magenta}{micro} or \textcolor{magenta}{nano}}\\
-{\fontsize{7.5pt}{5.2pt}\selectfont{金属中一般用\textrm{metal}}}
-	\end{itemize}
-}
-
-\frame
-{
-	\frametitle{\textcolor{cyan}{\textit{boundary}}:~设置模拟\textrm{box}的边界条件}
-	\begin{itemize}
-		\item 语法:~\textcolor{cyan}{\textit{boundary}} \textrm{$x$~$y$~$z$}
-\vskip 3pt
-\textcolor{cyan}{\textit{boundary}}命令设置box的边界条件，参数\textrm{$x$~$y$~$z$}分别设置该维度的边界条件，最基本的边界条件有四种:~\textrm{\textcolor{blue}{p}~\textcolor{blue}{f}~\textcolor{blue}{s}~\textcolor{blue}{m}}
-	\begin{itemize}
-
-{\fontsize{7.5pt}{5.2pt}\selectfont{
-		\item \textrm{\textcolor{blue}{p}}是周期性边界:~当粒子从一侧飞出，会从相对应的另一侧再次进入\textrm{box}，一般情况下不会发生\textrm{''lost~atoms''}(丢失原子)错误
-		\item \textrm{\textcolor{blue}{f}}是固定边界:~表示\textrm{box}的表面在该方向上被固定住，不因体系压力的变化发生移动，如果原子从一个表面飞出，会提示\textrm{''lost~atoms''}错误\\
-			{\fontsize{6.2pt}{5.2pt}\selectfont{设置\textcolor{cyan}{\textit{thermo\_modify}}~\textrm{\textcolor{blue}{lost}}可以允许原子丢失，否则模拟过程会被终止}}
-		\item \textrm{\textcolor{blue}{s}}是收缩性边界条件:~表示在该方向上，盒子的表面会根据体系的压力大小或原子运动情况发生移动\\
-			{\fontsize{6.2pt}{5.2pt}\selectfont{一般情况下，盒子会配合原子的移动，尽量把原子包含在\textrm{box}内，但是当原子速度过快，位移太大时原子也可能会飞出盒子，造成\textrm{''lost~atoms''}错误}}}}
-	\end{itemize}
-{\fontsize{7.0pt}{5.2pt}\selectfont{
-	\textrm{LAMMPS}支持对同一方向的两个边界设置不同的边界条件，对$y$方向下表面设置\textrm{\textcolor{blue}{f}}边界、上表面设置\textrm{\textcolor{blue}{s}}边界，可以写为:\\
-	\textcolor{cyan}{\textit{boundary}}~ \textcolor{blue}{\textrm{p}}~\textcolor{blue}{\textrm{fs}}~\textcolor{blue}{\textrm{p}}}}
-	\end{itemize}
-}
-
-\frame
-{
-	\frametitle{\textcolor{cyan}{\textit{atom\_style}}:~定义模拟过程中原子的类型}
-	\begin{itemize}
-		\item 语法:~\textcolor{cyan}{\textit{atom\_style}} \textrm{\textcolor{blue}{style}}\\
-			\textrm{\textcolor{blue}{style}}为\textrm{\textcolor{magenta}{amoeba} or \textcolor{magenta}{angle} or \textcolor{magenta}{atomic} or \textcolor{magenta}{body} or \textcolor{magenta}{bond} or \textcolor{magenta}{charge} or \textcolor{magenta}{dipole} or \textcolor{magenta}{dpd} or \textcolor{magenta}{edpd} or \textcolor{magenta}{electron} or \textcolor{magenta}{ellipsoid} or \textcolor{magenta}{full} or \textcolor{magenta}{line} or \textcolor{magenta}{mdpd} or \textcolor{magenta}{molecular} or \textcolor{magenta}{oxdna} or \textcolor{magenta}{peri} or \textcolor{magenta}{smd} or \textcolor{magenta}{sph} or \textcolor{magenta}{sphere} or \textcolor{magenta}{bpm}/\textcolor{magenta}{sphere} or \textcolor{magenta}{spin} or \textcolor{magenta}{tdpd} or \textcolor{magenta}{tri} or \textcolor{magenta}{template} or \textcolor{magenta}{hybrid}}
-		\item \textcolor{cyan}{atom\_style}命令用来定义模拟过程中原子的类型:~不同的对象粒子所具有的属性不同
-	\end{itemize}
-{\fontsize{7.5pt}{5.2pt}\selectfont{
-	\textcolor{red}{对于某个粒子对象，粒子不存在的属性就不需要设置，以便节省内存，加速运算}}}
-\vskip 5pt
-{\fontsize{6.2pt}{5.2pt}\selectfont{
-当\textrm{style}为\textcolor{blue}{\textrm{full}}时，其属性包括:~粒子编号，粒子所属分子的编号，粒子类别\textrm{(atom type)}，带电电荷量，坐标$x$,$y$,$z$\\
-如果粒子是金属粒子，如\textrm{Fe}，粒子\textrm{style}为\textcolor{blue}{\textrm{atomic}}的属性是:~粒子编号，粒子类别，坐标$x$,$y$,$z$}}
-}
-
-\frame
-{
-	\frametitle{\textcolor{cyan}{\textit{variable}}:~定义一个变量}
-	\begin{itemize}
-		\item 语法:~\textcolor{cyan}{\textit{variable}} \textrm{\textcolor{blue}{name style $\cdots$}}\\
-			{\fontsize{7.5pt}{5.2pt}\selectfont{\textcolor{blue}{\textrm{name}}是用户定义的变量名}}\\
-			\textrm{\textcolor{blue}{style}}是变量类型，可以为\textrm{\textcolor{magenta}{delete} or \textcolor{magenta}{index} or \textcolor{magenta}{loop} or \textcolor{magenta}{world} or \textcolor{magenta}{universe} or \textcolor{magenta}{uloop} or \textcolor{magenta}{string} or \textcolor{magenta}{format} or \textcolor{magenta}{getenv} or \textcolor{magenta}{file} or \textcolor{magenta}{atomfile} or \textcolor{magenta}{python} or \textcolor{magenta}{timer} or \textcolor{magenta}{internal} or \textcolor{magenta}{equal} or \textcolor{magenta}{vector} or \textcolor{magenta}{atom}}
-			\vskip 3pt
-{\fontsize{6.2pt}{5.2pt}\selectfont{
-	\textcolor{cyan}{\textit{variable}}是\textrm{LAMMPS}中定义变量的主要命令，在编写\textcolor{purple}{in}文件时，用于循环程序，条件执行，控制体系运动，变化模拟参数，以及分布计算核心，提高计算效率方面非常有用}}
-	\end{itemize}
-	常用的变量类型:
-	\begin{itemize}
-		\item \textrm{\textcolor{magenta}{index}}:~常搭配\textcolor{cyan}{\textit{next}}命令使用%，最开始将第一个字符串12赋予变量x，即x=12；后面遇到next命令时，在依次将后面的值赋予x
-			\textrm{E.g.:}~\textcolor{cyan}{\textit{variable}} \textrm{x} \textrm{\textcolor{magenta}{index}} \textrm{12 14 19 15 17}
-\item \textrm{\textcolor{magenta}{loop}}:~与\textrm{\textcolor{magenta}{index}}的作用相同，不同的是\textrm{\textcolor{magenta}{index}}后跟的字符串需要一一列出，而\textrm{\textcolor{magenta}{loop}}后面只需要写一个$n$即可\\
-	比如\textcolor{cyan}{\textit{variable}} \textrm{x} \textrm{\textcolor{magenta}{loop}} \textrm{140}代表了从1到140的列表，不需要像\textrm{\textcolor{magenta}{index}}一样一一列出
-	\end{itemize}
-}
-
-\frame
-{
-	\frametitle{\textcolor{cyan}{\textit{lattice}}:~定义供其它命令使用的晶格}
-	\begin{itemize}
-		\item 语法:~\textcolor{cyan}{\textit{lattice}} \textrm{\textcolor{blue}{style scale keyword values $\cdots$}} 
-			\begin{itemize}
-				\item \textrm{\textcolor{blue}{style}}可以取 \textrm{\textcolor{magenta}{none} or \textcolor{magenta}{sc} or \textcolor{magenta}{bcc} or \textcolor{magenta}{fcc} or \textcolor{magenta}{hcp} or \textcolor{magenta}{diamond} or \textcolor{magenta}{sq} or \textcolor{magenta}{sq2} or \textcolor{magenta}{hex} or \textcolor{magenta}{custom}
-				\item \textrm{\textcolor{blue}{scale}} \footnote{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{scale}表示的标度关系:~\textrm{scale factor between lattice and simulation box}}}:~对于除了\textrm{L-J~units}外的所有其他单位，\textrm{scale}是以距离为单位的晶格常数\textrm{(lattice constant in distance units)}
-				\item \textrm{\textcolor{blue}{keyword}}可以取\textrm{\textcolor{magenta}{origin} or \textcolor{magenta}{orient} or \textcolor{magenta}{spacing} or \textcolor{magenta}{$a_1$} or \textcolor{magenta}{$a_2$} or \textcolor{magenta}{$a_3$} or \textcolor{magenta}{bias}}
-			\end{itemize}
-	\end{itemize}
-	{\fontsize{7.5pt}{5.2pt}\selectfont{\textrm{LAMMPS}中，晶格仅仅是空间中点的集合，模拟对象由最小重复单元(初基原胞)决定，该最小重复单元在所有维度中无限被复制}}\\
-	{\fontsize{6.2pt}{5.2pt}\selectfont{\textcolor{cyan}{\textit{lattice}}命令可定义各式各样的晶格}}
-	{\fontsize{7.5pt}{5.2pt}\selectfont{\textcolor{cyan}{\textit{lattice}}在\textrm{LAMMPS}}中的两种应用方式}}
-	\begin{enumerate}
-		\item 利用\textcolor{cyan}{\textit{create\_atoms}}命令在模拟单元的晶格格点上创建原子，\textcolor{cyan}{\textit{create\_atom}}命令是给晶格格点原子位置上分配不同的原子类型
-		\item 被\textcolor{cyan}{\textit{create\_box}}, \textcolor{cyan}{\textit{region}}, \textcolor{cyan}{\textit{velocity}}等命令用作距离单位
-	\end{enumerate}
-	\textcolor{cyan}{\textit{lattice}}命令需要与模拟维度保持一致:
-	\begin{itemize}
-		\item \textrm{\textcolor{blue}{style}} \textrm{\textcolor{magenta}{sc} or \textcolor{magenta}{bcc} or \textcolor{magenta}{fcc} or \textcolor{magenta}{hcp} or \textcolor{magenta}{diamond}}被用作\textrm{3D}问题
-		\item \textrm{\textcolor{blue}{style}} \textrm{\textcolor{magenta}{sq} or \textcolor{magenta}{sq2} or \textcolor{magenta}{hex}} 被用作\textrm{2D}问题
-	\end{itemize}
-	{\fontsize{7.5pt}{5.2pt}\selectfont{\textcolor{red}{E.g:}~\textcolor{cyan}{\textit{lattice}} \textrm{fcc 4.05} 表示晶格类型是\textrm{fcc}，晶格常数为\textrm{4.05}，单位是\textrm{\AA}}}
-}
-
-\frame
-{
-	\frametitle{\textcolor{cyan}{\textit{region}}:~定义空间几何区域}
-	\begin{itemize}
-		\item 语法:~\textcolor{cyan}{\textit{region}} \textrm{\textcolor{blue}{ID style keyword $\cdots$}}
-			\begin{itemize}
-				\item \textrm{\textcolor{blue}{ID}}:~用户为区域命的名
-				\item \textrm{\textcolor{blue}{style}}可以取\textrm{\textcolor{magenta}{delete} or \textcolor{magenta}{block} or \textcolor{magenta}{cone} or \textcolor{magenta}{cylinder} or \textcolor{magenta}{ellipsoid} or \textcolor{magenta}{plane} or \textcolor{magenta}{prism} or \textcolor{magenta}{sphere} or \textcolor{magenta}{union} or \textcolor{magenta}{intersect}}
-					\begin{itemize}
-{\fontsize{7.5pt}{5.2pt}\selectfont{
-\item \textrm{\textcolor{magenta}{delete}}:~没有参数
-\item \textrm{\textcolor{magenta}{block}}:~\textrm{xlo xhi ylo yhi zlo zhi}是三个维度上的最小值和最大值
-\item \textrm{\textcolor{magenta}{cone}}:~\textrm{dim c1 c2 radlo radhi lo hi}}}
-					\end{itemize}
-			\end{itemize}
-	\end{itemize}
-{\fontsize{7.5pt}{5.2pt}\selectfont{
-	\textcolor{red}{举例如下}\\
-	\textcolor{cyan}{\textit{lattice}} \textrm{fcc 4.05}\\
-	\textcolor{cyan}{\textit{region}} \textrm{box1 \textcolor{magenta}{block} 0 30 0 30 0 30}}}\\
-{\fontsize{6.2pt}{5.2pt}\selectfont{
-	意思是创建一个名字为\textrm{box1}的\textrm{\textcolor{magenta}{block}},其中$x$, $y$, $z$方向上的长度均为30倍的晶格常数
-	\textcolor{red}{注意}:~这里的\textrm{30}是\textrm{30}倍的意思，实际长度为\textrm{30}乘以\textrm{4.05}\AA\\
-	如果想要让\textrm{30}代表实际长度，即让其单位为\AA，则只需要在后面加上\textcolor{cyan}{\textit{units}} \textrm{box}即可:\\
-	\textcolor{cyan}{\textit{region}} \textrm{box1 \textcolor{magenta}{block} 0 30 0 30 0 30 \textcolor{cyan}\textit{units} \textrm{box}}}}
-}
-
-\frame
-{
-	\frametitle{\textcolor{cyan}{\textit{create\_box}}:~创建一个有限区域}
-	该命令还固定了该模拟区域中原子类型
-	\textcolor{cyan}{\textit{create\_box}} \textrm{N region-ID \textcolor{blue}{keyword} $\cdots$}
-	\begin{itemize}
-		\item \textrm{N}:~本次模拟使用的原子种类数
-		\item \textrm{region-ID}:~用来模拟的区域的\textrm{ID}
-		\item \textrm{\textcolor{blue}{keyword}}可以取 \textrm{\textcolor{magenta}{bond}/\textcolor{magenta}{types} or \textcolor{magenta}{angle}/\textcolor{magenta}{types} or \textcolor{magenta}{dihedral}/\textcolor{magenta}{types} or \textcolor{magenta}{improper}/\textcolor{magenta}{types} or \textcolor{magenta}{extra}/\textcolor{magenta}{bond}/\textcolor{magenta}{per}/\textcolor{magenta}{atom} or \textcolor{magenta}{extra}/\textcolor{magenta}{angle}/\textcolor{magenta}{per}/\textcolor{magenta}{atom} or \textcolor{magenta}{extra}/\textcolor{magenta}{dihedral}/\textcolor{magenta}{per}/\textcolor{magenta}{atom} or \textcolor{magenta}{extra}/\textcolor{magenta}{improper}/\textcolor{magenta}{per}/\textcolor{magenta}{atom} or \textcolor{magenta}{extra}/\textcolor{magenta}{special}/\textcolor{magenta}{per}/\textcolor{magenta}{atom}}
-	\end{itemize}
-{\fontsize{7.5pt}{5.2pt}\selectfont{
-	\textcolor{red}{举例如下}\\
-	\textcolor{cyan}{\#}~在模拟盒子\textrm{box1}中添加一类原子
-	\textcolor{cyan}{\textit{create\_box}} \textrm{1 box1}}}
-}
-
-\frame
-{
-	\frametitle{\textcolor{cyan}{\textit{create\_atoms}}和\textcolor{cyan}{\textit{mass}}}
-	\textcolor{cyan}{\textit{create\_atoms}}:~在指定区域内填充一定数量的原子\\
-	\textcolor{cyan}{\textit{create\_atoms}} \textrm{\textcolor{blue}{type style keyword $\cdots$}}
-	{\fontsize{7.5pt}{5.2pt}\selectfont{其中\textrm{\textcolor{blue}{type}}与后面定义的模拟原子中的信息\textrm{(\textcolor{cyan}{\textit{mass}})}对应\\
-	\textcolor{red}{举例如下}\\
-	\textcolor{cyan}{\#} 在整个模拟区域中添加类型为\textrm{1}的原子(即添加\textrm{Al}原子)
-	\textcolor{cyan}{\textit{create\_atoms}} \textrm{1} \textcolor{cyan}{\textit{region}} \textrm{\textcolor{magenta}{whole}}\\
-	\textcolor{cyan}{\#} 模拟环境中的原子信息
-	\textcolor{cyan}{\textit{mass}} \textrm{1 26.981   \# Al}\\
-	\textcolor{cyan}{\textit{mass}}\textrm{2 55.845   \# Fe}}}
-
-	\textcolor{cyan}{\textit{mass}}:~为某一种或几种类型的原子设置质量
-}
-
-\frame
-{
-	\frametitle{\textcolor{cyan}{\textit{pair\_style}}和\textcolor{cyan}{\textit{pair\_coeff}}}
-	设置势函数 {\fontsize{7.5pt}{5.2pt}\selectfont{金属中常用的势函数是\textrm{EAM}势函数}}
-
-	\textrm{\textcolor{magenta}{$\ast$ $\ast$}}是通配符:~意思是\textcolor{purple}{使原子之间存在相互作用}\footnote{\fontsize{6.2pt}{5.2pt}\selectfont{假如体系中有两类原子，\textrm{Al}和\textrm{Fe}原子，这个通配符的作用就是使\textrm{Al}原子与\textrm{Al}原子相互作用，\textrm{Fe}原子与\textrm{Fe}原子相互作用，\textrm{Al}原子和\textrm{Fe}原子相互作用}}\\
-{\fontsize{7.5pt}{5.2pt}\selectfont{
-	\textcolor{red}{举例如下}\\
-	\textcolor{cyan}{\textit{pair\_style}} \textrm{eam/alloy}\\
-	\textcolor{cyan}{\textit{pair\_coeff}}	\textcolor{magenta}{$\ast$} \textcolor{magenta}{$*$} \textrm{Al99.eam.alloy Al}}}\\
-	{\fontsize{6.2pt}{5.2pt}\selectfont{其中\textrm{Al99.eam.alloy}是势函数的名称\\
-	\textcolor{red}{不同势函数后面的\textcolor{cyan}{\textit{pair\_coeff}}写法不同}\\
-	\textrm{EAM}势函数需要在后面写出所有原子的名称，且写的顺序要和\textcolor{cyan}{\textit{mass}}中定义的顺序一一对应}}
-}
-
-\frame[allowframebreaks]
-{
-	\frametitle{\textcolor{cyan}{\textit{group}}:~对原子分组}
-	分组后的原子会有一个\textrm{group-ID}，\textrm{group-ID}被用到\textcolor{cyan}{\textit{fix}}, \textcolor{cyan}{\textit{compute}}, \textcolor{cyan}{\textit{dump}}等命令中\\
-{\fontsize{7.5pt}{5.2pt}\selectfont{
-	如\textcolor{cyan}{\textit{fix}}命令中的第二个参数就是\textrm{group-ID}\\
-	\textcolor{cyan}{\textit{fix}} \textrm{ID group-ID style\_name \textcolor{blue}{keyword} $\cdots$}\\
-	\textcolor{cyan}{\textit{fix}} \textrm{1 water npt temp 300.0 300.0 100.0 iso 0.0 0.0 1000.0}}}
-	即使不对原子进行分组，\textrm{LAMMPS}也会设置一个默认的原子组:~\textrm{\textcolor{blue}{all}}，也就是把所有的原子全部划分到\textrm{\textcolor{blue}{all}}组内
-{\fontsize{7.5pt}{5.2pt}\selectfont{
-	例如对系统所有原子进行温度初始化，可以使用下面的语句，其中\textrm{\textcolor{blue}{all}}就是默认的\textrm{group-ID}:~\\
-	\textcolor{cyan}{\textit{velocity}} \textrm{\textcolor{blue}{all} create 300.0 300.0 4928459}}}
-
-常用的分组方式有以下几种：
-\begin{enumerate}
-	\item 配合\textcolor{cyan}{\textit{region}}使用，把某一区域的原子归入到一个组中
-{\fontsize{7.5pt}{5.2pt}\selectfont{
-例如在纳米铜的拉伸时，需要一端固定，另一端施加一定的速度进行拉伸，这就需要把\textrm{Cu}原子划分为三个组:
-\begin{itemize}
-	\item \textrm{left}:~固定组
-	\item \textrm{right}:~速度加载组
-	\item \textrm{mobile}:~中间组
-\end{itemize}
-\textcolor{cyan}{\textit{group}}命令配合 \textcolor{blue}{\textrm{union}}关键字可实现两个组的合并:\\
-{\fontsize{6.2pt}{5.2pt}\selectfont{
-例如\textrm{left}和\textrm{right}组合并为\textrm{boundary}组，可以写为:
-\textcolor{cyan}{\textit{group}} \textrm{boundary \textcolor{blue}{union} left right}}}
-
-配合\textcolor{blue}{\textrm{substract}}关键字可实现减法操作:\\
-{\fontsize{6.2pt}{5.2pt}\selectfont{所有原子减去\textrm{boundary}原子即为中间\textrm{moible}原子，可以写为:
-\textcolor{cyan}{\textit{group}} \textrm{mobile subtract \textcolor{blue}{all} boundary}}}
-		\textrm{Cu}拉伸建模全部代码如下:
-		\verbatiminput{Figures/Lammps_tutorial-command_example.txt}}} %为保险:~选用文件名绝对路径
-\item 配合\textcolor{cyan}{\textit{type}}命令，可以将多种类型的原子归为一组\\
-{\fontsize{6.2pt}{6.0pt}\selectfont{
-	\textcolor{cyan}{\#} 将原子类型为\textrm{3}和\textrm{4}的原子全部归入到\textrm{water}组\\
-	\textcolor{cyan}{\textit{group}} \textrm{water type 3 4}}}
-
-\item 配合原子\textrm{id}可将特定的原子归入到一组
-	{\fontsize{7.5pt}{6.0pt}\selectfont{
-		\verbatiminput{Figures/Lammps_tutorial-command_group.txt}}} %为保险:~选用文件名绝对路径
-\end{enumerate}
-\textcolor{red}{注意}:~\textrm{LAMMPS}最多支持\textrm{32}个\textcolor{cyan}{\textit{group}}(包含\textrm{all}组)\\
-{\fontsize{7.5pt}{6.0pt}\selectfont{
-如果定义的组过多，可将不再使用的组删除
-\textcolor{cyan}{\textit{group}}\textrm{boundary delete}}}
-}
-
-\frame
-{
-	\frametitle{\textcolor{cyan}{\textit{set}}:~改变原子类型}
-	改变原子类型，可以用来为不同区域设置不同颜色，或者用在高熵合金建模过程中\\
-{\fontsize{7.5pt}{6.0pt}\selectfont{
-	以下实例是在高熵合金建模中，通过
-	\textcolor{cyan}{\textit{set}} \textrm{\textcolor{magenta}{type} type\_ID \textcolor{magenta}{type}/\textcolor{magenta}{ratio} type\_new fraction seed}
-	\begin{itemize}
-		\item \textrm{type\_ID}是需要被替换的原子类型
-		\item \textrm{type\_nea}w是将要转换的新原子类型
-		\item \textrm{fraction}是新原子类型占初始原子类型的比例
-		\item \textrm{seed}为随机种子
-	\end{itemize}
-		\verbatiminput{Figures/Lammps_tutorial-command_set.txt}}} %为保险:~选用文件名绝对路径
-}
-
-\frame
-{
-	\frametitle{\textcolor{cyan}{\textit{timestep}}:~设置模拟时间步长}
-	设置模拟的时间步长\\
-{\fontsize{7.5pt}{6.0pt}\selectfont{
-	金属中一般是在\textcolor{magenta}{\textrm{atomic}}单位制下，所以\textcolor{cyan}{\textit{timestep}}的单位一般是\textrm{ps}
-
-	\textcolor{red}{举例如下}\\
-	\textcolor{cyan}{\textit{timestep}} \textrm{0.001}}}\\
-	{\fontsize{6.2pt}{6.0pt}\selectfont{这里设置的是\textrm{0.001ps}，也就是\textrm{1fs}}}
-}
-
-\frame
-{
-	\frametitle{\textcolor{cyan}{\textit{velocity}}:~创建初始温度}
-	用来创建初始温度，或者理解为原子组创建初始速度\footnote{\fontsize{6.2pt}{6.0pt}\selectfont{\textrm{LAMMPS}中温度的变化就是对应了速度的变化}}\\
-	\textcolor{cyan}{\textit{velocity}} \textrm{group-ID \textcolor{blue}{style} \textcolor{blue}{keyword} $\cdots$}
-	\begin{itemize}
-		\item \textrm{group-ID}:~即将改变速度的原子组的ID
-		\item  \textrm{\textcolor{blue}{style}}可以取 \textrm{\textcolor{magenta}{create} or \textcolor{magenta}{set} or \textcolor{magenta}{scale} or \textcolor{magenta}{ramp} or \textcolor{magenta}{zero}}\\
-
-{\fontsize{7.5pt}{6.0pt}\selectfont{
-			\textrm{\textcolor{magenta}{create}}后面要跟自己创建的初始温度\textrm{temp seed} \textrm{(其中temp = temperature value (temperature units))}
-
-	\textcolor{red}{举例如下}\\
-	\textcolor{cyan}{\textit{velocity}} \textrm{\textcolor{blue}{all} \textcolor{blue}{create} 300 12345}}}\\
-{\fontsize{6.2pt}{6.0pt}\selectfont{
-	上述例子中的\textrm{\textcolor{blue}{all}是\textrm{LAMMPS}中的关键字，意思是所有原子，也可以改成\textrm{group-ID}\\
-	\textrm{\textcolor{blue}{create} 300}意思是创建初始温度为\textrm{300K}，后面的\textrm{12345}是随机种子}}}
-	\end{itemize}
-}
-
-\frame
-{
-	\frametitle{\textcolor{cyan}{\textit{fix}}}
-	\textcolor{cyan}{\textit{fix}} \textrm{ID group-ID \textcolor{blue}{style} \textcolor{blue}{keyword} $\cdots$}
-	\begin{itemize}
-		\item \textrm{ID:~user-assigned name for the fix}
-		\item \textrm{group-ID: ID of the group of atoms to apply the fix to}
-		\item \textrm{\textcolor{blue}{style}:~ one of a long list of possible style names}\\
-			可以取 \textrm{\textcolor{magenta}{nvt} or \textcolor{magenta}{npt} or \textcolor{magenta}{nph}}
-		\item \textrm{args:~arguments used by a particular style}
-	\end{itemize}
-{\fontsize{7.5pt}{6.0pt}\selectfont{
-	\textcolor{red}{举例如下}\\
-	\textcolor{cyan}{\textit{fix}} \textrm{1 \textcolor{magenta}{all} \textcolor{magenta}{npt} \textcolor{magenta}{temp} 300 300 0.1 iso 0 0 1 drag 1}}}
-	\begin{itemize}
-{\fontsize{6.2pt}{6.0pt}\selectfont{
-\item \textrm{1}是该\textcolor{cyan}{\textit{fix}}命令的\textrm{ID}
-\item \textcolor{blue}{\textrm{all}}是对所有原子施加后面的条件
-\item \textcolor{blue}{\textrm{npt}}是等温等压系综
-\item \textcolor{blue}{\textrm{temp}}是设置温度的关键字\\
-	\textcolor{blue}{\textrm{temp}} \textrm{300 800 0.1}命令中\\
-	第一个参数\textrm{300}是\textcolor{red}{初始温度}\\
-	第二个参数\textrm{300}是截至温度\\
-	第三个参数\textrm{0.1}是温度的阻尼系数，设置它是使其在升温或者降温过程中不会出现太大的波动\footnote{\fontsize{6.2pt}{6.0pt}\selectfont{一般来说阻尼系数是\textrm{100}倍的\textcolor{cyan}{\textit{timestep}}}}\\
-	\textrm{iso}是控压方式，因为设置的是\textrm{npt}系综，所以温度和压力必须设置\\
-	其中\textrm{iso}是对$x$,$y$,$z$三个方向进行联合控压(耦合控压)\footnote{\fontsize{6.2pt}{6.0pt}\selectfont{在控压时要改变模拟盒子的大小，$x$,$y$,$z$三个方向同时改变}}
-	与之相对的是\textrm{aniso}，是非耦合控压($x$,$y$,$z$三个方向不是同时改变)
-	\textrm{iso}后跟的是初始压强，结束压强，和阻尼系数(为了使压强在增加或者降低过程中不会出现太大波动)}}
-	\end{itemize}
-}
-
-\frame[allowframebreaks]
-{
-	\frametitle{\textcolor{cyan}{\textit{thermo}}和\textcolor{cyan}{\textit{thermo\_style}}}
-	设置输出信息/格式
-	\begin{itemize}
-		\item \textcolor{cyan}{\textit{thermo}} \textcolor{blue}{$N$}\\
-			\textcolor{blue}{$N$}:~\textrm{output thermodynamics every \textcolor{blue}{$N$} \textcolor{cyan}{\textit{timesteps}}}
-
-		\item \textcolor{cyan}{\textit{thermo\_style}} \textrm{\textcolor{blue}{style}}\\
-			\textrm{\textcolor{blue}{style}}可以取\textrm{\textcolor{magenta}{one} or \textcolor{magenta}{multi} or \textcolor{magenta}{yaml} or \textcolor{magenta}{custom}}\\
-			\textrm{args:~list of arguments for a particular style}
-	\end{itemize}
-{\fontsize{7.5pt}{6.0pt}\selectfont{
-	\textcolor{red}{举例如下}\\
-	\textcolor{cyan}{\textit{thermoa}} 1000\\
-	\textcolor{cyan}{\textit{thermo\_style}} \textrm{\textcolor{magenta}{custom} \textcolor{magenta}{step} lx ly lz \textcolor{magenta}{press} pxx pyy pzz \textcolor{magenta}{pe} \textcolor{magenta}{temp}}}}\\
-{\fontsize{6.2pt}{6.0pt}\selectfont{
-	\textcolor{cyan}{\textit{thermoa}} \textrm{1000}:~每1000步在屏幕上输出一次
-	\textcolor{cyan}{\textit{thermo\_style}}后面是在屏幕上输出的信息:~\\
-	\textrm{\textcolor{magenta}{custom}}后的内容就是在屏幕上输出的，可以看到
-	输出的运行步数\textrm{\textcolor{magenta}{step}}:~三个方向上的长度\textrm{lx, ly, lz}
-	模拟体系的压力\textrm{\textcolor{magenta}{press}}:~三个方向上的压力\textrm{pxx, pyy, pzz}
-	\textrm{\textcolor{magenta}{pe}}是模拟体系的势能
-	\textrm{\textcolor{magenta}{temp}}是模拟体系的温度
-\begin{figure}[h!]
-\centering
-\vskip -5pt
-\includegraphics[height=2.50in,width=3.0in, viewport=0 0 646 547,clip]{Lammps_tutorial-command_thermo.png}
-%\caption{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{The general workflow for running molecular dynamics simulations using LAMMPS.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{Lammps_tutorial-command_thermo}
-\end{figure}
-可以看到最后一行是温度，在模拟开始时温度为\textrm{300K}，由于前面\textcolor{cyan}{\textit{fix}}命令中设置了\textrm{\textcolor{magenta}{temp}} \textrm{300 300 0.1}，所以截至温度也是\textrm{300K}，中间会有升温和降温过程，如果最终温度没到\textrm{300K}，\textcolor{red}{则可能是运行的步数不够}}}
-}
-
-
-\frame
-{
-	\frametitle{\textcolor{cyan}{\textit{dump}}:~设置输出}
-	\textcolor{cyan}{\textit{dump}} \textrm{ID group-ID \textcolor{blue}{style} \textcolor{blue}{$N$} file attribute1 attribute2 $\cdots$}
-	\begin{itemize}
-		\item \textrm{ID:~user-assigned name for the dump}
-		\item \textrm{group-ID:~ID of the group of atoms to be dumped}
-		\item \textrm{\textcolor{blue}{style}} 可以取\textrm{\textcolor{magenta}{atom} or \textcolor{magenta}{atom}/\textcolor{magenta}{adios} or \textcolor{magenta}{atom}/\textcolor{magenta}{gz} or \textcolor{magenta}{atom}/\textcolor{magenta}{zstd} or \textcolor{magenta}{atom}/\textcolor{magenta}{mpiio} or \textcolor{magenta}{cfg} or \textcolor{magenta}{cfg}/\textcolor{magenta}{gz} or \textcolor{magenta}{cfg}/\textcolor{magenta}{zstd} or \textcolor{magenta}{cfg}/\textcolor{magenta}{mpiio} or \textcolor{magenta}{cfg}/\textcolor{magenta}{uef} or \textcolor{magenta}{custom} or \textcolor{magenta}{custom}/\textcolor{magenta}{gz} or \textcolor{magenta}{custom}/\textcolor{magenta}{zstd} or \textcolor{magenta}{custom}/\textcolor{magenta}{mpiio} or \textcolor{magenta}{custom}/\textcolor{magenta}{adios} or \textcolor{magenta}{dcd} or \textcolor{magenta}{grid} or \textcolor{magenta}{grid}/\textcolor{magenta}{vtk} or \textcolor{magenta}{h5md} or \textcolor{magenta}{image} or \textcolor{magenta}{local} or \textcolor{magenta}{local}/\textcolor{magenta}{gz} or \textcolor{magenta}{local}/\textcolor{magenta}{zstd} or \textcolor{magenta}{molfile} or \textcolor{magenta}{movie} or \textcolor{magenta}{netcdf} or \textcolor{magenta}{netcdf}/\textcolor{magenta}{mpiio} or \textcolor{magenta}{vtk} or \textcolor{magenta}{xtc} or \textcolor{magenta}{xyz} or \textcolor{magenta}{xyz}/\textcolor{magenta}{gz} or \textcolor{magenta}{xyz}/\textcolor{magenta}{zstd} or \textcolor{magenta}{xyz}/\textcolor{magenta}{mpiio} or \textcolor{magenta}{yaml}}
-		\item \textcolor{blue}$N$: \textrm{dump on timesteps which are multiples of \textcolor{blue}{$N$}}
-		\item \textrm{file:~name of file to write dump info to}
-		\item \textrm{attribute1, attribute2, $\cdots$:~list of attributes for a particular style}
-	\end{itemize}
-{\fontsize{7.5pt}{6.0pt}\selectfont{
-	\textcolor{red}{举例如下}\\
-	\textcolor{cyan}{\textit{dump}} \textrm{1 \textclor{blue}{all} \textcolor{magenta}{custom} 1000 \textrm{Al.xyz} \textcolor{magenta}{type} $x$ $y$ $z$}}}\\
-{\fontsize{6.2pt}{6.0pt}\selectfont{其中\\
-	\textrm{1}是用户指定的\textcolor{cyan}{\textit{dump}}名字\\
-	\textrm{\textclor{blue}{all}}是关键字，对所有的原子施加后面的操作\\
-	\textrm{\textclor{blue}{custom}}是自定义输出\\
-	\textrm{1000}是每\textrm{1000}步输出一次，输出到后面的\textrm{Al.xyz}文件中，该文件中输出的信息有\textrm{\textclor{blue}{type}}(原子类型)，和$x$, $y$, $z$坐标}}
-
-	整个过程中的所有信息保存在\textcolor{purple}{\textrm{log.lammps}}文件中
 }
 
 %------------------------------------------------------------------------Reference----------------------------------------------------------------------------------------------
