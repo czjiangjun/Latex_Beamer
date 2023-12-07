@@ -71,15 +71,76 @@
 %	     \item \textrm{PAW}原子数据集:\textcolor{blue}{优异的赝势}\upcite{PRB59-1758_1999}
 %	\end{itemize}
 %}
+\section{高通量与高性能计算}
 \frame
 {
-	\frametitle{科学研究的范式变更}
+	\frametitle{高性能计算:~中心化集群}
 \begin{figure}[h!]
-\vspace*{0.08in}
+\vspace*{-15pt}
 \centering
-\includegraphics[height=2.00in,width=4.15in]{Figures/Four_Model_3.png}
+\includegraphics[height=2.70in,width=4.05in]{Figures/HPC_cluster.jpeg}
 %\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{Four_Model}
+\label{HPC-Architecture-1}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{高性能计算:~计算中心的资源分布}
+\begin{figure}[h!]
+\vspace*{-15pt}
+\centering
+\includegraphics[height=2.40in,width=4.05in]{Figures/Architecture-of-HPC-Cluster_Octopus.png}
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Architecture-of-HPC-Cluster_Octopus}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{计算中心:~多用户系统}
+\begin{figure}[h!]
+\vspace*{-10pt}
+\centering
+\includegraphics[height=2.30in,width=4.05in]{Figures/Traditional_bare-metal_HPC_cluster.png}
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{HPC-Architecture-2}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{高性能计算:~硬件}
+\begin{figure}[h!]
+\vspace*{-15pt}
+\centering
+\includegraphics[height=2.80in,width=3.5in]{Figures/The_SDSU_petascale-parallel_storage_cluster-beekeeper.png}
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{HPC-SDSU_petascale-parallel_storage_cluster-beekeeper}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{高性能计算:~硬件}
+\begin{figure}[h!]
+\vspace*{-10pt}
+\centering
+\includegraphics[height=2.80in,width=2.4in]{Figures/The_beehive_parallel_storage_cluster-in-the-Computational_Science_Data_Center.jpg}
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{HPC-beehive_parallel_storage_cluster-in-the-Computational_Science_Data_Center}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{高性能计算:~硬件}
+\begin{figure}[h!]
+\vspace*{-10pt}
+\centering
+\includegraphics[height=2.80in,width=4.0in]{Figures/The_SDSU_petascale_parallel_storage_cluster_beehive.png}
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{HPC-SDSU_petascale_parallel_storage_cluster_beehive}
 \end{figure}
 }
 
@@ -90,7 +151,7 @@
 		\item \textrm{HPC~(High Performance Computing)}:
 			\vskip 5pt
 			\textrm{Large amounts of [simultaneous] computing power for comparatively short periods of time} 
-		\item \textrm{HPC~(High Throughput Computing)}:
+		\item \textrm{HTC~(High Throughput Computing)}\footnote{\fontsize{5.5pt}{4.2pt}\selectfont{高通量的概念最初出现在实验领域，早期的材料研究、制药研究主要通过大量备选材料试错，最终才得到合适的材料或药物重要功能成分，这就是一种高通量筛选。文献中常会提到“高通量”和“组合方法”(\textrm{Combinational approach})，但很少区分两者的区别:~“高通量”指用户产生或处理的数据量极大，没有计算机自动处理无法完成;~而“组合方法”是针对影响研究对象的各种可能自由度的分门别类研究。换言之，高通量考虑的是利用计算机“一视同仁”地自动化式处理海量数据，而组合方法更强调对特定影响因素的筛查和组合研究}}:
 			\vskip 5pt
 			\textrm{Large amounts of computing over significantly longer periods, not necessarily all at the same time}
 	\end{itemize}
@@ -143,6 +204,31 @@
 			\vskip 1pt
 			{\fontsize{6.5pt}{5.2pt}\selectfont{串行系统适用于这些要求}}
 	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{高性能计算与高通量计算}
+\begin{figure}[h!]
+\vspace*{-10pt}
+\centering
+\includegraphics[height=2.80in,width=2.2in]{Figures/Interoperability-of-HTC-and-HPC-infrastructures-enables-new-types-of-e-science.png}
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Interoperability-of-HTC-and-HPC-infrastructures-enables-new-types-of-e-science}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{复杂计算流程:~高性能与高通量}
+\begin{figure}[h!]
+\vspace*{-10pt}
+\centering
+\includegraphics[height=2.80in,width=1.6in]{Figures/The_combined_GriF_HPC-HTC_Workflow.png}
+\includegraphics[height=2.80in,width=1.7in]{Figures/The_combined_GriF_HTC-HPC_Workflow.png}
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{The_combined-HTC-HPC_Workflow}
+\end{figure}
 }
 
 %\frame
@@ -218,6 +304,18 @@
 %
 \frame
 {
+	\frametitle{科学研究的范式变更}
+\begin{figure}[h!]
+\vspace*{0.08in}
+\centering
+\includegraphics[height=2.00in,width=4.15in]{Figures/Four_Model_3.png}
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Four_Model}
+\end{figure}
+}
+
+\frame
+{
 	\frametitle{数据驱动的科学研究}
 前所未有的计算能力和大规模的数据收集能力%，现代科学正在进入“第四范式”：
 \begin{figure}[h!]
@@ -234,7 +332,7 @@
 \frame
 {
 	\frametitle{高通量计算流程}
-高通量\footnote{\fontsize{5.5pt}{4.2pt}\selectfont{高通量的概念最初出现在实验领域，早期的材料研究、制药研究主要通过大量备选材料试错，最终才得到合适的材料或药物重要功能成分，这就是一种高通量筛选。文献中常会提到“高通量”和“组合方法”(\textrm{Combinational approach})，但很少区分两者的区别:~“高通量”指用户产生或处理的数据量极大，没有计算机自动处理无法完成;~而“组合方法”是针对影响研究对象的各种可能自由度的分门别类研究。换言之，高通量考虑的是利用计算机“一视同仁”地自动化式处理海量数据，而组合方法更强调对特定影响因素的筛查和组合研究}}计算流程主要任务包括三方面:
+高通量计算流程主要任务包括三方面:
 \begin{itemize}
 	\item \textcolor{blue}{增加材料模拟数据}:~主要包括\textrm{DFT}、\textrm{MD}计算的材料数据
 	\item \textcolor{blue}{存储材料物性数据}:~系统存储材料数据，用以构建材料数据库
