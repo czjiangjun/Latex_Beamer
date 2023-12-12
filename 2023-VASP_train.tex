@@ -557,14 +557,74 @@ $\vec k$空间布点数为$9\times9\times9$，布点方案由\textrm{Monkhorst-P
 {\fontsize{6.2pt}{5.2pt}\selectfont{$\vec k$-点收敛测试与\textit{ENCUT}收敛的情形类似}}%，结果如图\ref{Pt_FCC-kpoint-curve}所示。从图中不难看出，对于当前体系，$9\times9\times9$的网格点能保证足够精度。
 %需要指出的是，从文件\textrm{IBZKPT}中的$\vec k$点分布看，采用\textrm{Monkhorst-Pack}布点方案，将每个维度格点剖分成偶数时，$\vec k$空间的网格点分布会更均匀。
 }
-\section{{\rm Si}的能带结构}\label{Sec:Si-band}
-%在引入能带理论的时候，已知自由电子的能量是$\vec k$的二次函数(开口向上的抛物线)，能量极小值位于$\vec k=0$~($\Gamma$点)，考虑到平移周期性，可以将能量函数平移到第一\textrm{Brillouin}区表示;~实际的周期体系由于周期性势函数的存在，能量在倒空间中的分布存在带隙\textrm{(band gap)}，也不一定关于$\Gamma$点对称，这是和自由电子的最大区别。因为周期势场内的电子既不是完全局域也不是完全的自由的。
-
-%本次练习，将学习计算半导体\textrm{Si}的能带结构，我们将看到单个的\textrm{Si}原子堆积成固体\textrm{Si}时，原子轨道如何构成能带。该练习也将说明\textrm{Kohn-Sham}方程的能量$\varepsilon_{\vec k}^n$的表示，除了能带记号$n$，还必须包括波矢量子数$\vec k$。
-%\subsection{静态计算}
+\section{{\rm Si}的电子结构:~态密度与能带}\label{Sec:Si-band}
 \frame
 {
-	\frametitle{\textrm{Si}能带计算}
+	\frametitle{\textrm{Si}的初基原胞:~\textrm{FCC}}
+\vspace*{-13pt}
+\begin{figure}[h!]
+\centering
+\includegraphics[height=1.78in]{Figures/VASP_example-Si_POSCAR-1-Fig.png}
+\vskip 1pt
+\includegraphics[height=0.98in]{Figures/VASP_example-Si_POSCAR-1.png}
+%\caption{\tiny \textrm{The structure of TiC.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:VASP-Si_POSCAR}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{Si}的初始计算:~输入文件}
+\vspace*{-5pt}
+\begin{figure}[h!]
+\centering
+\includegraphics[height=0.62in]{Figures/VASP_example-Si_KPOINTS-G.png}
+\vskip 4pt
+\includegraphics[height=1.88in]{Figures/VASP_example-Si_INCAR-dyn.png}
+%\caption{\tiny \textrm{The structure of TiC.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:VASP-Si_KPOINT-INCAR}
+\end{figure}
+}
+
+%\frame
+%{
+%	\frametitle{\textrm{Si}的初始计算:~\textrm{POTCAR}}
+%\vspace*{-13pt}
+%\begin{figure}[h!]
+%\centering
+%\includegraphics[height=2.88in]{Figures/VASP_example-Si_POTCAR.png}
+%%\caption{\tiny \textrm{The structure of TiC.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\label{Fig:VASP-Si_POTCAR}
+%\end{figure}
+%}
+%
+%\frame
+%{
+%	\frametitle{\textrm{VASP}计算示范:~\textrm{Si}}
+%\vspace*{-10pt}
+%\begin{figure}[h!]
+%\centering
+%\includegraphics[width=3.0in]{Figures/VASP_example-Si_OUTCAR-1.png}
+%%\caption{\tiny \textrm{The structure of TiC.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\label{Fig:VASP-Si_OUTCAR-part1}
+%\end{figure}
+%}
+%
+%\frame
+%{
+%	\frametitle{\textrm{VASP}计算示范:~\textrm{Si}}
+%\vspace*{-10pt}
+%\begin{figure}[h!]
+%\centering
+%\includegraphics[width=3.5in]{Figures/VASP_example-Si_OUTCAR-2.png}
+%%\caption{\tiny \textrm{The structure of TiC.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\label{Fig:VASP-Si_OUTCAR-part2}
+%\end{figure}
+%}
+%
+\frame
+{
+	\frametitle{\textrm{Si}的静态计算}
 %静态计算是获得电子基态信息的重要步骤，在
 静态计算:~确定基态电荷密度
 \vskip 5pt
@@ -589,6 +649,19 @@ $\vec k$空间布点数为$9\times9\times9$，布点方案由\textrm{Monkhorst-P
 \vskip 6pt
 {\fontsize{8.5pt}{5.2pt}\selectfont{静态计算完毕，可以从文件\textrm{OSZICAR}得到体系的基态能量，电荷密度则保存到文件\textrm{CHGCAR}中}}
 }
+
+\frame
+{
+	\frametitle{静态计算:~\textrm{Si}的态密度}
+\vspace*{-10pt}
+\begin{figure}[h!]
+\centering
+\includegraphics[width=3.5in]{Figures/VASP_cdSi_1.png}
+%\caption{\tiny \textrm{The structure of TiC.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:VASP-Si_DOS}
+\end{figure}
+}
+
 %\subsection{Si的能带结构计算}
 \frame
 {
@@ -680,6 +753,31 @@ $\vec k$空间布点数为$9\times9\times9$，布点方案由\textrm{Monkhorst-P
 ~(该值仅为实验测得带隙的$1/2$，因\textrm{DFT}先天不足，低估带隙)}}
 %不过除了对带隙的低估，\textrm{DFT}计算的色散关系(能量在倒空间分布关系)是完全正确的，比如\textrm{Fermi}面附近有四个价带，四个导带，能量$\varepsilon_{\vec k}^n$随$\vec k$空间的变化逐渐改变，因此\textrm{DFT}理论的计算定性是完全正确的。实际上，其他物理量(比如波函数和电子密度)，也和能量本征值有类似的倒空间分布关系。表明这样的$\vec k$点采样是合理的，能够表现物理量在不可约\textrm{Brillouin}区的定量变化。
 }
+
+%\frame
+%{
+%	\frametitle{\textrm{Si}的能带}
+%%\vspace*{5pt}
+%\begin{figure}[h!]
+%\centering
+%\includegraphics[width=4.0in]{Figures/VASP_cdSi_2.png}
+%%\caption{\tiny \textrm{The structure of TiC.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\label{Fig:VASP-Si_Band}
+%\end{figure}
+%}
+%
+\frame
+{
+	\frametitle{\textrm{Si}的能带可视化:~\textrm{p4vasp}}
+%\vspace*{5pt}
+\begin{figure}[h!]
+\centering
+\includegraphics[width=4.0in]{Figures/VASP_cdSi_3.png}
+%\caption{\tiny \textrm{The structure of TiC.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:VASP-Si_p4vasp}
+\end{figure}
+}
+
 %\subsubsection{\rm{能带中的本征值}}
 \frame
 {
@@ -2060,6 +2158,8 @@ $\eta$对应\textrm{INCAR}中的控制参数\textcolor{cyan}{\textit{CSHIFT}}}}
 {\tiny
 	\bibitem{J.-G._Lee}\textrm{J.-G. Lee, \textit{Computational Materials Science:~an introduction}}~\textrm{(2nd Edition),~CPC Press}, \textrm{(2017)}
 	\bibitem{VASP_tutorial}\url{https://www.vasp.at/wiki/index.php/Category:Examples}
+	\bibitem{url_p4vasp}\url{https://github.com/orest-d/p4vasp}
+	\bibitem{url_VESTA}\url{https://jp-minerals.org/vesta/en/}
 	\bibitem{Comp_Phys}\textrm{J. M. Thijssen. \textit{Computational Physics}~\textrm{(2nd Edition)} (Cambridge University Press, Cambridge, England, 2007)}
 	\bibitem{PRB78-205302_2008}\textrm{H. Bentmann and A. A. Demkov and R. Gregory and S. Zollner. \textit{Phys. Rev. B} \textbf{78} (2008), 205302}
 	\bibitem{Landolt-Bornstein}\textrm{Landolt-B\"ornstein, \textit{Structure Data of Elements and Intermetallic Phase},~Springer Inc.}, \textrm{(1991)}
