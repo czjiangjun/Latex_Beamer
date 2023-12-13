@@ -11,6 +11,17 @@
 #%									%
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+PATH_Local=`pwd`
+test -e Beamer_Template/Beamer_Template-Preamble.tex && cp Beamer_Template/Beamer_Template-Preamble.tex  Beamer_Template/Beamer_Template-Preamble_tmp
+sed -e "s#\$PATHPWD#`echo $PATH_Local`#" Beamer_Template/Beamer_Template-Preamble_tmp > Beamer_Template/Beamer_Template-Preamble.tex
+# PATHFIG=`pwd`
+# test -e Beamer_Template/Beamer_Template-Preamble.tex &&  awk '{if(NR>=117 && NR<=117) print "\graphicspath{{" "$PATHFIG" "/}}"}' Beamer_Template/Beamer_Template-Preamble.tex
+
+test -e Beamer_Template/Beamer_3-Bibliography.tex && cp Beamer_Template/Beamer_3-Bibliography.tex  Beamer_Template/Beamer_3-Bibliography_tmp
+cd ../Reference && PATH_Reference=`pwd`
+cd $PATH_Local && sed -e "s#\$PATHPWD#`echo $PATH_Reference`#g"  Beamer_Template/Beamer_3-Bibliography_tmp > Beamer_Template/Beamer_3-Bibliography.tex 
+
+#exit
 touch Beamer_Template/.tmp 
 # test -s Beamer_Template/Beamer_2-Main.tex && sed 's/^\\input/%\\input/g' Beamer_Template/Beamer_2-Main.tex  > Beamer_Template/.tmp || echo "%Main_File"  > Beamer_Template/.tmp
 test -e Beamer_Template/Beamer_2-Main.tex && echo "%Main_File"  > Beamer_Template/.tmp
@@ -21,9 +32,13 @@ xelatex Beamer-Template_Main
 bibtex  Beamer-Template_Main
 xelatex Beamer-Template_Main
 xelatex Beamer-Template_Main
+
 rm -rf *.aux  *.bbl  *.dvi *.blg *.bcf *.out *.log *.nav *.thm *.snm *.toc *.*.xml *.*~ *~ .*.*.swp
 cd Beamer_Template/
 rm -rf *.aux  *.bbl  *.dvi *.blg *.bcf *.out *.log *.nav *.thm *.snm *.toc *.*.xml *.*~ *~ .*.*.swp
+mv Beamer_Template-Preamble_tmp Beamer_Template-Preamble.tex
+mv Beamer_3-Bibliography_tmp Beamer_3-Bibliography.tex
+
 cd ..
 mv Beamer-Template_Main.pdf $1.pdf
 evince $1.pdf
