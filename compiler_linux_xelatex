@@ -12,12 +12,12 @@
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 PATH_Local=`pwd`
-test -e Beamer_Template/Beamer_Template-Preamble.tex && cp Beamer_Template/Beamer_Template-Preamble.tex  Beamer_Template/Beamer_Template-Preamble_tmp
+test -s Beamer_Template/Beamer_Template-Preamble.tex && cp Beamer_Template/Beamer_Template-Preamble.tex  Beamer_Template/Beamer_Template-Preamble_tmp
 sed -e "s#\$PATHPWD#`echo $PATH_Local`#" Beamer_Template/Beamer_Template-Preamble_tmp > Beamer_Template/Beamer_Template-Preamble.tex
 # PATHFIG=`pwd`
 # test -e Beamer_Template/Beamer_Template-Preamble.tex &&  awk '{if(NR>=117 && NR<=117) print "\graphicspath{{" "$PATHFIG" "/}}"}' Beamer_Template/Beamer_Template-Preamble.tex
 
-test -e Beamer_Template/Beamer_3-Bibliography.tex && cp Beamer_Template/Beamer_3-Bibliography.tex  Beamer_Template/Beamer_3-Bibliography_tmp
+test -s Beamer_Template/Beamer_3-Bibliography.tex && cp Beamer_Template/Beamer_3-Bibliography.tex  Beamer_Template/Beamer_3-Bibliography_tmp
 cd ../Reference && PATH_Reference=`pwd`
 cd $PATH_Local && sed -e "s#\$PATHPWD#`echo $PATH_Reference`#g"  Beamer_Template/Beamer_3-Bibliography_tmp > Beamer_Template/Beamer_3-Bibliography.tex 
 
