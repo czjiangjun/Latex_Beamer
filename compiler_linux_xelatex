@@ -10,6 +10,29 @@
 #%\setsansfont[Mapping=tex-text]{Adobe 黑体 Std}	 %Beamer用字体	%
 #%									%
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+# echo $1
+Figures=Figures
+if [[ "$2" ]]; then
+	Figures=`echo $2 | awk -F "=" '{print $2}'`
+	if [ -d $Figures ]; then
+#		cd $Figures && pwd
+		Figures=$Figures
+	else
+		echo "There is NO Figures_Dir"
+		exit
+	fi
+fi
+References=../Reference
+if [[ "$3" ]]; then
+	References=`echo $3 | awk -F "=" '{print $2}'`
+	if [ -d $References ]; then
+#		cd $Figures && pwd
+		References=$References
+	else
+		echo "There is NO References_Dir"
+		exit
+	fi
+fi
 
 PATH_Local=`pwd`
 test -s Beamer_Template/Beamer_Template-Preamble.tex && cp Beamer_Template/Beamer_Template-Preamble.tex  Beamer_Template/Beamer_Template-Preamble_tmp
@@ -18,7 +41,7 @@ sed -e "s#\$PATHPWD#`echo $PATH_Local`#" Beamer_Template/Beamer_Template-Preambl
 # test -e Beamer_Template/Beamer_Template-Preamble.tex &&  awk '{if(NR>=117 && NR<=117) print "\graphicspath{{" "$PATHFIG" "/}}"}' Beamer_Template/Beamer_Template-Preamble.tex
 
 test -s Beamer_Template/Beamer_3-Bibliography.tex && cp Beamer_Template/Beamer_3-Bibliography.tex  Beamer_Template/Beamer_3-Bibliography_tmp
-cd ../Reference && PATH_Reference=`pwd`
+cd $References && PATH_Reference=`pwd`
 cd $PATH_Local && sed -e "s#\$PATHPWD#`echo $PATH_Reference`#g"  Beamer_Template/Beamer_3-Bibliography_tmp > Beamer_Template/Beamer_3-Bibliography.tex 
 
 #exit
