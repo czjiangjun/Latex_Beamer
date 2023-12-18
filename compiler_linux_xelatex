@@ -12,27 +12,45 @@
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 # echo $1
 Figures=Figures
-if [[ "$2" ]]; then
-	Figures=`echo $2 | awk -F "=" '{print $2}'`
-	if [ -d $Figures ]; then
-#		cd $Figures && pwd
-		Figures=$Figures
-	else
-		echo "There is NO Figures_Dir"
-		exit
-	fi
-fi
+#if [[ "$2" ]]; then
+#	Figures=`echo $2 | awk -F "=" '{print $2}'`
+#	if [ -d $Figures ]; then
+##		cd $Figures && pwd
+#		Figures=$Figures
+#	else
+#		echo "There is NO Figures_Dir"
+#		exit
+#	fi
+#fi
+while [[ ! -d $Figures ]];
+do
+	# echo "The Directory of Figures"
+	read -p "The Directory of Graphics: " var_Fig_Dir
+	Figures=$var_Fig_Dir #| awk -F "=" '{print $2}'`
+done
+# echo $Figures
+# exit
+
 References=../Reference
-if [[ "$3" ]]; then
-	References=`echo $3 | awk -F "=" '{print $2}'`
-	if [ -d $References ]; then
-#		cd $Figures && pwd
-		References=$References
-	else
-		echo "There is NO References_Dir"
-		exit
-	fi
-fi
+#if [[ "$3" ]]; then
+#	References=`echo $3 | awk -F "=" '{print $2}'`
+#	if [ -d $References ]; then
+##		cd $Figures && pwd
+#		References=$References
+##		echo $References
+#	else
+#		echo "There is NO References_Dir"
+#		exit
+#	fi
+#fi
+while [[ ! -d $References ]];
+do
+	# echo "The Directory of Figures"
+	read -p "The Directory of Bibliography: " var_Ref_Dir
+	References=$var_Ref_Dir #| awk -F "=" '{print $2}'`
+done
+# echo $References
+# exit
 
 PATH_Local=`pwd`
 test -s Beamer_Template/Beamer_Template-Preamble.tex && cp Beamer_Template/Beamer_Template-Preamble.tex  Beamer_Template/Beamer_Template-Preamble_tmp
