@@ -3948,12 +3948,15 @@ $$\left.\dfrac{\partial E[\tilde\Psi, R]}{\partial\langle\tilde\Psi_n|}\right|_R
 	\frametitle{\textrm{VASP}的平面波数目和内存估计}
 	平面波数目计算公式
 	\begin{displaymath}
-		N_{\mathrm{PW}}=\dfrac{4\pi}3\bigg(\sqrt{\dfrac{E_{\mathrm{cut}}}{\mathrm{RyToeV}}}\bigg)^3\times\dfrac{V_{\Omega}}{\mathrm{(a.u.To}\mbox{\textrm{\AA)}}^3}\times\dfrac1{8\pi^3}\times1.1
+		\begin{aligned}
+			N_{\mathrm{PW}}=&\dfrac{4\pi}3\bigg(\dfrac{\vec G_{\mathrm{max}}\cdot\vec L}{2\pi}\bigg)^3\times\textcolor{blue}{1.1}\\
+			=&\dfrac{4\pi}3\bigg(\sqrt{\dfrac{E_{\mathrm{cut}}}{\mathrm{RyToeV}}}\bigg)^3\times\dfrac{V_{\Omega}}{\mathrm{(a.u.To}\mbox{\textrm{\AA)}}^3}\times\dfrac1{8\pi^3}\times1.1
+		\end{aligned}
 	\end{displaymath}
 	{\tiny 其中\textrm{RyToeV}是单位换算常数\textrm{13.605826};~\textrm{a.u.To\AA}是单位换算常数\textrm{0.529177249}}
 	\begin{itemize}
-		\item \textrm{VASP}要求的基本(预保留)内存为\textrm{30M}
-		\item 当体系规模较大时，波函数部分是内存消耗的最主要部分，其计算公式为\\
+		\item {\fontsize{8.2pt}{6.2pt}\selectfont{\textrm{VASP}要求的基本(预保留)内存为\textrm{30M}}}
+		\item {\fontsize{8.2pt}{6.2pt}\selectfont{当体系规模较大时，波函数部分是内存消耗的最主要部分，其计算公式为\\
 			\textcolor{red}{平面波部分}(单位\textrm{Byte})
 			\begin{displaymath}
 				16.0\times N_{\mathrm{PW}}\times N_{\mathrm{Band}}\times N_{\vec k\mathrm{pt}}\times N_{\mathrm{spin}}
@@ -3962,7 +3965,7 @@ $$\left.\dfrac{\partial E[\tilde\Psi, R]}{\partial\langle\tilde\Psi_n|}\right|_R
 			\textcolor{red}{局域波函数部分}
 			\begin{displaymath}
 				16.0\times N_{\mathrm{local}}\times N_{\mathrm{Band}}\times N_{\vec k\mathrm{pt}}\times N_{\mathrm{spin}}
-			\end{displaymath}
+			\end{displaymath}}}
 	\end{itemize}
 }
 
