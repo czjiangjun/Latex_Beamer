@@ -678,46 +678,6 @@ $n_i$是$\psi_i$上的电子占据数，$\varepsilon_i$是其能量本征值，�
 }
 
 \section{\rm{VASP}计算示例}
-\frame
-{
-	\frametitle{\textrm{VASP}软件简介}
-	\textrm{VASP}软件是维也纳大学\textrm{(Universit\"at Wien)}~\textrm{G. Kresse}等开发的第一原理模拟软件包
-	\begin{itemize}
-		\item \textrm{VASP}采用\textrm{PAW~(Projector Augmented-Wave)}方法，平衡了赝势方法和全电子计算优点，兼顾了计算的精度和效率
-		\item \textrm{VASP}在实空间优化投影函数\textrm{(Projector)}，将主要的计算过程变换到实空间完成，大大节省了内存的开销%，保证了计算精度和效率
-		\item \textrm{VASP}通过引入多样的优化算法，提高了矩阵对角化和电荷密度搜索的效率
-		\item 在\textrm{VASP}的并行计算中，有效均衡了各节点处理\textrm{FFT}变换负载和通信，提升了软件的并行效率
-	\end{itemize}
-	相比于其他第一原理计算软件，\textrm{VASP}从物理思想与方法、优化算法和并行计算实现等多个方面都有更为出色的性能
-}
-
-\frame
-{
-	\frametitle{\textrm{VASP}的开发团队}
-\begin{figure}[h!]
-\centering
-\vspace*{-0.25in}
-\includegraphics[height=2.70in,width=4.05in,viewport=330 130 1280 770,clip]{Figures/VASP_team.png}
-\caption{\tiny \textrm{The development team of VASP.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{VASP_team}
-\end{figure}
-}
-
-\frame
-{
-	\frametitle{\textrm{VASP}的\textrm{Kohn-Sham}方程求解流程}
-\begin{figure}[h!]
-	\vspace{-0.2in}
-\centering
-%\includegraphics[height=2.7in,width=4.0in,viewport=0 0 1300 960,clip]{Figures/VASP_procedure-full.png}
-%\includegraphics[height=2.1in,width=1.6in,viewport=0 0 480 630,clip]{Figures/VASP_procedure.png}
-%\includegraphics[height=2.1in,width=2.3in,viewport=0 0 740 600,clip]{Figures/Ab-initio-Ene.png}
-\includegraphics[height=2.75in,width=2.5in,viewport=0 0 480 630,clip]{Figures/VASP_procedure.png}
-\caption{\tiny \textrm{The Flow of calculation for the KS-ground states.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{PAW_baiseset}
-\end{figure} 
-}
-
 \subsection{{\rm Si}的电子结构:~态密度与能带}\label{Sec:Si-band}
 \frame
 {
