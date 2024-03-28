@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  不使用 authblk 包制作标题  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %-------------------------------PPT Title-------------------------------------
-\title{第一原理材料模拟简介\rm{(I)}}
+\title{材料模拟软件与方法简介\rm{(I)}}
 %-----------------------------------------------------------------------------
 
 %----------------------------Author & Date------------------------------------
@@ -88,6 +88,21 @@
 
 \frame
 {
+%	\frametitle{\textrm{DFT-SCF}}
+\begin{figure}[h!]
+\vspace*{-0.25in}
+\centering
+\includegraphics[height=2.80in,width=4.95in,viewport=5 3 1250 780,clip]{Figures/Method_Procedure.png}
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Method-Procedure}
+\end{figure}
+}
+
+%-----------------------------------------------------------------------------------------------------------------------------------------------------------------------%
+\section{从理论到计算软件:~以\rm{DFT}为例}       %Bookmark
+\subsection{密度泛函理论}       %Bookmark
+\frame
+{
 	\frametitle{\textit{ab~initio}和\textrm{first~principle}}
 	\begin{itemize}
 		\item \textit{ab~initio}是拉丁文词汇\textrm{(Latin~term)}，其含义是\textrm{``from the beginning''}，由拉丁文\textit{ab}~\textrm{(``from'')}+\textit{initio}~\textrm{(``beginning'')}合成，后者是\textit{initium}的单数夺格\footnote{\fontsize{5.5pt}{4.2pt}\selectfont{夺格\textrm{(ablative)}，又称离格或从格，语法功能上表示某些词汇的状语。拉丁文\textit{initium}的意思是''开始、初始''。}}
@@ -126,85 +141,6 @@
 \end{minipage}
 }
 
-%-----------------------------------------------------------------------------------------------------------------------------------------------------------------------%
-\frame
-{
-%	\frametitle{\textrm{DFT-SCF}}
-\begin{figure}[h!]
-\vspace*{-0.25in}
-\centering
-\includegraphics[height=2.80in,width=4.95in,viewport=5 3 1250 780,clip]{Figures/Method_Procedure.png}
-%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{Method-Procedure}
-\end{figure}
-}
-
-\section{密度泛函理论}       %Bookmark
-\subsection{\rm{Thomas-Fermi~}模型}       %Bookmark
-\frame
-{
-	\frametitle{\textrm{Uniform Electron Gas}}
-\begin{figure}[h!]
-\vspace*{-0.15in}
-\centering
-\includegraphics[height=2.15in,width=4.90in,viewport=0 0 1850 780,clip]{Figures/Homogeneous_electron_gas-a_constant_energy_surface-in-k_space_(a)-3D_(b)-lattice_points-for-a-spherical_band-in-2D.png}
-\caption{\tiny \textrm{A constant energy surface in $\vec k$-space: (a) three-dimensional view and (b) lattice points for a spherical band in two-dimensional view.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{Homogeneous-electron-gas}
-\end{figure}
-}
-
-\frame
-{
-	\frametitle{\textrm{Thomas-Fermi}模型} 
-	\textrm{1927}年，\textrm{Thomas}和\textrm{Fermi}基于均匀电子气模型上建立\textrm{Thomas-Fermi}模型，\textcolor{blue}{体系能量可用}\textcolor{red}{电子密度}\textcolor{blue}{表示}:
-	\begin{itemize}
-		\item 动能表达式
-			$$T_{\mathrm{TF}}[\rho(\vec r)]=\dfrac3{10}(3\pi^2)^{\frac23}\int\rho^{\frac53}(\vec r)\mathrm{d}\vec r$$
-		\item 外势$V_{ext}(\vec r)$下电子体系的能量泛函表达式为
-			\begin{displaymath}
-				\begin{aligned}
-					E_{\mathrm{TF}}[\rho(\vec r)]=&\dfrac3{10}(3\pi^2)^{\frac23}\int\rho^{\frac53}(\vec r)\mathrm{d}\vec r\\
-					&+\int\rho(\vec r)V_{ext}(\vec r)\mathrm{d}\vec r+\dfrac12\int\int\dfrac{\rho(\vec r_1)\rho(\vec r_2)}{|\vec r_2-\vec r_1|}\mathrm{d}\vec r_1\mathrm{d}\vec r_2
-				\end{aligned}
-			\end{displaymath}
-		\item \textrm{Thomas-Fermi}模型完全没有考虑电子的交换-相关作用
-	\end{itemize}
-}
-
-\frame
-{
-	\frametitle{\textrm{Thomas-Fermi-Dirac}模型} 
-	1930年，\textrm{Dirac}将\textrm{Thomas-Fermi}模型修正，用局域密度近似考虑电子交换作用
-			\begin{displaymath}
-				\begin{aligned}
-					E_{\mathrm{TFD}}[\rho(\vec r)]=&\dfrac3{10}(3\pi^2)^{\frac23}\int\rho^{\frac53}(\vec r)\mathrm{d}\vec r+\int\rho(\vec r)V_{ext}(\vec r)\mathrm{d}\vec r\\
-					&+\dfrac12\int\int\dfrac{\rho(\vec r_1)\rho(\vec r_2)}{|\vec r_2-\vec r_1|}\mathrm{d}\vec r_1\mathrm{d}\vec r_2-\dfrac34\bigg(\dfrac3{\pi}\bigg)^{\frac13}\int\rho^{\frac43}(\vec r)\mathrm{d}\vec r
-				\end{aligned}
-			\end{displaymath}
-			\begin{itemize}
-				\item 在总电子数守恒约束条件
-					$$\int\rho(\vec r)\mathrm{d}\vec r=N$$
-					下，能量泛函$E_{\mathrm{TFD}}[\rho(\vec r)]$对密度$\rho(\vec r)$的变分极小获得体系的基态密度和基态能量
-			\end{itemize}
-}
-
-\frame
-{
-	\frametitle{\textrm{Thomas-Fermi}模型}
-	\begin{itemize}
-		\item \textrm{Thomas-Fermi}模型用电子密度代替波函数描述问题是极大的简化，但模型过于粗糙:\\
-%			\begin{enumerate}
-%				\item 以均匀电子气的密度得到动能的表达式
-%				\item 完全忽略电子间的交换-相关作用
-%			\end{enumerate}
-			不能正确描述相互作用电子体系的基本特征，如原子的壳层结构
-		\item \textrm{Thomas-Fermi}模型虽不够精确，但可以通过引入修正项校正:
-			\textrm{Dirac}交换泛函 $$E_X[\rho(\vec r)]=-\dfrac34\bigg(\dfrac3{\pi}\bigg)^{\frac13}\int\rho^{\frac43}(\vec r)\mathrm{d}\vec r$$
-			\textrm{Wigner}相关泛函 $$E_C[\rho(\vec r)]=-0.056\int\dfrac{\rho^{\frac43}(\vec r)}{0.079+\rho^{\frac13}(\vec r)}\mathrm{d}\vec r$$
-	\end{itemize}
-	\textrm{Thomas-Fermi}模型为密度泛函理论\textrm{(DFT)}提供了重要的启示
-}
-
 \frame
 {
 	\frametitle{电荷密度代替电子}
@@ -217,33 +153,7 @@
 \end{figure}
 }
 
-\subsection{密度泛函理论}       %Bookmark
-\frame                               %
-{
-\frametitle{密度泛函理论(\textrm{DFT})} %Slide Page Title
-%   \secname
-与传统的量子力学方法不同，密度泛函理论的基本变量是体系的基态电子密度。%通过体系的电子密度而非波函数确定体系的基态能量。
-\begin{itemize}%[+-| alert@+>]
-	\item 密度泛函理论的基石：\textrm{Hohenberg-Kohn}定理\upcite{PR136-B864_1964}
-\vskip 5pt
-\begin{itemize}%[+-| alert@+>]
-   \setlength{\itemsep}{8pt}
- \item $E[\rho]=F_{\mathrm{HK}}[\rho]+\displaystyle\int\rho(\vec{r})v(\vec{r})\textrm{d}\vec{r}$ \\
-\vskip 5pt 其中$F_{\mathrm{HK}}[\rho]=\underset{\Psi\to\rho}{\mathrm{Min}}\langle\Psi[\rho]|\hat{T}+\hat{W}|\Psi[\rho]\rangle$
-是普适的泛函表达式。%，指明多电子体系的基态性质与基态密度间存在一一对应关系
-     \textrm{\small{第一定理表明多电子体系的性质完全由体系的基态密度决定}}
-   \item 如果$\tilde\Psi\neq\Psi$，
-     $E[\tilde\rho]\geqslant E[\rho_0]$\\
-     \textrm{\small{第二定理指出基态总能量泛函在体系基态电子密度处取极小值}}
-   \end{itemize}
-%\textrm{\small{第二定理指出基态总能量泛函在体系基态电子密度处取极小值}}
-\vskip 8pt
- \item 密度泛函理论的优越性：用密度($\rho$)代替波函数($\Psi$)描述体系
-\vskip 5pt
- \item 密度泛函理论的困难：能量密度泛函的精确形式未知
-   \end{itemize}
-}
-
+%\section{密度泛函理论}       %Bookmark
 \frame
 {
 	\frametitle{\rm{Creators of DFT}}
@@ -254,110 +164,6 @@
 \caption{\tiny \textrm{Creators of DFT. Walter Kohn(left, in 1962) and his two postdoctoral fellows, Pierre Hohenberg (middle, in 1965) and Lujeu Sham (right).}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Creator_of_DFT}
 \end{figure}
-}
-
-\frame                               %
-{
-\frametitle{密度泛函理论(\textrm{DFT})}
-\textrm{Kohn-Sham}方程\upcite{PR140-A1133_1965}：无相互作用体系+交换-相关能的贡献
-$$(T_S+V_{e\!f\!f})|\varphi_i\rangle=\varepsilon_i|\varphi_i\rangle,\quad i=1,\cdots,N,\cdots$$
-其中$T_S=-\dfrac12\nabla^2$~~是无相互作用体系的动能
-\begin{displaymath}
-	\begin{aligned}
-		V_{e\!f\!f}(\vec r)=&V_{ext}(\vec r)+\displaystyle\int w(\vec r,\vec r\,')\rho(\vec r\,')\mathrm{d}\vec r\,'+V_{\mathrm{XC}}[\rho]\\
-=&\displaystyle\int\dfrac{\rho(\vec r\,')}{|\vec r-\vec r^{\prime}|}\mathrm{d}\vec r\,'+V_{ext}(\vec r)+V_{\mathrm{XC}}[\rho]
-	\end{aligned}
-\end{displaymath}
-$V_{ext}(\vec r)$是电子体系与外部的电荷或磁场相互作用\\
-$V_{\mathrm{XC}}[\rho]=\dfrac{\delta E_{\mathrm{XC}}}{\delta\rho(\vec r)}$称为交换-相关势
-\vskip 10pt
-\textrm{Kohn-Sham}方程是形式上的单粒子方程
-\vskip 6pt
-\textrm{Kohn-Sham}方程的实质：\\\textcolor{red}{将动能泛函的主要部分分离出来，剩余部分放在交换-相关能中}
-}
-
-\frame
-{
-	\frametitle{密度\textrm{vs.}粒子与泛函表示}
-\begin{figure}[h!]
-\vskip -10pt
-\centering
-\includegraphics[height=2.65in,width=3.8in,viewport=0 0 362 275,clip]{Figures/DFT-particle-density.png}
-\caption{\fontsize{6.0pt}{4.5pt}\selectfont{\textrm{Properties of a quantum mechanical system can be calculated by solving the SE (left). A more tractable, formally equivalent way is to solve the DFT KS equations (right).}}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{Schrodinger-equation-vs-Kohn-Sham-equation}
-\end{figure}
-}
-
-\frame
-{
-	\frametitle{}
-\begin{figure}[h!]
-\centering
-\includegraphics[height=2.65in,width=3.0in,viewport=0 0 600 570,clip]{Figures/Nobel_Prize_Chemistry_1998.png}
-\caption{\tiny \textrm{The Nolbel Prize in Chemistry 1998 Summary.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{Nobel_Prize_for_Chemistry}
-\end{figure}
-}
-
-\frame
-{
-\frametitle{交换-相关能与交换-相关势}
-实际考虑交换-相关能时，会将交换-相关能表示为交换能和相关能之和:
-\begin{displaymath}
-	E_{\mathrm{XC}}[\rho]=E_{\mathrm{X}}[\rho]+E_{\mathrm{C}}[\rho]=\int\varepsilon_{\mathrm{X}}[\rho]\rho(\vec{r}) \textrm{d}^3\vec{r}+\int\varepsilon_{\mathrm{C}}[\rho]\rho(\vec{r}) \textrm{d}^3\vec{r}
-\end{displaymath}
-$\varepsilon_{\mathrm{X}}[\rho]$和$\varepsilon_{\mathrm{C}}[\rho]$可理解为单电子的交换能和相关能
-\vskip 20pt
-交换-相关势通过交换-相关能计算得到:~
-		\begin{displaymath}
-			V_{\mathrm{XC}}^{\sigma}[\rho_{\alpha},\rho_{\beta}]=\dfrac{\delta E_{\mathrm{XC}}[\rho_{\alpha},\rho_{\beta}]}{\delta\rho_{\sigma}}=\dfrac{\delta\{E_{\mathrm{X}}[\rho_{\alpha},\rho_{\beta}]+E_{\mathrm{C}}[\rho_{\alpha},\rho_{\beta}]\}}{\delta\rho_{\sigma}}
-		\end{displaymath}
-		\textcolor{red}{注意}:~由于$E_{\mathrm{XC}}[\rho_{\sigma}]$对$\rho_{\sigma}$是非线性的\\
-		\textcolor{blue}{$V_{\mathrm{XC}}=V_{\mathrm{X}}+V_{\mathrm{C}}$和$\varepsilon_{\mathrm{XC}}=\varepsilon_{\mathrm{X}}+\varepsilon_{\mathrm{C}}$不同，不要混淆这两个量}
-}
-%  \beamertemplateshadingbackground{blue!10}{yellow!10}
-
-\frame                               %
-{
-\frametitle{交换-相关能密度泛函}
-\textcolor{blue}{密度泛函理论的核心问题}:\\
-\textrm{Kohn-Sham}方程用于实际计算，必须知道$E_{XC}[\rho]$或者$V_{XC}[\rho]$与$\rho(\vec r)$的泛函关系
-\vskip 15pt
-\begin{minipage}[b]{0.59\textwidth}
- \hspace*{-15pt}
- {\fontsize{7.5pt}{6.0pt}\selectfont\begin{itemize}%[+-| alert@+>]
-	 \setlength{\itemsep}{10pt}
- \item \textrm{LDA}:泛函只与密度分布的局域值有关
- \item \textrm{GGA}:泛函依赖:局域密度及其梯度
- \item $meta$-\textrm{GGA}:泛函依赖的变量还有动能密度
- \item 杂化(\textrm{hybrid})泛函:泛函与占据轨道有关
- \item 其他的交换-相关能泛函
- \item<1-> 完全非局域泛函:理想泛函，不现实
- \end{itemize}}
-\end{minipage}
-\hfill
-\begin{minipage}[b]{0.39\textwidth}
-\hspace*{-10pt}
-\includegraphics[height=1.7in,width=3.18in,viewport=10 5 1380 700,clip]{Figures/Jacobi-ladder.png}\\
-\centering{\textcolor{red}{\textrm{\tiny Jacob's ladder}}}
-\end{minipage}
-% \begin{itemize}%[+-| alert@+>]
-%\item 交换-相关能密度泛函
-}
-
-\frame                               %
-{
-	\frametitle{近似能量泛函$E_{\mathrm{XC}}[\rho]$的主要问题}
-\vskip 20pt
-\begin{enumerate}%[+-| alert@+>]
-   \setlength{\itemsep}{10pt}
- \item  密度是整体变量:~电子自相互作用抵消不净\\%\quad\textrm{(LDA+U)}方法的校正%(\textrm{LDA+U})
-	 用\textrm{DFT}计算电子数很少的体系，一般都会有较大的误差
- \item  电子相关:~简并和近简并基态的表示不合理\\
-	 基态电子密度用不同的简并轨道计算时，体系能量应保持不变，但现有的近似能量泛函不具有这个性质
- \item  渐近行为:~处理弱相互作用体系的误差大\\
-	 如\textrm{Van der Waals}相互作用和现有近似能量泛函本身的计算误差在同一量级
- \end{enumerate}
 }
 
 \frame                               %
@@ -375,414 +181,83 @@ $\varepsilon_{\mathrm{X}}[\rho]$和$\varepsilon_{\mathrm{C}}[\rho]$可理解为�
 
 \frame
 {
-	\frametitle{基组:~张开空间，展开波函数}
+	\frametitle{密度\textrm{vs.}粒子与泛函表示}
 \begin{figure}[h!]
-	\vspace{-5pt}
+\vskip -10pt
 \centering
-\includegraphics[height=2.6in,width=4.01in,viewport=0 0 780 550,clip]{Figures/Basis-set-STO-GTO.jpg}
-\caption{\fontsize{5.5pt}{4.2pt}\selectfont{\textrm{Schematic illustration of scattering of a Basic-set STO GTO.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{Basic-set:STO-GTO}
+\includegraphics[height=2.65in,width=3.8in,viewport=0 0 362 275,clip]{Figures/DFT-particle-density.png}
+\caption{\fontsize{6.0pt}{4.5pt}\selectfont{\textrm{Properties of a quantum mechanical system can be calculated by solving the SE (left). A more tractable, formally equivalent way is to solve the DFT KS equations (right).}}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Schrodinger-equation-vs-Kohn-Sham-equation}
 \end{figure}
 }
 
-\subsection{常见泛函的一些形式}
-\frame%[allowframebreaks]
+\frame                               %
 {
-	\frametitle{\rm{LDA}泛函}
-	\begin{itemize}
-		\item 交换能部分
+	\frametitle{近似能量泛函$E_{\mathrm{XC}}[\rho]$的主要问题}
+\vskip 20pt
+\begin{enumerate}%[+-| alert@+>]
+   \setlength{\itemsep}{10pt}
+ \item  密度是整体变量:~电子自相互作用抵消不净\\%\quad\textrm{(LDA+U)}方法的校正%(\textrm{LDA+U})
+	 用\textrm{DFT}计算电子数很少的体系，一般都会有较大的误差
+ \item  电子相关:~简并和近简并基态的表示不合理\\
+	 基态电子密度用不同的简并轨道计算时，体系能量应保持不变，但现有的近似能量泛函不具有这个性质
+ \item  渐近行为:~处理弱相互作用体系的误差大\\
+	 如\textrm{Van der Waals}相互作用和现有近似能量泛函本身的计算误差在同一量级
+ \end{enumerate}
+}
+
+\subsection{从理论到软件的实现}
+\frame
+{
+	\frametitle{\textrm{DFT-SCF}}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.25in}
+\hspace*{-0.80in}
+\includegraphics[height=2.80in,width=4.95in,viewport=5 3 1490 870,clip]{Figures/DFT-SCF_2.png}
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{DFT-SCF-2}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{晶体总能量的一般表示}
+采用赝势方法计算的晶体总能量$E_T$由晶格中的电子能量$E_{e-e}$与离子实排斥能$E_{N-N}$之和：
 	\begin{displaymath}
-		\begin{aligned}
-			\varepsilon_{\mathrm{X}}[\rho,\zeta]=&2^{-1/3}C_{\mathrm{X}}^{\sigma}g(\zeta)\rho^{1/3}(\vec r)\\
-			E_{\mathrm{X}}[\rho,\zeta]=&\int\varepsilon_{\mathrm{X}}[\rho,\zeta]\rho(\vec r)\mathrm{d}\vec r\\
-		\end{aligned}
+		E_T=E_{e-e}+E_{N-N}=T[\rho]+E_{ext}+E_{\mathrm{Coul}}+E_{\mathrm{XC}}+E_{N-N}
 	\end{displaymath}
-	{\fontsize{7.5pt}{6.0pt}\selectfont{这里:~$C_{\mathrm{X}}^{\sigma}=\dfrac32\bigg(\dfrac3{4\pi}\bigg)^{1/3}$\\
-		$g(\zeta)=\dfrac12\bigg[(1+\zeta)^{4/3}+(1-\zeta)^{4/3}\bigg]$\\
-		$\zeta(\vec r)=\dfrac{[\rho_{\alpha}(\vec r)-\rho_{\beta}(\vec r)]}{[\rho_{\alpha}(\vec r)+\rho_{\beta}(\vec r)]}$}}
-	\end{itemize}
-}
-
-\frame%[allowframebreaks]
-{
-	\frametitle{\rm{LDA}泛函}
-	\begin{itemize}
-		\item 相关能部分
-			\begin{displaymath}
-				\hspace*{-30pt}	\varepsilon_{\mathrm{C}}^{\mathrm{LDA}}(r_s,\zeta)=\varepsilon_{\mathrm{C}}(r_s,0)+a_{\mathrm{c}}(r_s)\dfrac{f(\zeta)}{f^{\prime\prime}(\zeta)}(1-\zeta^4)+[\varepsilon_{\mathrm{c}}(r_s,1)-\varepsilon_{\mathrm{c}}(r_s,0)]f(\zeta)\zeta^4
-			\end{displaymath}
-			{\fontsize{7.5pt}{6.0pt}\selectfont{这里:~$r_s=\bigg[\dfrac3{4\pi}(\rho_{\alpha}+\rho_{\beta})^{-1}\bigg]^{1/3}$~$f(\zeta)=[(1+\zeta)^{4/3}+(1-\zeta)^{4/3}-2]/(2^{4/3}-2)$\\
-			$\varepsilon_{\mathrm{C}(r_s,0)}$、$\varepsilon_{\mathrm{C}(r_s,1)}$、$a_{\mathrm{C}(r_s)}$由经验公式
-			\begin{displaymath}
-				\begin{aligned}
-					&G(r_s,A,\alpha_1,\beta_1,\beta_2+\beta_3+\beta_4)\\
-					=&-2A(1+\alpha_1r_s)\ln\bigg[1+\dfrac1{2A(\beta_1r_s^{1/2}+\beta_2r_s+\beta_2r_s^{3/2}+\beta_1r_s^2)}\bigg]
-				\end{aligned}
-			\end{displaymath}
-		计算。其中$A$、$\alpha_1$、$\beta_1$、$\beta_2$、$\beta_3$、$\beta_4$是参数，通过拟合实验结果确定}}
-		\begin{displaymath}
-			E_{\mathrm{C}}[\rho]=\int\rho(\vec r)\varepsilon_{\mathrm{C}}(\vec r)\mathrm{d}\vec r
-		\end{displaymath}
-	\end{itemize}
-}
-
-\frame%[allowframebreaks]
-{
-	\frametitle{\rm{GGA}泛函}
-	\begin{itemize}
-		\item 交换能泛函:
-			\begin{itemize}
-				\item \textrm{PW91}
-					\begin{displaymath}
-						\begin{aligned}
-							E_{\mathrm{X}}^{\mathrm{PW91}}[\rho_{\alpha},\rho_{\beta}]=&\dfrac12(E_{\mathrm{X}}^{\mathrm{PW91}}[2\rho_{\alpha}]+E_{\mathrm{X}}^{\mathrm{PW91}}[2\rho_{\beta}])\\
-							E_{\mathrm{X}}^{\mathrm{PW91}}[\rho]=&-\dfrac34\bigg(\dfrac3\pi\bigg)^{1/3}\int\rho^{4/3}(\vec r)F(x)\mathrm{d}\vec r
-						\end{aligned}
-					\end{displaymath}
-					\hspace*{-30 pt}{\fontsize{4.5pt}{4.0pt}\selectfont{这里:~$F(x)=\dfrac{1+0.19645(hx)\sinh^{-1}(7.7956hx)+(hx)^2\{0.2743-0.1508\mathrm{exp}[-100(hx)^2]\}}{1+0.19645(hx)\sinh^{-1}(7.7956hx)+0.004(hx)^4}$}\\
-					$h=(24\pi^2)^{-1/3}$,~~~$x=|\nabla\rho|\rho^{-4/3}$}
-				\item \textrm{PBE}
-			\begin{displaymath}
-				E_{\mathrm{X}}^{\mathrm{PBE}}[\rho,x]=E_{\mathrm{X}}^{\mathrm{LDA}}[\rho,x]-C_{\mathrm{X}}\int a\bigg(1-\dfrac1{bx^2}\bigg)\rho^{4/3}(\vec r)\mathrm{d}\vec r
-			\end{displaymath}
-			{\fontsize{4.5pt}{4.0pt}\selectfont{其中:~$C_{\mathrm{X}}=\dfrac34\bigg(\dfrac3\pi\bigg)^{1/3}$\\$a=0.804$,~~~$b=0.273$~是非经验参数}}
-			\end{itemize}
-	\end{itemize}
-}
-
-\frame%[allowframebreaks]
-{
-	\frametitle{\rm{GGA}泛函}
-	\begin{itemize}
-		\item 相关能泛函:
-			\begin{itemize}
-				\item \textrm{PW91}
-					\begin{displaymath}
-						\begin{aligned}
-							E_{\mathrm{C}}^{\mathrm{PW91}}[\rho_{\alpha},\rho_{\beta}]=&\int\mathrm{d}\vec r\rho(\vec r)[\varepsilon_{\mathrm{C}}^{\mathrm{LSDA}}(r_s,\zeta)]+H(t,r_s,\zeta)\\
-							H=&H_0+H_1
-						\end{aligned}
-					\end{displaymath}
-					{\fontsize{4.5pt}{4.0pt}\selectfont{这里:~
-						\begin{displaymath}
-							\begin{aligned}
-								H_0=&f^3(\zeta)\dfrac{\beta^2}{2\alpha}\ln\bigg(1+\dfrac{2\alpha}{\beta}\dfrac{t^2+At^4}{1+At^2+A^2t^4}\bigg)\\
-								A=&\dfrac{2\alpha}{\beta}\dfrac1{\mathrm{exp[-2\alpha\varepsilon_{\mathrm{C}}^{\mathrm{LDA}}(r_s,\zeta)}/f^3(\zeta)\beta^2]-1}\\
-							t=&\dfrac{|\nabla\rho|}{2f(\zeta)k_s\rho}~~~f(\zeta)=\dfrac12\bigg[(1+\zeta)^{2/3}+(1-\zeta)^{2/3}\bigg]\\
-							k_s=&[4(3\pi^{-1}\rho)^{1/3}]^{1/2}
-							\end{aligned}
-						\end{displaymath}
-						参数　$\alpha=0.09$,~~~$\beta=\nu C_{\mathrm{C}}(0)$\\
-						$\nu=(16/\pi)(3\pi^2)^{1/3}$,~~~$C_{\mathrm{C}}(0)=0.004235$
-				}}
-			\end{itemize}
-	\end{itemize}
-}
-
-\frame%[allowframebreaks]
-{
-	\frametitle{\rm{meta-GGA}泛函}
-	\begin{itemize}
-		\item 交换能泛函
-			\begin{itemize}
-				\item \textrm{TPSS}
-					\begin{displaymath}
-						\begin{aligned}
-							E_{\mathrm{X}}^{\mathrm{TPSS}}[\rho]&=\int\mathrm{d}\vec r\rho(\vec r)\varepsilon_{\mathrm{X}}^{\mathrm{LSDA}}(\vec r)F_{\mathrm{X}}^{\mathrm{TPSS}}(p,z)\\
-							F_{\mathrm{X}}^{\mathrm{TPSS}}&=1+\kappa-\dfrac{\kappa}{1+x/\kappa}
-						\end{aligned}
-					\end{displaymath}
-{\fontsize{4.5pt}{4.0pt}\selectfont{这里:~
-	$\rho(\vec r)=\rho_{\alpha}(\vec r)+\rho_{\beta}({\vec r})$,~~~$\varepsilon_{\mathrm{X}}^{\mathrm{LSDA}}(\vec r)=-\dfrac3{4\pi}[3\pi^2\rho(\vec r)]^{1/3}$
-\\
+根据\textrm{Kohn-Sham}方程，其中动能泛函用单电子能量表示为
 \begin{displaymath}
-	\begin{aligned}
-		x=&\left\{\bigg[\dfrac{10}{81}+\dfrac{cz^2}{(1+z^2)^2}\bigg]p+\dfrac{146}{2025}\bar{q}_b^2-\dfrac{73}{405}\bar{q}_b\bigg[\dfrac12\bigg(\dfrac35z\bigg)^2+\dfrac12p^2\bigg]^{1/2}\right.\\
-		&+\left.\dfrac1{\kappa}\bigg(\dfrac{10}{81}\bigg)^2p^2\dfrac{20e^{1/2}}{81}\bigg(\dfrac35z\bigg)^2+e\mu p^3\right\}(1+e^{1/2}p)^{-2}\\
-		p=&\dfrac{|\nabla\rho(\vec r)|^2}{4(3\pi^2)^{2/3}\rho^{8/3}(\vec r)}, ~~~ \bar{q}_b=\dfrac{(9/20)(\alpha-1)}{[1+b\alpha(\alpha-1)]^{1/2}}+2p/3
-	\end{aligned}
+	T[{\rho}]=\sum_in_i\langle\psi_i|\varepsilon_i-V_{\mathrm{KS}}|\psi_i\rangle
 \end{displaymath}
-$z=\tau_w/\tau$,~~~$\tau_w=\dfrac{|\nabla\rho(\vec r)|^2}{8\rho(\vec r)}$,~~~$\tau=\sum\limits_{\sigma}\tau_{\sigma}$\\
-$\alpha=(\tau-\tau_w)/\tau_{\mathrm{unif}}=(5p/3)(z^{-1}-1)$,~~~$\tau_{\mathrm{tiff}}=\dfrac3{10}(3\pi^2)^{2/3}[\rho(\vec r)]^{5/3}$
-}}
-			\end{itemize}
-	\end{itemize}
-}
-
-
-\frame%[allowframebreaks]
-{
-	\frametitle{\rm{meta-GGA}泛函}
-	\begin{itemize}
-		\item 相关能泛函
-			\begin{itemize}
-				\item {\textrm{TPSS}}
-					\begin{displaymath}
-						E_{\mathrm{C}}^{\mathrm{TPSS}}[\rho_{\alpha,\rho_{\beta}}]=\int\mathrm{d}\vec r\rho(\vec r)\varepsilon_{\mathrm{C}}^{\mathrm{TPSS0}}[1+\mathrm{d}\varepsilon_{\mathrm{C}}^{\mathrm{TPSS0}}(\tau_w/\tau)^3]
-					\end{displaymath}
-{\fontsize{4.5pt}{4.0pt}\selectfont{这里:~
-	\begin{displaymath}
-		\begin{aligned}
-			\varepsilon_{\mathrm{C}}^{\mathrm{TPSS0}}=&\varepsilon_{\mathrm{C}}^{\mathrm{PBE}}(\rho_{\alpha},\rho_{\beta},\nabla\rho_{\alpha},\nabla\rho_{\beta})[1+C(\zeta,\xi)(\tau_w/\tau)^2]\\
-			&-\bigg[1+C(\zeta,\xi)(\tau_w/\tau)^2\sum\limits_{\sigma}\dfrac{\rho_{\sigma}(\vec r)}{\rho(\vec r)}\bar{\varepsilon}_{\mathrm{C}}\bigg]\\
-			\bar{\varepsilon}_{\mathrm{C}}=&\max[\varepsilon_{\mathrm{C}}^{\mathrm{PBE}}(\rho_{\alpha},0,\nabla\rho_{\alpha},0),\varepsilon_{\mathrm{C}}^{\mathrm{PBE}}(\rho_{\alpha},\rho_{\beta},\nabla\rho_{\alpha},\nabla\rho_{\beta})]\\
-			C(\zeta,\xi)=&\dfrac{C(\zeta,0)}{\{1+\xi^2[(1+\zeta)^{-4/3}+(1-\zeta)^{-4/3}]/2\}^4}
-		\end{aligned}
-	\end{displaymath}
-	$\xi=\dfrac{|\nabla\zeta|}{2[3\pi^2\rho(\vec r)]^{1/3}}$, ~~~$C(\zeta,0)=0.53+0.87\zeta^2+0.50\zeta^4+2.26\zeta^6$
-}}
-			\end{itemize}
-	\end{itemize}
-	\vskip 5pt
-	\textrm{TPSS}泛函的特点:~\\
-	\vskip 3pt
-	{\fontsize{7.5pt}{6.0pt}\selectfont{不包含依靠实验数据的可调参数，数字系数由精确能量泛函满足的条件确定\\
-		\textcolor{blue}{对电子分布较为均匀的晶体体系和电子分布激烈变化的分子体系都有较高的精度} }}
-}
-
-\frame
-{
-	\frametitle{\rm{hybrid}泛函}
-	体系\textrm{Hamilton}算符表示为
-	\begin{displaymath}
-		\hat{H}_{\lambda}=-\dfrac12\sum_i^N\nabla^2+\sum_i^NV_i(\rho,\lambda)+\dfrac{\lambda}2\sum_i^N\sum_{j(j\neq i)}^N\dfrac1{r_{ij}}
-	\end{displaymath}
-	\begin{displaymath}
-		\mbox{\textcolor{blue}{$\lambda$表征电子间相互作用程度}}\left\{
-		\begin{aligned}
-			&\lambda=0:~\mbox{无相互作用的参考体系}\\
-			&\lambda=1:~\mbox{存在相互作用的真实体系}
-		\end{aligned}
-		\right.
-	\end{displaymath}
-	交换-相关能表示为
-	\begin{displaymath}
-		\begin{aligned}
-			E_{\mathrm{XC}}^{\lambda}=&\dfrac12\int\mathrm{d}\vec r_1\rho_1^{\lambda}(\vec r_1)\int\dfrac{h_{\mathrm{XC}}^{\lambda}(\vec r_1,\vec r_2)}{\vec r_1-\vec r_2}\mathrm{d}\vec r_2\\
-			E_{\mathrm{XC}}=&\int E_{\mathrm{XC}}^{\lambda}\mathrm{d}\lambda
-		\end{aligned}
-	\end{displaymath}
-	{\fontsize{4.5pt}{4.0pt}\selectfont{这里:~$h_{\mathrm{XC}}(\vec r_1,\vec r_2)=\dfrac{2\rho_2(\vec r_1,\vec r_2)}{\rho(\vec r_1)}-\rho_1(\vec r_2)$}}
-}
-
-\frame
-{
-	\frametitle{\rm{hybrid}泛函}
-	\begin{itemize}
-		\item \textrm{half-to-half}
-			\begin{displaymath}
-				\begin{aligned}
-					E_{\mathrm{XC}}=&\dfrac12(E_{\mathrm{XC}}^0+E_{\mathrm{XC}}^1)=\dfrac12E_{\mathrm{XC}}^{\mathrm{Exact}}+\dfrac12E_{\mathrm{XC}}^1\\
-					\approx&\dfrac12E_{\mathrm{XC}}^{\mathrm{HF}}+\dfrac12E_{\mathrm{XC}}^{\mathrm{LSDA}}
-				\end{aligned}
-			\end{displaymath}
-		\item \textrm{B3LYP}
-			\begin{displaymath}
-			\hspace*{-20pt}	E_{\mathrm{XC}}^{\mathrm{B3LYP}}=(1-a)E_{\mathrm{X}}^{\mathrm{LSDA}}+aE_{\mathrm{X}}^{\mathrm{HF}}+b\Delta E_{\mathrm{X}}^{\mathrm{VB88}}+cE_{\mathrm{C}}^{\mathrm{LYP}}+(1-c)E_{\mathrm{C}}^{\mathrm{LSDA}}
-			\end{displaymath}
-	\end{itemize}
-	\vskip 8pt
-	\textcolor{blue}{电子间的交换能和相关能都是离域的，但长程作用方向相反，很大程度上彼此抵消，剩余部分主要是局域的，所以将交换能和相关能合在一起处理，用局域近似可以比较好地描述电子行为}\\
-	\vskip 5pt
-	\textcolor{red}{采用精确交换能形式，虽然消除了自相互作用的误差，但剩余的相关能主体是离域的，因此局域形式的泛函不再是好的近似，对电子行为的描述效果会变差}
-}
-
-\section{固体能带理论}       %Bookmark
-\frame
-{
-%\frametitle{The Bloch theorem}
-	\frametitle{\textrm{Bloch~}定理}
-\begin{itemize}%[+-| alert@+>]
-   \setlength{\itemsep}{8pt}
-   \item 固体能带理论\upcite{Huang-Han}是固体电子理论的基础，形式上是单电子理论：
-    $$\hat H |\psi_i^{\vec k}(\vec r)\rangle=\bigg[-\dfrac{\hbar^2}{2m}\nabla^2+V(\vec r)\bigg]|\psi_i^{\vec k}(\vec r)\rangle=\epsilon_i(\vec k)|\psi_i^{\vec k}(\vec r)\rangle$$
-  \item \textrm{Bloch}定理:
-%   \item \textrm{periodic potential:} $$V(\vec r)=V(\vec r+\vec R_n)$$
-%     \textrm{Here,} $\vec R_n=n\vec R$
-%   \item \textrm{Bloch theorem:}$$\psi_{\vec k}(\vec r)=\textrm{e}^{\textrm i\vec k\cdot\vec r}u_{\vec k}(\vec r)$$
-%     \textrm{Here, $u_{\vec k}(\vec r)$ is a periodic function with the same periodicity as $V(\vec r)$, i.e., $u_{\vec k}(\vec r)=u_{\vec k}(\vec r+\vec R_n)$, then Bloch theorem could reads as:}
-%     $$\psi_{\vec k}(\vec r+\vec R_n)=\textrm{e}^{\textrm i\vec k\cdot\vec R_n}\psi_{\vec k}(\vec r)$$
-具有平移周期性的理想晶体，势能$V(\vec r)$满足$$V(\vec r)=V(\vec r+\vec R_n)$$
-体系的波函数满足\textrm{Bloch}波函数形式:$$\psi_{\vec k}(\vec r)=\textrm{e}^{i\vec k\cdot\vec r}u_{\vec k}(\vec r)$$
-是平面波和周期函数的乘积。$u(\vec r)$与势能有相同的周期。即$$u_{\vec k}(\vec r)=u_{\vec k}(\vec r+\vec R_n)$$
-  \item 能带理论相当于分子轨道理论
-%   \setlength{\itemsep}{30pt}
-\item \textrm{Bloch}函数反映了波函数在周期性势场下的变化规律。
-\end{itemize}
-}
-
-\frame
-{
-\frametitle{周期体系的波函数}
-物质的电子体系，可分为芯层分子和价层电子。芯电子能量低，受周围化学环境影响很小，基本保持原子属性；价层电子相互作用较强，对化学环境较为敏感。一般地，价电子波函数在原子间区域(\textrm{Interstitial}区)的变化平缓，在临近原子核附近区域(\textrm{Muffin-tin}球内)，会出现剧烈振荡(与芯层波函数正交)。
-\begin{figure}[h!]
-\centering
-\includegraphics[height=0.8in,width=4.in,viewport=41 433 539 546,clip]{Figures/Pseudo_wave.pdf}\\
-\includegraphics[height=0.8in,width=4.in,viewport=41 210 539 339,clip]{Figures/Pseudo_wave.pdf}
-\caption{\tiny \textrm{The periodic Potential and the wave functions in crystal.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{Potential-Wave}
-\end{figure}
-}
-
-\frame
-{
-\frametitle{一维自由电子近似微扰}
-\begin{figure}[h!]
-\centering
-%\hspace*{-10pt}
-%\vspace*{-1.1in}
-\includegraphics[height=1.5in,width=2.5in,viewport=5 5 700 450,clip]{Figures/Band_Gap-2.png}
-%\caption{\tiny \textrm{The Band-structure from free-electron gas.}}%
-\label{Band-Gap-2}
-\end{figure} 
+$n_i$是$\psi_i$上的电子占据数，$\varepsilon_i$是其能量本征值，因此有
 \begin{displaymath}
-	\begin{aligned}
-		&\hat H_0=-\dfrac{\hbar^2}{2m}\dfrac{\mathrm{d}^2}{\mathrm{d}x^2}+\={V} \longrightarrow \hat H=\hat H_0+\hat H^{\prime}=-\dfrac{\hbar^2}{2m}\dfrac{\mathrm{d}^2}{\mathrm{d}x^2}+\={V}+\underline{V(x)-\={V}}\\
-		&\Psi_k^0(x)=\dfrac1{\sqrt V}\mathrm{e}^{\mathrm{i}k\cdot x} \longrightarrow \Psi_k(x)=\Psi_k^0(x)+\sum_{k^{\prime}\neq k}\dfrac{\langle k^{\prime}|\hat H^{\prime}|k\rangle}{E_k^0-E_{k^{\prime}}^0}\Psi_{k^{\prime}}^0(x)\\
-		&\hat E_k^0=-\dfrac{\hbar^2k^2}{2m}+\={V} \longrightarrow E_k=%E_k^0+E^{\prime}=
-		\dfrac{\hbar^2k^2}{2m}+\={V}+\sum_n{}^{\prime}\dfrac{|V_n|^2}{\frac{\hbar^2}{2m}[k^2-(k+2\pi\frac na)^2]}
-	\end{aligned}
+	\hspace*{-12.0pt}	E_T=\sum_in_i\varepsilon_i-\dfrac12\int\int\mathrm{d}\vec r\mathrm{d}\vec r\dfrac{\rho(\vec r)\rho(\vec r^{\prime})}{|\vec r-\vec r^{\prime}|}+\int\mathrm{d}\vec r\rho(\vec r)[\epsilon_{\mathrm{XC}}(\vec r)-V_{\mathrm{XC}}(\vec r)]+E_{N-N}
 \end{displaymath}
 }
 
 \frame
 {
-\frametitle{一维自由电子简并微扰}
-在波矢$k=\pm\frac{n\pi}{a}$位置，电子能量出现简并态，必须采用简并态微扰理论处理
-\begin{figure}[h!]
-\centering
-%\hspace*{-10pt}
-%\vspace*{-1.1in}
-\includegraphics[height=1.3in,width=1.4in,viewport=0 5 420 450,clip]{Figures/Band_Gap-1.png}
-%\caption{\tiny \textrm{The Band-structure from free-electron gas.}}%
-\label{Band-Gap-1}
-\end{figure} 
+	\frametitle{晶体总能量倒空间的表示}
+周期体系的总能量表达式在动量空间($\vec K$空间)计算更方便
 \begin{displaymath}
-	E_{\textcolor{red}{\pm}}=\left\{
-	\begin{aligned}
-		&T_n+\={V}\textcolor{red}{+}\Delta^2T_n\bigg(\dfrac{2T_n}{|V_n|}\textcolor{red}{+}1\bigg)\\
-		&T_n+\={V}\textcolor{red}{-}\Delta^2T_n\bigg(\dfrac{2T_n}{|V_n|}\textcolor{red}{-}1\bigg)
-	\end{aligned}\right.
+	\hspace*{-15.0pt}	E_T=\textcolor{red}{\sum_in_i\varepsilon_i}-\dfrac{\Omega}2\sum_{\textcolor{red}{\vec k\neq 0}}\rho^{\ast}(\vec k)V_{\mathrm{Coul}}(\vec k)+\Omega\sum_{\vec k}\rho^{\ast}(\vec k)[\epsilon_{\mathrm{XC}}(\vec k)-V_{\mathrm{XC}}(\vec k)]+E_{N-N}
 \end{displaymath}
-这里$T_n=\frac{\hbar^2}{2m}\big(\frac{n\pi}a\big)^2$
+其中$V_{\mathrm{Coul}}(\vec k)$、$\epsilon_{\mathrm{XC}}(\vec k)$与$\rho^{\ast}(\vec k)$分别是\textrm{Coulomb}相互作用、单个电子的交换-相关能、交换-相关势和电子密度的\textrm{Fourier}分量。
+
+由\textrm{Poisson}方程
+\begin{displaymath}
+	\nabla^2V_{\mathrm{Coul}}(\vec r)=-4\pi\rho(\vec r)
+\end{displaymath}
+的\textrm{Fourier}展开有
+\begin{displaymath}
+	V_{\mathrm{Coul}}(\vec k)=\dfrac{4\pi\rho^{\ast}(\vec k)}{|\vec k|^2}
+\end{displaymath}
+交换-相关势和交换-相关能的计算一般先在实空间计算$\epsilon_{\mathrm{XC}}(\vec r)$和$V_{\mathrm{XC}}(\vec r)$后，再通过\textrm{Fourier}变换到动量空间，得到$\epsilon_{\mathrm{XC}}(\vec k)$和$V_{\mathrm{XC}}(\vec k)$
 }
 
-\frame
-{
-\frametitle{自由电子气模型}
-简并态微扰理论引起的能带裂分
-\begin{figure}[h!]
-\centering
-%\hspace*{-10pt}
-%\vspace*{-1.1in}
-\includegraphics[height=2.1in,width=3.8in,viewport=10 90 570 380,clip]{Figures/Band_Gap.pdf}
-\caption{\tiny \textrm{The Band-structure from free-electron gas.}}%
-\label{Band-Gap-co}
-\end{figure} 
-}
-
-\frame
-{
-\frametitle{紧束缚模型}
-从分子轨道到能带
-\begin{figure}[h!]
-\centering
-\hspace*{-0.29in}
-\vspace*{-0.1in}
-\subfigure[一维$\mathrm{H}$原子链]{
-\label{fig:Hydrogen-1D}
-\includegraphics[height=0.25in,width=1.1in,viewport=70 255 570 375,clip]{Figures/Hydrogen-1D.pdf}}
-\subfigure[$\mathrm{H}_n$分子轨道]{
-\label{fig:Hydrogen-2-n}
-\includegraphics[height=0.8in,width=1.5in,viewport=30 140 545 480,clip]{Figures/Hydrogen-Mol-Orbital.pdf}}
-\subfigure[分子波函数]{
-\label{fig:Hydrogen-Psi}
-\includegraphics[height=0.5in,width=1.4in,viewport=25 218 595 440,clip]{Figures/Hydrogen-Psi.pdf}}\\
-\vspace*{5pt}
-\subfigure[分子轨道与能带]{
-\label{fig:Hydrogen-Band-1D}
-\includegraphics[height=0.6in,width=1.4in,viewport=35 215 575 450,clip]{Figures/Hydrogen-Band-1D.pdf}}
-\subfigure[$d$\,轨道]{
-\label{fig:Hydrogen-d-Band-1D}
-\includegraphics[height=1.0in,width=0.7in,viewport=40 45 330 535,clip]{Figures/Hydrogen-d-Band-1D.pdf}}
-\caption{\tiny \textrm{The Band-structure from Molecular-orbital.}}%
-\label{Band-Structure-local-orbit}
-\end{figure} 
-}
-
-\subsection{能带、$\vec k$-空间与~\rm{Fermi~}面}
-\frame
-{
-\frametitle{能带、$\vec k$空间与\textrm{Fermi}面}
-\vspace{30pt}
-\begin{figure}[h!]
-\centering
-\hspace*{-0.10in}
-\subfigure[\textrm{Band structure}]{
-\label{Band_Gap_Fermi-1}
-\includegraphics[height=1.6in,width=2.1in,viewport=0 0 480 350,clip]{Figures/Band_Brillouin_zone.png}}
-\subfigure[\textrm{Brillouin Zone}]{
-\label{Band_Gap_Fermi-2}
-\includegraphics[height=1.28in,width=1.75in,viewport=100 120 545 470,clip]{Figures/2D_Brillouin-Zone.pdf}}
-\label{Band_Gap_Fermi}
-\end{figure}
-}
-
-\frame
-{
-	\frametitle{简单立方体系的\textrm{Brillouin}区与能带}
-\vspace{10pt}
-\begin{figure}[h!]
-\centering
-\hspace*{-0.28in}
-\subfigure[\textrm{Brillouin Zone of Cubic lattice}]{
-\label{Brillouin_Zone_Cubic-1}
-\includegraphics[height=2.1in,width=2.0in,viewport=90 0 550 500,clip]{Figures/Brillouin-Zone_CUB.png}}
-\subfigure[\textrm{Band Structure of \ch{SrSnO3}}]{
-\label{Band_Gap_SrSnO3-1}
-\vspace*{-1.00in}
-\includegraphics[height=2.10in,width=1.75in,viewport=0 0 710 550,clip]{Figures/Band-Struct_SrSnO3.png}}
-\label{Band_Gap_CUB_SrSnO3}
-\end{figure}
-}
-
-\frame
-{
-	\frametitle{面心立方体系的\textrm{Brillouin}区与能带}
-\vspace{10pt}
-\begin{figure}[h!]
-\centering
-\hspace*{-0.30in}
-\subfigure[\textrm{Brillouin Zone of FCC lattice}]{
-\label{Brillouin_Zone_FCC}
-\includegraphics[height=1.9in,width=1.8in,viewport=75 0 560 520,clip]{Figures/Brillouin-Zone_FCC.png}}
-\subfigure[\textrm{Band structure of \ch{CdS}}]{
-\label{Band_Gap_CdS}
-\includegraphics[height=2.10in,width=1.95in,viewport=0 0 700 520,clip]{Figures/Band-Struct_CdS.png}}
-\label{Band_Gap_FCC_CdS}
-\end{figure}
-}
-
-\frame
-{
-	\frametitle{体心立方体系的\textrm{Brillouin}区与能带}
-\vspace{10pt}
-\begin{figure}[h!]
-\centering
-\hspace*{-0.30in}
-\subfigure[\textrm{Brillouin Zone of BCC lattice}]{
-\label{Brillouin_Zone_BCC}
-\includegraphics[height=2.1in,width=1.9in,viewport=80 0 550 520,clip]{Figures/Brillouin-Zone_BCC.png}}
-\subfigure[\textrm{Band structure of \ch{GeF4}}]{
-\label{Band_Gap_GeF4}
-\includegraphics[height=2.10in,width=1.95in,viewport=0 0 700 500,clip]{Figures/Band-Struct_GeF4.png}}
-\label{Band_Gap_BCC_GeF4}
-\end{figure}
-}
-
-%-----------------------------------------------------------------------------
-
-\section{$\vec k$~空间布点与积分}
+\subsection{$\vec k$~空间布点与积分}
 \frame
 {
 	\frametitle{$\vec k$~空间布点与\textrm{Fermi~}面的确定}
@@ -1016,37 +491,866 @@ $\alpha=(\tau-\tau_w)/\tau_{\mathrm{unif}}=(5p/3)(z^{-1}-1)$,~~~$\tau_{\mathrm{t
 %\label{Fig:dime_Tetra-2}
 %\end{figure}
 %}
+
+\subsection{计算方法与软件分类}       %Bookmark
 \frame
 {
-	\frametitle{\textrm{DFT-SCF}}
+	\frametitle{基组:~张开空间，展开波函数}
 \begin{figure}[h!]
+	\vspace{-5pt}
 \centering
-\vspace*{-0.25in}
-\hspace*{-0.80in}
-\includegraphics[height=2.80in,width=4.95in,viewport=5 3 1490 870,clip]{Figures/DFT-SCF_2.png}
-%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{DFT-SCF-2}
+\includegraphics[height=2.6in,width=4.01in,viewport=0 0 780 550,clip]{Figures/Basis-set-STO-GTO.jpg}
+\caption{\fontsize{5.5pt}{4.2pt}\selectfont{\textrm{Schematic illustration of scattering of a Basic-set STO GTO.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Basic-set:STO-GTO}
 \end{figure}
 }
 
-%------------------------------------------------------------------------Reference----------------------------------------------------------------------------------------------
-\frame[allowframebreaks]
+\frame
+{
+%\frametitle{The methods on band structure calculation}
+\frametitle{固体能带计算方法}
+%\vskip 10pt
+%\textrm{The mainly difference of all these methods below: the basis sets and the construction of the potential}
+\vskip 10pt
+常用的固体能带计算方法
+\begin{itemize}%[+-| alert@+>]
+%\begin{enumerate}%[+-| alert@+>]
+\setlength{\itemsep}{12pt}
+%  \item \textrm{Plane wave and the pseudo-potential}
+	\item	平面波方法
+	\item	正交平面波\textrm{(The orthogonalized plane wave, OPW)}和赝势\textrm{(Pseudo-potential, PP)}方法\upcite{Singh,PRB41-7892_1990,JPCM6-8245_1994}
+	\item	缀加平面波\textrm{(Augmented plane wave, APW)}方法
+	\item	\textrm{MT}轨道\textrm{(Muffin-tin orbitals, MTO)}方法\upcite{LMTO_Book}
+	\item	投影子缀加波\textrm{(Projector Augmented Wave, PAW)}方法\upcite{PRB50-17953_1994,PRB59-1758_1999}
+\end{itemize}
+\vskip 5pt 各种方法的\textcolor{red}{主要区别}:~\textcolor{blue}{势函数的处理}与\textcolor{blue}{所选基函数类型}不同
+}
+
+\frame
+{
+	\frametitle{固体计算软件概览}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.05in}
+%\hspace*{-0.80in}
+\includegraphics[height=2.30in,width=4.00in,viewport=0 0 920 500,clip]{Figures/DFT-Software.jpg}
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Abinitio-Softwares}
+\end{figure}
+}
+
+\section{软件解方程:~迭代与优化}
+\frame
+{
+	\frametitle{非线性方程的\rm{Newton~}法求根}
+	\textcolor{blue}{不管哪一种数值算法，其设计原理都是将复杂转化为简单的重复，或者说，通过简单的重复生成复杂}:\\
+	\textcolor{red}{在算法设计和算法实现过程中，重复就是力量}\\
+迭代算法设计:~\textcolor{purple}{“速度”\textrm{vs}“稳定”}
+\begin{figure}[h!]
+\centering
+\animategraphics[autoplay, loop, height=2.0in]{1}{Figures/OP_Newton_}{0}{17}
+\label{Equation_Newon}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{迭代优化基本思想}
+	对于给定函数$f$，在极值点，函数的梯度满足
+	\begin{displaymath}
+		\nabla f=0
+	\end{displaymath}
+	可将函数极值问题转化成方程求根问题
+\begin{figure}[h!]
+\centering
+\includegraphics[height=1.68in,width=1.95in,viewport=30 0 450 360,clip]{Figures/OP_mini-1.png}
+\hskip 0.05in
+\includegraphics[height=1.68in,width=1.95in,viewport=150 20 560 390,clip]{Figures/OP_mini-2.png}
+\label{OP_mini}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{最陡下降与共轭梯度}
+\begin{figure}[h!]
+\centering
+\includegraphics[height=2.0in,width=3.5in,viewport=0 0 950 590,clip]{Figures/OP_descent_CG.png}
+\label{decent_CG}
+\caption{\tiny \textrm{Schematic illustration of minimization of a function in two dimensions. The steps 1,2,3,~$\cdots$ denote the steepest descent steps and the point - \!- \!- \!- \!- \!- denote the conjugate gradient path that reaches the exact solution after two steps if the functional is quadratic.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{共轭梯度的``轭''}
+\begin{figure}[h!]
+\centering
+\includegraphics[height=2.5in,width=4.0in,viewport=0 0 1050 680,clip]{Figures/Yoke_1.png}
+\label{Horse_Yoke}
+%\caption{\tiny \textrm{Schematic illustration of minimization of a function in two dimensions. The steps 1,2,3,$\cdots$ denote the steepest descent steps and the point $2^{\ast}$ denote the conjugate gradient path that reaches the exact solution after two steps if the functional is quadratic.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{共轭的含义}
+\begin{minipage}{0.63\textwidth}
+\begin{figure}[h!]
+\vskip -23pt
+\centering
+\includegraphics[height=1.6in,width=2.2in,viewport=0 0 600 490,clip]{Figures/Bi-Yoke_1.jpg}
+\vskip 2pt
+\includegraphics[height=1.5in,width=2.2in,viewport=0 0 750 530,clip]{Figures/Conjugate_Pi-bond.png}
+\label{Conjugate_1}
+%\caption{\tiny \textrm{Schematic illustration of minimization of a function in two dimensions. The steps 1,2,3,$\cdots$ denote the steepest descent steps and the point $2^{\ast}$ denote the conjugate gradient path that reaches the exact solution after two steps if the functional is quadratic.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\end{figure}
+\end{minipage}
+\begin{minipage}{0.35\textwidth}
+\begin{figure}[h!]
+\centering
+\includegraphics[height=2.2in,width=1.5in,viewport=0 0 250 390,clip]{Figures/Conjugate_complex.jpg}
+\label{Conjugate_2}
+%\caption{\tiny \textrm{Schematic illustration of minimization of a function in two dimensions. The steps 1,2,3,$\cdots$ denote the steepest descent steps and the point $2^{\ast}$ denote the conjugate gradient path that reaches the exact solution after two steps if the functional is quadratic.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\end{figure}
+\end{minipage}
+}
+
+		\frame[allowframebreaks]
 {
 \frametitle{主要参考文献}
 \begin{thebibliography}{99}
 {\tiny
-\bibitem{Xu_Li_Wang}徐光宪、黎乐民、王德民, {\textit{量子化学——基本原理和从头计算法}}\;\textrm{({\textit{上、中}})}\:科学出版社, 北京, 1980
-\bibitem{PR136-B864_1964}\textrm{P. Hohenberg and W. Kohn, \textit{Phys. Rev.} \textbf{136} (1964), B864}
-\bibitem{PR140-A1133_1965}\textrm{W. Kohn and L.J. Sham, \textit{Phys. Rev.} \textbf{140} (1965), A1133}
-\bibitem{PRL49-1691_1982}\textrm{P. Perdew, R. G. Parr, M. Levy and J. L. Balduz, Jr., \textit{Phys. Rev. Lett.} \textbf{49} (1982), 1691}
-\bibitem{Parr_Yang}\textrm{R.G. Parr and W. Yang. \textit{Density-Functional Theory of Atoms and Molecules} (Oxford University Press, New York, U.S.A., 1989)}
-\bibitem{Huang-Han}黄昆\:原著、韩汝琦\:改编, {\textit{固体物理学}}\:高等教育出版社, 北京, 1988
-\bibitem{PRB13-5188_1976}\textrm{H. J. Monkhorst and J. D. Pack \textit{Phys. Rev.} B, \textbf{13} (1976), 5188}
-\bibitem{PRB40-3616_1989}\textrm{M. Methfessel and A. T. Paxton \textit{Phys. Rev.} B, \textbf{40} (1989), 3616}
-\bibitem{PRB49-16233_1994}\textrm{P. E. Bl\"ochl, O. Jepsen and O. K. Andersen. \textit{Phys. Rev.} B, \textbf{49} (1994), 16233}
+        \bibitem{Singh}\textrm{D. J. Singh. \textit{Plane Wave, PseudoPotential and the LAPW method} (Kluwer Academic, Boston,USA, 1994)}					%
+	\bibitem{PRB41-7892_1990}\textrm{D. Vanderbilt. \textit{Phys. Rev.} B, \textbf{41} (1990), 7892} 
+	\bibitem{JPCM6-8245_1994}\textrm{G. Kresse and J. Hafner. J. Phys: \textit{Condens. Matter}, \textbf{6} (1994), 8245}
+	\bibitem{LMTO_Book}\textrm{H. Skriver. \textit{The LMTO method} (Springer, New York, USA, 1984)}
+	\bibitem{PRB50-17953_1994}\textrm{P. E. Bl\"ochl. \textit{Phys. Rev.} B, \textbf{50} (1994), 17953}
+	\bibitem{PRB59-1758_1999}\textrm{G. Kresse and D. Joubert \textit{Phys. Rev.} B, \textbf{59} (1999), 1758}
+	\bibitem{Andersen_Book}\textrm{O. K. Andersen. \textit{Computational Methods in Band Theory} (Plenum, New York, USA, 1971)}
+	\bibitem{Nemoshkalenko-Antonov}\textrm{V. V. Nemoshkalenko and V. N. Antonov. \textit{Computational Methods in Solid State Physics} (Gordon and Breach Science Publisher, Amsterdam, The Netherlands, 1998)}
+	\bibitem{Xie-Lu}谢希德、陆栋\:主编, {\textit{固体能带理论}}\:复旦大学出版社, 上海, 1998
+	\bibitem{Elect_Stru}\textrm{Richard. M. Martin. \textit{Electronic Structure: Basic Theory and Practical Methods} (Cambridge University Press, Cambridge, England, 2004)}
+	\bibitem{Comp_Phys}\textrm{J. M. Thijssen. \textit{Computational Physics}~\textrm{(2nd Edition)} (Cambridge University Press, Cambridge, England, 2007)}
 }
 \end{thebibliography}
-%\nocite*{}
+}
+
+\section{计算示例:~\rm{VASP}}
+\frame
+{
+	\frametitle{\textrm{VASP}软件简介}
+	\textrm{VASP}软件是维也纳大学\textrm{(Universit\"at Wien)}~\textrm{G. Kresse}等开发的第一原理模拟软件包
+	\begin{itemize}
+		\item \textrm{VASP}采用\textrm{PAW~(Projector Augmented-Wave)}方法，平衡了赝势方法和全电子计算优点，兼顾了计算的精度和效率
+		\item \textrm{VASP}在实空间优化投影函数\textrm{(Projector)}，将主要的计算过程变换到实空间完成，大大节省了内存的开销%，保证了计算精度和效率
+		\item \textrm{VASP}通过引入多样的优化算法，提高了矩阵对角化和电荷密度搜索的效率
+		\item 在\textrm{VASP}的并行计算中，有效均衡了各节点处理\textrm{FFT}变换负载和通信，提升了软件的并行效率
+	\end{itemize}
+	相比于其他第一原理计算软件，\textrm{VASP}从物理思想与方法、优化算法和并行计算实现等多个方面都有更为出色的性能
+}
+
+\frame
+{
+	\frametitle{\textrm{VASP}的开发团队}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.25in}
+\includegraphics[height=2.70in,width=4.05in,viewport=330 130 1280 770,clip]{Figures/VASP_team.png}
+\caption{\tiny \textrm{The development team of VASP.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{VASP_team}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{VASP}的\textrm{Kohn-Sham}方程求解流程}
+\begin{figure}[h!]
+	\vspace{-0.2in}
+\centering
+%\includegraphics[height=2.7in,width=4.0in,viewport=0 0 1300 960,clip]{Figures/VASP_procedure-full.png}
+%\includegraphics[height=2.1in,width=1.6in,viewport=0 0 480 630,clip]{Figures/VASP_procedure.png}
+%\includegraphics[height=2.1in,width=2.3in,viewport=0 0 740 600,clip]{Figures/Ab-initio-Ene.png}
+\includegraphics[height=2.75in,width=2.5in,viewport=0 0 480 630,clip]{Figures/VASP_procedure.png}
+\caption{\tiny \textrm{The Flow of calculation for the KS-ground states.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{PAW_baiseset}
+\end{figure} 
+}
+
+\section{\rm{VASP}计算示例}
+\frame
+{
+	\frametitle{\textrm{VASP}软件简介}
+	\textrm{VASP}软件是维也纳大学\textrm{(Universit\"at Wien)}~\textrm{G. Kresse}等开发的第一原理模拟软件包
+	\begin{itemize}
+		\item \textrm{VASP}采用\textrm{PAW~(Projector Augmented-Wave)}方法，平衡了赝势方法和全电子计算优点，兼顾了计算的精度和效率
+		\item \textrm{VASP}在实空间优化投影函数\textrm{(Projector)}，将主要的计算过程变换到实空间完成，大大节省了内存的开销%，保证了计算精度和效率
+		\item \textrm{VASP}通过引入多样的优化算法，提高了矩阵对角化和电荷密度搜索的效率
+		\item 在\textrm{VASP}的并行计算中，有效均衡了各节点处理\textrm{FFT}变换负载和通信，提升了软件的并行效率
+	\end{itemize}
+	相比于其他第一原理计算软件，\textrm{VASP}从物理思想与方法、优化算法和并行计算实现等多个方面都有更为出色的性能
+}
+
+\frame
+{
+	\frametitle{\textrm{VASP}的开发团队}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.25in}
+\includegraphics[height=2.70in,width=4.05in,viewport=330 130 1280 770,clip]{Figures/VASP_team.png}
+\caption{\tiny \textrm{The development team of VASP.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{VASP_team}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{VASP}的\textrm{Kohn-Sham}方程求解流程}
+\begin{figure}[h!]
+	\vspace{-0.2in}
+\centering
+%\includegraphics[height=2.7in,width=4.0in,viewport=0 0 1300 960,clip]{Figures/VASP_procedure-full.png}
+%\includegraphics[height=2.1in,width=1.6in,viewport=0 0 480 630,clip]{Figures/VASP_procedure.png}
+%\includegraphics[height=2.1in,width=2.3in,viewport=0 0 740 600,clip]{Figures/Ab-initio-Ene.png}
+\includegraphics[height=2.75in,width=2.5in,viewport=0 0 480 630,clip]{Figures/VASP_procedure.png}
+\caption{\tiny \textrm{The Flow of calculation for the KS-ground states.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{PAW_baiseset}
+\end{figure} 
+}
+
+\subsection{{\rm Si}的电子结构:~态密度与能带}\label{Sec:Si-band}
+\frame
+{
+	\frametitle{\textrm{Si}的结构:~\textrm{FCC}}
+%{\fontsize{7.2pt}{5.2pt}\selectfont{\textrm{Si}晶胞是金刚石结构，晶胞参数$a_0=5.47\mathrm{\AA}$由结构弛豫确定}}%为了得到\textrm{Si}的电子结构，必须要完成两组连续计算:~即通过静态计算得到迭代收敛的基态电子密度，随后用获得的电子密度，按特定的对称性方向，直接计算(无需自洽迭代)得到能带。
+\textrm{Si}晶胞是金刚石结构，晶胞参数$a_0=5.47\mathrm{\AA}$(由结构弛豫确定)
+\vskip 5pt
+\begin{figure}[h!]
+\centering
+\includegraphics[height=1.6in,viewport=0 0 370 150,clip]{Figures/Si_POSCAR.png}
+%\includegraphics[height=1.8in,width=4.in,viewport=30 210 570 440,clip]{PAW_projector.eps}
+\caption{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{Si}的原胞:~\textrm{POSCAR}文件.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Si_POSCAR}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{Si}的初基原胞}
+\vspace*{-13pt}
+\begin{figure}[h!]
+\centering
+\includegraphics[height=1.78in]{Figures/VASP_example-Si_POSCAR-1-Fig.png}
+\vskip 1pt
+\includegraphics[height=0.98in]{Figures/VASP_example-Si_POSCAR-1.png}
+%\caption{\tiny \textrm{The structure of TiC.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:VASP-Si_POSCAR}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{Si}的初始计算:~输入文件}
+\vspace*{-5pt}
+\begin{figure}[h!]
+\centering
+\includegraphics[height=0.62in]{Figures/VASP_example-Si_KPOINTS-G.png}
+\vskip 4pt
+\includegraphics[height=1.88in]{Figures/VASP_example-Si_INCAR-dyn.png}
+%\caption{\tiny \textrm{The structure of TiC.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:VASP-Si_KPOINT-INCAR}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{Si}的初始计算:~\textrm{POTCAR}}
+\vspace*{-13pt}
+\begin{figure}[h!]
+\centering
+\includegraphics[height=2.88in]{Figures/VASP_example-Si_POTCAR.png}
+%\caption{\tiny \textrm{The structure of TiC.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:VASP-Si_POTCAR}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{VASP}计算示范:~\textrm{Si}}
+\vspace*{-10pt}
+\begin{figure}[h!]
+\centering
+\includegraphics[width=3.0in]{Figures/VASP_example-Si_OUTCAR-1.png}
+%\caption{\tiny \textrm{The structure of TiC.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:VASP-Si_OUTCAR-part1}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{VASP}计算示范:~\textrm{Si}}
+\vspace*{-10pt}
+\begin{figure}[h!]
+\centering
+\includegraphics[width=3.5in]{Figures/VASP_example-Si_OUTCAR-2.png}
+%\caption{\tiny \textrm{The structure of TiC.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:VASP-Si_OUTCAR-part2}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{Si}的静态计算}
+%静态计算是获得电子基态信息的重要步骤，在
+静态计算:~确定基态电荷密度
+\vskip 2.5pt
+{\fontsize{8.5pt}{5.2pt}\selectfont{\textcolor{blue}{材料电子学性质计算的起点}}}
+\vskip 3pt
+{\fontsize{8.5pt}{5.2pt}\selectfont{静态计算完毕，可以从文件\textrm{OSZICAR}得到体系的基态能量，电荷密度则保存到文件\textrm{CHGCAR}中}}
+%\vspace*{-10pt}
+\begin{figure}[h!]
+\centering
+\includegraphics[width=2.5in]{Figures/VASP_cdSi_1.png}
+%\caption{\tiny \textrm{The structure of TiC.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:VASP-Si_DOS}
+\end{figure}
+}
+
+%\subsection{Si的能带结构计算}
+\frame
+{
+	\frametitle{能带计算与$\vec k$点选择}
+%一般地，波矢$\vec k $的取值是三维空间(第一\textrm{Brillouin}区)中的矢量。在
+	%表\ref{Tabble-kpath}给出的是\textrm{FCC}结构的第一\textrm{Brillouin}区的高对称性$\vec k$点列表。
+\begin{minipage}{1.0\textwidth}
+\begin{table}[!h]
+\tabcolsep 0pt \vspace*{-12pt}
+\fontsize{7.2pt}{5.2pt}\selectfont{
+%\begin{center}
+\centering
+\caption{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{FCC}的第一\textrm{Brillouin}区中高对称性点的列表}}\label{Table-kpath}
+\def\temptablewidth{0.95\textwidth}
+\renewcommand\arraystretch{0.8} %表格宽度控制(普通表格宽度的两倍)
+\rule{\temptablewidth}{1pt}
+\begin{tabular*} {\temptablewidth}{@{\extracolsep{\fill}}c@{\extracolsep{\fill}}c@{\extracolsep{\fill}}c}
+%-------------------------------------------------------------------------------------------------------------------------
+	&\textrm{Reciprocal coordinates} &\textrm{Cartesian coordinates}\\
+	\textrm{Points}	&\textrm{(unit of $b_1,b_2,b_3$)} &\textrm{unit of $2\pi/a$} \\\hline
+	$\Gamma$ &0~~0~~0 &0~~0~~0 \\
+	X &1/2~~0~~1/2 &0~~1~~0 \\
+	W &3/4~~1/2~~1/4 &0~~1/2~~1 \\
+	L &1/2~~1/2~~1/2 &1/2~~1/2~~1/2 \\
+	$\Delta$ &1/4~~0~~1/4 &0~~1/2~~0 \\
+	$\Lambda$ &1/ 4~~1/4~~1/4 &1/4~~1/4~~1/4 \\
+\end{tabular*}
+\rule{\temptablewidth}{1pt}
+}
+%\end{center}
+\end{table}
+\end{minipage}
+\begin{figure}[h!]
+	\vskip -8pt
+\centering 
+\includegraphics[height=1.7in,viewport=0 0 680 680,clip]{Figures/VASP_train-FCC-BZ.png}
+%\includegraphics[height=1.8in,width=4.in,viewport=30 210 570 440,clip]{PAW_projector.eps}
+\caption{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{Brillouin}区为\textrm{FCC}时的空间结构和$\vec k$-点路径关系.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{VASP_train-FCC-BZ}
+\end{figure}
+	{\fontsize{7.5pt}{5.2pt}\selectfont{能带表示中的波矢$\vec k$选择:~沿不可约第一\textrm{Brillouin}区的高对称性点连线}}
+%因此，为了绘制平滑的能带曲线，需要在\textrm{KPOINTS}文件中指定足够多的$\vec k$点，能带计算时，只需针对这些指定的$\vec k$点计算各轨道的能量本征值。%如图\ref{Si_KPOINTS}所示:
+}
+
+\frame
+{
+	\frametitle{\textrm{Si}能带计算}
+
+%为了完成能带计算，主要是\textrm{CHGCAR}文件，其余文件改动极少。
+%\subsubsection{\rm{INCAR}}%如图\ref{Si_Band-INCAR}所示。这里
+%\subsubsection{\rm{KPOINTS}}
+{\fontsize{7.5pt}{5.2pt}\selectfont{由\textrm{Brillouin}区$\vec k$点连线，确定\textrm{KPOINTS}文件的$\vec k$点分布:}}\\%如图所示\ref{VASP_train-FCC-BZ}。
+{\fontsize{6.2pt}{5.2pt}\selectfont{沿$\vec k$点路线$\mathrm{W}-\mathrm{L}-\Gamma-\mathrm{X}-\mathrm{W}$共计80个$\vec k$点(20点/连线$\times$4组连线)}%的\textrm{KPOINTS}文件%，对应
+\begin{figure}[h!]
+	\vskip -5pt
+\centering 
+\includegraphics[width=3.6in,viewport=0 0 540 210,clip]{Figures/Si_KPOINTS.png}
+%\includegraphics[height=1.8in,width=4.in,viewport=30 210 570 440,clip]{PAW_projector.eps}
+\caption{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{Si}的能带计算时\textrm{KPOINTS}的设置.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Si_KPOINTS}
+\end{figure}
+%图\ref{Si_KPOINTS}给出的是\textrm{VASP}计算
+}
+\begin{figure}[h!] 
+	\vskip -5pt
+\centering
+\includegraphics[height=0.5in,viewport=0 0 330 80,clip]{Figures/Si_Band-INCAR.png}
+%\includegraphics[height=1.8in,width=4.in,viewport=30 210 570 440,clip]{PAW_projector.eps}
+\caption{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{Si}的能带计算中的\textrm{INCAR}设置.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Si_Band-INCAR}
+\end{figure}
+{\fontsize{7.5pt}{5.2pt}\selectfont{静态计算完毕，根据能带计算需要，修改\textrm{INCAR}文件参数:~设置\textcolor{cyan}{\textit{ICHARG}}=11，电荷密度来自静态计算\textrm{CHGCAR}，在计算中保持不变}}
+}
+
+\frame
+{
+	\frametitle{\textrm{Si}能带}
+%图\ref{Si_Band-DOS}给出绘制的能带图，可见按照当前的$\vec k$点路径选择，。
+\begin{figure}[h!]
+	\vskip -8pt
+\centering
+\includegraphics[width=3.5in,viewport=0 10 920 610,clip]{Figures/Si_Band-DOS.png}
+%\includegraphics[height=1.8in,width=4.in,viewport=30 210 570 440,clip]{PAW_projector.eps}
+\caption{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{Si}的能带和相应的态密度图，从能带图看出\textrm{Si}是间接带隙半导体.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Si_Band-DOS}
+\end{figure}
+{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{Si}是%间接带隙
+半导体，带隙$E_g=0.61\textrm{eV}$%是$\Gamma$点和$X$点之间的带隙值，同时也是图中所有$\vec k$点之间最小的能量差。
+~(该值仅为实验测得带隙的$1/2$，因\textrm{DFT}先天不足，低估带隙)}}
+%不过除了对带隙的低估，\textrm{DFT}计算的色散关系(能量在倒空间分布关系)是完全正确的，比如\textrm{Fermi}面附近有四个价带，四个导带，能量$\varepsilon_{\vec k}^n$随$\vec k$空间的变化逐渐改变，因此\textrm{DFT}理论的计算定性是完全正确的。实际上，其他物理量(比如波函数和电子密度)，也和能量本征值有类似的倒空间分布关系。表明这样的$\vec k$点采样是合理的，能够表现物理量在不可约\textrm{Brillouin}区的定量变化。
+}
+
+%\frame
+%{
+%	\frametitle{\textrm{Si}的能带}
+%%\vspace*{5pt}
+%\begin{figure}[h!]
+%\centering
+%\includegraphics[width=4.0in]{Figures/VASP_cdSi_2.png}
+%%\caption{\tiny \textrm{The structure of TiC.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\label{Fig:VASP-Si_Band}
+%\end{figure}
+%}
+%
+\frame
+{
+	\frametitle{\textrm{Si}的能带可视化:~\textrm{p4vasp}}
+%\vspace*{5pt}
+\begin{figure}[h!]
+\centering
+\includegraphics[width=4.0in]{Figures/VASP_cdSi_3.png}
+%\caption{\tiny \textrm{The structure of TiC.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:VASP-Si_p4vasp}
+\end{figure}
+}
+
+%\subsubsection{\rm{能带中的本征值}}
+\frame
+{
+	\frametitle{\textrm{Si}能带与本征值}
+%因为能带计算是非自洽迭代计算，计算出来能量本征值$\varepsilon_{\vec k}^n$写入\textrm{EIGENVAL}文件中，用于绘制能带图。如图\ref{Si_Band-EIGENVAL}所示
+	{\fontsize{7.2pt}{5.2pt}\selectfont{由\textrm{OUTCAR}可知\textrm{Fermi}能级为5.6980\textrm{eV}}}%)设为0~\textrm{eV}，可以得到$\vec k$点和能量本征值关系的数据文件\textrm{Si-band.dat}，内容如图\ref{Si_Band-data}所示
+\begin{figure}[h!]
+	\vskip -3pt
+\centering
+\includegraphics[width=4.0in,viewport=0 0 640 375,clip]{Figures/Si_Band-EIGENVAL.png}
+%\includegraphics[height=1.8in,width=4.in,viewport=30 210 570 440,clip]{PAW_projector.eps}
+\caption{\fontsize{6.2pt}{5.2pt}\selectfont{\textrm{VASP}计算\textrm{Si}的能量本征值文件\textrm{EIGENVAL}(部分).}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Si_Band-EIGENVAL}
+\end{figure}
+%文件\textrm{EIGENVAL}中第一行是倒晶格中的$\vec k$点位置，随后8行是对应的8个能带的能量本征值:~其中前4个(\textrm{No.}~1-4)能级表示价带，是0\textrm{K}下的占据态。从\textrm{EIGENVAL}文件中提取出各$\vec k$点的能量本征值$\varepsilon_{\vec k}^n$，并将\textrm{Fermi}能级设置为0~(可以用本讲义提供的脚本\textcolor{blue}{\textrm{vasp\_to\_image.py}}实现)。运行该脚本，将\textrm{Fermi}能级(
+
+%\begin{figure}[h!]
+%\centering
+%\includegraphics[height=1.2in,viewport=0 0 540 140,clip]{Si_Band-data.png}
+%%\includegraphics[height=1.8in,width=4.in,viewport=30 210 570 440,clip]{PAW_projector.eps}
+%\caption{\small \textrm{用于绘制\textrm{Si}能带结构的数据.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\label{Si_Band-data}
+%\end{figure}
+}
+
+\section{材料模拟基础:~建模——以\rm{Materials~Studio}为例}
+\frame
+{
+	\frametitle{\textrm{MS}的架构}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.10in}
+\includegraphics[height=2.20in,width=4.15in,viewport=0 0 1275 667,clip]{Figures/MS-main_Struct.png}
+\caption{\tiny \textrm{The main structure of Materials studio.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{MS-main-structure}
+\end{figure}
+}
+
+\subsection{\rm{Materials Studio}的界面框架}
+\frame
+{
+	\frametitle{\textrm{MS}的界面框架}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.31in}
+\includegraphics[height=2.45in,width=4.10in,viewport=0 0 1340 800,clip]{Figures/MS-Frame.png}
+\includegraphics[height=0.45in,width=4.15in,viewport=0 0 1400 147,clip]{Figures/MS-Frame_calculators.png}
+\caption{\tiny \textrm{The frame of Materials studio.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{MS-Frame}
+\end{figure}
+}
+
+%\subsection{\rm{Materials Studio:~Building}}
+%\frame
+%{
+%	\frametitle{\textrm{MS:~Building Modules}}
+%\begin{figure}[h!]
+%\centering
+%%\vspace*{-0.10in}
+%\includegraphics[height=1.90in,width=4.10in,viewport=0 0 1259 586,clip]{Figures/MS-Building_tools.png}
+%\caption{\tiny \textrm{The Building tools in Materials studio.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\label{MS-Building-tools}
+%\end{figure}
+%}
+
+%\subsection{\rm{Materials Studio:~Calculator}}
+%\frame
+%{
+%	\frametitle{\textrm{MS:~Calculator}}
+%\begin{figure}[h!]
+%\centering
+%\vspace*{-0.15in}
+%\includegraphics[height=2.75in,width=3.80in,viewport=0 0 969 728,clip]{Figures/MS-Caluculator-compare-2.png}
+%\caption{\tiny \textrm{Comparing of Calculators in Materials studio.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\label{MS-Calculator-compare-2}
+%\end{figure}
+%}
+%
+%\frame
+%{
+%	\frametitle{\textrm{MS:~Calculator}}
+%\begin{figure}[h!]
+%\centering
+%%\vspace*{-0.10in}
+%\includegraphics[height=1.50in,width=4.10in,viewport=0 0 1517 602,clip]{Figures/MS-Caluculator-compare-1.png}
+%\caption{\tiny \textrm{Calculators in Materials studio:~parameters.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\label{MS-Calculator-compare-1}
+%\end{figure}
+%}
+%
+%\frame
+%{
+%	\frametitle{\textrm{MS:~XC-functionals}}
+%\begin{figure}[h!]
+%\centering
+%\vspace*{-0.10in}
+%\includegraphics[height=2.50in,width=4.10in,viewport=0 0 1261 752,clip]{Figures/MS-xc_functional-compare.png}
+%\caption{\tiny \textrm{XC-functionals in Materials studio.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\label{MS-xc_functional-compare}
+%\end{figure}
+%}
+%
+\frame
+{
+	\frametitle{\textrm{MS}的界面框架:~\textrm{Indigo}}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.28in}
+\includegraphics[height=2.85in,width=4.15in,viewport=0 0 1140 800,clip]{Figures/MS-Frame_example.png}
+\caption{\tiny \textrm{The frame of Materials studio:~Example Indigo.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{MS-Frame_example}
+\end{figure}
+}
+
+\subsection{\rm{Materials Studio:~Quick Start}}
+\frame
+{
+	\frametitle{\textrm{MS:~Quick Start-01}}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.21in}
+\includegraphics[height=2.70in,width=4.10in,viewport=0 0 1134 740,clip]{Figures/MS-New_Project-01.png}
+\caption{\tiny \textrm{Quick Start for Materials studio:~Step-01.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{MS-Quick_Start-01}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{MS:~Quick Start-02}}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.10in}
+\includegraphics[height=2.70in,width=4.00in,viewport=0 0 1045 776,clip]{Figures/MS-New_Project-02.png}
+\caption{\tiny \textrm{Quick Start for Materials studio:~Step-02.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{MS-Quick_Start-02}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{MS:~Quick Start-03}}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.10in}
+\includegraphics[height=2.68in,width=4.00in,viewport=0 0 1090 760,clip]{Figures/MS-New_Project-03.png}
+\caption{\tiny \textrm{Quick Start for Materials studio:~Step-03.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{MS-Quick_Start-03}
+\end{figure}
+}
+
+%\subsection{\rm{Materials Studio:~Modelling}}
+\frame
+{
+	\frametitle{\textrm{MS:~Quick Start-Modelling-01}}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.10in}
+\includegraphics[height=2.60in,width=4.00in,viewport=0 0 1090 710,clip]{Figures/MS-New_Project-04.png}
+\caption{\tiny \textrm{Quick Start for Materials studio:~Modelling-01.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{MS-Quick_Start-Modelling-01}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{MS:~Quick Start-Modelling-02}}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.10in}
+\includegraphics[height=2.68in,width=4.00in,viewport=0 0 1090 760,clip]{Figures/MS-New_Project-05.png}
+\caption{\tiny \textrm{Quick Start for Materials studio:~Modelling-02.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{MS-Quick_Start-Modelling-02}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{MS:~Modelling Crystal-01}}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.10in}
+\includegraphics[height=2.68in,width=4.00in,viewport=0 0 1090 760,clip]{Figures/MS-New_Project-06.png}
+\caption{\tiny \textrm{Modelling crystal by Materials studio.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{MS-Modelling-Crystal-01}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{MS:~Modelling Crystal-02}}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.15in}
+\includegraphics[height=2.75in,width=4.00in,viewport=0 0 1090 814,clip]{Figures/MS-New_Project-07.png}
+\caption{\tiny \textrm{Modelling crystal by Materials studio:~Parameters.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{MS-Modelling-Crystal-02}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{MS:~Modelling Crystal-03}}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.15in}
+\includegraphics[height=2.75in,width=3.70in,viewport=0 0 818 616,clip]{Figures/MS-New_Project-08.png}
+\caption{\tiny \textrm{Modelling crystal by Materials studio:~Lattice-parameters.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{MS-Modelling-Crystal-03}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{MS:~Modelling Crystal-04}}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.10in}
+\includegraphics[height=2.70in,width=4.00in,viewport=0 0 1090 759,clip]{Figures/MS-New_Project-09.png}
+\caption{\tiny \textrm{Modelling crystal by Materials studio:~Elements.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{MS-Modelling-Crystal-04}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{MS:~Modelling Crystal example:~Si}}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.10in}
+\includegraphics[height=2.70in,width=2.30in,viewport=0 0 546 747,clip]{Figures/MS-New_Project-10-Si_example.png}
+\caption{\tiny \textrm{Modelling crystal by Materials studio:~Si.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{MS-Modelling-Crystal-05}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{MS:~Modelling Crystal example:~Si}}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.10in}
+\includegraphics[height=2.65in,width=4.00in,viewport=0 0 1090 698,clip]{Figures/MS-New_Project-11-Si_crystal.png}
+\caption{\tiny \textrm{Modelling crystal by Materials studio:~Si.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{MS-Modelling-Crystal-06}
+\end{figure}
+}
+
+\subsection{\rm{Materials Studio:~Calculation}}
+\frame
+{
+	\frametitle{\textrm{MS:~CASTEP Calculation example:~Si}}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.10in}
+\includegraphics[height=2.62in,width=4.00in,viewport=0 0 1210 740,clip]{Figures/MS-CASTEP-01-Si.png}
+\caption{\tiny \textrm{CASTEP Calculation by Materials studio:~Si.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{MS-CASTEP-Calculation-01}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{MS:~CASTEP Calculation example:~Si}}
+\begin{figure}[h!]
+\centering
+%\vspace*{-0.10in}
+\includegraphics[height=2.05in,width=1.95in,viewport=0 0 756 787,clip]{Figures/MS-CASTEP-02-Si-parameter-1.png}
+\includegraphics[height=2.05in,width=1.95in,viewport=0 0 775 798,clip]{Figures/MS-CASTEP-02-Si-parameter-2.png}
+\caption{\tiny \textrm{CASTEP Calculation by Materials studio:~Parameter.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{MS-CASTEP-Calculation-02}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{MS:~CASTEP Calculation example:~Si}}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.10in}
+\includegraphics[height=2.15in,width=1.95in,viewport=0 -50 650 700,clip]{Figures/MS-CASTEP-13-Si-Calculat-Electron-step.png}
+\includegraphics[height=2.15in,width=1.95in,viewport=0 0 636 774,clip]{Figures/MS-CASTEP-13-Si-Calculat-Electron-detail.png}
+\caption{\tiny \textrm{CASTEP Calculation by Materials studio:~Electron-step.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{MS-CASTEP-Calculation-electron}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{MS:~CASTEP Calculation example:~Si}}
+\begin{figure}[h!]
+\centering
+%\vspace*{-0.10in}
+\includegraphics[height=1.15in,width=3.30in,viewport=0 0 1070 452,clip]{Figures/MS-CASTEP-03-Si-input-1.png}
+\includegraphics[height=1.15in,width=4.00in,viewport=0 0 1070 355,clip]{Figures/MS-CASTEP-03-Si-input-2.png}
+\caption{\tiny \textrm{CASTEP Calculation.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{MS-CASTEP-Calculation-03}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{MS:~CASTEP Calculation example:~Si}}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.10in}
+\includegraphics[height=2.65in,width=2.63in,viewport=0 0 643 698,clip]{Figures/MS-CASTEP-04-Si-sever.png}
+\caption{\tiny \textrm{CASTEP Calculation by Materials studio:~Connect to localhost.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{MS-CASTEP-Calculation-sever}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{MS:~CASTEP Calculation example:~Si}}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.10in}
+\includegraphics[height=2.60in,width=4.00in,viewport=0 0 1210 740,clip]{Figures/MS-CASTEP-05-Si-Calculat.png}
+\caption{\tiny \textrm{CASTEP Calculation by Materials studio:~Run.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{MS-CASTEP-Calculation-Run}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{MS:~CASTEP Calculation example:~Si}}
+\begin{figure}[h!]
+\centering
+%\vspace*{-0.10in}
+\includegraphics[height=1.50in,width=4.00in,viewport=0 0 1070 469,clip]{Figures/MS-CASTEP-06-Si-Calculat-finish.png}
+\caption{\tiny \textrm{CASTEP Calculation by Materials studio:~Complete.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{MS-CASTEP-Calculation-Complete}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{MS:~CASTEP Calculation example:~Si}}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.10in}
+\includegraphics[height=2.66in,width=4.00in,viewport=0 0 1150 801,clip]{Figures/MS-CASTEP-07-Si-Calculat-data.png}
+\caption{\tiny \textrm{CASTEP Calculation by Materials studio:~Finish.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{MS-CASTEP-Calculation-data}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{MS:~CASTEP Calculation example:~Si}}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.10in}
+\includegraphics[height=2.60in,width=4.00in,viewport=0 0 1039 790,clip]{Figures/MS-CASTEP-08-Si-Calculat-SCF.png}
+\caption{\tiny \textrm{CASTEP Calculation by Materials studio:~SCF.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{MS-CASTEP-Calculation-SCF}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{MS:~CASTEP Analysis example:~Si}}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.10in}
+\includegraphics[height=2.60in,width=4.00in,viewport=0 0 1210 742,clip]{Figures/MS-CASTEP-09-Si-Analysis.png}
+\caption{\tiny \textrm{CASTEP Analysis by Materials studio.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{MS-CASTEP-Analysis}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{MS:~CASTEP Analysis example:~Si}}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.10in}
+\includegraphics[height=2.66in,width=2.30in,viewport=0 0 567 813,clip]{Figures/MS-CASTEP-10-Si-Analysis-parameter.png}
+\caption{\tiny \textrm{CASTEP Analysis by Materials studio:~Parameter.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{MS-CASTEP-Analysis-parameter}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{MS:~CASTEP Analysis example:~Si}}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.10in}
+\includegraphics[height=2.60in,width=4.00in,viewport=0 0 1210 742,clip]{Figures/MS-CASTEP-11-Si-Analysis-charge.png}
+\caption{\tiny \textrm{CASTEP Analysis by Materials studio:~Charge.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{MS-CASTEP-Analysis-Charge}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{MS:~CASTEP Analysis example:~Si}}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.10in}
+\includegraphics[height=2.60in,width=4.00in,viewport=0 0 1210 742,clip]{Figures/MS-CASTEP-11-Si-Analysis-display.png}
+\caption{\tiny \textrm{CASTEP Analysis by Materials studio:~Display-style.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{MS-CASTEP-Analysis-display}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{MS:~CASTEP Analysis example:~Si}}
+\begin{figure}[h!]
+\centering
+%\vspace*{-0.10in}
+\includegraphics[height=2.00in,width=1.95in,viewport=0 0 810 820,clip]{Figures/MS-CASTEP-12-Si-Analysis-display-parameter-1.png}
+\includegraphics[height=2.00in,width=1.95in,viewport=0 0 802 822,clip]{Figures/MS-CASTEP-12-Si-Analysis-display-parameter-2.png}
+\caption{\tiny \textrm{CASTEP Analysis by Materials studio:~Display-parameter.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{MS-CASTEP-Analysis-display-parameter}
+\end{figure}
 }
 
 \appendix
