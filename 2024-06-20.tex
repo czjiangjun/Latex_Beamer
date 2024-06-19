@@ -1,0 +1,281 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  不使用 authblk 包制作标题  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%-------------------------------PPT Title-------------------------------------
+\title{计算材料模拟软件与优化}
+%-----------------------------------------------------------------------------
+
+%----------------------------Author & Date------------------------------------
+%\author[\textrm{Jun\_Jiang}]{姜\;\;骏\inst{}} %[]{} (optional, use only with lots of authors)
+%% - Give the names in the same order as the appear in the paper.
+%% - Use the \inst{?} command only if the authors have different
+%%   affiliation.
+\institute[BCC]{\inst{}%
+%\institute[Gain~Strong]{\inst{}%
+\vskip -20pt 北京市计算中心~云平台事业部~姜骏}
+%\vskip -20pt {\large 格致斯创~科技}}
+\date[\today] % (optional, should be abbreviation of conference name)
+{	{\fontsize{6.2pt}{4.2pt}\selectfont{\textcolor{blue}{E-mail:~}\url{jiangjun@bcc.ac.cn}}}
+\vskip 45 pt {\fontsize{8.2pt}{6.2pt}\selectfont{%北京科技大学% 报告地点
+	\vskip 5 pt \textrm{2024.06.20}}}
+}
+
+%% - Either use conference name or its abbreviation
+%% - Not really information to the audience, more for people (including
+%%   yourself) who are reading the slides onlin%%   yourself) who are reading the slides onlin%%   yourself) who are reading the slides onlineee
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subject{}
+% This is only inserted into the PDF information catalog. Can be left
+% out.
+%\maketitle
+\frame
+{
+%	\frametitle{\fontsize{9.5pt}{5.2pt}\selectfont{\textcolor{orange}{“高通量并发式材料计算算法与软件”年度检查}}}
+\titlepage
+}
+%-----------------------------------------------------------------------------
+
+%------------------------------------------------------------------------------列出全文 outline ---------------------------------------------------------------------------------
+\section*{}
+\frame[allowframebreaks]
+{
+  \frametitle{Outline}
+%  \frametitle{\textcolor{mycolor}{\secname}}
+  \tableofcontents%[current,currentsection,currentsubsection]
+}
+%%在每个section之前列出全部Outline
+%%类似的在每个subsection之前列出全部Outline是\AtBeginSubsection[]
+%\AtBeginSection[]
+%{
+%  \frame<handout:0>%[allowframebreaks]
+%  {
+%    \frametitle{Outline}
+%%全部Outline中，本部分加亮
+%    \tableofcontents[current,currentsection]
+%  }
+%}
+
+%-----------------------------------------------PPT main Body------------------------------------------------------------------------------------
+\small
+%\section{引言}
+\frame
+{
+	\frametitle{\rm{I~Have~A~Dream}}
+\begin{figure}[h!]
+\vspace*{-0.18in}
+\centering
+\includegraphics[height=2.55in,width=4.05in]{Figures/Schematic_Material-Design.png}
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Schematic_Material-Design}
+\end{figure} 
+}
+
+\frame
+{
+%	\frametitle{\textrm{DFT-SCF}}
+\begin{figure}[h!]
+\vspace*{-0.25in}
+\centering
+\includegraphics[height=2.80in,width=4.95in,viewport=5 3 1250 780,clip]{Figures/Method_Procedure.png}
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Method-Procedure}
+\end{figure}
+}
+
+%-----------------------------------------------------------------------------------------------------------------------------------------------------------------------%
+\frame
+{
+	\frametitle{\textrm{DFT-SCF}}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.25in}
+\hspace*{-0.80in}
+\includegraphics[height=2.80in,width=4.95in,viewport=5 3 1490 870,clip]{Figures/DFT-SCF_2.png}
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{DFT-SCF-2}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{密度泛函与粒子表示表示}
+\begin{figure}[h!]
+\vskip -10pt
+\centering
+\includegraphics[height=2.65in,width=3.8in,viewport=0 0 362 275,clip]{Figures/DFT-particle-density.png}
+\caption{\fontsize{6.0pt}{4.5pt}\selectfont{\textrm{Properties of a quantum mechanical system can be calculated by solving the SE (left). A more tractable, formally equivalent way is to solve the DFT KS equations (right).}}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Schrodinger-equation-vs-Kohn-Sham-equation}
+\end{figure}
+}
+
+\section{国产第一原理软件现状}
+\frame
+{
+	\frametitle{材料计算软件发展现状}
+\begin{figure}[h!]
+\vspace*{-0.16in}
+\centering
+\includegraphics[width=3.30in]{Figures/Softwares_logo.png}
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Softwares}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{国产第一原理计算软件现状}
+\begin{figure}[h!]
+\vspace*{-0.19in}
+\centering
+\includegraphics[width=2.83in]{Figures/Softwares_China-logo.png}
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Software-China}
+\end{figure}
+	\fontsize{6.2pt}{5.2pt}\selectfont{\textcolor{red}{中国学科发展战略\,$\cdot$\,理论与计算化学,~~国家自然科学基金委员会,~中国科学院,~~北京:~科学出版社,~~2016}}
+}
+
+\section{\rm{VASP}软件的计算特色}
+\frame
+{
+	\frametitle{\textrm{VASP}软件简介}
+	\textrm{VASP}软件是维也纳大学\textrm{(Universit\"at Wien)}~\textrm{G. Kresse}等开发的第一原理模拟软件包
+	\begin{itemize}
+		\item \textrm{VASP}采用\textrm{PAW~(Projector Augmented-Wave)}方法\upcite{PRB50-17953_1994,PRB59-1758_1999}，平衡了赝势方法和全电子计算优点，兼顾了计算的精度和效率
+		\item \textrm{VASP}在实空间优化投影函数\textrm{(Projector)}，将主要的计算过程变换到实空间完成，大大节省了内存的开销%，保证了计算精度和效率
+		\item \textrm{VASP}通过引入多样的优化算法，提高了矩阵对角化和电荷密度搜索的效率%\upcite{CMS6-15_1996,PRB54-11169_1996}
+		\item 在\textrm{VASP}的并行计算中，有效均衡了各节点处理\textrm{FFT}变换负载和通信，提升了软件的并行效率
+	\end{itemize}
+	相比于其他第一原理计算软件，\textrm{VASP}从物理思想与方法、优化算法和并行计算实现等多个方面都有更为出色的性能%\upcite{PRL55-2471_1985,PRB47-10142_1993}
+}
+
+\frame
+{
+	\frametitle{\textrm{VASP}的开发团队}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.25in}
+\includegraphics[height=2.70in,width=4.05in,viewport=330 130 1280 770,clip]{Figures/VASP_team.png}
+\caption{\tiny \textrm{The development team of VASP.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{VASP_team}
+\end{figure}
+}
+
+\begin{frame}[allowframebreaks]{\textrm{VASP}的主程序结构}
+\begin{figure}[h!]
+\vskip -10pt
+\centering
+\includegraphics[height=2.65in,width=4.0in,viewport=0 360 562 720,clip]{Figures/VASP_main_Flow-1.png}
+\includegraphics[height=2.65in,width=4.0in,viewport=0 0 562 360,clip]{Figures/VASP_main_Flow-1.png}
+\includegraphics[height=2.35in,width=4.0in,viewport=0 370 562 680,clip]{Figures/VASP_main_Flow-2.png}
+\includegraphics[height=2.50in,width=4.0in,viewport=0 0 562 370,clip]{Figures/VASP_main_Flow-2.png}
+\includegraphics[height=2.45in,width=4.0in,viewport=0 350 562 660,clip]{Figures/VASP_main_Flow-3.png}
+\includegraphics[height=2.50in,width=4.0in,viewport=0 0 562 350,clip]{Figures/VASP_main_Flow-3.png}
+\includegraphics[height=2.30in,width=4.0in,viewport=0 215 562 530,clip]{Figures/VASP_main_Flow-4.png}
+\includegraphics[height=1.40in,width=4.0in,viewport=0 0 562 215,clip]{Figures/VASP_main_Flow-4.png}
+\caption{\tiny \textrm{The Flow of main program for VASP.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{FLOW_of_VASP}
+\end{figure}
+\end{frame}
+
+\frame
+{
+	\frametitle{双网格技术}
+\begin{figure}[h!]
+	\vspace{-0.15in}
+\centering
+%\includegraphics[height=2.7in,width=4.0in,viewport=0 0 1180 875,clip]{Figures/dual_grid.png}
+\includegraphics[height=2.75in,width=4.0in,viewport=0 0 800 600,clip]{Figures/dual_grid-2.png}
+\caption{\tiny \textrm{The Schematic description of the dual grid technique.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{PAW_dualgrid}
+\end{figure} 
+}
+
+\frame
+{
+	\frametitle{\textrm{VASP}的并行效率}
+	与同类型软件相比，\textrm{VASP}有着优异的并行能力
+\begin{figure}[h!]
+	\vspace{-0.15in}
+\centering
+%\includegraphics[height=2.7in,width=4.0in,viewport=0 0 1180 875,clip]{Figures/dual_grid.png}
+\includegraphics[height=1.55in,width=1.95in,viewport=0 0 240 200,clip]{Figures/VASP-abinit_Li128-1.png}
+\includegraphics[height=1.55in,width=1.95in,viewport=0 0 240 200,clip]{Figures/VASP-abinit_Li128-2.png}
+\caption{\tiny \textrm{The comparison of parallel scaling for ABINIT vs VASP.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{ABINIT_vs_VASP}
+\end{figure} 
+\begin{itemize}
+	\item \textrm{VASP}迭代对角化约束了矩阵的维度，减少了对角化过程中的迭代次数，保证了\textrm{MPI}并行的规模和扩展性
+	\item \textrm{VASP}实施\textrm{FFT}变换时，保证各节点上处理的网格负载均衡
+\end{itemize}
+}
+
+\frame
+{
+	\frametitle{\textrm{VASP}计算的\textrm{FFT}并行实现}
+	\begin{itemize}
+	     \item 中间层设计:~\textrm{FFT}网格、实空间基组与计算节点的匹配\\
+		     \textcolor{red}{通过子程序\textrm{mgrid.F}生成中间层，实现并行负载与计算节点分配的匹配，减少\textrm{FFT}变换和实空间并行的节点间通信}
+\begin{figure}[h!]
+		\vspace{-0.25in}
+	\centering
+%\includegraphics[height=2.7in,width=4.0in,viewport=0 0 1180 875,clip]{Figures/dual_grid.png}
+\includegraphics[height=1.0in,width=4.0in,viewport=0 0 1500 450,clip]{Figures/VASP_FFT-MPI_Reciprocal.png}
+\vskip 0.5pt
+\includegraphics[height=0.7in,width=4.0in,viewport=0 0 730 150,clip]{Figures/VASP_FFT-MPI_Real.png}
+\caption{\tiny \textrm{VASP:~ Reciprocal-Real space layout for grids in MPI.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{MPI-FFT}
+\end{figure} 
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{\textrm{VASP}的通信开销}
+	在高性能的计算队列中，\textrm{VASP}的并行上限可以突破256核，但当并行核数超过百核数量级，并行效率下降非常明显
+\begin{figure}[h!]
+	\vspace{-0.15in}
+\centering
+%\includegraphics[height=2.7in,width=4.0in,viewport=0 0 1180 875,clip]{Figures/dual_grid.png}
+\includegraphics[height=1.55in,width=1.95in,viewport=0 0 240 200,clip]{Figures/VASP-mpi-Li128.png}
+\caption{\tiny \textrm{Time spent in MPI calls with increasing the number of ranks in a VASP calculation.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{VASP_communication}
+\end{figure} 
+
+如能对并行系统与\textrm{VASP}结合作深度改造(如国家超算天津中心方案)，\textrm{VASP}的并行扩展可以到$10^4$核级别，但这一改造需要对底层代码和计算框架作较大规模改动
+}
+
+\frame
+{
+	\frametitle{\textrm{VASP}的\textrm{GPU}加速}
+\textrm{NVIDIA}多年来致力于\textrm{VASP}的\textrm{GPU}加速，取得了一定的成效
+\begin{figure}[h!]
+	\vspace{-0.15in}
+\centering
+%\includegraphics[height=2.7in,width=4.0in,viewport=0 0 1180 875,clip]{Figures/dual_grid.png}
+\includegraphics[height=1.2in,width=4.05in,viewport=0 0 850 260,clip]{Figures/VASP-GPU-CPU.png}
+\caption{\tiny \textrm{Compare of VASP calculation with GPU and CPU.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{VASP_GPU}
+\end{figure} 
+\begin{itemize}
+	\item 通用配置下，\textrm{GPU}对\textrm{VASP}计算有加速效果，一般可提升4$\sim$6倍
+	\item 矩阵对角化的并行算法限制了\textrm{GPU}在第一原理计算中的应用
+	\item \textrm{GPU}加速的模式主要适合于分子动力学计算
+\end{itemize}
+}
+
+\section{小结}
+\frame
+{
+	\frametitle{小结}
+	作为第一性原理计算的商用软件，\textrm{VASP}已成为计算材料学领域应用最广泛的软件之一。全球绝大多数超算中心都安装了\textrm{VASP}，据统计，\textrm{VASP}软件的作业机时占用全球总机时的12$\sim$20\%，但由于其%类似于linpack软件，
+属于重型浮点计算密集型应用，实际耗电量占比则高达30$\sim$50\%
+\vskip 3pt
+	{\fontsize{9.0pt}{7.2pt}\selectfont{
+	\begin{itemize}
+\setlength{\itemsep}{5pt}
+		\item \textcolor{blue}{物理上}，\textrm{VASP}基于\textrm{DFT}近似，求解\textrm{Kohn-Sham}方程，并将粒子基态密度问题转化为矩阵的本征函数和本征值问题
+		\item \textcolor{blue}{数学上}，方程求解过程的核心是矩阵对角化与\textrm{PDE}的自洽迭代，即便对于简单体系，也需要完成数十次的迭代，而规模大的计算模拟体系则可能需要成千上万次迭代计算
+		\item \textcolor{blue}{计算过程上}，\textrm{VASP}计算的时长开销主要是本征值求解的矩阵对角化；此外由于算法限制，\textrm{Kohn-Sham}方程作为线性方程组作并行处理时，节点间存在密集的通信。在上千节点，上万计算核的大规模并行系统上，数据通信将严重影响程序的性能，这是当前\textrm{VASP}软件的主要瓶颈
+	\end{itemize}}}
+%			\textcolor{magenta}{有必要探索新的并行和优化策略来提升\textrm{VASP}的计算性能}
+}
