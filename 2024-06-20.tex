@@ -35,13 +35,13 @@
 %-----------------------------------------------------------------------------
 
 %------------------------------------------------------------------------------列出全文 outline ---------------------------------------------------------------------------------
-\section*{}
-\frame[allowframebreaks]
-{
-  \frametitle{Outline}
-%  \frametitle{\textcolor{mycolor}{\secname}}
-  \tableofcontents%[current,currentsection,currentsubsection]
-}
+%\section*{}
+%\frame[allowframebreaks]
+%{
+%  \frametitle{Outline}
+%%  \frametitle{\textcolor{mycolor}{\secname}}
+%  \tableofcontents%[current,currentsection,currentsubsection]
+%}
 %%在每个section之前列出全部Outline
 %%类似的在每个subsection之前列出全部Outline是\AtBeginSubsection[]
 %\AtBeginSection[]
@@ -108,7 +108,6 @@
 \end{figure}
 }
 
-\section{国产第一原理软件现状}
 \frame
 {
 	\frametitle{材料计算软件发展现状}
@@ -134,7 +133,6 @@
 	\fontsize{6.2pt}{5.2pt}\selectfont{\textcolor{red}{中国学科发展战略\,$\cdot$\,理论与计算化学,~~国家自然科学基金委员会,~中国科学院,~~北京:~科学出版社,~~2016}}
 }
 
-\section{\rm{VASP}软件的计算特色}
 \frame
 {
 	\frametitle{\textrm{VASP}软件简介}
@@ -176,6 +174,22 @@
 \label{FLOW_of_VASP}
 \end{figure}
 \end{frame}
+
+\frame[allowframebreaks]
+{\frametitle{\textrm{VASP}运行分析}
+\begin{figure}[h!]
+	\vspace{-0.15in}
+\centering
+%\includegraphics[height=2.7in,width=4.0in,viewport=0 0 1180 875,clip]{Figures/dual_grid.png}
+\includegraphics[height=2.5in,width=4.05in,viewport=0 0 1531 877,clip]{Figures/Kcachegrid_analyasis-VASP-01.png}
+\includegraphics[height=2.5in,width=4.05in,viewport=0 0 1531 877,clip]{Figures/Kcachegrid_analyasis-VASP-02.png}
+\includegraphics[height=2.5in,width=4.05in,viewport=0 0 1531 877,clip]{Figures/Kcachegrid_analyasis-VASP-03.png}
+\includegraphics[height=2.5in,width=4.05in,viewport=0 0 1531 877,clip]{Figures/Kcachegrid_analyasis-VASP-04.png}
+\includegraphics[height=2.5in,width=4.05in,viewport=0 0 1531 877,clip]{Figures/Kcachegrid_analyasis-VASP-05.png}
+%\caption{\tiny \textrm{Compare of VASP calculation with GPU and CPU.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{VASP_Kcachegrind}
+\end{figure} 
+}
 
 \frame
 {
@@ -263,7 +277,6 @@
 \end{itemize}
 }
 
-\section{小结}
 \frame
 {
 	\frametitle{小结}
