@@ -109,10 +109,6 @@
   \node [box4,below=0.8 of Theory, text width=15em] (Basic-Equ) {(学科)基本方程\\量子力学:~\textrm{Schr\"odinger}方程\\$\hat{\mathbf H}\Psi=E\Psi$};
 %  \node [box,below=0.5 of density] (criterion) {Convergence criterion satisfied?};
 
-  \path
-  (Softwares.north west) ++(-1em,1em) coordinate (Softwares fit)
-  (Basic-Equ.south east) ++(1em,-1em) coordinate (Basic-Equ fit);
-
 %  \node [box,above=1.5 of potential, fill=orange!30, text width=20em] (initial) {Supply initial density guess $\rho_\text{ini}(\vec r)$ to Kohn Sham equations};
   \node [box4,left=0.5 of Basic-Equ, fill=violet!30, text width=5em, minimum height=5em] (PDE) {经典数值\\分析算法};
 %  \node [box,below=1.5 of criterion, fill=blue!30, text width=20em] (energy) {Use $\rho_\text{fin}(\vec r)$ to minimize total energy functional $E_{V_\text{ext}}[\rho]=T_{e,s}[\phi_i\{\rho\}] + V_{ee,H}[\rho] + E_{xc}[\rho] + V_{eI}[\rho]$};
@@ -132,8 +128,14 @@
   \path [arrow] (Algorithm) |- (Softwares.west);
   \path [arrow] (Method.east) -- (coding.west);
   \path [arrow] (Method.west) -- (Algorithm.east);
+
+%%%%%% ------------ 定义 虚线方框转角 -----------------  %%%%%%
+%  \path
+%  (potential.north west) ++(-1em,1em) coordinate (potential fit)
+%  (criterion.south east) ++(1em,-1em) coordinate (criterion fit);
+
+%%%%%% ------------ 绘制 虚线方框 -----------------  %%%%%%
 %  \node [rectangle,draw,dashed,inner sep=1em,fit=(potential fit) (criterion fit)] (enclosure) {};
-%  \node [above=-0.8em of enclosure,anchor=south,draw,outer sep=0pt,fill=white] (enclosure label) {\Large\textbf{Kohn-Sham method}};
 %  \node [above=-0.8em of enclosure,anchor=south,draw,outer sep=0pt,fill=white] (enclosure label) {\Large\textbf{Kohn-Sham method}};
 
 %  \path [arrow] (criterion) -- (energy) node [midway,left=0.1,draw,outer sep=0pt,fill=white] (TextNode) {Yes};
@@ -171,18 +173,6 @@
 \label{Multi-Scale}
 \end{figure}
 \end{minipage}
-}
-
-\frame
-{
-%	\frametitle{\textrm{DFT-SCF}}
-\begin{figure}[h!]
-\vspace*{-0.25in}
-\centering
-\includegraphics[height=2.80in,width=4.95in,viewport=5 3 1250 780,clip]{Figures/Method_Procedure.png}
-%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{Method-Procedure}
-\end{figure}
 }
 
 %-----------------------------------------------------------------------------------------------------------------------------------------------------------------------%
