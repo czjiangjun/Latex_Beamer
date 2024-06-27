@@ -86,33 +86,129 @@
 
 \frame
 {
-	\frametitle{材料模拟的基本思想和方法}
-\begin{figure}[h!]
-\vspace*{-0.25in}
-\centering
-\includegraphics[height=0.80in,width=4.05in]{Figures/MGE-2.png}
-%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{MGE}
-\end{figure}
-\begin{minipage}[c]{0.30\textwidth}
+	\frametitle{材料基因工程的理念}
+\begin{minipage}[c]{0.31\textwidth}
 \begin{itemize}%[+-| alert@+>]
-\vspace*{-2.25in}
- {\fontsize{7.5pt}{6.0pt}\selectfont
+\vspace*{-1.85in}
+ {\fontsize{8.5pt}{6.0pt}\selectfont
 	 \setlength{\itemsep}{10pt}
  \item 变革研发模式，计算-实验-理论-数据科学相融合: 高效、低耗按需设计
  \item 数据驱动的材料创新平台主要面向复杂材料的模拟}
  \end{itemize}
 \end{minipage}
 \hfill
-\begin{minipage}[b]{0.68\textwidth}
+\begin{minipage}[b]{0.67\textwidth}
 \begin{figure}[h!]
 %\vspace*{-0.25in}
 \centering
-\includegraphics[height=1.60in,width=2.75in]{Figures/Multi-Scale-6.png}
+\includegraphics[height=1.60in,width=2.55in]{Figures/Mat_Geno_Ene-1.png}
 %\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{Multi-Scale}
+\label{Mater_Genome}
 \end{figure}
 \end{minipage}
+\vskip 5pt
+\textcolor{magenta}{本单位参与国家重点研发计划项目}
+\begin{itemize}
+	\setlength{\itemsep}{3pt}
+	\item {\fontsize{8.2pt}{5.0pt}\selectfont{“\textcolor{blue}{高通量并发式材料计算算法和软件}”}}{\fontsize{6.2pt}{4.2pt}\selectfont{(编号:~\textrm{2017YFB0701500})}}
+		%{\fontsize{8.2pt}{6.2pt}\selectfont{(本单位任务责任人)}}
+	\item {\fontsize{8.2pt}{5.0pt}\selectfont{“\textcolor{blue}{材料高通量计算/实验平台数据自动汇交技术}”}}{\fontsize{6.2pt}{4.2pt}\selectfont{(编号:~\textrm{2017YFB0704302})}}
+		%{\fontsize{8.2pt}{6.2pt}\selectfont{(参与)}}
+	\item {\fontsize{8.2pt}{5.0pt}\selectfont{“\textcolor{blue}{国家材料基因工程数据管理与数据服务技术平台}”}}{\fontsize{6.2pt}{4.2pt}\selectfont{(编号:~\textrm{2018YFB0704300})}}
+		%{\fontsize{8.2pt}{6.2pt}\selectfont{(参与)}}
+\end{itemize}
+}
+
+\frame
+{
+	\frametitle{材料设计的基本思想}
+\begin{figure}[h!]
+\vspace*{-0.20in}
+\centering
+\includegraphics[height=0.70in,width=3.75in]{Figures/MGE-2.png}
+\includegraphics[height=1.90in,width=3.75in,viewport=-120 0 775 480,clip]{Figures/Multi_Scale-2.jpeg}
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{MGE}
+\end{figure}
+{\fontsize{7.2pt}{5.0pt}\selectfont{还原论\textrm{(reductionism)}:\\\textcolor{red}{复杂系统表现的性质(现象)，可归结为最基本的组成单元和决定单元行为的基本规律}}}
+}
+
+\frame
+{
+	\frametitle{跨尺度计算:~微观尺度的尝试}
+%	\textcolor[rgb]{0.00, 1.00, 0.00}{还原论\textrm{(reductionism)}}:~将复杂还原为简单，然后再从简单重建复杂\\
+\begin{figure}[h!]
+\vspace*{-0.15in}
+\centering
+\includegraphics[height=1.05in,width=3.05in,viewport=0 0 360 118,clip]{Figures/Alloy_modeling.png}
+\caption{\tiny \textrm{Schematic illustration of modeling a simple alloy from atoms.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Alloy_modeling}
+\end{figure}
+{\fontsize{7.2pt}{5.0pt}\selectfont{
+\begin{itemize}
+	\item 在每一还原层次,系统特征的空间尺度迅速变小，特征的能量/时间尺度急剧升高
+	\item 由于数值计算的困难程度随着体系尺度的增大而指数增加，无法从理论上准确预测大量粒子组成体系的性质
+\end{itemize}}}
+\begin{figure}[h!]
+\vspace*{-0.10in}
+\centering
+\includegraphics[height=0.65in,width=1.10in,viewport=0 0 1050 650,clip]{Figures/Chemical_Bonding_2.jpg}
+%\caption{\tiny \textrm{Schematic illustration of modeling a simple alloy from atoms.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Chemical_Bonding}
+\end{figure}
+
+}
+
+\frame
+{
+	\frametitle{跨尺度计算:~合金材料}
+\begin{figure}[h!]
+\vspace*{-0.20in}
+\centering
+\includegraphics[height=2.80in,width=3.35in,viewport=0 0 170 150,clip]{Figures/Multi_Scale-6.jpg}
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Alloy-Multi_Scale}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{跨尺度计算:~电池材料}
+\begin{figure}[h!]
+\vspace*{-0.13in}
+\centering
+\includegraphics[height=2.50in,width=4.05in,viewport=0 0 224 125,clip]{Figures/Multiple_scales-Battery_cell.jpg}
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Battery_Cell-Multi_Scale}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{跨尺度计算的主要困难:~\textcolor[rgb]{1.00, 0.00 0.00}{多者异也}}
+	\textrm{Philip W.Anderson}的``多者异也''~\textrm{(\textcolor[rgb]{0.00, 0.00, 1.00}{More is different})}理论:\\
+复杂体系在每一不同的聚集层次，都会呈现出许多预想不到的全新复杂物理性质，这些性质已经远超出组成基元的物理学规律
+\begin{figure}[h!]
+\vspace*{-0.05in}
+\centering
+\includegraphics[height=1.35in,width=1.65in,viewport=0 0 425 420,clip]{Figures/Ti-Al_alloy_model.jpg}
+\includegraphics[height=1.35in,width=1.65in,viewport=55 10 335 305,clip]{Figures/high-entropy_alloys.jpg}
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Flow-of-multi_scale-modelling}
+\end{figure}
+\textcolor{red}{在每一个复杂性的发展层次中，都会呈现出全新的物理概念、物理定律和物理原理}
+}
+
+\frame
+{
+	\frametitle{材料数据:~多尺度计算的主要任务}
+\begin{figure}[h!]
+\vspace*{-0.15in}
+\centering
+\includegraphics[height=2.65in,width=4.05in,viewport=0 0 1179 721,clip]{Figures/Schematic_flow-of-multi_scale-modelling.png}
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Data_for-Machine-Leaning}
+\end{figure}
 }
 
 %-----------------------------------------------------------------------------------------------------------------------------------------------------------------------%
