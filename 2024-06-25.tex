@@ -86,66 +86,6 @@
 
 \frame
 {
-%\documentclass[tikz,svgnames,border={0 2}]{standalone}
-%\renewcommand\vec[1]{\boldsymbol{#1}}
-%\begin{document}
-\begin{tikzpicture}[
-    box/.style={rectangle,draw,fill=DarkGray!20,node distance=1cm,text width=15em,text centered,rounded corners,minimum height=2em,thick},
-    box1/.style={rectangle,draw,fill=green!50,node distance=1cm,text width=12em,text centered,rounded corners,minimum height=2em,thick},
-    box2/.style={rectangle,draw,fill=magenta!75,node distance=1cm,text width=12em,text centered,rounded corners,minimum height=2em,thick},
-    box3/.style={rectangle,draw,fill=blue!30,node distance=1cm,text width=12em,text centered,rounded corners,minimum height=2em,thick},
-    box4/.style={rectangle,draw,fill=violet!45,node distance=2cm,text width=13em,text centered,rounded corners,minimum height=2em,thick},
-%    arrow/.style={draw,-latex', thick},
-    arrow/.style={draw,-latex', red, line width=2pt},
-  ]
-
-%  \node [box] (potential) {$v_{\text{ext},s}(\vec r)=v_\text{H}(\vec r) + v_\text{xc}(\vec r) + v_\text{ext}(\vec r)$};
-  \node [box1,text width=8em] (Softwares) {实际程序\\实现和应用};
-%  \node [box,below=0.5 of potential] (hamiltonian) {$\hat{H}_{KS}=-\frac{\hbar^2}{2m}\vec{\nabla}^2 + v_{\text{ext},s}(\vec r)$};
-  \node [box2,below=0.5 of Softwares] (Method) {基组和势函数处理方法\\$\vec k$空间积分方案};
-%  \node [box,below=0.5 of hamiltonian] (se) {$\hat{H}_{KS} \phi_i(\vec r)= E_i \phi_i(\vec r)$};
-  \node [box3,below=0.7 of Method, text width=13em] (Theory) {基本理论\\\textrm{DFT}和\textrm{Band Structure}};
-%  \node [box,below=0.5 of se] (density) {$\rho(\vec r)=\sum_{i=1}^n f_i\,|\phi_i(\vec r_i)|^2$};
-  \node [box4,below=0.8 of Theory, text width=15em] (Basic-Equ) {(学科)基本方程\\量子力学:~\textrm{Schr\"odinger}方程\\$\hat{\mathbf H}\Psi=E\Psi$};
-%  \node [box,below=0.5 of density] (criterion) {Convergence criterion satisfied?};
-
-%  \node [box,above=1.5 of potential, fill=orange!30, text width=20em] (initial) {Supply initial density guess $\rho_\text{ini}(\vec r)$ to Kohn Sham equations};
-  \node [box4,left=0.5 of Basic-Equ, fill=violet!30, text width=5em, minimum height=5em] (PDE) {经典数值\\分析算法};
-%  \node [box,below=1.5 of criterion, fill=blue!30, text width=20em] (energy) {Use $\rho_\text{fin}(\vec r)$ to minimize total energy functional $E_{V_\text{ext}}[\rho]=T_{e,s}[\phi_i\{\rho\}] + V_{ee,H}[\rho] + E_{xc}[\rho] + V_{eI}[\rho]$};
-  \node [box4,left=1.0 of Method, fill=magenta!50, text width=5em] (Algorithm) {具体\\算法\\实现};
-
-  \node [box4,right=0.5 of Basic-Equ, fill=violet!30, text width=5em] (OS) {操作\\系统\\与\\编程\\技术};
-  \node [box4,right=1.0 of Method, fill=magenta!50, text width=5em] (coding) {程序语言};
-%  \path [arrow] (initial) -- (potential);
-  \path [arrow] (Method) -- (Softwares);
-  \path [arrow] (Theory) -- (Method);
-  \path [arrow] (Basic-Equ) -- (Theory);
-%  \path [arrow] (density) -- (criterion);
-
-  \path [arrow] (PDE) -- (Algorithm);
-  \path [arrow] (OS) -- (coding);
-  \path [arrow] (coding) |- (Softwares.east);
-  \path [arrow] (Algorithm) |- (Softwares.west);
-  \path [arrow] (Method.east) -- (coding.west);
-  \path [arrow] (Method.west) -- (Algorithm.east);
-
-%%%%%% ------------ 定义 虚线方框转角 -----------------  %%%%%%
-%  \path
-%  (potential.north west) ++(-1em,1em) coordinate (potential fit)
-%  (criterion.south east) ++(1em,-1em) coordinate (criterion fit);
-
-%%%%%% ------------ 绘制 虚线方框 -----------------  %%%%%%
-%  \node [rectangle,draw,dashed,inner sep=1em,fit=(potential fit) (criterion fit)] (enclosure) {};
-%  \node [above=-0.8em of enclosure,anchor=south,draw,outer sep=0pt,fill=white] (enclosure label) {\Large\textbf{Kohn-Sham method}};
-
-%  \path [arrow] (criterion) -- (energy) node [midway,left=0.1,draw,outer sep=0pt,fill=white] (TextNode) {Yes};
-%  \path [draw,thick] (criterion.south) ++(0em,-1em) -- (criterion fit) node [midway,below=0.1,sloped,draw,outer sep=0pt,fill=white] (TextNode) {No};
-%  \draw [arrow] (criterion fit) |- (potential.east);
-\end{tikzpicture}
-}
-
-\frame
-{
 	\frametitle{材料模拟的基本思想和方法}
 \begin{figure}[h!]
 \vspace*{-0.25in}
@@ -176,6 +116,76 @@
 }
 
 %-----------------------------------------------------------------------------------------------------------------------------------------------------------------------%
+\frame
+{
+%\documentclass[tikz,svgnames,border={0 2}]{standalone}
+%\renewcommand\vec[1]{\boldsymbol{#1}}
+%\begin{document}
+\begin{tikzpicture}[
+    box/.style={rectangle,draw,fill=DarkGray!20,node distance=1cm,text width=15em,text centered,rounded corners,minimum height=2em,thick},
+    box1/.style={rectangle,draw,fill=green!50,node distance=1cm,text width=12em,text centered,rounded corners,minimum height=2em,thick},
+    box2/.style={rectangle,draw,fill=magenta!75,node distance=1cm,text width=12em,text centered,rounded corners,minimum height=2em,thick},
+    box3/.style={rectangle,draw,fill=blue!30,node distance=1cm,text width=12em,text centered,rounded corners,minimum height=2em,thick},
+    box4/.style={rectangle,draw,fill=violet!45,node distance=2cm,text width=13em,text centered,rounded corners,minimum height=2em,thick},
+%    arrow/.style={draw,-latex', thick},
+    arrow/.style={draw,-latex', red, line width=2pt},
+  ]
+%  \node [box] (potential) {$v_{\text{ext},s}(\vec r)=v_\text{H}(\vec r) + v_\text{xc}(\vec r) + v_\text{ext}(\vec r)$};
+  \node [box1,text width=8em] (Softwares) {实际程序\\实现和应用};
+%  \node [box,below=0.5 of potential] (hamiltonian) {$\hat{H}_{KS}=-\frac{\hbar^2}{2m}\vec{\nabla}^2 + v_{\text{ext},s}(\vec r)$};
+  \node [box2,below=0.5 of Softwares] (Method) {基组和势函数处理方法\\$\vec k$空间积分方案};
+%  \node [box,below=0.5 of hamiltonian] (se) {$\hat{H}_{KS} \phi_i(\vec r)= E_i \phi_i(\vec r)$};
+  \node [box3,below=0.7 of Method, text width=13em] (Theory) {基本理论\\\textrm{DFT}和\textrm{Band Structure}};
+%  \node [box,below=0.5 of se] (density) {$\rho(\vec r)=\sum_{i=1}^n f_i\,|\phi_i(\vec r_i)|^2$};
+  \node [box4,below=0.8 of Theory, text width=15em] (Basic-Equ) {(学科)基本方程\\量子力学:~\textrm{Schr\"odinger}方程\\$\hat{\mathbf H}\Psi=E\Psi$};
+%  \node [box,below=0.5 of density] (criterion) {Convergence criterion satisfied?};
+
+%  \node [box,above=1.5 of potential, fill=orange!30, text width=20em] (initial) {Supply initial density guess $\rho_\text{ini}(\vec r)$ to Kohn Sham equations};
+  \node [box4,left=0.5 of Basic-Equ, fill=violet!30, text width=5em, minimum height=5em] (PDE) {经典数值\\分析算法};
+%  \node [box,below=1.5 of criterion, fill=blue!30, text width=20em] (energy) {Use $\rho_\text{fin}(\vec r)$ to minimize total energy functional $E_{V_\text{ext}}[\rho]=T_{e,s}[\phi_i\{\rho\}] + V_{ee,H}[\rho] + E_{xc}[\rho] + V_{eI}[\rho]$};
+  \node [box4,left=1.0 of Method, fill=magenta!50, text width=5em] (Algorithm) {具体\\算法\\实现};
+
+  \node [box4,right=0.5 of Basic-Equ, fill=violet!30, text width=5em] (OS) {操作\\系统\\与\\编程\\技术};
+  \node [box4,right=1.0 of Method, fill=magenta!50, text width=5em] (coding) {程序语言};
+%  \node [box4,right=1.0 of Method, fill=magenta!50, text width=5em, thick] at (-5,0) (Figure) {\includegraphics[width=0.5in, height=0.4in]{Figures/Multi-Scale-6.png}};
+%  \path [arrow] (initial) -- (potential);
+  \path [arrow] (Method) -- (Softwares);
+  \path [arrow] (Theory) -- (Method);
+  \path [arrow] (Basic-Equ) -- (Theory);
+%  \path [arrow] (density) -- (criterion);
+
+  \path [arrow] (PDE) -- (Algorithm);
+  \path [arrow] (OS) -- (coding);
+ % \path [arrow] (OS) -- (Figure);
+  \path [arrow] (coding) |- (Softwares.east);
+  \path [arrow] (Algorithm) |- (Softwares.west);
+  \path [arrow] (Method.east) -- (coding.west);
+  \path [arrow] (Method.west) -- (Algorithm.east);
+
+%%%%%% ------------ 定义 虚线方框转角 -----------------  %%%%%%
+%  \path
+%  (potential.north west) ++(-1em,1em) coordinate (potential fit)
+%  (criterion.south east) ++(1em,-1em) coordinate (criterion fit);
+
+%%%%%% ------------ 绘制 虚线方框 -----------------  %%%%%%
+%  \node [rectangle,draw,dashed,inner sep=1em,fit=(potential fit) (criterion fit)] (enclosure) {};
+%  \node [above=-0.8em of enclosure,anchor=south,draw,outer sep=0pt,fill=white] (enclosure label) {\Large\textbf{Kohn-Sham method}};
+
+%  \path [arrow] (criterion) -- (energy) node [midway,left=0.1,draw,outer sep=0pt,fill=white] (TextNode) {Yes};
+%  \path [draw,thick] (criterion.south) ++(0em,-1em) -- (criterion fit) node [midway,below=0.1,sloped,draw,outer sep=0pt,fill=white] (TextNode) {No};
+%  \draw [arrow] (criterion fit) |- (potential.east);
+\end{tikzpicture}
+}
+
+\frame
+{
+	\frametitle{TEST}
+	Text before image
+	\begin{tikzpicture}
+	\end{tikzpicture}
+	Text after image
+}
+
 \frame
 {
 	\frametitle{\textrm{DFT-SCF}}
