@@ -220,17 +220,29 @@
 \end{figure}
 }
 
+%\frame
+%{
+%	\frametitle{计算材料数据}
+%	现有材料数据内容
+%\begin{figure}[h!]
+%\vspace*{-0.15in}
+%\centering
+%\includegraphics[height=2.35in,width=4.05in,viewport=0 0 1529 873,clip]{Figures/Database_Materials.png}
+%%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\label{DataBase_Materials}
+%\end{figure}
+%}
+%
 \frame
 {
 	\frametitle{计算材料数据}
-	现有材料数据内容
-\begin{figure}[h!]
-\vspace*{-0.15in}
-\centering
-\includegraphics[height=2.35in,width=4.05in,viewport=0 0 1529 873,clip]{Figures/Database_Materials.png}
+	现有材料数据内容\\
+	\begin{tikzpicture}[
+    box/.style={rectangle,draw,fill=darkgray!20,node distance=1cm,text width=15em,text centered,rounded corners,minimum height=2em,thick},]
+\node at (-5,0) (Figure){\includegraphics[height=2.35in,width=4.05in,viewport=0 0 1529 873,clip]{Figures/Database_Materials.png}};
+\node[rectangle,draw=red, dashdotted, inner sep=1em] at (-1.75, 0.7) (enclosure) {};
 %\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{DataBase_Materials}
-\end{figure}
+\end{tikzpicture}
 }
 
 \frame
