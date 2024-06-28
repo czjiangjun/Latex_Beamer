@@ -222,11 +222,12 @@
 
 \frame
 {
-	\frametitle{材料计算数据}
+	\frametitle{计算材料数据}
+	现有材料数据内容
 \begin{figure}[h!]
 \vspace*{-0.15in}
 \centering
-\includegraphics[height=2.55in,width=4.05in,viewport=0 0 1529 873,clip]{Figures/Database_Materials.png}
+\includegraphics[height=2.35in,width=4.05in,viewport=0 0 1529 873,clip]{Figures/Database_Materials.png}
 %\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{DataBase_Materials}
 \end{figure}
@@ -234,10 +235,196 @@
 
 \frame
 {
-	\frametitle{材料计算数据的硬件基础:~计算资源}
-全国高校计算联盟
-
+	\frametitle{计算材料数据:~计算流程}
+	现有材料数据计算流程
+\begin{figure}[h!]
+\vspace*{-0.15in}
+\centering
+\includegraphics[height=2.35in,width=4.05in,viewport=0 0 1530 873,clip]{Figures/Database_Materials-Flow.png}
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{DataBase_Materials-Flow}
+\end{figure}
 }
+
+\frame
+{
+	\frametitle{计算材料数据:~数据库}
+\begin{figure}[h!]
+\vspace*{-0.15in}
+\centering
+\includegraphics[height=2.35in,width=4.05in,viewport=0 0 1527 872,clip]{Figures/Database_Materials-3.png}
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{DataBase_Materials-3}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{数据的硬件基础:~高性能计算资源}
+全国高校计算联盟:~资源类型
+\begin{figure}[h!]
+\vspace*{-0.15in}
+\centering
+\includegraphics[height=2.15in,width=4.05in,viewport=0 0 1527 797,clip]{Figures/Eaas-HPC-Cloud.png}
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Eaas-HPC-Cloud}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{数据的硬件基础:~计算资源}
+全国高校计算联盟:~资源配额
+\begin{figure}[h!]
+\vspace*{-0.15in}
+\centering
+\includegraphics[height=2.15in,width=4.05in,viewport=0 0 1529 799,clip]{Figures/Eaas-HPC-Cloud-resource.png}
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Eaas-HPC-Cloud-resource}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{材料计算软件发展现状}
+\begin{figure}[h!]
+\vspace*{-0.16in}
+\centering
+\includegraphics[width=3.30in]{Figures/Softwares_logo.png}
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Softwares}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{VASP}:~第一原理计算软件的代表}
+	{\fontsize{8.2pt}{7.2pt}\selectfont{
+	作为第一性原理计算的商用软件，\textrm{VASP}已成为计算材料学领域应用最广泛的软件之一。全球绝大多数超算中心都安装了\textrm{VASP}，据统计，\textrm{VASP}软件的作业机时占用全球总机时的12$\sim$20\%，但由于其%类似于linpack软件，
+属于重型浮点计算密集型应用，实际耗电量占比则高达30$\sim$50\%
+\vskip 3pt
+	\begin{itemize}
+		\item 提供了多种电子结构和原子受力的优化算法(\textrm{SD}、\textrm{CG}、\textrm{RMM-DIIS}等)%\\
+%			用户可以通过控制文件\textcolor{blue}{\textrm{INCAR}}的参数调控来选择
+		\item 与同类型软件相比，\textrm{VASP}有着优异的并行能力
+\begin{figure}[h!]
+	\vspace{-0.15in}
+\centering
+%\includegraphics[height=2.7in,width=4.0in,viewport=0 0 1180 875,clip]{Figures/dual_grid.png}
+%\includegraphics[height=1.55in,width=1.95in,viewport=0 0 240 200,clip]{Figures/VASP-abinit_Li128-1.png}
+\includegraphics[height=1.55in,width=1.95in,viewport=0 0 240 200,clip]{Figures/VASP-abinit_Li128-2.png}
+\caption{\tiny \textrm{The comparison of parallel scaling for ABINIT vs VASP.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{ABINIT_vs_VASP}
+\end{figure} 
+%		\item 提供了基于\textrm{PAW}方法适用性广泛的原子数据集文件\textrm{POTCAR}
+	\end{itemize}}}
+%			\textcolor{magenta}{有必要探索新的并行和优化策略来提升\textrm{VASP}的计算性能}
+}
+
+\frame
+{
+	\frametitle{\textrm{VASP}的基础:~原子数据集}
+	{\fontsize{7.2pt}{7.2pt}\selectfont{
+	\begin{itemize}
+		\item \textrm{POTCAR}是\textrm{VASP}实现材料精确计算的重要保证%\\
+%			同样都应用\textrm{PAW}方法，\textcolor{blue}{公认\textrm{VASP}较\textrm{QE}、\textrm{ABINIT}等软件的计算精度要高}
+%		\item \textrm{POTCAR}数据生成依赖较多的可调参数\\
+%			包括能量参数$\varepsilon_l$、多种截断半径$r_c$、$r_{\mathrm{vloc}}$、$r_{\mathrm{shape}}$、$r_{\mathrm{core}}$
+		\item \textcolor{red}{\textrm{POTCAR}数据生成代码是\textrm{VASP}中唯一没有公开的}
+%		\item 用\textrm{VASP}模拟极端条件下材料物性的能力，受到\textrm{POTCAR}数据的制约
+	\end{itemize}}}
+\begin{figure}[h!]
+\centering
+\vskip -0.5in
+\includegraphics[width=1.5in,height=2.7in,viewport=0 0 350 550, angle=-90, clip]{Figures/WAE-data.eps}
+\vskip -0.2in
+\includegraphics[height=2.7in,width=1.5in,viewport=0 0 350 550, angle=-90, clip]{Figures/WPS-data.eps}
+\caption{\tiny \textrm{The partial wave function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Wave_Function}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{PAW}原子数据集:~\textrm{core~density}}
+	\textcolor{blue}{构造赝芯电荷密度$\tilde n_c$}:~在截断半径$r_{\mathrm{core}}$内的定义为
+	$$\sum_{i=1,2}B_i\dfrac{\sin(q_ir)}r\quad r<r_{\mathrm{core}}$$
+	调节系数$q_i$和$B_i$使得赝芯电荷密度$\tilde n_c(r)$在截断半径$r_{\mathrm{core}}$处的两阶导数连续
+\begin{figure}[h!]
+\vskip -0.5in
+\centering
+\hspace*{-0.1in}
+\includegraphics[width=1.5in,height=2.35in,viewport=0 0 350 550, angle=-90, clip]{Figures/CORE-data.eps}
+\hspace*{-0.7in}
+\includegraphics[height=2.35in,width=1.5in,viewport=0 0 350 550, angle=-90, clip]{Figures/PCORE-data.eps}
+\caption{\tiny \textrm{The core density.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{core_density_Function}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{PAW}原子数据集:~$\mathrm{v}_{e\!f\!f}(r)$与$\tilde{\mathrm{v}}_{e\!f\!f}(r)$}
+	\textcolor{blue}{原子局域有效势$\mathrm{v}_{e\!f\!f}^a$}
+\begin{figure}[h!]
+%\vskip -0.5in
+\vskip -0.17in
+\centering
+%\includegraphics[width=1.6in,height=2.7in,viewport=0 0 300 460, angle=-90, clip]{Figures/POTAE-data.eps}
+\includegraphics[width=2.5in,height=1.2in,viewport=0 0 1600 800, clip]{Figures/POTAE-full-dat.pdf}
+\caption{\tiny \textrm{The local atomic effective-Potential.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{local_atomic_PP}
+\end{figure}
+	\textcolor{blue}{构造原子局域赝势$\tilde v_{e\!f\!f}^a$}%(\textcolor{red}{为防止\textrm{ghost band}})
+	:%\\
+	(在截断半径$r_{\mathrm{loc}}$内的定义)
+	$$\tilde v_{e\!f\!f}^a=A\dfrac{\sin(q_{loc}r)}r\quad r<r_{\mathrm{loc}}$$
+	其中$q_{loc}$和$A$要求局域赝势在截断半径$r_{\mathrm{loc}}$处连续到一阶导数
+}
+
+\frame
+{
+	\frametitle{\textrm{PAW}原子数据集:~$\mathrm{v}_H[\tilde n_{Zc}]$}
+	局域离子赝势$v_H[\tilde n_{Zc}]$可由原子局域赝势去屏蔽得到
+	$$v_H[\tilde n_{Zc}]=\tilde v_{e\!f\!f}^a-v_H[\tilde n_a^1+\hat n_a]-v_{\mathrm{XC}}[\tilde n_a^1+\hat n_a+\tilde n_c]$$
+\begin{figure}[h!]
+\vskip -0.5in
+\centering
+\hspace*{-0.1in}
+\includegraphics[width=1.5in,height=2.35in,viewport=0 0 350 550, angle=-90, clip]{Figures/POTPS-data.eps}
+\hspace*{-0.7in}
+\includegraphics[height=2.35in,width=1.5in,viewport=0 0 350 550, angle=-90, clip]{Figures/POTPSC-data.eps}
+\caption{\tiny \textrm{The pseudo-potential and local ionic pseudo-potential.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{pseudo_potential}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{PAW}原子数据集:~$\tilde{n}_{\mathrm G}$}
+	局域离子赝势$\tilde{n_{\mathrm G}}$可由原子局域赝密度的\textrm{FFT}得到
+\begin{figure}[h!]
+\vskip -0.2in
+\centering
+\includegraphics[width=4.0in,height=2.35in,viewport=0 0 1530 850, clip]{Figures/PSRHO_G-dat.pdf}
+\caption{\tiny \textrm{The pseudo-density in reciprocal space.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{pseudo_density_in_reciprocal-space}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{PAW}原子数据集:~$\mathrm{v}_{\mathrm G}[\tilde n_{Zc}]$}
+	局域离子赝势在倒空间的表示$v_{\mathrm G}[\tilde n_{Zc}]$可由原子去屏蔽局域赝势的\textrm{FFT}得到
+\begin{figure}[h!]
+\vskip -0.2in
+\centering
+\includegraphics[width=4.0in,height=2.35in,viewport=0 0 1150 650, clip]{Figures/POT_G-dat.pdf}
+\caption{\tiny \textrm{The local ionic pseudo-potential in reciprocal space.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{pseudo_potential_in_reciprocal-space}
+\end{figure}
+}
+
 %-----------------------------------------------------------------------------------------------------------------------------------------------------------------------%
 \frame
 {
@@ -265,68 +452,7 @@
 
 \frame
 {
-%\documentclass[tikz,svgnames,border={0 2}]{standalone}
-%\renewcommand\vec[1]{\boldsymbol{#1}}
-%\begin{document}
-\begin{tikzpicture}[
-    box/.style={rectangle,draw,fill=DarkGray!20,node distance=1cm,text width=15em,text centered,rounded corners,minimum height=2em,thick},
-    box1/.style={rectangle,draw,fill=green!50,node distance=1cm,text width=12em,text centered,rounded corners,minimum height=2em,thick},
-    box2/.style={rectangle,draw,fill=magenta!75,node distance=1cm,text width=12em,text centered,rounded corners,minimum height=2em,thick},
-    box3/.style={rectangle,draw,fill=blue!30,node distance=1cm,text width=12em,text centered,rounded corners,minimum height=2em,thick},
-    box4/.style={rectangle,draw,fill=violet!45,node distance=2cm,text width=13em,text centered,rounded corners,minimum height=2em,thick},
-%    arrow/.style={draw,-latex', thick},
-    arrow/.style={draw,-latex', red, line width=2pt},
-  ]
-%  \node [box] (potential) {$v_{\text{ext},s}(\vec r)=v_\text{H}(\vec r) + v_\text{xc}(\vec r) + v_\text{ext}(\vec r)$};
-  \node [box1,text width=8em] (Softwares) {实际程序\\实现和应用};
-%  \node [box,below=0.5 of potential] (hamiltonian) {$\hat{H}_{KS}=-\frac{\hbar^2}{2m}\vec{\nabla}^2 + v_{\text{ext},s}(\vec r)$};
-  \node [box2,below=0.5 of Softwares] (Method) {基组和势函数处理方法\\$\vec k$空间积分方案};
-%  \node [box,below=0.5 of hamiltonian] (se) {$\hat{H}_{KS} \phi_i(\vec r)= E_i \phi_i(\vec r)$};
-  \node [box3,below=0.7 of Method, text width=13em] (Theory) {基本理论\\\textrm{DFT}和\textrm{Band Structure}};
-%  \node [box,below=0.5 of se] (density) {$\rho(\vec r)=\sum_{i=1}^n f_i\,|\phi_i(\vec r_i)|^2$};
-  \node [box4,below=0.8 of Theory, text width=15em] (Basic-Equ) {(学科)基本方程\\量子力学:~\textrm{Schr\"odinger}方程\\$\hat{\mathbf H}\Psi=E\Psi$};
-%  \node [box,below=0.5 of density] (criterion) {Convergence criterion satisfied?};
-
-%  \node [box,above=1.5 of potential, fill=orange!30, text width=20em] (initial) {Supply initial density guess $\rho_\text{ini}(\vec r)$ to Kohn Sham equations};
-  \node [box4,left=0.5 of Basic-Equ, fill=violet!30, text width=5em, minimum height=5em] (PDE) {经典数值\\分析算法};
-%  \node [box,below=1.5 of criterion, fill=blue!30, text width=20em] (energy) {Use $\rho_\text{fin}(\vec r)$ to minimize total energy functional $E_{V_\text{ext}}[\rho]=T_{e,s}[\phi_i\{\rho\}] + V_{ee,H}[\rho] + E_{xc}[\rho] + V_{eI}[\rho]$};
-  \node [box4,left=1.0 of Method, fill=magenta!50, text width=5em] (Algorithm) {具体\\算法\\实现};
-
-  \node [box4,right=0.5 of Basic-Equ, fill=violet!30, text width=5em] (OS) {操作\\系统\\与\\编程\\技术};
-  \node [box4,right=1.0 of Method, fill=magenta!50, text width=5em] (coding) {程序语言};
-%  \node [box4,right=1.0 of Method, fill=magenta!50, text width=5em, draw=red, thick] at (-5,0) (Figure) {\includegraphics[width=0.5in, height=0.4in]{Figures/Multi-Scale-6.png}};
-%  \path [arrow] (initial) -- (potential);
-  \path [arrow] (Method) -- (Softwares);
-  \path [arrow] (Theory) -- (Method);
-  \path [arrow] (Basic-Equ) -- (Theory);
-%  \path [arrow] (density) -- (criterion);
-
-  \path [arrow] (PDE) -- (Algorithm);
-  \path [arrow] (OS) -- (coding);
- % \path [arrow] (OS) -- (Figure);
-  \path [arrow] (coding) |- (Softwares.east);
-  \path [arrow] (Algorithm) |- (Softwares.west);
-  \path [arrow] (Method.east) -- (coding.west);
-  \path [arrow] (Method.west) -- (Algorithm.east);
-
-%%%%%% ------------ 定义 虚线方框转角 -----------------  %%%%%%
-%  \path
-%  (potential.north west) ++(-1em,1em) coordinate (potential fit)
-%  (criterion.south east) ++(1em,-1em) coordinate (criterion fit);
-
-%%%%%% ------------ 绘制 虚线方框 -----------------  %%%%%%
-%  \node [rectangle,draw,dashed,inner sep=1em,fit=(potential fit) (criterion fit)] (enclosure) {};
-%  \node [above=-0.8em of enclosure,anchor=south,draw,outer sep=0pt,fill=white] (enclosure label) {\Large\textbf{Kohn-Sham method}};
-
-%  \path [arrow] (criterion) -- (energy) node [midway,left=0.1,draw,outer sep=0pt,fill=white] (TextNode) {Yes};
-%  \path [draw,thick] (criterion.south) ++(0em,-1em) -- (criterion fit) node [midway,below=0.1,sloped,draw,outer sep=0pt,fill=white] (TextNode) {No};
-%  \draw [arrow] (criterion fit) |- (potential.east);
-\end{tikzpicture}
-}
-
-\frame
-{
-	\frametitle{材料科学的梦想:~按需设计材料}
+	\frametitle{材料科学的梦想:~\textrm{AI for Mateials}}
 \begin{figure}[h!]
 \vspace*{-0.18in}
 \centering
