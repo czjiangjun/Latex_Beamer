@@ -163,9 +163,9 @@
   \node [box, fill=blue!30, text width=7.0em, minimum height=1em] at(-7.5,0.4) (Init-Wave) {\fontsize{6.0pt}{4.5pt}\selectfont{初始结构~(经验或猜测)}};
   \node [box, fill=blue!30, text width=5.0em, minimum height=1em] at(-7.5,-0.4) (Init-charge) {\fontsize{6.0pt}{4.5pt}\selectfont{初始电荷密度$\rho_0$}};
   \node [box, draw=blue, fill=white, text width=8.0em, minimum height=1em] at(-4.0,-0.3) (DFT-SCF) {\fontsize{16.0pt}{4.5pt}\selectfont{\textcolor{blue}{\bf{DFT-$SCF$}}}};
-  \node [box, below=0.2 of Symmetry-OP, fill=blue!120, text width=5.5em, minimum height=1em] (Potential) {\fontsize{6.0pt}{4.5pt}\selectfont{\textcolor{white}{全势\textrm{(FP)}方法\\赝势\textrm{(PP)}方法}}};
-  \node [box, right=0.2 of Potential, fill=blue!60, text width=4.0em, minimum height=1em] (Hartree) {\fontsize{6.0pt}{4.5pt}\selectfont{\textrm{(Hartree)}势$V_\mathrm{H}(\vec r)$}};
-  \node [box, right=0.8 of Hartree, fill=blue!60, text width=4.0em, minimum height=1em] (Exch-Cor) {\fontsize{6.0pt}{4.5pt}\selectfont{交换-相关势$V_{\mathrm{XC}}[\rho(\vec r)]$}};
+  \node [box, below=0.6 of Symmetry-OP, fill=blue!120, text width=5.0em, minimum height=1em] (Potential) {\fontsize{6.0pt}{4.5pt}\selectfont{\textcolor{white}{全势\textrm{(FP)}方法\\赝势\textrm{(PP)}方法}}};
+  \node [box, right=0.2 of Potential, fill=blue!60, text width=6.0em, minimum height=1em] (Hartree) {\fontsize{6.0pt}{4.5pt}\selectfont{\textrm{Hartree}势$V_\mathrm{H}(\vec r)$}};
+  \node [box, right=0.8 of Hartree, fill=blue!60, text width=7.0em, minimum height=1em] (Exch-Cor) {\fontsize{6.0pt}{4.5pt}\selectfont{交换-相关势$V_{\mathrm{XC}}[\rho(\vec r)]$}};
 %  \node [box,below=0.5 of potential] (hamiltonian) {$\hat{H}_{KS}=-\frac{\hbar^2}{2m}\vec{\nabla}^2 + v_{\text{ext},s}(\vec r)$};
   \node [box2,below=0.5 of Softwares] (Method) {基组和势函数处理方法\\$\vec k$空间积分方案};
 %  \node [box,below=0.5 of hamiltonian] (se) {$\hat{H}_{KS} \phi_i(\vec r)= E_i \phi_i(\vec r)$};
