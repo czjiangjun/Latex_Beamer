@@ -174,7 +174,7 @@
   \node [box, below=0.2 of Kohn-Sham, fill=blue!80, text width=7.0em, minimum height=0.5em] (Wave-Eigen) {\fontsize{5.0pt}{2.5pt}\selectfont{本征态波函数$\Psi_i(\vec r)$，\vskip -1.3em 能量本征值$\varepsilon_i$}};
 %  \node [box, draw=blue, fill=white, text width=5.0em, minimum height=1em] at(-3.0,-2.7) (k-space) {\fontsize{5.0pt}{2.5pt}\selectfont{$\vec k$-空间积分方案}};
   \node [box, below=0.2 of Wave-Eigen, fill=blue!80, text width=7.0em, minimum height=0.5em] (Charge) {\fontsize{5.0pt}{2.5pt}\selectfont{计算电荷密度$\rho$}};
-  \node [box, draw=blue, below=1.2 of Exch-Corr, fill=purple!30, text width=5.0em, minimum height=0.5em] (k-space) {\fontsize{5.0pt}{2.5pt}\selectfont{$\vec k$-空间积分方案}};
+  \node [box, draw=blue, below=2.25 of Exch-Corr, fill=purple!30, text width=5.0em, minimum height=0.5em] (k-space) {\fontsize{5.0pt}{2.5pt}\selectfont{$\vec k$-空间积分方案}};
   \node [box, below=0.2 of Charge, fill=blue!80, text width=5.5em, minimum height=0.5em] (ele-ele) {\fontsize{4.0pt}{2.5pt}\selectfont{电子-电子静电作用$E_{e-e}$}};
   \node [box, left=0.05 of ele-ele, fill=blue!80, text width=5.5em, minimum height=0.5em] (Ion-ele) {\fontsize{4.0pt}{2.5pt}\selectfont{离子-电子静电作用$E_{\mathrm{N-}e}$}};
 %  \node [box, left=2.4 of Basis-set, fill=blue!80, text width=4.6em, minimum height=0.5em] at(-11,0.0) (Ion-Static) {\fontsize{4.0pt}{2.5pt}\selectfont{离子静电作用$E_{\mathrm{N-N}}$}};
@@ -206,7 +206,14 @@
 %  \node [box,below=1.5 of criterion, fill=blue!30, text width=20em] (energy) {Use $\rho_\text{fin}(\vec r)$ to minimize total energy functional $E_{V_\text{ext}}[\rho]=T_{e,s}[\phi_i\{\rho\}] + V_{ee,H}[\rho] + E_{xc}[\rho] + V_{eI}[\rho]$};
 
 \path
-  (Criterion.west) ++(-8.5em,0.0em) coordinate (Criterion-fit);
+  (Basis-set.south) ++(0.0em,-6.8em) coordinate (Basis-set-fit)
+  (Charge.west) ++(-1.6em,0.0em) coordinate (Charge-fit)
+  (Wave-Eigen.west) ++(-1.6em,0.0em) coordinate (Wave-Eigen-fit)
+  (Potential.north west) ++(-3.9em,0.20em) coordinate (Potential-fit2)
+  (Criterion.west) ++(-8.5em,0.0em) coordinate (Criterion-fit)
+  (SCF-output.west) ++(-11.35em,-1.0em) coordinate (SCF-output-fit)
+  (Symmetry-OP.west) ++(-5.1em, 0.0em) coordinate (Symmetry-OP-fit2)
+  (k-space.east) ++(4.1em, 0.0em) coordinate (k-space-fit) ;
 
 %  \path [arrow] (initial) -- (potential);
   \path [arrow, gray] (Init-Struct) -- (Init-Charge);
@@ -237,22 +244,34 @@
 %  \node [rectangle,draw=red, fill=gray!30, inner sep=0.1em,fit=(Fock-matrix-fit) (Kohn-Sham-fit), thick] (enclosure1) {};
   \node [rectangle,draw=red, dotted, inner sep=0.1em,fit=(Fock-matrix-fit) (Kohn-Sham-fit), thick] (enclosure1) {};
  % \path [arrow] (OS) -- (Figure);
-  \path [arrow] (coding) |- (Softwares.east);
-  \path [arrow] (Algorithm) |- (Softwares.west);
-  \path [arrow] (Method.east) -- (coding.west);
-  \path [arrow] (Method.west) -- (Algorithm.east);
+  \path [arrow, draw=cyan] (k-space.west) -| (Charge.north);
 
   \node [above=0.2em of Ion-Static, anchor=south,outer sep=0pt] (Etot-label){\fontsize{5.0pt}{2.5pt}\selectfont{\textcolor{red}{$\mathbf{E}_{TOT}$}}};
   \path [arrow] (Charge) --(enclosure2);
+  \path [draw, magenta] (Charge) --(Charge-fit);
+  \path [draw, magenta] (Charge-fit) |-(Potential-fit1);
+  \path [draw, magenta] (Wave-Eigen) --(Wave-Eigen-fit);
+  \path [draw, magenta] (Wave-Eigen-fit) |-(Potential-fit1);
+  \path [draw, orange] (Basis-set) --(Basis-set-fit);
+  \path [draw, orange] (Basis-set-fit) -|(enclosure2);
 
   \path [arrow] (enclosure2)-- (Criterion);
 
 
   \path [arrow] (Criterion)--(SCF-output) node[midway,right=0.1,outer sep=0pt](TextNode1){\fontsize{4.0pt}{2.5pt}\selectfont{\textrm{\textcolor{black}{Yes}}}};
-  \path [draw,magenta] (Criterion.west)--(Criterion-fit) node[midway,above=0.05,outer sep=0pt](TextNode1){\fontsize{4.0pt}{2.5pt}\selectfont{\textrm{\textcolor{black}{NO}}}};
-  \path [draw,magenta] (Criterion-fit) --(Potential-fit)++(-0.1em, -0.1em)--(Potential-fit1);
-  \node [box, right=0.3 of SCF-output, fill=green!50, text width=7.0em, minimum height=0.5em] (SCF-output) {\fontsize{5.0pt}{2.5pt}\selectfont{各类物理数据与性质计算}};
-  \node [box, fill=magenta!50, text width=5em, draw=pink, thick] at (-3.0,-0.8) (Figure) {\includegraphics[width=0.5in, height=0.4in,viewport=0 0 1172 863,clip]{Figures/DFT.png}};
+  \path [draw,magenta] (Criterion.west)++(0.25em, 0.0em)--(Criterion-fit) node[midway,above=0.05,outer sep=0pt](TextNode1){\fontsize{4.0pt}{2.5pt}\selectfont{\textrm{\textcolor{black}{NO}}}};
+  \path [draw,magenta] (Criterion-fit) |-(Potential-fit1);
+  \node [box, right=0.3 of SCF-output, fill=green!50, text width=7.0em, minimum height=0.5em] (SCF-properties) {\fontsize{5.0pt}{2.5pt}\selectfont{各类物理数据与性质计算}};
+  \node [box, fill=magenta!50, text width=8.5em, draw=pink, minimum height=0.5em, thick] at (-3.8,-0.35) (Figure) {\includegraphics[width=1.05in, height=0.7in,viewport=0 0 1172 863,clip]{Figures/DFT.png}};
+
+  \path [arrow, draw=purple] (SCF-output.east) --(SCF-properties.west);
+  \path [draw, dotted, brown] (Symmetry-OP.west) --(Symmetry-OP-fit2);
+  \path [draw, dotted, brown] (Symmetry-OP-fit2) --(SCF-output-fit);
+  \path [arrow, dotted, draw=brown](SCF-output-fit)-|(SCF-properties.south);
+  \path [draw, cyan] (k-space) --(k-space-fit);
+  \path [arrow, cyan](k-space-fit)|-(SCF-properties.east);
+  \path [arrow, draw, fill=red, line width=2.5pt] (enclosure1.east) -- (Figure.west);
+
 
 
 %  \node [above=-0.8em of enclosure,anchor=south,draw,outer sep=0pt,fill=white] (enclosure label) {\Large\textbf{Kohn-Sham method}};

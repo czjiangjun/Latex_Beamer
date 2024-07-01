@@ -37,11 +37,13 @@
 \usepackage[controls]{animate}	 %插入动画
 \usepackage{tikz}		 %绘图工具
 \usetikzlibrary{%
-    arrows,shapes,chains,shapes,arrows.meta,matrix,
+    arrows,shapes,chains,fit, arrows.meta,matrix,
+    backgrounds,
     graphs, decorations, 
     decorations.markings, 
     decorations.pathmorphing, 
 %    graphdrawing,                                       % requires lualatex
+    positioning, petri,
     shapes.geometric, snakes
 }
 %\usegdlibrary{trees,force, layered}                     % requires lualatex
@@ -115,7 +117,7 @@
 %\beamersetaveragebackground{gray}                          %设置背景颜色(单一色) 
 \beamertemplateshadingbackground{green!10}{red!5}         %设置背景颜色(渐变色)
 
-\graphicspath{{$PATHPWD/}}                           %$PATH用于脚本指定图片路径
+\graphicspath{{/home/jiangjun/Documents/Latex_Beamer/}}                           %$PATH用于脚本指定图片路径
 %\graphicspath{{/home/jun-jiang/Documents/Latex_Beamer/Figures/}}   %直接指定图片绝对路径
 %\graphicspath{{/home/jiangjun/Documents/Latex_Beamer/Figures/}}   %直接指定图片绝对路径
 
