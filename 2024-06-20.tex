@@ -157,31 +157,46 @@
     box3/.style={rectangle,draw,fill=blue!30,node distance=1cm,text width=12em,text centered,rounded corners,minimum height=2em,thick},
     box4/.style={rectangle,draw,fill=violet!45,node distance=2cm,text width=13em,text centered,rounded corners,minimum height=2em,thick},
 %    arrow/.style={draw,-latex', thick},
-    arrow/.style={draw,-latex', red, line width=2pt},
+    arrow/.style={draw,-latex', red},
   ]
 %  \node [box] (potential) {$v_{\text{ext},s}(\vec r)=v_\text{H}(\vec r) + v_\text{xc}(\vec r) + v_\text{ext}(\vec r)$};
   \node [box, fill=brown!80, text width=2.5em, minimum height=0.5em,xshift=-30.0em, yshift=-7.5em] at (current page.west)(Symmetry-OP) {\fontsize{5.0pt}{2.5pt}\selectfont{对称操作}};
-  \node [box, fill=blue!30, text width=7.0em, minimum height=0.5em] at(-7.5,2.4) (Init-Wave) {\fontsize{5.0pt}{2.5pt}\selectfont{初始结构~(经验或猜测)}};
-  \node [box, fill=blue!30, text width=5.0em, minimum height=0.5em] at(-7.5,1.6) (Init-charge) {\fontsize{5.0pt}{2.5pt}\selectfont{初始电荷密度$\rho_0$}};
-  \node [box, draw=blue, fill=white, text width=8.0em, minimum height=0.5em] at(-4.0,1.8) (DFT-SCF) {\fontsize{16.0pt}{4.5pt}\selectfont{\textcolor{blue}{\bf{DFT-$SCF$}}}};
-  \node [box, below=0.6 of Symmetry-OP, fill=blue!120, text width=5.0em, minimum height=1em] (Potential) {\fontsize{5.0pt}{2.5pt}\selectfont{\textcolor{white}{全势\textrm{(FP)}方法\\赝势\textrm{(PP)}方法}}};
-  \node [box, right=0.2 of Potential, fill=blue!60, text width=6.0em, minimum height=0.5em] (Hartree) {\fontsize{5.0pt}{2.5pt}\selectfont{\textrm{Hartree}势$V_\mathrm{H}(\vec r)$}};
-  \node [box, right=0.8 of Hartree, fill=blue!60, text width=7.0em, minimum height=0.5em] (Exch-Cor) {\fontsize{5.0pt}{2.5pt}\selectfont{交换-相关势$V_{\mathrm{XC}}[\rho(\vec r)]$}};
-  \node [box, below=0.2 of Potential, fill=orange!80, text width=7.0em, minimum height=0.5em] (Basis-set) {\fontsize{5.0pt}{2.5pt}\selectfont{基函数}};
-  \node [box, right=1.1 of Basis-set, fill=red!80, text width=7.0em, minimum height=0.5em] (Fock-matrix) {\fontsize{5.0pt}{2.5pt}\selectfont{构造\textrm{Fock}矩阵}};
-  \node [box, below=0.2 of Fock-matrix, fill=green!80, text width=7.0em, minimum height=0.5em] (Kohn-Sham) {\fontsize{5.0pt}{2.5pt}\selectfont{求解\textrm{Kohn-Sham}方程(\textrm{Fock}矩阵对角化)}};
-  \node [box, below=0.2 of Kohn-Sham, fill=blue!80, text width=7.0em, minimum height=0.5em] (Wave-Eigen) {\fontsize{5.0pt}{2.5pt}\selectfont{本征态波函数$\Psi_i(\vec r)$，能量本征值$\varepsilon_i$}};
-  \node [box, draw=blue, fill=white, text width=5.0em, minimum height=1em] at(-3.0,-2.7) (k-space) {\fontsize{5.0pt}{2.5pt}\selectfont{$\vec k$-空间积分方案}};
+  \node [box, fill=blue!30, text width=7.0em, minimum height=0.5em] at(-7.5,2.45) (Init-Struct) {\fontsize{5.0pt}{2.5pt}\selectfont{初始结构~(经验或猜测)}};
+  \node [box, fill=blue!30, text width=5.0em, minimum height=0.5em] at(-7.5,1.75) (Init-Charge) {\fontsize{5.0pt}{2.5pt}\selectfont{初始电荷密度$\rho_0$}};
+  \node [box, draw=blue, fill=white, text width=8.0em, minimum height=0.5em] at(-4.0,2.0) (DFT-SCF) {\fontsize{16.0pt}{4.5pt}\selectfont{\textcolor{blue}{\bf{DFT-$SCF$}}}};
+%  \node [dot,  below=0.1 of Init-Charge] (Corner1) {};
+  \node [box, below=0.6 of Symmetry-OP, fill=blue!120, text width=5.0em, minimum height=1em] (Potential) {\fontsize{5.0pt}{2.5pt}\selectfont{\textcolor{white}{全势\textrm{(FP)}方法\vskip -1.3em 赝势\textrm{(PP)}方法}}};
+  \node [box, right=0.3 of Potential, fill=blue!60, text width=6.0em, minimum height=0.5em] (Hartree) {\fontsize{5.0pt}{2.5pt}\selectfont{\textrm{Hartree}势$V_\mathrm{H}(\vec r)$}};
+  \node [box, right=0.8 of Hartree, fill=blue!60, text width=7.0em, minimum height=0.5em] (Exch-Corr) {\fontsize{5.0pt}{2.5pt}\selectfont{交换-相关势$V_{\mathrm{XC}}[\rho(\vec r)]$}};
+  \node [box, below=0.2 of Potential, fill=orange!80, text width=4.0em, minimum height=0.5em] (Basis-set) {\fontsize{5.0pt}{2.5pt}\selectfont{基函数}};
+  \node [box, right=0.8 of Basis-set, fill=red!80, text width=7.0em, minimum height=0.5em] (Fock-matrix) {\fontsize{5.0pt}{2.5pt}\selectfont{构造\textrm{Fock}矩阵}};
+  \node [box, below=0.2 of Fock-matrix, fill=green!80, text width=7.0em, minimum height=0.5em] (Kohn-Sham) {\fontsize{5.0pt}{2.5pt}\selectfont{求解\textrm{Kohn-Sham}方程\vskip -1.3em (\textrm{Fock}矩阵对角化)}};
+  \node [box, below=0.2 of Kohn-Sham, fill=blue!80, text width=7.0em, minimum height=0.5em] (Wave-Eigen) {\fontsize{5.0pt}{2.5pt}\selectfont{本征态波函数$\Psi_i(\vec r)$，\vskip -1.3em 能量本征值$\varepsilon_i$}};
+%  \node [box, draw=blue, fill=white, text width=5.0em, minimum height=1em] at(-3.0,-2.7) (k-space) {\fontsize{5.0pt}{2.5pt}\selectfont{$\vec k$-空间积分方案}};
   \node [box, below=0.2 of Wave-Eigen, fill=blue!80, text width=7.0em, minimum height=0.5em] (Charge) {\fontsize{5.0pt}{2.5pt}\selectfont{计算电荷密度$\rho$}};
-  \node [box, below=3.0 of Basis-set, fill=blue!80, text width=4.6em, minimum height=0.5em] at(-11,0.0) (Ion-Static) {\fontsize{4.0pt}{2.5pt}\selectfont{离子静电作用$E_{\mathrm{N-N}}$}};
-  \node [box, right=0.05 of Ion-Static, fill=blue!80, text width=5.5em, minimum height=0.5em] (Ion-ele) {\fontsize{4.0pt}{2.5pt}\selectfont{离子-电子静电作用$E_{\mathrm{N-}e}$}};
-  \node [box, right=0.05 of Ion-ele, fill=blue!80, text width=5.5em, minimum height=0.5em] (ele-ele) {\fontsize{4.0pt}{2.5pt}\selectfont{电子-电子静电作用$E_{e-e}$}};
+  \node [box, draw=blue, below=1.2 of Exch-Corr, fill=purple!30, text width=5.0em, minimum height=0.5em] (k-space) {\fontsize{5.0pt}{2.5pt}\selectfont{$\vec k$-空间积分方案}};
+  \node [box, below=0.2 of Charge, fill=blue!80, text width=5.5em, minimum height=0.5em] (ele-ele) {\fontsize{4.0pt}{2.5pt}\selectfont{电子-电子静电作用$E_{e-e}$}};
+  \node [box, left=0.05 of ele-ele, fill=blue!80, text width=5.5em, minimum height=0.5em] (Ion-ele) {\fontsize{4.0pt}{2.5pt}\selectfont{离子-电子静电作用$E_{\mathrm{N-}e}$}};
+%  \node [box, left=2.4 of Basis-set, fill=blue!80, text width=4.6em, minimum height=0.5em] at(-11,0.0) (Ion-Static) {\fontsize{4.0pt}{2.5pt}\selectfont{离子静电作用$E_{\mathrm{N-N}}$}};
+  \node [box, left=0.05 of Ion-ele, fill=blue!80, text width=4.6em, minimum height=0.5em] (Ion-Static) {\fontsize{4.0pt}{2.5pt}\selectfont{离子静电作用$E_{\mathrm{N-N}}$}};
   \node [box, right=0.05 of ele-ele, fill=blue!80, text width=5.0em, minimum height=0.5em] (Kinetic-Ene) {\fontsize{4.0pt}{2.5pt}\selectfont{电子动能$T=\sum T_i$}};
-  \node [box, right=0.05 of Kinetic-Ene, fill=blue!80, text width=5.0em, minimum height=0.5em] (Exch-Corr-EnE) {\fontsize{4.0pt}{2.5pt}\selectfont{交换-相关能$E[\rho(\vec r)]$}};
-  \node [box1, below=0.8 of Charge, fill=purple!80, text width=7.0em, minimum height=0.5em] (Criterion) {\fontsize{5.0pt}{2.5pt}\selectfont{收敛判据}};
-  \node [box, below=0.2 of Criterion, fill=purple!80, text width=7.0em, minimum height=0.5em] (SCF-output) {\fontsize{5.0pt}{2.5pt}\selectfont{输出电荷密度$\rho(\vec r)$\\本征态波函数$\Psi_i(\vec r)$\\能量本征值$\varepsilon_i$}};
-  \node [box, right=0.3 of SCF-output, fill=green!50, text width=7.0em, minimum height=0.5em] (SCF-output) {\fontsize{5.0pt}{2.5pt}\selectfont{各类物理数据与性质计算}};
-  \node [box, fill=magenta!50, text width=5em, draw=pink, thick] at (-3.0,-0.8) (Figure) {\includegraphics[width=0.5in, height=0.4in,viewport=0 0 1172 863,clip]{Figures/DFT.png}};
+  \node [box, right=0.05 of Kinetic-Ene, fill=blue!80, text width=5.0em, minimum height=0.5em] (Exch-Corr-Ene) {\fontsize{4.0pt}{2.5pt}\selectfont{交换-相关能$E[\rho(\vec r)]$}};
+%%%%%% ------------ 定义 虚线方框转角 -----------------  %%%%%%
+\path
+  (Init-Charge.south) ++(0.0 em, -0.3em) coordinate (Potential-fit1)
+  (Symmetry-OP.east) ++(1.5em, 0.0em) coordinate (Symmetry-OP-fit)
+  (Hartree.south) ++(0.0 em, -0.3em) coordinate (Hartree-fit)
+  (Exch-Corr.south) ++(0.0em, -0.3em) coordinate (Exch-Corr-fit)
+  (Potential.north west) ++(-3.7em,0.05em) coordinate (Potential-fit)
+  (Exch-Corr-Ene.south east) ++(0.1em,-0.15em) coordinate (Exch-Corr-fit1)
+  (Fock-matrix.west) ++(-1.0 em, 0.75em) coordinate (Fock-matrix-fit)
+  (Kohn-Sham.east) ++(1.0em, -1.0em) coordinate (Kohn-Sham-fit)
+  (Ion-ele.north west) ++(-5.5em,0.03em) coordinate (Ion-ele-fit)
+  (Exch-Corr-Ene.south east) ++(0.04em,-0.03em) coordinate (Exch-Corr-Ene-fit);
+
+  \node [rectangle,draw=red, inner sep=0.1em,fit=(Ion-ele-fit) (Exch-Corr-Ene-fit),thick] (enclosure2) {};
+  \node [box1, below=0.05 of enclosure2, fill=purple!80, text width=7.0em, minimum height=0.5em] (Criterion) {\fontsize{5.0pt}{2.5pt}\selectfont{收敛判据}};
+  \node [box, below=0.2 of Criterion, fill=purple!80, text width=7.0em, minimum height=0.5em] (SCF-output) {\fontsize{4.2pt}{1.5pt}\selectfont{输出电荷密度$\rho(\vec r)$\vskip -0.2em 本征态波函数$\Psi_i(\vec r)$ \vskip -1.5em 能量本征值$\varepsilon_i$}};
 %  \node [box,below=0.5 of potential] (hamiltonian) {$\hat{H}_{KS}=-\frac{\hbar^2}{2m}\vec{\nabla}^2 + v_{\text{ext},s}(\vec r)$};
 %  \node [box,below=0.5 of hamiltonian] (se) {$\hat{H}_{KS} \phi_i(\vec r)= E_i \phi_i(\vec r)$};
 %  \node [box,below=0.5 of se] (density) {$\rho(\vec r)=\sum_{i=1}^n f_i\,|\phi_i(\vec r_i)|^2$};
@@ -190,27 +205,56 @@
 %  \node [box,above=1.5 of potential, fill=orange!30, text width=20em] (initial) {Supply initial density guess $\rho_\text{ini}(\vec r)$ to Kohn Sham equations};
 %  \node [box,below=1.5 of criterion, fill=blue!30, text width=20em] (energy) {Use $\rho_\text{fin}(\vec r)$ to minimize total energy functional $E_{V_\text{ext}}[\rho]=T_{e,s}[\phi_i\{\rho\}] + V_{ee,H}[\rho] + E_{xc}[\rho] + V_{eI}[\rho]$};
 
-%  \path [arrow] (initial) -- (potential);
-  \path [arrow] (Method) -- (Softwares);
-  \path [arrow] (Theory) -- (Method);
-  \path [arrow] (Basic-Equ) -- (Theory);
-%  \path [arrow] (density) -- (criterion);
+\path
+  (Criterion.west) ++(-8.5em,0.0em) coordinate (Criterion-fit);
 
-  \path [arrow] (PDE) -- (Algorithm);
-  \path [arrow] (OS) -- (coding);
+%  \path [arrow] (initial) -- (potential);
+  \path [arrow, gray] (Init-Struct) -- (Init-Charge);
+  \path [arrow] (Symmetry-OP.east) -| (Init-Charge.north);
+  \path [arrow, blue!90] (Potential) -- (Hartree);
+
+  \path [draw, magenta](Init-Charge.south) ++(0em, -0.0em) --(Potential-fit1);
+  \path [arrow, draw=magenta] (Potential-fit1) -| (Hartree.north);
+  \path [draw, magenta](Init-Charge.south) ++(0em, -0.0em) --(Potential-fit1);
+  \path [arrow, draw=magenta] (Potential-fit1) -| (Exch-Corr.north);
+  \path [draw, magenta](Hartree.south) -- (Hartree-fit) ++ (0em, 0.0em);
+  \path [arrow, draw=magenta] (Hartree-fit) -| (Fock-matrix.north);
+  \path [draw, magenta](Exch-Corr.south) --(Exch-Corr-fit) ++(0em, 0.0em);
+  \path [arrow, draw=magenta] (Exch-Corr-fit) -| (Fock-matrix.north);
+
+  \path [arrow, draw=orange] (Basis-set) -- (Fock-matrix);
+  \path [arrow, draw=orange] (Basis-set.north) -- (Potential.south);
+  \path [draw, dotted, brown] (Symmetry-OP.east) ++(0em, 0.0em)-- (Symmetry-OP-fit);
+  \path [arrow, dotted, draw=brown] (Symmetry-OP-fit) |- (Fock-matrix.west);
+
+%%%%%% ------------ 绘制 虚线方框 -----------------  %%%%%%
+  \node [rectangle,draw,dashdotted,inner sep=0.1em,fit=(Potential-fit) (Exch-Corr-fit1)] (enclosure) {};
+
+
+  \path [arrow, draw=black] (Fock-matrix) -- (Kohn-Sham);
+  \path [arrow, draw=black] (Kohn-Sham) -- (Wave-Eigen);
+  \path [arrow, draw=black] (Wave-Eigen) -- (Charge);
+%  \node [rectangle,draw=red, fill=gray!30, inner sep=0.1em,fit=(Fock-matrix-fit) (Kohn-Sham-fit), thick] (enclosure1) {};
+  \node [rectangle,draw=red, dotted, inner sep=0.1em,fit=(Fock-matrix-fit) (Kohn-Sham-fit), thick] (enclosure1) {};
  % \path [arrow] (OS) -- (Figure);
   \path [arrow] (coding) |- (Softwares.east);
   \path [arrow] (Algorithm) |- (Softwares.west);
   \path [arrow] (Method.east) -- (coding.west);
   \path [arrow] (Method.west) -- (Algorithm.east);
 
-%%%%%% ------------ 定义 虚线方框转角 -----------------  %%%%%%
-%  \path
-%  (potential.north west) ++(-1em,1em) coordinate (potential fit)
-%  (criterion.south east) ++(1em,-1em) coordinate (criterion fit);
+  \node [above=0.2em of Ion-Static, anchor=south,outer sep=0pt] (Etot-label){\fontsize{5.0pt}{2.5pt}\selectfont{\textcolor{red}{$\mathbf{E}_{TOT}$}}};
+  \path [arrow] (Charge) --(enclosure2);
 
-%%%%%% ------------ 绘制 虚线方框 -----------------  %%%%%%
-%  \node [rectangle,draw,dashed,inner sep=1em,fit=(potential fit) (criterion fit)] (enclosure) {};
+  \path [arrow] (enclosure2)-- (Criterion);
+
+
+  \path [arrow] (Criterion)--(SCF-output) node[midway,right=0.1,outer sep=0pt](TextNode1){\fontsize{4.0pt}{2.5pt}\selectfont{\textrm{\textcolor{black}{Yes}}}};
+  \path [draw,magenta] (Criterion.west)--(Criterion-fit) node[midway,above=0.05,outer sep=0pt](TextNode1){\fontsize{4.0pt}{2.5pt}\selectfont{\textrm{\textcolor{black}{NO}}}};
+  \path [draw,magenta] (Criterion-fit) --(Potential-fit)++(-0.1em, -0.1em)--(Potential-fit1);
+  \node [box, right=0.3 of SCF-output, fill=green!50, text width=7.0em, minimum height=0.5em] (SCF-output) {\fontsize{5.0pt}{2.5pt}\selectfont{各类物理数据与性质计算}};
+  \node [box, fill=magenta!50, text width=5em, draw=pink, thick] at (-3.0,-0.8) (Figure) {\includegraphics[width=0.5in, height=0.4in,viewport=0 0 1172 863,clip]{Figures/DFT.png}};
+
+
 %  \node [above=-0.8em of enclosure,anchor=south,draw,outer sep=0pt,fill=white] (enclosure label) {\Large\textbf{Kohn-Sham method}};
 
 %  \path [arrow] (criterion) -- (energy) node [midway,left=0.1,draw,outer sep=0pt,fill=white] (TextNode) {Yes};
