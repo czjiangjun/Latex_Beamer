@@ -1,0 +1,144 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  不使用 authblk 包制作标题  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%-------------------------------PPT Title-------------------------------------
+\title{\ch{Ni}表面\ch{CO2}的吸附}
+%-----------------------------------------------------------------------------
+
+%----------------------------Author & Date------------------------------------
+%\author[\textrm{Jun\_Jiang}]{姜\;\;骏\inst{}} %[]{} (optional, use only with lots of authors)
+%% - Give the names in the same order as the appear in the paper.
+%% - Use the \inst{?} command only if the authors have different
+%%   affiliation.
+\institute[BCC]{\inst{}%
+%\institute[Gain~Strong]{\inst{}%
+\vskip 0pt 北京市计算中心有限公司~材料计算团队}
+%\vskip -20pt {\large 格致斯创~科技}}
+\date[\today] % (optional, should be abbreviation of conference name)
+{	%{\fontsize{6.2pt}{4.2pt}\selectfont{\textcolor{blue}{E-mail:~}\url{jiangjun@bcc.ac.cn}}}
+\vskip 45 pt {\fontsize{8.2pt}{6.2pt}\selectfont{%北京科技大学% 报告地点
+	\vskip 5 pt \textrm{2024.07.05}}}
+}
+
+%% - Either use conference name or its abbreviation
+%% - Not really information to the audience, more for people (including
+%%   yourself) who are reading the slides onlin%%   yourself) who are reading the slides onlin%%   yourself) who are reading the slides onlineee
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subject{}
+% This is only inserted into the PDF information catalog. Can be left
+% out.
+%\maketitle
+\frame
+{
+%	\frametitle{\fontsize{9.5pt}{5.2pt}\selectfont{\textcolor{orange}{“高通量并发式材料计算算法与软件”年度检查}}}
+\titlepage
+}
+%-----------------------------------------------------------------------------
+
+%------------------------------------------------------------------------------列出全文 outline ---------------------------------------------------------------------------------
+%\section*{}
+%\frame[allowframebreaks]
+%{
+%  \frametitle{}
+%%  \frametitle{\textcolor{mycolor}{\secname}}
+%  \tableofcontents%[current,currentsection,currentsubsection]
+%}
+%在每个section之前列出全部Outline
+%类似的在每个subsection之前列出全部Outline是\AtBeginSubsection[]
+%\AtBeginSection[]
+%{
+%  \frame<handout:0>%[allowframebreaks]
+%  {
+%    \frametitle{Outline}
+%%全部Outline中，本部分加亮
+%    \tableofcontents[current,currentsection]
+%  }
+%}
+
+%-----------------------------------------------PPT main Body------------------------------------------------------------------------------------
+\small
+\frame
+{
+	\frametitle{基底模型:~\textrm{\ch{Ni}}-\textrm{\ch{SiO2}}}
+	\begin{itemize}
+		\item 金属的结构:\textrm{HCP-\ch{Ni}}
+		\item \textrm{\ch{SiO2}}与底层\textrm{\ch{Ni}}原子固定，上层\textrm{\ch{Ni}}原子可弛豫
+	\end{itemize}
+\begin{figure}[h!]
+\vskip -0.05in
+\centering
+\includegraphics[width=3.1in,height=1.8in,viewport=0 0 1528 879, clip]{/home/jun-jiang/Pictures/Screenshot from 2024-07-04 16-10-04.png}
+\caption{\tiny \textrm{\ch{Ni}-\ch{SiO2}}基底模型.}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Substrct_0}
+\end{figure}
+\vskip -0.08in
+基底体系的基态能量 $\mathrm{E}_{sub}=-1014.052159~\mathrm{eV}$
+}
+
+\frame
+{
+	\frametitle{吸附模型:~基底吸附\textrm{\ch{CO2}}}
+\begin{figure}[h!]
+\vskip -0.1in
+\centering
+\includegraphics[width=3.5in,height=2.0in,viewport=0 0 1528 879, clip]{/home/jun-jiang/Pictures/Screenshot from 2024-07-04 16-29-18.png}
+\caption{\tiny \textrm{基底吸附\textrm{\ch{CO2}}模型.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Substrct_1}
+\end{figure}
+基底吸附\textrm{CO2}的基态能量 $\mathrm{E}_{sub}^{\mathrm{CO_2}}=-1035.594648~\mathrm{eV}$
+}
+
+\frame
+{
+	\frametitle{反应中间体模型}
+\begin{figure}[h!]
+\vskip -0.1in
+\centering
+\includegraphics[width=3.5in,height=2.0in,viewport=0 0 1528 879, clip]{/home/jun-jiang/Pictures/Screenshot from 2024-07-04 16-32-53.png}
+\caption{\tiny \textrm{反应中间体模型.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Substrct_2}
+\end{figure}
+反应中间体的基态能量 $\mathrm{E}_{sub}^{\mathrm{\chemfig{C(=[1]O)-OH}}}=-1037.7071~\mathrm{eV}$
+}
+
+\frame
+{
+	\frametitle{吸附模型:~基底吸附\textrm{\ch{CO}}}
+\begin{figure}[h!]
+\vskip -0.1in
+\centering
+\includegraphics[width=3.5in,height=2.0in,viewport=0 0 1528 879, clip]{/home/jun-jiang/Pictures/Screenshot from 2024-07-04 16-30-46.png}
+\caption{\tiny \textrm{基底吸附\textrm{\ch{CO}}模型.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Substrct_3}
+\end{figure}
+基底吸附\textrm{CO}的基态能量 $\mathrm{E}_{sub}^{\mathrm{CO}}=-1028.222503~\mathrm{eV}$
+}
+
+\frame
+{
+	\frametitle{吸附与反应的热力学评估}
+	体系能量的表示
+	\begin{displaymath}
+		\begin{aligned}
+			\mathrm{E}_0=&\mathrm{E}_{sub}+\mathrm{E}_{\mathrm{CO_2}}+\mathrm{E}_\mathrm{H_2}\\
+			\mathrm{E}_1=&\mathrm{E}_{sub}^{\mathrm{CO_2}}+\mathrm{E}_\mathrm{H_2}\\
+			\mathrm{E}_0=&\mathrm{E}_{sub}^{\mathrm{COOH}}+\frac12\mathrm{E}_\mathrm{H_2}\\
+			\mathrm{E}_0=&\mathrm{E}_{sub}^{\mathrm{CO}}+\mathrm{E}_\mathrm{H_2O}
+		\end{aligned}
+	\end{displaymath}
+\begin{minipage}{0.43\textwidth}
+	$\mathrm{E}_{\mathrm{CO_2}}=-23.2054~\mathrm{eV}$\\
+	$\mathrm{E}_{\mathrm{CO}}=-15.1820~\mathrm{eV}$\\
+	$\mathrm{E}_{\mathrm{H_2}}=-6.8~\mathrm{eV}$\\
+	$\mathrm{E}_{\mathrm{H_2O}}=-14.227~\mathrm{eV}$
+\end{minipage}
+\hspace*{1pt}
+\begin{minipage}{0.55\textwidth}
+\begin{figure}[h!]
+\vskip -0.6in
+\hspace*{1.5in}
+\centering
+\includegraphics[width=2.5in,height=1.4in,viewport=0 0 292 167, clip]{/home/jun-jiang/Pictures/Energy.png}
+\caption{\tiny \textrm{热力学评估.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Substrct_4}
+\end{figure}
+\end{minipage}
+}
