@@ -1,0 +1,224 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  不使用 authblk 包制作标题  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%-------------------------------PPT Title-------------------------------------
+\title{数据存证与数据知识产权登记}
+%-----------------------------------------------------------------------------
+
+%----------------------------Author & Date------------------------------------
+%\author[\textrm{Jun\_Jiang}]{姜\;\;骏\inst{}} %[]{} (optional, use only with lots of authors)
+%% - Give the names in the same order as the appear in the paper.
+%% - Use the \inst{?} command only if the authors have different
+%%   affiliation.
+\institute[BCC]{\inst{}%
+%\institute[Gain~Strong]{\inst{}%
+\vskip 0pt 北京市计算中心有限公司}
+%\vskip -20pt {\large 格致斯创~科技}}
+\date[\today] % (optional, should be abbreviation of conference name)
+{	%{\fontsize{6.2pt}{4.2pt}\selectfont{\textcolor{blue}{E-mail:~}\url{jiangjun@bcc.ac.cn}}}
+\vskip 45 pt {\fontsize{8.2pt}{6.2pt}\selectfont{%北京科技大学% 报告地点
+	\vskip 5 pt \textrm{2024.06}}}
+}
+
+%% - Either use conference name or its abbreviation
+%% - Not really information to the audience, more for people (including
+%%   yourself) who are reading the slides onlin%%   yourself) who are reading the slides onlin%%   yourself) who are reading the slides onlineee
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subject{}
+% This is only inserted into the PDF information catalog. Can be left
+% out.
+%\maketitle
+\frame
+{
+%	\frametitle{\fontsize{9.5pt}{5.2pt}\selectfont{\textcolor{orange}{“高通量并发式材料计算算法与软件”年度检查}}}
+\titlepage
+}
+%-----------------------------------------------------------------------------
+
+%------------------------------------------------------------------------------列出全文 outline ---------------------------------------------------------------------------------
+%\section*{}
+\frame[allowframebreaks]
+{
+  \frametitle{}
+数据知识产权登记主要包括两部分
+%  \frametitle{\textcolor{mycolor}{\secname}}
+  \tableofcontents%[current,currentsection,currentsubsection]
+  以下依次介绍
+}
+%在每个section之前列出全部Outline
+%类似的在每个subsection之前列出全部Outline是\AtBeginSubsection[]
+%\AtBeginSection[]
+%{
+%  \frame<handout:0>%[allowframebreaks]
+%  {
+%    \frametitle{Outline}
+%%全部Outline中，本部分加亮
+%    \tableofcontents[current,currentsection]
+%  }
+%}
+
+%-----------------------------------------------PPT main Body------------------------------------------------------------------------------------
+\small
+\section{数据存证}
+\frame
+{
+	\frametitle{数据存证}
+	北京市方圆公证处存取证系统:\\
+%	{\fontsize{8.0pt}{5.2pt}\selectfont{\url{https://evidence.bnpo.gov.cn/forensics-project-platform/#/login}}}
+\begin{figure}[h!]
+\centering
+\includegraphics[width=3.0in,height=1.6in,viewport=0 0 1528 879, clip]{/home/jun-jiang/Pictures/Screenshot from 2024-07-02 13-27-56.png}
+\caption{\tiny 登录页面.}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Evindence_Login}
+\end{figure}
+\vskip -0.15in
+	\begin{itemize}
+		\item \textrm{\textcolor{blue}{ID}:~13810044281}
+		\item \textrm{\textcolor{blue}{PassWd}:~BCCbcc123\$}
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{数据存证}
+	依照文档``\href{run:./北京市方圆公证处存取证系统（可信空间2.0）存证使用说明书.pdf}{北京市方圆公证处存取证系统（可信空间2.0）存证使用说明书}''的操作说明，完成数据存证过程
+\begin{figure}[h!]
+\vskip -0.05in
+\centering
+\includegraphics[width=3.0in,height=1.6in,viewport=0 0 1528 879, clip]{/home/jun-jiang/Pictures/Screenshot from 2024-07-02 10-41-41.png}
+\caption{\tiny 存证数据页面.}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Evindence_Data}
+\end{figure}
+\textcolor{red!80}{注意}:~每生成一个新存证报告(有新\textrm{hash}值)，存证平台都会收取费用，不要反复存证
+}
+
+\frame
+{
+	\frametitle{存证报告}
+\begin{figure}[h!]
+\vskip -0.05in
+\centering
+\includegraphics[width=4.0in,height=2.3in,viewport=0 0 1528 879, clip]{/home/jun-jiang/Pictures/Screenshot from 2024-07-02 10-41-50.png}
+\caption{\tiny 电子存证报告页面.}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Evindence_Report}
+\end{figure}
+}
+
+\section{数据知识产权登记}
+\frame
+{
+	\frametitle{数据知识产权登记}
+	\begin{enumerate}
+		\item 登录北京市知识产权保护中心网页:~\url{http://www.bjippc.cn/}
+		\item 下拉网页，点击``\textcolor{blue!70}{数据知识产权登记}''
+\begin{figure}[h!]
+\centering
+\includegraphics[width=3.20in,height=1.8in,viewport=0 0 1528 879, clip]{/home/jun-jiang/Pictures/Screenshot from 2024-07-02 14-28-50.png}
+\caption{\tiny 登录主页.}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Data-Properties_Main}
+\end{figure}
+	\end{enumerate}
+}
+
+\frame
+{
+	\frametitle{数据知识产权登记}
+	点击页面中``知识产权登记中心''
+\begin{figure}[h!]
+\centering
+\includegraphics[width=3.20in,height=1.8in,viewport=0 0 1528 879, clip]{/home/jun-jiang/Pictures/Screenshot from 2024-07-02 14-30-22.png}
+\caption{\tiny ``知识产权登记中心''位置.}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Data-Properties_Regist-Center}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{数据知识产权登记}
+\begin{figure}[h!]
+\centering
+\includegraphics[width=3.20in,height=1.8in,viewport=0 0 1528 879, clip]{/home/jun-jiang/Pictures/Screenshot from 2024-07-02 14-29-19.png}
+\caption{\tiny 登录页面.}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Data-Properties_Login}
+\end{figure}
+\vskip -0.15in
+	\begin{itemize}
+		\item \textrm{\textcolor{blue}{ID}:~bjsjszx}
+		\item \textrm{\textcolor{blue}{PassWd}:~BCCbcc123\$}
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{数据知识产权登记}
+%	依照文档``\href{run:./数据知识产权登记平台操作指引0706.pdf}{数据知识产权登记平台操作指引}''的操作说明，完成数据知识产权登记
+%	依照文档``{数据知识产权登记平台操作指引}''\textrm{(\url{http://www.bjippc.cn/static/modules/cms/front/site/suzhou/wenjian/数据知识产权登记平台操作指引0706.pdf})}的操作说明，完成数据知识产权登记
+	依照文档``\href{run:./数据知识产权登记平台操作指引0706.pdf}{数据知识产权登记平台操作指引}''\\{\fontsize{7.0pt}{5.2pt}\selectfont{\textrm{(\url{http://www.bjippc.cn/static/modules/cms/front/site/suzhou/wenjian/\%E6\%95\%B0\%E6\%8D\%AE\%E7\%9F\%A5\%E8\%AF\%86\%E4\%BA\%A7\%E6\%9D\%83\%E7\%99\%BB\%E8\%AE\%B0\%E5\%B9\%B3\%E5\%8F\%B0\%E6\%93\%8D\%E4\%BD\%9C\%E6\%8C\%87\%E5\%BC\%950706.pdf})}}}\\的操作说明，完成数据知识产权登记
+\begin{figure}[h!]
+\vskip -0.05in
+\centering
+\includegraphics[width=3.0in,height=1.8in,viewport=0 0 340 209, clip]{/home/jun-jiang/Pictures/Screenshot from 2024-07-02 18-07-05.png}
+\caption{\tiny 点击``立即登记''.}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Data-Properties_Regist}
+\end{figure}
+}
+
+\frame{
+	\frametitle{数据知识产权登记内容填写}
+\textcolor{red!80}{注意}:~填写``数据知识产权登记''时需要仔细
+\begin{figure}[h!]
+\vskip -0.05in
+\centering
+\includegraphics[width=4.0in,height=2.1in,viewport=0 0 1528 879, clip]{/home/jun-jiang/Pictures/Screenshot from 2024-07-02 14-53-11.png}
+\caption{\tiny 存证数据页面:~基本信息.}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Data-Properties_Content-1}
+\end{figure}
+}
+
+\frame{
+	\frametitle{数据知识产权登记内容填写}
+	\textcolor{magenta}{主要参照``数据知识产权登记平台操作指引''要求填写}
+	\begin{itemize}
+		\item \textcolor{red}{数据集名称}:~名称必须是``\underline{\textrm{XXXXX}\textcolor{purple}{数据集}}''
+		\item \textcolor{blue}{数据来源}:~单位提供证明
+		\item \textcolor{red}{数据格式}:~根据字段填写数据结构(有模板可参考)\footnote{填写的网页版数据结构用于公示时展示}
+		\item \textcolor{red}{算法规则}:~需要提供算法说明文档(注明是否可以公开)
+		\item \textcolor{red}{数据样例}:~网页页面填写不多于5条，数据样例文档中不多于100条
+		\item \textcolor{blue}{数据知识产权登记承诺函}:~提交人撰写，加盖单位公章
+	\end{itemize}
+	审查时主要是格式审查，所以\textcolor{red}{红色标注的填写内容}，建议严格按照``操作指引''和``模板''的要求填写，减少反复修改、提交的周期
+}
+
+\frame{
+	\frametitle{数据知识产权登记:~公示}
+%\textcolor{red!80}{注意}:~填写``数据知识产权登记''时需要仔细
+\begin{figure}[h!]
+\vskip -0.05in
+\centering
+\includegraphics[width=4.0in,height=2.1in,viewport=0 0 1528 879, clip]{/home/jun-jiang/Pictures/Screenshot from 2024-07-03 09-59-40.png}
+\caption{\tiny 存证数据的提交与审核.}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Data-Properties_Check}
+\end{figure}
+}
+
+\frame{
+	\frametitle{数据知识产权登记:~公示}
+%\textcolor{red!80}{注意}:~填写``数据知识产权登记''时需要仔细
+\begin{figure}[h!]
+\vskip -0.05in
+\centering
+\includegraphics[width=4.0in,height=2.1in,viewport=0 0 1528 879, clip]{/home/jun-jiang/Pictures/Screenshot from 2024-07-02 14-51-54.png}
+\caption{\tiny 存证数据的公示:~数据结构.}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Data-Properties_Check-Content-1}
+\end{figure}
+}
+
+\frame{
+	\frametitle{数据知识产权登记:~公示}
+%\textcolor{red!80}{注意}:~填写``数据知识产权登记''时需要仔细
+\begin{figure}[h!]
+\vskip -0.05in
+\centering
+\includegraphics[width=4.0in,height=2.1in,viewport=0 0 1528 879, clip]{/home/jun-jiang/Pictures/Screenshot from 2024-07-03 10-29-13.png}
+\caption{\tiny 存证数据的公示:~修改版本纪录.}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Data-Properties_Check-Content-2}
+\end{figure}
+}
