@@ -832,6 +832,144 @@ $U_2(\vec r_i,\vec r_j)$是双体势，$U_3(\vec r_i,\vec r_j,\vec r_k)$是描�
 \end{figure}
 }
 
+
+\begin{frame}
+	\frametitle{\textrm{Hamilton}运动方程与辛几何}
+	经典粒子随时间的演化:~\textcolor{blue}{基于\textrm{Verlet}算法求解积分运动方程}\\
+	{\fontsize{7.2pt}{4.2pt}\selectfont{考虑数值计算的累积误差\textrm{(accumulated error)}，随着模拟步数的增长，误差可能越来越大}}
+
+	在相空间$(\vec p,\vec r)$中，一维粒子的\textrm{Hamiltonian}可以表示为:
+	\begin{displaymath}
+		\mathcal{H}(p,x)=\dfrac{p^2}2+V(x)
+	\end{displaymath}
+	因此粒子运动的\textrm{Hamilton}运动方程可以表示为
+	\begin{displaymath}
+		\begin{aligned}
+			\dot p=&\dfrac{\partial\mathcal{H}(p,x)}{\partial x}\\
+			\dot x=&\dfrac{\partial\mathcal{H}(p,x)}{\partial p}
+		\end{aligned}
+	\end{displaymath}
+	相空间中，粒子运动的\textrm{Hamilton}方程具有的几何结构称为\textcolor{red}{辛几何\textrm{(Symplectic geometry)\footnote{\fontsize{6.2pt}{4.2pt}\selectfont{不同的力学，对应着的是不同的几何观点:~\textrm{Newton}力学对应着$\mathbb{R}^3$上的经典外蕴微分几何，\textrm{Lagrange}力学对应着流形上的微分几何，\textrm{Hamilton}力学则对应着辛几何}}}}
+\end{frame}
+
+\begin{frame}
+	\frametitle{\textrm{Hamilton}运动方程的解析形式}
+	{\fontsize{8.5pt}{4.2pt}\selectfont{如果记动量-位置坐标为 $z=(p,x)$，则运动方程可以表示为
+		\begin{displaymath}
+			\dot z=\mathbf{J}\nabla\mathcal{H}(z)
+		\end{displaymath}
+		这里$\mathbf{J}$是矩阵
+		\begin{displaymath}
+			\mathbf{J}= \begin{pmatrix}
+				0 &-1\\
+				1 &0
+			\end{pmatrix}
+		\end{displaymath}
+并有
+\begin{displaymath}
+	\nabla\mathcal{H}(z)=\bigg(\frac{\partial\mathcal{H}(z)}{\partial p},\frac{\partial\mathcal{H}(z)}{\partial x}\bigg)
+\end{displaymath}
+可知相空间点$z$随时间演化的递推关系为
+\begin{displaymath}
+	z(t+h)=z(t)+h\mathbf{J}\nabla_z\mathcal{H}[z(t)]
+\end{displaymath}
+并有运动方程的解析形式为
+\begin{displaymath}
+	\textcolor{blue}{z(t)=\mathrm{exp}(t\mathbf{J}\nabla_z\mathcal{H})[z(0)]}
+\end{displaymath} }}
+\end{frame}
+
+\begin{frame}[allowframebreaks]
+	\frametitle{\textrm{Liouvill}定理的导出}
+	{\fontsize{7.5pt}{4.2pt}\selectfont{如果相空间局域点$z=(p,x)$附近，存在无穷小量$\delta z^a$和$\delta z^b$，则其面积$\delta A$可以写成
+		\begin{displaymath}
+			\delta A=\delta z^a\times\delta z^b=\delta z^a\cdot(\mathbf{J}\delta z^b)
+		\end{displaymath}
+		不难看出，面积$\delta A$表示的就是相空间点$z(t)$
+
+		作为初值条件，要求$t=0$，$\delta A$的时间导数为0，此后相空间点随时间演化可表示为
+		\begin{displaymath}
+			\begin{aligned}
+				\left.\dfrac{\mathrm{d}\delta A}{\mathrm{d}t}\right|_{t=0}=&\dfrac{\mathrm{d}}{\mathrm{d}t}\{[\mathrm{e}^{t\mathbf{J}\nabla_z\mathcal{H}(\delta z^a)}]\cdot[\mathbf{J}\mathrm{e}^{t\mathbf{J}\mathcal{H}}(\delta z^b)]\}_{t=0}\\
+				=&[\mathbf{J}\nabla_z\mathcal{H}(\delta z^a)]\cdot(\mathbf{J}\delta z^b)+(\delta z^a)\cdot[\mathbf{J}\mathbf{J}\nabla_z\mathcal{H}(\delta z^b)]
+			\end{aligned}
+		\end{displaymath}
+		利用\textrm{Taylor}展开
+		\begin{displaymath}
+			\mathcal{H}(\delta z^a)=\mathcal{H}(z+\delta z^a)-\mathcal{H}(z)=\delta z^a\cdot\nabla_z\mathcal{H}(z)
+		\end{displaymath}
+		可有
+		\begin{displaymath}
+			\left.\dfrac{\mathrm{d}\delta A}{\mathrm{d}t}\right|_{t=0}=-(\mathbf{L}^T\delta z^a)\cdot(\mathbf{J}\delta z^b)-(\delta z^a)(\mathbf{JL}^{T}\delta z^b)
+		\end{displaymath}
+		这里$\mathbf{L}$是算子$\mathbf{J}\nabla_z\mathcal{H}$的\textrm{Jacobian}矩阵:
+		\begin{displaymath}
+			L_{ij}=\sum_k J_{ik}[\nabla^2\mathcal{H}(z)/\nabla z_k\nabla z_j]=
+			\begin{pmatrix}
+				-\mathcal{H}_{px} &-\mathcal{H}_{xx} \\
+				\mathcal{H}_{pp} &\mathcal{H}_{px} 
+			\end{pmatrix}
+		\end{displaymath}
+		因此矩阵$\mathbf{L}$满足
+		\begin{displaymath}
+			\textcolor{blue}{\mathbf{L}^T\mathbf{J}+\mathbf{JL}=0}
+		\end{displaymath}
+		由此可以推论出相空间的点$\delta A$随时间变化的守恒特征，这就是\textrm{Liouvill}定理\footnote{\fontsize{6.2pt}{4.2pt}\selectfont{给定一个系统点，在相空间遍历过程中，该点邻近的系统点的密度是关于时间的常数}}
+
+		如果将$\mathrm{exp}(t\mathbf{J}\nabla H)$的\textrm{Jacobi}矩阵$\mathbf{S}$写成一般形式
+		\begin{displaymath}
+			\mathbf{S}=\mathrm{exp}(t\mathbf{L})
+		\end{displaymath}}}
+		$\mathbf{S}$矩阵有等式
+		\begin{displaymath}
+			\textcolor{red}{\mathbf{S}^T\mathbf{J}\mathbf{S}=\mathbf{J}}
+		\end{displaymath}
+		满足该条件的矩阵称为\textcolor{red}{保辛结构}\\
+
+		这些矩阵构成\textrm{Lie}群，该\textrm{Lie}群的\textrm{Lie}代数服从矩阵$\mathbf{L}$要求满足的等式形式
+\end{frame}
+
+\begin{frame}
+	\frametitle{\textrm{Hamilton}体系的相空间守恒}
+	当体系在相空间的自由度超过二维，同样有类似的相空间守恒
+\begin{figure}[h!]
+\centering
+\vspace*{+0.05in}
+%\hspace*{-10pt}
+\includegraphics[height=2.15in,width=3.6in,viewport=0 0 893 655,clip]{Figures/Area-conservation-law-symplectic-flow.png}
+%\caption{\fontsize{5.2pt}{4.2pt}\selectfont{\textrm{The Area conservation law for a sympletic flow.}}}%
+\label{Area-conservation-law-symplectic-flow}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{相空间的粒子随时间演化:~积分}
+	{\fontsize{8.5pt}{4.2pt}\selectfont{如果\textrm{Hamiltonian}可以表示为
+	\begin{displaymath}
+		\mathcal{H}=\mathbf{T}(p)+U(x)
+	\end{displaymath}
+	对相空间点$z=(p,x)$，则有
+	\begin{displaymath}
+		\begin{aligned}
+			\dfrac{\mathrm{d}z}{\mathrm{d}t}=&\bigg(-\dfrac{\partial\mathcal{H}}{\partial x},\dfrac{\partial\mathcal{H}}{\partial p}\bigg)=\bigg(-\dfrac{\partial U(x)}{\partial x},\dfrac{\partial\mathbf{T}(p)}{\partial p}\bigg)\\
+			=&\mathbf{J}\nabla\mathcal{H}(z)\equiv \tilde{\mathbf{T}}(z)+\tilde{U}(z)
+		\end{aligned}
+	\end{displaymath}
+	其中
+	\begin{displaymath}
+		\begin{aligned}
+			\tilde{\mathbf{T}}(z)=&\bigg(0,\dfrac{\partial\mathbf{T}(p)}{\partial p}\bigg)\\
+			\tilde{U}(z)=&\bigg(\dfrac{\partial U(x)}{\partial x},0\bigg)
+		\end{aligned}
+	\end{displaymath}
+	因此，粒子在相空间的解析形式为
+	\begin{displaymath}
+		\textcolor{blue}{z(t)=\mathrm{exp}(t\mathbf{J}\nabla\mathcal{H})[z(0)]=\mathrm{exp}[t(\tilde{\mathbf{T}}+\tilde{U})][z(0)]}
+	\end{displaymath}
+	$\mathrm{exp}(t\mathbf{J}\nabla\mathcal{H})$是时间演化算子，是保辛结构的，因此$\mathrm{exp}(t\tilde{\mathbf{T}})$和$\mathrm{exp}(t\tilde{U})$也是保辛结构的
+}}
+\end{frame}
+
 \section{第一原理分子动力学简介}
 \frame
 {
