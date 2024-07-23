@@ -177,6 +177,90 @@
 \centering
 %\hskip -35pt
 \includegraphics[height=2.18in]{Figures/MP_comp_BCC.png}
+%\vskip -10pt
+%\begin{tikzpicture}[
+%    box-rect/.style={rectangle,draw,fill=darkgray!20,node distance=1cm,text width=15em,text centered,rounded corners,minimum height=2em,thick},
+%    box-diam/.style={diamond, aspect=7, inner sep=2pt, draw,fill=green!50,node distance=1cm,text width=12em,text centered,rounded corners,minimum height=2em,thick},
+%    arrow/.style={draw,-latex', red},
+%  ]
+%
+%  \node [box-rect, fill=magenta!50, text width=4.5em, draw=pink, minimum height=0.2em, thick] at (current page.west)(Figure) {\includegraphics[width=0.60in, height=0.3in,viewport=0 0 103 55,clip]{Figures/The-Periodic-Table-of-perovskene-materials.jpg}};
+%  \node [box-rect, right=0.3 of Figure, fill=gray!30, text width=6.0em, minimum height=0.2em] (Highthrough-Put) {\fontsize{3.0pt}{2.5pt}\selectfont{高通量材料计算\textrm{Python/Web}服务}};
+%  \node [box-rect, right=0.3 of Highthrough-Put, fill=white, text width=0.5em, minimum height=6.0em, yshift=-2.1em, very thin] (Modeling-Initial) {\fontsize{3.0pt}{2.5pt}\selectfont{ 结\\\vskip -8.0pt构\\\vskip -8.0pt建\\\vskip -8.0pt模\\\vskip -8.0pt与\\\vskip -8.0pt初\\\vskip -8.0pt始\\\vskip -8.0pt化}};
+%  \node [box-rect, below=0.2 of Figure, fill=red!30, text width=3.5em, minimum height=0.2em] (Modeling-mode) {\fontsize{3.0pt}{2.5pt}\selectfont{计算结构建模\\\vskip -8.0pt\textrm{+ASE\_Atoms}模块}};
+%  \node [box-rect, right=0.4 of Modeling-mode, fill=red!30, text width=2.4em, minimum height=0.2em] (User-defineded) {\fontsize{3.0pt}{2.5pt}\selectfont{用户需求自定义}};
+%  \node [box-rect, right=0.4 of User-defineded, fill=brown!30, text width=2.1em, minimum height=0.2em] (Process-Design) {\fontsize{3.0pt}{2.5pt}\selectfont{计算流程设计}};
+%  \node [box-rect, below=0.2 of Modeling-mode, fill=green!30, text width=4.5em, minimum height=0.2em] (Modeling-Analysis) {\fontsize{3.0pt}{2.5pt}\selectfont{组分、模型与结构对称性分析}};
+%
+%  \node [box-rect, below=0.6 of Modeling-Analysis, fill=blue!50, text width=3.8em, minimum height=0.2em, xshift=0.5em] (Process-Manage) {\fontsize{3.0pt}{2.5pt}\selectfont{计算流程管理\\\vskip -8.0pt\textrm{MP\_FireWorks}模块}};
+%  \node [box-rect, right=0.8 of Process-Manage, fill=red!50, text width=4.5em, minimum height=3.0em] (Multi-Scale) {\fontsize{3.0pt}{2.5pt}\selectfont{\vskip -10.0pt高性能计算任务\\\textrm{DFT-MD-$\cdots$}\\\vskip 1pt \textrm{(跨尺度计算)}\\\vskip -8.0pt\textrm{+}集成核心计算软件接口}};
+%  \node [box-rect, right=0.65 of Process-Manage, fill=orange!50, text width=4.2em, minimum height=0.2em, yshift=-0.8em] (Custodian) {\fontsize{3.0pt}{2.5pt}\selectfont{容错机制\textrm{Cudodian}模块}};
+%  \node [box-rect, below=0.05 of Modeling-Initial, fill=white, text width=0.5em, minimum height=5.6em, very thin] (Multi-Scale-Simulation) {\fontsize{3.0pt}{2.5pt}\selectfont{多\\\vskip -8.0pt尺\\\vskip -8.0pt度\\\vskip -8.0pt计\\\vskip -8.0pt算\\\vskip -8.0pt与\\\vskip -8.0pt模\\\vskip -8.0pt拟}};
+%  \node [below=0.3 of Process-Manage, text width=3.5em, minimum height=0.2em] (DataBase) {\fontsize{3.0pt}{2.5pt}\selectfont{\textcolor{violet}{\textrm{MongoDB}数据库}}};
+%
+%  \node [box-rect, below=0.5 of DataBase, fill=olive!60, text width=5.5em, minimum height=1.5em] (Data-Manage) {\fontsize{3.0pt}{2.5pt}\selectfont{计算结果数据与管理}};
+%  \node [box-rect, below=0.6 of Data-Manage, fill=lime!70, text width=3.5em, minimum height=1.5em, xshift=-0.5em] (Result-Analysis) {\fontsize{3.0pt}{2.5pt}\selectfont{计算结果可视化分析}};
+%  \node [box-rect, right=0.3 of Result-Analysis, fill=teal!70, text width=6.5em, minimum height=1.5em] (Machine-Learning) {\fontsize{3.0pt}{2.5pt}\selectfont{\textrm{Python}集成的机器学习算法\\\vskip -8pt \textrm{GPR/BO/ANN}支持}};
+%  \node [box-rect, below=1.5 of Data-Manage, fill=darkgray!70, text width=10.5em, minimum height=1.5em, xshift=4.0em] (Application) {\fontsize{3.0pt}{2.5pt}\selectfont{\textcolor{white}{特色应用场景:~原子间多体相互作用}}};
+%  \node [box-rect, below=0.05 of Multi-Scale-Simulation, fill=white, text width=0.5em, minimum height=6.5em, very thin] (Result-Machine-Learning) {\fontsize{3.0pt}{2.5pt}\selectfont{计\\\vskip -8.0pt算\\\vskip -8.0pt结\\\vskip -8.0pt果\\\vskip -8.0pt分\\\vskip -8.0pt析\\\vskip -8.0pt与\\\vskip -8.0pt机\\\vskip -8.0pt器\\\vskip -8.0pt学\\\vskip -8.0pt习}};
+%
+%%%%%%% ------------ 定义 虚线方框转角 -----------------  %%%%%%
+%\path
+%  (Figure.north) ++(-2.0 em, -0.6em) coordinate (Model-fit)
+%  (Modeling-Analysis.south) ++(2.0em, 0.6em) coordinate (Symmetry-fit)
+%  (Modeling-Analysis.south) ++(-3.0em, -0.2em) coordinate (Symmetry-seperate)
+%  (Highthrough-Put.south) ++(-2.0em, 0.0em) coordinate (Highthrough-1)
+%  (Highthrough-Put.south) ++(2.10em, -0.0em) coordinate (Highthrough-2)
+%  (Highthrough-Put.west) ++(-0.50em, 0.0em) coordinate (Highthrough-3)
+%  (Process-Manage.north) ++(-2.5em, 0.3em) coordinate (DataBase-1)
+%  (Data-Manage.south) ++ (2.5em, -0.1em) coordinate (DataBase-2)
+%  (Process-Design.south)++(-2.0em, -1.50em) coordinate (Process-Design-1)
+%  (Process-Design.south)++(-8.5em, -1.50em) coordinate (Process-Design-2)
+%  (Process-Manage.north)++(2.7em, 0.0em) coordinate (Process-Manage-1)
+%  (Modeling-Analysis.south)++(-2.0em, 0.0em) coordinate (Modeling-Analysis-1)
+%  (Data-Manage.north) ++ (-2.55em, 0.0em) coordinate (DataBase-3)
+%  (Application.north)++(-4.51em, 0.0em) coordinate(Application-1)
+%  (Application.north)++(-4.35em, 0.0em) coordinate(Application-2)
+%  (Application.north)++(4.43em, 0.0em) coordinate(Application-3)
+%  (Machine-Learning.north) ++(-3.0em, -0.5em) coordinate (Machine-Learning-1)
+%  (Machine-Learning.south) ++(3.0em, 0.5em) coordinate (Machine-Learning-2);
+%
+%\path [arrow, gray,thick] (Figure.south) -- (Modeling-mode);
+%\path [arrow, gray,thick] (Highthrough-Put.west) -- (Highthrough-3) |- (Modeling-mode.east);
+%\path [arrow, gray,thick] (Modeling-mode.south) -- (Modeling-Analysis);
+%\path [arrow, gray,thick] (User-defineded.west) -- (Modeling-mode.east);
+%\path [arrow, gray,thick] (User-defineded.east) -- (Process-Design.west);
+%\path [arrow, gray,thick] (Highthrough-1) -- (User-defineded.north);
+%\path [arrow, gray,thick] (Highthrough-2) -- (Process-Design.north);
+%
+%\path [arrow, draw=blue!30, line width=4pt] (Process-Design.south) -- (Multi-Scale.north);
+%\path [arrow, draw=black, line width=3pt] (Process-Design.south)++(-2.0em, 0.0em) |- (Process-Design-2) -- (Process-Manage-1);
+%%\path [draw=black, line width=3pt] (Process-Design-1) -- (Process-Design-2);
+%%\path [arrow, draw=black, line width=3pt] (Process-Design-2) -- (Process-Manage-1);
+%\path [arrow, draw=green!70!red, opacity=0.50, line width=3pt] (Modeling-Analysis-1) -- (DataBase-3);
+%\path [arrow, draw=red!80, line width=3pt] (Process-Manage.east) -- (Multi-Scale.west);
+%\path [arrow, draw=black,  line width=3pt] (Multi-Scale.south) |- (Data-Manage.east);
+%
+%\path [arrow, draw=black, thick](Data-Manage.south)++(-3.45em, 0.0em) -- (Result-Analysis.north);
+%\path [arrow, draw=black, thick](Result-Analysis.south)++(2.0em, 0.0em) -- (Application-1);
+%\path [arrow, draw=black, thick](Data-Manage.south)++(0.65em, 0.0em) -- (Application-2);
+%\path [arrow, draw=black, thick](Machine-Learning.north) |- (Data-Manage.east);
+%\path [arrow, draw=black, thick](Machine-Learning.south) -- (Application-3);
+%
+%%%%%%% ------------ 绘制 虚线 -----------------  %%%%%%
+%%\draw [gray, dotted, line width=2pt] (Symmetry-seperate) -- (Modeling-Initial.south);
+%\draw [gray, dashed, ultra thick] (Symmetry-seperate) -- (Modeling-Initial.south);
+%%\draw [gray, densely dotted, ultra thick] (Symmetry-seperate) -- (Modeling-Initial.south);
+%\draw [gray, dotted, line width=2pt] (DataBase.south)++(-3.5em,-0.78em) -- (Multi-Scale-Simulation.south);
+%%%%%%% ------------ 绘制 虚线方框 -----------------  %%%%%%
+%\node [rectangle,draw=blue!30, dashdotted, inner sep=0.8em,fit=(Model-fit) (Symmetry-fit), very thick] (enclosure) {};
+%%\node [rectangle,draw=blue!30, dash dot, inner sep=0.8em,fit=(Model-fit) (Symmetry-fit), very thick] (enclosure) {};
+%%\node [rectangle,draw=blue!30, dash dot dot, inner sep=0.8em,fit=(Model-fit) (Symmetry-fit), very thick] (enclosure) {};
+%%\node [rectangle,draw=violet, dash, inner sep=0.8em,fit=(DataBase-1) (DataBase-2), thick] (enclosure) {};
+%\node [rectangle,draw=violet, dashed, inner sep=0.8em,fit=(DataBase-1) (DataBase-2), thick] (enclosure) {};
+%
+%\node [rectangle,draw=red, inner sep=0.8em,fit=(Machine-Learning-1) (Machine-Learning-2), line width=3.0pt] (enclosure) {};
+%\end{tikzpicture}
 \caption{\fontsize{6.5pt}{4.5pt}\selectfont{适用于异质界面的高通量材料计算自动流程软件架构}}%
 \label{MP_comp_BCC}
 \end{figure}
