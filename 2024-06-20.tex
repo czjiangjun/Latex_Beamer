@@ -72,9 +72,9 @@
 
 \frame
 {
-%\documentclass[tikz,svgnames,border={0 2}]{standalone}
-%\renewcommand\vec[1]{\boldsymbol{#1}}
-%\begin{document}
+\begin{figure}[h!]
+\vspace*{-0.15in}
+\centering
 \begin{tikzpicture}[
     box/.style={rectangle,draw,fill=DarkGray!20,node distance=1cm,text width=15em,text centered,rounded corners,minimum height=2em,thick},
     box1/.style={rectangle,draw,fill=green!50,node distance=1cm,text width=12em,text centered,rounded corners,minimum height=2em,thick},
@@ -129,6 +129,9 @@
 %  \path [draw,thick] (criterion.south) ++(0em,-1em) -- (criterion fit) node [midway,below=0.1,sloped,draw,outer sep=0pt,fill=white] (TextNode) {No};
 %  \draw [arrow] (criterion fit) |- (potential.east);
 \end{tikzpicture}
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Method-Procedure}
+\end{figure}
 }
 
 \frame
@@ -147,9 +150,10 @@
 \frame%[allowframebreaks]
 {
 	\frametitle{\textrm{DFT-SCF}}
-%\documentclass[tikz,svgnames,border={0 2}]{standalone}
-%\renewcommand\vec[1]{\boldsymbol{#1}}
-%\begin{document}
+\begin{figure}[h!]
+\vspace*{-0.30in}
+\hspace*{-0.15in}
+\centering
 \begin{tikzpicture}[
     box/.style={rectangle,draw,fill=darkgray!20,node distance=1cm,text width=15em,text centered,rounded corners,minimum height=2em,thick},
     box1/.style={diamond, aspect=7, inner sep=2pt, draw,fill=green!50,node distance=1cm,text width=12em,text centered,rounded corners,minimum height=2em,thick},
@@ -171,16 +175,16 @@
   \node [box, below=0.2 of Potential, fill=orange!80, text width=4.0em, minimum height=0.5em] (Basis-set) {\fontsize{5.0pt}{2.5pt}\selectfont{基函数}};
   \node [box, right=0.8 of Basis-set, fill=red!80, text width=7.0em, minimum height=0.5em] (Fock-matrix) {\fontsize{5.0pt}{2.5pt}\selectfont{构造\textrm{Fock}矩阵}};
   \node [box, below=0.2 of Fock-matrix, fill=green!80, text width=7.0em, minimum height=0.5em] (Kohn-Sham) {\fontsize{5.0pt}{2.5pt}\selectfont{求解\textrm{Kohn-Sham}方程\vskip -1.3em (\textrm{Fock}矩阵对角化)}};
-  \node [box, below=0.2 of Kohn-Sham, fill=blue!80, text width=7.0em, minimum height=0.5em] (Wave-Eigen) {\fontsize{5.0pt}{2.5pt}\selectfont{本征态波函数$\Psi_i(\vec r)$，\vskip -1.3em 能量本征值$\varepsilon_i$}};
+  \node [box, below=0.2 of Kohn-Sham, fill=blue!80, text width=7.0em, minimum height=0.5em] (Wave-Eigen) {\fontsize{5.0pt}{2.5pt}\selectfont{\textcolor{white}{本征态波函数$\Psi_i(\vec r)$，\vskip -1.3em 能量本征值$\varepsilon_i$}}};
 %  \node [box, draw=blue, fill=white, text width=5.0em, minimum height=1em] at(-3.0,-2.7) (k-space) {\fontsize{5.0pt}{2.5pt}\selectfont{$\vec k$-空间积分方案}};
-  \node [box, below=0.2 of Wave-Eigen, fill=blue!80, text width=7.0em, minimum height=0.5em] (Charge) {\fontsize{5.0pt}{2.5pt}\selectfont{计算电荷密度$\rho$}};
+  \node [box, below=0.2 of Wave-Eigen, fill=blue!80, text width=7.0em, minimum height=0.5em] (Charge) {\fontsize{5.0pt}{2.5pt}\selectfont{\textcolor{white}{计算电荷密度$\rho$}}};
   \node [box, draw=blue, below=2.25 of Exch-Corr, fill=purple!30, text width=5.0em, minimum height=0.5em] (k-space) {\fontsize{5.0pt}{2.5pt}\selectfont{$\vec k$-空间积分方案}};
-  \node [box, below=0.2 of Charge, fill=blue!80, text width=5.5em, minimum height=0.5em] (ele-ele) {\fontsize{4.0pt}{2.5pt}\selectfont{电子-电子静电作用$E_{e-e}$}};
-  \node [box, left=0.05 of ele-ele, fill=blue!80, text width=5.5em, minimum height=0.5em] (Ion-ele) {\fontsize{4.0pt}{2.5pt}\selectfont{离子-电子静电作用$E_{\mathrm{N-}e}$}};
+  \node [box, below=0.2 of Charge, fill=blue!80, text width=5.5em, minimum height=0.5em] (ele-ele) {\fontsize{4.0pt}{2.5pt}\selectfont{\textcolor{white}{电子-电子静电作用$E_{e\textendash e}$}}};
+  \node [box, left=0.05 of ele-ele, fill=blue!80, text width=5.5em, minimum height=0.5em] (Ion-ele) {\fontsize{4.0pt}{2.5pt}\selectfont{\textcolor{white}{离子-电子静电作用$E_{\mathrm{N}\textendash e}$}}};
 %  \node [box, left=2.4 of Basis-set, fill=blue!80, text width=4.6em, minimum height=0.5em] at(-11,0.0) (Ion-Static) {\fontsize{4.0pt}{2.5pt}\selectfont{离子静电作用$E_{\mathrm{N-N}}$}};
-  \node [box, left=0.05 of Ion-ele, fill=blue!80, text width=4.6em, minimum height=0.5em] (Ion-Static) {\fontsize{4.0pt}{2.5pt}\selectfont{离子静电作用$E_{\mathrm{N-N}}$}};
-  \node [box, right=0.05 of ele-ele, fill=blue!80, text width=5.0em, minimum height=0.5em] (Kinetic-Ene) {\fontsize{4.0pt}{2.5pt}\selectfont{电子动能$T=\sum T_i$}};
-  \node [box, right=0.05 of Kinetic-Ene, fill=blue!80, text width=5.0em, minimum height=0.5em] (Exch-Corr-Ene) {\fontsize{4.0pt}{2.5pt}\selectfont{交换-相关能$E[\rho(\vec r)]$}};
+  \node [box, left=0.05 of Ion-ele, fill=blue!80, text width=4.6em, minimum height=0.5em] (Ion-Static) {\fontsize{4.0pt}{2.5pt}\selectfont{\textcolor{white}{离子静电作用$E_{\mathrm{N\textendash N}}$}}};
+  \node [box, right=0.05 of ele-ele, fill=blue!80, text width=5.0em, minimum height=0.5em] (Kinetic-Ene) {\fontsize{4.0pt}{2.5pt}\selectfont{\textcolor{white}{电子动能$T=\sum T_i$}}};
+  \node [box, right=0.05 of Kinetic-Ene, fill=blue!80, text width=5.0em, minimum height=0.5em] (Exch-Corr-Ene) {\fontsize{4.0pt}{2.5pt}\selectfont{\textcolor{white}{交换-相关能$E[\rho(\vec r)]$}}};
 %%%%%% ------------ 定义 虚线方框转角 -----------------  %%%%%%
 \path
   (Init-Charge.south) ++(0.0 em, -0.3em) coordinate (Potential-fit1)
@@ -196,7 +200,7 @@
 
   \node [rectangle,draw=red, inner sep=0.1em,fit=(Ion-ele-fit) (Exch-Corr-Ene-fit),thick] (enclosure2) {};
   \node [box1, below=0.05 of enclosure2, fill=purple!80, text width=7.0em, minimum height=0.5em] (Criterion) {\fontsize{5.0pt}{2.5pt}\selectfont{收敛判据}};
-  \node [box, below=0.2 of Criterion, fill=purple!80, text width=7.0em, minimum height=0.5em] (SCF-output) {\fontsize{4.2pt}{1.5pt}\selectfont{输出电荷密度$\rho(\vec r)$\vskip -0.2em 本征态波函数$\Psi_i(\vec r)$ \vskip -1.5em 能量本征值$\varepsilon_i$}};
+  \node [box, below=0.2 of Criterion, fill=purple!80, text width=7.0em, minimum height=0.5em] (SCF-output) {\fontsize{4.7pt}{1.5pt}\selectfont{输出电荷密度$\rho(\vec r)$\vskip -0.2em 本征态波函数$\Psi_i(\vec r)$ \vskip -1.5em 能量本征值$\varepsilon_i$}};
 %  \node [box,below=0.5 of potential] (hamiltonian) {$\hat{H}_{KS}=-\frac{\hbar^2}{2m}\vec{\nabla}^2 + v_{\text{ext},s}(\vec r)$};
 %  \node [box,below=0.5 of hamiltonian] (se) {$\hat{H}_{KS} \phi_i(\vec r)= E_i \phi_i(\vec r)$};
 %  \node [box,below=0.5 of se] (density) {$\rho(\vec r)=\sum_{i=1}^n f_i\,|\phi_i(\vec r_i)|^2$};
@@ -211,7 +215,7 @@
   (Wave-Eigen.west) ++(-1.6em,0.0em) coordinate (Wave-Eigen-fit)
   (Potential.north west) ++(-3.9em,0.20em) coordinate (Potential-fit2)
   (Criterion.west) ++(-8.5em,0.0em) coordinate (Criterion-fit)
-  (SCF-output.west) ++(-11.35em,-1.0em) coordinate (SCF-output-fit)
+  (SCF-output.west) ++(-11.35em,-1.30em) coordinate (SCF-output-fit)
   (Symmetry-OP.west) ++(-5.1em, 0.0em) coordinate (Symmetry-OP-fit2)
   (k-space.east) ++(4.1em, 0.0em) coordinate (k-space-fit) ;
 
@@ -259,15 +263,14 @@
 
 
   \path [arrow] (Criterion)--(SCF-output) node[midway,right=0.1,outer sep=0pt](TextNode1){\fontsize{4.0pt}{2.5pt}\selectfont{\textrm{\textcolor{black}{Yes}}}};
-  \path [draw,magenta] (Criterion.west)++(0.25em, 0.0em)--(Criterion-fit) node[midway,above=0.05,outer sep=0pt](TextNode1){\fontsize{4.0pt}{2.5pt}\selectfont{\textrm{\textcolor{black}{NO}}}};
+  \path [draw,magenta] (Criterion.west)++(0.25em, 0.0em)--(Criterion-fit) node[midway,above=-0.05,outer sep=0pt](TextNode1){\fontsize{4.0pt}{2.5pt}\selectfont{\textrm{\textcolor{black}{NO}}}};
   \path [draw,magenta] (Criterion-fit) |-(Potential-fit1);
   \node [box, right=0.3 of SCF-output, fill=green!50, text width=7.0em, minimum height=0.5em] (SCF-properties) {\fontsize{5.0pt}{2.5pt}\selectfont{各类物理数据与性质计算}};
   \node [box, fill=magenta!50, text width=8.5em, draw=pink, minimum height=0.5em, thick] at (-3.8,-0.35) (Figure) {\includegraphics[width=1.05in, height=0.7in,viewport=0 0 1172 863,clip]{Figures/DFT.png}};
 
   \path [arrow, draw=purple] (SCF-output.east) --(SCF-properties.west);
   \path [draw, dotted, brown] (Symmetry-OP.west) --(Symmetry-OP-fit2);
-  \path [draw, dotted, brown] (Symmetry-OP-fit2) --(SCF-output-fit);
-  \path [arrow, dotted, draw=brown](SCF-output-fit)-|(SCF-properties.south);
+  \path [arrow, dotted, draw=brown] (Symmetry-OP-fit2) --(SCF-output-fit)-|(SCF-properties.south);
   \path [draw, cyan] (k-space) --(k-space-fit);
   \path [arrow, cyan](k-space-fit)|-(SCF-properties.east);
   \path [arrow, draw, fill=red, line width=2.5pt] (enclosure1.east) -- (Figure.west);
@@ -280,6 +283,9 @@
 %  \path [draw,thick] (criterion.south) ++(0em,-1em) -- (criterion fit) node [midway,below=0.1,sloped,draw,outer sep=0pt,fill=white] (TextNode) {No};
 %  \draw [arrow] (criterion fit) |- (potential.east);
 \end{tikzpicture}
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{DFT-SCF-Procedure}
+\end{figure}
 }
 
 \frame
