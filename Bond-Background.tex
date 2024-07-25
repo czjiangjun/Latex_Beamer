@@ -201,6 +201,23 @@
 \subsection{分子间相互作用与化学键}
 \frame
 {
+	\frametitle{经典分子动力学}
+	装有$N$个经典粒子的$L_1\times L_2\times L_3$容器内，假设粒子间只有简单的二体相互作用\footnote{\fontsize{7.2pt}{6.2pt}\selectfont{二体作用是粒子间多体相互作用的简化，只考虑粒子两两间彼此相互作用。}}$\vec F(r)$，力的大小仅与粒子间间距$r$相关
+	\begin{displaymath}
+		\vec F(R_i)=\sum_{\substack{j=1\\j\neq i}}^N F(|\vec r_i-\vec r_j|)\hat{\vec r}_{ij}
+	\end{displaymath}
+	{\fontsize{7.2pt}{6.2pt}\selectfont{这里$R$代表全部原子坐标$\vec r_i$，$\hat{\vec r}_{ij}$是表示粒子$i$指向粒子$j$的矢量($\vec r_j-\vec r_i$)的单位矢量}}
+
+	在经典力学框架下，粒子$i$的受力运动方程是:~
+	\begin{displaymath}
+		\dfrac{\mathrm{d}^2\vec r_i(t)}{\mathrm{d}t^2}=\dfrac{\vec F_i(R)}{m_i}
+	\end{displaymath}
+	粒子$i$的质量是$m_i$\\
+	\textcolor{purple}{经典分子动力学，就是应用数值模拟对大量粒子求解该方程，基于统计力学原理，研究物质的状态和热力学性质}
+}
+
+\frame
+{
 	\frametitle{分子间相互作用的本质}
 \begin{figure}[h!]
 \centering
@@ -213,7 +230,19 @@
 \end{figure}
 }
 
-\subsection{从力场到化学键}
+\subsection{化学键与力场}
+\frame
+{
+	\frametitle{分子间相互作用的的复杂性}
+\begin{figure}[h!]
+\centering
+\label{MO-Bond_charge-density}
+\vspace{-3.5pt}
+%\caption{\textrm{The wave-particle duality and Photoelectric effect}}
+\includegraphics[height=2.70in,width=4.00in,viewport=0 0 355 260,clip]{Figures/Molecular_mechanics-potential_energy_function-with-continuum_solvent.png}
+\end{figure}
+}
+
 \frame
 {
 	\frametitle{原子:~原子核与电荷密度}
@@ -228,19 +257,6 @@
 
 \frame
 {
-	\frametitle{原子间相互作用的经典描述:~力场}
-\begin{figure}[h!]
-\centering
-\vspace{-10.5pt}
-%\caption{\textrm{The wave-particle duality and Photoelectric effect}}
-\includegraphics[height=1.45in,width=2.00in,viewport=0 0 600 430,clip]{Figures/H2-bonding.jpg}\\
-\includegraphics[height=1.45in,width=1.20in,viewport=0 0 323 420,clip]{Figures/Bond_stretching_energy.png}
-\label{Bond_stretching-model}
-\end{figure}
-}
-
-\frame
-{
 	\frametitle{原子间相互作用:~原子核/离子实与电荷密度}
 \begin{figure}[h!]
 \centering
@@ -249,30 +265,6 @@
 \includegraphics[height=1.70in,width=1.60in,viewport=0 0 170 180,clip]{Figures/Structure_of_water_molecule.jpg}\\
 \includegraphics[height=1.20in,width=2.20in,viewport=0 0 480 280,clip]{Figures/H2O_bond.png}
 \label{MO-Bond_model-H2O}
-\end{figure}
-}
-
-\frame
-{
-	\frametitle{电荷密度与力场}
-\begin{figure}[h!]
-\centering
-\vspace{-10.5pt}
-%\caption{\textrm{The wave-particle duality and Photoelectric effect}}
-\includegraphics[height=2.90in,width=3.2in,viewport=0 0 870 780,clip]{Figures/Molecular_electrostatic_potential_(MEP)-surface-and-ﬁtting-point_charges-to-the-electrostatic_potential-of-N-(2_bromoethyl)_phthalimide.png}
-\label{MO-potential_density}
-\end{figure}
-}
-
-\frame
-{
-	\frametitle{力场的具象描述:~成键}
-\begin{figure}[h!]
-\centering
-\label{MO-Bond_charge-density}
-\vspace{-3.5pt}
-%\caption{\textrm{The wave-particle duality and Photoelectric effect}}
-\includegraphics[height=2.70in,width=4.00in,viewport=0 0 355 260,clip]{Figures/Molecular_mechanics-potential_energy_function-with-continuum_solvent.png}
 \end{figure}
 }
 
@@ -300,9 +292,63 @@
 \end{figure}
 }
 
+\frame[allowframebreaks]
+{
+	\frametitle{原子间相互作用的经典描述:~力场}
+	原子间受力一般用\textcolor{red}{力场}(\textrm{Force Field}，也就是“\textcolor{blue}{相互作用势}”)描述，力场的形式有很多种，典型力场的有
+	\begin{itemize}
+		\item \textrm{Lennard-Jones}势
+\begin{figure}[h!]
+\centering
+\vskip -0.35in
+%\includegraphics[height=1.00in,width=1.35in,viewport=0 0 340 270,clip]{Figures/Lennard-Jones_potential.png}
+\includegraphics[height=1.00in,width=1.40in,viewport=0 0 600 430,clip]{Figures/H2-bonding.jpg}\\
+\caption{\tiny \textrm{The Lennard-Jones Potential.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Potential-Lennard-Jones}
+\end{figure}
+	\begin{displaymath}
+		U(r)=4\varepsilon\bigg[\bigg(\dfrac{\sigma}{r}\bigg)^{12}-\bigg(\dfrac{\sigma}{r}\bigg)^6\bigg]
+	\end{displaymath}
+	{\fontsize{7.0pt}{6.2pt}\selectfont{这里$\varepsilon$和$\sigma$是和原子有关的参数
+	\textrm{L-J}势能的最低点在$r_{\min}=2^{(1/6)}\sigma\approx1.12\sigma$，$r<r_{\min}$时为排斥力，$r>r_{\min}$时为吸引力
+%\vskip -50pt
+%	由\textrm{L-J}势改造，可以得到\textrm{WCA}势和\textrm{PHS}势
+}}
+\item \textrm{Morse}势
+	\begin{displaymath}
+		U(r)=-D_{\mathrm{e}}+D_{\mathrm{e}}\bigg(1-\mathrm{e}^{-a(r-r_{\mathrm{e}})}\bigg)^2
+	\end{displaymath}
+	{\fontsize{7.2pt}{6.2pt}\selectfont{这里$D_{\mathrm{e}}$是\textrm{Morse}势的势阱深，参数$a$确定势阱宽度，$r_{\mathrm{e}}$是原子处于平衡位置的平衡键长
+\begin{figure}[h!]
+\centering
+\vspace*{-0.15in}
+\includegraphics[height=1.25in,width=1.10in,viewport=0 0 323 420,clip]{Figures/Bond_stretching_energy.png}
+\includegraphics[height=1.30in,width=1.85in,viewport=0 0 3540 2770,clip]{Figures/Morse-potential.png}
+\caption{\tiny \textrm{The Morse potential (blue) and harmonic oscillator potential (green).}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Potential-Morse}
+\end{figure}
+}}
+\item \textrm{EAM}势\\
+	{\fontsize{9.5pt}{6.2pt}\selectfont{对于金属晶体，内能虽可以表示为对相互作用之和，但拟合原子受力非常困难\footnote{\fontsize{5.2pt}{3.2pt}\selectfont{应用二体势计算金属弹性常数时必须涉及对体积很敏感的能量项，因为涉及缺陷、表面的体积很难确定。}}:
+	\vskip 2pt
+	\textcolor{red}{从物理上说金属原子处于电子海洋中，电子密度来自多个原子的贡献，这是自由电子气带来的多体效应}}
+	\vskip 2pt
+	\textrm{EAM}将金属中原子的势能表示为二体势和多体势之和
+	\begin{displaymath}
+		E_i=F_{\alpha}\bigg(\sum_{j\neq i}\rho_{\beta}(r_{ij})\bigg)+\dfrac12\sum_{j\neq i}\phi_{\alpha\beta}(\vec r_{ij})
+	\end{displaymath}}
+	{\fontsize{7.2pt}{6.2pt}\selectfont{$\alpha$和$\beta$分别为位置$i$、$j$处的原子类型\\
+		$\phi$是二体势，是原子$\alpha$和$\beta$和原子间距$r_{ij}$的函数\\
+		$F$是多体势，是其余原子在位置$i$处的电荷密度与位置$i$处原子$\alpha$的相互作用能，由原子类型$\alpha$和位置$i$处的电子密度确定\\
+		位置$j$原子在位置$i$处产生的电荷密度$\rho$只与位置$j$处原子类型$\beta$和原子间距$r_{ij}$有关，与方向无关}}
+	\vskip 1pt
+	{\fontsize{8.5pt}{6.2pt}\selectfont{各类\textrm{EAM}势中，$\phi(r)$、$\rho(r)$和$F(\rho)$都不是解析的，以数值形式存储}}
+	\end{itemize}
+}
+
 \frame
 {
-	\frametitle{化学键}
+	\frametitle{化学反应与化学键}
 化学反应:~\textcolor{purple}{伴随旧的化学键的断裂和新的化学键的生成}
 \begin{figure}[h!]
 \centering
@@ -566,48 +612,48 @@
 \end{figure}
 }
 
-\begin{frame}
-	\frametitle{数的信仰}
-\begin{figure}[h!]
-\centering
-\vspace{-15.5pt}
-\includegraphics[height=1.30in,width=2.60in,viewport=0 0 600 290,clip]{Figures/pythagorean_numerology.png}
-\includegraphics[height=1.20in,width=2.60in,viewport=0 0 850 400,clip]{Figures/quote_pythagoras.jpg}
-\caption{\tiny 万物皆数\textrm{(All is number)}信仰}
-\label{Pythagoras_numerology}
-\end{figure}
-\end{frame}
-
-\begin{frame}
-	\frametitle{无理数的挑战}
-	\begin{itemize}
-		\item \textcolor{red}{有理数}:~\textrm{rational number} ~~~ {\fontsize{7.5pt}{6.0pt}\selectfont{\textcolor{magenta}{\textrm{rate}} $\Longrightarrow$ \textrm{ration} $\longrightarrow$ \textcolor{violet}{\textrm{rational}}}}
-		\item \textcolor{blue}{无理数}:~\textrm{irrational number}
-	\end{itemize}
-\begin{figure}[h!]
-\centering
-\vspace{-10.5pt}
-\includegraphics[height=1.80in,width=1.80in,viewport=0 0 110 110,clip]{Figures/Pi_sqrt2.jpeg}
-\includegraphics[height=1.80in,width=1.80in,viewport=0 0 317 316,clip]{Figures/coordinate-plane.png}
-\caption{\tiny \textrm{$\pi$、$\sqrt 2$、$\sqrt 3$ from a circle and a coordinate plane.}}
-\label{Pi_sqrt2}
-\end{figure}
-\end{frame}
-
-\begin{frame}
-	\frametitle{复数的物理意义}
-	\begin{displaymath}
-		\textcolor{blue}{z}=a+b\textcolor{red}{\mathbf{i}}
-	\end{displaymath}
-\begin{figure}[h!]
-\centering
-\vspace{-5.5pt}
-\includegraphics[height=1.90in,width=4.00in,viewport=0 0 1052 566,clip]{Figures/RLC_series_circuit.png}
-\caption{\tiny \textrm{The imaginary in RLC series circuit.}}
-\label{complex_imaginary}
-\end{figure}
-\end{frame}
-
+%\begin{frame}
+%	\frametitle{数的信仰}
+%\begin{figure}[h!]
+%\centering
+%\vspace{-15.5pt}
+%\includegraphics[height=1.30in,width=2.60in,viewport=0 0 600 290,clip]{Figures/pythagorean_numerology.png}
+%\includegraphics[height=1.20in,width=2.60in,viewport=0 0 850 400,clip]{Figures/quote_pythagoras.jpg}
+%\caption{\tiny 万物皆数\textrm{(All is number)}信仰}
+%\label{Pythagoras_numerology}
+%\end{figure}
+%\end{frame}
+%
+%\begin{frame}
+%	\frametitle{无理数的挑战}
+%	\begin{itemize}
+%		\item \textcolor{red}{有理数}:~\textrm{rational number} ~~~ {\fontsize{7.5pt}{6.0pt}\selectfont{\textcolor{magenta}{\textrm{rate}} $\Longrightarrow$ \textrm{ration} $\longrightarrow$ \textcolor{violet}{\textrm{rational}}}}
+%		\item \textcolor{blue}{无理数}:~\textrm{irrational number}
+%	\end{itemize}
+%\begin{figure}[h!]
+%\centering
+%\vspace{-10.5pt}
+%\includegraphics[height=1.80in,width=1.80in,viewport=0 0 110 110,clip]{Figures/Pi_sqrt2.jpeg}
+%\includegraphics[height=1.80in,width=1.80in,viewport=0 0 317 316,clip]{Figures/coordinate-plane.png}
+%\caption{\tiny \textrm{$\pi$、$\sqrt 2$、$\sqrt 3$ from a circle and a coordinate plane.}}
+%\label{Pi_sqrt2}
+%\end{figure}
+%\end{frame}
+%
+%\begin{frame}
+%	\frametitle{复数的物理意义}
+%	\begin{displaymath}
+%		\textcolor{blue}{z}=a+b\textcolor{red}{\mathbf{i}}
+%	\end{displaymath}
+%\begin{figure}[h!]
+%\centering
+%\vspace{-5.5pt}
+%\includegraphics[height=1.90in,width=4.00in,viewport=0 0 1052 566,clip]{Figures/RLC_series_circuit.png}
+%\caption{\tiny \textrm{The imaginary in RLC series circuit.}}
+%\label{complex_imaginary}
+%\end{figure}
+%\end{frame}
+%
 \frame
 {
 	\frametitle{\textcolor{red}{公理体系}:~现代科学的逻辑起点}
@@ -768,17 +814,6 @@
 \label{Method-Procedure}
 \end{figure}
 }
-
-\begin{frame}{科学研究的重要助手:~计算模拟}
-\begin{figure}[h!]
-\vspace*{-0.18in}
-\centering
-\includegraphics[height=2.55in,width=4.05in]{Figures/Schematic_Material-Design.png}
-%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{Schematic_Material-Design}
-\end{figure}
-\end{frame}
 
 \frame
 {
@@ -1000,6 +1035,18 @@
 \end{figure}
 }
 
+\frame
+{
+	\frametitle{电荷密度与力场}
+\begin{figure}[h!]
+\centering
+\vspace{-10.5pt}
+%\caption{\textrm{The wave-particle duality and Photoelectric effect}}
+\includegraphics[height=2.90in,width=3.2in,viewport=0 0 870 780,clip]{Figures/Molecular_electrostatic_potential_(MEP)-surface-and-ﬁtting-point_charges-to-the-electrostatic_potential-of-N-(2_bromoethyl)_phthalimide.png}
+\label{MO-potential_density}
+\end{figure}
+}
+
 \section{生物化学反应机理的模拟与常用软件}
 \subsection{\rm{QM/MM}与酶化学反应机理}
 \frame
@@ -1098,6 +1145,36 @@
 	\item 非键作用(即\textrm{van~der~Waals~(vdW)}和静电相互作用)
 \end{itemize}}}
 }
+
+\begin{frame}[allowframebreaks]
+	\frametitle{\textrm{QM/MM}重叠区域的定量计算}
+	\textrm{QM/MM}重叠体系的能量计算有两类方案
+	\begin{itemize}
+		\item 扣减法\textrm{(subtractive scheme)}:
+			\begin{displaymath}
+				E(\mathrm{QM/MM})=E^{\mathrm{QM}}(\mathrm{QM})+E^{\mathrm{MM}}(\mathrm{QM}+\mathrm{MM})-E^{\mathrm{MM}}(\mathrm{QM})
+			\end{displaymath}
+			{\fontsize{8.0pt}{4.2pt}\selectfont{其中$E^{\mathrm{MM}}(\mathrm{QM})$是用分子力学方法计算的\textrm{QM}区能量}}\\
+			\textcolor{blue}{该方法简单易行，但\textrm{QM}-\textrm{MM}区相互作用只考虑到\textrm{MM}量级}
+		\item 高精度方法:
+			\begin{displaymath}
+				\begin{aligned}
+					&E(\mathrm{QM/MM})=\textcolor{magenta}{\sum_{I^{\prime}=1}^{\mathrm{MM}}\bigg[\int\mathrm{d}\vec r\dfrac{q_{I^{\prime}}\rho(\vec r)}{|\vec R_{I^{\prime}}-\vec r|}+\sum_{I=1}^{\mathrm{QM}}\dfrac{q_{I^{\prime}}q_{I}}{|\vec R_{I^{\prime}}-\vec R_I|}\bigg]}\\
+					+&\textcolor{violet}{\sum_{\mathrm{\fontsize{5.0pt}{2.0pt}\selectfont{non\textendash boundedr~pairs}}}\bigg(\dfrac{A_{II^{\prime}}}{R_{II^{\prime}}^{12}}-\dfrac{B_{II^{\prime}}}{R_{II^{\prime}}^6}\bigg)}+\textcolor{cyan}{\sum_{\mathrm{bonds}}k_r(R_{II^{\prime}}-r_0)^2}\\
+					+&\textcolor{brown}{\sum_{\mathrm{angles}}k_{\theta}(\theta-\theta_0)^2}+\textcolor{brown}{\sum_{\mathrm{torsions}}\sum_nk_{\phi,n}[\cos(n\phi+\delta_n)+1]}
+				\end{aligned}
+			\end{displaymath}
+			{\fontsize{8.0pt}{4.2pt}\selectfont{下标$I$表示\textrm{QM}区的原子核，而下标$I^{\prime}$表示\textrm{MM}区的原子核}}
+			\begin{enumerate}
+				{\fontsize{7.0pt}{4.2pt}\selectfont{
+				\item \textcolor{magenta}{前两项}表示\textrm{QM}区\underline{电荷密度}(源于电子与离子电荷)与\textrm{MM}区\underline{经典电荷}的总的相互作用
+				\item \textcolor{violet}{第三项}表示在\textrm{QM/MM}区域的色散相互作用
+				\item \textcolor{cyan}{第四项}表示在\textrm{QM/MM}区共价键的伸缩振动势函数
+				\item \textcolor{brown}{最后两项}表示\textrm{QM/MM}区共价键的弯曲和旋转振动势函数}}\\
+					{\fontsize{6.0pt}{4.2pt}\selectfont{\textcolor{red}{$\theta$和$\phi$由\textrm{QM}与\textrm{MM}区域原子构成的夹角}}}
+			\end{enumerate}
+	\end{itemize}
+\end{frame}
 
 \frame
 {
@@ -1287,6 +1364,17 @@
 %\nocite*{}
 }
 %-----------------------------------------------------------------------------------------------------------------------------------------------------------------------%
+\begin{frame}{科学研究的重要助手:~计算模拟}
+\begin{figure}[h!]
+\vspace*{-0.18in}
+\centering
+\includegraphics[height=2.55in,width=4.05in]{Figures/Schematic_Material-Design.png}
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Schematic_Material-Design}
+\end{figure}
+\end{frame}
+
 \frame
 {
 	\frametitle{生命科学的研究思想:~分化\textrm{.vs.}整合}
