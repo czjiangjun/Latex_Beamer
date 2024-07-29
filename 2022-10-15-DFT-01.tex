@@ -155,7 +155,7 @@
 %\label{Black_box}
 %\end{figure}
 %	{\fontsize{8.0pt}{4.2pt}\selectfont{
-%\textrm{1896}年，\textrm{Wien}从热力学角度提出黑体辐射强度的近似表示:
+%\textrm{1896}年，\textrm{Wien}从热力学角度提出，将组成黑体空腔腔壁的粒子看作带电的线性谐振子，假设谐振子能谱分布与\textrm{Maxwell}分子速率分布类似，得到黑体辐射强度的近似表示:
 %\begin{displaymath}
 %	\rho(\lambda, T)=c\cdot\dfrac1{\lambda^5}\cdot\mathrm{e}^{-c_1/\lambda T}
 %\end{displaymath}
@@ -164,9 +164,9 @@
 %%	\item 在温度较低或波长较短时，与实验一致性非常好
 %%	\item 在$\lambda T$较大时，会与实验存在偏差，并随$\lambda T$增大而增加
 %%\end{itemize}
-%%		随后\textrm{Rayeigh}指出，当$\lambda T$较大时，\textrm{Wien}近似中指数$\mathrm{e}^{-c_1/\lambda T}\rightarrow1$，此时辐射强度将与温度成正比
+%%		随后\textrm{Rayeigh}将\textrm{Boltzmann}统计物理的能量(按自由度)均分定理应用到电磁辐射上，则当$\lambda T$较大时，\textrm{Wien}近似中指数$\mathrm{e}^{-c_1/\lambda T}\rightarrow1$，此时辐射强度将与温度成正比
 
-%\textrm{Rayleigh-Jeans}公式\footnote{\fontsize{6.2pt}{4.2pt}\selectfont{\textrm{Rayleigh}提出，经\textrm{Jeans}作小的修正}}给出的黑体辐射
+%\textrm{Rayleigh-Jeans}公式\footnote{\fontsize{6.2pt}{4.2pt}\selectfont{\textrm{Rayleigh}提出，经\textrm{Jeans}作小的修正(即式中的系数8)}}给出的黑体辐射
 %	\begin{displaymath}
 %		\rho(\nu, T)\mathrm{d}\nu=\dfrac{8\pi k_{\mathrm{B}}T\nu^2}{c^2}\mathrm{d}\nu
 %	\end{displaymath}
@@ -197,7 +197,7 @@
 
 %\begin{frame}[allowframebreaks]
 %	\frametitle{黑体辐射与能量量子化}
-%\textrm{Planck}根据{Boltzmann}统计物理和\textrm{Maxwell}电动力学，提出:
+%\textrm{Planck}认为，辐射的黑体是由大量带电的谐振子组成的，它们可以发射和吸收辐射能，根据{Boltzmann}统计物理和\textrm{Maxwell}电动力学，提出:
 %
 %	{\fontsize{9.0pt}{4.2pt}\selectfont{
 %在频率(或波长)一定，振子的平均能量$\bar{\varepsilon}(\nu)$与单个振子体系的基元能量$\varepsilon_0(\nu)$的关系为\footnote{\fontsize{6.2pt}{4.2pt}\selectfont{\textcolor{red}{这是\textrm{Planck}放弃了能量均分原理，凭物理直觉猜出的辐射体系的能量密度的量子化分布}%，但是要推导出量子化分布的结果，会碰到\textrm{Laplace}逆变换和广义函数问题。\textrm{Laplace}逆变换具有不适定性(病态)、解的唯一性和稳定性等都遇到难题，任何近似的数值试探很容易陷入泥坑不能自拔;~广义函数差不多\textrm{40}年后才正式进入数学界的厅堂，并很快获得第二次世界大战后第一个\textrm{Fields}奖}}
@@ -214,6 +214,50 @@
 %\end{displaymath}
 %这就是能量量子化的概念}}
 %
+%$\ast$\textrm{Planck}对比了\textrm{Rayleigh}考虑黑体辐射的过程，将公式变形
+%\begin{displaymath}
+%	\rho_{\nu}\mathrm{d\nu}=\dfrac{c_2\nuk_{\mathrm{B}}}{\mathrm{e}^{c_2\nu k_{\mathrm{B}}/Tk_{\mathrm{B}}}-1}\dfrac{c_1}{c_2k_{\mathrm{B}}}\nu^2\mathrm{d}\nu
+%\end{displaymath}
+%注意到\textrm{Rayleigh}公式推导时，空腔中电磁波允许的振动模式的态密度函数数目为$N$\sim$\nu^2\mathrm{d}\nu$，因此
+%\begin{displaymath}
+%	\bar{\varepsilon}_{\nu}\equiv\dfrac{c_2\nu k_{\mathrm{B}}}{\mathrm{e}^{c_2\nu k_{\mathrm{B}}/Tk_{\mathrm{B}}}-1}
+%\end{displaymath}
+%被解释为频率$\nu$的允许的电磁波振动模的平均能量，并有
+%\begin{displaymath}
+%	\bar{\varepsilon}_{\nu}\equiv\dfrac{c_2\nu k_{\mathrm{B}}}{\mathrm{e}^{c_2\nu k_{\mathrm{B}}/Tk_{\mathrm{B}}}-1}=\dfrac{\mathrm{d}}{\mathrm{d}\beta}\ln\big(\textcolor{purple}{1-\mathrm{e}^{-\beta k_{\mathrm{B}}c_2\nu}}\big)
+%\end{displaymath}
+%这里$\beta=1/k_{\mathrm{B}}T$，考虑配分函数\textrm{(partition function)}:
+%\begin{displaymath}
+%	Z=\sum_{\varepsilon}\mathrm{e}^{-\beta\varepsilon}
+%\end{displaymath}
+%满足
+%\begin{displaymath}
+%	\bar{E}=-\dfrac{\mathrm{d}}{\mathrm{d}\beta}\ln Z=\dfrac{\mathrm{d}}{\mathrm{d}\beta}\ln\big(\textcolor{purple}{\sum_{\varepsilon}\mathrm{e}^{-\beta\varepsilon}}\big)=\dfrac{\sum_{\varepsilon}\varepsilon\mathrm{e}^{-\beta\varepsilon}}{\sum_{\varepsilon}\mathrm{e}^{-\beta\varepsilon}}
+%\end{displaymath}
+%因此令
+%\begin{displaymath}
+%	\textcolor{purple}{\sum_{\varepsilon}\mathrm{e}^{-\beta\varepsilon}=1-\mathrm{e}^{-\beta k_{\mathrm{B}}c_2\nu}}
+%\end{displaymath}
+%将等式左侧用等比级数展开，有
+%\begin{displaymath}
+%	\sum_{\varepsilon}\mathrm{e}^{-\beta\varepsilon}=1+\mathrm{e}^{-\beta k_{\mathrm{B}}c_2\nu}++\mathrm{e}^{-2\beta k_{\mathrm{B}}c_2\nu}++\mathrm{e}^{-3\beta k_{\mathrm{B}}c_2\nu}+$\cdots$
+%\end{displaymath}
+%由此可得递推关系
+%\begin{displaymath}
+%	\begin{aligned}
+%		\varepsilon_0=&0\\
+%		\varepsilon_1=&k_{\mathrm{B}}c_2\nu\\
+%		\varepsilon_2=&2k_{\mathrm{B}}c_2\nu\\
+%		&\cdots\\
+%		\varepsilon_n=&nk_{\mathrm{B}}c_2\nu
+%	\end{aligned}
+%\end{displaymath}
+%令$h=k_{\mathrm{B}}c_2$，因此有能量关系
+%\begin{displaymath}
+%	\varepsilon_n=nh\nu
+%\end{displaymath}
+%即\textrm{Planck}公式中，黑体辐射的空腔中，电磁波的能量是不连续的
+%`
 %	\textrm{Rayleigh-Jeans}公式是\textrm{Planck}黑体辐射公式低频下的近似结果
 %
 %	{\fontsize{9.0pt}{4.2pt}\selectfont{当$h\nu/k_{\mathrm{B}}T\ll1$时，可有
