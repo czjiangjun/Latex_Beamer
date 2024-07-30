@@ -83,4 +83,4 @@ cp Beamer_3-Bibliography_tmp Beamer_3-Bibliography.tex && rm Beamer_3-Bibliograp
 
 cd ..
 mv Beamer-Template_Main.pdf $1.pdf
-evince $1.pdf
+evince $1.pdf &
