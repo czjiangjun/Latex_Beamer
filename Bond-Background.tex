@@ -328,7 +328,7 @@
 \label{Potential-Morse}
 \end{figure}
 }}
-\item \textrm{EAM}势\\
+\item 金属的\textrm{EAM}势\\
 	{\fontsize{9.5pt}{6.2pt}\selectfont{对于金属晶体，内能虽可以表示为对相互作用之和，但拟合原子受力非常困难\footnote{\fontsize{5.2pt}{3.2pt}\selectfont{应用二体势计算金属弹性常数时必须涉及对体积很敏感的能量项，因为涉及缺陷、表面的体积很难确定。}}:
 	\vskip 2pt
 	\textcolor{red}{从物理上说金属原子处于电子海洋中，电子密度来自多个原子的贡献，这是自由电子气带来的多体效应}}
@@ -574,18 +574,18 @@
 \end{figure}
 }
 
-%\frame
-%{
-%	\frametitle{因果倒置:~\textrm{Delayed Choice Experiment}}
-%\begin{figure}[h!]
-%\centering
-%\vspace{-10.5pt}
-%\includegraphics[height=0.55\textwidth,width=1.0\textwidth,viewport=0 0 690 370,clip]{Figures/Schematic-diagram-of-delayed_choice-experiment.png}
-%\caption{\fontsize{5.2pt}{3.9pt}\selectfont{\textrm{Schematic diagram of Wheeler's delayed choice experiment with A Mach-Zehnder Interferometer.}}}
-%\label{Delayed_Choice-Experiment}
-%\end{figure}
-%}
-%
+\frame
+{
+	\frametitle{因果倒置:~\textrm{Delayed Choice Experiment}}
+\begin{figure}[h!]
+\centering
+\vspace{-10.5pt}
+\includegraphics[height=0.55\textwidth,width=1.0\textwidth,viewport=0 0 690 370,clip]{Figures/Schematic-diagram-of-delayed_choice-experiment.png}
+\caption{\fontsize{5.2pt}{3.9pt}\selectfont{\textrm{Schematic diagram of Wheeler's delayed choice experiment with A Mach-Zehnder Interferometer.}}}
+\label{Delayed_Choice-Experiment}
+\end{figure}
+}
+
 \frame
 {
 	\frametitle{量子力学量力学}
@@ -1138,12 +1138,25 @@
 \begin{displaymath}
 	E_{\mathrm{QM/MM}}=E_{\mathrm{QM},model}+E_{\mathrm{MM},env}+E_{\mathrm{QM/MM},interaction}
 \end{displaymath}
+}
+
+\frame
+{
+	\frametitle{\textrm{QM/MM}中的\textrm{MM}部分的力场}
 {\fontsize{6.0pt}{4.2pt}\selectfont{
-	\textrm{QM/MM}组合\textrm{Hamiltonian}($\mathbf{H}$)是模型和环境之间的相互作用，通常包括
+	\textrm{QM/MM}组合的\textrm{MM}部分\textrm{Hamiltonian}($\mathbf{H}$)的相互作用\\
+	(\textcolor{magenta}{通常包括与\textrm{QM/MM}边界一分为二的共价键部分})
 \begin{itemize}
-	\item 与\textrm{QM/MM}边界一分为二的共价键的成键作用(即拉伸、弯曲和扭转的贡献)
+	\item 共价键的成键作用(即拉伸、弯曲和扭转的贡献)
 	\item 非键作用(即\textrm{van~der~Waals~(vdW)}和静电相互作用)
 \end{itemize}}}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.05in}
+\includegraphics[height=2.05in,width=2.50in,viewport=0 0 650 524,clip]{Figures/Potential-energy-function-for-molecular-interactions-in-the-molecular-mechanics.png}
+\caption{\tiny \textrm{Potential energy function for molecular interactions in the molecular mechanics.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Potential-molecules}
+\end{figure}
 }
 
 \begin{frame}[allowframebreaks]
