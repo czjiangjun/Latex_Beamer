@@ -1,0 +1,173 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  不使用 authblk 包制作标题  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%-------------------------------PPT Title-------------------------------------
+\title{\rm{\ch{Ni}}表面\rm{\ch{CO2}}的吸附}
+%-----------------------------------------------------------------------------
+
+%----------------------------Author & Date------------------------------------
+%\author[\textrm{Jun\_Jiang}]{姜\;\;骏\inst{}} %[]{} (optional, use only with lots of authors)
+%% - Give the names in the same order as the appear in the paper.
+%% - Use the \inst{?} command only if the authors have different
+%%   affiliation.
+\institute[BCC]{\inst{}%
+%\institute[Gain~Strong]{\inst{}%
+\vskip 0pt 北京市计算中心有限公司~材料计算团队}
+%\vskip -20pt {\large 格致斯创~科技}}
+\date[\today] % (optional, should be abbreviation of conference name)
+{	%{\fontsize{6.2pt}{4.2pt}\selectfont{\textcolor{blue}{E-mail:~}\url{jiangjun@bcc.ac.cn}}}
+\vskip 45 pt {\fontsize{8.2pt}{6.2pt}\selectfont{%北京科技大学% 报告地点
+	\vskip 5 pt \textrm{2024.09.04}}}
+}
+
+%% - Either use conference name or its abbreviation
+%% - Not really information to the audience, more for people (including
+%%   yourself) who are reading the slides onlin%%   yourself) who are reading the slides onlin%%   yourself) who are reading the slides onlineee
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subject{}
+% This is only inserted into the PDF information catalog. Can be left
+% out.
+%\maketitle
+\frame
+{
+%	\frametitle{\fontsize{9.5pt}{5.2pt}\selectfont{\textcolor{orange}{“高通量并发式材料计算算法与软件”年度检查}}}
+\titlepage
+}
+%-----------------------------------------------------------------------------
+
+%------------------------------------------------------------------------------列出全文 outline ---------------------------------------------------------------------------------
+%\section*{}
+%\frame[allowframebreaks]
+%{
+%  \frametitle{}
+%%  \frametitle{\textcolor{mycolor}{\secname}}
+%  \tableofcontents%[current,currentsection,currentsubsection]
+%}
+%在每个section之前列出全部Outline
+%类似的在每个subsection之前列出全部Outline是\AtBeginSubsection[]
+%\AtBeginSection[]
+%{
+%  \frame<handout:0>%[allowframebreaks]
+%  {
+%    \frametitle{Outline}
+%%全部Outline中，本部分加亮
+%    \tableofcontents[current,currentsection]
+%  }
+%}
+
+%-----------------------------------------------PPT main Body------------------------------------------------------------------------------------
+\small
+\begin{frame}[allowframebreaks]
+	\frametitle{前期计算结果}
+	\begin{itemize}
+		\item 文献和我们的计算表明，甲醛基~\textrm{(\ch{HCO}$\cdot$)}的生成应该在\textrm{\ch{CO}}产生之后;~初始反应时，甲醛基~\textrm{(\ch{HCO}$\cdot$)}的生成比甲酸基~\textrm{(\ch{HCOO}$\cdot$)}和羧酸基~\textrm{($\cdot$\ch{COOH})}困难
+		\item 
+			\begin{enumerate}
+				\item 基底吸附\textrm{\ch{CO2}}的基态能量 $\mathrm{E}_{sub}^{\mathrm{CO_2}}=-1035.594648~\mathrm{eV}$
+				\item 反应中间体的基态能量 $\mathrm{E}_{sub}^{\mathrm{\chemfig{C(=[1,0.7]O)-[,0.7]OH}}}=-1037.7071~\mathrm{eV}$
+				\item 反应中间体的基态能量 $\mathrm{E}_{sub}^{\mathrm{\chemfig{HC(=[1,0.7]O)-[,0.7]O}}}=-1038.5303~\mathrm{eV}$
+				\item 基底吸附\textrm{CO}的基态能量 $\mathrm{E}_{sub}^{\mathrm{CO}}=-1028.222503~\mathrm{eV}$
+			\end{enumerate}
+		\item \textcolor{blue}{在\textrm{\ch{CO}}生成及后续可能的反应通道}\\
+	计算:~\textcolor{red}{实验关心的反应历程}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks]
+	\frametitle{计算验证}
+%	{\huge
+%		\setchemfig{atom sep=2em, bond style={line width=1pt, red, dash pattern=on 2pt off 2pt}}
+%		\chemname{\chemfig{H-C(-[2]H)(-[6]H)-C(=[1]O)-[7]H}}{Acetaldehyde}}
+	为了检验\textrm{\ch{CO}}与\textrm{H}的反应历程，设计方案
+\begin{itemize}
+	\item \textrm{\ch{CO}}加\textrm{\ch{H}}的能力:\\加在\textrm{\ch{C}}端(生成\textrm{\chemfig{H-[,0.3]C(=[1,0.7]O)-[6,0.3]}})%\chemfig{R-[:30]*-[:180]H}\\
+		~\textrm{\textcolor{blue}{vs}}~加在\textrm{\ch{O}}端(生成\textrm{\chemfig{C(=[1,0.7]O-[,0.3]H)(-[5,0.3])-[7,0.3]}})
+	\item 类比\textrm{\ch{CN}}和\textrm{\ch{NO}}的两端加\textrm{\ch{H}}能力
+	\item 系统类比加\textrm{\ch{H}}引起体系能量和电荷密度的变化
+\end{itemize}
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}[
+%    box/.style={rectangle,draw,node distance=1cm,text width=15em,text centered,rounded corners,minimum height=2em,thick},  %文字居中
+    box/.style={rectangle,draw,node distance=1cm,text width=18em,anchor=west,rounded corners,minimum height=5em,thick},   %文字左对齐
+    arrow/.style={draw,-latex', red, line width=2pt},
+]
+\node [box](box){};
+\node [anchor=west, text width=1em] (H1) {\textrm{\ch{H}}};  %% anchor=west 文字左对齐
+\node [right=2 of H1] (CO) {\textrm{\chemfig{C~O}}};
+\path [arrow, draw=red, line width =0.5pt] (10.5em,0.2em) -- (8.5em, 0.2em);
+\node [right=5.5 of H1] (H2) {\textrm{\ch{H}}};
+\node [above=0.05 of CO] (CN) {\textrm{\chemfig{C(~N)}}};
+\draw [draw=red] (7.6em,1.6em) circle [radius=0.1em];
+\node [below=0.05 of CO] (NO) {\textrm{\chemfig{N(=O)}}};
+\filldraw [fill=red, draw=red] (9.6em,-1.2em) circle [radius=0.1em];
+\filldraw [fill=red, draw=red] (11.7em,-1.4em) circle [radius=0.1em];
+\filldraw [fill=red, draw=red] (11.7em,-1.8em) circle [radius=0.1em];
+% \path [arrow] (Method) -- (Softwares);
+  \path [arrow, dotted] (CO) -- (H1);
+  \path [arrow, draw=blue, dotted] (CO) -- (H2);
+\end{tikzpicture}
+\caption{\tiny{\textrm{\ch{CO}、\ch{CN}、\ch{NO}}分子两端加\textrm{\ch{H}}的示意，不同距离的\textrm{X-H~(X=C、N、O)}，示意加\textrm{H}的动力学过程}}
+\label{Molecules}
+\end{figure}
+反应模型:~活化的\textrm{\ch{CO}}与\textrm{\ch{H}}
+\begin{figure}[h!]
+\centering
+%\vspace*{-0.10in}
+\includegraphics[height=2.00in,width=1.9in, viewport=1870 350 2950 1500, clip]{/home/jun-jiang/BCC/2023-NICE/Ni-CO2/图片/能量测试结构/活化C-O---H.png}
+\includegraphics[height=2.00in,width=1.9in, viewport=1870 350 2950 1500, clip]{/home/jun-jiang/BCC/2023-NICE/Ni-CO2/图片/能量测试结构/活化H---C-O.png}
+\caption{\tiny \textrm{The front view of model for \ch{CO}-activated compounded with \ch{H} by \ch{O}-end (left) and \ch{C}-end (right).}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Model:CO-H}
+\end{figure}
+反应模型:~活化的\textrm{\ch{CN}}与\textrm{\ch{H}}
+\begin{figure}[h!]
+\centering
+%\vspace*{-0.10in}
+\includegraphics[height=2.00in,width=1.9in, viewport=1870 350 2950 1500, clip]{/home/jun-jiang/BCC/2023-NICE/Ni-CO2/图片/能量测试结构/活化C-N---H.png}
+%\includegraphics[height=2.00in,width=1.9in, viewport=1870 350 2950 1500, clip]{/home/jun-jiang/BCC/2023-NICE/Ni-CO2/图片/能量测试结构/活化H---C-O.png}
+\caption{\tiny \textrm{The front view of model for \ch{CN}-activated compounded with \ch{H} by \ch{N}-end.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Model:CN-H}
+\end{figure}
+反应模型:~活化的\textrm{\ch{NO}}与\textrm{\ch{H}}
+\begin{figure}[h!]
+\centering
+%\vspace*{-0.10in}
+\includegraphics[height=2.00in,width=1.9in, viewport=1870 350 2950 1500, clip]{/home/jun-jiang/BCC/2023-NICE/Ni-CO2/图片/能量测试结构/活化N-O---H.png}
+\includegraphics[height=2.00in,width=1.9in, viewport=1870 350 2950 1500, clip]{/home/jun-jiang/BCC/2023-NICE/Ni-CO2/图片/能量测试结构/活化H---N-O.png}
+\caption{\tiny \textrm{The front view of model for \ch{NO}-activated compounded with \ch{H} by \ch{O}-end (left) and \ch{N}-end (right).}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Model:NO-H}
+\end{figure}
+
+差分电荷表示:~活化的\textrm{\ch{CO}}与\textrm{\ch{H}}反应
+\begin{figure}[h!]
+\centering
+%\vspace*{-0.10in}
+\includegraphics[height=2.00in,width=1.9in, viewport=1870 850 2950 1880, clip]{/home/jun-jiang/BCC/2023-NICE/Ni-CO2/图片/差分电荷/俯视活化C-O---H.png}
+\includegraphics[height=2.00in,width=1.9in, viewport=1870 480 2950 1780, clip]{/home/jun-jiang/BCC/2023-NICE/Ni-CO2/图片/差分电荷/正视活化C-O---H.png}
+\caption{\tiny \textrm{The top-view (left) and front-view (right) of charge-density difference for \ch{CO}-activated compounded with \ch{H}.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Charge-density_difference:CO}
+\end{figure}
+差分电荷表示:~活化的\textrm{\ch{NO}}与\textrm{\ch{H}}反应
+\begin{figure}[h!]
+\centering
+%\vspace*{-0.10in}
+\includegraphics[height=2.00in,width=1.9in, viewport=1870 850 2950 1880, clip]{/home/jun-jiang/BCC/2023-NICE/Ni-CO2/图片/差分电荷/俯视活化N-O---H.png}
+\includegraphics[height=2.00in,width=1.9in, viewport=1870 480 2950 1780, clip]{/home/jun-jiang/BCC/2023-NICE/Ni-CO2/图片/差分电荷/正视活化N-O---H.png}
+\caption{\tiny \textrm{The top-view (left) and front-view (right) of charge-density difference for \ch{NO}-activated compounded with \ch{H}.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Charge-density_difference:NO}
+\end{figure}
+能量-键长呈现的反应动力学可能性
+\begin{figure}[h!]
+\centering
+%\vspace*{-0.10in}
+%\includegraphics[height=2.10in,width=4.0in, viewport=0 0 360 200, clip]{/home/jun-jiang/BCC/2023-NICE/Ni-CO2/X-H_E.eps}
+\caption{\tiny 金属表面吸附的\textrm{\ch{CO}、\ch{CN}、\ch{NO}}分子与\textrm{\ch{H}}相互作用的能量随\textrm{X-H~(X=C、N、O)}间距的变化}%\textrm{The energy of  of \ch{CO2} activation over \ch{Ni}.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{X-H_E}
+\end{figure}
+\newpage
+对比金属表面吸附的\textrm{\ch{CN}}、\textrm{\ch{CO}}、\textrm{\ch{NO}}
+\begin{itemize}
+	\item \textrm{\ch{CO}}更明显地倾向\textrm{\ch{C}}端与\textrm{\ch{H}}优先反应
+%	\item \textrm{\ce{CO2->[+H2]COOH}\ce{->[-H2O]CO}\ce{->[+H2]COH}}
+	\item \textrm{\ce{CO2 ->[\ce{+H2}] COOH ->[\ce{-H2O}] CO ->[\ce{+H2}] \chemfig{H-[,0.3]C(=[1,0.7]O)-[6,0.3]} ->[\ce{+H2}] $\cdots$ -> CH4}}
+\end{itemize}
+
+\end{frame}
