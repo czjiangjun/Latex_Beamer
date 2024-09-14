@@ -1,10 +1,18 @@
 \appendix
 %------------------------------------------------------------------------Reference----------------------------------------------------------------------------------------------
 %-----------------------------------------------------------Beamer下不建议使用bib,因为涉及分页--------------------------------------------------------------------------%
+%\begin{thebibliography}{99}								      %
 \frame[allowframebreaks]
 {
 \frametitle{主要参考文献}
 {\tiny\textrm{
+%\setlength{\bibsep}{0em}  %%设置参考文献间距
+%--------%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%--------%
+%%\bibitem{PRL58-65_1987}H.Feil, C. Haas, {\it Phys. Rev. Lett.} {\bf 58}, 65 (1987).         %
+%\bibitem{kp-method} \textrm{Zhenxi Pan, Yong Pan, Jun Jiang$^{\ast}$, Liutao Zhao}, \textrm{High-Throughput Electronic Band Structure Calculations for Hexaborides}, \textit{Intelligent Computing}, \textbf{Springer}, \textbf{P.386-395}, (2019).              %
+%\bibitem{QCQC_2014} \textrm{姜骏}，\textrm{PAW原子数据集的构造与检验}, \textit{中国化学会第十二届全国量子化学会议论文摘要集}，\textbf{太原}，(2014).
+%											      %
+
 %\phantomsection\addcontentsline{toc}{section}{Bibliography}	 %直接调用\addcontentsline命令可能导致超链指向不准确,一般需要在之前调用一次\phantomsection命令加以修正	%
 %\phantomsection\addcontentsline{toc}{section}{主要参考文献}	 %直接调用\addcontentsline命令可能导致超链指向不准确,一般需要在之前调用一次\phantomsection命令加以修正	%
 	\bibliography{$PATHPWD/Myref}				%%$PATH用于脚本指定图片路径
@@ -12,6 +20,9 @@
 \bibliographystyle{$PATHPWD/mybib}				%%$PATH用于脚本指定图片路径
 %\bibliographystyle{../ref/mybib}%
 }}
+%\printbibliography[heading=bibintoc, title=参考文献]    %%在目录列表中列出参考文献，title可自定义
+
 %\nocite{*}%
 }
+%\end{thebibliography}								              %
 %-----------------------------------------------------------------------------
