@@ -11,16 +11,15 @@
 #%									%
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 # echo $1
-Figures=Figures
+Figures=Figures/
 #if [[ "$2" ]]; then
 #	Figures=`echo $2 | awk -F "=" '{print $2}'`
-#	if [ -d $Figures ]; then
-##		cd $Figures && pwd
-#		Figures=$Figures
+	if [ -d $Figures ]; then
+		cd $Figures && Figures=`pwd`&& cd ..
 #	else
 #		echo "There is NO Figures_Dir"
 #		exit
-#	fi
+	fi
 #fi
 while [[ ! -d $Figures ]];
 do
@@ -31,7 +30,7 @@ done
 # echo $Figures
 # exit
 
-References=../Reference
+References=/home/jun-jiang/Documents/Reference
 #if [[ "$3" ]]; then
 #	References=`echo $3 | awk -F "=" '{print $2}'`
 #	if [ -d $References ]; then
@@ -53,12 +52,14 @@ done
 # exit
 
 PATH_Local=`pwd`
-test -s Beamer_Template/Beamer_Template-Preamble.tex && cp Beamer_Template/Beamer_Template-Preamble.tex  Beamer_Template/Beamer_Template-Preamble_tmp
-sed -e "s#\$PATHPWD#`echo $PATH_Local`#" Beamer_Template/Beamer_Template-Preamble_tmp > Beamer_Template/Beamer_Template-Preamble.tex
+test -s Beamer_Template/Beamer_Template-Preamble_tmp && mv Beamer_Template/Beamer_Template-Preamble_tmp  Beamer_Template/Beamer_Template-Preamble.tex
+	cp Beamer_Template/Beamer_Template-Preamble.tex  Beamer_Template/Beamer_Template-Preamble_tmp
+sed -e "s#\$PATHPWD#`echo $Figures `#" Beamer_Template/Beamer_Template-Preamble_tmp > Beamer_Template/Beamer_Template-Preamble.tex
 # PATHFIG=`pwd`
 # test -e Beamer_Template/Beamer_Template-Preamble.tex &&  awk '{if(NR>=117 && NR<=117) print "\graphicspath{{" "$PATHFIG" "/}}"}' Beamer_Template/Beamer_Template-Preamble.tex
 
-test -s Beamer_Template/Beamer_3-Bibliography.tex && cp Beamer_Template/Beamer_3-Bibliography.tex  Beamer_Template/Beamer_3-Bibliography_tmp
+test -s Beamer_Template/Beamer_3-Bibliography_tmp && mv Beamer_Template/Beamer_3-Bibliography_tmp  Beamer_Template/Beamer_3-Bibliography.tex
+       	cp Beamer_Template/Beamer_3-Bibliography.tex  Beamer_Template/Beamer_3-Bibliography_tmp
 cd $References && PATH_Reference=`pwd`
 cd $PATH_Local && sed -e "s#\$PATHPWD#`echo $PATH_Reference`#g"  Beamer_Template/Beamer_3-Bibliography_tmp > Beamer_Template/Beamer_3-Bibliography.tex 
 

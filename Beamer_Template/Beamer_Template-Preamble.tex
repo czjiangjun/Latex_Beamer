@@ -118,34 +118,34 @@
 %\beamersetaveragebackground{gray}                          %设置背景颜色(单一色) 
 \beamertemplateshadingbackground{green!10}{red!5}         %设置背景颜色(渐变色)
 
-\graphicspath{{/home/jiangjun/Documents/Latex_Beamer/}}                           %$PATH用于脚本指定图片路径
+\graphicspath{{$PATHPWD}}                           %$PATH用于脚本指定图片路径
 %\graphicspath{{/home/jun-jiang/Documents/Latex_Beamer/Figures/}}   %直接指定图片绝对路径
 %\graphicspath{{/home/jiangjun/Documents/Latex_Beamer/Figures/}}   %直接指定图片绝对路径
 
 %i放置单位logo
-%\logo{\includegraphics[width=1.6cm,height=0.35cm]{Figures/BCC_logo-1.png}}	%简单设置logo
+%\logo{\includegraphics[width=1.6cm,height=0.35cm]{BCC_logo-1.png}}	%简单设置logo
 
-%\pgfdeclareimage[width=3.5cm]{logoname}{Figures/BCC_logo-1.png}		%logo置于左侧微调
+%\pgfdeclareimage[width=3.5cm]{logoname}{BCC_logo-1.png}		%logo置于左侧微调
 %\logo{\pgfuseimage{logoname}{\vspace{0.2cm}\hspace*{-2.0cm}}}
 
 %在指定位置精确放置logo
 \usepackage{beamerfoils}
 \usepackage{pgf}
-\logo{\pgfputat{\pgfxy(11.68,0.15)}{\includegraphics[height=1.01cm,viewport=0 0 140 120,clip]{Figures/BCC_logo-1.png}}\pgfputat{\pgfxy(10.502,-0.218)}{\includegraphics[height=0.369cm,viewport=140 0 540 120,clip]{Figures/BCC_logo-1.png}}}
-%\logo{\pgfputat{\pgfxy(11.68,0.15)}{\includegraphics[height=0.95cm,viewport=0 0 510 360,clip]{Figures/Logo_Gainstrong.png}}\pgfputat{\pgfxy(10.333,-0.195)}{\includegraphics[height=0.35cm,viewport=530 70 1100 218,clip]{Figures/Logo_Gainstrong.png}}}
-%\logo{\pgfputat{\pgfxy(10.28,0.00)}{\includegraphics[height=0.95cm,viewport=0 0 1100 360,clip]{Figures/Logo_Gainstrong.png}}}
-%\logo{\pgfputat{\pgfxy(11.68,0.15)}{\includegraphics[height=0.95cm,viewport=0 0 510 360,clip]{Figures/Logo_Gainstrong.png}}\pgfputat{\pgfxy(10.333,-0.195)}{\includegraphics[height=0.35cm,viewport=530 70 1100 218,clip]{Figures/Logo_Gainstrong.png}}}
-%\logo{\pgfputat{\pgfxy(10.68,0.00)}{\includegraphics[height=1.20cm,viewport=0 15 400 430,clip]{Figures/seal_Jiang-2.jpg}}
-      %\pgfputat{\pgfxy(10.817,-0.218)}{\includegraphics[height=0.47cm,viewport=20 0 670 350,clip]{Figures/signature_Jiang_new.jpg}}
+\logo{\pgfputat{\pgfxy(11.68,0.15)}{\includegraphics[height=1.01cm,viewport=0 0 140 120,clip]{BCC_logo-1.png}}\pgfputat{\pgfxy(10.502,-0.218)}{\includegraphics[height=0.369cm,viewport=140 0 540 120,clip]{BCC_logo-1.png}}}
+%\logo{\pgfputat{\pgfxy(11.68,0.15)}{\includegraphics[height=0.95cm,viewport=0 0 510 360,clip]{Logo_Gainstrong.png}}\pgfputat{\pgfxy(10.333,-0.195)}{\includegraphics[height=0.35cm,viewport=530 70 1100 218,clip]{Logo_Gainstrong.png}}}
+%\logo{\pgfputat{\pgfxy(10.28,0.00)}{\includegraphics[height=0.95cm,viewport=0 0 1100 360,clip]{Logo_Gainstrong.png}}}
+%\logo{\pgfputat{\pgfxy(11.68,0.15)}{\includegraphics[height=0.95cm,viewport=0 0 510 360,clip]{Logo_Gainstrong.png}}\pgfputat{\pgfxy(10.333,-0.195)}{\includegraphics[height=0.35cm,viewport=530 70 1100 218,clip]{Logo_Gainstrong.png}}}
+%\logo{\pgfputat{\pgfxy(10.68,0.00)}{\includegraphics[height=1.20cm,viewport=0 15 400 430,clip]{seal_Jiang-2.jpg}}
+      %\pgfputat{\pgfxy(10.817,-0.218)}{\includegraphics[height=0.47cm,viewport=20 0 670 350,clip]{signature_Jiang_new.jpg}}
 %}
-%\logo{\pgfputat{\pgfxy(11.68,0.252)}{\includegraphics[height=0.89cm,viewport=0 15 810 800,clip]{Figures/seal_Jiang-new.jpg}}\pgfputat{\pgfxy(10.762,-0.218)}{\includegraphics[height=0.49cm,viewport=20 0 670 350,clip]{Figures/signature_Jiang_new.jpg}}}
-%\logo{\pgfputat{\pgfxy(11.68,0.252)}{\includegraphics[height=0.90cm,viewport=0 15 400 430,clip]{Figures/seal_Jiang-2.jpg}}\pgfputat{\pgfxy(10.817,-0.218)}{\includegraphics[height=0.47cm,viewport=20 0 670 350,clip]{Figures/signature_Jiang_new.jpg}}}
+%\logo{\pgfputat{\pgfxy(11.68,0.252)}{\includegraphics[height=0.89cm,viewport=0 15 810 800,clip]{seal_Jiang-new.jpg}}\pgfputat{\pgfxy(10.762,-0.218)}{\includegraphics[height=0.49cm,viewport=20 0 670 350,clip]{signature_Jiang_new.jpg}}}
+%\logo{\pgfputat{\pgfxy(11.68,0.252)}{\includegraphics[height=0.90cm,viewport=0 15 400 430,clip]{seal_Jiang-2.jpg}}\pgfputat{\pgfxy(10.817,-0.218)}{\includegraphics[height=0.47cm,viewport=20 0 670 350,clip]{signature_Jiang_new.jpg}}}
 %\MyLogo{
-%	\pgfputat{\pgfxy(-50,-50)}{\pgfbox[right,base]{\includegraphics[height=1cm]{Figures/BCC_logo-1.png}}}
+%	\pgfputat{\pgfxy(-50,-50)}{\pgfbox[right,base]{\includegraphics[height=1cm]{BCC_logo-1.png}}}
 
 %logo作为背景放置
 %\setbeamertemplate{background}{
-%	\pgfputat{\pgfxy(6.5,-0.5)}{\pgfbox[left,top]{\pgfimage[height=1.1cm]{Figures/BCC_logo-1.png}}}}
+%	\pgfputat{\pgfxy(6.5,-0.5)}{\pgfbox[left,top]{\pgfimage[height=1.1cm]{BCC_logo-1.png}}}}
 
 %\logo{}									%不显示logo
 
