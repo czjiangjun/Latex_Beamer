@@ -1,16 +1,16 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  不使用 authblk 包制作标题  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %-------------------------------PPT Title-------------------------------------
-\title{赝势理论在第一原理计算方法中的地位}
+\title{第一原理计算中的赝势方法}
 %-----------------------------------------------------------------------------
 
 %----------------------------Author & Date------------------------------------
-\author[\textrm{Jun\_Jiang}]{姜\;\;骏\inst{}} %[]{} (optional, use only with lots of authors)
+\author[]{\vskip +10pt 姜\;\;骏\inst{}} %[]{} (optional, use only with lots of authors)
 %% - Give the names in the same order as the appear in the paper.
 %% - Use the \inst{?} command only if the authors have different
 %%   affiliation.
 \institute[BCC]{\inst{}%
 %\institute[Gain~Strong]{\inst{}%
-\vskip -20pt 北京市计算中心}
+\vskip -15pt 北京市计算中心}
 %\vskip -20pt {\large 格致斯创~科技}}
 \date[\today] % (optional, should be abbreviation of conference name)
 {	{\fontsize{6.2pt}{4.2pt}\selectfont{\textcolor{blue}{E-mail:~}\url{jiangjun@bcc.ac.cn}}}
@@ -35,15 +35,15 @@
 %-----------------------------------------------------------------------------
 
 %------------------------------------------------------------------------------列出全文 outline ---------------------------------------------------------------------------------
-%\section*{}
-%\frame[allowframebreaks]
-%{
-%  \frametitle{Outline}
-%%  \frametitle{\textcolor{mycolor}{\secname}}
-%  \tableofcontents%[current,currentsection,currentsubsection]
-%}
-%%在每个section之前列出全部Outline
-%%类似的在每个subsection之前列出全部Outline是\AtBeginSubsection[]
+\section*{}
+\frame[allowframebreaks]
+{
+	\frametitle{\textrm{Outline}}
+%  \frametitle{\textcolor{mycolor}{\secname}}
+  \tableofcontents%[current,currentsection,currentsubsection]
+}
+%在每个section之前列出全部Outline
+%类似的在每个subsection之前列出全部Outline是\AtBeginSubsection[]
 %\AtBeginSection[]
 %{
 %  \frame<handout:0>%[allowframebreaks]
@@ -56,6 +56,31 @@
 
 %-----------------------------------------------PPT main Body------------------------------------------------------------------------------------
 \small
+\frame{
+	\frametitle{密度泛函理论的优势}
+\begin{figure}[h!]
+\vskip -10pt
+\centering
+\includegraphics[height=2.65in,width=3.8in,viewport=0 0 362 275,clip]{Figures/DFT-particle-density.png}
+\caption{\fontsize{6.0pt}{4.5pt}\selectfont{\textrm{Properties of a quantum mechanical system can be calculated by solving the SE (left). A more tractable, formally equivalent way is to solve the DFT KS equations (right).}}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Schrodinger-equation-vs-Kohn-Sham-equation}
+\end{figure}
+密度泛函理论的优越性:~用密度($\rho$)代替波函数($\Psi$)描述体系\\体系基态能量用粒子密度表示:~$E[\rho]$
+}
+
+\frame
+{
+	\frametitle{固体第一原理计算软件概览}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.05in}
+%\hspace*{-0.80in}
+\includegraphics[height=2.30in,width=4.00in,viewport=0 0 920 500,clip]{Figures/DFT-Software.jpg}
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Abinitio-Softwares}
+\end{figure}
+}
+
 \frame
 {
 	\frametitle{\textrm{DFT-SCF}}
@@ -69,6 +94,17 @@
 \end{figure}
 }
 
+%\begin{frame}
+%\begin{figure}[h!]
+%\vspace*{-0.18in}
+%\centering
+%\includegraphics[height=1.75in,width=4.05in]{Figures/Wavefun-Density.png}
+%\caption{\tiny \textrm{The wavefunction and density functional theory.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\label{Wavefunction-Density}
+%\end{figure}
+%密度泛函理论的优越性:~用密度($\rho$)代替波函数($\Psi$)描述体系\\体系基态能量用粒子密度表示:~$E[\rho]$
+%\end{frame}
+%
 \frame                               %
 {
 	\frametitle{\textrm{Kohn-Sham}方程}
@@ -115,7 +151,7 @@ $$\Psi_l^{>}(\varepsilon,r)=C_l\bigg[j_l(\kappa r)-\tan\eta_l(\varepsilon)n_l(\k
 	\frametitle{散射相移与赝势}
 \begin{figure}[h!]
 \centering
-\vspace*{-0.25in}
+\vspace*{-0.20in}
 \includegraphics[height=1.20in,width=1.77in,viewport=0 0 1150 750,clip]{Figures/Pseudo-scatter-2.png}
 \caption{\fontsize{4.5pt}{3.2pt}\selectfont{\textrm{Radial wave-function $\phi=r\psi$ for low-energy scattering as illustrated in a figure from the 1934 and 1935 papers of Fermi and coworkers for low-energy electron scattering from atoms and neutron scattering from nuclei. The node in the wave-function near the origin show that the potential is attractive and strong enough to have bound states. The cross-section for scattering from the localized potential is determined by the phase shift and is the same for weaker pseudo-potential with the same phase shift modulo $2\pi$.}}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Pseudo-scatter-2}
@@ -155,9 +191,9 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 \frame
 {
 	\frametitle{由\textrm{OPW~}到赝势}
-	\textrm{Phillips-Kleinman}指出，赝势($V^{e\!f\!f}$)-赝波函数(可用$\phi_{PW}^{\vec k+\vec G}$展开)满足\textrm{Schr\"odinger}方程%\upcite{PR116-287_1959}
+	\textrm{Phillips-Kleinman}指出，有效势($V^{e\!f\!f}$)-赝波函数(可用$\phi_{PW}^{\vec k+\vec G}$展开)满足\textrm{Schr\"odinger}方程%\upcite{PR116-287_1959}
 	$$\bigg(-\dfrac12\nabla^2+\textcolor{red}{V^{e\!f\!f}}\bigg)|\tilde{\phi}_v\rangle=\textcolor{blue}{\varepsilon_v}|\tilde{\phi}_v\rangle$$
-	其中$\textcolor{red}{V^{e\!f\!f}}=V(\vec r)+\textcolor{blue}{V^R}$
+	其中$\textcolor{red}{V^{e\!f\!f}}=V(\vec r)+\textcolor{blue}{V^R}$称为赝势(\textrm{Pseudo Potential, PP})
 	\begin{itemize}
 		\item 赝势-赝波函数的本征值$\varepsilon_v$与真实体系的价电子能量本征值等价
 		\item 赝势$\textcolor{red}{V^{e\!f\!f}}$比$V(\vec r)$平滑得多，并且$\textcolor{blue}{V^R}$是非局域的排斥势
@@ -169,25 +205,6 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 			\end{displaymath}
 %			这里$$V^R(\vec r,\vec r^{\prime})=\sum_c(\varepsilon_v-\varepsilon_c)|\varphi_c(\vec r^{\prime})\rangle\langle\varphi_c(\vec r)|$$
 	\end{itemize}
-}
-
-\frame
-{
-\frametitle{赝势的评估}
-赝势(\textrm{Pseudo Potential, PP})方法是在正交平面波的基础上发展起来的，构造出平缓的势函数代替核的强吸引作用和芯层电子的排斥作用，用平缓的函数取代波函数近核时的震荡。
-\begin{itemize}
-\setlength{\itemsep}{5pt}
-	\item 赝势-平面波方法，只需要少量平面波可展开赝波函数，大大提升了计算效率；但是赝波函数不能很好地反映与电子近核行为有关的性质。
-	\item 赝势的构造并不唯一，考核构造赝势的两大指标:~\\“柔软程度”\textrm{(Soft)}与“可移植性”\textrm{(transferability)}
-\end{itemize}
-\begin{figure}[h!]
-\centering
-\vspace*{-0.10in}
-\includegraphics[height=1.35in,width=1.40in,viewport=154 100 562 508,clip]{Figures/Pseudo.pdf}
-\includegraphics[height=1.35in,width=2.55in,viewport=1 1 980 500,clip]{Figures/Pseudo-2.png}
-\caption{\tiny \textrm{The Pseudo wave function and Pseudo potential.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{Pseudo_Potential-Wave}
-\end{figure}
 }
 
 \frame
@@ -211,19 +228,18 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 \end{figure}
 }
 
-\frame
-{
-	\frametitle{传统赝势的构造}
-\begin{figure}[h!]
-\centering
-\vspace*{-0.10in}
-\includegraphics[height=1.30in,width=4.17in,viewport=0 0 1150 350,clip]{Figures/Pseudo-model.png}
-\caption{\tiny \textrm{Left:``Empty core'' model potential of Ashcroft in which the potential is zero inside radius $R_c(l)$ which is different for each $l$. Right: Square well model potential with value $A_l$ inside a cut-off radius $R_c$, proposed by Abarenkov and Heine and fit to atomic data by Animalu and Heine. The fact that the potential are weak, zero, or even positive inside cut-off radius $R_c$ is an illustration of the ``cancellation theorem''.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{Pseudo-model}
-\end{figure}
-}
-
-\subsection{模守恒赝势}
+%\frame
+%{
+%	\frametitle{传统赝势的构造}
+%\begin{figure}[h!]
+%\centering
+%\vspace*{-0.10in}
+%\includegraphics[height=1.30in,width=4.17in,viewport=0 0 1150 350,clip]{Figures/Pseudo-model.png}
+%\caption{\tiny \textrm{Left:``Empty core'' model potential of Ashcroft in which the potential is zero inside radius $R_c(l)$ which is different for each $l$. Right: Square well model potential with value $A_l$ inside a cut-off radius $R_c$, proposed by Abarenkov and Heine and fit to atomic data by Animalu and Heine. The fact that the potential are weak, zero, or even positive inside cut-off radius $R_c$ is an illustration of the ``cancellation theorem''.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\label{Pseudo-model}
+%\end{figure}
+%}
+%
 \frame
 {
 	\frametitle{第一原理赝势}
@@ -243,6 +259,28 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 
 \frame
 {
+\frametitle{赝势方法}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.15in}
+%\includegraphics[height=1.35in,width=1.40in,viewport=154 100 562 508,clip]{Figures/Pseudo.pdf}
+\includegraphics[height=1.35in,width=3.55in,viewport=1 1 980 500,clip]{Figures/Pseudo-2.png}
+\caption{\tiny \textrm{The Pseudo wave function and Pseudo potential.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Pseudo_Potential-Wave}
+\end{figure}
+\fontsize{8.5pt}{5.2pt}\selectfont{
+理论计算采用的赝势方法是在正交平面波的基础上发展起来的，用平缓的函数取代波函数近核时的震荡，构造出平缓的势函数近似等效核的强吸引作用和芯层电子的排斥作用
+\begin{itemize}
+\setlength{\itemsep}{2pt}
+	\item 赝势-平面波方法，只需要少量平面波可展开赝波函数，大大提升了计算效率
+	\item 赝波函数无法很好地反映与电子近核行为有关的性质
+	\item 赝势的构造并不唯一，考核构造赝势的两大指标:~\\“柔软程度”\textrm{(Soft)}与“可移植性”\textrm{(transferability)}
+\end{itemize}}
+}
+
+\subsection{模守恒赝势}
+\frame
+{
 	\frametitle{模守恒\textrm{(Norm-conserving)}条件}
 %	构造赝势确定参数的边界(构造条件)
 	\begin{enumerate}
@@ -256,18 +294,18 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 	\end{enumerate}
 }
 
-\frame
-{
-	\frametitle{模守恒\textrm{(Norm-conserving)}条件}
-\begin{figure}[h!]
-\centering
-\vspace*{-0.10in}
-\includegraphics[height=1.30in,width=4.17in,viewport=0 0 1150 350,clip]{Figures/Pseudo-OPW_NCPP.png}
-\caption{\tiny \textrm{Schematic example of a valence function that has the character of a $3s$ orbital near the nucleus and two examples of smooth functions (dashed lines) that equal the full wave-function outside the core region. Left: the smooth part of the valence function defined by OPW-like equation; Right: a smooth pseudo-function that satisfies the norm-conservation condition.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{Pseudo-OPW_NCPP}
-\end{figure}
-}
-
+%\frame
+%{
+%	\frametitle{模守恒\textrm{(Norm-conserving)}条件}
+%\begin{figure}[h!]
+%\centering
+%\vspace*{-0.10in}
+%\includegraphics[height=1.30in,width=4.17in,viewport=0 0 1150 350,clip]{Figures/Pseudo-OPW_NCPP.png}
+%\caption{\tiny \textrm{Schematic example of a valence function that has the character of a $3s$ orbital near the nucleus and two examples of smooth functions (dashed lines) that equal the full wave-function outside the core region. Left: the smooth part of the valence function defined by OPW-like equation; Right: a smooth pseudo-function that satisfies the norm-conservation condition.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\label{Pseudo-OPW_NCPP}
+%\end{figure}
+%}
+%
 \frame
 {
 	\frametitle{赝势去屏蔽}
@@ -603,7 +641,7 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 \frame
 {
 \frametitle{超软赝势的特点}
-\textrm{Vanderbilt}的超软赝势构造方案最大的优点是
+\textrm{Vanderbilt}的超软赝势构造方案最大的优点
 \begin{itemize}
 	\item \textcolor{purple}{解除模守恒约束}:~有助于增加赝波函数的截断半径，系统提高赝势的柔软程度
 	\item \textcolor{purple}{引入多个参考能量$\varepsilon_l$}:~使得模守恒条件下只在特定参考能量$\varepsilon$处成立的对数导数连续条件，扩展到参考能量$\varepsilon_l$区间范围内，这大大提高了赝势的适用范围(可移植性)
@@ -641,7 +679,7 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 
 \frame
 {
-	\frametitle{\textrm{US-PP}的总能量表示}
+	\frametitle{超软赝势的总能量表示}
 	根据\textrm{D. Vanderbilt}的超软赝势(\textrm{US-PP})方案
 	原子波函数满足$$(T+V_{\mathrm{AE}}-\varepsilon_n)|\psi_n\rangle=0$$
 	据此构造原子赝波函数$\phi_n$，在截断半径$r_c^l$处，$\phi_n$与$\psi_n$平滑衔接(不需要模守恒条件)
@@ -657,7 +695,7 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 
 \frame
 {
-	\frametitle{\textrm{US-PP}的总能量表示}
+	\frametitle{超软赝势的总能量表示}
 	定义\textcolor{orange}{缀加函数}$$Q_{nm}(\vec r)=\psi_n^{\ast}(\vec r)\psi_m(\vec r)-\phi_n^{\ast}(\vec r)\phi_m(\vec r)$$
 	\textcolor{blue}{可赝化的补偿电荷}$$q_{nm}=\langle\psi_n|\psi_m\rangle_R-\langle\phi_n|\phi_m\rangle_R$$
 	由此可以导出$\phi_n$满足久期方程
@@ -672,8 +710,8 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 
 \frame
 {
-	\frametitle{\textrm{US-PP}的总能量表示}
-	在超软赝势方法中，包含$N_v$个价电子体系的总能量\upcite{PRB47-10142_1993}
+	\frametitle{超软赝势的总能量表示}
+	在超软赝势方法中，包含$N_v$个价电子体系的总能量%\upcite{PRB47-10142_1993}
 	\begin{displaymath}
 		\begin{aligned}
 			E_{\mathrm{tot}}[\{\phi_i\},\{\vec R_I\}]=&\sum_i\langle\phi_i|-\frac12\nabla^2+V_{\mathrm{NL}}|\phi_i\rangle\\
@@ -687,7 +725,7 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 
 \frame
 {
-	\frametitle{\textrm{US-PP}的总能量表示}
+	\frametitle{超软赝势的总能量表示}
 	电荷密度$$n(\vec r)=\sum_i\big[|\phi_i(\vec r)|^2+\sum_{nm,I}Q_{nm}^I(\vec r)\langle\phi_i|\beta_n^I\rangle\langle\beta_m^I|\phi_i\rangle\big]$$
 	局域势$$V_{loc}^{\mathrm{ion}}(\vec r)=\sum_IV_{loc}^{\mathrm{ion}}(\vec r-\vec R_I)$$
 	$V_{loc}^{\mathrm{ion}}$由$V_{loc}$去屏蔽后得到$$V_{loc}^{\mathrm{ion}}(r)=V_{loc}(r)-\int\mathrm{d}\vec r\,^{\prime}\dfrac{n(\vec r\,^{\prime})}{|\vec r-\vec r\,^{\prime}|}-\mu_{\mathrm{XC}}(r)$$
@@ -697,7 +735,7 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 
 \frame
 {
-	\frametitle{超软赝势总能量计算}
+	\frametitle{超软赝势总能量表示}
 	去除价电子屏蔽效应的贡献后，可得最终超软赝势的总能量表达式
 	\begin{displaymath}
 		\begin{aligned}
@@ -712,11 +750,11 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 	$$\bigg[-\dfrac12\nabla^2+V_{\mathrm{local}}+\tilde V_{NL}^{\mathrm{US}}-\varepsilon_i\bigg(\mathbf{1}+\sum_{s,s^{\prime}}Q_{s,s^{\prime}}|\beta_s\rangle\langle\beta_{s^{\prime}}|\bigg)\bigg]|\phi_{lmi}\rangle=0$$
 }
 
-\subsection{赝势方法与\rm{PAW}方法}
+\section{\rm{PAW}方法与赝势}
 \frame
 {
 %	\frametitle{\textrm{PAW}原子数据集}
-	\frametitle{\textrm{PAW Augmentation}}
+	\frametitle{\textrm{PAW}方法基本思想}
 \begin{figure}[h!]
 \centering
 \includegraphics[height=2.3in,width=4.0in,viewport=0 0 1280 745,clip]{Figures/PAW-baseset.png}
@@ -728,7 +766,8 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 \frame
 {
 \frametitle{电荷密度的重新分解}
-\textrm{PAW}方法提出后有很长一段时间没有能够得到广泛应用，直到\textrm{G. Kresse}等将\textrm{Bl\"ochl}的原始方案中电荷密度计算方案重新组合后，明确了\textrm{PAW}方法与\textrm{USPP}方法的内在联系。
+\textrm{PAW}方法提出后有很长一段时间没有能够得到广泛应用，直到\textrm{G. Kresse}等将%\textrm{Bl\"ochl}的
+原始方案中电荷密度计算方案重新组合后，明确了\textrm{PAW}方法与\textrm{USPP}方法的内在联系。
 \begin{itemize}
 	\item 芯层电荷与核电荷构成离子实电荷：$n_{Zc}=n_Z+n_c$
 \end{itemize}
@@ -771,48 +810,199 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 这里$$(a)(b)=\int\mathrm{d}\vec r\mathrm{d}\vec r^{\prime}\dfrac{a(\vec r)b(\vec r\,^{\prime})}{|\vec r-\vec r\,^{\prime}|}$$
 \textcolor{red}{近似}：$\tilde n_T$用$\tilde n_T^1$替换：
 \begin{displaymath}
-	\dfrac12(n_T)(n_T)=\dfrac12(\tilde n_T)(\tilde n_T)-\dfrac12\overline{(n_T^1(\tilde n_T^1)}+\dfrac12\overline{(n_T^1)(n_T^1)}
+	\dfrac12(n_T)(n_T)=\textcolor{blue}{\dfrac12(\tilde n_T)(\tilde n_T)}\textcolor{magenta}{-\dfrac12\overline{(\tilde n_T^1)(\tilde n_T^1)}}+\textcolor{purple}{\dfrac12\overline{(n_T^1)(n_T^1)}}
 \end{displaymath}
+这里$$\overline{(a)(b)}=\int_0^{\mathrm{r}_c}\mathrm{d}\vec r\mathrm{d}\vec r^{\prime}\dfrac{a(\vec r)b(\vec r\,^{\prime})}{|\vec r-\vec r\,^{\prime}|}$$
 }
+
+\frame
+{
+	\frametitle{}
+	{\fontsize{7.2pt}{5.2pt}\selectfont{具体地，将$\tilde n_T$代入表达式并展开，有
+	\begin{enumerate}
+	\item 第一项	
+	\begin{displaymath}
+		\begin{aligned}
+			&\textcolor{blue}{\dfrac12(\tilde n+\hat n)(\tilde n+\hat n)+(\tilde n_{Zc})(\tilde n+\hat n)+\dfrac12(\tilde n_{Zc})(\tilde n_{Zc})}\\
+			=&\dfrac12(\tilde n+\hat n)(\tilde n+\hat n)+(\tilde n_{Zc})(\tilde n+\hat n)\boxed{\textcolor{red}{+\dfrac12\overline{(\tilde n_{Zc})(\tilde n_{Zc})}}}\\
+			&+U(\mathbf{R},Z_{\mathrm{ion}})
+		\end{aligned}
+	\end{displaymath}
+这里假设不同原子彼此间芯电荷不发生重叠
+	\item 第二项
+	\begin{displaymath}
+		\textcolor{magenta}{-\dfrac12\overline{(\tilde n^1+\hat n)(\tilde n^1+\hat n)}-\overline{(\tilde n_{Zc})(\tilde n^1+\hat n)}}\boxed{\textcolor{red}{-\dfrac12\overline{(\tilde n_{Zc})(\tilde n_{Zc})}}}
+	\end{displaymath}
+	\item 第三项
+\begin{displaymath}
+	\textcolor{purple}{\dfrac12\overline{(\tilde n^1)(\tilde n^1)}+\overline{(\tilde n_{Zc})(\tilde n^1)}}\boxed{\textcolor{red}{+\dfrac12\overline{(\tilde n_{Zc})(\tilde n_{Zc})}}}
+\end{displaymath}
+	\end{enumerate}
+	注意到第一项展开中$U(\mathbf{R},Z_{\mathrm{ion}})$表示的是均匀静电场背景下点电荷$Z_{\mathrm{ion}}$的静电相互作用，$\dfrac12\overline{(\tilde n_{Zc})(\tilde n_{Zc})}$表示离子实的自相互作用，这部分将与第二项展开式中对应部分彼此抵消，而第三项中$\dfrac12\overline{(\tilde n_{Zc})(\tilde n_{Zc})}$并未包括在最后的总能量表达式中，因为这部分能量只是影响了能量零点位置的选择%，最后用\textrm{Ewald}求和计算
+}}}
 
 \frame
 {
 \frametitle{交换-相关能泛函的处理}
-由于交换-相关能泛函是非线性的，\textrm{G. Kresse}方案中电荷密度分解为
+\textrm{G. Kresse}方案中电荷密度分解为
 \begin{displaymath}
 	n_c+n=(\tilde n+\hat n+\tilde n_c)+(n^1+n_c)-(\tilde n^1+\hat n+\tilde n_c)
 \end{displaymath}
-原始的\textrm{Bl\"ochl}方案中电荷分解为
+对比原始的\textrm{Bl\"ochl}方案中电荷分解为
 \begin{displaymath}
 	n_c+n=(\tilde n)+(n^1+n_c)-(\tilde n^1)
 \end{displaymath}
-\textcolor{blue}{两种不同的电荷密度分解方案根源}：\\\textrm{G. Kresse}方案中赝离子实电荷$\tilde n_{Zc}$与\textrm{Bl\"ochl}方案中$\tilde n_c$的约束条件不同！
+%\textrm{G. Kresse}方案中赝离子实电荷$\tilde n_{Zc}$与\textrm{Bl\"ochl}方案中$\tilde n_c$的约束条件不同，
+
+显然，\textrm{VASP}中的交换-相关能计算表达式
 \begin{displaymath}
 	E_{\mathrm{XC}}[\tilde n+\hat n+\tilde n_c]+\overline{E_{\mathrm{XC}}[n^1+n_c]}-\overline{E_{\mathrm{XC}}[\tilde n^1+\hat n+\tilde n_c]}
 \end{displaymath}
+但由于交换-相关能泛函是非线性的，\textrm{G. Kress}的电荷分解引起的误差则为
+\begin{displaymath}
+	\begin{aligned}
+		&\textcolor{blue}{\overline{E_{\mathrm{XC}}[(\tilde n+\hat n+\tilde n_c)+(n^1+n_c)-(\tilde n^1+\hat n+\tilde n_c)]}}\\
+		&-\overline{E_{\mathrm{XC}}[\tilde n+\hat n+\tilde n_c]}-\overline{E_{\mathrm{XC}}[n^1+n_c]}+\overline{E_{\mathrm{XC}}[\tilde n^1+\hat n+\tilde n_c]}
+	\end{aligned}
+\end{displaymath}
 }
 
-\subsection{赝势方法与全势方法}
-\subsection{\rm{APW~}与\rm{LAPW~}方法}
 \frame
 {
-	\frametitle{\textrm{Muffin-tin}近似}
-\begin{figure}[h!]
-\centering
-\subfigure[\textrm{Muffin-tin Potentional}]{
-\label{Semi-local-potential}
-\includegraphics[height=1.10in,width=1.92in,viewport=1 22 507 295,clip]{Figures/Muffin-tin.png}}
-\subfigure[\textrm{Division of the unit cell into spheres(I) and into interstitial region(II)}]{
-\label{Semi-local-space}
-\includegraphics[height=1.45in,width=1.92in,viewport=1 20 515 435,clip]{Figures/Muffin-Tin.png}}
-%\caption{\tiny \textrm{Division of the unit cell into spheres(I) and into interstitial region(II)}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{Muffin_tin-1}
-\end{figure}
-\textrm{Muffin-tin}近似是\textrm{Johnson}采用$\chi_{\alpha}$方法计算分子体系的交换-相关时，引入多重散射(\textrm{Multiple scattering})理论时提出的%，\textrm{Muffin-tin}直译为“松饼罐头”，意思是把分子中的原子看成堆在一起的圆球罐
-
-\textcolor{red}{\textrm{MT}球近似与多重散射理论有密切的关联}
+	\frametitle{\textrm{PAW}与\textrm{US-PP}近似}
+%	\textrm{G. Kresse}指出只要总能量表达式中$E^1$和$\tilde E^1$在原子构象附近作线性化即可得到\textrm{US-PP}的表达式。
+	
+	如果电子占据数$\rho_{ij}$直接用原子态构象$\rho_{ij}^a$近似，因此电荷密度分布记作$n_a^1$、$\tilde n_a^1$和$\hat n_a$，则%$E^1$中的
+	\textcolor{blue}{\underline{\textrm{Hartree}能和交换-相关能项}}在$n_a$附近线性化($n_a\Rightarrow n_a^1$):
+	\begin{displaymath}
+		E_{\mathrm{XC}}(\textcolor{red}{n_a^1+n_c})+E_H(\textcolor{red}{n_a^1})+\int(v_{\mathrm{XC}}[\textcolor{red}{n_a^1+n_c}]+v_H[\textcolor{red}{n_a^1}])[n^1(\vec r)-\textcolor{red}{n_a^1(\vec r)}]\mathrm{d}\vec r
+	\end{displaymath}
+	在\textrm{PAW}方法中，电子密度$n^1(\vec r)$%和$\tilde n^1(\vec r)$
+	的表达式
+	\begin{displaymath}
+		\begin{aligned}
+			n^1(\vec r)=&\sum_{(i,j)}\rho_{ij}\langle\phi_i|\vec r\rangle\langle\vec r|\phi_j\rangle\\
+	%		\tilde n^1(\vec r)=&\sum_{(i,j)}\rho_{ij}\langle\tilde\phi_i|\vec r\rangle\langle\vec r|\tilde\phi_j\rangle 
+		\end{aligned}
+	\end{displaymath}
+	因此，\textrm{Hartree}能和交换-相关能项为
+	$$\textcolor{blue}{C}+\sum_{(i,j)}\rho_{ij}\langle\phi_i|v_{\mathrm{XC}}[\textcolor{red}{n_a^1+n_c}]+v_H[\textcolor{red}{n_a^1}]|\phi_j\rangle$$
+	这里\textcolor{blue}{\textrm{C}}是常数:~{\fontsize{7.1pt}{3.9pt}\selectfont{$\textcolor{blue}{E_{\mathrm{XC}}(\textcolor{red}{n_a^1+n_c})+E_H(\textcolor{red}{n_a^1})-\int(v_{\mathrm{XC}}[\textcolor{red}{n_a^1+n_c}]+v_H[\textcolor{red}{n_a^1}])[\textcolor{red}{n_a^1(\vec r)}]\mathrm{d}\vec r}$}}
 }
 
+\frame
+{
+	\frametitle{\textrm{PAW}与\textrm{US-PP}近似}
+	因此靠近原子核附近的能量$E^1$用占据数$\rho_{ij}$近似到一阶($\rho_{ij}\Rightarrow\rho_{ij}^1$)，可有
+	\begin{displaymath}
+		E^1\approx\textcolor{blue}{C}+\sum_{(i,j)}\rho_{i,j}\langle\phi_i|-\frac12\nabla^2+\textcolor{blue}{v_{e\!f\!f}^a}|\phi_j\rangle
+	\end{displaymath}
+	这里\textcolor{red}{$v_{e\!f\!f}^a$}是\textcolor{blue}{原子构象下的全电子有效势}
+	\begin{displaymath}
+		v_{e\!f\!f}^a=v_H[\textcolor{red}{n_a^1}+\textcolor{blue}{n_{Zc}}]+v_{\mathrm{XC}}[\textcolor{red}{n_a^1+n_c}]
+	\end{displaymath}
+
+	类似地可有
+	\begin{displaymath}
+		\tilde E^1\approx\textcolor{blue}{\tilde C}+\sum_{(i,j)}\left[\langle\tilde\phi_i|-\frac12\nabla^2+\tilde v_{e\!f\!f}^a|\tilde\phi_j\rangle+\underline{\int\tilde Q_{ij}^L(\vec r)\tilde v_{e\!f\!f}^a(\vec r)\mathrm{d}\vec r}\right]
+	\end{displaymath}
+	这里\textcolor{red}{$\tilde v_{e\!f\!f}^a$}是\textcolor{blue}{原子构象下的局域原子赝势}
+	$$\tilde v_{e\!f\!f}^a=v_H[\tilde n_a^1+\textcolor{blue}{\hat n_a}+\tilde n_{Zc}]+v_{\mathrm{XC}}[\tilde n_a^1+\textcolor{blue}{\hat n_a}+\tilde n_c]$$
+}
+
+\frame
+{
+	\frametitle{\textrm{PAW}与\textrm{US-PP}近似}
+	在此近似下，包含$\tilde E$可得体系总能量$E$:
+	\begin{displaymath}
+		\begin{aligned}
+			E=&\sum_nf_n\langle\tilde\Psi_n|-\frac12\nabla^2+\sum_{(ij)}|\tilde p_i\rangle\langle\tilde p_j|G_{ij}^{\mathrm{US}}|\tilde\Psi_n\rangle\\
+			&+E_{\mathrm{XC}}[\tilde n+\hat n+\tilde n_c]+E_H[\tilde n+\hat n]\\
+			&+\int v_H[\tilde n_{Zc}][\tilde n(\vec r)+\hat n(\vec r)]\mathrm{d}\vec r+U(\vec R,Z_{\mathrm{ion}})
+		\end{aligned}
+	\end{displaymath}
+	其中
+	\begin{displaymath}
+		\begin{aligned}
+			G_{ij}^{\mathrm{US}}=&\langle\phi_i|-\frac12\nabla^2+v_{e\!f\!f}^a|\phi_j\rangle-\langle\tilde\phi_i|-\frac12\nabla^2+\tilde v_{e\!f\!f}^a|\tilde\phi_j\rangle\\
+			&-\int\hat Q_{ij}^L(\vec r)\tilde v_{e\!f\!f}^a(\vec r)\mathrm{d}\vec r
+		\end{aligned}
+	\end{displaymath}
+}
+
+
+\frame
+{
+	\frametitle{\textrm{PAW}与\textrm{US-PP}近似}
+	\textcolor{blue}{当补偿电荷$\hat n$用\textrm{US-PP}方案的赝化补偿电荷表示时}\\%$E\rightarrow E_{\mathrm{tot}}$
+	$G_{ij}^{\mathrm{US}}$的\textcolor{blue}{前两项}与赝势理论中对应的是$\textcolor{blue}{D_{ij}}$，\textcolor{blue}{最后一项}对应的是去\textcolor{blue}{屏蔽部分}
+	\begin{displaymath}
+		\begin{aligned}
+			&\textcolor{blue}{\underbrace{\langle\phi_i|-\frac12\nabla^2+v_{e\!f\!f}^a|\phi_j\rangle-\langle\tilde\phi_i|-\frac12\nabla^2+\tilde v_{e\!f\!f}^a|\tilde\phi_j\rangle}}\\
+			\Longrightarrow\quad\qquad&\textcolor{red}{D_{nm}=B_{nm}+\varepsilon_mq_{nm}} \\
+			\overset{\textcolor{red}{\textrm{\fontsize{4.1pt}{3.9pt}\selectfont{desrceen}}}}{-}&\textcolor{blue}{\underline{\int\hat Q_{ij}^L(\vec r)\tilde v_{e\!f\!f}^a(\vec r)\mathrm{d}\vec r}} \qquad\rightarrow\qquad \textcolor{red}{\int_{\Omega_r}\mathrm{d}\vec r\,^{\prime}\tilde v_{e\!f\!f}^a(\vec r\,^{\prime})Q_{mn}(\vec r\,^{\prime})}\\
+%			&\int\mathrm{d}\vec r\,^{\prime}V_{loc}(\vec r\,^{\prime})n(\vec r\,^{\prime})\\
+			\Longrightarrow\quad\qquad&\textcolor{red}{D_{nm}^{(0)}}
+		\end{aligned}
+	\end{displaymath}
+	\begin{displaymath}
+		\begin{aligned}
+			\therefore D_{ij}^1-\tilde D_{ij}^1+\hat D_{ij}=D_{ij}^{(0)}+&\underbrace{\sum_L\int\tilde v_{e\!f\!f}(\vec r)\hat{Q}_{ij}^L(\vec r)\mathrm{d}\vec r}\\
+			&\qquad{\textcolor{blue}{\fontsize{5.2pt}{4.2pt}\selectfont{\textrm{non-local-terms}}}}
+		\end{aligned}
+	\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{\textrm{PAW}与\textrm{US-PP}近似}
+	在\textrm{PAW}方法中，如果缀加区补偿电荷$\hat n$满足~$\hat n=n^1-\tilde n^1$，并且如果满足$\tilde n_{Zc}=n_{Zc}$和$\tilde n_c=n_c$，则各“在位”(\textrm{on-site})项对体系总能量的贡献，将完全来自动能部分
+	\begin{displaymath}
+		E^1-\tilde E^1=\sum_{(i,j)}\rho_{ij}\big(\langle\phi_i|-\frac12\nabla^2|\phi_j\rangle-\langle\tilde\phi_i|-\frac12\nabla^2|\tilde\phi_j\rangle\big)
+	\end{displaymath}
+	显然，\textcolor{blue}{在这种极限情况下，\textrm{PAW}与\textrm{US-PP}是等价的;~如果考虑冻芯近似，则两种方法都将逼近精确解}\\ 
+	这也意味着\textrm{US-PP}中，用于构造补偿电荷的电荷密度差函数满足
+	$$\textcolor{magenta}{\hat Q_{ij}^L(\vec r)=Q_{ij}(\vec r)}=\phi_i^{\ast}(\vec r)\phi_j(\vec r)-\tilde\phi_i^{\ast}(\vec r)\tilde\phi_j(\vec r)$$
+	由此可见，\textcolor{blue}{在\textrm{US-PP}方案中，如能提高\underline{赝化缀加函数}的精度，有可能系统提升总能量的计算精度}
+
+	{\fontsize{6.5pt}{3.9pt}\selectfont{换言之，如\textrm{US-PP}能使用精确形式的补偿电荷，其总能泛函将逼近冻芯近似下的全电子方法的结果}}
+}
+
+\frame
+{
+	\frametitle{\textrm{PAW}与\textrm{US-PP}近似}
+	\begin{itemize}
+		\item 冻芯近似下，即使仅要求构造补充电荷的$\hat{Q}_{ij}^L(\vec r)$与$Q_{ij}(\vec r)$有相同的多极矩，但\textrm{US-PP}随原子态电荷分布的变化，也能精确到一阶\\
+			{\fontsize{6.5pt}{3.9pt}\selectfont{这从一定程度上解释了为什么\textrm{US-PP}方法具有相当的可靠性}}
+		\item 当电荷密度变化剧烈时，\textrm{US-PP}的可移植性引起的误差也将越来越大(\textcolor{blue}{因为误差与补偿电荷密切关联})为了得到更精确的结果，会要求$\hat{Q}_{ij}^L\textcolor{red}{\rightarrow}Q_{ij}(\vec r)$\\
+			{\fontsize{6.5pt}{3.9pt}\selectfont{即$\hat{Q}_{ij}^L$逼近真实电荷密度差的精确形式，不仅仅是要求多极矩相等}}
+	\end{itemize}
+	\begin{itemize}
+		\item \textrm{PAW}方法:~构造补偿电荷容易
+			\vskip 2pt
+			{\fontsize{6.5pt}{3.9pt}\selectfont{引入了全电子波函数，保持电荷密度差的精度\\
+		通过电荷密度差的多极矩构造补偿电荷\\
+		空间上补偿电荷更延展、更平缓}}
+		\item \textrm{US-PP}方法:~构造补偿电荷的代价更大
+			\vskip 2pt
+			{\fontsize{6.5pt}{3.9pt}\selectfont{越精确的赝势越要求\textcolor{blue}{精确和硬}(\textrm{accurate~and~hard})的电荷密度差\\
+		空间上补偿电荷更收缩、更局域}}
+	\end{itemize}
+
+}
+
+\frame
+{
+	\frametitle{几种赝势方法的关系}
+\begin{figure}[h!]
+\centering
+\includegraphics[height=1.0in,width=4.1in,clip]{Figures/Pseudo-Potential.png}
+\caption{\tiny \textrm{The relation of Pseudo potential and PAW.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Pseudo_Potential_PAW}
+\end{figure}
+}
+
+\section{\rm{LAPW~}方法与全势}
 \frame
 {
 \frametitle{\textrm{APW}方法}
@@ -835,25 +1025,11 @@ $$\mbox{其中~}D_l(\varepsilon,r)\equiv r\psi_l^{\prime}(r)/\psi_l(r)=r\dfrac{\
 
 \frame
 {
-	\frametitle{空间两部分函数在球面上的衔接}
-	\textrm{Huygens}原理:~\textcolor{blue}{平面波可以在各个原子球中心用球谐函数展开}:
-	\begin{displaymath}
-		\mathrm{e}^{\mathrm{i}\vec k\cdot\vec r}=4\pi\sum_{l=0}^{\infty}\sum_{m=-l}^l\mathrm{i}^lj_l(|\vec k|r)Y_{lm}^{\ast}(\hat{\vec k})Y_{lm}(\hat{\vec r})
-	\end{displaymath}
-	其中$j_l(|\vec k|r)$是$l$-阶球\textrm{Bessel}函数，$\hat{\vec k}$和$\hat{\vec r}$分别是矢量$\vec k$和$\vec r$与直角坐标$z$-轴的夹角$\theta$和$\varphi$
-
-	要求空间中不同区域函数在球面上连续，可调参数$A_{lm}^{\vec k}$可为下式确定
-\begin{displaymath}
-	A_{lm}^{\vec k}=4\pi\mathrm{e}^{\mathrm{i}\vec k\cdot\vec r_s}\mathrm{i}^lY_{lm}^{\ast}(\hat{\vec k})j_l(|\vec k|R_{MT}^s)/u_l(R_{MT}^s,E)
-\end{displaymath}
-\textrm{APW}的问题:\textcolor{blue}{球面参数$A_{lm}^{\vec k}$对能量$E$依赖，由此构造的久期方程\footnote{\fontsize{7.2pt}{6.2pt}\selectfont{久期方程\textrm{secular~equation}，\textrm{secular}来自拉丁语\textrm{saeculum}，本意为一代人、一个时期、一个时代、一个世界等意思。其名词在拉丁语中就作为世纪讲。汉译\textrm{secular}为久期，是取\textrm{long-term}的意思(实为慢，\textrm{slow~in~comparison~to~the~annual~motion}的意思)，与期待\textrm{(expectation)}无关\upcite{PhysCN40-477_2011}。}}非线性的}
-}
-
-\frame
-{
 \frametitle{\textrm{LAPW}方法}
 %\small\textrm{APW}方法的困难，久期方程不能化成广义本征值方程的形式(久期方程对能量$E$是非线性的)为了克服这一困难，人们提出线性化方法，
-\textrm{O.~K.~Andersen~}提出\textrm{LAPW}方法\upcite{Singh}:将$u_l(r,E)$在某一合适的$E_l$值附近对$E$的一阶微商{$\left.\dfrac{\textrm{d}u_l(r,E)}{\textrm{d}E}\right|_{E_l}\equiv\dot u_l(r,E_l)$}\\代入\textrm{APW}基函数中可得\textrm{LAPW}方法的基函数：
+%\textrm{O.~K.~Andersen~}提出
+\textrm{LAPW}方法%\upcite{Singh}:
+将$u_l(r,E)$在某一合适的$E_l$值附近对$E$的一阶微商{$\left.\dfrac{\textrm{d}u_l(r,E)}{\textrm{d}E}\right|_{E_l}\equiv\dot u_l(r,E_l)$}\\代入\textrm{APW}基函数中可得\textrm{LAPW}方法的基函数：
 {\fontsize{7.5pt}{3.3pt}\selectfont
 $$\hskip -14pt \varphi(\vec k_j,\vec r)=\left\{
   \begin{aligned}
@@ -872,12 +1048,12 @@ $$\hskip -14pt \varphi(\vec k_j,\vec r)=\left\{
 \end{figure}
 }
 
-\subsection{全势的基本思想}
 \frame
 {
 \frametitle{全势的基本思想}
-全势\textrm{(Full Potential, FP)}是相对于赝势的概念，即\textcolor{blue}{电子运动过程中感受到其它粒子作用的真实效果}。
-实际计算中，构造\textrm{LAPW}基组的\textrm{MT}势换成晶体势函数。一般地，在每个\textrm{MT}球内，势函数用球谐函数(或者是满足晶体对称性)展开，\textrm{MT}球外的势函数用\textrm{Fourier}级数展开：%\upcite{PRB13-5362_1976}
+全势\textrm{(Full Potential, FP)}是相对于赝势的概念，即\textcolor{blue}{电子运动过程中感受到其它粒子作用的真实效果}。实际计算中，构造\textrm{LAPW}基组的\textrm{MT}势换成晶体势函数
+
+一般地，在每个\textrm{MT}球内，势函数用球谐函数(或者是满足晶体对称性)展开，\textrm{MT}球外的势函数用\textrm{Fourier}级数展开：%\upcite{PRB13-5362_1976}
 {\footnotesize$$ V(\vec r)=\left\{
   \begin{aligned}
     &\sum_{a,L}V_L^a(r)Y_L(\hat{\vec r})\quad &r\leqslant R_{\mathrm{MT}}^a\\
@@ -885,18 +1061,20 @@ $$\hskip -14pt \varphi(\vec k_j,\vec r)=\left\{
   \end{aligned}\right.
   \label{eq:solid-63}
 $$}
+\fontsize{7.5pt}{3.3pt}\selectfont{
 这里$L$\,$\equiv$\,$l,m$，$\vec G_n$为倒格矢，$Y_L(\hat{\vec r})$是球谐函数，\textrm{II}为原子间隙
 \begin{itemize}
 	\item 在\textrm{MT}球内靠近原子核，势能具有原子型势能特征
 	\item 在\textrm{MT}球外，要满足\textrm{Bloch}函数边界条件特征。
 	\item 在\textrm{MT}球内外的势能表象不同，同样要求势能在\textrm{MT}球表面连续。
-\end{itemize}
+\end{itemize}}
 }
 
 \frame
 {
 	\frametitle{全势方法在$\vec k$空间的实现}
-\textrm{Weiner}提出全势计算的实现方法\upcite{JMP22-2433_1981}:~\\
+\textrm{Weiner}提出全势计算的实现方法%\upcite{JMP22-2433_1981}
+:~\\
 \begin{itemize}
 	\item 将\textrm{MT}球外的电荷密度$\rho_I(\vec r)$扩展到球内
 	\begin{tikzpicture}[remember picture,overlay]
@@ -1030,33 +1208,454 @@ $$}
 \end{figure}
 }
 
+\section{\rm{VASP}的\rm{POTCAR}文件中的数据分析}
 \frame
 {
-	\frametitle{固体计算软件概览}
-\begin{figure}[h!]
+	\frametitle{\rm{VASP}的\rm{POTCAR}文件}
 \centering
-\vspace*{-0.05in}
-%\hspace*{-0.80in}
-\includegraphics[height=2.30in,width=4.00in,viewport=0 0 920 500,clip]{Figures/DFT-Software.jpg}
-%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{Abinitio-Softwares}
-\end{figure}
+\vspace{-0.15in}
+%------------------------------------直-接-插-入-文-件--------------------------------------------------------------------------------------
+%\textcolor{red}{\textbf{直接插入文件}}:
+\fontsize{4.8pt}{4.2pt}\selectfont{
+%\verbatiminput{/home/jiangjun/Documents/Latex_Beamer/Figures/VASP-POTCAR_Si-00-PSCTR} %为保险:~选用文件名绝对路径
+\verbatiminput{Figures/VASP-POTCAR_Si-00-PSCTR} %为保险:~选用文件名绝对路径
+}
 }
 
+\frame
+{
+	\frametitle{\rm{VASP}的\rm{POTCAR}文件}
+\begin{minipage}{0.40\textwidth}
+\centering
+%\vspace{0.05in}
+%------------------------------------直-接-插-入-文-件--------------------------------------------------------------------------------------
+%\textcolor{red}{\textbf{直接插入文件}}:
+\fontsize{2.7pt}{1.2pt}\selectfont{
+%\verbatiminput{/home/jiangjun/Documents/Latex_Beamer/Figures/VASP-POTCAR_Si-01-localpotential-part} %为保险:~选用文件名绝对路径
+\verbatiminput{Figures/VASP-POTCAR_Si-01-localpotential-part} %为保险:~选用文件名绝对路径
+}
+\end{minipage}
+\begin{minipage}{0.58\textwidth}
+{\fontsize{5.5pt}{4.2pt}\selectfont{
+	\begin{displaymath}
+		G_{\max}^1
+	\end{displaymath}
+	\begin{displaymath}
+		\begin{aligned}
+%			\tilde{V}(q)=&\frac{4\pi}{q}\int\sin(q\cdot r)\tilde{V}(r)\cdot r\mathrm{d}r\\
+			\tilde{V}(q)\cdot q=&4\pi\int_0^{\infty}\sin(q\cdot r)\tilde{V}(r)\cdot r\mathrm{d}r\\
+			\tilde{V}_{\mathrm{ion}}(q)=&-\frac{4\pi Z_{\mathrm{ion}}(1-\mathrm{e}^{-q^2/4\alpha})}{q^2}\\
+			\tilde{V}(q=0)=&0
+		\end{aligned}
+\end{displaymath} }}
+\begin{figure}[t!]
+\centering
+\vspace{-0.15in}
+\includegraphics[width=2.3in,height=1.75in,viewport=0 0 1150 650, clip]{Figures/POT_G-dat.pdf}
+\label{local-potential}
+\end{figure}
+\end{minipage}
+}
+
+\frame
+{
+	\frametitle{\rm{VASP}的\rm{POTCAR}文件}
+\begin{minipage}{0.40\textwidth}
+\centering
+\vspace{-0.05in}
+%------------------------------------直-接-插-入-文-件--------------------------------------------------------------------------------------
+%\textcolor{red}{\textbf{直接插入文件}}:
+\fontsize{2.7pt}{1.2pt}\selectfont{
+%\verbatiminput{/home/jiangjun/Documents/Latex_Beamer/Figures/VASP-POTCAR_Si-02-localcorecharge} %为保险:~选用文件名绝对路径
+\verbatiminput{Figures/VASP-POTCAR_Si-02-localcorecharge} %为保险:~选用文件名绝对路径
+}
+\end{minipage}
+\begin{minipage}{0.58\textwidth}
+{\fontsize{7.2pt}{6.2pt}\selectfont{
+	\vskip -5.0in
+	\begin{displaymath}
+		\begin{aligned}
+%			\tilde{V}(q)=&\frac{4\pi}{q}\int\sin(q\cdot r)\tilde{V}(r)\cdot r\mathrm{d}r\\
+			\tilde{\rho}_{\mathrm{core}}(q)\cdot q=&4\pi\int_0^{\infty}\sin(q\cdot r)\tilde{\rho}_{\mathrm{core}}(r)\cdot r\mathrm{d}r\\
+%			=&\frac{4\pi}{q}\int_0^{\infty}\sin(q\cdot r)V(r)\cdot r\mathrm{d}r
+		\end{aligned}
+\end{displaymath}
+}}
+\end{minipage}
+}
+
+\frame
+{
+	\frametitle{\rm{VASP}的\rm{POTCAR}文件}
+\begin{minipage}{0.40\textwidth}
+\centering
+\centering
+\vspace{-0.05in}
+%------------------------------------直-接-插-入-文-件--------------------------------------------------------------------------------------
+%\textcolor{red}{\textbf{直接插入文件}}:
+\fontsize{2.7pt}{1.2pt}\selectfont{
+%\verbatiminput{/home/jiangjun/Documents/Latex_Beamer/Figures/VASP-POTCAR_Si-03-pseudo-charge} %为保险:~选用文件名绝对路径
+\verbatiminput{Figures/VASP-POTCAR_Si-03-pseudo-charge} %为保险:~选用文件名绝对路径
+}
+\end{minipage}
+\begin{minipage}{0.58\textwidth}
+{\fontsize{7.2pt}{6.2pt}\selectfont{
+	\vskip -5.0in
+	\begin{displaymath}
+		\tilde{\rho}(q)=\frac{\tilde{V}(q)}{4\pi}\cdot q^2
+\end{displaymath}
+}}
+\end{minipage}
+}
+
+\frame
+{
+	\frametitle{\rm{VASP}的\rm{POTCAR}文件}
+\begin{minipage}{0.58\textwidth}
+\centering
+\vspace{-0.10in}
+%------------------------------------直-接-插-入-文-件--------------------------------------------------------------------------------------
+%\textcolor{red}{\textbf{直接插入文件}}:
+\fontsize{2.6pt}{1.2pt}\selectfont{
+%\verbatiminput{/home/jiangjun/Documents/Latex_Beamer/Figures/VASP-POTCAR_Si-04-projector-1} %为保险:~选用文件名绝对路径
+\verbatiminput{Figures/VASP-POTCAR_Si-04-projector-1} %为保险:~选用文件名绝对路径
+}
+\end{minipage}
+\hfill
+\begin{minipage}{0.40\textwidth}
+{\fontsize{5.5pt}{4.2pt}\selectfont{
+	\begin{displaymath}
+		\begin{aligned}
+			& G_{\max}^2 \\
+			& r_{\max,0}^{\mathrm{pro}}
+		\end{aligned}
+	\end{displaymath}
+	\vskip 10pt
+	\begin{displaymath}
+		\begin{aligned}
+			\hat{T}|\psi_i\rangle=&\left[-\nabla^2-\frac{l(l+1)}2\right]|\psi_i\rangle\\
+			D_{ij}^{\mathrm{ion}}=&\langle\psi_i|\hat{T}+V_{\mathrm{eff}}|\psi_j\rangle\\
+			-&\langle\tilde{\psi}_i|\hat{T}+\tilde{V}_{\mathrm{eff}}|\tilde{\psi}_j\rangle\\
+			-&\int\hat{Q}_{ij}^{00}(r)\tilde{V}(r)\mathrm{d}r
+		\end{aligned}
+	\end{displaymath}
+	\vskip 50pt
+	\begin{displaymath}
+		\langle\tilde{p}_i|\tilde\phi_j\rangle=\delta_{ij}	
+	\end{displaymath}}}
+\end{minipage}
+}
+
+\frame
+{
+	\frametitle{\rm{VASP}的\rm{POTCAR}文件}
+\centering
+\vspace{-0.15in}
+%------------------------------------直-接-插-入-文-件--------------------------------------------------------------------------------------
+%\textcolor{red}{\textbf{直接插入文件}}:
+\fontsize{2.6pt}{1.2pt}\selectfont{
+%\verbatiminput{/home/jiangjun/Documents/Latex_Beamer/Figures/VASP-POTCAR_Si-04-projector-2} %为保险:~选用文件名绝对路径
+\verbatiminput{Figures/VASP-POTCAR_Si-04-projector-2} %为保险:~选用文件名绝对路径
+}
+}
+
+\frame
+{
+	\frametitle{\rm{VASP}的\rm{POTCAR}文件}
+\centering
+\vspace{-0.15in}
+%------------------------------------直-接-插-入-文-件--------------------------------------------------------------------------------------
+%\textcolor{red}{\textbf{直接插入文件}}:
+\fontsize{4.8pt}{4.2pt}\selectfont{
+%\verbatiminput{/home/jiangjun/Documents/Latex_Beamer/Figures/VASP-POTCAR_Si-05-augmentcharge} %为保险:~选用文件名绝对路径
+\verbatiminput{Figures/VASP-POTCAR_Si-05-augmentcharge} %为保险:~选用文件名绝对路径
+}
+}
+
+\frame
+{
+	\frametitle{\rm{VASP}的\rm{POTCAR}文件}
+\begin{minipage}{0.58\textwidth}
+\centering
+\vspace{-0.10in}
+%------------------------------------直-接-插-入-文-件--------------------------------------------------------------------------------------
+%\textcolor{red}{\textbf{直接插入文件}}:
+\fontsize{3.3pt}{1.9pt}\selectfont{
+%\verbatiminput{/home/jiangjun/Documents/Latex_Beamer/Figures/VASP-POTCAR_Si-06-grid} %为保险:~选用文件名绝对路径
+\verbatiminput{Figures/VASP-POTCAR_Si-06-grid} %为保险:~选用文件名绝对路径
+}
+\end{minipage}
+\hfill
+\begin{minipage}{0.40\textwidth}
+{\fontsize{8.2pt}{6.2pt}\selectfont{
+	\centering{径向部分的对数布点:}
+	\begin{displaymath}
+		r(i)=r(1)*10^{(i-1)\cdot\Delta h}
+	\end{displaymath}}}
+\end{minipage}
+}
+
+\frame
+{
+	\frametitle{\rm{VASP}的\rm{POTCAR}文件}
+\begin{minipage}{0.58\textwidth}
+\centering
+\vspace{-0.10in}
+%------------------------------------直-接-插-入-文-件--------------------------------------------------------------------------------------
+%\textcolor{red}{\textbf{直接插入文件}}:
+\fontsize{3.3pt}{1.9pt}\selectfont{
+%\verbatiminput{/home/jiangjun/Documents/Latex_Beamer/Figures/VASP-POTCAR_Si-07-aepotential} %为保险:~选用文件名绝对路径
+\verbatiminput{Figures/VASP-POTCAR_Si-07-aepotential} %为保险:~选用文件名绝对路径
+}
+\end{minipage}
+\hfill
+\begin{minipage}{0.40\textwidth}
+\begin{figure}[t!]
+\centering
+\vspace{-0.05in}
+\includegraphics[height=2.25in,width=1.5in,viewport=0 0 350 550, angle=-90, clip]{Figures/POTAE-data.eps}
+\label{Potential_Function}
+\end{figure}
+\end{minipage}
+}
+
+\frame
+{
+	\frametitle{\rm{VASP}的\rm{POTCAR}文件}
+\begin{minipage}{0.58\textwidth}
+\centering
+\vspace{-0.10in}
+%------------------------------------直-接-插-入-文-件--------------------------------------------------------------------------------------
+%\textcolor{red}{\textbf{直接插入文件}}:
+\fontsize{3.3pt}{1.9pt}\selectfont{
+%\verbatiminput{/home/jiangjun/Documents/Latex_Beamer/Figures/VASP-POTCAR_Si-08-corecharge} %为保险:~选用文件名绝对路径
+\verbatiminput{Figures/VASP-POTCAR_Si-08-corecharge} %为保险:~选用文件名绝对路径
+}
+\end{minipage}
+\hfill
+\begin{minipage}{0.40\textwidth}
+\begin{figure}[t!]
+\centering
+\vspace{-0.05in}
+\includegraphics[height=2.25in,width=1.5in,viewport=0 0 350 550, angle=-90, clip]{Figures/CORE-data.eps}
+\label{core_density_Function}
+\end{figure}
+\end{minipage}
+}
+
+\frame
+{
+	\frametitle{\rm{VASP}的\rm{POTCAR}文件}
+\centering
+\vspace{-0.15in}
+%------------------------------------直-接-插-入-文-件--------------------------------------------------------------------------------------
+%\textcolor{red}{\textbf{直接插入文件}}:
+\fontsize{3.3pt}{1.9pt}\selectfont{
+%\verbatiminput{/home/jiangjun/Documents/Latex_Beamer/Figures/VASP-POTCAR_Si-09-kinetic-ene-den} %为保险:~选用文件名绝对路径
+\verbatiminput{Figures/VASP-POTCAR_Si-09-kinetic-ene-den} %为保险:~选用文件名绝对路径
+}
+}
+
+\frame
+{
+	\frametitle{\rm{VASP}的\rm{POTCAR}文件}
+\begin{minipage}{0.58\textwidth}
+\centering
+\vspace{-0.10in}
+%------------------------------------直-接-插-入-文-件--------------------------------------------------------------------------------------
+%\textcolor{red}{\textbf{直接插入文件}}:
+\fontsize{3.3pt}{1.9pt}\selectfont{
+%\verbatiminput{/home/jiangjun/Documents/Latex_Beamer/Figures/VASP-POTCAR_Si-10-pspotential} %为保险:~选用文件名绝对路径
+\verbatiminput{Figures/VASP-POTCAR_Si-10-pspotential} %为保险:~选用文件名绝对路径
+}
+\end{minipage}
+\hfill
+\begin{minipage}{0.40\textwidth}
+\begin{figure}[t!]
+\centering
+\vspace{-0.05in}
+\includegraphics[height=2.25in,width=1.5in,viewport=0 0 350 550, angle=-90, clip]{Figures/POTPSC-data.eps}
+\label{Pseudopotential-core_Function}
+\end{figure}
+\end{minipage}
+}
+
+\frame
+{
+	\frametitle{\rm{VASP}的\rm{POTCAR}文件}
+\begin{minipage}{0.58\textwidth}
+\centering
+\vspace{-0.10in}
+%------------------------------------直-接-插-入-文-件--------------------------------------------------------------------------------------
+%\textcolor{red}{\textbf{直接插入文件}}:
+\fontsize{3.3pt}{1.9pt}\selectfont{
+%\verbatiminput{/home/jiangjun/Documents/Latex_Beamer/Figures/VASP-POTCAR_Si-11-pscoreden} %为保险:~选用文件名绝对路径
+\verbatiminput{Figures/VASP-POTCAR_Si-11-pscoreden} %为保险:~选用文件名绝对路径
+}
+\end{minipage}
+\hfill
+\begin{minipage}{0.40\textwidth}
+\begin{figure}[t!]
+\centering
+\vspace{-0.05in}
+\includegraphics[height=2.25in,width=1.5in,viewport=0 0 350 550, angle=-90, clip]{Figures/PCORE-data.eps}
+\label{psedudocore_density_Function}
+\end{figure}
+\end{minipage}
+}
+
+\frame
+{
+	\frametitle{\rm{VASP}的\rm{POTCAR}文件}
+\begin{minipage}{0.58\textwidth}
+\centering
+\vspace{-0.10in}
+%------------------------------------直-接-插-入-文-件--------------------------------------------------------------------------------------
+%\textcolor{red}{\textbf{直接插入文件}}:
+\fontsize{3.3pt}{1.9pt}\selectfont{
+%\verbatiminput{/home/jiangjun/Documents/Latex_Beamer/Figures/VASP-POTCAR_Si-12-pswav-1} %为保险:~选用文件名绝对路径
+\verbatiminput{Figures/VASP-POTCAR_Si-12-pswav-1} %为保险:~选用文件名绝对路径
+}
+\end{minipage}
+\hfill
+\begin{minipage}{0.40\textwidth}
+\begin{figure}[t!]
+\centering
+\vspace{-0.05in}
+\includegraphics[height=2.25in,width=1.4in,viewport=0 0 350 550, angle=-90, clip]{Figures/WPS-data.eps}
+\label{Wave-PS_Function}
+\end{figure}
+\end{minipage}
+}
+
+\frame
+{
+	\frametitle{\rm{VASP}的\rm{POTCAR}文件}
+\begin{minipage}{0.58\textwidth}
+\centering
+\vspace{-0.10in}
+%------------------------------------直-接-插-入-文-件--------------------------------------------------------------------------------------
+%\textcolor{red}{\textbf{直接插入文件}}:
+\fontsize{3.3pt}{1.9pt}\selectfont{
+%\verbatiminput{/home/jiangjun/Documents/Latex_Beamer/Figures/VASP-POTCAR_Si-12-aewav-1} %为保险:~选用文件名绝对路径
+\verbatiminput{Figures/VASP-POTCAR_Si-12-aewav-1} %为保险:~选用文件名绝对路径
+}
+\end{minipage}
+\hfill
+\begin{minipage}{0.40\textwidth}
+\begin{figure}[t!]
+\centering
+\vspace{-0.05in}
+\includegraphics[height=2.25in,width=1.4in,viewport=0 0 350 550, angle=-90, clip]{Figures/WAE-data.eps}
+\label{Wave-AE_Function}
+\end{figure}
+\end{minipage}
+}
+
+\frame
+{
+	\frametitle{\rm{VASP}的\rm{POTCAR}文件}
+\centering
+\vspace{-0.15in}
+%------------------------------------直-接-插-入-文-件--------------------------------------------------------------------------------------
+%\textcolor{red}{\textbf{直接插入文件}}:
+\fontsize{3.3pt}{1.9pt}\selectfont{
+%\verbatiminput{/home/jiangjun/Documents/Latex_Beamer/Figures/VASP-POTCAR_Si-12-pswav-2} %为保险:~选用文件名绝对路径
+\verbatiminput{Figures/VASP-POTCAR_Si-12-pswav-2} %为保险:~选用文件名绝对路径
+}
+}
+
+\frame
+{
+	\frametitle{\rm{VASP}的\rm{POTCAR}文件}
+\centering
+\vspace{-0.15in}
+%------------------------------------直-接-插-入-文-件--------------------------------------------------------------------------------------
+%\textcolor{red}{\textbf{直接插入文件}}:
+\fontsize{3.3pt}{1.9pt}\selectfont{
+%\verbatiminput{/home/jiangjun/Documents/Latex_Beamer/Figures/VASP-POTCAR_Si-12-aewav-2} %为保险:~选用文件名绝对路径
+\verbatiminput{Figures/VASP-POTCAR_Si-12-aewav-2} %为保险:~选用文件名绝对路径
+}
+}
+
+\frame
+{
+	\frametitle{\rm{VASP}的\rm{POTCAR}文件}
+\centering
+\vspace{-0.15in}
+%------------------------------------直-接-插-入-文-件--------------------------------------------------------------------------------------
+%\textcolor{red}{\textbf{直接插入文件}}:
+\fontsize{3.3pt}{1.9pt}\selectfont{
+%\verbatiminput{/home/jiangjun/Documents/Latex_Beamer/Figures/VASP-POTCAR_Si-12-pswav-3} %为保险:~选用文件名绝对路径
+\verbatiminput{Figures/VASP-POTCAR_Si-12-pswav-3} %为保险:~选用文件名绝对路径
+}
+}
+
+\frame
+{
+	\frametitle{\rm{VASP}的\rm{POTCAR}文件}
+\centering
+\vspace{-0.15in}
+%------------------------------------直-接-插-入-文-件--------------------------------------------------------------------------------------
+%\textcolor{red}{\textbf{直接插入文件}}:
+\fontsize{3.3pt}{1.9pt}\selectfont{
+%\verbatiminput{/home/jiangjun/Documents/Latex_Beamer/Figures/VASP-POTCAR_Si-12-aewav-3} %为保险:~选用文件名绝对路径
+\verbatiminput{Figures/VASP-POTCAR_Si-12-aewav-3} %为保险:~选用文件名绝对路径
+}
+}
+
+\frame
+{
+	\frametitle{\rm{VASP}的\rm{POTCAR}文件}
+\centering
+\vspace{-0.15in}
+%------------------------------------直-接-插-入-文-件--------------------------------------------------------------------------------------
+%\textcolor{red}{\textbf{直接插入文件}}:
+\fontsize{3.3pt}{1.9pt}\selectfont{
+%\verbatiminput{/home/jiangjun/Documents/Latex_Beamer/Figures/VASP-POTCAR_Si-12-pswav-4} %为保险:~选用文件名绝对路径
+\verbatiminput{Figures/VASP-POTCAR_Si-12-pswav-4} %为保险:~选用文件名绝对路径
+}
+}
+
+\frame
+{
+	\frametitle{\rm{VASP}的\rm{POTCAR}文件}
+\centering
+\vspace{-0.15in}
+%------------------------------------直-接-插-入-文-件--------------------------------------------------------------------------------------
+%\textcolor{red}{\textbf{直接插入文件}}:
+\fontsize{3.3pt}{1.9pt}\selectfont{
+%\verbatiminput{/home/jiangjun/Documents/Latex_Beamer/Figures/VASP-POTCAR_Si-12-aewav-4} %为保险:~选用文件名绝对路径
+\verbatiminput{Figures/VASP-POTCAR_Si-12-aewav-4} %为保险:~选用文件名绝对路径
+}
+}
+
+\appendix
 %------------------------------------------------------------------------Reference----------------------------------------------------------------------------------------------
 		\frame[allowframebreaks]
 		{
 \begin{thebibliography}{99}
 \frametitle{主要参考文献}
 {\tiny
-	\bibitem{PhysCN40-477_2011}曹则贤, \textit{Secular,equation}, \textit{物理}, \textbf{40} \textrm{(2011), 477}
-	\bibitem{Singh}\textrm{D. J. Singh. \textit{Plane Wave, PseudoPotential and the LAPW method} (Kluwer Academic, Boston,USA, 1994)}
-	\bibitem{Nemoshkalenko-Antonov}\textrm{V. V. Nemoshkalenko and V. N. Antonov. \textit{Computational Methods in Solid State Physics} (Gordon and Breach Science Publisher, Amsterdam, The Netherlands, 1998)}
+%	\bibitem{PhysCN40-477_2011}曹则贤, \textit{Secular,equation}, \textit{物理}, \textbf{40} \textrm{(2011), 477}
+	\bibitem{PR136-B864_1964}\textrm{P. Hohenberg and W. Kohn, \textit{Phys. Rev.} \textbf{136} (1964), B864}
+	\bibitem{PR140-A1133_1965}\textrm{W. Kohn and L.J. Sham, \textit{Phys. Rev.} \textbf{140} (1965), A1133}
+	\bibitem{JPC12-4409_1979}\textrm{J. Ihm, A. Zunger and L. Cohen, {\textit{J. Phys. C}} \textbf{12} (1979), 4409}
+	\bibitem{PRB41-7892_1990}\textrm{D. Vanderbilt. \textit{Phys. Rev.} B, \textbf{41} (1990), 7892} 
+	\bibitem{JPCM6-8245_1994}\textrm{G. Kresse and J. Hafner. J. Phys: \textit{Condens. Matter}, \textbf{6} (1994), 8245}
+	\bibitem{PRB50-17953_1994}\textrm{P. E. Bl\"ochl. \textit{Phys. Rev.} B, \textbf{50} (1994), 17953}
+	\bibitem{PRB59-1758_1999}\textrm{G. Kresse and D. Joubert \textit{Phys. Rev.} B, \textbf{59} (1999), 1758}
 	\bibitem{PRB12-3060_1975}\textrm{O. K. Andersen. \textit{Phys. Rev.} B, \textbf{12} (1975), 3060}
 	\bibitem{JMP22-2433_1981}\textrm{M. Weiner. \textit{J. Math. Phys.}, \textbf{22} (1981), 2433}
 	\bibitem{PRB26-4571_1982}\textrm{M. Weinert, E. Wimmer and A. J. Freeman. \textit{Phys. Rev.} B, \textbf{26} (1982), 4571}
-	\bibitem{SSC114-15_2000}\textrm{E. Sj\"ostedt, L. Nordstr\"om and D. J. Singh. \textit{Solid State Commun.}, \textbf{114} (2000), 15}
 	\bibitem{Andersen_Book}\textrm{O. K. Andersen. \textit{Computational Methods in Band Theory} (Plenum, New York, USA, 1971)}
+        \bibitem{Singh}\textrm{D. J. Singh. \textit{Plane Wave, PseudoPotential and the LAPW method} (Kluwer Academic, Boston,USA, 1994)}					%
+	\bibitem{Singh}\textrm{D. J. Singh. \textit{Plane Wave, PseudoPotential and the LAPW method} (Kluwer Academic, Boston,USA, 1994)}
+	\bibitem{Xie-Lu}谢希德、陆栋\:主编, {\textit{固体能带理论}}\:复旦大学出版社, 上海, 1998
+	\bibitem{Nemoshkalenko-Antonov}\textrm{V. V. Nemoshkalenko and V. N. Antonov. \textit{Computational Methods in Solid State Physics} (Gordon and Breach Science Publisher, Amsterdam, The Netherlands, 1998)}
+	\bibitem{Elect_Stru}\textrm{Richard. M. Martin. \textit{Electronic Structure: Basic Theory and Practical Methods} (Cambridge University Press, Cambridge, England, 2004)}
+	\bibitem{Xu_Li_Wang}徐光宪、黎乐民、王德民, {\textit{量子化学——基本原理和从头计算法}}\;\textrm{({\textit{上、中}})}\:科学出版社, 北京, 1980
+%	\bibitem{SSC114-15_2000}\textrm{E. Sj\"ostedt, L. Nordstr\"om and D. J. Singh. \textit{Solid State Commun.}, \textbf{114} (2000), 15}
 }
 \end{thebibliography}
 \nocite*{}
