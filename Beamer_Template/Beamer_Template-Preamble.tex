@@ -103,10 +103,12 @@
 %\useoutertheme{smoothbars}
 \useinnertheme[shadow=true]{rounded}
 
+\usepackage{minted}      % 代码高亮
 % Beamer Settings
 \usetheme{Berkeley}                                          %主题式样
 %\usetheme{Luebeck}
 %\usetheme{Warsaw}
+%\usetheme{metropolis}    % 现代主题
 
 \usecolortheme{lily}                                        %颜色主题式样
 
@@ -120,6 +122,7 @@
 
 \graphicspath{{$PATHPWD}}                           %$PATH用于脚本指定图片路径
 %\graphicspath{{/home/jun-jiang/Documents/Latex_Beamer/Figures/}}   %直接指定图片绝对路径
+%\graphicspath{{/home/jun-jiang/Documents/Peking_Opera/}}   %直接指定图片绝对路径
 %\graphicspath{{/home/jiangjun/Documents/Latex_Beamer/Figures/}}   %直接指定图片绝对路径
 
 %i放置单位logo
@@ -127,6 +130,16 @@
 
 %\pgfdeclareimage[width=3.5cm]{logoname}{BCC_logo-1.png}		%logo置于左侧微调
 %\logo{\pgfuseimage{logoname}{\vspace{0.2cm}\hspace*{-2.0cm}}}
+
+%% itemize的marker形状、颜色等的设置
+%\setbeamertemplate{items}[circle]
+%\setbeamertemplate{itemize items}[triangle]
+%\setbeamertemplate{enumerate items}[default]
+%\definecolor{maincolor}{RGB}{63,175,175}
+%\setbeamercolor{normal text}{fg=maincolor,bg=black}
+%\setbeamercolor{itemize item}{fg=red}
+%\setbeamercolor{enumerate subitem}{fg=green}
+
 
 %在指定位置精确放置logo
 \usepackage{beamerfoils}
