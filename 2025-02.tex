@@ -145,11 +145,11 @@
 \caption{\tiny \textrm{Perceptron Learning Algorithm.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Fig:PLA}
 \end{figure}
-输出与输入之间将学习到一个线性关系，可有中间输出结果
+输出与输入之间将学习到一个线性关系，可有\textcolor{blue}{中间输出结果}
 \begin{displaymath}
 	z=\sum_{i=1}^mw_ix_i+b
 \end{displaymath}
-中间结果连接一个神经元激活函数
+\textcolor{blue}{中间结}果连接一个神经元激活函数
 \begin{displaymath}
 	\mathrm{sign}(z)=\left\{
 		\begin{aligned}
@@ -401,190 +401,264 @@
 \end{figure}
 \end{frame}
 
-\section{什么是数字孪生？}
-\begin{frame}{核心定义}
-  \begin{block}{NASA定义（2010）}
-    物理实体的高保真数字镜像，通过实时数据更新实现动态仿真
+\section{数字孪生}
+\begin{frame}{数字核心的定义}
+	\begin{block}{\textrm{NASA}定义的数字孪生\textrm{(2010)}}
+		\textcolor{blue}{物理实体}的高保真\textcolor{blue}{数字镜像}，通过\textcolor{magenta}{实时数据更新}实现动态仿真
   \end{block}
+%
+%  \begin{columns}
+%    \column{0.6\textwidth}
+%    \begin{itemize}
+      %\item 
+%  三要素：物理实体、数字模型、数据连接
+ %     \item
+%    \end{itemize}
 
-  \begin{columns}
-    \column{0.6\textwidth}
-    \begin{itemize}
-      \item 三要素：物理实体、数字模型、数据连接
-      \item 关键特征：
-      \begin{itemize}
-        \item 虚实映射
-        \item 实时交互
-        \item 迭代优化
-      \end{itemize}
-    \end{itemize}
-
-    \column{0.4\textwidth}
-%    \includegraphics[width=\textwidth]{dt_basic.png}
-  \end{columns}
+%    \column{0.4\textwidth}
+\begin{figure}[h!]
+%\vspace*{0.05in}
+\centering
+     \includegraphics[height=1.6in, width=2.9in, viewport=30 30 1100 680,clip]{Figures/Three-elements_of_a_digital-twin.png}
+\caption{\tiny \textrm{All three elements must be present for a true digital twin.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:Three-elements_of_a_digital-twin}
+\end{figure}
+%  \end{columns}
+\textcolor{red}{关键特征}:~
+%      \begin{itemize}
+ %       \item 
+虚实映射、
+  %      \item 
+实时交互、
+   %     \item 
+迭代优化
+   %   \end{itemize}
 \end{frame}
 
 % ========== 发展历程 ==========
-\section{技术演进}
-\begin{frame}{里程碑事件}
-  \begin{tikzpicture}[overlay, remember picture]
-    \node[anchor=north east] at (current page.north east) {
+\subsection{发展历程}
+\begin{frame}{标志性时间节点}
+\begin{figure}[h!]
+%\vspace*{0.05in}
+\centering
+     \includegraphics[height=1.2in, width=4.0in, viewport=0 0 1416 471,clip]{Figures/Evolution_of_Digital-Twin.png}
+\caption{\tiny \textrm{The evolution of Digital-Twin.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:Evolution_of_Digital-Twin}
+\end{figure}
+%  \begin{tikzpicture}[overlay, remember picture]
+ %   \node[anchor=north east] at (current page.north east) {
  %     \includegraphics[width=0.3\textwidth]{dt_timeline.png}
-    };
-  \end{tikzpicture}
+ %   };
+ % \end{tikzpicture}
 
   \begin{itemize}
-    \item 2002: 密歇根大学提出"镜像空间模型"
-    \item 2010: NASA应用于航天器健康管理
-    \item 2017: GE推出工业数字孪生平台
-    \item 2021: 元宇宙概念推动数字孪生普及
+	  \item \textrm{2002:~Michigan}大学教授\textrm{M. Grieves}提出``镜像空间模型''
+	  \item \textrm{2010:~NASA}应用于航天器健康管理
+	  \item \textrm{2017:~GE}推出工业数字孪生平台
+	  \item \textrm{2021:~}元宇宙\textrm{(Metaverse)}概念推动数字孪生普及
   \end{itemize}
 \end{frame}
 
 % ========== 技术架构 ==========
-\section{技术体系}
-\subsection{系统架构}
+%\section{技术体系}
+%\subsection{系统架构}
+\begin{frame}{支撑技术}
+\begin{figure}[h!]
+\vspace*{-0.15in}
+\centering
+     \includegraphics[height=1.8in, width=2.3in, viewport=0 0 1416 1171,clip]{Figures/Digital-Twin_related-technologies.png}
+\caption{\tiny \textrm{Digital Twin and the related technologies.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:Digital-Twin_related-technologies}
+\end{figure} 
+\vspace*{-0.15in}
+  \begin{columns}
+    \column{0.5\textwidth}
+\fontsize{8.2pt}{6.2pt}\selectfont{
+    \begin{itemize}
+	    \item \textcolor{blue}{物联网\textrm{(IoT)}}:~实时数据采集
+      \item \textcolor{magenta}{大数据分析}:~数据价值挖掘
+      \item \textcolor{red}{建模仿真}:~\textrm{ANSYS/Matlab}
+    \end{itemize}}
+    \column{0.5\textwidth}
+\fontsize{8.2pt}{6.2pt}\selectfont{
+    \begin{itemize}
+      \item \textcolor{purple}{\textrm{AI}算法}:~数字模型优化
+      \item \textcolor{orange}{云边协同}:~分布式计算
+    \end{itemize}}
+ %   \includegraphics[width=0.9\textwidth]{dt_tech_stack.png}
+ \end{columns}
+\end{frame}
+
 \begin{frame}{典型架构}
   \centering
-  \begin{tikzpicture}[node distance=2cm, auto]
-    \node (phy) [rectangle, draw, fill=blue!20, text width=3cm, text centered] {物理世界\\传感器/设备};
-    \node (data) [rectangle, draw, fill=green!20, below of=phy] {数据层\\IoT/5G传输};
-    \node (model) [rectangle, draw, fill=red!20, below of=data] {数字模型\\仿真引擎/AI算法};
-    \node (app) [rectangle, draw, fill=yellow!20, below of=model] {应用层\\预测/优化/决策};
+  \begin{tikzpicture}[node distance=1.8cm, auto]
+    \node [rectangle, draw, fill=blue!20, text width=3cm, text centered] (phy) {物理世界\\传感器/设备};
+    \node [rectangle, draw, fill=green!20, below of=phy] (data) {数据层\\\textrm{IoT/5G}传输};
+    \node [rectangle, draw, fill=red!20, below of=data] (model) {数字模型\\仿真引擎/\textrm{AI}算法};
+    \node [rectangle, draw, fill=yellow!20, below of=model] (app) {应用层\\预测/优化/决策};
 
     \path[->] (phy) edge (data)
               (data) edge (model)
               (model) edge (app)
-              (app) edge[bend right=30] node[right] {反向控制} (phy);
+              (app.east) edge[bend right=30] node[right] {反向控制} (phy.east);
   \end{tikzpicture}
 \end{frame}
 
-\subsection{关键技术}
-\begin{frame}{支撑技术}
-  \begin{columns}
-    \column{0.5\textwidth}
-    \begin{itemize}
-      \item \textcolor{blue}{物联网(IoT)}：实时数据采集
-      \item \textcolor{green}{大数据分析}：数据价值挖掘
-      \item \textcolor{red}{建模仿真}：ANSYS/Matlab
-      \item \textcolor{purple}{AI算法}：数字模型优化
-      \item \textcolor{orange}{云边协同}：分布式计算
-    \end{itemize}
-
-    \column{0.5\textwidth}
- %   \includegraphics[width=0.9\textwidth]{dt_tech_stack.png}
-  \end{columns}
-\end{frame}
-
+%\subsection{关键技术}
 % ========== 应用案例 ==========
-\section{典型应用}
+\subsection{典型应用}
 \begin{frame}{智能制造}
-  \begin{exampleblock}{西门子安贝格工厂}
+	\begin{exampleblock}{\textrm{Siemens}工厂\textrm{in Amberg}}
+
+\begin{figure}[h!]
+%\vspace*{0.05in}
+\centering
+     \includegraphics[height=1.6in, width=2.9in, viewport=0 0 2650 1992,clip]{Figures/Siemens_Amberg-Factory.jpeg}
+%\caption{\tiny \textrm{All three elements must be present for a true digital twin.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:Siemens_Amberg-Factory}
+\end{figure}
+  \end{exampleblock}
     \begin{itemize}
       \item 生产线数字镜像
       \item 产品全生命周期管理
-      \item 故障预测准确率提升40%
+      \item 故障预测准确率提升\textrm{40\%}
     \end{itemize}
-  \end{exampleblock}
-
-  \centering
+%  \centering
 %  \includegraphics[width=0.6\textwidth]{factory_dt.jpg}
 \end{frame}
 
 \begin{frame}{智慧城市}
+%  \begin{columns}
+ %   \column{0.6\textwidth}
+ %   \begin{itemize}
+ %     \item 
+	新加坡"虚拟新加坡"项目
+\begin{figure}[h!]
+%\vspace*{0.05in}
+\centering
+     \includegraphics[height=2.4in, width=4.0in, viewport=0 0 1920 1154,clip]{Figures/Smart-city_strategic_national_projects.jpg}
+\caption{\tiny \textrm{Smart Nation Singapore (The Smart Nation Digital Government Group).}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:Smart-city_strategic_national_projects}
+\end{figure}
+  %    \item 城市三维数字模型
+  %    \item 应用场景：
+  %    \begin{itemize}
+  %      \item 交通流量仿真
+  %      \item 应急演练
+  %      \item 能源管理
+  %    \end{itemize}
+  %  \end{itemize}
+
+  %  \column{0.4\textwidth}
+%    \includegraphics[width=\textwidth]{smart_city.png}
+%  \end{columns}
+\end{frame}
+
+\begin{frame}{智慧城市}
+%  \begin{columns}
+ %   \column{0.6\textwidth}
+ %   \begin{itemize}
+  %    \item 
+	城市三维数字模型
+\begin{figure}[h!]
+%\vspace*{0.05in}
+\centering
+     \includegraphics[height=1.5in, width=2.2in, viewport=0 0 1280 720,clip]{Figures/Digital-Twin_Smart-city-infrustruct.jpg}
+\caption{\tiny \textrm{Digital Twin for Smart city:~infrustruct.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Fig:Digital-Twin_Smart-city-infrustruct}
+\end{figure}
+应用场景:
   \begin{columns}
-    \column{0.6\textwidth}
-    \begin{itemize}
-      \item 新加坡"虚拟新加坡"项目
-      \item 城市三维数字模型
-      \item 应用场景：
+   \column{0.6\textwidth}
       \begin{itemize}
         \item 交通流量仿真
         \item 应急演练
-        \item 能源管理
       \end{itemize}
-    \end{itemize}
+  %  \end{itemize}
 
     \column{0.4\textwidth}
+   \begin{itemize}
+        \item 能源管理
+      \end{itemize}
 %    \includegraphics[width=\textwidth]{smart_city.png}
   \end{columns}
 \end{frame}
 
 % ========== 挑战与趋势 ==========
-\section{未来展望}
-\begin{frame}{技术挑战}
-  \begin{alertblock}{主要瓶颈}
-    \begin{itemize}
-      \item 多源异构数据融合
-      \item 模型精度与计算效率平衡
-      \item 安全与隐私保护
-      \item 标准化体系缺失
-    \end{itemize}
-  \end{alertblock}
-
-  \begin{exampleblock}{发展趋势}
-    \begin{itemize}
-      \item 数字孪生+元宇宙融合
-      \item 自主进化型数字孪生
-      \item 行业SaaS服务平台
-    \end{itemize}
-  \end{exampleblock}
-\end{frame}
+%\subsection{未来展望}
+%\begin{frame}{技术挑战}
+%  \begin{alertblock}{主要瓶颈}
+%    \begin{itemize}
+%      \item 多源异构数据融合
+%      \item 模型精度与计算效率平衡
+%      \item 安全与隐私保护
+%      \item 标准化体系缺失
+%    \end{itemize}
+%  \end{alertblock}
+%
+%  \begin{exampleblock}{发展趋势}
+%    \begin{itemize}
+%      \item 数字孪生+元宇宙融合
+%      \item 自主进化型数字孪生
+%      \item 行业SaaS服务平台
+%    \end{itemize}
+%  \end{exampleblock}
+%\end{frame}
 
 % ========== 总结 ==========
-\section*{总结}
-\begin{frame}{核心价值}
-  \centering
-  \begin{tabular}{cl}
-    \toprule
-    \textbf{维度} & \textbf{价值体现} \\
-    \midrule
-    产品研发 & 缩短50\%以上开发周期 \\
-    生产运营 & 降低30\%运维成本 \\
-    决策支持 & 提升80\%模拟预测精度 \\
-    创新生态 & 构建协同创新平台 \\
-    \bottomrule
-  \end{tabular}
-
-  \vspace{1cm}
-  \textcolor{blue}{\Large 虚实交融，智创未来}
-\end{frame}
-
-\begin{frame}{Q\&A}
-  \centering
+%\section*{总结}
+%\begin{frame}{核心价值}
+%  \centering
+%  \begin{tabular}{cl}
+%    \toprule
+%    \textbf{维度} & \textbf{价值体现} \\
+%    \midrule
+%    产品研发 & 缩短50\%以上开发周期 \\
+%    生产运营 & 降低30\%运维成本 \\
+%    决策支持 & 提升80\%模拟预测精度 \\
+%    创新生态 & 构建协同创新平台 \\
+%    \bottomrule
+%  \end{tabular}
+%
+%  \vspace{1cm}
+%  \textcolor{blue}{\Large 虚实交融，智创未来}
+%\end{frame}
+%
+%\begin{frame}{Q\&A}
+%  \centering
 %  \includegraphics[width=0.7\textwidth]{dt_future.jpg}
 
-  \begin{footnotesize}
-    图片来源：数字孪生典型应用场景示意图
-  \end{footnotesize}
-\end{frame}
+%  \begin{footnotesize}
+%    图片来源：数字孪生典型应用场景示意图
+%  \end{footnotesize}
+%\end{frame}
 
 %\appendix
 %------------------------------------------------------------------------Reference----------------------------------------------------------------------------------------------
-		\frame[allowframebreaks]{
-\begin{thebibliography}{99}
-\frametitle{主要参考文献}
-{\tiny
-%	\bibitem{PhysCN40-477_2011}曹则贤, \textit{Secular,equation}, \textit{物理}, \textbf{40} \textrm{(2011), 477}
-	\bibitem{PR136-B864_1964}\textrm{P. Hohenberg and W. Kohn, \textit{Phys. Rev.} \textbf{136} (1964), B864}
-	\bibitem{PR140-A1133_1965}\textrm{W. Kohn and L.J. Sham, \textit{Phys. Rev.} \textbf{140} (1965), A1133}
-	\bibitem{JPC12-4409_1979}\textrm{J. Ihm, A. Zunger and L. Cohen, {\textit{J. Phys. C}} \textbf{12} (1979), 4409}
-	\bibitem{PRB41-7892_1990}\textrm{D. Vanderbilt. \textit{Phys. Rev.} B, \textbf{41} (1990), 7892} 
-	\bibitem{JPCM6-8245_1994}\textrm{G. Kresse and J. Hafner. J. Phys: \textit{Condens. Matter}, \textbf{6} (1994), 8245}
-	\bibitem{PRB50-17953_1994}\textrm{P. E. Bl\"ochl. \textit{Phys. Rev.} B, \textbf{50} (1994), 17953}
-	\bibitem{PRB59-1758_1999}\textrm{G. Kresse and D. Joubert \textit{Phys. Rev.} B, \textbf{59} (1999), 1758}
-	\bibitem{PRB12-3060_1975}\textrm{O. K. Andersen. \textit{Phys. Rev.} B, \textbf{12} (1975), 3060}
-	\bibitem{JMP22-2433_1981}\textrm{M. Weiner. \textit{J. Math. Phys.}, \textbf{22} (1981), 2433}
-	\bibitem{PRB26-4571_1982}\textrm{M. Weinert, E. Wimmer and A. J. Freeman. \textit{Phys. Rev.} B, \textbf{26} (1982), 4571}
-	\bibitem{Andersen_Book}\textrm{O. K. Andersen. \textit{Computational Methods in Band Theory} (Plenum, New York, USA, 1971)}
-        \bibitem{Singh}\textrm{D. J. Singh. \textit{Plane Wave, PseudoPotential and the LAPW method} (Kluwer Academic, Boston,USA, 1994)}					%
-	\bibitem{Singh}\textrm{D. J. Singh. \textit{Plane Wave, PseudoPotential and the LAPW method} (Kluwer Academic, Boston,USA, 1994)}
-	\bibitem{Xie-Lu}谢希德、陆栋\:主编, {\textit{固体能带理论}}\:复旦大学出版社, 上海, 1998
-	\bibitem{Nemoshkalenko-Antonov}\textrm{V. V. Nemoshkalenko and V. N. Antonov. \textit{Computational Methods in Solid State Physics} (Gordon and Breach Science Publisher, Amsterdam, The Netherlands, 1998)}
-	\bibitem{Elect_Stru}\textrm{Richard. M. Martin. \textit{Electronic Structure: Basic Theory and Practical Methods} (Cambridge University Press, Cambridge, England, 2004)}
-	\bibitem{Xu_Li_Wang}徐光宪、黎乐民、王德民, {\textit{量子化学——基本原理和从头计算法}}\;\textrm{({\textit{上、中}})}\:科学出版社, 北京, 1980
-%	\bibitem{SSC114-15_2000}\textrm{E. Sj\"ostedt, L. Nordstr\"om and D. J. Singh. \textit{Solid State Commun.}, \textbf{114} (2000), 15}
-}
-\end{thebibliography}
-\nocite*{}
-}
+%		\frame[allowframebreaks]{
+%\begin{thebibliography}{99}
+%\frametitle{主要参考文献}
+%{\tiny
+%%	\bibitem{PhysCN40-477_2011}曹则贤, \textit{Secular,equation}, \textit{物理}, \textbf{40} \textrm{(2011), 477}
+%	\bibitem{PR136-B864_1964}\textrm{P. Hohenberg and W. Kohn, \textit{Phys. Rev.} \textbf{136} (1964), B864}
+%	\bibitem{PR140-A1133_1965}\textrm{W. Kohn and L.J. Sham, \textit{Phys. Rev.} \textbf{140} (1965), A1133}
+%	\bibitem{JPC12-4409_1979}\textrm{J. Ihm, A. Zunger and L. Cohen, {\textit{J. Phys. C}} \textbf{12} (1979), 4409}
+%	\bibitem{PRB41-7892_1990}\textrm{D. Vanderbilt. \textit{Phys. Rev.} B, \textbf{41} (1990), 7892} 
+%	\bibitem{JPCM6-8245_1994}\textrm{G. Kresse and J. Hafner. J. Phys: \textit{Condens. Matter}, \textbf{6} (1994), 8245}
+%	\bibitem{PRB50-17953_1994}\textrm{P. E. Bl\"ochl. \textit{Phys. Rev.} B, \textbf{50} (1994), 17953}
+%	\bibitem{PRB59-1758_1999}\textrm{G. Kresse and D. Joubert \textit{Phys. Rev.} B, \textbf{59} (1999), 1758}
+%	\bibitem{PRB12-3060_1975}\textrm{O. K. Andersen. \textit{Phys. Rev.} B, \textbf{12} (1975), 3060}
+%	\bibitem{JMP22-2433_1981}\textrm{M. Weiner. \textit{J. Math. Phys.}, \textbf{22} (1981), 2433}
+%	\bibitem{PRB26-4571_1982}\textrm{M. Weinert, E. Wimmer and A. J. Freeman. \textit{Phys. Rev.} B, \textbf{26} (1982), 4571}
+%	\bibitem{Andersen_Book}\textrm{O. K. Andersen. \textit{Computational Methods in Band Theory} (Plenum, New York, USA, 1971)}
+%        \bibitem{Singh}\textrm{D. J. Singh. \textit{Plane Wave, PseudoPotential and the LAPW method} (Kluwer Academic, Boston,USA, 1994)}					%
+%	\bibitem{Singh}\textrm{D. J. Singh. \textit{Plane Wave, PseudoPotential and the LAPW method} (Kluwer Academic, Boston,USA, 1994)}
+%	\bibitem{Xie-Lu}谢希德、陆栋\:主编, {\textit{固体能带理论}}\:复旦大学出版社, 上海, 1998
+%	\bibitem{Nemoshkalenko-Antonov}\textrm{V. V. Nemoshkalenko and V. N. Antonov. \textit{Computational Methods in Solid State Physics} (Gordon and Breach Science Publisher, Amsterdam, The Netherlands, 1998)}
+%	\bibitem{Elect_Stru}\textrm{Richard. M. Martin. \textit{Electronic Structure: Basic Theory and Practical Methods} (Cambridge University Press, Cambridge, England, 2004)}
+%	\bibitem{Xu_Li_Wang}徐光宪、黎乐民、王德民, {\textit{量子化学——基本原理和从头计算法}}\;\textrm{({\textit{上、中}})}\:科学出版社, 北京, 1980
+%%	\bibitem{SSC114-15_2000}\textrm{E. Sj\"ostedt, L. Nordstr\"om and D. J. Singh. \textit{Solid State Commun.}, \textbf{114} (2000), 15}
+%}
+%\end{thebibliography}
+%\nocite*{}
+%}
