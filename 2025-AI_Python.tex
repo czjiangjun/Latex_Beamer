@@ -75,7 +75,7 @@
 \textcolor{magenta}{特点}%	\textrm{Python}的特点
 	\begin{itemize}
 		\item \textrm{Python}简单易学、代码可读性强
-		\item \textrm{Python}支持\textrm{Windows}、\textrm{macOS}、\textrm{Linux}等操作系统\\
+		\item \textrm{Python}支持\textrm{Windows}、\textrm{MacOS}、\textrm{Linux}等操作系统\\
 			{\fontsize{7.2pt}{4.2pt}\selectfont{可以在不同的平台上无缝运行，而无需修改代码}}
 		\item \textrm{Python}拥有广泛的标准库和第三方库
 	\end{itemize}
@@ -115,12 +115,37 @@
 \includegraphics[height=0.8in, width=1.3in, viewport=0 0 666 410,clip]{Figures/python_install-windows-1.png}
 \includegraphics[height=0.8in, width=1.3in, viewport=0 0 666 410,clip]{Figures/python_install-windows-2.png}
 \includegraphics[height=0.8in, width=1.3in, viewport=0 0 666 410,clip]{Figures/python_install-windows-3.png}
-\label{Python-download_windows}
+\label{Python-install_windows}
 \end{figure}
 \end{frame}
 
 \begin{frame}
 	\frametitle{\textrm{Windows}系统配置\textrm{Python}}
+\begin{figure}[h!]
+\vspace*{-0.18in}
+\centering
+\includegraphics[height=1.3in, width=1.5in, viewport=0 0 728 639,clip]{Figures/python_config-windows-1.png}
+\includegraphics[height=1.3in, width=1.2in, viewport=0 0 479 598,clip]{Figures/python_config-windows-2.png}\\
+\hspace*{-0.11in}
+\includegraphics[height=1.4in, width=1.3in, viewport=0 0 618 659,clip]{Figures/python_config-windows-3.png}
+\includegraphics[height=1.4in, width=1.35in, viewport=0 0 527 563,clip]{Figures/python_config-windows-4.png}
+\includegraphics[height=1.4in, width=1.35in, viewport=0 0 527 563,clip]{Figures/python_config-windows-5.png}\\
+\includegraphics[height=0.35in, width=1.8in, viewport=0 0 640 140,clip]{Figures/python_config-windows-pip.png}
+\label{Python-config_windows}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{\textrm{Windows}系统配置与运行\textrm{Python}}
+\begin{figure}[h!]
+\vspace*{-0.15in}
+\centering
+\includegraphics[height=1.4in, width=1.5in, viewport=0 0 724 627,clip]{Figures/python_config-windows-6.png}\\
+\includegraphics[height=0.6in, width=3.5in, viewport=0 0 1484 312,clip]{Figures/python_command-windows-1.png}
+\includegraphics[height=0.4in, width=3.5in, viewport=0 0 1496 261,clip]{Figures/python_command-windows-2.png}
+\includegraphics[height=0.6in, width=3.5in, viewport=0 0 1559 387,clip]{Figures/python_command-windows-3.png}
+\label{Python-run_windows}
+\end{figure}
 \end{frame}
 
 % 幻灯片5：Linux系统安装Python
@@ -145,43 +170,51 @@
 \end{frame}
 
 % 幻灯片6：MacOS系统安装Python
-\begin{frame}
-    \frametitle{MacOS系统安装Python}
+\begin{frame}[fragile]
+	\frametitle{\textrm{MacOS}系统安装\textrm{Python}}
     \begin{itemize}
-        \item 使用Homebrew安装（推荐）
+	    \item 使用\textrm{Homebrew}安装~(推荐)
             \begin{itemize}
-                \item 若未安装Homebrew，先在终端运行命令%\verb|/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"|安装Homebrew
-                \item 安装完成后，运行命令%\verb|brew install python|安装Python
-                \item 安装过程中可能需要输入用户密码，输入后按回车键继续
+		    \item 若未安装\textrm{Homebrew}，先运行命令~\\
+%			    \begin{verbatim}
+%			    \end{verbatim}\\
+			{\fontsize{8.2pt}{4.2pt}\selectfont{\verb|/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"|}}
+%			    \begin{verbatim}
+%			    \end{verbatim}\\
+			    {\fontsize{7.2pt}{4.2pt}\selectfont{\textcolor{magenta}{\%安装\textrm{Homebrew}}}}
+                \item 安装完成后，运行命令 \verb|brew install python|\\
+			{\fontsize{7.2pt}{4.2pt}\selectfont{\textcolor{magenta}{\%安装\textrm{Python}}}}
+%                \item 安装过程中可能需要输入用户密码，输入后按回车键继续
             \end{itemize}
         \item 使用官方安装包安装
             \begin{itemize}
-                \item 访问Python官方网站下载适合MacOS的安装包
-                \item 双击安装包，按照安装向导提示完成安装
-                \item 安装完成后，在终端中可通过%\verb|python3 --version|查看Python版本
+		    \item 访问\textrm{Python}官方网站下载适合\textrm{MacOS}的安装包
+                \item 双击安装包，按安装向导提示，完成安装
             \end{itemize}
+                \item 安装完成，运行命令 \verb|python3 --version|\\
+			{\fontsize{7.2pt}{4.2pt}\selectfont{\textcolor{magenta}{\%查看\textrm{Python}版本}}}
     \end{itemize}
 \end{frame}
 
 % 幻灯片7：安装后的验证与测试
-\begin{frame}
+\begin{frame}[fragile]
     \frametitle{安装后的验证与测试}
     \begin{itemize}
         \item 验证Python是否安装成功
             \begin{itemize}
                 \item 打开命令行（Windows下为CMD或PowerShell，Linux和MacOS下为终端）
-                \item 输入命令%\verb|python --version|（若安装的是Python 3，也可输入\verb|python3 --version|），显示Python版本号则安装成功
+                \item 输入命令\verb|python --version|（若安装的是Python 3，也可输入\verb|python3 --version|），显示Python版本号则安装成功
             \end{itemize}
         \item 测试Python运行
             \begin{itemize}
-                \item 在命令行中输入%\verb|python|（或\verb|python3|）进入Python交互式环境
-                \item 输入代码%\verb|print("Hello, Python!")|，按回车键，若输出\verb|Hello, Python!|，则说明Python运行正常
+                \item 在命令行中输入\verb|python|（或\verb|python3|）进入Python交互式环境
+                \item 输入代码\verb|print("Hello, Python!")|，按回车键，若输出\verb|Hello, Python!|，则说明Python运行正常
             \end{itemize}
     \end{itemize}
 \end{frame}
 
 % 幻灯片8：常见问题与解决方法
-\begin{frame}
+\begin{frame}[fragile]
     \frametitle{常见问题与解决方法}
     \begin{itemize}
         \item 安装过程中报错
@@ -192,8 +225,8 @@
             \end{itemize}
         \item pip安装包失败
             \begin{itemize}
-                \item 检查pip版本，可通过命令%\verb|pip install --upgrade pip|升级pip
-                \item 更换pip源，如使用国内镜像源（如清华大学镜像源：\href{https://pypi.tuna.tsinghua.edu.cn/simple}{https://pypi.tuna.tsinghua.edu.cn/simple}），在命令行中运行%\verb|pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple|
+                \item 检查pip版本，可通过命令\verb|pip install --upgrade pip|升级pip
+                \item 更换pip源，如使用国内镜像源（如清华大学镜像源：\href{https://pypi.tuna.tsinghua.edu.cn/simple}{https://pypi.tuna.tsinghua.edu.cn/simple}），在命令行中运行\verb|pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple|
             \end{itemize}
     \end{itemize}
 \end{frame}
