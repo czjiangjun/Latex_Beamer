@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  不使用 authblk 包制作标题  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %-------------------------------PPT Title-------------------------------------
-\title{\rm{Python}简介}
+\title{\rm{Python}入门}
 %-----------------------------------------------------------------------------
 
 %----------------------------Author & Date------------------------------------
@@ -56,7 +56,7 @@
 
 %-----------------------------------------------PPT main Body------------------------------------------------------------------------------------
 \small
-\section{\rm{Python}入门}
+\section{\rm{Python}简介}
 \begin{frame}
 	\frametitle{\textrm{Python}是什么}
 	\begin{itemize}
@@ -338,7 +338,7 @@ jupyter notebook
 \end{frame}
 
 %% 基础语法
-\section{基础语法}
+\section{\rm{Python}的基础语法}
 \begin{frame}[fragile]
 %	\frametitle{\textrm{Hello, World!}}
 	\frametitle{\textrm{hello python}}
@@ -408,7 +408,7 @@ print("你好，" + name + "！")
 \section{控制结构}
 \begin{frame}[fragile]
     \frametitle{条件语句}
-    条件语句用于根据条件执行不同的代码块。
+    条件语句用于根据条件执行不同的代码块
     \begin{lstlisting}[style=pythonstyle]
 age = 18
 if age >= 18:
@@ -473,7 +473,7 @@ print(result)
 \section{类与对象}
 \begin{frame}[fragile]
     \frametitle{类的定义}
-    \textcolor{purple}{类}:~对象的符号表示形式，定义了对象的属性和方法
+    \textcolor{purple}{类}:~对象的符号表示形式，定义了对象的\textcolor{purple}{属性}和\textcolor{purple}{方法}\footnote{\tiny 方法与函数很相似，但方法需依附对象;通过对象调用方法，实现对该对象的更改}
     \begin{lstlisting}[style=pythonstyle]
 class Person:
     def __init__(self, name, age):
@@ -481,7 +481,7 @@ class Person:
         self.age = age
 
     def introduce(self):
-        print("我叫 {self.name}，今年 {self.age} 岁。")
+        print(f"我叫 {self.name}，今年 {self.age} 岁。") # print(f'')允许字符串中嵌入表达式
 
 p = Person("Bob", 25)
 p.introduce()
@@ -490,13 +490,14 @@ p.introduce()
     \begin{itemize}
 	    \item \texttt{\textcolor{blue}{class}} 关键字用于定义类
         \item \texttt{\_\_init\_\_()} 是构造方法，用于初始化对象的属性
+%	\item \texttt{introduce}() 是方法，通过对象调用方法，可实现对该对象的更改
         \item \texttt{self} 代表类的实例
     \end{itemize}
 \end{frame}
 %
 \begin{frame}[fragile]
     \frametitle{类的继承}
-    继承允许一个类继承另一个类的属性和方法。
+    类的继承特征:~允许一个类继承另一个类的属性和方法
     \begin{lstlisting}[style=pythonstyle]
 class Student(Person):
     def __init__(self, name, age, grade):
@@ -504,7 +505,7 @@ class Student(Person):
         self.grade = grade
 
     def study(self):
-        print("{self.name} 正在学习，成绩是 {self.grade}。")
+        print(f"{self.name} 正在学习，成绩是 {self.grade}。")
 
 s = Student("Alice", 20, "A")
 s.introduce()
@@ -512,8 +513,8 @@ s.study()
     \end{lstlisting}
 %    解释：
     \begin{itemize}
-        \item \texttt{Student} 类继承自 \texttt{Person} 类。
-        \item \texttt{super()} 函数用于调用父类的方法。
+        \item \texttt{Student} 类继承自 \texttt{Person} 类
+	\item \texttt{\textcolor{blue}{super}()} 函数用于调用父类的方法
     \end{itemize}
 \end{frame}
 %
@@ -521,7 +522,7 @@ s.study()
 \section{装饰器}
 \begin{frame}[fragile]
     \frametitle{装饰器的概念}
-    装饰器是一种特殊的函数，用于修改其他函数的行为。
+    \textcolor{purple}{装饰器}:~一种特殊的函数，用于修改其他函数/类的行为或功能
     \begin{lstlisting}[style=pythonstyle]
 def my_decorator(func):
     def wrapper():
@@ -538,17 +539,84 @@ say_hello()
     \end{lstlisting}
 %    解释：
     \begin{itemize}
-        \item \texttt{my\_decorator} 是一个装饰器函数，它接受一个函数作为参数，并返回一个新的函数。
-        \item \texttt{@my\_decorator} 语法糖用于将 \texttt{say\_hello} 函数传递给 \texttt{my\_decorator} 装饰器。
+        \item \texttt{my\_decorator} 是装饰器函数:\\
+		{\fontsize{7.2pt}{4.2pt}\selectfont{装饰器函数接受一个函数作为参数，并返回一个新的函数}}
+	\item \texttt{@my\_decorator} \texttt{\textcolor{purple}{@}}(语法糖):~用于将函数{\fontsize{6.5pt}{4.2pt}\selectfont{(\texttt{say\_hello})}}传递给装饰器{\fontsize{6.5pt}{4.2pt}\selectfont{(\texttt{my\_decorator})}}
     \end{itemize}
 \end{frame}
 %
-%% 模块与包
-\section{模块与包}
+% Python 库介绍
+\section{\rm{Python}的库}
 \begin{frame}[fragile]
-    \frametitle{模块}
-    模块是一个包含 Python 代码的文件。
-    导入模块：
+	\frametitle{\textrm{NumPy} - 数值计算库}
+	\textrm{NumPy}:~ \textrm{Python} 中用于科学计算的基础库\\
+	{\fontsize{8.5pt}{4.2pt}\selectfont{提供高性能的多维数组对象和数组处理的工具}}
+    \begin{lstlisting}[style=pythonstyle]
+import numpy as np
+
+# 创建一个一维数组
+arr = np.array([1, 2, 3, 4, 5])
+print(arr)
+
+# 数组运算
+print(arr * 2)
+    \end{lstlisting}
+%    解释：
+    \begin{itemize}
+	    \item \texttt{np.array()} 用于创建 \textrm{NumPy} 数组
+        \item 可对数组进行各种数学运算
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\textrm{Pandas} - 数据处理库}
+	\textrm{Pandas}:~ 用于数据处理和分析的库\\
+	{\fontsize{8.5pt}{4.2pt}\selectfont{可提供 \textrm{DataFrame} 和 \textrm{Series} 等数据结构}}
+    \begin{lstlisting}[style=pythonstyle]
+import pandas as pd
+
+# 创建一个 DataFrame
+data = {'Name': ['Alice', 'Bob', 'Charlie'],
+        'Age': [20, 25, 30]}
+df = pd.DataFrame(data)
+print(df)
+    \end{lstlisting}
+%    解释：
+    \begin{itemize}
+	    \item \texttt{pd.DataFrame()} 用于创建 \textrm{DataFrame} 对象
+	    \item \textrm{DataFrame} 可进行数据操作和分析
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\textrm{Matplotlib} - 数据可视化库}
+	\textrm{Matplotlib}:~ \textrm{Python} 中常用的绘图库
+	{\fontsize{8.5pt}{4.2pt}\selectfont{用于创建各种类型的图表}}
+    \begin{lstlisting}[style=pythonstyle]
+import matplotlib.pyplot as plt
+
+# 绘制简单的折线图
+x = [1, 2, 3, 4, 5]
+y = [2, 4, 6, 8, 10]
+plt.plot(x, y)
+plt.xlabel('X-axis')
+plt.ylabel('Y-axis')
+plt.title('Simple Line Plot')
+plt.show()
+    \end{lstlisting}
+%    解释：
+    \begin{itemize}
+        \item \texttt{plt.plot()} 用于绘制折线图
+        \item 可使用 \texttt{plt.xlabel()}、\texttt{plt.ylabel()} 和 \texttt{plt.title()} 为图表添加标签和标题
+    \end{itemize}
+\end{frame}
+%% 模块与包
+\section{\rm{Module}与\rm{Package}}
+\begin{frame}[fragile]
+	\frametitle{\textrm{Module}}
+	\textcolor{purple}{\textrm{Module}}:~一个包含\textrm{Python}代码的\textcolor{red}{文件}
+\vskip 2pt
+    导入\textrm{Module}:~
     \begin{lstlisting}[style=pythonstyle]
 import math
 result = math.sqrt(16)
@@ -556,20 +624,21 @@ print(result)
     \end{lstlisting}
 %    解释：
     \begin{itemize}
-        \item \texttt{import} 关键字用于导入模块。
-        \item 可以使用模块中的函数和变量。
+	    \item \texttt{\textcolor{blue}{import}} 关键字用于导入\textrm{Module}
+	    \item 可以使用\textrm{Module}中的函数和变量
     \end{itemize}
 \end{frame}
 %
 \begin{frame}[fragile]
-    \frametitle{包}
-    包是一个包含多个模块的目录。
-    导入包中的模块：
+	\frametitle{\textrm{Package}}
+	\textcolor{purple}{\textrm{Package}}:~一个\textrm{Package}含多个\textrm{Module}的\textcolor{red}{目录}
+\vskip 2pt
+	导入\textrm{Package}中的\textrm{Module}:
     \begin{lstlisting}[style=pythonstyle]
 import mypackage.mymodule
 mypackage.mymodule.my_function()
     \end{lstlisting}
-    或者使用 \texttt{from...import} 语句：
+    或者使用 \texttt{\textcolor{blue}{from}...\textcolor{blue}{import}} 语句:
     \begin{lstlisting}[style=pythonstyle]
 from mypackage.mymodule import my_function
 my_function()
@@ -581,13 +650,13 @@ my_function()
 \begin{frame}
     \frametitle{总结}
     \begin{itemize}
-        \item 了解了 Python 的基本概念和安装方法。
-        \item 学习了 Python 的基础语法，包括变量、数据类型、输入输出等。
-        \item 掌握了控制结构（条件语句、循环语句）和函数的使用。
-        \item 学习了类与对象、继承和装饰器的知识。
-        \item 了解了 Jupyter Notebook 等开发环境的使用。
-        \item 了解了模块和包的概念及使用方法。
+	    \item 了解 \textrm{Python} 的基本概念和安装方法
+	    \item 了解 \textrm{Jupyter Notebook} 等 \textrm{Python} 开发环境的使用。
+	    \item 学习 \textrm{Python} 的基础语法，包括变量、数据类型、输入输出等
+        \item 掌握控制结构~(条件语句、循环语句)和函数的使用
+        \item 学习类与对象、继承和装饰器的知识
+        \item 了解模块和包的概念及使用方法
     \end{itemize}
-    继续学习，探索更多 Python 的知识！
+    继续学习，探索更多 \textrm{Python} 的知识
 \end{frame}
 %
