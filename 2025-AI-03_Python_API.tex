@@ -1,0 +1,249 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  不使用 authblk 包制作标题  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%-------------------------------PPT Title-------------------------------------
+\title{\rm{Python~OpenAI~API}简介}
+%-----------------------------------------------------------------------------
+
+%----------------------------Author & Date------------------------------------
+\author[]{\vskip +10pt 姜\;\;骏\inst{}} %[]{} (optional, use only with lots of authors)
+%% - Give the names in the same order as the appear in the paper.
+%% - Use the \inst{?} command only if the authors have different
+%%   affiliation.
+\institute[BCC]{\inst{}%
+%\institute[Gain~Strong]{\inst{}%
+\vskip -15pt 北京市计算中心}
+%\vskip -20pt {\large 格致斯创~科技}}
+\date[\today] % (optional, should be abbreviation of conference name)
+{	{\fontsize{6.2pt}{4.2pt}\selectfont{\textcolor{blue}{E-mail:~}\url{jiangjun@bcc.ac.cn}}}
+\vskip 45 pt {\fontsize{8.2pt}{6.2pt}\selectfont{%清华大学\;\;物理系% 报告地点
+	\vskip 5 pt \textrm{2025.02}}}
+}
+
+%% - Either use conference name or its abbreviation
+%% - Not really information to the audience, more for people (including
+%%   yourself) who are reading the slides onlin%%   yourself) who are reading the slides onlin%%   yourself) who are reading the slides onlineee
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subject{}
+% This is only inserted into the PDF information catalog. Can be left
+% out.
+%\maketitle
+\frame
+{
+%	\frametitle{\fontsize{9.5pt}{5.2pt}\selectfont{\textcolor{orange}{“高通量并发式材料计算算法与软件”年度检查}}}
+\titlepage
+}
+%-----------------------------------------------------------------------------
+
+%------------------------------------------------------------------------------列出全文 outline ---------------------------------------------------------------------------------
+\section*{}
+\frame[allowframebreaks]
+{
+	\frametitle{\textrm{Outline}}
+%  \frametitle{\textcolor{mycolor}{\secname}}
+  \tableofcontents%[current,currentsection,currentsubsection]
+}
+%在每个section之前列出全部Outline
+%类似的在每个subsection之前列出全部Outline是\AtBeginSubsection[]
+%\AtBeginSection[]
+%{
+%  \frame<handout:0>%[allowframebreaks]
+%  {
+%    \frametitle{Outline}
+%%全部Outline中，本部分加亮
+%    \tableofcontents[current,currentsection]
+%  }
+%}
+
+%-----------------------------------------------PPT main Body------------------------------------------------------------------------------------
+\small
+\section{引言}
+\begin{frame}{引言}
+    % 介绍 Python 和 OpenAI API 的重要性以及本演示的目标和范围
+    \begin{itemize}
+        \item 介绍 Python 和 OpenAI API 的重要性
+        \item 说明本演示的目标和范围
+    \end{itemize}
+\end{frame}
+
+\section{OpenAI API 概述}
+\begin{frame}{OpenAI API 概述}
+    % 阐述 OpenAI API 的定义、主要功能、应用场景和不同模型特点
+    \begin{itemize}
+        \item 什么是 OpenAI API
+        \item 主要功能和应用场景
+        \item 不同模型的特点（如 GPT - 3.5, GPT - 4 等）
+    \end{itemize}
+\end{frame}
+
+\section{Python 环境准备}
+\begin{frame}{Python 环境准备}
+    % 说明安装 Python 和 OpenAI Python 库的要求
+    \begin{itemize}
+        \item 安装 Python（建议 Python 3.7 及以上版本）
+        \item 安装 OpenAI Python 库
+    \end{itemize}
+    % 展示安装 OpenAI Python 库的命令
+    \begin{lstlisting}[style=pythonstyle]
+pip install openai
+    \end{lstlisting}
+\end{frame}
+
+\section{API 密钥设置}
+\begin{frame}{API 密钥设置}
+    % 介绍获取和设置 OpenAI API 密钥的步骤
+    \begin{itemize}
+        \item 在 OpenAI 平台获取 API 密钥
+        \item 在 Python 代码中设置 API 密钥
+    \end{itemize}
+    % 展示在 Python 代码中设置 API 密钥的示例
+    \begin{lstlisting}[style=pythonstyle]
+import openai
+
+openai.api_key = "YOUR_API_KEY"
+    \end{lstlisting}
+\end{frame}
+
+\section{基本请求示例}
+\begin{frame}{基本请求示例}
+    % 给出一个使用 OpenAI API 生成文本的简单示例
+    以下是一个简单的使用 OpenAI API 生成文本的示例：
+    \begin{lstlisting}[style=pythonstyle]
+import openai
+
+openai.api_key = "YOUR_API_KEY"
+
+response = openai.Completion.create(
+    engine="text-davinci-003",
+    prompt="Once upon a time",
+    max_tokens=50
+)
+
+print(response.choices[0].text)
+    \end{lstlisting}
+\end{frame}
+
+\section{高级使用技巧}
+\begin{frame}{高级使用技巧 - 调整参数}
+    % 解释 temperature 参数的作用和效果，并给出示例代码
+    \begin{itemize}
+        \item \textbf{temperature}: 控制生成文本的随机性。取值范围从 0 到 1，值越大，生成的文本越随机、越有创意；值越小，生成的文本越确定、越保守。
+        \begin{lstlisting}[style=pythonstyle]
+import openai
+
+openai.api_key = "YOUR_API_KEY"
+
+# 低 temperature，生成文本较保守
+response_low_temp = openai.Completion.create(
+    engine="text-davinci-003",
+    prompt="Write a short story about a cat",
+    max_tokens=100,
+    temperature=0.2
+)
+
+# 高 temperature，生成文本较随机
+response_high_temp = openai.Completion.create(
+    engine="text-davinci-003",
+    prompt="Write a short story about a cat",
+    max_tokens=100,
+    temperature=0.8
+)
+
+print("Low temperature result:", response_low_temp.choices[0].text)
+print("High temperature result:", response_high_temp.choices[0].text)
+        \end{lstlisting}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{高级使用技巧 - 调整参数（续）}
+    % 解释 top_p 参数的作用和效果，并给出示例代码
+    \begin{itemize}
+        \item \textbf{top_p}: 也称为核采样，是另一种控制生成文本随机性的方法。它会从累积概率超过指定值（如 0.9）的词中进行采样。
+        \begin{lstlisting}[style=pythonstyle]
+import openai
+
+openai.api_key = "YOUR_API_KEY"
+
+# 低 top_p，生成文本较集中
+response_low_top_p = openai.Completion.create(
+    engine="text-davinci-003",
+    prompt="Describe a beautiful sunset",
+    max_tokens=100,
+    top_p=0.2
+)
+
+# 高 top_p，生成文本较分散
+response_high_top_p = openai.Completion.create(
+    engine="text-davinci-003",
+    prompt="Describe a beautiful sunset",
+    max_tokens=100,
+    top_p=0.8
+)
+
+print("Low top_p result:", response_low_top_p.choices[0].text)
+print("High top_p result:", response_high_top_p.choices[0].text)
+        \end{lstlisting}
+    \end{itemize}
+\end{frame}
+
+\section{Hugging Face 介绍}
+\begin{frame}{Hugging Face 简介}
+    % 介绍 Hugging Face 平台的基本信息
+    \begin{itemize}
+        \item Hugging Face 是一个专注于自然语言处理（NLP）的开源社区和平台。
+        \item 提供了丰富的预训练模型、数据集和工具，方便开发者进行 NLP 任务的开发。
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Hugging Face 主要功能}
+    % 详细说明 Hugging Face 的主要功能
+    \begin{itemize}
+        \item \textbf{模型库}: 拥有大量的预训练模型，涵盖多种语言和任务，如文本分类、情感分析、机器翻译等。
+        \item \textbf{数据集}: 提供了各种公开的数据集，方便开发者进行模型训练和评估。
+        \item \textbf{Transformers 库}: 一个强大的 Python 库，用于加载和使用预训练模型，简化了模型的使用流程。
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Hugging Face 使用方法}
+    % 介绍使用 Hugging Face 的步骤和示例代码
+    \begin{itemize}
+        \item 安装 Transformers 库
+        \begin{lstlisting}[style=pythonstyle]
+pip install transformers
+        \end{lstlisting}
+        \item 使用预训练模型进行文本生成示例
+        \begin{lstlisting}[style=pythonstyle]
+from transformers import pipeline
+
+generator = pipeline('text-generation', model='gpt2')
+result = generator("Once upon a time", max_length=50, num_return_sequences=1)
+print(result[0]['generated_text'])
+        \end{lstlisting}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Hugging Face 与 OpenAI API 对比}
+    % 对比 Hugging Face 和 OpenAI API 的开放性、模型多样性和易用性
+    \begin{itemize}
+        \item \textbf{开放性}: Hugging Face 是开源社区，模型和代码可自由使用和修改；OpenAI API 部分模型需付费使用，且有使用限制。
+        \item \textbf{模型多样性}: Hugging Face 模型库丰富，涵盖多种架构和语言；OpenAI 主要以其自身研发的模型为主。
+        \item \textbf{易用性}: Hugging Face 的 Transformers 库简化了模型使用；OpenAI API 提供了统一的接口，使用方便。
+    \end{itemize}
+\end{frame}
+
+\section{错误处理和最佳实践}
+\begin{frame}{错误处理和最佳实践}
+    % 强调处理 API 请求错误和遵循使用政策的重要性
+    \begin{itemize}
+        \item 处理 API 请求中的错误（如网络错误、权限错误等）
+        \item 遵循 OpenAI 和 Hugging Face 的使用政策和最佳实践
+    \end{itemize}
+\end{frame}
+
+\section{总结}
+\begin{frame}{总结}
+    % 总结 Python 与 OpenAI API、Hugging Face 的使用要点并鼓励探索
+    \begin{itemize}
+        \item 回顾 Python 与 OpenAI API、Hugging Face 的使用要点
+        \item 鼓励进一步探索和实践
+    \end{itemize}
+\end{frame}
