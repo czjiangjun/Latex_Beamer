@@ -59,6 +59,13 @@
 \section{传统的神经网络}
 \begin{frame}
 	\frametitle{\textrm{RNN}在\textrm{NLP}中的基本思想}
+\begin{figure}[h!]
+\vspace*{-0.05in}
+\centering
+\includegraphics[height=2.0in, width=4.0in, viewport=0 0 1080 510,clip]{Figures/RNN-Language-model.png}
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{RNN-language-model}
+\end{figure}
     \begin{itemize}
     \item **序列建模**:~\textrm{RNN}将文本看作由单词组成的序列，通过循环结构逐词处理，每个时间步更新隐藏状态，以此保存文本的上下文信息\\
 	    隐藏状态不仅受当前单词影响，还依赖之前单词的信息，借此模拟人类语言理解过程中的记忆功能
@@ -70,7 +77,14 @@
 \end{frame}
 
 \begin{frame}
-	\frametitle{\textrm{CNN}在\textrm{NLP}中的基本思想}
+	\frametitle{\textrm{CNN}在\textrm{CV}中的基本思想}
+\begin{figure}[h!]
+\vspace*{-0.05in}
+\centering
+\includegraphics[height=2.0in, width=4.0in, viewport=0 0 1080 510,clip]{Figures/CNN-CV-model.png}
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{CNN-CV-model}
+\end{figure}
     \begin{enumerate}
 	    \item **局部特征提取**:~\textrm{CNN}把文本中的每个单词类比为图像中的像素，使用卷积核在文本序列上滑动，提取相邻单词组成的局部片段特征\\
 		    多个不同大小的卷积核能够提取多种尺度的特征，捕捉单词间的局部语义关系
@@ -107,12 +121,13 @@
 \caption{\tiny \textrm{Transformer:~full architecture.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Transformer_full_architecture}
 \end{figure}
-    \textrm{Transformer}由编码器\textrm{(Encoder)}和解码器\textrm{(Decoder)}组成，分别包含多个相同的层，层间使用残差连接和归一化操作\\
-    这些模块的设计，为并行计算提供了基础
 \end{frame}
 
 \begin{frame}
     \frametitle{并行计算:~基石模块}
+    \textrm{Transformer}由编码器\textrm{(Encoder)}和解码器\textrm{(Decoder)}组成，分别包含多个相同的层，层间使用残差连接和归一化操作\\
+    这些模块的设计，为并行计算提供了基础
+
     在\textrm{Transformer}中，编码器和解码器内的多个层并非按顺序逐一计算，而是可以并行处理\\
     举例来说，在编码器中每个编码器层相互独立，在计算时，所有编码器层可以同时处理输入数据的不同部分，大幅提升计算效率
 \end{frame}
