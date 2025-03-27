@@ -56,64 +56,84 @@
 
 %-----------------------------------------------PPT main Body------------------------------------------------------------------------------------
 \small
-\section{引言}
-\begin{frame}{引言}
-    % 介绍 Python 和 OpenAI API 的重要性以及本演示的目标和范围
+\section{\rm{OpenAI~API}入门}
+\begin{frame}{\textrm{OpenAI~API}概述}
     \begin{itemize}
-        \item 介绍 Python 和 OpenAI API 的重要性
-        \item 说明本演示的目标和范围
+	    \item<1-> \textcolor{magenta}{\textrm{OpenAI API}}\\
+		    \textrm{OpenAI}提供的一组接口，开发者可通过编程方式调用其强大的人工智能模型\\
+		    {\fontsize{7.5pt}{6.2pt}\selectfont{\textcolor{magenta}{借助该\textrm{API}，开发者将先进的自然语言处理能力集成到自己的应用程序、网站或服务中，无需自行从头训练模型}}}
+        \item<2-> 主要功能和应用场景
+        \begin{itemize}
+		\setlength{\itemsep}{5pt}
+		\item<2-> \textcolor{blue}{文本生成:}~根据提示生成连贯且相关的文本内容\\
+			{\fontsize{7.5pt}{6.2pt}\selectfont{如故事、诗歌、文章等}}
+		\item<2-> \textcolor{blue}{问答系统:}~理解用户问题并给出准确回答\\
+			{\fontsize{7.5pt}{6.2pt}\selectfont{适用于智能客服等场景}}
+		\item<2-> \textcolor{blue}{机器翻译:}~支持不同语言间的文本翻译
+		\item<2-> \textcolor{blue}{文本摘要:}~凝炼长篇文本的关键信息，生成简明的摘要
+		\item<2-> \textcolor{blue}{情感分析:}~判断文本的情感倾向(积极、消极、中性)
+        \end{itemize}
+%        \item<3-> 不同模型的特点(如\textrm{GPT-3.5}, \textrm{GPT-4}等)
     \end{itemize}
 \end{frame}
 
-\section{OpenAI API 概述}
-\begin{frame}{OpenAI API 概述}
-    % 阐述 OpenAI API 的定义、主要功能、应用场景和不同模型特点
-    \begin{itemize}
-        \item 什么是 OpenAI API
-        \item 主要功能和应用场景
-        \item 不同模型的特点（如 GPT - 3.5, GPT - 4 等）
-    \end{itemize}
-\end{frame}
-
-\section{Python 环境准备}
-\begin{frame}{Python 环境准备}
+%\section{Python 环境准备}
+\begin{frame}[fragile]
+	\frametitle{\textrm{Python}环境准备}
     % 说明安装 Python 和 OpenAI Python 库的要求
-    \begin{itemize}
-        \item 安装 Python（建议 Python 3.7 及以上版本）
-        \item 安装 OpenAI Python 库
-    \end{itemize}
+%    \begin{itemize}
+%	    \item 安装\textrm{Python}(建议\textrm{Python~3.7}及以上版本)
+%        \item 
+	安装\textrm{OpenAI~Python}库
+%    \end{itemize}
     % 展示安装 OpenAI Python 库的命令
+	\begin{block}{使用默认源安装}
     \begin{lstlisting}[style=pythonstyle]
 pip install openai
     \end{lstlisting}
+    \end{block}
+       \begin{block}{使用国内源安装}
+%        在国内，
+	       由于网络原因，使用默认源安装可能较慢，可使用国内镜像源来加速安装\\
+	       \vskip 3pt
+	{\fontsize{7.5pt}{6.2pt}\selectfont{以下是使用阿里云源的示例:
+        \begin{lstlisting}[style=pythonstyle]
+pip install openai -i https://mirrors.aliyun.com/pypi/simple/
+\end{lstlisting}}}
+%       常用的国内源还有:
+%       \begin{itemize}
+%           \item 清华大学r:~\url{https://pypi.tuna.tsinghua.edu.cn/simple}
+%           \item 中国科学技术大学:~\url{https://pypi.mirrors.ustc.edu.cn/simple}
+%       \end{itemize}
+    \end{block}
 \end{frame}
-
-\section{API 密钥设置}
-\begin{frame}{API 密钥设置}
-    % 介绍获取和设置 OpenAI API 密钥的步骤
-    \begin{itemize}
-        \item 在 OpenAI 平台获取 API 密钥
-        \item 在 Python 代码中设置 API 密钥
-    \end{itemize}
-    % 展示在 Python 代码中设置 API 密钥的示例
-    \begin{lstlisting}[style=pythonstyle]
-import openai
-
-openai.api_key = "YOUR_API_KEY"
-    \end{lstlisting}
-\end{frame}
-
-\section{基本请求示例}
-\begin{frame}{基本请求示例}
+%\section{API 密钥设置}
+%\begin{frame}[fragile]{\textrm{API}的密钥设置}
+%    % 介绍获取和设置 OpenAI API 密钥的步骤
+%    \begin{itemize}
+%	    \item 在\textrm{OpenAI}平台获取 \textrm{API}密钥
+%	    \item 在 \textrm{Python}代码中设置\textrm{API}密钥
+%    \end{itemize}
+%    % 展示在 Python 代码中设置 API 密钥的示例
+%    \begin{lstlisting}[style=pythonstyle]
+%import openai
+%
+%openai.api_key = "YOUR_API_KEY"
+%    \end{lstlisting}
+%\end{frame}
+%
+\subsection{基本请求示例}
+\begin{frame}[fragile]{基本请求示例}
     % 给出一个使用 OpenAI API 生成文本的简单示例
-    以下是一个简单的使用 OpenAI API 生成文本的示例：
+	以下是一个简单的使用\textrm{OpenAI API}生成文本的示例:
     \begin{lstlisting}[style=pythonstyle]
 import openai
 
 openai.api_key = "YOUR_API_KEY"
 
 response = openai.Completion.create(
-    engine="text-davinci-003",
+    model="gpt-4.0-turbo",   # model参数用于指定具体的模型名称
+#    engine="text-davinci-003", # engine参数通常用于指定使用的GPT模型
     prompt="Once upon a time",
     max_tokens=50
 )
@@ -122,11 +142,34 @@ print(response.choices[0].text)
     \end{lstlisting}
 \end{frame}
 
-\section{高级使用技巧}
-\begin{frame}{高级使用技巧 - 调整参数}
+%\section{Python 代码实操}
+\begin{frame}[fragile]{通过\textrm{openai}接入\textrm{DeepSeep-API}}
+        \begin{lstlisting}[style=pythonstyle]
+from openai import OpenAI
+
+# 创建OpenAI 客户端
+client = OpenAI(api_key="YOUR_API_KEY", base_url="https://api.deepseek.com")
+
+response = client.chat.completions.create(
+    model="deepseek-chat",
+    messages=[
+        {"role": "system", "content": "You are a helpful assistant"},
+#        {"role": "user", "content": "Hello"},
+        {"role": "user", "content": "介绍一下长城"},
+    ],
+    stream=False
+)
+
+print(response.choices[0].message.content)
+        \end{lstlisting}
+\end{frame}
+
+\subsection{控制参数调整}
+\begin{frame}[fragile, allowframebreaks]{调整参数:~\textrm{temperature}}
     % 解释 temperature 参数的作用和效果，并给出示例代码
     \begin{itemize}
-        \item \textbf{temperature}: 控制生成文本的随机性。取值范围从 0 到 1，值越大，生成的文本越随机、越有创意；值越小，生成的文本越确定、越保守。
+	    \item \texttt{\textcolor{blue}{temperature}}:~控制生成文本的随机性\\
+	{\fontsize{7.5pt}{6.2pt}\selectfont{\texttt{temperature}取值范围从 0 到 1:~值越大，生成的文本越随机、越有创意；值越小，生成的文本越确定、越保守}}
         \begin{lstlisting}[style=pythonstyle]
 import openai
 
@@ -152,12 +195,13 @@ print("Low temperature result:", response_low_temp.choices[0].text)
 print("High temperature result:", response_high_temp.choices[0].text)
         \end{lstlisting}
     \end{itemize}
-\end{frame}
+    \end{frame}
 
-\begin{frame}{高级使用技巧 - 调整参数（续）}
+\begin{frame}[fragile, allowframebreaks]{调整参数:~\textrm{top\_p}}
     % 解释 top_p 参数的作用和效果，并给出示例代码
     \begin{itemize}
-        \item \textbf{top_p}: 也称为核采样，是另一种控制生成文本随机性的方法。它会从累积概率超过指定值（如 0.9）的词中进行采样。
+	    \item \texttt{\textcolor{blue}{top\_p}}:~是另一种控制生成文本随机性的方法，也称为核采样\\
+		    {\fontsize{7.5pt}{6.2pt}\selectfont{\texttt{top\_p}会从累积概率超过指定值，如 \textrm{(0.9)}，的词中进行采样}}
         \begin{lstlisting}[style=pythonstyle]
 import openai
 
@@ -185,28 +229,71 @@ print("High top_p result:", response_high_top_p.choices[0].text)
     \end{itemize}
 \end{frame}
 
-\section{Hugging Face 介绍}
-\begin{frame}{Hugging Face 简介}
+\subsection{错误处理}
+\begin{frame}[fragile,allowframebreaks]{错误处理}
+%    \begin{itemize}
+ %       \item 错误处理：
+        \begin{lstlisting}[style=pythonstyle]
+try:
+    # 发送请求代码
+    # 若请求成功，打印生成的文本
+        print(response.choices[0].text)
+except openai.error.AuthenticationError as e:
+    # 处理认证错误，通常是 API 密钥无效
+        print(f"认证失败，请检查 API 密钥。错误信息: {e}")
+except openai.error.InvalidRequestError as e:
+    # 处理无效请求错误，如请求参数错误
+        print(f"无效请求。错误信息: {e}")
+except openai.error.RateLimitError as e:
+    # 处理速率限制错误，即请求频率过高
+        print(f"请求速率超过限制。错误信息: {e}")
+except openai.error.ServiceUnavailableError as e:
+    # 处理服务不可用错误，可能是 OpenAI 服务器问题
+        print(f"服务不可用，请稍后再试。错误信息: {e}")
+except openai.error.APIConnectionError as e:
+    # 处理 API 连接错误，如网络问题
+        print(f"API 连接错误，请检查网络。错误信息: {e}")
+except openai.error.Timeout as e:
+    # 处理请求超时错误
+        print(f"请求超时，请稍后再试。错误信息: {e}")
+except Exception as e:
+    # 处理其他未知错误
+        print(f"发生未知错误: {e}")
+except requests.RequestException as e:
+    print(f"请求发生错误: {e}")
+        \end{lstlisting}
+  %      \item 注意事项：
+  %      \begin{itemize}
+%		\item \textrm{API}密钥安全:~保管好\textrm{API}密钥，避免泄露
+%		\item \textrm{API}版本和模型差异:~根据不同版本和模型调整请求参数和响应处理方式
+%		\item 费用问题:~调用\textrm{API}可能产生费用，关注官方计费规则
+%        \end{itemize}
+%    \end{itemize}
+\end{frame}
+
+\section{\rm{Hugging Face}}
+\begin{frame}{\textrm{Hugging Face}简介}
     % 介绍 Hugging Face 平台的基本信息
     \begin{itemize}
-        \item Hugging Face 是一个专注于自然语言处理（NLP）的开源社区和平台。
-        \item 提供了丰富的预训练模型、数据集和工具，方便开发者进行 NLP 任务的开发。
+	    \item \textrm{Hugging Face}:~专注于自然语言处理\textrm{(NLP)}的开源社区和平台
+	    \item 提供丰富的预训练模型、数据集和工具，方便开发者进行\textrm{NLP}任务的开发
     \end{itemize}
-\end{frame}
-
-\begin{frame}{Hugging Face 主要功能}
+    \vskip 5pt
+\textrm{Hugging Face}主要功能:
     % 详细说明 Hugging Face 的主要功能
     \begin{itemize}
-        \item \textbf{模型库}: 拥有大量的预训练模型，涵盖多种语言和任务，如文本分类、情感分析、机器翻译等。
-        \item \textbf{数据集}: 提供了各种公开的数据集，方便开发者进行模型训练和评估。
-        \item \textbf{Transformers 库}: 一个强大的 Python 库，用于加载和使用预训练模型，简化了模型的使用流程。
+	    \setlength{\itemsep}{8pt}
+	    \item \textcolor{blue}{模型库:}~拥有大量的预训练模型，涵盖多种语言和任务\\
+		    {\fontsize{7.5pt}{6.2pt}\selectfont{如文本分类、情感分析、机器翻译等}}
+	    \item \textcolor{blue}{数据集:}~提供各种公开的数据集，方便模型训练和评估
+	    \item \textcolor{blue}{Transformers 库:}~一个强大的 \textrm{Python}库，用于加载和使用预训练模型，简化模型的使用流程
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Hugging Face 使用方法}
+\begin{frame}[fragile]{\textrm{Hugging Face}使用示例}
     % 介绍使用 Hugging Face 的步骤和示例代码
     \begin{itemize}
-        \item 安装 Transformers 库
+	    \item 安装 \textrm{Transformers}库
         \begin{lstlisting}[style=pythonstyle]
 pip install transformers
         \end{lstlisting}
@@ -221,29 +308,114 @@ print(result[0]['generated_text'])
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Hugging Face 与 OpenAI API 对比}
+\begin{frame}{\textrm{Hugging Face}与\textrm{OpenAI API}对比}
     % 对比 Hugging Face 和 OpenAI API 的开放性、模型多样性和易用性
     \begin{itemize}
-        \item \textbf{开放性}: Hugging Face 是开源社区，模型和代码可自由使用和修改；OpenAI API 部分模型需付费使用，且有使用限制。
-        \item \textbf{模型多样性}: Hugging Face 模型库丰富，涵盖多种架构和语言；OpenAI 主要以其自身研发的模型为主。
-        \item \textbf{易用性}: Hugging Face 的 Transformers 库简化了模型使用；OpenAI API 提供了统一的接口，使用方便。
+	    \setlength{\itemsep}{10pt}
+	    \item \textcolor{red}{开放性:} \\
+		    {\fontsize{7.5pt}{6.2pt}\selectfont{\textrm{Hugging Face}是开源社区，模型和代码可自由使用和修改}}\\
+		    {\fontsize{7.5pt}{6.2pt}\selectfont{\textrm{OpenAI API}部分模型需付费使用，且有使用限制}}
+	    \item \textcolor{red}{模型多样性:}\\
+		    {\fontsize{7.5pt}{6.2pt}\selectfont{\textrm{Hugging Face}模型库丰富，涵盖多种架构和语言}}\\
+		    {\fontsize{7.5pt}{6.2pt}\selectfont{ \textrm{OpenAI}主要以其自身研发的模型为主}}
+	    \item \textcolor{red}{易用性:} \\
+		    {\fontsize{7.5pt}{6.2pt}\selectfont{\textrm{Hugging Face}的\textrm{Transformers}库简化了模型使用}}\\
+		    {\fontsize{7.5pt}{6.2pt}\selectfont{\textrm{OpenAI API}提供了统一的接口，使用方便}}
     \end{itemize}
 \end{frame}
 
-\section{错误处理和最佳实践}
-\begin{frame}{错误处理和最佳实践}
+%\section{错误处理和最佳实践}
+%\begin{frame}{错误处理和最佳实践}
     % 强调处理 API 请求错误和遵循使用政策的重要性
-    \begin{itemize}
-        \item 处理 API 请求中的错误（如网络错误、权限错误等）
-        \item 遵循 OpenAI 和 Hugging Face 的使用政策和最佳实践
-    \end{itemize}
-\end{frame}
+%    \begin{itemize}
+%        \item 处理 API 请求中的错误（如网络错误、权限错误等）
+%        \item 遵循 OpenAI 和 Hugging Face 的使用政策和最佳实践
+%    \end{itemize}
+%\end{frame}
 
-\section{总结}
-\begin{frame}{总结}
-    % 总结 Python 与 OpenAI API、Hugging Face 的使用要点并鼓励探索
-    \begin{itemize}
-        \item 回顾 Python 与 OpenAI API、Hugging Face 的使用要点
-        \item 鼓励进一步探索和实践
-    \end{itemize}
-\end{frame}
+%\section{\rm{DeepSeek API}简介}
+%\begin{frame}{\textrm{DeepSeek API}简介}
+%    \begin{itemize}
+%	    \item %\texrm{DeepSeek}是字节跳动研发的前沿大语言模型，
+%		    \textrm{DeepSeek API}为开发者提供与模型交互的接口，可将模型能力集成到各类应用中
+%        \item 应用场景广泛，如智能客服、内容创作辅助、智能问答系统等
+%    \end{itemize}
+%%    \includegraphics[width=0.5\textwidth]{客服聊天窗口.jpg} % 替换为实际图片
+% %   \includegraphics[width=0.5\textwidth]{文案编辑界面.jpg} % 替换为实际图片
+%\end{frame}
+%
+%%\section{准备工作}
+%\begin{frame}[fragile]{准备工作}
+%    \begin{itemize}
+%	    \item 获取 \textrm{API}密钥:~在\textrm{DeepSeek}官方平台注册账号并获取\textrm{API}密钥
+%%        \includegraphics[width=0.8\textwidth]{平台注册与密钥获取页面.jpg} % 替换为实际截图
+%	    \item 安装\textrm{requests}库:~用于发送\textrm{HTTP}请求到\textrm{DeepSeek~API}
+%        \begin{lstlisting}[style=pythonstyle]
+%pip install requests
+%        \end{lstlisting}
+%    \end{itemize}
+%\end{frame}
+%
+%%\section{Python 代码实操}
+%\begin{frame}[fragile]{框架搭建}
+%    \begin{itemize}
+%        \item 设置 API 端点和 API 密钥：
+%        \begin{lstlisting}[style=pythonstyle]
+%API_ENDPOINT = "https://api.deepseek.com/v1/chat/completions"
+%API_KEY = "your_api_key"
+%        \end{lstlisting}
+%        \item 设置请求头：
+%        \begin{lstlisting}[style=pythonstyle]
+%headers = {
+%    "Content-Type": "application/json",
+%    "Authorization": f"Bearer {API_KEY}"
+%}
+%        \end{lstlisting}
+%    \end{itemize}
+%\end{frame}
+%
+%\begin{frame}[fragile]{\textrm{Python}请求体设置与发送请求}
+%    \begin{itemize}
+%        \item 设置请求体:
+%        \begin{lstlisting}[style=pythonstyle]
+%data = {
+%    "model": "deepseek-chat",
+%    "messages": [
+%        {
+%            "role": "user",
+%            "content": "介绍一下长城"
+%        }
+%    ]
+%}
+%        \end{lstlisting}
+%\item 发送\textrm{POST}请求：
+%        \begin{lstlisting}[style=pythonstyle]
+%response = requests.post(API_ENDPOINT, headers=headers, data=json.dumps(data))
+%        \end{lstlisting}
+%    \end{itemize}
+%\end{frame}
+%
+%\begin{frame}[fragile]{处理响应}
+%    \begin{itemize}
+%        \item 检查响应状态码：
+%        \begin{lstlisting}[style=pythonstyle]
+%if response.status_code == 200:
+%    result = response.json()
+%    print(result["choices"][0]["message"]["content"])
+%elif response.status_code == 402:
+%        error_info = response.json()
+%        print(f"账户余额不足，请充值。错误信息: {error_info['error']['message']}")
+%else:
+%    print(f"请求失败，状态码: {response.status_code}，错误信息: {response.text}")
+%        \end{lstlisting}
+%    \end{itemize}
+%\end{frame}
+
+%\section{总结}
+%\begin{frame}{总结}
+%    % 总结 Python 与 OpenAI API、Hugging Face 的使用要点并鼓励探索
+%    \begin{itemize}
+%        \item 回顾 \textrm{Python} 与 \textrm{OpenAI~API}、\textrm{Hugging Face} 的使用要点
+%        \item 鼓励进一步探索和实践
+%    \end{itemize}
+%\end{frame}
