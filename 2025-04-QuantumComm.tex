@@ -74,7 +74,7 @@
             \end{figure}
 	    \vskip -0.24in
 	    {\fontsize{8.5pt}{5.2pt}\selectfont{\textcolor{magenta}{叠加态之间存在确定的相位关系}}}
-        \item 量子相干态使得粒子可以同时处于多个状态
+        \item 量子相干使得粒子可以同时处于多个状态
             \begin{figure}
         \centering
 %                \includegraphics[width=0.95\textwidth]{Figures_History/Collection_23-1.jpeg}
@@ -124,7 +124,7 @@
 \end{frame}
 
 % 量子计算机基本原理部分
-\section{量子计算机的基本原理}
+\section{量子计算的基本原理}
 \begin{frame}
     \frametitle{量子比特}
     \begin{itemize}
@@ -188,7 +188,7 @@
 	\frametitle{量子计算机}
             \begin{figure}
         \centering
-                \includegraphics[height=1.0in, width=2.2in, viewport=0 0 1200 515,clip]{Figures/Quantum_Computing.jpg}
+                \includegraphics[height=2.3in, width=3.2in, viewport=0 0 767 511,clip]{Figures/Quantum_Computing.jpg}
 %                \includegraphics[width=0.95\textwidth]{Figures_History/Collection_23-1.jpeg}
 		\caption{\tiny{\textrm{A Schematic illustration of the elements of quantum computing.}}}
 		\label{Fig:Quantum_Computing}
@@ -275,11 +275,11 @@
 \end{frame}
 
 \begin{frame}
-	\frametitle{激光冷却与俘获:~磁-光俘获\textrm{(Magneto-Optical Traps, MOTs)}}
-	\textrm{MOTs}将磁场和激光束相结合，用以捕获超冷原子
+	\frametitle{激光冷却与俘获:~磁-光俘获}
+	磁-光俘获\textrm{(Magneto-Optical Traps, MOTs)}:~将磁场和激光束相结合，用以捕获超冷原子
     \begin{figure}
         \centering
-                \includegraphics[height=1.5in, width=2.45in, viewport=0 0 500 341,clip]{Figures/Atom-MOT-and-laser-cooling_MOTs.png}
+                \includegraphics[height=1.5in, width=2.2in, viewport=0 0 500 341,clip]{Figures/Atom-MOT-and-laser-cooling_MOTs.png}
         % 这里可以插入激光冷却与囚禁技术的示意图片
 		\caption{\tiny{\textrm{Schematic diagram of Magneto-Optical Traps.}}}
 		\label{Fig:Atom-MOT-and-laser-cooling_MOTs}
@@ -325,7 +325,7 @@
 %		\label{Fig:Device_structure-of-the-semiconductor_quantum_dot-with-doped-AlGaAs_GaAs-heterostructure-and-undoped_Si_SiGe herterostructure}
     \end{figure}
        	    \vskip -10pt
-	    {\fontsize{7.5pt}{5.2pt}\selectfont{在半导体量子计算中，量子点可作为量子比特的载体，用于生成和处理量子信息}}
+	    {\fontsize{9.5pt}{5.2pt}\selectfont{在半导体量子计算中，量子点可作为量子比特的载体，用于生成和处理量子信息}}
 \end{frame}
 
 %% 量子态的保持部分
@@ -367,10 +367,10 @@
 \begin{frame}
     \frametitle{量子纠错编码}
         量子纠错码是一种通过引入冗余信息来检测和纠正量子态错误的技术\\
-	当量子态受到干扰发生错误时，量子纠错码可以识别并恢复正确的量子态
+	{\fontsize{7.5pt}{5.2pt}\selectfont{当量子态受到干扰发生错误时，量子纠错码可以识别并恢复正确的量子态}}
     \begin{figure}
         \centering
-                \includegraphics[height=1.5in, width=3.0in, viewport=0 0 1536 867,clip]{Figures/Quantum_Error-correction-diagram.png}
+                \includegraphics[height=1.2in, width=2.3in, viewport=0 0 1210 650,clip]{Figures/Quantum_Error-correction-diagram.jpg}
 		\caption{\tiny{\textrm{Surface code: illustration of how error correction works for bit and phase flips. The measure qubits on light blue backgrounds check for phase flip errors while the measure qubits on dark blue backgrounds check for bit flip errors. In this example the measure qubits on reddish backgrounds are registering the errors.}}}
 		\label{Fig:Quantum_Error-correction-diagram}
     \end{figure}
@@ -379,18 +379,18 @@
 \end{frame}
 
 % 量子通信部分
-\section{量子通信}
+\section{量子通信与加密}
 \begin{frame}
     \frametitle{量子通信}
     \textcolor{red}{量子通信}:~利用量子力学原理，依赖量子相干态进行信息传输
-主要方式包括
+    {\fontsize{7.5pt}{5.2pt}\selectfont{主要方式包括}}:
     \begin{itemize}
 	\item 量子密钥分发\textrm{(Quantum Key Distribution,~QKD)}
 	\item 量子隐形传态\textrm{(Quantum Teleportation,~QT)}
     \end{itemize}
     \begin{figure}
         \centering
-                \includegraphics[height=1.5in, width=3.0in, viewport=0 0 1050 688,clip]{Figures/Quantum_Communication.png}
+                \includegraphics[height=1.7in, width=3.0in, viewport=0 0 1050 688,clip]{Figures/Quantum_Communication.jpeg}
 		\caption{\tiny{\textrm{The overall network architecture showing the physical layer, communication layer, and the way wavelength channels are distributed.}}}%The network consists of two layers. (A) The physical layer contains the source of entanglement (blue) and the multiplexing unit (MU; gray). These form the QNSP. Our topology uses just one deployed fiber (red) per user to interconnect all eight individual users. (B) The communication layer forms a fully connected graph without trusted nodes for entanglement distribution, key exchange, and secure communication (classical communication channels between users are not shown). Each line represents a link—the sharing of a bipartite entangled state. Higher-bandwidth links share a second entangled state shown as a red line. (C) Wavelength allocation: Every user of the eight-node network receives four wavelength channels denoted by a number (which corresponds to their ITU 100-GHz DWDM grid channel number minus 34). That is, ITU channel 34 (or 0 in the figure’s naming convention) corresponds to the channel approximately centered at the down-conversion degeneracy wavelength. Thus, a pair of matching colors or numbers with equal absolute values and opposite sign denote wavelengths corresponding to an entangled photon pair. The regions shaded in blue and yellow are identical subnets and represent the multiplexing using BSs. The last row below the dotted line shows the additional wavelength channel needed to fully interconnect the two subnets. Certain user pairs are connected by two entangled photon pairs (such as Alice and Gopi via {8, −8} and {2, −2}) and consequently enjoy an increased key rate.
 		\label{Fig:Quantum_Communication}
     \end{figure}
@@ -404,8 +404,8 @@
     \end{itemize}
     \begin{figure}
         \centering
-                \includegraphics[height=1.5in, width=3.0in, viewport=0 0 1280 720,clip]{Figures/Quantum_Communication-QKD_infografia.jpg}
-		\caption{\tiny{\textrm{Basic-principle_diagram-of-using-the-BB84_protocol-in-the-QKD-link.}}}
+                \includegraphics[height=1.5in, width=3.0in, viewport=0 0 1280 720,clip]{Figures/Quantum_Communication-QKD_infografia.jpeg}
+		\caption{\tiny{\textrm{Basic principle diagram of using the BB84 protocol in the QKD link.}}}
 		\label{Fig:Basic-principle_diagram-of-using-the-BB84_protocol-in-the-QKD-link}
     \end{figure}
 \vskip -10pt
@@ -419,13 +419,15 @@
 %\subsection{量子隐形传态}
 \begin{frame}
 	\frametitle{量子隐形传态\textrm{(QT)}}
-        量子隐形传态:~利用量子纠缠实现量子态信息传输的技术，它并非是将实体物质进行传输，而是传输量子态所携带的信息\\
+        量子隐形传态:~利用量子纠缠实现量子态信息传输的技术\\
+	\textcolor{red}{并非是将实体物质进行传输，而是传输量子态所携带的信息}
+	\vskip 2pt
     量子隐形传态原理
     \begin{itemize}
-	    \item \textcolor{blue}{准备}:~首先需要制备一对处于纠缠态的量子比特(如光子对)\\
+	    \item \textcolor{blue}{准备}:~首先制备一对处于纠缠态的量子比特(如光子对)\\
 		    {\fontsize{7.5pt}{5.2pt}\selectfont{将其中一个光子发送给发送方\textrm{(Alice)}，另一个发送给接收方\textrm{(Bob)}}}
 	    \item \textcolor{blue}{编码}:~\textrm{Alice} 拥有一个待传输的量子比特 \( |\psi\rangle \)，她对这个量子比特和手中的纠缠光子进行联合测量\\
-		    {\fontsize{7.5pt}{5.2pt}\selectfont{\textcolor{magenta}{该次测量会使这两个量子比特的状态发生坍缩，同时由于纠缠关系，、\textrm{Bob}手中的光子状态也会相应改变}}}
+		    {\fontsize{7.5pt}{5.2pt}\selectfont{\textcolor{magenta}{该次测量会使这两个量子比特的状态发生坍缩，同时由于纠缠关系，\textrm{Bob}手中的光子状态也会相应改变}}}
 	    \item \textcolor{blue}{传输}:~\textrm{Alice} 通过经典通信渠道(如光纤、无线电等)将她的测量结果发送给 \textrm{Bob}
 	    \item \textcolor{blue}{解码}:~\textrm{Bob}根据接收到的经典信息，对自己手中的光子进行相应的幺正变换操作\\
 		    {\fontsize{7.5pt}{5.2pt}\selectfont{使该光子的状态变为 \( |\psi\rangle \)，实现了量子态的传输}}
@@ -436,18 +438,18 @@
     \frametitle{量子隐形传态的应用}
     \begin{figure}
         \centering
-                \includegraphics[height=1.5in, width=3.0in, viewport=0 0 1280 720,clip]{Figures/Quantum_Teleportation.jpg}
+                \includegraphics[height=1.2in, width=2.0in, viewport=0 0 900 710,clip]{Figures/Quantum_Teleportation.jpg}
 		\caption{\tiny{\textrm{A cartoon-demonstration explains the Quantum Teleportation.}}}
 		\label{Fig:Quantum_Teleportation}
     \end{figure}
     \vskip -10pt
     \begin{itemize}
         \item 量子通信网络:~%作为量子通信网络的关键技术，
-		可实现远程节点之间的量子态传输\\
+		实现远程节点之间的量子态传输\\
 		{\fontsize{7.5pt}{5.2pt}\selectfont{为构建大规模、长距离的量子通信网络奠定基础}}
-        \item 量子计算:~在分布式量子计算中，可用于在不同计算单元之间传输量子信息\\
+        \item 量子计算:~在分布式量子计算中，用于在不同计算单元之间传输量子信息\\
 		{\fontsize{7.5pt}{5.2pt}\selectfont{提高计算效率和协同性}}
-        \item 量子加密:~保障敏感信息的安全传输
+        \item 量子加密:~保障敏感信息的安全传输\\
 		{\fontsize{7.5pt}{5.2pt}\selectfont{结合量子隐形传态和量子密钥分发技术，可进一步增强信息传输的安全性}}
     \end{itemize}
 \end{frame}
@@ -458,13 +460,24 @@
     \frametitle{量子直接通信}
 %    \begin{itemize}
 	    量子直接通信\textrm{(Quantum Direct Communication,~QDC)}:\\
-		    由清华大学龙桂鲁团队原创提出的一种不依赖于传统密钥分发的量子通信方式，能直接在通信双方之间传输信息
-		    {\fontsize{7.5pt}{5.2pt}\selectfont{与传统量子密钥分发后再进行经典加密通信不同，它可直接传递机密信息}}
+		    {\fontsize{7.5pt}{5.2pt}\selectfont{由清华大学龙桂鲁团队原创提出的一种不依赖于传统密钥分发的量子通信方式，能直接在通信双方之间传输信息}}
 %    \end{itemize}
+    \begin{figure}
+        \centering
+                \includegraphics[height=1.0in, width=1.9in, viewport=0 0 1334 705,clip]{Figures/Illustration-of-the-proposed_protocol-for-QDC.png}
+%		\caption{\tiny{\textrm{Illustration of the proposed protocol for QDC.}}}%The main channel and wiretap channel are discrete and memoryless. The service channel is a classical authenticated noiseless public channel, which transmits only the associated auxiliary data. The blue lines are classical, while qubits are transmitted over the black dotted lines
+%		\label{Fig:Illustration-of-the-proposed_protocol-for-QDC}
+                \includegraphics[height=1.0in, width=1.9in, viewport=0 0 1348 777,clip]{Figures/Illustration-of-experiment-setup-for-QDC.png}
+%		\caption{\tiny{\textrm{Illustration of experiment setup for QDC.}}}%Laser: 1550 nm with pulse-repetition frequency 50 MHz; FPGA field programmable gate array, ATT attenuator, PC polarization controller, ILP in-line polarizer, CIR optical circulator, PBS polarization beam splitter, FC 90:10 filter coupler, PMFC polarization maintaining filter coupler, PM phase modulator, IM intensity modulator with extinction ratio of 45.1 dB, ISO isolator, FR 90 degree Faraday rotator, SPD superconducting nanowire single-photon detector with over 85% detection efficiency, 50 Hz dark count rate and 15 ns reset time. The asymmetric Mach-Zehnder interferometer consists of two PMFC, and the delay length is about 2 m
+		\caption{\tiny{\textrm{Illustration of the proposed protocol and the experiment setup for QDC.}}}
+		\label{Fig:Illustration-of-experiment-setup-for-QDC}
+    \end{figure}
+    \vskip -10pt
+		    与传统量子密钥分发后再进行经典加密通信不同，它可直接传递机密信息
 \end{frame}
 
 \begin{frame}
-    \frametitle{直接量子通信原理}
+    \frametitle{量子直接通信原理}
     \begin{itemize}
         \item 基于量子纠缠或量子叠加原理，对一个粒子的操作会瞬间影响另一个粒子的状态\\
 		{\fontsize{7.5pt}{5.2pt}\selectfont{利用纠缠态的量子比特，实现信息的直接传输}}
@@ -472,7 +485,7 @@
     \end{itemize}
     \begin{figure}
         \centering
-                \includegraphics[height=1.5in, width=3.0in, viewport=0 0 753 342,clip]{Figures/Secure-communication-frameworks_Twin-channel-architecture_Single-channel-architecture.png}
+                \includegraphics[height=1.5in, width=3.6in, viewport=0 0 250 112,clip]{Figures/Secure-communication-frameworks_Twin-channel-architecture_Single-channel-architecture.png}
 		\caption{\tiny{\textrm{Secure communication frameworks: (a)~Twin-channel-architecture, (b)~Single channel architecture.}}}%Secure communication frameworks. a: Twin-channel architecture. b: Single-channel architecture. QSDC: Quantum secure direct communication. Note that QKD uses an authenticated public channel for base sifting and post-processing, while QSDC uses this channel for eavesdropping detection and error correction.
 		\label{Fig:Secure-communication-frameworks_Twin-channel-architecture_Single-channel-architecture}
 %                \includegraphics[height=1.5in, width=3.0in, viewport=0 0 1334 705,clip]{Figures/Illustration-of-the-proposed_protocol-for-QDC.png}
@@ -485,12 +498,15 @@
 \end{frame}
 
 \begin{frame}
-    \frametitle{直接量子通信的优势与挑战}
+    \frametitle{量子直接通信的优势与挑战}
+    \textcolor{red}{优势}：
     \begin{itemize}
-        \item 安全性更高:~量子力学原理使得任何窃听行为都会改变量子态，被通信双方察觉
-        \item 实时性:~可直接传输信息，无须%像传统量子通信那样
+	    \item \textcolor{blue}{安全性更高}:~量子力学原理使得任何窃听行为都会改变量子态，被通信双方察觉
+	    \item \textcolor{blue}{实时性更强}:~可直接传输信息，无须%像传统量子通信那样
 		先进行密钥分发，提高了通信效率
     \end{itemize}
+
+    \textcolor{red}{挑战}：
     \begin{itemize}
         \item 距离限制:~量子态易受环境干扰，导致通信距离受限\\
 		{\fontsize{7.5pt}{5.2pt}\selectfont{目前难以实现长距离的直接量子通信}}
@@ -508,14 +524,14 @@
 	{\fontsize{7.5pt}{5.2pt}\selectfont{在量子信号传输过程中，能有效延长量子态的传输距离，同时保持量子态的相干性}}
     \begin{figure}
         \centering
-                \includegraphics[height=1.5in, width=3.0in, viewport=0 0 725 366,clip]{Figures/Quantum-networksa-Quantum_relay-Entanglement-resources-Quantum_repeater.jpeg}
+                \includegraphics[height=1.8in, width=4.0in, viewport=0 0 725 366,clip]{Figures/Quantum-networksa-Quantum_relay-Entanglement-resources-Quantum_repeater.jpeg}
 		\caption{\tiny{\textrm{Quantum networks. Quantum relay and Quantum repeater.}}}%Quantum networks.a, Quantum relay. Entanglement resources and quantum channels joined by means of a BSM, where the entanglement of photons A–B and B–C is swapped to A–C. b, Quantum repeater. An entanglement resource and quantum memories (QM) provide a chaining element that can be concatenated for longer quantum-communication distances, where B1 and Bj denote the connecting BSM links in the repeater chain. The inset illustrates the difference between a 'heralded QM', (i), and a possible modification for a QM without heralding, (ii).}}}
 		\label{Fig:Quantum-networksa-Quantum_relay-Entanglement-resources-Quantum_repeater}
     \end{figure}
 \end{frame}
 
 \begin{frame}
-    \frametitle{相干中继的应用}
+    \frametitle{相干中继的实现和应用}
     \begin{itemize}
 	    \item \textcolor{blue}{量子存储}:~首先要对接收到的量子信号进行存储\\
 		    {\fontsize{7.5pt}{5.2pt}\selectfont{利用量子存储器将量子态暂时保存下来，避免信号在传输过程中因损耗而丢失}}
@@ -524,23 +540,24 @@
 	    \item \textcolor{blue}{量子纠错}:~在存储和纠缠交换过程中，量子态可能会受到噪声和干扰的影响而发生错误\\
 		    {\fontsize{7.5pt}{5.2pt}\selectfont{利用量子纠错编码对错误进行检测和纠正，确保量子态的准确性和相干性}}
     \end{itemize}
+   % 相干中继续的远景
     \begin{itemize}
-        \item 长距离量子通信：克服量子信号在光纤等传输介质中的衰减问题，实现洲际甚至全球范围的量子通信，为构建全球化的量子通信网络提供可能。
-        \item 量子互联网：作为量子互联网的关键组成部分，相干中继有助于连接不同地区的量子节点，实现量子信息在网络中的高效传输和共享，推动量子互联网的发展。
+	    \item \textcolor{magenta}{长距离量子通信}:~克服量子信号在光纤等传输介质中的衰减问题，实现洲际甚至全球范围的量子通信\\
+		{\fontsize{7.5pt}{5.2pt}\selectfont{为构建全球化的量子通信网络提供可能}}
+	\item \textcolor{magenta}{量子互联网}:~作为量子互联网的关键组成部分，相干中继有助于连接不同地区的量子节点\\
+		{\fontsize{7.5pt}{5.2pt}\selectfont{实现量子信息在网络中的高效传输和共享，推动量子互联网的发展}}
     \end{itemize}
 \end{frame}
 
 % 量子加密部分
-\section{量子加密}
+%\section{量子加密}
 \begin{frame}
-    \frametitle{量子加密简介}
-    \begin{itemize}
-        \item 利用量子力学原理和特性实现信息加密
-        \item 结合量子通信和传统加密技术，量子相干态为加密提供了新的手段
-    \end{itemize}
+    \frametitle{量子加密}
+     利用量子力学原理和特性对信息实施加密:
+    %    结合量子通信和传统加密技术，量子相干态为加密提供了新的手段
     \begin{figure}
         \centering
-                \includegraphics[height=1.5in, width=3.0in, viewport=0 0 768 314,clip]{Figures/Symmetric_encryption-with-quantum_devices.png}
+                \includegraphics[height=0.9in, width=2.1in, viewport=0 0 568 235,clip]{Figures/Symmetric_encryption-with-quantum_devices.png}
 		\caption{\tiny{\textrm{A schematic diagram of symmetric encryption with quantum devices.}}}
 		\label{Fig:Symmetric_encryption-with-quantum_devices}
 %                \includegraphics[height=2.0in, width=2.5in, viewport=0 0 944 845,clip]{Figures/Schematic-diagram-of-Quantum_Encryption_Algorithms.png}
@@ -552,11 +569,11 @@
 
 %\begin{frame}
 %    \frametitle{量子加密的优势}
-量子加密的优势
+    \textcolor{blue}{量子加密的优势}
     \begin{itemize}
-	    \item \textclor{red}{无条件安全性}:~基于量子物理原理，无法被破解\\
+	    \item \textcolor{red}{无条件安全性}:~基于量子物理原理，无法被破解\\
 		    {\fontsize{7.5pt}{5.2pt}\selectfont{\textcolor{blue}{量子相干态的稳定性保证了加密的安全性}}}
-	    \item \textcolor{red}{抗干扰能力}:~对外部干扰有较强的抵抗能力。
+	    \item \textcolor{red}{抗干扰能力}:~对外部干扰有较强的抵抗能力
     \end{itemize}
     \begin{exampleblock}{应用场景}
         金融、军事、政府等对信息安全要求极高的领域
