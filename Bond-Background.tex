@@ -668,49 +668,48 @@
 \end{figure}
 }
 
-\frame
+\frame[allowframebreaks]
 {
 	\frametitle{量子力学基本假设(\textcolor{red}{公理体系})}
 	\begin{itemize}
-		\item 波函数假设\\
-			\textcolor{blue}{微观体系的运动状态可由波函数$\Psi$完全描述，波函数包含体系的所有性质}\\
-			波函数$\Psi$一般要求满足\textcolor{red}{连续}、\textcolor{red}{有限}和\textcolor{red}{单值}三个条件
 		\item 全同粒子假设\\
 			\textcolor{blue}{全同粒子组成的体系中，两个全同粒子相互调换不改变体系的状态}\\ 
 			全同粒子是指\textcolor{red}{内禀性质完全相同的一类微观粒子}:\\例如，所有的电子是全同粒子 
+		\item 波函数假设\\
+			\textcolor{blue}{微观体系的运动状态可由波函数$\Psi$完全描述，波函数包含体系的所有性质}\\
+			波函数$\Psi$一般要求满足\textcolor{red}{连续}、\textcolor{red}{有限}和\textcolor{red}{单值}三个条件
+		\item 微观体系的运动状态\textcolor{blue}{波函数随时间变化的规律}:\\\textcolor{red}{遵从\textrm{Schr\"odinger}方程}
+			$$\mathrm{i}\hbar\dfrac{\mathrm{d}}{\mathrm{d}t}|\Psi\rangle=\hat{\mathbf H}|\Psi\rangle$$
 		\item 态叠加原理\\
 			如果$\Psi_1$是体系的一个本征态，对应的本征值为$A_1$，$\Psi_2$也是体系的一个本征态，对应的本征值为$A_2$，则\textcolor{blue}{$$\Psi=C_1\Psi_1+C_2\Psi_2$$}\textcolor{red}{也是体系一个可能的存在状态}
-	\end{itemize}
-}
-
-\frame
-{
-	\frametitle{叠加态的数学表示:~矩阵}
+            \begin{figure}
+        \centering
+                \includegraphics[height=1.0in, width=1.45in, viewport=0 0 460 330,clip]{Figures/Illustration-of-a-bit_and_qubit.png}
+		\hspace{0.1in}
+                \includegraphics[height=1.0in, width=0.5in, viewport=0 0 85 170,clip]{Figures/American_Eagle_gold_coin_2019_2.jpg}
+                \includegraphics[height=1.0in, width=1.0in, viewport=0 0 150 151,clip]{Figures/Coin-spin.jpg}
+%                \includegraphics[width=0.95\textwidth]{Figures_History/Collection_23-1.jpeg}
+		\caption{\tiny{\textrm{Schematic diagram of superposition/coherence of particle.}}}
+		\label{Fig:Schematic-Coherence-of-particle}
+            \end{figure}
+		\item 力学量算符假设\\
+			\textcolor{blue}{经典力学的物理量对应到量子力学中，要用线性~\textrm{Hermite}算符表示}(\textcolor{red}{\textrm{Hermite~}算符的本征函数构成完备空间})\\
+			如动量算符 ~~~ $\hat{\mathbf{p}}=-\mathrm{i}\hbar\nabla$\\
+			~~~位置算符 ~~~ $\hat{\mathbf r}=r$\\
+			力学量算符之间有确定的对易关系(\textcolor{brown}{量子条件})
+			$$[\hat{\mathbf F},\hat{\mathbf G}]=\hat{\mathbf F}\hat{\mathbf G}-\hat{\mathbf G}\hat{\mathbf F}$$ 
+%\frame
+%{
+%	\frametitle{力学量算符的数学表示:~矩阵}
+			\textcolor{magenta}{矩阵}:~力学量算符的数学表示
 \begin{figure}[h!]
 \centering
 \vspace{-1.5pt}
-\hspace*{-0.12in}
-\includegraphics[height=0.48\textwidth,width=1.05\textwidth]{Figures/Matrix_Rotation.png}
+%\hspace*{-0.12in}
+\includegraphics[height=0.25\textwidth,width=0.65\textwidth]{Figures/Matrix_Rotation.png}
 %\caption{\textrm{ABINIT}的Si.in}
 \label{Matrix-Rotation}
 \end{figure}
-}
-
-%\frame
-\frame
-{
-	\frametitle{量子力学基本假设(续)}
-	\begin{itemize}
-		\item 力学量算符假设\\
-			\textcolor{blue}{经典力学中的物理量对应到量子力学中，要用线性\textrm{Hermite~}算符表示}(\textcolor{red}{\textrm{Hermite~}算符的本征函数构成完备空间})\\
-			如动量算符 
-			$$\hat{\mathbf{p}}=-\mathrm{i}\hbar\nabla$$
-			位置算符$$\hat{\mathbf r}=r$$
-			力学量算符之间有确定的对易关系(\textcolor{brown}{量子条件})
-			$$[\hat{\mathbf F},\hat{\mathbf G}]=\hat{\mathbf F}\hat{\mathbf G}-\hat{\mathbf G}\hat{\mathbf F}$$ 
-			
-		\item 微观体系的运动状态\textcolor{blue}{波函数随时间变化的规律}:\\\textcolor{red}{遵从\textrm{Schr\"odinger}方程}
-			$$\mathrm{i}\hbar\dfrac{\mathrm{d}}{\mathrm{d}t}|\Psi\rangle=\hat{\mathbf H}|\Psi\rangle$$
 	\end{itemize}
 }
 
