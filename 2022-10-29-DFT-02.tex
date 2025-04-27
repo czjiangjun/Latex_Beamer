@@ -327,12 +327,12 @@
    \setlength{\itemsep}{8pt}
  \item $E[\rho]=F_{\mathrm{HK}}[\rho]+\displaystyle\int\rho(\vec{r})v(\vec{r})\textrm{d}\vec{r}$ 
 \vskip 5pt 
-其中$F_{\mathrm{HK}}[\rho]=\underset{\Psi\to\rho}{\mathrm{Min}}\langle\Psi[\rho]|\hat{T}+\hat{W}|\Psi[\rho]\rangle$
-是普适的泛函表达式。%，指明多电子体系的基态性质与基态密度间存在一一对应关系
-     \textrm{\small{第一定理表明多电子体系的性质完全由体系的基态密度决定}}
+{\fontsize{7.2pt}{6.2pt}\selectfont{其中$F_{\mathrm{HK}}[\rho]=\underset{\Psi\to\rho}{\mathrm{Min}}\langle\Psi[\rho]|\hat{T}+\hat{W}|\Psi[\rho]\rangle$
+是普适的泛函表达式}}\\%，指明多电子体系的基态性质与基态密度间存在一一对应关系
+\textcolor{magenta}{\fontsize{8.2pt}{6.2pt}\selectfont{第一定理表明多电子体系的性质完全由体系的基态密度决定}}
    \item 如果$\tilde\Psi\neq\Psi$，
      $E[\tilde\rho]\geqslant E[\rho_0]$\\
-     \textrm{\small{第二定理指出基态总能量泛函在体系基态电子密度处取极小值}}
+     \textcolor{magenta}{\fontsize{8.2pt}{6.2pt}\selectfont{第二定理指出基态总能量泛函在体系基态电子密度处取极小值}}
    \end{itemize}
 %\textrm{\small{第二定理指出基态总能量泛函在体系基态电子密度处取极小值}}
 \vskip 8pt
@@ -375,8 +375,9 @@ $\varepsilon_{\mathrm{X}}[\rho]$和$\varepsilon_{\mathrm{C}}[\rho]$可理解为�
 		\begin{displaymath}
 			V_{\mathrm{XC}}^{\sigma}[\rho_{\alpha},\rho_{\beta}]=\dfrac{\delta E_{\mathrm{XC}}[\rho_{\alpha},\rho_{\beta}]}{\delta\rho_{\sigma}}=\dfrac{\delta\{E_{\mathrm{X}}[\rho_{\alpha},\rho_{\beta}]+E_{\mathrm{C}}[\rho_{\alpha},\rho_{\beta}]\}}{\delta\rho_{\sigma}}
 		\end{displaymath}
-		\textcolor{red}{注意}:~由于$E_{\mathrm{XC}}[\rho_{\sigma}]$对$\rho_{\sigma}$是非线性的\\
-		\textcolor{blue}{$V_{\mathrm{XC}}=V_{\mathrm{X}}+V_{\mathrm{C}}$和$\varepsilon_{\mathrm{XC}}=\varepsilon_{\mathrm{X}}+\varepsilon_{\mathrm{C}}$不同，不要混淆这两个量}
+		\textcolor{red}{注意}:~由于$E_{\mathrm{XC}}[\rho_{\sigma}]$对$\rho_{\sigma}$是非线性的
+		\vskip 8pt
+		\textcolor{blue}{$V_{\mathrm{XC}}=V_{\mathrm{X}}+V_{\mathrm{C}}$和$\varepsilon_{\mathrm{XC}}=\varepsilon_{\mathrm{X}}+\varepsilon_{\mathrm{C}}$不同}，\underline{\textcolor{purple}{不要混淆这两个量}}
 }
 %  \beamertemplateshadingbackground{blue!10}{yellow!10}
 
@@ -384,32 +385,37 @@ $\varepsilon_{\mathrm{X}}[\rho]$和$\varepsilon_{\mathrm{C}}[\rho]$可理解为�
 {
 \frametitle{交换-相关能密度泛函}
 \textcolor{blue}{密度泛函理论的核心问题}:\\
-\textrm{Kohn-Sham}方程用于实际计算，必须知道$E_{XC}[\rho]$或者$V_{XC}[\rho]$与$\rho(\vec r)$的泛函关系
+\textrm{Kohn-Sham}方程用于实际计算，必须知道$E_{\mathrm{XC}}[\rho]$或者$V_{\mathrm{XC}}[\rho]$与$\rho(\vec r)$的泛函关系
 \vskip 5pt
 \begin{minipage}[b]{0.59\textwidth}
- \hspace*{-15pt}
- %\begin{itemize}[<+-|alert@+>]
- \begin{itemize}
+ \hspace*{-20pt}
+ \vskip -30pt
+ {\fontsize{7.5pt}{6.0pt}\selectfont{
+ \begin{itemize}%[<+-|alert@+>]
 	 \setlength{\itemsep}{15pt}
-		 {\fontsize{7.5pt}{6.0pt}\selectfont{
- \item \textrm{LDA}:泛函只与密度分布的局域值有关
- \item \textrm{GGA}:泛函依赖:局域密度及其梯度
- \item $meta$-\textrm{GGA}:泛函依赖的变量还有动能密度
- \item 杂化\textrm{(hybrid)}泛函:泛函与占据轨道有关
+%		 {\fontsize{7.5pt}{6.0pt}\selectfont{
+	 \item \textrm{LDA}:~泛函只与\textcolor{blue}{密度分布的局域值}有关
+	 \item \textrm{GGA}:~泛函依赖\textcolor{blue}{局域密度及其梯度}
+	 \item $meta$-\textrm{GGA}:~泛函依赖的变量还有\textcolor{purple}{动能密度}
+	 \item 杂化\textrm{(hybrid)}泛函:~泛函\textcolor{purple}{与占据轨道有关}
  \item 其他的交换-相关能泛函
- \item 完全非局域泛函:理想泛函，不现实
+ \item<1-> 完全非局域泛函:~\textcolor{magenta}{理想泛函，不现实}
  %\item<1-> 完全非局域泛函:理想泛函，不现实
- }}
+% }}
  \end{itemize}
+}}
 \end{minipage}
 \hfill
 \begin{minipage}[b]{0.39\textwidth}
 \begin{figure}[h!]
-\hspace*{-10pt}
+%\centering
+\hspace*{-12pt}
 \includegraphics[height=1.9in,width=3.28in,viewport=10 5 1380 700,clip]{Figures/Jacobi-ladder.png}\\
-\centering{\textcolor{red}{\textrm{\tiny Jacob's ladder}}}
+%\caption{\tiny \textcolor{red}{\textrm{\tiny Jacob's ladder}}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Jacobi-Ladder}
 \end{figure}
+\vskip -10pt
+\centering{\textcolor{red}{\textrm{\tiny Jacob's ladder}}}
 \end{minipage}
 % \begin{itemize}%[+-| alert@+>]
 %\item 交换-相关能密度泛函
