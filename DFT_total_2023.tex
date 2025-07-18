@@ -13290,6 +13290,11 @@ x_6 &=1.0430906366 %~\Longrightarrow
 {
 	\frametitle{矩阵对角化的\textrm{Lanczos~}算法}
 	因此\textcolor{blue}{矩阵$\mathbf{A}$可以用$\psi_p$(称为\textrm{Lanczos}矢量)为基组表示成三对角阵形式}(稀疏矩阵)
+	\begin{tikzpicture}[
+%    box/.style={rectangle,draw,fill=darkgray!20,node distance=1cm,text width=25em,text centered,rounded corners,minimum height=2em,thick},
+%    arrow/.style={draw,-latex',thick},
+		]
+    \node [rectangle, text width=25em,text centered,rounded corners,minimum height=2em,thick] (matrix) {
 	\begin{displaymath}
 		\mathbf{A}^p=\begin{pmatrix}
 			a_1 & b_2 & & & & \\
@@ -13299,7 +13304,22 @@ x_6 &=1.0430906366 %~\Longrightarrow
 & & &b_{p-1} &a_{p-1} &b_{p}\\
 &\raisebox{0.8ex}[0pt]{\huge{0}} & & &b_{p} &a_{p}
 		\end{pmatrix}
-	\end{displaymath}
+	\end{displaymath}};
+    \coordinate (matrix) ++ (-5.5em,1.0em) coordinate (O) ;
+    \coordinate (matrix) ++ (-3.8em,1.0em) coordinate (A1);
+    \coordinate (matrix) ++ (-3.8em,2.4em) coordinate (A2);
+    \coordinate (matrix) ++ (-2.1em,2.4em) coordinate (A3);
+    \coordinate (matrix) ++ (-2.1em,3.8em) coordinate (A4);
+    \coordinate (matrix) ++ (-5.5em,3.8em) coordinate (A5);
+%    \coordinate (O) at (-1.5,3.0) node[left]{$O$};
+    \draw[-, red, dashed, thin] (O) -- (A1) ; %node[left]{$x$};
+    \draw[-, red, dashed, thin] (A1) -- (A2) ; %node[left]{$x$};
+    \draw[-, red, dashed, thin] (A2) -- (A3) ; %node[left]{$x$};
+    \draw[-, red, dashed, thin] (A3) -- (A4) ; %node[left]{$x$};
+    \draw[-, red, dashed, thin] (A4) -- (A5) ; %node[left]{$x$};
+    \draw[-, red, dashed, thin] (A5) -- (O) ; %node[left]{$x$};
+		\end{tikzpicture}
+
 	不难看出，\textcolor{blue}{经过$p$次\textrm{Lanczos}迭代，当$b\rightarrow0$即达到收敛，意味着此时$p\times p$三对角阵$\mathbf{A}^p$的本征值也将收敛到矩阵$\mathbf{A}$的本征值}
 	\begin{itemize}
 		\item 稀疏矩阵$\mathbf{A}^p$可通过快速\textrm{QR}分解得到本征值
