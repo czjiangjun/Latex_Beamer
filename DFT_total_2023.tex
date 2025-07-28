@@ -664,7 +664,7 @@
 \begin{figure}[h!]
 \centering
 \vspace{-10.5pt}
-\includegraphics[height=0.68\textwidth,width=1.0\textwidth,viewport=0 0 770 500,clip]{Figures/Philp_Nature_Mach-2.png}
+\includegraphics[height=0.68\textwidth,width=1.0\textwidth,viewport=0 0 770 500,clip]{Figures/Philp_Nature_Math-2.png}
 %\caption{\textrm{ABINIT}的Si.in}
 \label{Philp_Nature}
 \end{figure}
@@ -4327,7 +4327,7 @@ $$\left.\dfrac{\partial E[\tilde\Psi, R]}{\partial\langle\tilde\Psi_n|}\right|_R
 }
 
 %-------------------------------PPT Title-------------------------------------
-\title{10-第一原理分子动力学概要}
+%\title{10-第一原理分子动力学概要}
 %\section{\rm{VASP~}软件中\rm{PAW~}计算的实现}
 %\frame
 %
@@ -4818,6 +4818,293 @@ $U_2(\vec r_i,\vec r_j)$是双体势，$U_3(\vec r_i,\vec r_j,\vec r_k)$是描�
 	\end{itemize}
 }
 
+\subsection{第一原理分子动力学简述}
+\frame
+{
+	\frametitle{分子动力学\textrm{(MD)}}
+	分子动力学\textrm{(Molecular dynamics,~MD)}主要用于各类化学反应、合金与复杂材料状态方程研究，着重关注体系的反应或状态随温度、压力变化规律和动力学性质
+\vskip 5pt
+\textcolor{blue}{分子动力学模拟的基本框架}
+	\begin{itemize}
+		\item 结构优化:~根据体系的初始构型\textrm{(initial configuration)}，遵从能量最低原理，得到体系基态结构(确定基态时原子的位置)
+		\item 原子运动计算:~在一定环境(温度、压力等)条件下，计算各原子的受力，并依据运动方程得到设定时间步长下的原子的运动，进而获得得体系的当前构型
+		\item 径迹计算:~在设定的时间范围内，根据原子运动和体系构型的变化，组合成体系随时间演化的径迹\textrm{(the trajectory of time evolution)}
+		\item 结果分析:~分析体系的径迹变化规律，得到体系的动力学和热力学性质
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{原子间相互作用力的表示}
+	分子动力学模拟中影响结果最主要因素之一是\textcolor{purple}{原子间相互作用力}的准确度
+\vskip 5pt
+\begin{itemize}
+	\item 经典分子动力学模拟中，原子间相互作用力是根据经验势函数得到的\footnote{\fontsize{6.2pt}{4.2pt}\selectfont{经验势函数也称为力场，是参数化形式给出的原子间相互作用，一般通过对实验数据拟合或小体系的第一原理计算得到}}。构建一套高精度的经验势函数代价很高，而且经验势函数一般不具备可移植性
+\end{itemize}
+\vskip 5pt
+	当动力学过程必须考虑量子效应(如电子影响的贡献不可忽略时)，必须采用第一原理分子动力学\textrm{(Ab initio~MD,~AIMD)}
+	\begin{itemize}
+		\item 所谓第一原理分子动力学，就是在计算原子运动时，将电子结构变化的贡献考虑进来，因此在每一时间步长，体系实时构型下的原子受力计算，都必须伴随电子结构计算
+	\end{itemize}
+	一般电子结构计算采用\textrm{DFT}计算，不难想见，第一原理分子动力学模拟的代价极高
+}
+
+\frame
+{
+	\frametitle{第一原理分子动力学\textrm{AIMD}}
+	\begin{itemize}
+		\item \textrm{AIMD}将电子结构与原子和经典轨迹计算在同一基础上完成
+		\item 每个原子运动步的受力都是在电子结构计算基础上获得的
+%		\item 基于\textrm{B-O}近似，原子运动径迹的每一步上，电子运动都达到收敛
+		\item 扩展的\textrm{Lagrangian}方法:~根据体系几何结构构造体系波函数\\
+			\textcolor{blue}{\textrm{Car-Parinello}}:\\
+			平面波基，构成分子轨道\\
+			\textcolor{blue}{\textrm{Atom-centered Density Matrix Progation~(ADMP)}}:\\
+			原子中心基，构成密度矩阵
+	\end{itemize}
+	\textrm{AIMD}计算内容
+	\begin{itemize}
+		\item 可用于复杂体系的电子结构计算
+		\item 几何结构优化(能量最小化)
+		\item 描述系统演化
+		\item 模拟时长规模$\approx{\mathrm{ps}}(10^{-12}\mathrm{s})$~(经典分子动力学 $\approx\mathrm{ns}(10^{-9}\mathrm{s})$)
+	\end{itemize}
+}
+
+
+%\frame
+%{
+%	\frametitle{第一原理分子动力学的分类}
+%\begin{figure}[h!]
+%\centering
+%\vspace*{-0.05in}
+%%\hspace*{-10pt}
+%\includegraphics[height=2.3in,width=4.0in,viewport=0 0 440 230,clip]{Figures/Molecular-dynamics_Claaified.png}
+%\caption{\fontsize{5.2pt}{4.2pt}\selectfont{\textrm{The major differences between the methods of aiMD simulations.}}}%
+%\label{Molecular-dynamics_Claaified}
+%\end{figure}
+%}
+%
+\frame
+{
+	\frametitle{第一原理分子动力学中的近似}
+	由于分子动力学模拟的复杂性，必须做出适当的近似。具体到第一原理分子动力学，一般有两类重要的近似:
+	\begin{itemize}
+		\item \textcolor{blue}{绝热近似\textrm{(adiabatic approximation)}}\\
+			{\fontsize{6.2pt}{4.2pt}\selectfont{假设电子-原子核在能量层面上完全分离，彼此间没有能量传递}}
+		\item \textcolor{blue}{\textrm{Born-Oppenheimer}近似}\\
+			{\fontsize{6.2pt}{4.2pt}\selectfont{假设电子和原子核的运动完全解耦，对应每个时间步长的原子构型，电子可以实时处于基态\footnote{\fontsize{5.2pt}{4.2pt}\selectfont{\textrm{B-O}近似也是一种绝热近似，\textcolor{red}{但\textrm{B-O}近似下的绝热强调电子对核运动的瞬时响应}。讨论电子计算时，\textrm{B-O}近似下假设原子核是固定不动的;~在分子动力学讨论中，绝热近似强调的是电子-核运动在能量上的完整分离，而\textrm{B-O}近似则明确要求电子-核运动彼此完全解耦，且电子实时处于基态}}}}
+	\end{itemize}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.25in}
+%\hspace*{-10pt}
+\includegraphics[height=1.55in,width=2.6in,viewport=0 0 440 230,clip]{Figures/Molecular-dynamics_Claaified.png}
+%\caption{\fontsize{5.2pt}{4.2pt}\selectfont{\textrm{The major differences between the methods of aiMD simulations.}}}%
+\label{Molecular-dynamics_Classified}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{第一原理分子动力学:~\textrm{BOMD}}
+	如果绝热近似和\textrm{Born-Oppenheimer}近似同时满足，称为\textrm{Born-Oppenheimer}分子动力学\textrm{(BOMD)}
+	\begin{itemize}
+		\item 原子核运动的势函数为$E[\{\psi_i\};\mathbf{R}]$，并且每个时间步长内，势函数对$\{\psi_i(\vec r)\}$取极小值\\
+			\begin{displaymath}
+				\begin{aligned}
+					L_{\mathrm{BO}}(\{\psi_i\};~\mathbf{R},\dot{\mathbf{R}})=&\dfrac12\sum_{I=1}^NM_I\dot{\mathbf{R}}^2_I-\underset{\{\psi_i\}}{\textcolor{red}{\min}}~E[\{\psi_i\};\mathbf{R}]\\
+					&+\sum_{ij}\Lambda_{ij}(\langle\psi_i|\psi_j\rangle-\delta_{ij})
+				\end{aligned}
+			\end{displaymath}
+		\item 运动方程\textrm{(Equations of Motion,~EOM)}
+			\begin{displaymath}
+				\begin{aligned}
+					\hspace*{-40pt}
+					M_I\ddot{\mathbf{R}}_I=&-\nabla_{\mathbf{R}_I}\bigg[\underset{\{\psi_i\}}{\textcolor{red}{\min}}~E[\{\psi_i\};\mathbf{R}]\bigg|_{\{\langle\psi_i|\psi_j\rangle=\delta_{ij}\}}\bigg]\\
+					=&\textcolor{purple}{-\dfrac{\partial E}{\partial\mathbf{R}_I}}\textcolor{blue}{+\sum_{i,j}\Lambda_{ij}\dfrac{\partial}{\partial \mathbf{R}_I}\langle\psi_i|\psi_j\rangle}\textcolor{magenta}{-2\sum_i\dfrac{\partial\langle\psi_i|}{\partial\mathbf{R}_I}\bigg[\dfrac{\delta E}{\delta\langle\psi_i|}-\sum_j\Lambda_{ij}|\psi_j\rangle\bigg]}
+				\end{aligned}
+			\end{displaymath}
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{第一原理分子动力学:~\textrm{BOMD}}
+	\begin{itemize}
+		\item $\textcolor{purple}{\dfrac{\partial E}{\partial\mathbf{R}_I}}$表示\textrm{Hellmann-Feynman}力$\vec F_{\mathrm{HF}}$
+		\item $\textcolor{blue}{\sum\limits_{i,j}\Lambda_{ij}\dfrac{\partial}{\partial \mathbf{R}_I}\langle\psi_i|\psi_j\rangle}$是\textrm{Pulay}力$\vec F_{\mathrm{WF}}$\\
+			{\fontsize{6.2pt}{4.2pt}\selectfont{源于电子波函数正交要求，且只有当基函数为局域函数(依赖于$\mathbf{R}$时)才有贡献}}
+		\item $\textcolor{magenta}{\sum\limits_i\dfrac{\partial\langle\psi_i|}{\partial\mathbf{R}_I}\bigg[\dfrac{\delta E}{\delta\langle\psi_i|}-\sum\limits_j\Lambda_{ij}|\psi_j\rangle\bigg]}$表示非自洽电子态的影响$\vec F_{\mathrm{NSC}}$\\
+			{\fontsize{6.2pt}{4.2pt}\selectfont{源自非局域基(如平面波)，由于波函数非显式依赖$\mathbf{R}$，因此展开系数$c_{ij}(\mathbf{R})$依赖于原子核位置
+			\begin{displaymath}
+				\psi_i(\mathbf{R})=\sum\limits_jc_{ij}(\mathbf{R})\phi_i
+			\end{displaymath}
+			前面\textrm{MOE}中的系数\textrm{2}源于\textrm{K-S}轨道波函数为实数时的简化表示\\
+			这一项的贡献比起$F_{\mathrm{HF}}$小很多，\textcolor{blue}{只要当$\psi_i(\mathbf{R})$是体系精确的电子的本征态波函数，该项就会消失}——换言之，只有非完全自洽的电子计算，才需要考虑该项的贡献。显然，所有数值计算中，都将存在不等式
+	\begin{displaymath}
+			0\leqslant-\dfrac{\delta E}{\delta\langle\psi_i|}+\sum_j\Lambda_{ij}|\psi_j\rangle=-\hat{H_{\mathrm{e}}}\langle\psi_j|+\sum_j\Lambda_{ij}|\psi_j\rangle
+		\end{displaymath} }}
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{第一原理分子动力学:~\textrm{BOMD}}
+	另一方面，如果忽略$\vec F_{\mathrm{WF}}$和$\vec F_{\mathrm{NSC}}$的贡献，仅对体系电子的非本征态波函数应用\textrm{Hellmann-Feynman}定理，得到的结果和精确计算的原子受力
+	\begin{displaymath}
+		\vec F=\vec F_{\mathrm{HF}}+\vec F_{\mathrm{WF}}+\vec F_{\mathrm{NSC}}
+	\end{displaymath}
+	计算相比，也只有微小的偏差
+	\vskip 1.5pt
+	这是因为在\textrm{DFT}框架下，能量是电荷密度的非线性函数，因此$H_{\mathrm{e}}$必须通过迭代求解;~而原子受力的误差则随电荷密度线性变化——这也解释了为什么一般\textrm{BOMD}计算的原子受力比体系总能要精确得多
+
+	\vskip 5pt
+	在\textrm{BOMD}中，\textrm{Born-Oppenheimer}近似下核与电子的运动完全解耦，在此基础上考虑绝热近似，将不再有对动力学模拟的时间步长限制，相比于其它\textrm{AIMD}方法，\textrm{BOMD}模拟允许的时间步长要长得多
+}
+
+\frame
+{
+	\frametitle{第一原理分子动力学:~\textrm{CPMD}}
+	1985年\textrm{Car}和\textrm{Parrinello}在密度泛函理论基础上，将第一原理方法应用到分子动力学研究中，形成\textrm{Car-Parrinello Molecular dynamics~(CPMD)}
+	\begin{itemize}
+		\item 与\textrm{BOMD}不同，在\textrm{CPMD}中，电子自由度存在于经典\textrm{Lagrangian}中
+			\begin{displaymath}
+				\begin{aligned}
+					L_{\mathrm{CP}}(\{\psi_i\};~\mathbf{R},\dot{\mathbf{R}})=&\textcolor{blue}{\dfrac12\mu\sum_i\langle\dot{\psi}_i|\dot{\psi}_i\rangle}+\dfrac12\sum_{I=1}^NM_I\dot{\mathbf{R}}^2_I\\
+					-&\textcolor{red}{E}[\{\psi_i\};\mathbf{R}]\\
+					&+\sum_{ij}\Lambda_{ij}(\langle\psi_i|\psi_j\rangle-\delta_{ij})
+				\end{aligned}
+			\end{displaymath}
+			{\fontsize{6.2pt}{4.2pt}\selectfont{在经典\textrm{Lagrangian}中考虑电子自由度，人为地引入了傀电子质量参数$\mu$和傀轨道速度$\dot{\psi}_i$}}
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{第一原理分子动力学:~\textrm{CPMD}}
+	\begin{itemize}
+		\item \textrm{CPMD}下的运动方程表示为
+			\begin{displaymath}
+				\begin{aligned}
+					M_I\ddot{\mathbf{R}}_I=&-\nabla_{\mathbf{R}_I}\bigg[E[\{\psi_i\};\mathbf{R}]\bigg|_{\{\langle\psi_i|\psi_j\rangle=\delta_{ij}\}}\bigg]\\
+					=&\textcolor{purple}{-\dfrac{\partial E}{\partial\mathbf{R}_I}}\textcolor{blue}{+\sum_{i,j}\Lambda_{ij}\dfrac{\partial}{\partial \mathbf{R}_I}\langle\psi_i|\psi_j\rangle}\\
+					\mu\ddot{\psi}_i(\vec r,t)=&-\dfrac{\delta E}{\delta\langle\psi_i|}+\sum_j\Lambda_{ij}|\psi_j\rangle\\
+					=&-\hat{H_{\mathrm{e}}}\langle\psi_j|+\sum_j\Lambda_{ij}|\psi_j\rangle
+				\end{aligned}
+			\end{displaymath}
+			{\fontsize{6.2pt}{4.2pt}\selectfont{$-\dfrac{\delta E}{\delta\langle\psi|}$表示经典力学框架下的电子受力，用来描述分子动力学范畴内电子自由度随原子核运动的情况 }}
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{\textrm{CPMD}计算的特点}
+	\begin{itemize}
+		\item 计算成本大大节约\\
+			{\fontsize{8.2pt}{4.2pt}\selectfont{相比于\textrm{BOMD},\textrm{CPMD}无需在每个分子动力学时间步长执行电子自洽计算}}
+		\item 计算时间步长不能太长\\
+			{\fontsize{8.2pt}{4.2pt}\selectfont{绝热近似要求电子-核运动能量彼此分离，\textcolor{blue}{声子最高频率}$\omega_{\mathrm I}$必须远小于\textcolor{blue}{傀电子最低振动频率}$\omega_{\mathrm e}$
+			\begin{displaymath}
+				\omega_{\mathrm e}\propto\sqrt{\dfrac{\Delta E_{\mathrm{gap}}}{\mu}}
+			\end{displaymath}
+			$\Delta E_{\mathrm{gap}}$是\textrm{K-S}单粒子的带隙，许可最大时间步长$\Delta t_{\mathrm{max}}<1/\omega_{\mathrm{e}}$，大小主要由$\sqrt{\mu}$}}确定
+		\item $\mu$物理上没有意义，但通过调节$\mu$可以平衡\textrm{AIMD}的效率和精度，一般选取$\mu$使得$\omega_{\mathrm{I}}<<\omega_{\mathrm{I}}$成立
+		\item 对于金属/导体的\textrm{CPMD}计算，由于$\Delta E_{\mathrm{gap}}=0$，必须要求体系通过恒温条件平衡交换能或者泛函允许分数占据
+		\end{itemize}
+}
+
+\frame
+{
+	\frametitle{其它\textrm{AIMD}:~\textrm{PIMD}和\textrm{Ehrenfest~MD}}
+	\begin{itemize}
+		\item \textrm{Path Integral~MD~(PIMD)}\footnote{\fontsize{6.2pt}{4.2pt}\selectfont{基于量子统计的第一原理路径积分称为\textrm{Feynman}路径积分\textrm{(path integrals)}}}\\
+			\textrm{PIMD}用量子力学计算电子和原子核运动，因此该方法比\textrm{BOMD}和\textrm{CPMD}方法精确，特别是对于含有轻元素体系——计算量也要大得多
+		\item \textrm{Ehrenfest~MD}\\
+			电子自由度通过求解含时\textrm{(Time-dependent)~Schr\"odinger}方程得到，当$\Delta t\rightarrow0$，自由度变化对应于电子的幺正传播\textrm{(unitary propagation)}\footnote{\fontsize{6.2pt}{4.2pt}\selectfont{\textrm{Ehrenfest~MD}的幺正变换确保波函数保持正交，但代价是积分时间步长必须极小，因此\textrm{Ehrenfest~MD}模拟时间尺度仅达\textrm{atto}$(10^{-18})$秒尺度}}
+	\end{itemize}
+	\textcolor{blue}{\textrm{CPMD}结合了\textrm{BOMD}与\textrm{Ehrenfest~MD}的优点}:
+	\begin{itemize}
+		\item 计算体系受力由总能对粒子位置的求导，并非求电子态的$\langle\Psi_0|\hat H_{\mathrm{e}}|\Psi_0\rangle$极小值
+		\item 因为选择平面波基，$\vec F_{\mathrm{NSC}}$自然为0
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{平衡态统计基础}
+	系综(\textrm{Ensembles})是在一定的宏观条件下，由大量微观粒子组成的性质和结构完全相同的、处于各种运动状态的、各自独立的系统整体的集合。简言之，系综是给定宏观条件下，所有微观状态的集合。
+%	应用\textrm{Verlet}算法，完成单粒子运动的数值积分，可以得到动力学体系的\textrm{Hamiltonian}对应的能量，进而应用统计力学的统计系综，获得宏观体系的物理量
+	\vskip 3pt
+	\textcolor{blue}{等概率原理}\textrm{(Principle of equal weights)}:\\
+	一个热力学体系有相同的概率到达每个可能经历的微观态。\\
+	等概率原理导出\textrm{Boltzmann}分布
+	\begin{displaymath}
+		P_j=\dfrac{\mathrm{e}^{-\beta\varepsilon_j}}Q
+	\end{displaymath}
+	这里$Q$称为配分函数\textrm{(partition function)}
+	\begin{displaymath}
+		\begin{aligned}
+			Q=&\sum_i\mathrm{e}^{(-\beta\varepsilon_i)}\\
+			\beta=&1/k_{\mathrm{B}}T
+		\end{aligned}
+	\end{displaymath}
+	物理量的系综平均
+	\begin{displaymath}
+		\langle A\rangle=\sum_jA_j\mathrm{e}^{(-\beta\varepsilon_j)}/Q
+	\end{displaymath}
+}
+
+\frame
+{
+	\frametitle{常用统计系综}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.20in}
+%\includegraphics[height=1.60in,width=3.85in,viewport=0 0 1420 570,clip]{Figures/Statistical_Ensembles.png}
+\includegraphics[height=1.20in,width=3.75in,viewport=0 0 1420 470,clip]{Figures/Statistical_Ensembles.png}
+\caption{\tiny \textrm{The Statistical Ensembles.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Statistical_Ensembles}
+\end{figure}
+\vskip -15pt
+\begin{itemize}
+		{\fontsize{7.2pt}{1.2pt}\selectfont{
+		\item 微正则系综\textrm{(Mircocanonical Ensemble)}%\footnote{\fontsize{4.5pt}{1.2pt}\selectfont{\textrm{canonical}，汉译作``正则''，出自《楚辞\textperiodcentered 离骚》``皇揽揆余於初度兮，肇锡余以嘉名;~名余曰\textcolor{red}{正则}兮，字余曰灵均''，《楚辞章句》\upcite{Chucizhangju}:~``正，平也;~则，法也;~灵，神也;~均，调也。言正平可法则者，莫过于天;~养物均调者，莫神于地。高平曰原，故父伯庸名我为平以法天，字我为原以法地。言己上之能安君，下之能养民也。''意思是说``正则''、``灵均''隐喻着某种意义，即平正是天的象征，原均是地的象征。因此正则的含义是``\textcolor{blue}{符合天道}''，与\textrm{canonical}的意思\textrm{of, relating to, or forming a canon}意义一致。}}
+			:~\textrm{NVE}皆为常数
+		\item 正则系综\textrm{(Canonical Ensemble)}:~\textrm{NVT}皆为常数
+		\item 巨正则系综\textrm{(Grandcanonical Ensemble)}:~\textrm{$\mu$VT}皆为常数，粒子数不固定
+		\item 等压-等温系综\textrm{(Isobaric-Isothermal Ensemble)}:~\textrm{NPT}皆为常数
+		\item 等焓-等压系综\textrm{(Isoenthalpic-Isobaric Ensemble)}:~\textrm{NPH}皆为常数
+		\item 等张力-等温系综\textrm{(Isotension-Isothermal Ensemble)}:~容器形状可变 }}
+\end{itemize}
+}
+
+\frame
+{
+	\frametitle{常用热力学量}
+	\begin{itemize}
+{\fontsize{7.8pt}{1.2pt}\selectfont{
+		\item 动能 ~$E_{\mathrm{k}}=\bigg\langle\sum\limits_{i=1}^N\dfrac12m_iv_i^2\bigg\rangle$
+		\item 势能 ~$E_{\mathrm{p}}=\bigg\langle\sum\limits_{i=1}^NE_{\mathrm{p}i}\bigg\rangle$
+		\item 温度 ~$T=\dfrac1{\mathrm{d}Nk_{\mathrm{B}}}\bigg\langle\sum\limits_{i=1}^Nm_iv_i^2\bigg\rangle$ ~~~~ 其中$\mathrm{d}$是空间维度
+		\item 压强 ~$p=\dfrac{k_{\mathrm{B}}TN}{V}+\dfrac1{\mathrm{d}V}\bigg\langle\sum\limits_{i<j}\vec f_{ij}\cdot\vec r_{ij}\bigg\rangle$
+		\item 焓 ~$H=E+pV$ ~~~~ 相当于\textrm{NPT}下的有效总内能
+		\item 熵 ~$S=k_{\mathrm{B}}\ln\Omega(N,V,E)$ ~~~~ $\Omega$是系统的总的微观状态数
+		\item \textrm{Helmholtz}自由能:~\textcolor{blue}{\textrm{NVT}下的自由能}
+			\begin{displaymath}
+				F=E-TS=-k_{\mathrm{B}}T\ln{Q}
+			\end{displaymath}
+		\item \textrm{Gibbs}自由能:~\textcolor{blue}{\textrm{NPT}下的自由能}
+			\begin{displaymath}
+				G=F+pV=E-TS+pV
+			\end{displaymath}
+		\item 化学势 ~$\mu=\dfrac{\partial G}{\partial N}\bigg|_{T,p}=\dfrac{\partial F}{\partial N}\bigg|_{T,V}$}}
+	\end{itemize}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  不使用 authblk 包制作标题  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%-------------------------------PPT Title-------------------------------------
+\title{19-\rm{Berry}相位、\rm{Wannier}函数与极化理论}
+%-----------------------------------------------------------------------------
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  不使用 authblk 包制作标题  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %-------------------------------PPT Title-------------------------------------
 \title{11-\rm{APW}方法与\rm{LAPW}方法}
@@ -10053,293 +10340,6 @@ $\beta$与$\alpha$类似，是\textrm{Dresselhaus}耦合系数
 	\end{displaymath}
 }
 
-\subsection{第一原理分子动力学简述}
-\frame
-{
-	\frametitle{分子动力学\textrm{(MD)}}
-	分子动力学\textrm{(Molecular dynamics,~MD)}主要用于各类化学反应、合金与复杂材料状态方程研究，着重关注体系的反应或状态随温度、压力变化规律和动力学性质
-\vskip 5pt
-\textcolor{blue}{分子动力学模拟的基本框架}
-	\begin{itemize}
-		\item 结构优化:~根据体系的初始构型\textrm{(initial configuration)}，遵从能量最低原理，得到体系基态结构(确定基态时原子的位置)
-		\item 原子运动计算:~在一定环境(温度、压力等)条件下，计算各原子的受力，并依据运动方程得到设定时间步长下的原子的运动，进而获得得体系的当前构型
-		\item 径迹计算:~在设定的时间范围内，根据原子运动和体系构型的变化，组合成体系随时间演化的径迹\textrm{(the trajectory of time evolution)}
-		\item 结果分析:~分析体系的径迹变化规律，得到体系的动力学和热力学性质
-	\end{itemize}
-}
-
-\frame
-{
-	\frametitle{原子间相互作用力的表示}
-	分子动力学模拟中影响结果最主要因素之一是\textcolor{purple}{原子间相互作用力}的准确度
-\vskip 5pt
-\begin{itemize}
-	\item 经典分子动力学模拟中，原子间相互作用力是根据经验势函数得到的\footnote{\fontsize{6.2pt}{4.2pt}\selectfont{经验势函数也称为力场，是参数化形式给出的原子间相互作用，一般通过对实验数据拟合或小体系的第一原理计算得到}}。构建一套高精度的经验势函数代价很高，而且经验势函数一般不具备可移植性
-\end{itemize}
-\vskip 5pt
-	当动力学过程必须考虑量子效应(如电子影响的贡献不可忽略时)，必须采用第一原理分子动力学\textrm{(Ab initio~MD,~AIMD)}
-	\begin{itemize}
-		\item 所谓第一原理分子动力学，就是在计算原子运动时，将电子结构变化的贡献考虑进来，因此在每一时间步长，体系实时构型下的原子受力计算，都必须伴随电子结构计算
-	\end{itemize}
-	一般电子结构计算采用\textrm{DFT}计算，不难想见，第一原理分子动力学模拟的代价极高
-}
-
-\frame
-{
-	\frametitle{第一原理分子动力学\textrm{AIMD}}
-	\begin{itemize}
-		\item \textrm{AIMD}将电子结构与原子和经典轨迹计算在同一基础上完成
-		\item 每个原子运动步的受力都是在电子结构计算基础上获得的
-%		\item 基于\textrm{B-O}近似，原子运动径迹的每一步上，电子运动都达到收敛
-		\item 扩展的\textrm{Lagrangian}方法:~根据体系几何结构构造体系波函数\\
-			\textcolor{blue}{\textrm{Car-Parinello}}:\\
-			平面波基，构成分子轨道\\
-			\textcolor{blue}{\textrm{Atom-centered Density Matrix Progation~(ADMP)}}:\\
-			原子中心基，构成密度矩阵
-	\end{itemize}
-	\textrm{AIMD}计算内容
-	\begin{itemize}
-		\item 可用于复杂体系的电子结构计算
-		\item 几何结构优化(能量最小化)
-		\item 描述系统演化
-		\item 模拟时长规模$\approx{\mathrm{ps}}(10^{-12}\mathrm{s})$~(经典分子动力学 $\approx\mathrm{ns}(10^{-9}\mathrm{s})$)
-	\end{itemize}
-}
-
-
-%\frame
-%{
-%	\frametitle{第一原理分子动力学的分类}
-%\begin{figure}[h!]
-%\centering
-%\vspace*{-0.05in}
-%%\hspace*{-10pt}
-%\includegraphics[height=2.3in,width=4.0in,viewport=0 0 440 230,clip]{Figures/Molecular-dynamics_Claaified.png}
-%\caption{\fontsize{5.2pt}{4.2pt}\selectfont{\textrm{The major differences between the methods of aiMD simulations.}}}%
-%\label{Molecular-dynamics_Claaified}
-%\end{figure}
-%}
-%
-\frame
-{
-	\frametitle{第一原理分子动力学中的近似}
-	由于分子动力学模拟的复杂性，必须做出适当的近似。具体到第一原理分子动力学，一般有两类重要的近似:
-	\begin{itemize}
-		\item \textcolor{blue}{绝热近似\textrm{(adiabatic approximation)}}\\
-			{\fontsize{6.2pt}{4.2pt}\selectfont{假设电子-原子核在能量层面上完全分离，彼此间没有能量传递}}
-		\item \textcolor{blue}{\textrm{Born-Oppenheimer}近似}\\
-			{\fontsize{6.2pt}{4.2pt}\selectfont{假设电子和原子核的运动完全解耦，对应每个时间步长的原子构型，电子可以实时处于基态\footnote{\fontsize{5.2pt}{4.2pt}\selectfont{\textrm{B-O}近似也是一种绝热近似，\textcolor{red}{但\textrm{B-O}近似下的绝热强调电子对核运动的瞬时响应}。讨论电子计算时，\textrm{B-O}近似下假设原子核是固定不动的;~在分子动力学讨论中，绝热近似强调的是电子-核运动在能量上的完整分离，而\textrm{B-O}近似则明确要求电子-核运动彼此完全解耦，且电子实时处于基态}}}}
-	\end{itemize}
-\begin{figure}[h!]
-\centering
-\vspace*{-0.25in}
-%\hspace*{-10pt}
-\includegraphics[height=1.55in,width=2.6in,viewport=0 0 440 230,clip]{Figures/Molecular-dynamics_Claaified.png}
-%\caption{\fontsize{5.2pt}{4.2pt}\selectfont{\textrm{The major differences between the methods of aiMD simulations.}}}%
-\label{Molecular-dynamics_Classified}
-\end{figure}
-}
-
-\frame
-{
-	\frametitle{第一原理分子动力学:~\textrm{BOMD}}
-	如果绝热近似和\textrm{Born-Oppenheimer}近似同时满足，称为\textrm{Born-Oppenheimer}分子动力学\textrm{(BOMD)}
-	\begin{itemize}
-		\item 原子核运动的势函数为$E[\{\psi_i\};\mathbf{R}]$，并且每个时间步长内，势函数对$\{\psi_i(\vec r)\}$取极小值\\
-			\begin{displaymath}
-				\begin{aligned}
-					L_{\mathrm{BO}}(\{\psi_i\};~\mathbf{R},\dot{\mathbf{R}})=&\dfrac12\sum_{I=1}^NM_I\dot{\mathbf{R}}^2_I-\underset{\{\psi_i\}}{\textcolor{red}{\min}}~E[\{\psi_i\};\mathbf{R}]\\
-					&+\sum_{ij}\Lambda_{ij}(\langle\psi_i|\psi_j\rangle-\delta_{ij})
-				\end{aligned}
-			\end{displaymath}
-		\item 运动方程\textrm{(Equations of Motion,~EOM)}
-			\begin{displaymath}
-				\begin{aligned}
-					\hspace*{-40pt}
-					M_I\ddot{\mathbf{R}}_I=&-\nabla_{\mathbf{R}_I}\bigg[\underset{\{\psi_i\}}{\textcolor{red}{\min}}~E[\{\psi_i\};\mathbf{R}]\bigg|_{\{\langle\psi_i|\psi_j\rangle=\delta_{ij}\}}\bigg]\\
-					=&\textcolor{purple}{-\dfrac{\partial E}{\partial\mathbf{R}_I}}\textcolor{blue}{+\sum_{i,j}\Lambda_{ij}\dfrac{\partial}{\partial \mathbf{R}_I}\langle\psi_i|\psi_j\rangle}\textcolor{magenta}{-2\sum_i\dfrac{\partial\langle\psi_i|}{\partial\mathbf{R}_I}\bigg[\dfrac{\delta E}{\delta\langle\psi_i|}-\sum_j\Lambda_{ij}|\psi_j\rangle\bigg]}
-				\end{aligned}
-			\end{displaymath}
-	\end{itemize}
-}
-
-\frame
-{
-	\frametitle{第一原理分子动力学:~\textrm{BOMD}}
-	\begin{itemize}
-		\item $\textcolor{purple}{\dfrac{\partial E}{\partial\mathbf{R}_I}}$表示\textrm{Hellmann-Feynman}力$\vec F_{\mathrm{HF}}$
-		\item $\textcolor{blue}{\sum\limits_{i,j}\Lambda_{ij}\dfrac{\partial}{\partial \mathbf{R}_I}\langle\psi_i|\psi_j\rangle}$是\textrm{Pulay}力$\vec F_{\mathrm{WF}}$\\
-			{\fontsize{6.2pt}{4.2pt}\selectfont{源于电子波函数正交要求，且只有当基函数为局域函数(依赖于$\mathbf{R}$时)才有贡献}}
-		\item $\textcolor{magenta}{\sum\limits_i\dfrac{\partial\langle\psi_i|}{\partial\mathbf{R}_I}\bigg[\dfrac{\delta E}{\delta\langle\psi_i|}-\sum\limits_j\Lambda_{ij}|\psi_j\rangle\bigg]}$表示非自洽电子态的影响$\vec F_{\mathrm{NSC}}$\\
-			{\fontsize{6.2pt}{4.2pt}\selectfont{源自非局域基(如平面波)，由于波函数非显式依赖$\mathbf{R}$，因此展开系数$c_{ij}(\mathbf{R})$依赖于原子核位置
-			\begin{displaymath}
-				\psi_i(\mathbf{R})=\sum\limits_jc_{ij}(\mathbf{R})\phi_i
-			\end{displaymath}
-			前面\textrm{MOE}中的系数\textrm{2}源于\textrm{K-S}轨道波函数为实数时的简化表示\\
-			这一项的贡献比起$F_{\mathrm{HF}}$小很多，\textcolor{blue}{只要当$\psi_i(\mathbf{R})$是体系精确的电子的本征态波函数，该项就会消失}——换言之，只有非完全自洽的电子计算，才需要考虑该项的贡献。显然，所有数值计算中，都将存在不等式
-	\begin{displaymath}
-			0\leqslant-\dfrac{\delta E}{\delta\langle\psi_i|}+\sum_j\Lambda_{ij}|\psi_j\rangle=-\hat{H_{\mathrm{e}}}\langle\psi_j|+\sum_j\Lambda_{ij}|\psi_j\rangle
-		\end{displaymath} }}
-	\end{itemize}
-}
-
-\frame
-{
-	\frametitle{第一原理分子动力学:~\textrm{BOMD}}
-	另一方面，如果忽略$\vec F_{\mathrm{WF}}$和$\vec F_{\mathrm{NSC}}$的贡献，仅对体系电子的非本征态波函数应用\textrm{Hellmann-Feynman}定理，得到的结果和精确计算的原子受力
-	\begin{displaymath}
-		\vec F=\vec F_{\mathrm{HF}}+\vec F_{\mathrm{WF}}+\vec F_{\mathrm{NSC}}
-	\end{displaymath}
-	计算相比，也只有微小的偏差
-	\vskip 1.5pt
-	这是因为在\textrm{DFT}框架下，能量是电荷密度的非线性函数，因此$H_{\mathrm{e}}$必须通过迭代求解;~而原子受力的误差则随电荷密度线性变化——这也解释了为什么一般\textrm{BOMD}计算的原子受力比体系总能要精确得多
-
-	\vskip 5pt
-	在\textrm{BOMD}中，\textrm{Born-Oppenheimer}近似下核与电子的运动完全解耦，在此基础上考虑绝热近似，将不再有对动力学模拟的时间步长限制，相比于其它\textrm{AIMD}方法，\textrm{BOMD}模拟允许的时间步长要长得多
-}
-
-\frame
-{
-	\frametitle{第一原理分子动力学:~\textrm{CPMD}}
-	1985年\textrm{Car}和\textrm{Parrinello}在密度泛函理论基础上，将第一原理方法应用到分子动力学研究中，形成\textrm{Car-Parrinello Molecular dynamics~(CPMD)}
-	\begin{itemize}
-		\item 与\textrm{BOMD}不同，在\textrm{CPMD}中，电子自由度存在于经典\textrm{Lagrangian}中
-			\begin{displaymath}
-				\begin{aligned}
-					L_{\mathrm{CP}}(\{\psi_i\};~\mathbf{R},\dot{\mathbf{R}})=&\textcolor{blue}{\dfrac12\mu\sum_i\langle\dot{\psi}_i|\dot{\psi}_i\rangle}+\dfrac12\sum_{I=1}^NM_I\dot{\mathbf{R}}^2_I\\
-					-&\textcolor{red}{E}[\{\psi_i\};\mathbf{R}]\\
-					&+\sum_{ij}\Lambda_{ij}(\langle\psi_i|\psi_j\rangle-\delta_{ij})
-				\end{aligned}
-			\end{displaymath}
-			{\fontsize{6.2pt}{4.2pt}\selectfont{在经典\textrm{Lagrangian}中考虑电子自由度，人为地引入了傀电子质量参数$\mu$和傀轨道速度$\dot{\psi}_i$}}
-	\end{itemize}
-}
-
-\frame
-{
-	\frametitle{第一原理分子动力学:~\textrm{CPMD}}
-	\begin{itemize}
-		\item \textrm{CPMD}下的运动方程表示为
-			\begin{displaymath}
-				\begin{aligned}
-					M_I\ddot{\mathbf{R}}_I=&-\nabla_{\mathbf{R}_I}\bigg[E[\{\psi_i\};\mathbf{R}]\bigg|_{\{\langle\psi_i|\psi_j\rangle=\delta_{ij}\}}\bigg]\\
-					=&\textcolor{purple}{-\dfrac{\partial E}{\partial\mathbf{R}_I}}\textcolor{blue}{+\sum_{i,j}\Lambda_{ij}\dfrac{\partial}{\partial \mathbf{R}_I}\langle\psi_i|\psi_j\rangle}\\
-					\mu\ddot{\psi}_i(\vec r,t)=&-\dfrac{\delta E}{\delta\langle\psi_i|}+\sum_j\Lambda_{ij}|\psi_j\rangle\\
-					=&-\hat{H_{\mathrm{e}}}\langle\psi_j|+\sum_j\Lambda_{ij}|\psi_j\rangle
-				\end{aligned}
-			\end{displaymath}
-			{\fontsize{6.2pt}{4.2pt}\selectfont{$-\dfrac{\delta E}{\delta\langle\psi|}$表示经典力学框架下的电子受力，用来描述分子动力学范畴内电子自由度随原子核运动的情况 }}
-	\end{itemize}
-}
-
-\frame
-{
-	\frametitle{\textrm{CPMD}计算的特点}
-	\begin{itemize}
-		\item 计算成本大大节约\\
-			{\fontsize{8.2pt}{4.2pt}\selectfont{相比于\textrm{BOMD},\textrm{CPMD}无需在每个分子动力学时间步长执行电子自洽计算}}
-		\item 计算时间步长不能太长\\
-			{\fontsize{8.2pt}{4.2pt}\selectfont{绝热近似要求电子-核运动能量彼此分离，\textcolor{blue}{声子最高频率}$\omega_{\mathrm I}$必须远小于\textcolor{blue}{傀电子最低振动频率}$\omega_{\mathrm e}$
-			\begin{displaymath}
-				\omega_{\mathrm e}\propto\sqrt{\dfrac{\Delta E_{\mathrm{gap}}}{\mu}}
-			\end{displaymath}
-			$\Delta E_{\mathrm{gap}}$是\textrm{K-S}单粒子的带隙，许可最大时间步长$\Delta t_{\mathrm{max}}<1/\omega_{\mathrm{e}}$，大小主要由$\sqrt{\mu}$}}确定
-		\item $\mu$物理上没有意义，但通过调节$\mu$可以平衡\textrm{AIMD}的效率和精度，一般选取$\mu$使得$\omega_{\mathrm{I}}<<\omega_{\mathrm{I}}$成立
-		\item 对于金属/导体的\textrm{CPMD}计算，由于$\Delta E_{\mathrm{gap}}=0$，必须要求体系通过恒温条件平衡交换能或者泛函允许分数占据
-		\end{itemize}
-}
-
-\frame
-{
-	\frametitle{其它\textrm{AIMD}:~\textrm{PIMD}和\textrm{Ehrenfest~MD}}
-	\begin{itemize}
-		\item \textrm{Path Integral~MD~(PIMD)}\footnote{\fontsize{6.2pt}{4.2pt}\selectfont{基于量子统计的第一原理路径积分称为\textrm{Feynman}路径积分\textrm{(path integrals)}}}\\
-			\textrm{PIMD}用量子力学计算电子和原子核运动，因此该方法比\textrm{BOMD}和\textrm{CPMD}方法精确，特别是对于含有轻元素体系——计算量也要大得多
-		\item \textrm{Ehrenfest~MD}\\
-			电子自由度通过求解含时\textrm{(Time-dependent)~Schr\"odinger}方程得到，当$\Delta t\rightarrow0$，自由度变化对应于电子的幺正传播\textrm{(unitary propagation)}\footnote{\fontsize{6.2pt}{4.2pt}\selectfont{\textrm{Ehrenfest~MD}的幺正变换确保波函数保持正交，但代价是积分时间步长必须极小，因此\textrm{Ehrenfest~MD}模拟时间尺度仅达\textrm{atto}$(10^{-18})$秒尺度}}
-	\end{itemize}
-	\textcolor{blue}{\textrm{CPMD}结合了\textrm{BOMD}与\textrm{Ehrenfest~MD}的优点}:
-	\begin{itemize}
-		\item 计算体系受力由总能对粒子位置的求导，并非求电子态的$\langle\Psi_0|\hat H_{\mathrm{e}}|\Psi_0\rangle$极小值
-		\item 因为选择平面波基，$\vec F_{\mathrm{NSC}}$自然为0
-	\end{itemize}
-}
-
-\frame
-{
-	\frametitle{平衡态统计基础}
-	系综(\textrm{Ensembles})是在一定的宏观条件下，由大量微观粒子组成的性质和结构完全相同的、处于各种运动状态的、各自独立的系统整体的集合。简言之，系综是给定宏观条件下，所有微观状态的集合。
-%	应用\textrm{Verlet}算法，完成单粒子运动的数值积分，可以得到动力学体系的\textrm{Hamiltonian}对应的能量，进而应用统计力学的统计系综，获得宏观体系的物理量
-	\vskip 3pt
-	\textcolor{blue}{等概率原理}\textrm{(Principle of equal weights)}:\\
-	一个热力学体系有相同的概率到达每个可能经历的微观态。\\
-	等概率原理导出\textrm{Boltzmann}分布
-	\begin{displaymath}
-		P_j=\dfrac{\mathrm{e}^{-\beta\varepsilon_j}}Q
-	\end{displaymath}
-	这里$Q$称为配分函数\textrm{(partition function)}
-	\begin{displaymath}
-		\begin{aligned}
-			Q=&\sum_i\mathrm{e}^{(-\beta\varepsilon_i)}\\
-			\beta=&1/k_{\mathrm{B}}T
-		\end{aligned}
-	\end{displaymath}
-	物理量的系综平均
-	\begin{displaymath}
-		\langle A\rangle=\sum_jA_j\mathrm{e}^{(-\beta\varepsilon_j)}/Q
-	\end{displaymath}
-}
-
-\frame
-{
-	\frametitle{常用统计系综}
-\begin{figure}[h!]
-\centering
-\vspace*{-0.20in}
-%\includegraphics[height=1.60in,width=3.85in,viewport=0 0 1420 570,clip]{Figures/Statistical_Ensembles.png}
-\includegraphics[height=1.20in,width=3.75in,viewport=0 0 1420 470,clip]{Figures/Statistical_Ensembles.png}
-\caption{\tiny \textrm{The Statistical Ensembles.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{Statistical_Ensembles}
-\end{figure}
-\vskip -15pt
-\begin{itemize}
-		{\fontsize{7.2pt}{1.2pt}\selectfont{
-		\item 微正则系综\textrm{(Mircocanonical Ensemble)}%\footnote{\fontsize{4.5pt}{1.2pt}\selectfont{\textrm{canonical}，汉译作``正则''，出自《楚辞\textperiodcentered 离骚》``皇揽揆余於初度兮，肇锡余以嘉名;~名余曰\textcolor{red}{正则}兮，字余曰灵均''，《楚辞章句》\upcite{Chucizhangju}:~``正，平也;~则，法也;~灵，神也;~均，调也。言正平可法则者，莫过于天;~养物均调者，莫神于地。高平曰原，故父伯庸名我为平以法天，字我为原以法地。言己上之能安君，下之能养民也。''意思是说``正则''、``灵均''隐喻着某种意义，即平正是天的象征，原均是地的象征。因此正则的含义是``\textcolor{blue}{符合天道}''，与\textrm{canonical}的意思\textrm{of, relating to, or forming a canon}意义一致。}}
-			:~\textrm{NVE}皆为常数
-		\item 正则系综\textrm{(Canonical Ensemble)}:~\textrm{NVT}皆为常数
-		\item 巨正则系综\textrm{(Grandcanonical Ensemble)}:~\textrm{$\mu$VT}皆为常数，粒子数不固定
-		\item 等压-等温系综\textrm{(Isobaric-Isothermal Ensemble)}:~\textrm{NPT}皆为常数
-		\item 等焓-等压系综\textrm{(Isoenthalpic-Isobaric Ensemble)}:~\textrm{NPH}皆为常数
-		\item 等张力-等温系综\textrm{(Isotension-Isothermal Ensemble)}:~容器形状可变 }}
-\end{itemize}
-}
-
-\frame
-{
-	\frametitle{常用热力学量}
-	\begin{itemize}
-{\fontsize{7.8pt}{1.2pt}\selectfont{
-		\item 动能 ~$E_{\mathrm{k}}=\bigg\langle\sum\limits_{i=1}^N\dfrac12m_iv_i^2\bigg\rangle$
-		\item 势能 ~$E_{\mathrm{p}}=\bigg\langle\sum\limits_{i=1}^NE_{\mathrm{p}i}\bigg\rangle$
-		\item 温度 ~$T=\dfrac1{\mathrm{d}Nk_{\mathrm{B}}}\bigg\langle\sum\limits_{i=1}^Nm_iv_i^2\bigg\rangle$ ~~~~ 其中$\mathrm{d}$是空间维度
-		\item 压强 ~$p=\dfrac{k_{\mathrm{B}}TN}{V}+\dfrac1{\mathrm{d}V}\bigg\langle\sum\limits_{i<j}\vec f_{ij}\cdot\vec r_{ij}\bigg\rangle$
-		\item 焓 ~$H=E+pV$ ~~~~ 相当于\textrm{NPT}下的有效总内能
-		\item 熵 ~$S=k_{\mathrm{B}}\ln\Omega(N,V,E)$ ~~~~ $\Omega$是系统的总的微观状态数
-		\item \textrm{Helmholtz}自由能:~\textcolor{blue}{\textrm{NVT}下的自由能}
-			\begin{displaymath}
-				F=E-TS=-k_{\mathrm{B}}T\ln{Q}
-			\end{displaymath}
-		\item \textrm{Gibbs}自由能:~\textcolor{blue}{\textrm{NPT}下的自由能}
-			\begin{displaymath}
-				G=F+pV=E-TS+pV
-			\end{displaymath}
-		\item 化学势 ~$\mu=\dfrac{\partial G}{\partial N}\bigg|_{T,p}=\dfrac{\partial F}{\partial N}\bigg|_{T,V}$}}
-	\end{itemize}
-}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  不使用 authblk 包制作标题  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%-------------------------------PPT Title-------------------------------------
-\title{19-\rm{Berry}相位、\rm{Wannier}函数与极化理论}
-%-----------------------------------------------------------------------------
 \section{\rm{Berry}相位、\rm{Wannier}函数与极化理论}
 \subsection{几何\rm{Berry~}相位}
 \frame
