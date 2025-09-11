@@ -10,12 +10,12 @@
 %%   affiliation.
 \institute[BCC]{\inst{}%
 %\institute[Gain~Strong]{\inst{}%
-\vskip -15pt 南京展智科技有限公司\\北京市计算中心~材料计算团队}
+\vskip -15pt 南京展智科技有限公司\\[0.5em]北京市计算中心~材料计算团队}
 %\vskip -20pt {\large 格致斯创~科技}}
 \date[\today] % (optional, should be abbreviation of conference name)
 {	%{\fontsize{6.2pt}{4.2pt}\selectfont{\textcolor{blue}{E-mail:~}\url{jiangjun@bcc.ac.cn}}}
-\vskip 45 pt {\fontsize{8.2pt}{6.2pt}\selectfont{%清华大学\;\;物理系% 报告地点
-	\vskip 5 pt \textrm{2025.09.04}}}
+\vskip 35 pt {\fontsize{8.2pt}{6.2pt}\selectfont{%清华大学\;\;物理系% 报告地点
+	\vskip 2 pt \textrm{\today}}}
 }
 
 %% - Either use conference name or its abbreviation
@@ -455,7 +455,7 @@
 \underline{潜在的应用需求}
 \begin{itemize}
 		\setlength{\itemsep}{10pt}
-		\item 	对机器学习势完成的分子动力学计算的实际检验:\\
+		\item 	对机器学习势完成的分子动力学计算的数值检验:\\
 			{\fontsize{7.2pt}{5.2pt}\selectfont{是否可以彻底摆脱对第一原理大规模计算的约束}}
 		\item 电池材料、高熵合金的微观性质高精度计算:\\
 			{\fontsize{7.2pt}{5.2pt}\selectfont{高精度的应用级模拟}}
