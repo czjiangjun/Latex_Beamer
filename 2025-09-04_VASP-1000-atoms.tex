@@ -85,6 +85,24 @@
 
 \begin{frame}
 	\frametitle{千原子量级模型计算的必要性和困难}
+	\begin{itemize}
+		\item 机器学习势函数，要考虑粒子间多体相互作用与长程相互作用
+\begin{figure}[h!]
+\vspace*{-0.10in}
+%\centering
+%\includegraphics[height=0.60in,width=3.05in]{Figures/MGE-2.png}
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\vskip 0.05pt
+\includegraphics[height=2.34in,width=3.00in]{Figures/MLP_GNN.jpg}
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Multi-Scale-4}
+\end{figure}
+	\end{itemize}
+\end{frame}
+
+\section{\rm{VASP}软件的主要瓶颈}
+\begin{frame}
+	\frametitle{千原子量级模型计算的必要性和困难}
 	第一原理计算(主要是\textrm{DFT})为材料模拟提供``数据底座'':
 %			\\为包括微观电子结构性质在内的基本物性提供有效描述
 \begin{figure}[h!]
@@ -114,24 +132,6 @@
 \end{figure}
 \end{frame}
 
-\begin{frame}
-	\frametitle{千原子量级模型计算的必要性和困难}
-	\begin{itemize}
-		\item 机器学习势函数，要考虑粒子间多体相互作用与长程相互作用
-\begin{figure}[h!]
-\vspace*{-0.10in}
-%\centering
-%\includegraphics[height=0.60in,width=3.05in]{Figures/MGE-2.png}
-%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-%\vskip 0.05pt
-\includegraphics[height=2.34in,width=3.00in]{Figures/MLP_GNN.jpg}
-%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{Multi-Scale-4}
-\end{figure}
-	\end{itemize}
-\end{frame}
-
-\section{\rm{VASP}软件的主要瓶颈}
 \frame
 {
 	\frametitle{\textrm{VASP}软件简介}
@@ -244,15 +244,15 @@
 	大规模\textrm{DFT}计算面临的效率问题，根源在于系统软件平台\\
 	{\fontsize{7.2pt}{5.2pt}\selectfont{传统系统软件平台难以充分发挥硬件性能，无法为\textrm{DFT}计算软件提供高效适配与支持}}
 	\vskip 3pt 
-\textrm{VASP}软件将大模型的计算转化成矩阵基础操作\\
-{\fontsize{7.2pt}{5.2pt}\selectfont{迭代对角化方案，依次(近似)求解矩阵本征值，因此单个本征值求解过程中，矩阵计算的相关性极高，参与计算的\textrm{CPU}核之间存在非常频繁的通信，产生极大的通信压力}}
+借助频繁的\textrm{FFT}，\textrm{VASP}软件将大模型的计算转化成矩阵基础操作:\\
+{\fontsize{7.2pt}{5.2pt}\selectfont{迭代对角化方案，依次求解矩阵的若干(近似)本征值，单个本征值迭代求解过程中，矩阵计算的相关性极高，参与计算的\textrm{CPU}核之间存在非常频繁的通信，产生极大的通信压力}}
 	\begin{itemize}
 		\item 如果配置较多本征值并行处理，则需要更多的系统资源来对多个本征值计算进行描述，模型越大，冗余开销越大\\
-			{\fontsize{7.2pt}{5.2pt}\selectfont{可能影响实用性，甚至超过了现有计算机集群的处理极限}}
-		\item 如果把大量系统资源配置到单一本征值，则会因算法失去局部性，各\textrm{CPU}核之间计算任务耦合过重\\
+			{\fontsize{7.2pt}{5.2pt}\selectfont{可能影响软件的实用性，甚至超过了现有计算机集群的处理极限}}
+		\item 如果把大量系统资源配置到单一本征值的迭代求解，则会因算法失去局部性，各\textrm{CPU}核之间计算任务耦合过重\\
 	{\fontsize{7.2pt}{5.2pt}\selectfont{可能造成系统过载}}
 	\end{itemize}
-	基于通用硬件搭建，通过优化系统软件层面对\textrm{DFT}计算的支持，释放\textrm{VASP}等软件的并行计算潜力，实现更大规模\textrm{DFT}模型的高效支持
+	\sout{\textcolor{red}{基于通用硬件的搭建}}，优化系统基础软件层对\textrm{DFT}计算的支持，释放\textrm{VASP}等软件的并行计算潜力，实现更大规模\textrm{DFT}模型的高效支持
 \end{frame}
 
 \begin{frame}
@@ -262,7 +262,7 @@
 		\item 高通量的分布式矩阵运算，会导致频繁的系统通信，在系统软件的临界区会产生严重冲突\\
 			{\fontsize{7.2pt}{5.2pt}\selectfont{例如，多个计算节点同时请求访问共享资源、传输关键数据时，频繁的竞争与等待使得数据传输延迟大幅增加}}
 %构造一种新型通讯机制，兼容\textrm{DFT}计算的高通量矩阵需求与软件环境特征
-		\item \textrm{VASP}软件基于\textrm{Intel}等基础库函数支持的并行计算库，在高并行度条件时，暴露出各种不适应\\
+		\item \textrm{VASP}软件底层依赖的\textrm{Intel}等通用基础库函数支持的并行计算库，在高并行度条件时，暴露出各种不适应\\
 			{\fontsize{7.2pt}{5.2pt}\selectfont{例如，某些矩阵运算算法在多核心并行计算时，数据划分与同步机制不合理，导致核心间负载不均衡，大量核心处于空闲等待状态；部分通信算法在高并发数据传输时，因协议设计缺陷引发数据拥塞}}
 %			建立科学的算法评估体系，对这类不适用于高并行度的算法进行精准识别，并结合\textrm{DFT}计算特点，设计出适合高并行度的等效实现方案，从算法层面提升\textrm{VASP}软件在大规模并行计算中的性能表现
 		\item \textrm{DFT}计算的核心数据结构的空间复杂度偏高\\
@@ -272,16 +272,16 @@
 
 \begin{frame}
 	\frametitle{总体技术路线}
-	自研的虚拟机技术，将硬件进行重新封装，通过一系列自研数据结构、算法与特定编程方法，改变硬件呈现的特性，面向高通量数据处理软件提供更高效的运行环境
+	自研的虚拟机技术，重新封装硬件，通过一系列自研数据结构、算法与特定编程方法，改变硬件呈现的特性，\textcolor{red}{在不改动\textrm{VASP}代码基础上}，构建面向高通量数据处理的高效运行环境
 	\begin{itemize}
-		\item 高通量并发计算系统:~解决单一本征值计算过程矩阵运算的\textrm{CPU}核之间高效配合的问题
+		\item 高通量并发计算系统:~解决单一本征值计算过程\textcolor{blue}{矩阵运算的\textrm{CPU}核之间高效配合的问题}
 			\begin{enumerate}
 \fontsize{7.2pt}{5.2pt}\selectfont
 				\item 重新划分软件分层
 				\item 严格控制临界区范围
 				\item 与高通量通信硬件的深度适配
 			\end{enumerate}
-		\item 并行计算库:~与高通量通信硬件的深度适配
+		\item 并行计算库:~\textcolor{blue}{与高通量通信硬件的深度适配的底层计算库}
 			\begin{itemize}
 \fontsize{7.2pt}{5.2pt}\selectfont
 				\item 数据处理分层化:~将部分计算任务的处理过程进行分层，在负载均担与实时性需求之间进行再平衡
@@ -290,7 +290,7 @@
 		\item 内存溢出子系统:~%在计算机集群系统中，
 			集成内存储器的规模超过一定范围后，成本会明显增加\\
 			{\fontsize{7.2pt}{5.2pt}\selectfont{
-				针对\textrm{DFT}运算的核心数据结构访问局部性与连续性，设计了内外存储器联动的算法:~%该算法
+					针对\textrm{DFT}运算的核心数据结构访问局部性与连续性，设计了\textcolor{blue}{内外存储器联动}的算法:~%该算法
 		\\精准捕捉数据访问的规律，保证算法执行效率下降不超过\textrm{20\%}的前提下，可处理规模为内存储器\textrm{200\%$\sim$1000\%}以上的数据结构，有效突破内存容量对大规模计算的制约}}
 	\end{itemize}
 \end{frame}
@@ -407,7 +407,7 @@
 %}
 
 \begin{frame}
-	\frametitle{计算算例:~\textrm{CFeTi}}
+	\frametitle{计算算例:~\textrm{CdHgTe}}
 \begin{figure}[h!]
 \centering
 \vskip -0.41in
