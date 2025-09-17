@@ -85,10 +85,11 @@
 
 \begin{frame}
 	\frametitle{千原子量级模型计算的必要性和困难}
-	\begin{itemize}
-		\item 机器学习势函数，要考虑粒子间多体相互作用与长程相互作用
+%	\begin{enumerate}[{[1]}]\item 
+	机器学习势函数，要考虑粒子间多体相互作用与长程相互作用
+%	\end{enumerate}
 \begin{figure}[h!]
-\vspace*{-0.10in}
+\vspace*{-0.05in}
 %\centering
 %\includegraphics[height=0.60in,width=3.05in]{Figures/MGE-2.png}
 %\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
@@ -97,7 +98,6 @@
 %\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Multi-Scale-4}
 \end{figure}
-	\end{itemize}
 \end{frame}
 
 \section{\rm{VASP}软件的主要瓶颈}
@@ -252,7 +252,7 @@
 		\item 如果把大量系统资源配置到单一本征值的迭代求解，则会因算法失去局部性，各\textrm{CPU}核之间计算任务耦合过重\\
 	{\fontsize{7.2pt}{5.2pt}\selectfont{可能造成系统过载}}
 	\end{itemize}
-	\sout{\textcolor{red}{基于通用硬件的搭建}}，优化系统基础软件层对\textrm{DFT}计算的支持，释放\textrm{VASP}等软件的并行计算潜力，实现更大规模\textrm{DFT}模型的高效支持
+	\textcolor{red}{基于通用硬件的搭建}，优化系统基础软件层对\textrm{DFT}计算的支持，释放\textrm{VASP}等软件的并行计算潜力，实现更大规模\textrm{DFT}模型的高效支持
 \end{frame}
 
 \begin{frame}
