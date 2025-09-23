@@ -326,7 +326,7 @@
 	大规模\textrm{DFT}计算面临的效率问题，根源在于系统软件平台\\
 	{\fontsize{7.2pt}{5.2pt}\selectfont{传统系统软件平台难以充分发挥硬件性能，无法为\textrm{DFT}计算软件提供高效适配与支持}}
 	\vskip 3pt 
-借助频繁的\textrm{FFT}，\textrm{VASP}软件将大模型的计算转化成矩阵基础操作:\\
+在频繁的\textrm{FFT}基础上，\textrm{VASP}软件将大模型的本征值求解过程，转化和分解为矩阵-向量的基础操作:\\
 {\fontsize{7.2pt}{5.2pt}\selectfont{迭代对角化方案，依次求解矩阵的若干(近似)本征值，单个本征值迭代求解过程中，矩阵计算的相关性极高，参与计算的\textrm{CPU}核之间存在非常频繁的通信，产生极大的通信压力}}
 	\begin{itemize}
 		\item 如果配置较多本征值并行处理，则需要更多的系统资源来对多个本征值计算进行描述，模型越大，冗余开销越大\\
@@ -355,6 +355,53 @@
 \begin{frame}
 	\frametitle{总体技术路线}
 	自研的虚拟机技术，重新封装硬件，通过一系列自研数据结构、算法与特定编程方法，改变硬件呈现的特性，\textcolor{red}{在不改动\textrm{VASP}代码基础上}，构建面向高通量数据处理的高效运行环境
+	\begin{figure}[ht]
+		\centering
+		\begin{minipage}[b]{0.4\textwidth}
+			\begin{tikzpicture}[
+			box-rect/.style={rectangle,draw=none,node distance=1cm,text width=4.5em,text centered,rounded corners,minimum height=0.1em,thin},
+    straightline/.style={line width = 2pt, -},
+    arrow/.style={draw,-latex', line width = 2pt},
+		]
+		\node [box-rect, text width=8.0em, minimum height=0.1em, thick](Single-Band) {\fontsize{5.5pt}{0.2pt}\selectfont{单能带\textrm{(Single-Band)计算}}};
+		\node [box-rect, below = 0.15 of Single-Band, fill=NavyBlue!50, text width=9.0em, draw=cyan, minimum height=1.5em, thick, dash dot dot](Critical-Virtual-Machine) {\fontsize{5.5pt}{0.2pt}\selectfont{\textcolor{red}{无临界虚拟机}}};
+		\node [box-rect, below = 0.15 of Critical-Virtual-Machine, fill=purple!50, text width=0.5em, draw=cyan, minimum height=0.2em, thick](VASP-process-3) {\fontsize{5.5pt}{0.2pt}\selectfont{\textrm{V\\A\\S\\P\\}计算进程}};
+		\node [box-rect, left = 0.5 of VASP-process-3, fill=purple!50, text width=0.5em, draw=cyan, minimum height=0.2em, thick](VASP-process-2) {\fontsize{5.5pt}{0.2pt}\selectfont{\textrm{V\\A\\S\\P\\}计算进程}};
+		\node [box-rect, left = 0.5 of VASP-process-2, fill=purple!50, text width=0.5em, draw=cyan, minimum height=0.2em, thick](VASP-process-1) {\fontsize{5.5pt}{0.2pt}\selectfont{\textrm{V\\A\\S\\P\\}计算进程}};
+		\node [box-rect, right = 0.5 of VASP-process-3, fill=purple!50, text width=0.5em, draw=cyan, minimum height=0.2em, thick](VASP-process-4) {\fontsize{5.5pt}{0.2pt}\selectfont{\textrm{V\\A\\S\\P\\}计算进程}};
+		\node [box-rect, right = 0.5 of VASP-process-4, fill=purple!50, text width=0.5em, draw=cyan, minimum height=0.2em, thick](VASP-process-5) {\fontsize{5.5pt}{0.2pt}\selectfont{\textrm{V\\A\\S\\P\\}计算进程}};
+		\node [box-rect, below = 0.2 of VASP-process-1, fill=violet!50, text width=0.5em, draw=cyan, minimum height=0.1em, thick](VASP-MPI-1) {\fontsize{5.5pt}{0.2pt}\selectfont{\textcolor{white}{\textrm{M\\P\\I\\}}}};
+		\node [box-rect, below = 0.2 of VASP-process-2, fill=violet!50, text width=0.5em, draw=cyan, minimum height=0.1em, thick](VASP-MPI-2) {\fontsize{5.5pt}{0.2pt}\selectfont{\textcolor{white}{\textrm{M\\P\\I\\}}}};
+		\node [box-rect, below = 0.2 of VASP-process-3, fill=violet!50, text width=0.5em, draw=cyan, minimum height=0.1em, thick](VASP-MPI-3) {\fontsize{5.5pt}{0.2pt}\selectfont{\textcolor{white}{\textrm{M\\P\\I\\}}}};
+		\node [box-rect, below = 0.2 of VASP-process-4, fill=violet!50, text width=0.5em, draw=cyan, minimum height=0.1em, thick](VASP-MPI-4) {\fontsize{5.5pt}{0.2pt}\selectfont{\textcolor{white}{\textrm{M\\P\\I\\}}}};
+		\node [box-rect, below = 0.2 of VASP-process-5, fill=violet!50, text width=0.5em, draw=cyan, minimum height=0.1em, thick](VASP-MPI-5) {\fontsize{5.5pt}{0.2pt}\selectfont{\textcolor{white}{\textrm{M\\P\\I\\}}}};
+		\node [box-rect, below = 0.3 of VASP-MPI-3, fill=green!50, text width=8.0em, draw=cyan, minimum height=2.0em, thick](Critical-MPI) {\fontsize{5.5pt}{0.2pt}\selectfont{\textrm{MPI}临界区}};
+
+		\path
+		(Critical-MPI.north)++(-4.0em, 0.0em) coordinate (Critical-MPI-1)
+		(Critical-MPI.north)++(-2.0em, 0.0em) coordinate (Critical-MPI-2)
+		(Critical-MPI.north)++(0.0em, 0.0em) coordinate (Critical-MPI-3)
+		(Critical-MPI.north)++(2.0em, 0.0em) coordinate (Critical-MPI-4)
+		(Critical-MPI.north)++(4.0em, 0.0em) coordinate (Critical-MPI-5);
+
+		\draw [straightline, black,very thick] (VASP-process-1.south) -- (VASP-MPI-1.north);
+		\draw [straightline, black,very thick] (VASP-process-2.south) -- (VASP-MPI-2.north);
+		\draw [straightline, black,very thick] (VASP-process-3.south) -- (VASP-MPI-3.north);
+		\draw [straightline, black,very thick] (VASP-process-4.south) -- (VASP-MPI-4.north);
+		\draw [straightline, black,very thick] (VASP-process-5.south) -- (VASP-MPI-5.north);
+		\path [arrow, NavyBlue, thin] (VASP-MPI-1.south) -- (Critical-MPI-1);
+		\path [arrow, NavyBlue, thin] (VASP-MPI-2.south) -- (Critical-MPI-2);
+		\path [arrow, NavyBlue, thin] (VASP-MPI-3.south) -- (Critical-MPI-3);
+		\path [arrow, NavyBlue, thin] (VASP-MPI-4.south) -- (Critical-MPI-4);
+		\path [arrow, NavyBlue, thin] (VASP-MPI-5.south) -- (Critical-MPI-5);
+			\end{tikzpicture}
+		\end{minipage}
+		\label{fig:Single-Band-orig}
+	\end{figure}
+\end{frame}
+
+\begin{frame}[allowframebreaks]
+	\frametitle{总体技术路线}
 	\begin{itemize}
 		\item 高通量并发计算系统:~解决单一本征值计算过程\textcolor{blue}{矩阵运算的\textrm{CPU}核之间高效配合的问题}
 			\begin{enumerate}
@@ -363,6 +410,52 @@
 				\item 严格控制临界区范围
 				\item 与高通量通信硬件的深度适配
 			\end{enumerate}
+	\begin{figure}[ht]
+		\centering
+		\begin{minipage}[b]{0.4\textwidth}
+			\begin{tikzpicture}[
+			box-rect/.style={rectangle,draw=none,node distance=1cm,text width=4.5em,text centered,rounded corners,minimum height=0.1em,thin},
+    straightline/.style={line width = 2pt, -},
+    arrow/.style={draw,-latex', line width = 2pt},
+		]
+		\node [box-rect, text width=8.0em, minimum height=0.1em, thick](Single-Band) {\fontsize{5.5pt}{0.2pt}\selectfont{单能带\textrm{(Single-Band)计算}}};
+		\node [box-rect, below = 0.1 of Single-Band, fill=NavyBlue!50, text width=8.0em, draw=cyan, minimum height=1.2em, thick](Critical-Virtual-Machine) {\fontsize{4.5pt}{0.2pt}\selectfont{\textcolor{red}{无临界虚拟机}}};
+		\node [box-rect, below = 0.8 of Critical-Virtual-Machine, text width=0.5em, minimum height=0.1em, thick](VASP-process-3) {\fontsize{5.5pt}{0.2pt}\selectfont{$\cdots$}};
+		\node [box-rect, left = 0.5 of VASP-process-3, fill=purple!50, text width=0.5em, draw=cyan, minimum height=0.1em, thick](VASP-process-2) {\fontsize{4.5pt}{0.2pt}\selectfont{\textrm{V\\A\\S\\P}\\计\\算\\进\\程\\}};
+		\node [box-rect, left = 0.5 of VASP-process-2, fill=purple!50, text width=0.5em, draw=cyan, minimum height=0.1em, thick](VASP-process-1) {\fontsize{4.5pt}{0.2pt}\selectfont{\textrm{V\\A\\S\\P}\\计\\算\\进\\程\\}};
+		\node [box-rect, right = 0.5 of VASP-process-3, fill=purple!50, text width=0.5em, draw=cyan, minimum height=0.1em, thick](VASP-process-4) {\fontsize{4.5pt}{0.2pt}\selectfont{\textrm{V\\A\\S\\P}\\计\\算\\进\\程\\}};
+		\node [box-rect, right = 0.5 of VASP-process-4, fill=purple!50, text width=0.5em, draw=cyan, minimum height=0.1em, thick](VASP-process-5) {\fontsize{4.5pt}{0.2pt}\selectfont{\textrm{V\\A\\S\\P}\\计\\算\\进\\程\\}};
+		\node [box-rect, below = 0.2 of VASP-process-1, fill=violet!50, text width=0.5em, draw=cyan, minimum height=0.1em, thick](VASP-MPI-1) {\fontsize{4.5pt}{0.2pt}\selectfont{\textcolor{white}{\textrm{M\\P\\I\\}}}};
+		\node [box-rect, below = 0.2 of VASP-process-2, fill=violet!50, text width=0.5em, draw=cyan, minimum height=0.1em, thick](VASP-MPI-2) {\fontsize{4.5pt}{0.2pt}\selectfont{\textcolor{white}{\textrm{M\\P\\I\\}}}};
+		\node [box-rect, below = 1.0 of VASP-process-3, text width=0.5em, minimum height=0.1em, thick](VASP-MPI-3) {\fontsize{5.5pt}{0.2pt}\selectfont{$\cdots$}};
+		\node [box-rect, below = 0.2 of VASP-process-4, fill=violet!50, text width=0.5em, draw=cyan, minimum height=0.1em, thick](VASP-MPI-4) {\fontsize{4.5pt}{0.2pt}\selectfont{\textcolor{white}{\textrm{M\\P\\I\\}}}};
+		\node [box-rect, below = 0.2 of VASP-process-5, fill=violet!50, text width=0.5em, draw=cyan, minimum height=0.1em, thick](VASP-MPI-5) {\fontsize{4.5pt}{0.2pt}\selectfont{\textcolor{white}{\textrm{M\\P\\I\\}}}};
+		\node [box-rect, below = 0.4 of VASP-MPI-3, fill=green!50, text width=8.0em, draw=cyan, minimum height=1.5em, thick](Critical-MPI) {\fontsize{4.5pt}{0.2pt}\selectfont{\textrm{MPI}临界区}};
+
+		\path
+		(Critical-MPI.north)++(-4.0em, 0.0em) coordinate (Critical-MPI-1)
+		(Critical-MPI.north)++(-2.0em, 0.0em) coordinate (Critical-MPI-2)
+		(Critical-MPI.north)++(0.0em, 0.0em) coordinate (Critical-MPI-3)
+		(Critical-MPI.north)++(2.0em, 0.0em) coordinate (Critical-MPI-4)
+		(Critical-MPI.north)++(4.0em, 0.0em) coordinate (Critical-MPI-5);
+
+		\draw [straightline, black,very thick] (VASP-process-1.south) -- (VASP-MPI-1.north);
+		\draw [straightline, black,very thick] (VASP-process-2.south) -- (VASP-MPI-2.north);
+%		\draw [straightline, black,very thick] (VASP-process-3.south) -- (VASP-MPI-3.north);
+		\draw [straightline, black,very thick] (VASP-process-4.south) -- (VASP-MPI-4.north);
+		\draw [straightline, black,very thick] (VASP-process-5.south) -- (VASP-MPI-5.north);
+		\path [arrow, NavyBlue, thin] (VASP-MPI-1.south) -- (Critical-MPI-1);
+		\path [arrow, NavyBlue, thin] (VASP-MPI-2.south) -- (Critical-MPI-2);
+%		\path [arrow, NavyBlue, thin] (VASP-MPI-3.south) -- (Critical-MPI-3);
+		\path [arrow, NavyBlue, thin] (VASP-MPI-4.south) -- (Critical-MPI-4);
+		\path [arrow, NavyBlue, thin] (VASP-MPI-5.south) -- (Critical-MPI-5);
+%		\includegraphics{<+file+>}
+%		\caption{<+caption text+>}
+			\end{tikzpicture}
+		\end{minipage}
+		\label{fig:Single-Band-orig}
+	\end{figure}
+
 		\item 并行计算库:~\textcolor{blue}{与高通量通信硬件的深度适配的底层计算库}
 			\begin{itemize}
 \fontsize{7.2pt}{5.2pt}\selectfont
@@ -370,12 +463,109 @@
 				\item 计算去中心化:~去掉各种形式的``主结点''，部分算法进行``去中心化''重写
 			\end{itemize}
 		\item 内存溢出子系统:~%在计算机集群系统中，
-			集成内存储器的规模超过一定范围后，成本会明显增加\\
+			集成内存储器的规模超过一定范围后，成本会明显增加
+			\vskip 1pt
 			{\fontsize{7.2pt}{5.2pt}\selectfont{
 					针对\textrm{DFT}运算的核心数据结构访问局部性与连续性，设计了\textcolor{blue}{内外存储器联动}的算法:~%该算法
 		\\精准捕捉数据访问的规律，保证算法执行效率下降不超过\textrm{20\%}的前提下，可处理规模为内存储器\textrm{200\%$\sim$1000\%}以上的数据结构，有效突破内存容量对大规模计算的制约}}
 	\end{itemize}
 \end{frame}
+
+%\begin{frame}
+%	\frametitle{总体技术路线}
+%	\begin{figure}[ht]
+%		\centering
+%		\begin{minipage}[b]{0.4\textwidth}
+%			\begin{tikzpicture}[
+%			box-rect/.style={rectangle,draw=none,node distance=1cm,text width=4.5em,text centered,rounded corners,minimum height=0.1em,thin},
+%    straightline/.style={line width = 2pt, -},
+%    arrow/.style={draw,-latex', line width = 2pt},
+%		]
+%		\node [box-rect, text width=8.0em, minimum height=0.1em, thick](Single-Band) {\fontsize{5.5pt}{0.2pt}\selectfont{单能带\textrm{(Single-Band)计算}}};
+%		\node [box-rect, below = 0.2 of Single-Band, fill=NavyBlue!50, text width=8.0em, draw=cyan, minimum height=3.0em, thick, dash dot dot](Critical-Virtual-Machine) {\fontsize{5.5pt}{0.2pt}\selectfont{\textcolor{red}{无临界虚拟机}}};
+%		\node [box-rect, below = 0.2 of Critical-Virtual-Machine, fill=purple!50, text width=0.5em, draw=cyan, minimum height=0.1em, thick](VASP-process-3) {\fontsize{5.5pt}{0.2pt}\selectfont{\textrm{V\\A\\S\\P\\}计算进程}};
+%		\node [box-rect, left = 0.5 of VASP-process-3, fill=purple!50, text width=0.5em, draw=cyan, minimum height=0.1em, thick](VASP-process-2) {\fontsize{5.5pt}{0.2pt}\selectfont{\textrm{V\\A\\S\\P\\}计算进程}};
+%		\node [box-rect, left = 0.5 of VASP-process-2, fill=purple!50, text width=0.5em, draw=cyan, minimum height=0.1em, thick](VASP-process-1) {\fontsize{5.5pt}{0.2pt}\selectfont{\textrm{V\\A\\S\\P\\}计算进程}};
+%		\node [box-rect, right = 0.5 of VASP-process-3, fill=purple!50, text width=0.5em, draw=cyan, minimum height=0.1em, thick](VASP-process-4) {\fontsize{5.5pt}{0.2pt}\selectfont{\textrm{V\\A\\S\\P\\}计算进程}};
+%		\node [box-rect, right = 0.5 of VASP-process-4, fill=purple!50, text width=0.5em, draw=cyan, minimum height=0.1em, thick](VASP-process-5) {\fontsize{5.5pt}{0.2pt}\selectfont{\textrm{V\\A\\S\\P\\}计算进程}};
+%		\node [box-rect, below = 0.2 of VASP-process-1, fill=violet!50, text width=0.5em, draw=cyan, minimum height=0.1em, thick](VASP-MPI-1) {\fontsize{5.5pt}{0.2pt}\selectfont{\textcolor{white}{\textrm{M\\P\\I\\}}}};
+%		\node [box-rect, below = 0.2 of VASP-process-2, fill=violet!50, text width=0.5em, draw=cyan, minimum height=0.1em, thick](VASP-MPI-2) {\fontsize{5.5pt}{0.2pt}\selectfont{\textcolor{white}{\textrm{M\\P\\I\\}}}};
+%		\node [box-rect, below = 0.2 of VASP-process-3, fill=violet!50, text width=0.5em, draw=cyan, minimum height=0.1em, thick](VASP-MPI-3) {\fontsize{5.5pt}{0.2pt}\selectfont{\textcolor{white}{\textrm{M\\P\\I\\}}}};
+%		\node [box-rect, below = 0.2 of VASP-process-4, fill=violet!50, text width=0.5em, draw=cyan, minimum height=0.1em, thick](VASP-MPI-4) {\fontsize{5.5pt}{0.2pt}\selectfont{\textcolor{white}{\textrm{M\\P\\I\\}}}};
+%		\node [box-rect, below = 0.2 of VASP-process-5, fill=violet!50, text width=0.5em, draw=cyan, minimum height=0.1em, thick](VASP-MPI-5) {\fontsize{5.5pt}{0.2pt}\selectfont{\textcolor{white}{\textrm{M\\P\\I\\}}}};
+%		\node [box-rect, below = 0.3 of VASP-MPI-3, fill=green!50, text width=8.0em, draw=cyan, minimum height=4.0em, thick](Critical-MPI) {\fontsize{5.5pt}{0.2pt}\selectfont{\textrm{MPI}临界区}};
+%
+%		\path
+%		(Critical-MPI.north)++(-4.0em, 0.0em) coordinate (Critical-MPI-1)
+%		(Critical-MPI.north)++(-2.0em, 0.0em) coordinate (Critical-MPI-2)
+%		(Critical-MPI.north)++(0.0em, 0.0em) coordinate (Critical-MPI-3)
+%		(Critical-MPI.north)++(2.0em, 0.0em) coordinate (Critical-MPI-4)
+%		(Critical-MPI.north)++(4.0em, 0.0em) coordinate (Critical-MPI-5);
+%
+%		\draw [straightline, black,very thick] (VASP-process-1.south) -- (VASP-MPI-1.north);
+%		\draw [straightline, black,very thick] (VASP-process-2.south) -- (VASP-MPI-2.north);
+%		\draw [straightline, black,very thick] (VASP-process-3.south) -- (VASP-MPI-3.north);
+%		\draw [straightline, black,very thick] (VASP-process-4.south) -- (VASP-MPI-4.north);
+%		\draw [straightline, black,very thick] (VASP-process-5.south) -- (VASP-MPI-5.north);
+%		\path [arrow, NavyBlue, thin] (VASP-MPI-1.south) -- (Critical-MPI-1);
+%		\path [arrow, NavyBlue, thin] (VASP-MPI-2.south) -- (Critical-MPI-2);
+%		\path [arrow, NavyBlue, thin] (VASP-MPI-3.south) -- (Critical-MPI-3);
+%		\path [arrow, NavyBlue, thin] (VASP-MPI-4.south) -- (Critical-MPI-4);
+%		\path [arrow, NavyBlue, thin] (VASP-MPI-5.south) -- (Critical-MPI-5);
+%			\end{tikzpicture}
+%		\end{minipage}
+%		\label{fig:Single-Band-orig}
+%	\end{figure}
+%\end{frame}
+%
+%\begin{frame}
+%	\frametitle{总体技术路线}
+%	\begin{figure}[ht]
+%		\centering
+%		\begin{minipage}[b]{0.4\textwidth}
+%			\begin{tikzpicture}[
+%			box-rect/.style={rectangle,draw=none,node distance=1cm,text width=4.5em,text centered,rounded corners,minimum height=0.1em,thin},
+%    straightline/.style={line width = 2pt, -},
+%    arrow/.style={draw,-latex', line width = 2pt},
+%		]
+%		\node [box-rect, text width=8.0em, minimum height=0.1em, thick](Single-Band) {\fontsize{5.5pt}{0.2pt}\selectfont{单能带\textrm{(Single-Band)计算}}};
+%		\node [box-rect, below = 0.2 of Single-Band, fill=NavyBlue!50, text width=8.0em, draw=cyan, minimum height=3.0em, thick](Critical-Virtual-Machine) {\fontsize{5.5pt}{0.2pt}\selectfont{\textcolor{red}{无临界虚拟机}}};
+%		\node [box-rect, below = 1.4 of Critical-Virtual-Machine, text width=0.5em, minimum height=0.1em, thick](VASP-process-3) {\fontsize{5.5pt}{0.2pt}\selectfont{$\cdots$}};
+%		\node [box-rect, left = 0.5 of VASP-process-3, fill=purple!50, text width=0.5em, draw=cyan, minimum height=0.1em, thick](VASP-process-2) {\fontsize{5.5pt}{0.2pt}\selectfont{\textrm{V\\A\\S\\P\\}计算进程}};
+%		\node [box-rect, left = 0.5 of VASP-process-2, fill=purple!50, text width=0.5em, draw=cyan, minimum height=0.1em, thick](VASP-process-1) {\fontsize{5.5pt}{0.2pt}\selectfont{\textrm{V\\A\\S\\P\\}计算进程}};
+%		\node [box-rect, right = 0.5 of VASP-process-3, fill=purple!50, text width=0.5em, draw=cyan, minimum height=0.1em, thick](VASP-process-4) {\fontsize{5.5pt}{0.2pt}\selectfont{\textrm{V\\A\\S\\P\\}计算进程}};
+%		\node [box-rect, right = 0.5 of VASP-process-4, fill=purple!50, text width=0.5em, draw=cyan, minimum height=0.1em, thick](VASP-process-5) {\fontsize{5.5pt}{0.2pt}\selectfont{\textrm{V\\A\\S\\P\\}计算进程}};
+%		\node [box-rect, below = 0.2 of VASP-process-1, fill=violet!50, text width=0.5em, draw=cyan, minimum height=0.1em, thick](VASP-MPI-1) {\fontsize{5.5pt}{0.2pt}\selectfont{\textcolor{white}{\textrm{M\\P\\I\\}}}};
+%		\node [box-rect, below = 0.2 of VASP-process-2, fill=violet!50, text width=0.5em, draw=cyan, minimum height=0.1em, thick](VASP-MPI-2) {\fontsize{5.5pt}{0.2pt}\selectfont{\textcolor{white}{\textrm{M\\P\\I\\}}}};
+%		\node [box-rect, below = 1.5 of VASP-process-3, text width=0.5em, minimum height=0.1em, thick](VASP-MPI-3) {\fontsize{5.5pt}{0.2pt}\selectfont{$\cdots$}};
+%		\node [box-rect, below = 0.2 of VASP-process-4, fill=violet!50, text width=0.5em, draw=cyan, minimum height=0.1em, thick](VASP-MPI-4) {\fontsize{5.5pt}{0.2pt}\selectfont{\textcolor{white}{\textrm{M\\P\\I\\}}}};
+%		\node [box-rect, below = 0.2 of VASP-process-5, fill=violet!50, text width=0.5em, draw=cyan, minimum height=0.1em, thick](VASP-MPI-5) {\fontsize{5.5pt}{0.2pt}\selectfont{\textcolor{white}{\textrm{M\\P\\I\\}}}};
+%		\node [box-rect, below = 0.4 of VASP-MPI-3, fill=green!50, text width=8.0em, draw=cyan, minimum height=4.0em, thick](Critical-MPI) {\fontsize{5.5pt}{0.2pt}\selectfont{\textrm{MPI}临界区}};
+%
+%		\path
+%		(Critical-MPI.north)++(-4.0em, 0.0em) coordinate (Critical-MPI-1)
+%		(Critical-MPI.north)++(-2.0em, 0.0em) coordinate (Critical-MPI-2)
+%		(Critical-MPI.north)++(0.0em, 0.0em) coordinate (Critical-MPI-3)
+%		(Critical-MPI.north)++(2.0em, 0.0em) coordinate (Critical-MPI-4)
+%		(Critical-MPI.north)++(4.0em, 0.0em) coordinate (Critical-MPI-5);
+%
+%		\draw [straightline, black,very thick] (VASP-process-1.south) -- (VASP-MPI-1.north);
+%		\draw [straightline, black,very thick] (VASP-process-2.south) -- (VASP-MPI-2.north);
+%%		\draw [straightline, black,very thick] (VASP-process-3.south) -- (VASP-MPI-3.north);
+%		\draw [straightline, black,very thick] (VASP-process-4.south) -- (VASP-MPI-4.north);
+%		\draw [straightline, black,very thick] (VASP-process-5.south) -- (VASP-MPI-5.north);
+%		\path [arrow, NavyBlue, thin] (VASP-MPI-1.south) -- (Critical-MPI-1);
+%		\path [arrow, NavyBlue, thin] (VASP-MPI-2.south) -- (Critical-MPI-2);
+%%		\path [arrow, NavyBlue, thin] (VASP-MPI-3.south) -- (Critical-MPI-3);
+%		\path [arrow, NavyBlue, thin] (VASP-MPI-4.south) -- (Critical-MPI-4);
+%		\path [arrow, NavyBlue, thin] (VASP-MPI-5.south) -- (Critical-MPI-5);
+%%		\includegraphics{<+file+>}
+%%		\caption{<+caption text+>}
+%			\end{tikzpicture}
+%		\end{minipage}
+%		\label{fig:Single-Band-orig}
+%	\end{figure}
+%\end{frame}
 
 \section{计算结果}
 %\frame
