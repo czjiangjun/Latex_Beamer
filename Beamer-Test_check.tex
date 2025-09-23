@@ -96,3 +96,150 @@
 \fontsize{8.2pt}{6.2pt}\selectfont{
 	\textrm{Lin L. \textit{Materials databases infrastructure constructed by first principles calculations:~a review.} \textbf{Mater. Perform. Character.}, 2015, 4(1):148.}}
 }
+
+\frame
+{
+	\frametitle{}
+\begin{figure}[!h]
+	\centering
+	\begin{tikzpicture}[
+    box-rect/.style={rectangle,draw=none,node distance=1cm,text width=15em,text centered,rounded corners,minimum height=2em,thick},
+    straightline/.style = {line width = 2pt,-},
+    arrow/.style={draw,-latex', line width = 2pt},
+		]
+		\node [box-rect, text width=2.0em, minimum height=1.5em, very thin] at(-4.0, 2.3 )(Melody) {\fontsize{3.5pt}{2.5pt}\selectfont{唱腔}}; % yshift=5.0em 表示竖直方向，向上移动3.5em
+		\node [box-rect, below=0.04 of Melody, fill=green!40, text width=0.75em, minimum height=0.1em, very thin] (Nature) {\fontsize{3.5pt}{2.5pt}\selectfont{自然}};
+		\node [box-rect, below=0.04 of Nature, fill=green!40, text width=7.5em, minimum height=0.1em, very thin] (Tech-Motion) {\fontsize{3.5pt}{2.5pt}\selectfont{技:~刚、实、宽、厚\hspace{5em}薄、窄、虚、柔:~情}};
+		\node [box-rect, below=0.04 of Tech-Motion, fill=green!40, text width=1.5em, minimum height=0.1em, very thin] (Tan-Xinpei) {\fontsize{3.5pt}{2.5pt}\selectfont{谭鑫培}};
+		\node [box-rect, below=0.04 of Tan-Xinpei, fill=green!40, text width=1.5em, minimum height=0.1em, very thin] (Yang-Xiaolou) {\fontsize{3.5pt}{2.5pt}\selectfont{杨小楼}};
+		\node [box-rect, below=0.45 of Tan-Xinpei, fill=green!40, text width=1.5em, minimum height=0.1em, very thin] (Tan-Xiaopei) {\fontsize{3.5pt}{2.5pt}\selectfont{谭小培}};
+		\node [box-rect, below=0.04 of Tan-Xiaopei, fill=green!40, text width=1.5em, minimum height=0.1em, very thin] (Five-Tan) {\fontsize{3.5pt}{2.5pt}\selectfont{``五坛''}};
+		\node [box-rect, below=0.04 of Five-Tan, fill=green!40, text width=1.5em, minimum height=0.1em, very thin] (Wang-Youchen) {\fontsize{3.5pt}{2.5pt}\selectfont{王又宸}};
+		\node [box-rect, below=0.04 of Wang-Youchen, fill=green!40, text width=1.5em, minimum height=0.1em, very thin] (Chen-Yanheng) {\fontsize{3.5pt}{2.5pt}\selectfont{陈彦衡}};
+		\node [box-rect, below=0.04 of Chen-Yanheng, fill=green!40, text width=3.75em, minimum height=0.1em, very thin] (Guan-Chen) {\fontsize{3.5pt}{2.5pt}\selectfont{贯大元\hspace{2em}陈秀华}};
+		\node [box-rect, below=0.04 of Guan-Chen, fill=green!40, text width=1.5em, minimum height=0.1em, very thin] (Yu-Shuyan) {\fontsize{3.5pt}{2.5pt}\selectfont{余叔岩}};
+		\node [box-rect, below=0.04 of Yu-Shuyan, fill=green!40, text width=1.5em, minimum height=0.1em, very thin] (Yan-Jupeng) {\fontsize{3.5pt}{2.5pt}\selectfont{言菊朋}};
+		\node [box-rect, below=0.04 of Yan-Jupeng, fill=green!40, text width=7.5em, minimum height=0.1em, very thin] (Double-Wang-Li-Zhang) {\fontsize{3.5pt}{2.5pt}\selectfont{王君直\hspace{2em}王荣山\hspace{2em}李适可\hspace{2em}张伯驹}};
+		\node [box-rect, below=0.04 of Double-Wang-Li-Zhang, fill=green!40, text width=3.75em, minimum height=0.1em, very thin] (Fan-Han) {\fontsize{3.5pt}{2.5pt}\selectfont{范濂泉\hspace{2em}韩慎先}};
+		\node [box-rect, below=0.04 of Fan-Han, fill=green!40, text width=1.5em, minimum height=0.1em, very thin] (Yang-Baosen) {\fontsize{3.5pt}{2.5pt}\selectfont{杨宝森}};
+		\node [box-rect, below=0.04 of Yang-Baosen, fill=green!40, text width=1.5em, minimum height=0.1em, very thin] (Meng-Xiaodong) {\fontsize{3.5pt}{2.5pt}\selectfont{孟小冬}};
+		\node [box-rect, below=0.04 of Meng-Xiaodong, fill=green!40, text width=1.5em, minimum height=0.1em, very thin] (Xi-Xiaobo) {\fontsize{3.5pt}{2.5pt}\selectfont{奚啸伯}};
+
+\path
+(Nature.west)++(-3.75, 0.0) coordinate(Nature-)
+(Nature.east)++(3.75, 0.0) coordinate(Nature+)
+(Tech-Motion.west)++(-2.55, 0.0) coordinate(Tech-Motion-)
+(Tech-Motion.east)++(2.55, 0.0) coordinate(Tech-Motion+)
+
+(Tan-Xinpei.west)++(-3.6, 0.0) coordinate(Tan-Xinpei-)
+(Tan-Xinpei.east)++(3.6, 0.0) coordinate(Tan-Xinpei+)
+(Yang-Xiaolou.west)++(-3.5, 0.0) coordinate(Yang-Xiaolou-)
+(Yang-Xiaolou.east)++(3.5, 0.0) coordinate(Yang-Xiaolou+)
+(Tan-Xiaopei.west)++(-2.2, 0.0) coordinate(Tan-Xiaopei-)
+(Tan-Xiaopei.east)++(2.2, 0.0) coordinate(Tan-Xiaopei+)
+(Five-Tan.west)++(-2.5, 0.0) coordinate(Five-Tan-)
+(Five-Tan.east)++(2.5, 0.0) coordinate(Five-Tan+)
+(Wang-Youchen.west)++(-2.7, 0.0) coordinate(Wang-Youchen-)
+(Wang-Youchen.east)++(2.7, 0.0) coordinate(Wang-Youchen+)
+(Chen-Yanheng.west)++(-3.0, 0.0) coordinate(Chen-Yanheng-)
+(Chen-Yanheng.east)++(3.0, 0.0) coordinate(Chen-Yanheng+)
+(Guan-Chen.west)++(-2.8, 0.0) coordinate(Guan-Chen-)
+(Guan-Chen.east)++(2.8, 0.0) coordinate(Guan-Chen+)
+
+(Yu-Shuyan.west)++(-3.8, 0.0) coordinate(Yu-Shuyan-)
+(Yu-Shuyan.east)++(3.1, 0.0) coordinate(Yu-Shuyan+)
+(Yan-Jupeng.west)++(-3.0, 0.0) coordinate(Yan-Jupeng-)
+(Yan-Jupeng.east)++(3.8, 0.0) coordinate(Yan-Jupeng+)
+(Double-Wang-Li-Zhang.west)++(-1.2, 0.0) coordinate(Double-Wang-Li-Zhang-)
+(Double-Wang-Li-Zhang.east)++(1.2, 0.0) coordinate(Double-Wang-Li-Zhang+)
+(Fan-Han.west)++(-2.9, 0.0) coordinate(Fan-Han-)
+(Fan-Han.east)++(3.0, 0.0) coordinate(Fan-Han+)
+(Yang-Baosen.west)++(-3.45, 0.0) coordinate(Yang-Baosen-)
+(Yang-Baosen.east)++(3.45, 0.0) coordinate(Yang-Baosen+)
+(Meng-Xiaodong.west)++(-3.70, 0.0) coordinate(Meng-Xiaodong-)
+(Meng-Xiaodong.east)++(2.8, 0.0) coordinate(Meng-Xiaodong+)
+(Xi-Xiaobo.west)++(-3.0, 0.0) coordinate(Xi-Xiaobo-)
+(Xi-Xiaobo.east)++(3.55, 0.0) coordinate(Xi-Xiaobo+);
+
+\draw [dotted, very thick](-8, -4.5) -- (-8, 2.5);
+\draw [dotted, very thick](0, -10.0) -- (0, 2.5);
+		\draw [straightline, dashed, thin](Nature.west) -- (Nature-);
+		\draw [straightline, dashed, thin](Nature.east) -- (Nature+);
+		\path [arrow, NavyBlue, thick](Tech-Motion.west) -- (Tech-Motion-);
+		\path [arrow, NavyBlue, thick](Tech-Motion.east) -- (Tech-Motion+);
+
+		\draw [solid, ultra thick](-8, 0) -- (-8, -.4);
+		\draw [solid, ultra thick](8, 0) -- (8, -0.4);
+		\draw [straightline, dash dot, thin](Tan-Xinpei.west) -- (Tan-Xinpei-);
+		\draw [straightline, dash dot, thin](Tan-Xinpei.east) -- (Tan-Xinpei+);
+
+		\draw [solid, red, very thick](-7.9, -0.75) -- (-7.9, -1.15);
+		\draw [solid, red, very thick](7.9, -0.75) -- (7.9, -1.15);
+		\draw [straightline, dash dot dot, thin](Yang-Xiaolou.west) -- (Yang-Xiaolou-);
+		\draw [straightline, dash dot dot, thin](Yang-Xiaolou.east) -- (Yang-Xiaolou+);
+
+		\draw [solid, very thick](-5, -1.5) -- (-5, -1.9);
+		\draw [solid, very thick](5, -1.5) -- (5, -1.9);
+		\draw [straightline, dash dot, thin](Tan-Xiaopei.west) -- (Tan-Xiaopei-);
+		\draw [straightline, dash dot, thin](Tan-Xiaopei.east) -- (Tan-Xiaopei+);
+
+		\draw [solid, very thick](-6, -2.20) -- (-6, -2.60);
+		\draw [solid, very thick](6, -2.20) -- (6, -2.60);
+		\draw [straightline, dash dot, thin](Five-Tan.west) -- (Five-Tan-);
+		\draw [straightline, dash dot, thin](Five-Tan.east) -- (Five-Tan+);
+
+		\draw [solid, very thick](-6.5, -2.95) -- (-6.5, -3.35);
+		\draw [solid, very thick](6.5, -2.95) -- (6.5, -3.35);
+		\draw [straightline, dash dot, thin](Wang-Youchen.west) -- (Wang-Youchen-);
+		\draw [straightline, dash dot, thin](Wang-Youchen.east) -- (Wang-Youchen+);
+
+		\draw [solid, very thick](-7.0, -3.65) -- (-7.0, -4.05);
+		\draw [solid, very thick](7.0, -3.65) -- (7.0, -4.05);
+		\draw [straightline, dash dot, thin](Chen-Yanheng.west) -- (Chen-Yanheng-);
+		\draw [straightline, dash dot, thin](Chen-Yanheng.east) -- (Chen-Yanheng+);
+
+		\draw [solid, very thick](-6.8, -4.4) -- (-6.8, -4.8);
+		\draw [solid, very thick](6.8, -4.4) -- (6.8, -4.8);
+		\draw [straightline, dash dot, thin](Guan-Chen.west) -- (Guan-Chen-);
+		\draw [straightline, dash dot, thin](Guan-Chen.east) -- (Guan-Chen+);
+
+		\draw [solid, very thick](-8.5, -5.10) -- (-8.5, -5.50);
+		\draw [solid, very thick](6.8, -5.10) -- (6.8, -5.50);
+		\draw [straightline, dash dot, thin](Yu-Shuyan.west) -- (Yu-Shuyan-);
+		\draw [straightline, dash dot, thin](Yu-Shuyan.east) -- (Yu-Shuyan+);
+
+		\draw [solid, very thick](-6.5, -5.85) -- (-6.5, -6.25);
+		\draw [solid, very thick](8.5, -5.85) -- (8.5, -6.25);
+		\draw [straightline, dash dot, thin](Yan-Jupeng.west) -- (Yan-Jupeng-);
+		\draw [straightline, dash dot, thin](Yan-Jupeng.east) -- (Yan-Jupeng+);
+
+		\draw [solid, very thick](-7.5, -6.60) -- (-7.5, -7.00);
+		\draw [solid, very thick](6.4, -6.60) -- (6.4, -7.00);
+		\draw [straightline, dash dot, thin](Double-Wang-Li-Zhang.west) -- (Double-Wang-Li-Zhang-);
+		\draw [straightline, dash dot, thin](Double-Wang-Li-Zhang.east) -- (Double-Wang-Li-Zhang+);
+
+		\draw [solid, very thick](-6.4, -7.30) -- (-6.4, -7.70);
+		\draw [solid, very thick](7.5, -7.30) -- (7.5, -7.70);
+		\draw [straightline, dash dot, thin](Fan-Han.west) -- (Fan-Han-);
+		\draw [straightline, dash dot, thin](Fan-Han.east) -- (Fan-Han+);
+
+		\draw [solid, very thick](-7.8, -8.05) -- (-7.8, -8.45);
+		\draw [solid, very thick](6.5, -8.05) -- (6.5, -8.45);
+		\draw [straightline, dash dot, thin](Yang-Baosen.west) -- (Yang-Baosen-);
+		\draw [straightline, dash dot, thin](Yang-Baosen.east) -- (Yang-Baosen+);
+
+		\draw [solid, very thick](-8.2, -8.75) -- (-8.2, -9.15);
+		\draw [solid, very thick](6.5, -8.75) -- (6.5, -9.15);
+		\draw [straightline, dash dot, thin](Meng-Xiaodong.west) -- (Meng-Xiaodong-);
+		\draw [straightline, dash dot, thin](Meng-Xiaodong.east) -- (Meng-Xiaodong+);
+
+		\draw [solid, very thick](-6.3, -9.50) -- (-6.3, -9.90);
+		\draw [solid, very thick](7.8, -9.50) -- (7.8, -9.90);
+		\draw [straightline, dash dot, thin](Xi-Xiaobo.west) -- (Xi-Xiaobo-);
+		\draw [straightline, dash dot, thin](Xi-Xiaobo.east) -- (Xi-Xiaobo+);
+\end{tikzpicture}
+%	\includegraphics{<+file+>}
+%	\caption{<+caption text+>}
+	\label{fig:Broad_Spectrum-Analysis}
+\end{figure}
+}
