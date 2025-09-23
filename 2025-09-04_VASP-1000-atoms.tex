@@ -199,97 +199,103 @@
 	\frametitle{\textrm{VASP}的主要瓶颈:~内存和通信}
 \begin{itemize}
 	\item 随着计算对象原子数增加，波函数、电子密度和\textrm{Hamiltonian}矩阵等变量存储所需的内存迅速增长
-	\item 计算过程中需要完成大量的\textrm{FFT}计算\\
+	\item 应用``双网格技术''计算过程中需要完成大量的\textrm{FFT}计算\\
 		{\fontsize{7.2pt}{5.2pt}\selectfont{并行核数增加，完成\textrm{FFT}计算的通信量增长更快}}
 \end{itemize}
 \begin{figure}[h!]
-	\vspace{-0.20in}
+	\vspace{-0.05in}
 \centering
 %\includegraphics[height=2.7in,width=4.0in,viewport=0 0 1180 875,clip]{Figures/dual_grid.png}
-\includegraphics[height=1.39in,width=1.98in,viewport=0 0 800 600,clip]{Figures/dual_grid-2.png}
-%	\begin{tikzpicture}[
-%    box-rect/.style={rectangle,draw,fill=darkgray!20,node distance=1cm,text width=15em,text centered,rounded corners,minimum height=2em,thick},
-%    box-diam/.style={diamond, aspect=7, inner sep=2pt, draw,fill=green!50,node distance=1cm,text width=12em,text centered,rounded corners,minimum height=2em,thick},
-%    arrow/.style={draw,-latex', line width = 2pt},
-%		]
-%\tikzstyle{straightline} = [line width = 2pt,-]
-%		\node [box-rect, fill=LimeGreen!50, text width=12.5em, draw=cyan, minimum height=0.5em, thick] at (current page.west)(nr-real-space) {$\tilde n(\vec r)$正空间(粗网格)表示};
-%		\node [box-rect, right=0.5 of nr-real-space, fill=purple!50, text width=2.5em, draw=cyan, minimum height=0.5em, thick] (FFT-1) {\textcolor{white}{\textbf{FFT}}};
-%		\node [box-rect, right=5.0 of FFT-1, fill=violet!50, text width=13.0em, draw=NavyBlue, minimum height=0.5em, thick] (psi-G1-reciprocal-space) {$\tilde \Psi(\vec G_1)$\textcolor{white}{倒空间(粗网格)表示}};
-%		\node [box-rect, below=0.5 of nr-real-space, fill=violet!50, text width=13.0em, draw=NavyBlue, minimum height=0.5em, thick] (nG1-reciprocal-space) {$\tilde n(\vec G_1)$\textcolor{white}{倒空间(粗网格)表示}};
-%		\node [box-rect, right=0.5 of nG1-reciprocal-space, fill=purple!50, text width=2.5em, draw=cyan, minimum height=0.5em, thick] (FFT-2) {\textcolor{white}{\textbf{FFT}}};
-%		\node [box-rect, right=1.2 of FFT-2, fill=NavyBlue!50, text width=13.0em, draw=cyan, minimum height=0.5em, thick] (nr1-real-space) {$\hat n(\vec r)$正空间(密网格)表示};
-%		\node [box-rect, below=0.5 of nG1-reciprocal-space, fill=RedOrange!50, text width=13.0em, draw=NavyBlue, minimum height=0.5em, thick] (nG2-reciprocal-space) {$\tilde n(\vec G_2)$\textcolor{white}{倒空间(密网格)表示}};
-%		\node [box-rect, right=0.5 of nG2-reciprocal-space, fill=purple!50, text width=2.5em, draw=cyan, minimum height=0.5em, thick] (FFT-3) {\textcolor{white}{\textbf{FFT}}};
-%		\node [box-rect, right=1.2 of FFT-3, fill=RedOrange!50, text width=13.0em, draw=NavyBlue, minimum height=0.5em, thick] (nG22-reciprocal-space) {$\hat n(\vec G_2)$\textcolor{white}{倒空间(密网格)表示}};
-%		\node [box-rect, below=0.75 of nG2-reciprocal-space, fill=NavyBlue!50, text width=13.0em, draw=cyan, minimum height=0.5em, thick] (nr12-real-space) {$\tilde n(\vec r)$正空间(密网格)表示};
-%
-%		\node [box-rect, below=0.9 of nr12-real-space, fill=RedOrange!50, text width=13.5em, draw=NavyBlue, minimum height=0.5em, thick] (VHG2-reciprocal-space) {$V_{\mathrm{H}}(\vec G_2)$\textcolor{white}{倒空间(密网格)表示}};
-%		\node [box-rect, right=0.5 of VHG2-reciprocal-space, fill=purple!50, text width=2.5em, draw=cyan, minimum height=0.5em, thick] (FFT-4) {\textcolor{white}{\textbf{FFT}}};
-%		\node [box-rect, right=1.0 of FFT-4, fill=RedOrange!50, text width=13.8em, draw=NavyBlue, minimum height=0.5em, thick] (VGZc-reciprocal-space) {$V_{\mathrm{H}}(\tilde n_{\mathrm{Zc}})$\textcolor{white}{倒空间(密网格)表示}};
-%		\node [box-rect, below=0.5 of VHG2-reciprocal-space, fill=NavyBlue!50, text width=13.0em, draw=cyan, minimum height=0.5em, thick] (Vr1-real-space) {$V_{\mathrm{H}}(\vec r)$正空间(密网格)表示};
-%		\node [box-rect, right=0.1 of Vr1-real-space, fill=NavyBlue!50, text width=13.0em, draw=cyan, minimum height=0.5em, thick] (Vxc-real-space) {$V_{\mathrm{xc}}(\vec r)$正空间(密网格)表示};
-%		\node [box-rect, below=2.0 of FFT-4, fill=purple!50, text width=2.5em, draw=cyan, minimum height=0.5em, thick] (FFT-5) {\textcolor{white}{\textbf{FFT}}};
-%		\node [box-rect, right=1.0 of FFT-5, fill=violet!50, text width=13.8em, draw=NavyBlue, minimum height=0.5em, thick] (VHZc-reciprocal-space) {$V_{\mathrm{H}}(\tilde n_{\mathrm{Zc}})$\textcolor{white}{倒空间(粗网格)表示}};
-%
+%\includegraphics[height=1.39in,width=1.98in,viewport=0 0 800 600,clip]{Figures/dual_grid-2.png}
+\begin{minipage}[t]{0.49\textwidth}
+	
+	\begin{tikzpicture}[
+			box-rect/.style={rectangle,draw,fill=darkgray!20,node distance=1cm,text width=4.5em,text centered,rounded corners,minimum height=0.1em,thin},
+    box-diam/.style={diamond, aspect=7, inner sep=2pt, draw,fill=green!50,node distance=1cm,text width=12em,text centered,rounded corners,minimum height=2em,very thin},
+    straightline/.style={line width = 2pt, -},
+    arrow/.style={draw,-latex', line width = 2pt},
+		]
+		\node [box-rect, fill=LimeGreen!50, text width=4.2em, draw=cyan, minimum height=0.1em, very thin] at (current page.west)(nr-real-space) {\fontsize{3.5pt}{0.2pt}\selectfont{$\tilde n(\vec r)$\!正空间\!(粗网格)\!表示}};
+		\node [box-rect, right=0.1 of nr-real-space, fill=purple!50, text width=0.5em, draw=cyan, minimum height=0.1em, very thin] (FFT-1) {\fontsize{3.5pt}{0.2pt}\selectfont{\textcolor{white}{\textbf{FFT}}}};
+		\node [box-rect, right=1.7 of FFT-1, fill=violet!50, text width=4.5em, draw=NavyBlue, minimum height=0.1em,very thin] (psi-G1-reciprocal-space) {\fontsize{3.5pt}{0.2pt}\selectfont{$\tilde \Psi(\vec G_1)$\textcolor{white}{倒空间\!(粗网格)\!表示}}};
+		\node [box-rect, below=0.1 of nr-real-space, fill=violet!50, text width=4.6em, draw=NavyBlue, minimum height=0.1em, very thin] (nG1-reciprocal-space) {\fontsize{3.5pt}{0.2pt}\selectfont{$\tilde n(\vec G_1)$\textcolor{white}{倒空间\!(粗网格)\!表示}}};
+			\node [box-rect, right=0.1 of nG1-reciprocal-space, fill=purple!50, text width=0.5em, draw=cyan, minimum height=0.1em, very thin] (FFT-2) {\fontsize{3.5pt}{0.2pt}\selectfont{\textcolor{white}{\textbf{FFT}}}};
+			\node [box-rect, right=0.2 of FFT-2, fill=NavyBlue!50, text width=4.6em, draw=cyan, minimum height=0.1em, very thin] (nr1-real-space) {\fontsize{3.5pt}{0.2pt}\selectfont{$\hat n(\vec r)$\!正空间\!(密网格)\!表示}};
+			\node [box-rect, below=0.1 of nG1-reciprocal-space, fill=RedOrange!50, text width=4.6em, draw=NavyBlue, minimum height=0.1em, very thin] (nG2-reciprocal-space) {\fontsize{3.5pt}{0.2pt}\selectfont{$\tilde n(\vec G_2)$\textcolor{white}{倒空间\!(密网格)\!表示}}};
+			\node [box-rect, right=0.1 of nG2-reciprocal-space, fill=purple!50, text width=0.5em, draw=cyan, minimum height=0.1em, very thin] (FFT-3) {\fontsize{3.5pt}{0.2pt}\selectfont{\textcolor{white}{\textbf{FFT}}}};
+			\node [box-rect, right=0.2 of FFT-3, fill=RedOrange!50, text width=4.6em, draw=NavyBlue, minimum height=0.1em, very thin] (nG22-reciprocal-space) {\fontsize{3.5pt}{0.2pt}\selectfont{$\hat n(\vec G_2)$\textcolor{white}{倒空间\!(密网格)\!表示}}};
+			\node [box-rect, below=0.25 of nG2-reciprocal-space, fill=NavyBlue!50, text width=4.5em, draw=cyan, minimum height=0.1em, very thin] (nr12-real-space) {\fontsize{3.5pt}{0.2pt}\selectfont{$\tilde n(\vec r)$\!正空间\!(密网格)\!表示}};
+
+			\node [box-rect, below=0.2 of nr12-real-space, fill=RedOrange!50, text width=4.8em, draw=NavyBlue, minimum height=0.1em, very thin] (VHG2-reciprocal-space) {\fontsize{3.5pt}{0.2pt}\selectfont{$V_{\mathrm{H}}(\vec G_2)$\textcolor{white}{倒空间\!(密网格)\!表示}}};
+			\node [box-rect, right=0.1 of VHG2-reciprocal-space, fill=purple!50, text width=0.5em, draw=cyan, minimum height=0.1em, very thin] (FFT-4) {\fontsize{3.5pt}{0.2pt}\selectfont{\textcolor{white}{\textbf{FFT}}}};
+			\node [box-rect, right=0.5 of FFT-4, fill=RedOrange!50, text width=4.9em, draw=NavyBlue, minimum height=0.1em, very thin] (VGZc-reciprocal-space) {\fontsize{3.5pt}{0.2pt}\selectfont{$V_{\mathrm{H}}(\tilde n_{\mathrm{Zc}})$\textcolor{white}{倒空间\!(密网格)\!表示}}};
+			\node [box-rect, below=0.1 of VHG2-reciprocal-space, fill=NavyBlue!50, text width=4.8em, draw=cyan, minimum height=0.1em, very thin] (Vr1-real-space) {\fontsize{3.5pt}{0.2pt}\selectfont{$V_{\mathrm{H}}(\vec r)$\!正空间\!(密网格)\!表示}};
+			\node [box-rect, right=0.1 of Vr1-real-space, fill=NavyBlue!50, text width=4.5em, draw=cyan, minimum height=0.1em, very thin] (Vxc-real-space) {\fontsize{3.5pt}{0.2pt}\selectfont{$V_{\mathrm{xc}}(\vec r)$\!正空间\!(密网格)\!表示}};
+			\node [box-rect, below=0.8 of FFT-4, fill=purple!50, text width=0.5em, draw=cyan, minimum height=0.1em, very thin] (FFT-5) {\fontsize{3.5pt}{0.2pt}\selectfont{\textcolor{white}{\textbf{FFT}}}};
+			\node [box-rect, right=0.5 of FFT-5, fill=violet!50, text width=4.9em, draw=NavyBlue, minimum height=0.1em, very thin] (VHZc-reciprocal-space) {\fontsize{3.5pt}{0.2pt}\selectfont{$V_{\mathrm{H}}(\tilde n_{\mathrm{Zc}})$\textcolor{white}{倒空间\!(粗网格)\!表示}}};
+
 %%%%%%% ------------ 定义 虚线方框转角 -----------------  %%%%%%
-%\path
-%	(FFT-3.south)++(0.0, -1.2em) coordinate (FFT-3-corner)
-%	(FFT-4.north)++(0.0, +1.2em) coordinate (FFT-4-corner)
+\path
+	(FFT-3.south)++(0.0, -0.3em) coordinate (FFT-3-corner)
+	(FFT-4.north)++(0.0, +0.55em) coordinate (FFT-4-corner)
+
+	(VHG2-reciprocal-space.north)++(0.0,+0.4em) coordinate (VHG2-corner)
+	(Vxc-real-space.east)++(3.05em,0.0) coordinate (Vxc-corner)
+	(nr12-real-space.east)++(8.67em,0.0) coordinate (nr12-corner)
+	(Vr1-real-space.east)++(0.02em,-1.0em) coordinate (nr1-corner) ;
 %
-%	(VHG2-reciprocal-space.north)++(0.0,+0.8em) coordinate (VHG2-corner)
-%	(Vxc-real-space.east)++(8.5em,0.0) coordinate (Vxc-corner)
-%	(nr12-real-space.east)++(22.48em,0.0) coordinate (nr12-corner)
-%	(Vr1-real-space.east)++(0.1em,-2.0em) coordinate (nr1-corner) ;
+	\node [box-rect, below=0.5 of nr1-corner, fill=RedOrange!50, text width=6.8em, draw=NavyBlue, minimum height=0.2em, very thin] (VHxcG2-reciprocal-space) {\fontsize{3.5pt}{0.2pt}\selectfont{$V_{\mathrm{H}}(\vec G_2)$,$V_{\mathrm{xc}}(\vec G_2)$\textcolor{white}{倒空间\!(密网格)\!表示}}};
+		\node [box-rect, below=0.15 of VHxcG2-reciprocal-space, fill=violet!50, text width=6.8em, draw=NavyBlue, minimum height=0.2em, very thin] (VHxcG1-reciprocal-space) {\fontsize{3.5pt}{0.2pt}\selectfont{$V_{\mathrm{H}}(\vec G_1)$,$V_{\mathrm{xc}}(\vec G_1)$\textcolor{white}{倒空间\!(粗网格)\!表示}}};
 %
-%	\node [box-rect, below=1.0 of nr1-corner, fill=RedOrange!50, text width=16.8em, draw=NavyBlue, minimum height=0.5em, thick] (VHxcG2-reciprocal-space) {$V_{\mathrm{H}}(\vec G_2)$,$V_{\mathrm{xc}}(\vec G_2)$\textcolor{white}{倒空间(密网格)表示}};
-%	\node [box-rect, below=0.5 of VHxcG2-reciprocal-space, fill=violet!50, text width=16.8em, draw=NavyBlue, minimum height=0.5em, thick] (VHxcG1-reciprocal-space) {$V_{\mathrm{H}}(\vec G_1)$,$V_{\mathrm{xc}}(\vec G_1)$\textcolor{white}{倒空间(粗网格)表示}};
-%
-%\path
-%	(VHxcG1-reciprocal-space.south)++(0.0,-1.5em) coordinate (VHxcG1-corner)
-%	(VHxcG2-reciprocal-space.east)++(7.0em,0.0) coordinate (VHxcG2-corner)
-%	(VHxcG1-corner)++(20.0em, 0.0) coordinate (VHZc-corner) ;
-%
-%	\draw [straightline, black,thick] (nr-real-space.east) -- (FFT-1.west);
-%	\path [arrow, red,thick] (nr-real-space.south) -- (nG1-reciprocal-space.north);
-%	\path [arrow, green, thick] (nG1-reciprocal-space.south) -- (nG2-reciprocal-space.north);
-%	\draw [straightline, black,thick] (FFT-2.east) -- (nr1-real-space.west);
-%	\draw [straightline, black,thick] (nG2-reciprocal-space.east) -- (FFT-3.west);
-%
-%	\path [arrow, red, thick] (nr1-real-space.south) -- (nG22-reciprocal-space.north);
-%	\path [arrow, NavyBlue, thick] (nG2-reciprocal-space.south)++(0.0, +0.0) coordinate |- (FFT-3-corner) -| (FFT-4-corner) |- (VHG2-corner) -| (VHG2-reciprocal-space.north);
-%	\path [arrow, NavyBlue, thick] (nG22-reciprocal-space.south)++(0.0, +0.0) coordinate |- (FFT-3-corner) -| (FFT-4-corner) |- (VHG2-corner) -| (VGZc-reciprocal-space.north);
-%
-%	\path [arrow, red,thick] (nG2-reciprocal-space.south) -- (nr12-real-space.north);
-%
-%	\path [arrow, black, thick] (nr1-real-space.east)++(0.0, 0.0) coordinate -| (Vxc-corner) |- (Vxc-real-space.east);
-%	\path [arrow, black, thick] (nr12-real-space.east)++(0.0, 0.0) coordinate -| (nr12-corner) |- (Vxc-real-space.east);
-%
-%	\path [arrow, red,thick] (VHG2-reciprocal-space.south) -- (Vr1-real-space.north);
-%	\draw [straightline, black,thick] (VHG2-reciprocal-space.east) -- (FFT-4.west);
-%	\path [arrow, green, thick] (VGZc-reciprocal-space.south) -- (VHZc-reciprocal-space.north);
-%
-%	\draw [straightline, black,thick] (nr1-corner) |- (FFT-5.west);
-%	\path [arrow, NavyBlue, thick] (Vr1-real-space.south)++(0.0, +0.0) coordinate |- (nr1-corner) -| (VHxcG2-reciprocal-space.north);
-%	\path [arrow, NavyBlue, thick] (Vxc-real-space.south)++(0.0, +0.0) coordinate |- (nr1-corner) -| (VHxcG2-reciprocal-space.north);
-%	\path [arrow, red,thick] (nr1-corner) -- (VHxcG2-reciprocal-space.north);
-%
-%	\path [arrow, green, thick] (VHxcG2-reciprocal-space.south) -- (VHxcG1-reciprocal-space.north);
-%	\path [arrow, NavyBlue, thick] (VHxcG1-reciprocal-space.south) -- (VHxcG1-corner);
-%
-%	\path [arrow, NavyBlue, thick] (psi-G1-reciprocal-space.south) |- (VHxcG2-corner) -| (VHZc-corner);
-%	\path [arrow, NavyBlue, thick] (VHZc-reciprocal-space.south) |- (VHxcG2-corner) -| (VHZc-corner);
-%%  (Modeling-Analysis.south) ++(5.0em, 0.6em) coordinate (Symmetry-fit)
-%	\end{tikzpicture}
+\path
+	(VHxcG1-reciprocal-space.south)++(0.0,-0.5em) coordinate (VHxcG1-corner)
+	(VHxcG2-reciprocal-space.east)++(3.0em,0.0) coordinate (VHxcG2-corner)
+	(VHxcG1-corner)++(7.1em, 0.0) coordinate (VHZc-corner) ;
+
+	\draw [straightline, black,very thin] (nr-real-space.east) -- (FFT-1.west);
+	\path [arrow, red,very thin] (nr-real-space.south) -- (nG1-reciprocal-space.north);
+	\path [arrow, green, very thin] (nG1-reciprocal-space.south) -- (nG2-reciprocal-space.north);
+	\draw [straightline, black,very thin] (FFT-2.east) -- (nr1-real-space.west);
+	\draw [straightline, black,very thin] (nG2-reciprocal-space.east) -- (FFT-3.west);
+
+	\path [arrow, red, very thin] (nr1-real-space.south) -- (nG22-reciprocal-space.north);
+	\path [arrow, NavyBlue, very thin] (nG2-reciprocal-space.south)++(0.0, +0.0) coordinate |- (FFT-3-corner) -| (FFT-4-corner) |- (VHG2-corner) -| (VHG2-reciprocal-space.north);
+	\path [arrow, NavyBlue, very thin] (nG22-reciprocal-space.south)++(0.0, +0.0) coordinate |- (FFT-3-corner) -| (FFT-4-corner) |- (VHG2-corner) -| (VGZc-reciprocal-space.north);
+
+	\path [arrow, red,very thin] (nG2-reciprocal-space.south) -- (nr12-real-space.north);
+
+	\path [arrow, black, very thin] (nr1-real-space.east)++(0.0, 0.0) coordinate -| (Vxc-corner) |- (Vxc-real-space.east);
+	\path [arrow, black, very thin] (nr12-real-space.east)++(0.0, 0.0) coordinate -| (nr12-corner) |- (Vxc-real-space.east);
+
+	\path [arrow, red,very thin] (VHG2-reciprocal-space.south) -- (Vr1-real-space.north);
+	\draw [straightline, black,very thin] (VHG2-reciprocal-space.east) -- (FFT-4.west);
+	\path [arrow, green, very thin] (VGZc-reciprocal-space.south) -- (VHZc-reciprocal-space.north);
+
+	\draw [straightline, black,very thin] (nr1-corner) |- (FFT-5.west);
+	\path [arrow, NavyBlue, very thin] (Vr1-real-space.south)++(0.0, +0.0) coordinate |- (nr1-corner) -| (VHxcG2-reciprocal-space.north);
+	\path [arrow, NavyBlue, very thin] (Vxc-real-space.south)++(0.0, +0.0) coordinate |- (nr1-corner) -| (VHxcG2-reciprocal-space.north);
+	\path [arrow, red,very thin] (nr1-corner) -- (VHxcG2-reciprocal-space.north);
+
+	\path [arrow, green, very thin] (VHxcG2-reciprocal-space.south) -- (VHxcG1-reciprocal-space.north);
+	\path [arrow, NavyBlue, very thin] (VHxcG1-reciprocal-space.south) -- (VHxcG1-corner);
+
+	\path [arrow, NavyBlue, very thin] (psi-G1-reciprocal-space.south) |- (VHxcG2-corner) -| (VHZc-corner);
+	\path [arrow, NavyBlue, very thin] (VHZc-reciprocal-space.south) |- (VHxcG2-corner) -| (VHZc-corner);
+%  (Modeling-Analysis.south) ++(5.0em, 0.6em) coordinate (Symmetry-fit)
+	\end{tikzpicture}
 %%	\includegraphics{<+file+>}
 %%	\caption{\tiny \textrm{Multi-FFT of Dual-Grid in VASP.}}
+\end{minipage}
+\begin{minipage}[b]{0.49\textwidth}
+{\fontsize{7.5pt}{5.2pt}\selectfont{\textrm{VASP}计算$10^2$原子量级的体系问题不大，\textcolor{red}{但计算$10^3$原子量级规模的体系异常吃力}
+%对并行系统与\textrm{VASP}结合作深度改造(如国家超算天津中心方案)，\textrm{VASP}的并行扩展可以到$10^4$核级别，这一改造需要对底层代码和计算框架作较大规模改动
+}}
 %\includegraphics[height=1.55in,width=1.95in,viewport=0 0 240 200,clip]{Figures/VASP-abinit_Li128-2.png}
 \includegraphics[height=1.55in,width=1.95in,viewport=0 0 240 200,clip]{Figures/VASP-mpi-Li128.png}
 %\caption{\tiny \textrm{The comparison of parallel scaling for ABINIT vs VASP.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\end{minipage}
 \label{ABINIT_vs_VASP-3}
 \end{figure} 
-\textrm{VASP}计算$10^2$原子量级的体系问题不大，\textcolor{red}{但计算$10^3$原子量级规模的体系异常吃力}
-%对并行系统与\textrm{VASP}结合作深度改造(如国家超算天津中心方案)，\textrm{VASP}的并行扩展可以到$10^4$核级别，这一改造需要对底层代码和计算框架作较大规模改动
 
 }
 
