@@ -97,3 +97,239 @@
 	\textrm{Lin L. \textit{Materials databases infrastructure constructed by first principles calculations:~a review.} \textbf{Mater. Perform. Character.}, 2015, 4(1):148.}}
 }
 
+%\begin{frame}
+%	\frametitle{}	
+%\begin{animateinline}[loop]{20}%
+%  \multiframe{360}{rx=0+5}{
+%\begin{tikzpicture}[scale=1.5]
+%\pgfmathsetmacro{\x}{4+1*sin(\rx)}	
+%\coordinate  (P) at (\x,0);	
+%\draw [decorate,decoration={coil,segment length= \x pt, pre length=2mm, post length=2mm
+%,amplitude=2mm}] (0,0)--(P);
+%\shade[ball color=black](P)circle (2mm);
+%\fill [pattern = north east lines] (0,0.-0.2) -- ++ (0,0.4) -- ++ (-0.1,0) -- ++(0,-0.4) --cycle
+%      (0,-0.2) -- ++(0,-0.1) -- ++ (5.5,0) -- ++ (0,0.1) -- cycle;
+%\draw (0,0.2) -- (0,-0.2) -- (5.5,-0.2);
+%\end{tikzpicture} 	    }
+%\end{animateinline}
+%\end{frame}
+
+%\begin{frame}
+%	\frametitle{}
+%\centering
+%\begin{animateinline}[loop]{20}%
+%  \multiframe{60  }{rt=-120+1}{
+%\begin{tikzpicture}[scale=1.5]
+%\filldraw [densely dashed,draw=black,fill=blue!20](0,0) -- (0,-1.5)
+%(0,0) -- (-120:1.5) (0,0) -- (-60:1.5) arc (-60:-120:1.5);
+%\draw (-2,-2) rectangle (2,1);
+%\pgfmathsetmacro{\x}{1.5*cos(\rt)}
+%\pgfmathsetmacro{\y}{1.5*sin(\rt)}
+%\coordinate  (P) at (\x,\y);
+%\draw[blue] (0,0)--(P);
+%\shade[ball color=black](P)circle (2pt);
+%\fill [pattern = north east lines] (-1,0) -- (1,0) -- (1,0.1) -- (-1,0.1) -- cycle;
+%\draw (-1,0) -- (1,0);
+%\end{tikzpicture} 	    }
+%\newframe
+%\multiframe{60  }{rt=-60+-1}{
+%\begin{tikzpicture}[scale=1.5]
+%\filldraw [densely dashed,draw=black,fill=blue!20](0,0) -- (0,-1.5)
+%(0,0) -- (-120:1.5) (0,0) -- (-60:1.5) arc (-60:-120:1.5);
+%\draw (-2,-2) rectangle (2,1);
+%\pgfmathsetmacro{\x}{1.5*cos(\rt)}
+%\pgfmathsetmacro{\y}{1.5*sin(\rt)}
+%\coordinate  (P) at (\x,\y);
+%\draw (0,0)--(P);
+%\shade[ball color=black](P)circle (2pt);
+%\fill [pattern = north east lines] (-1,0) -- (1,0) -- (1,0.1) -- (-1,0.1) -- cycle;
+%\draw (-1,0) -- (1,0);
+%\end{tikzpicture} 	    }
+%\end{animateinline}
+%\end{frame}
+%
+%\begin{frame}
+%	\frametitle{}
+%\begin{animateinline}[loop]{20}%
+%  \multiframe{72  }{rt=0+-5}{
+%\begin{tikzpicture}[scale=1.5]
+%\draw (-2,-2) rectangle (2,1);
+%\pgfmathsetmacro{\x}{0.75*cos(\rt)}
+%\pgfmathsetmacro{\y}{-1.3+0.3*sin(\rt)}
+%\coordinate  (P) at (\x,\y);
+%\draw [blue] (0,0)--(P);
+%\shade[ball color=black] (P) circle (2pt);
+%\fill [pattern = north east lines] (-1,0) -- (1,0) -- (1,0.1) -- (-1,0.1) -- cycle;
+%\draw (-1,0) -- (1,0);
+%\draw[red,densely dashed] (0,-1.3)ellipse (0.75 and 0.3);
+%\fill[opacity=0.1,red] (0,0) -- (0.75,-1.3)
+%arc (0:\rt:0.75 and 0.3) -- cycle;
+%\draw[-Stealth] (-0.5,-0.5) -- ++ (0,-0.3)node[right]{$g$};
+%\draw [densely dashed](0,0) -- (0,-1.3) -- node[above]{$r$}
+%(P) node[above right]{$m$};
+%\end{tikzpicture} 	    }
+%\end{animateinline}
+%\end{frame}
+
+%\begin{frame}
+%	\frametitle{}
+%	\begin{animateinline}[loop]{12}%
+%  \multiframe{72}{ix = 0 + 5}{
+%   \begin{tikzpicture}
+%    \draw [line width = 0pt] (-3,-2) rectangle (2,2);
+%    \begin{scope}[xshift=-0.5cm]
+%      \draw[blue] (0,0) circle (0.5);
+%      \draw[green] (\ix:1) circle (0.5);
+%    \end{scope}
+%    \node at (0.5,1.7) {$r=1-\cos\theta$};
+%    \draw[domain=0:\ix,samples=500,red] plot ({(1-cos(\x))*cos(\x)},{(1-cos(\x))*sin(\x)});
+%  \end{tikzpicture}
+%  }
+%\end{animateinline}
+%\end{frame}
+
+%\begin{frame}
+%	\frametitle{}	
+%\begin{animateinline}[loop]{10}%
+%  \multiframe{60}{rx = 0 + pi/30}{
+%  \begin{tikzpicture}
+%    \draw [->] (-1,0) -- (0,0) node[below left]{$O$}
+%               -- (2*pi,0) node[below]{$2\pi$}
+%               -- (7,0) node[below]{$x$};
+%    \draw [->] (0,-2) -- (0,2.4) node[left]{$y$};
+%    \node at (3,-1) {$\begin{cases}
+%      x = t - \sin t \\
+%      y = 1 - \cos t
+%    \end{cases}$};
+%    \draw [blue] (\rx,1) circle (1);
+%    \draw [domain=0:\rx,red] plot({\x-sin(\x r)},{1-cos(\x r)});
+%  \end{tikzpicture}
+%  }
+%\end{animateinline}
+%\end{frame}
+
+%\begin{frame}
+%	\frametitle{}
+%	\begin{animateinline}[loop]{10}%
+%  \multiframe{60}{rx = 0 + 6}{
+%  \begin{tikzpicture}
+%    \draw [->] (-5,0) -- (0,0) node[below left]{$O$}
+%               -- (5,0)  node[below]{$x$};
+%    \draw [->] (0,-5) -- (0,5) node[left]{$y$};
+%    \draw (0,0) circle (4) ;
+%    \draw [blue] (\rx:3) circle (1);
+%    \node at (4,4) {$\begin{cases}
+%      x = a\cos ^3t\\
+%      y = a\sin ^3 t
+%    \end{cases}$};
+%    \draw [domain=0:\rx,red,samples=200] plot({4*(cos(\x))^3},{4*(sin(\x))^3});
+%  \end{tikzpicture}
+%  }
+%\end{animateinline}
+%\end{frame}
+
+%\begin{frame}
+%	\frametitle{}
+%	\foreach \x in {0,6,...,354}{
+%\begin{tikzpicture}[scale=1.3]
+%\filldraw[fill=gray!20](0,0)circle(4.1cm);
+%\filldraw[fill=white](0,0)circle(4cm);
+%\foreach \x in {6,12,...,360}
+%\draw(\x:4)--(\x:3.8);
+%\foreach \x in {0,30,...,330}
+%\draw[ultra thick](\x:4)--(\x:3.8);
+%\node at (0:3.3){$[\ln\mathrm e^\uppi]$};
+%\node at (30:3.3){$\sum_{i=0}^\infty\frac1{2^i}$};
+%\node at (60:3.3){$\lim_{x\to0}\frac x{\sin x}$};
+%\node at (90:3.3){$\mathrm C_{(16)}$};
+%\node at (120:3.3){$\begin{vmatrix}
+%3&1\\1&4
+%\end{vmatrix}$};
+%\node at (150:3.3){$\mathrm C_5^2$};
+%\node at (180.7:3){$\frac1{(\arctan 2\sqrt2)'}$};
+%\node at (210:3.3){$2^{\log_327}$};
+%\node at (240:3.2){$\int_1^23x^2\,\mathrm dx$};
+%\node at (270:3.3){$3!$};
+%\node at (300:3.2){$\frac\uppi{\arccos\frac12}{+}\frac\uppi{\arcsin1}$};
+%\node at (-30:3){$\min\left\{\left|4x+\frac1x\right|\right\}$};
+%\draw (0,0)circle(0.15);
+%\draw[line width=4.5pt,rotate=-\x/720](90:2)--(-90:0.7);
+%\draw[line width=2.5pt,rotate=-\x/60](-90:3.3)--(90:0.65);
+%\draw[line width=2.5pt,rotate=-\x](-90:1.1)--(-90:0.4);
+%\draw[thick,rotate=-\x](-90:0.4)--(90:3.5);
+%
+%\end{tikzpicture}
+%}
+%\end{frame}
+
+\begin{frame}
+	\frametitle{}
+	\begin{animateinline}[autoplay,loop,controls]{10} % 10 fps
+\multiframe{20}{rPos=0.05+0.05}{ % 20帧，每帧移动0.05
+\begin{tikzpicture}[scale=0.8]
+% 绘制坐标轴
+\draw[gray!30, thin] (-0.2,0) grid (4.2,2.2);
+\draw[->] (-0.2,0) -- (4.5,0) node[right] {$x$};
+\draw[->] (0,-0.2) -- (0,2.5) node[above] {$y$};
+% 移动的方块
+\filldraw[blue!70, opacity=0.8] (\rPos,1) rectangle (\rPos+1,2);
+\node at (\rPos+0.5,1.5) {方块};
+% 标记位置
+\node[below] at (\rPos+0.5,1) {位置: \rPos};
+\end{tikzpicture}
+}
+\end{animateinline}
+\end{frame}
+
+\begin{frame}
+	\frametitle{总体技术路线}
+	自研的虚拟机技术，重新封装硬件，通过一系列自研数据结构、算法与特定编程方法，改变硬件呈现的特性，\textcolor{red}{在不改动\textrm{VASP}代码基础上}，构建面向高通量数据处理的高效运行环境
+	\begin{figure}[ht]
+		\centering
+		\begin{minipage}[b]{0.4\textwidth}
+%	\begin{animateinline}[loop]{1} % 20 fps
+%		\multiframe{10}{rPOS = -2.0 + 0.2}{ % 72帧，每帧移动 0.05
+			\begin{tikzpicture}[
+			box-rect/.style={rectangle,draw=none,node distance=1cm,text width=4.5em,text centered,rounded corners,minimum height=0.1em,thin},
+    straightline/.style={line width = 2pt, -},
+    arrow/.style={draw,-latex', line width = 2pt},
+		]
+		\node<1-> [box-rect, text width=8.0em, minimum height=0.1em, thick](Single-Band) {\fontsize{5.5pt}{0.2pt}\selectfont{单能带\textrm{(Single-Band)计算}}};
+%		\node [box-rect, fill=NavyBlue!50, text width=9.0em, draw=cyan, minimum height=1.5em, thick, dash dot dot](Critical-Virtual-Machine) at (\rPOS, -0.4) {\fontsize{5.5pt}{0.2pt}\selectfont{\textcolor{red}{无临界虚拟机}}};
+		\node<2>[box-rect, fill=NavyBlue!50, text width=9.0em, draw=cyan, minimum height=1.5em, thick, dash dot dot](Critical-Virtual-Machine) at (0.0, -0.4) {\fontsize{5.5pt}{0.2pt}\selectfont{\textcolor{red}{无临界虚拟机}}};
+		\node<1-> [box-rect, below = 0.5 of Single-Band, fill=purple!50, text width=0.5em, draw=cyan, minimum height=0.2em, thick](VASP-process-3) {\fontsize{5.5pt}{0.2pt}\selectfont{\textrm{V\\A\\S\\P\\}计算进程}};
+		\node<1-> [box-rect, left = 0.5 of VASP-process-3, fill=purple!50, text width=0.5em, draw=cyan, minimum height=0.2em, thick](VASP-process-2) {\fontsize{5.5pt}{0.2pt}\selectfont{\textrm{V\\A\\S\\P\\}计算进程}};
+		\node<1-> [box-rect, left = 0.5 of VASP-process-2, fill=purple!50, text width=0.5em, draw=cyan, minimum height=0.2em, thick](VASP-process-1) {\fontsize{5.5pt}{0.2pt}\selectfont{\textrm{V\\A\\S\\P\\}计算进程}};
+		\node<1-> [box-rect, right = 0.5 of VASP-process-3, fill=purple!50, text width=0.5em, draw=cyan, minimum height=0.2em, thick](VASP-process-4) {\fontsize{5.5pt}{0.2pt}\selectfont{\textrm{V\\A\\S\\P\\}计算进程}};
+		\node<1-> [box-rect, right = 0.5 of VASP-process-4, fill=purple!50, text width=0.5em, draw=cyan, minimum height=0.2em, thick](VASP-process-5) {\fontsize{5.5pt}{0.2pt}\selectfont{\textrm{V\\A\\S\\P\\}计算进程}};
+		\node<1-> [box-rect, below = 0.2 of VASP-process-1, fill=violet!50, text width=0.5em, draw=cyan, minimum height=0.1em, thick](VASP-MPI-1) {\fontsize{5.5pt}{0.2pt}\selectfont{\textcolor{white}{\textrm{M\\P\\I\\}}}};
+		\node<1-> [box-rect, below = 0.2 of VASP-process-2, fill=violet!50, text width=0.5em, draw=cyan, minimum height=0.1em, thick](VASP-MPI-2) {\fontsize{5.5pt}{0.2pt}\selectfont{\textcolor{white}{\textrm{M\\P\\I\\}}}};
+		\node<1-> [box-rect, below = 0.2 of VASP-process-3, fill=violet!50, text width=0.5em, draw=cyan, minimum height=0.1em, thick](VASP-MPI-3) {\fontsize{5.5pt}{0.2pt}\selectfont{\textcolor{white}{\textrm{M\\P\\I\\}}}};
+		\node<1-> [box-rect, below = 0.2 of VASP-process-4, fill=violet!50, text width=0.5em, draw=cyan, minimum height=0.1em, thick](VASP-MPI-4) {\fontsize{5.5pt}{0.2pt}\selectfont{\textcolor{white}{\textrm{M\\P\\I\\}}}};
+		\node<1-> [box-rect, below = 0.2 of VASP-process-5, fill=violet!50, text width=0.5em, draw=cyan, minimum height=0.1em, thick](VASP-MPI-5) {\fontsize{5.5pt}{0.2pt}\selectfont{\textcolor{white}{\textrm{M\\P\\I\\}}}};
+		\node<1-> [box-rect, below = 0.3 of VASP-MPI-3, fill=green!50, text width=8.0em, draw=cyan, minimum height=2.0em, thick](Critical-MPI) {\fontsize{5.5pt}{0.2pt}\selectfont{\textrm{MPI}临界区}};
+
+		\path
+		(Critical-MPI.north)++(-4.0em, 0.0em) coordinate (Critical-MPI-1)
+		(Critical-MPI.north)++(-2.0em, 0.0em) coordinate (Critical-MPI-2)
+		(Critical-MPI.north)++(0.0em, 0.0em) coordinate (Critical-MPI-3)
+		(Critical-MPI.north)++(2.0em, 0.0em) coordinate (Critical-MPI-4)
+		(Critical-MPI.north)++(4.0em, 0.0em) coordinate (Critical-MPI-5);
+
+		\draw<1-> [straightline, black,very thick] (VASP-process-1.south) -- (VASP-MPI-1.north);
+		\draw<1-> [straightline, black,very thick] (VASP-process-2.south) -- (VASP-MPI-2.north);
+		\draw<1-> [straightline, black,very thick] (VASP-process-3.south) -- (VASP-MPI-3.north);
+		\draw<1-> [straightline, black,very thick] (VASP-process-4.south) -- (VASP-MPI-4.north);
+		\draw<1-> [straightline, black,very thick] (VASP-process-5.south) -- (VASP-MPI-5.north);
+		\path<1-> [arrow, NavyBlue, thin] (VASP-MPI-1.south) -- (Critical-MPI-1);
+		\path<1-> [arrow, NavyBlue, thin] (VASP-MPI-2.south) -- (Critical-MPI-2);
+		\path<1-> [arrow, NavyBlue, thin] (VASP-MPI-3.south) -- (Critical-MPI-3);
+		\path<1-> [arrow, NavyBlue, thin] (VASP-MPI-4.south) -- (Critical-MPI-4);
+		\path<1-> [arrow, NavyBlue, thin] (VASP-MPI-5.south) -- (Critical-MPI-5);
+			\end{tikzpicture}
+%		}
+%	\end{animateinline}
+		\end{minipage}
+		\label{fig:Single-Band-orig}
+	\end{figure}
+\end{frame}
