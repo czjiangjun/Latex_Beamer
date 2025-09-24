@@ -32,22 +32,28 @@
 \usepackage{amsmath,amsthm,amsfonts,amssymb,bm}
 \usepackage{bbding}
 \usepackage{mathrsfs}
+\usepackage{booktabs}                                      % 用于高质量的表格线，可确定划线颜色
+%\textcolor[rgb]{0.25, 0.5, 0.75}{自定义颜色1}
+%\textcolor[rgb]{0.75, 0.5, 0.25}{自定义颜色2}
 \usepackage{hyperref} 
 \usepackage{graphicx}
 \usepackage{float}               %将图片定死在某一个位置用(主要支持[htbp!]中的h)
 \usepackage{subfigure}           %图片跨页
-\usepackage[controls]{animate}	 %插入动画
+\usepackage[controls,autoplay]{animate}	 %插入动画
+\usetikzlibrary{decorations.pathmorphing,}
 \usepackage{tikz}		 %绘图工具
 \usetikzlibrary{%
-    arrows,shapes,chains,fit, arrows.meta,matrix,
+    arrows,arrows.meta,chains,fit, matrix,
     backgrounds,
     graphs, decorations, 
     decorations.markings, 
-    decorations.pathmorphing, 
+    decorations.pathmorphing, patterns, 
 %    graphdrawing,                                       % requires lualatex
     positioning, petri,
     shapes.geometric, snakes
 }
+
+\tikzset{>=Stealth}
 
 \usepackage{ulem, cancel, soul}				% delete line \sout, \xout, \cancel, \bcancel, \xcancel, \cancelto
 %\usegdlibrary{trees,force, layered}                     % requires lualatex
