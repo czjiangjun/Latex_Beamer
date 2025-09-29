@@ -58,60 +58,22 @@
 \small
 \section{研究背景}
 \begin{frame}
-	\frametitle{千原子量级模型计算的必要性和困难}
-	材料的属性由其基本组分、结构决定:
+	\frametitle{材料的组分、结构与性质}
 %			\\材料功能与性质的精确描述，必须考察材料的复杂性
 \begin{figure}[h!]
-\vspace*{-0.10in}
+\vspace*{-0.3in}
 %\centering
 \includegraphics[height=0.80in,width=4.05in]{Figures/MGE-2.png}
 %\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 %\vskip 0.05pt
 %\includegraphics[height=2.20in,width=3.45in]{Figures/Multi-Scale-6.png}
 %\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{Multi-Scale-1}
-\end{figure}
-% 调节材料的组分获得材料的特性:~掺杂、表面等特性
-	材料模拟与计算在新材料研发中的作用日益凸显
-	\begin{itemize}
-		\item \textcolor{blue}{功能材料}的属性精确调控:\\
-			对材料组分与结构存在客观要求
-		\item \textcolor{blue}{结构材料}的微观缺陷和应力研究:\\
-			对材料尺度也有客观要求
-		\item \textrm{AI}支持的\textcolor{blue}{跨尺度材料模拟}:\\
-			对模型和数据同样有尺度要求
-	\end{itemize}
-\end{frame}
-
-\begin{frame}
-	\frametitle{千原子量级模型计算的必要性和困难}
-%	\begin{enumerate}[{[1]}]\item 
-	机器学习势函数，要考虑粒子间多体相互作用与长程相互作用
-%	\end{enumerate}
-\begin{figure}[h!]
-\vspace*{-0.05in}
-%\centering
-%\includegraphics[height=0.60in,width=3.05in]{Figures/MGE-2.png}
-%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-%\vskip 0.05pt
-\includegraphics[height=2.34in,width=3.00in]{Figures/MLP_GNN.jpg}
-%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{Multi-Scale-4}
-\end{figure}
-\end{frame}
-
-\section{\rm{VASP}软件的主要瓶颈}
-\begin{frame}
-	\frametitle{千原子量级模型计算的必要性和困难}
-	第一原理计算(主要是\textrm{DFT})为材料模拟提供``数据底座'':
-%			\\为包括微观电子结构性质在内的基本物性提供有效描述
-\begin{figure}[h!]
 \vspace*{-0.10in}
 %\centering
 %\includegraphics[height=0.60in,width=3.05in]{Figures/MGE-2.png}
 %\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 %\vskip 0.05pt
-\includegraphics[height=2.50in,width=4.05in]{Figures/Multi_Scale-5.jpg}
+\includegraphics[height=2.20in,width=4.05in]{Figures/Multi_Scale-5.jpg}
 %\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Multi-Scale-2}
 \end{figure}
@@ -119,19 +81,58 @@
 
 \begin{frame}
 	\frametitle{千原子量级模型计算的必要性和困难}
-	\textrm{DFT}可以精确模拟的材料尺度非常有限:
+	材料模拟与计算在新材料研发中的作用日益凸显
+\begin{minipage}[t]{0.51\textwidth}
+	\begin{itemize}
+		\item \textcolor{blue}{功能材料}:\\
+			属性的精确调控\\
+			对材料组分与结构存在客观要求
+		\item \textcolor{blue}{结构材料}:\\
+			微观缺陷和应力研究\\
+			对材料尺度也有客观要求
+		\item \textcolor{blue}{机器学习势函数}:\\
+			粒子间多体相互作用\\
+			粒子间长程相互作用
+	\end{itemize}
+\end{minipage}
+\begin{minipage}[t]{0.47\textwidth}
+%	\end{enumerate}
+	\vskip 5pt
+\textrm{AI}支持的跨尺度材料模拟
+\begin{figure}[h!]
+\vspace*{-0.15in}
+%\centering
+%\includegraphics[height=0.60in,width=3.05in]{Figures/MGE-2.png}
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\vskip 0.05pt
+\includegraphics[height=1.64in,width=2.00in]{Figures/MLP_GNN.jpg}
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Multi-Scale-4}
+\end{figure}
+\end{minipage}
+	\vskip 5pt
+	\textcolor{red}{\hskip 60pt 新材料模拟，对模型和数据都有尺度要求}
+\end{frame}
+
+\begin{frame}
+	\frametitle{千原子量级模型计算的必要性和困难}
+	第一原理计算(主要是\textrm{DFT})为材料模拟提供``数据底座'':
+%			\\为包括微观电子结构性质在内的基本物性提供有效描述
+% 调节材料的组分获得材料的特性:~掺杂、表面等特性
 \begin{figure}[h!]
 %\vspace*{-0.10in}
 %\centering
 %\includegraphics[height=0.60in,width=3.05in]{Figures/MGE-2.png}
 %\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 %\vskip 0.05pt
-\includegraphics[height=2.50in,width=4.00in]{Figures/Multi-Scale-6.png}
+\includegraphics[height=2.00in,width=3.20in]{Figures/Multi-Scale-6.png}
 %\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Multi-Scale-3}
 \end{figure}
+	\textrm{DFT}可以精确模拟的材料尺度非常有限
 \end{frame}
 
+\section{\rm{VASP}软件的主要瓶颈}
 \frame
 {
 	\frametitle{\textrm{VASP}软件简介}
@@ -305,10 +306,10 @@
 {\fontsize{7.2pt}{5.2pt}\selectfont{通过迭代对角化，依次求解矩阵的若干(近似)本征值\\
 单个本征值求解中，矩阵运算的相关度高，参与计算的\textrm{CPU}核之间存在非常频繁的通信，将产生较大的通信压力}}
 	\begin{itemize}
-		\item 如果配置较多本征值求解并行处理，则需要更多的系统资源来对多个本征值计算进行描述，模型越大，冗余开销越大\\
-			{\fontsize{7.2pt}{5.2pt}\selectfont{可能影响软件的实用性，甚至超过了现有计算机集群的处理极限}}
 		\item 如果把大量系统资源配置到单一本征值的迭代求解，则会因算法失去局部性，各\textrm{CPU}核之间计算任务耦合过重\\
 	{\fontsize{7.2pt}{5.2pt}\selectfont{可能造成系统过载}}
+		\item 如果配置较多本征值求解并行处理，则需要更多的系统资源来对多个本征值计算进行描述，模型越大，冗余开销越大\\
+			{\fontsize{7.2pt}{5.2pt}\selectfont{可能影响软件的实用性，甚至超过了现有计算机集群的处理极限}}
 	\end{itemize}
 %	\vskip 3pt 
 	{\textcolor{blue}{大模型体系的\textrm{DFT}计算面临的效率问题，根源在软件平台基础}}
