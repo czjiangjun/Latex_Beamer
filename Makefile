@@ -1,6 +1,7 @@
 MAIN = Beamer-Template_Main
 RM = rm -f
 
+FIGURES = Figures/
 
 evince:
 	evince $(MAIN).pdf
