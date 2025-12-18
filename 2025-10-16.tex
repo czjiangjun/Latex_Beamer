@@ -1,0 +1,1038 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  不使用 authblk 包制作标题  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%-------------------------------PPT Title-------------------------------------
+\title{\rm{VASP}软件与\\$10^3$原子量级模型高精度第一原理计算}
+%-----------------------------------------------------------------------------
+
+%----------------------------Author & Date------------------------------------
+\author[]{\vskip +10pt 李珅、李计勇; 崔旭、姜骏\inst{}} %[]{} (optional, use only with lots of authors)
+%% - Give the names in the same order as the appear in the paper.
+%% - Use the \inst{?} command only if the authors have different
+%%   affiliation.
+\institute[BCC]{\inst{}%
+%\institute[Gain~Strong]{\inst{}%
+\vskip -15pt 南京展智科技有限公司\\[0.5em]北京市计算中心~材料计算团队}
+%\vskip -20pt {\large 格致斯创~科技}}
+\date[\today] % (optional, should be abbreviation of conference name)
+{	%{\fontsize{6.2pt}{4.2pt}\selectfont{\textcolor{blue}{E-mail:~}\url{jiangjun@bcc.ac.cn}}}
+\vskip 15 pt {\fontsize{8.2pt}{6.2pt}\selectfont{%清华大学\;\;物理系% 报告地点
+	\vskip 2 pt \textrm{\today}}}
+}
+
+%% - Either use conference name or its abbreviation
+%% - Not really information to the audience, more for people (including
+%%   yourself) who are reading the slides onlin%%   yourself) who are reading the slides onlin%%   yourself) who are reading the slides onlineee
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subject{}
+% This is only inserted into the PDF information catalog. Can be left
+% out.
+%\maketitle
+\frame
+{
+%	\frametitle{\fontsize{9.5pt}{5.2pt}\selectfont{\textcolor{orange}{“高通量并发式材料计算算法与软件”年度检查}}}
+\titlepage
+}
+%-----------------------------------------------------------------------------
+
+%------------------------------------------------------------------------------列出全文 outline ---------------------------------------------------------------------------------
+\section*{}
+\frame[allowframebreaks]
+{
+	\frametitle{\textrm{Outline}}
+%  \frametitle{\textcolor{mycolor}{\secname}}
+  \tableofcontents%[current,currentsection,currentsubsection]
+}
+%在每个section之前列出全部Outline
+%类似的在每个subsection之前列出全部Outline是\AtBeginSubsection[]
+%\AtBeginSection[]
+%{
+%  \frame<handout:0>%[allowframebreaks]
+%  {
+%    \frametitle{Outline}
+%%全部Outline中，本部分加亮
+%    \tableofcontents[current,currentsection]
+%  }
+%}
+
+%-----------------------------------------------PPT main Body------------------------------------------------------------------------------------
+\small
+\section{研究背景}
+\begin{frame}
+	\frametitle{材料的组分、结构与性质}
+%			\\材料功能与性质的精确描述，必须考察材料的复杂性
+\begin{figure}[h!]
+\vspace*{-0.3in}
+%\centering
+\includegraphics[height=0.80in,width=4.05in]{Figures/MGE-2.png}
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\vskip 0.05pt
+%\includegraphics[height=2.20in,width=3.45in]{Figures/Multi-Scale-6.png}
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\vspace*{-0.10in}
+%\centering
+%\includegraphics[height=0.60in,width=3.05in]{Figures/MGE-2.png}
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\vskip 0.05pt
+\includegraphics[height=2.20in,width=4.05in]{Figures/Multi_Scale-5.jpg}
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Multi-Scale-2}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{千原子量级模型计算的必要性和困难}
+	材料模拟与计算在新材料研发中的作用日益凸显
+\begin{minipage}[t]{0.51\textwidth}
+	\begin{itemize}
+		\item \textcolor{blue}{功能材料}:\\
+			属性的精确调控\\
+			对材料组分与结构存在客观要求
+		\item \textcolor{blue}{结构材料}:\\
+			微观缺陷和应力研究\\
+			对材料尺度也有客观要求
+		\item \textcolor{blue}{机器学习势函数}:\\
+			粒子间多体相互作用\\
+			粒子间长程相互作用
+	\end{itemize}
+\end{minipage}
+\begin{minipage}[t]{0.47\textwidth}
+%	\end{enumerate}
+	\vskip 5pt
+\textrm{AI}支持的跨尺度材料模拟
+\begin{figure}[h!]
+\vspace*{-0.15in}
+%\centering
+%\includegraphics[height=0.60in,width=3.05in]{Figures/MGE-2.png}
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\vskip 0.05pt
+\includegraphics[height=1.64in,width=2.00in]{Figures/MLP_GNN.jpg}
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Multi-Scale-4}
+\end{figure}
+\end{minipage}
+	\vskip 5pt
+	\textcolor{red}{\hskip 60pt 新材料模拟，对模型和数据都有尺度要求}
+\end{frame}
+
+\begin{frame}
+	\frametitle{千原子量级模型计算的必要性和困难}
+	第一原理计算(主要是\textrm{DFT})为材料模拟提供``数据底座'':
+%			\\为包括微观电子结构性质在内的基本物性提供有效描述
+% 调节材料的组分获得材料的特性:~掺杂、表面等特性
+\begin{figure}[h!]
+%\vspace*{-0.10in}
+%\centering
+%\includegraphics[height=0.60in,width=3.05in]{Figures/MGE-2.png}
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\vskip 0.05pt
+\includegraphics[height=2.00in,width=3.20in]{Figures/Multi-Scale-6.png}
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Multi-Scale-3}
+\end{figure}
+	\textrm{DFT}可以精确模拟的材料尺度非常有限
+\end{frame}
+
+
+\section{\rm{VASP}软件简介}
+\frame
+{
+	\frametitle{\textrm{VASP}软件简介}
+	\textrm{VASP}软件是维也纳大学\textrm{(Universit\"at Wien)}~\textrm{G. Kresse}等开发的第一原理模拟软件包，在物理方法、优化算法和并行计算实现等方面都有出色的性能，是第一原理计算软件中``执牛耳''者
+	\begin{itemize}
+\fontsize{7.2pt}{5.2pt}\selectfont
+		\item \textrm{VASP}采用\textrm{PAW~(Projector Augmented-Wave)}方法，平衡了赝势方法和全电子计算优点，兼顾了计算的精度和效率
+		\item \textrm{VASP}在实空间优化投影函数\textrm{(Projector)}，将主要的计算过程变换到实空间完成，节省了矩阵迭代的内存开销%，保证了计算精度和效率
+		\item \textrm{VASP}通过引入多样的优化算法，提高了矩阵对角化和电荷密度搜索的效率
+		\item 在\textrm{VASP}的并行计算中，有效均衡了各节点处理\textrm{FFT}变换负载和通信，提升了软件的并行效率
+	\end{itemize}
+\begin{figure}[h!]
+	\vspace{-0.25in}
+\centering
+%\includegraphics[height=2.7in,width=4.0in,viewport=0 0 1180 875,clip]{Figures/dual_grid.png}
+\includegraphics[height=1.55in,width=2.05in,viewport=0 0 240 200,clip]{Figures/VASP-abinit_Li128-2.png}
+%\caption{\tiny \textrm{The comparison of parallel scaling for ABINIT vs VASP.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{ABINIT_vs_VASP-1}
+\end{figure} 
+}
+
+%\frame
+%{
+%	\frametitle{\textrm{VASP}的开发团队}
+%\begin{figure}[h!]
+%\centering
+%\vspace*{-0.25in}
+%\includegraphics[height=2.70in,width=4.05in,viewport=330 130 1280 770,clip]{Figures/VASP_team.png}
+%\caption{\tiny \textrm{The development team of VASP.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\label{VASP_team}
+%\end{figure}
+%}
+%
+%\frame
+%{
+%	\frametitle{\textrm{VASP}的\textrm{Kohn-Sham}方程求解流程}
+%\begin{figure}[h!]
+%	\vspace{-0.2in}
+%\centering
+%%\includegraphics[height=2.7in,width=4.0in,viewport=0 0 1300 960,clip]{Figures/VASP_procedure-full.png}
+%%\includegraphics[height=2.1in,width=1.6in,viewport=0 0 480 630,clip]{Figures/VASP_procedure.png}
+%%\includegraphics[height=2.1in,width=2.3in,viewport=0 0 740 600,clip]{Figures/Ab-initio-Ene.png}
+%\includegraphics[height=2.75in,width=2.5in,viewport=0 0 480 630,clip]{Figures/VASP_procedure.png}
+%\caption{\tiny \textrm{The Flow of calculation for the KS-ground states.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\label{PAW_baiseset}
+%\end{figure} 
+%}
+
+\frame
+{
+	\frametitle{\textrm{VASP}计算的并行效率}
+%与同类型软件相比，\textrm{VASP}有着优异的并行能力
+	在高性能计算环境下，\textrm{VASP}的并行上限可以突破\textrm{256}核，但当并行核数超过百核数量级，并行效率下降非常明显
+\begin{figure}[h!]
+	\vspace{-0.10in}
+\centering
+\includegraphics[height=2.35in,width=3.55in,viewport=0 0 240 180,clip]{Figures/VASP-abinit_Li128-1.png}
+%\caption{\tiny \textrm{The comparison of parallel scaling for ABINIT vs VASP.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{ABINIT_vs_VASP-2}
+\end{figure} 
+}
+
+\frame
+{
+	\frametitle{\textrm{VASP}的电子步计算:~时间分配与并行}
+	\textrm{VASP}中最基础的电子步迭代，主要包括矩阵迭代对角化和电荷密度的更新。对于较大的模型，在并行环境下，对角化与\textrm{FFT}变换的时间分配存在差异
+\begin{figure}[h!]
+	\vspace{-0.05in}
+\centering
+%\includegraphics[height=2.7in,width=4.0in,viewport=0 0 1180 875,clip]{Figures/dual_grid.png}
+\includegraphics[height=2.20in,width=3.5in,viewport=0 0 518 346,clip]{Figures/VASP-subroutinebytime.png}
+%\caption{\tiny \textrm{The comparison of parallel scaling for ABINIT vs VASP.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{VASP-DIAG}
+\end{figure} 
+}
+
+\section{\rm{VASP}软件的主要瓶颈}
+\frame
+{
+	\frametitle{\textrm{VASP}的主要瓶颈:~内存和通信}
+\begin{itemize}
+	\item 随着计算对象原子数增加，波函数、电子密度和\textrm{Hamiltonian}矩阵等变量存储所需的内存迅速增长
+	\item 应用``双网格技术''计算过程中需要完成大量的\textrm{FFT}计算\\
+		{\fontsize{7.2pt}{5.2pt}\selectfont{并行核数增加，完成\textrm{FFT}计算的通信量增长更快}}
+\end{itemize}
+\begin{figure}[h!]
+	\vspace{-0.05in}
+\centering
+%\includegraphics[height=2.7in,width=4.0in,viewport=0 0 1180 875,clip]{Figures/dual_grid.png}
+%\includegraphics[height=1.39in,width=1.98in,viewport=0 0 800 600,clip]{Figures/dual_grid-2.png}
+\begin{minipage}[t]{0.49\textwidth}
+	
+	\begin{tikzpicture}[
+			box-rect/.style={rectangle,draw,fill=darkgray!20,node distance=1cm,text width=4.5em,text centered,rounded corners,minimum height=0.1em,thin},
+    box-diam/.style={diamond, aspect=7, inner sep=2pt, draw,fill=green!50,node distance=1cm,text width=12em,text centered,rounded corners,minimum height=2em,very thin},
+    straightline/.style={line width = 2pt, -},
+    arrow/.style={draw,-latex', line width = 2pt},
+		]
+		\node [box-rect, fill=LimeGreen!50, text width=4.2em, draw=cyan, minimum height=0.1em, very thin] at (current page.west)(nr-real-space) {\fontsize{3.5pt}{0.2pt}\selectfont{$\tilde n(\vec r)$\!正空间\!(粗网格)\!表示}};
+		\node [box-rect, right=0.1 of nr-real-space, fill=purple!50, text width=0.5em, draw=cyan, minimum height=0.1em, very thin] (FFT-1) {\fontsize{3.5pt}{0.2pt}\selectfont{\textcolor{white}{\textbf{FFT}}}};
+		\node [box-rect, right=1.7 of FFT-1, fill=violet!50, text width=4.5em, draw=NavyBlue, minimum height=0.1em,very thin] (psi-G1-reciprocal-space) {\fontsize{3.5pt}{0.2pt}\selectfont{$\tilde \Psi(\vec G_1)$\textcolor{white}{倒空间\!(粗网格)\!表示}}};
+		\node [box-rect, below=0.1 of nr-real-space, fill=violet!50, text width=4.6em, draw=NavyBlue, minimum height=0.1em, very thin] (nG1-reciprocal-space) {\fontsize{3.5pt}{0.2pt}\selectfont{$\tilde n(\vec G_1)$\textcolor{white}{倒空间\!(粗网格)\!表示}}};
+			\node [box-rect, right=0.1 of nG1-reciprocal-space, fill=purple!50, text width=0.5em, draw=cyan, minimum height=0.1em, very thin] (FFT-2) {\fontsize{3.5pt}{0.2pt}\selectfont{\textcolor{white}{\textbf{FFT}}}};
+			\node [box-rect, right=0.2 of FFT-2, fill=NavyBlue!50, text width=4.6em, draw=cyan, minimum height=0.1em, very thin] (nr1-real-space) {\fontsize{3.5pt}{0.2pt}\selectfont{$\hat n(\vec r)$\!正空间\!(密网格)\!表示}};
+			\node [box-rect, below=0.1 of nG1-reciprocal-space, fill=RedOrange!50, text width=4.6em, draw=NavyBlue, minimum height=0.1em, very thin] (nG2-reciprocal-space) {\fontsize{3.5pt}{0.2pt}\selectfont{$\tilde n(\vec G_2)$\textcolor{white}{倒空间\!(密网格)\!表示}}};
+			\node [box-rect, right=0.1 of nG2-reciprocal-space, fill=purple!50, text width=0.5em, draw=cyan, minimum height=0.1em, very thin] (FFT-3) {\fontsize{3.5pt}{0.2pt}\selectfont{\textcolor{white}{\textbf{FFT}}}};
+			\node [box-rect, right=0.2 of FFT-3, fill=RedOrange!50, text width=4.6em, draw=NavyBlue, minimum height=0.1em, very thin] (nG22-reciprocal-space) {\fontsize{3.5pt}{0.2pt}\selectfont{$\hat n(\vec G_2)$\textcolor{white}{倒空间\!(密网格)\!表示}}};
+			\node [box-rect, below=0.25 of nG2-reciprocal-space, fill=NavyBlue!50, text width=4.5em, draw=cyan, minimum height=0.1em, very thin] (nr12-real-space) {\fontsize{3.5pt}{0.2pt}\selectfont{$\tilde n(\vec r)$\!正空间\!(密网格)\!表示}};
+
+			\node [box-rect, below=0.2 of nr12-real-space, fill=RedOrange!50, text width=4.8em, draw=NavyBlue, minimum height=0.1em, very thin] (VHG2-reciprocal-space) {\fontsize{3.5pt}{0.2pt}\selectfont{$V_{\mathrm{H}}(\vec G_2)$\textcolor{white}{倒空间\!(密网格)\!表示}}};
+			\node [box-rect, right=0.1 of VHG2-reciprocal-space, fill=purple!50, text width=0.5em, draw=cyan, minimum height=0.1em, very thin] (FFT-4) {\fontsize{3.5pt}{0.2pt}\selectfont{\textcolor{white}{\textbf{FFT}}}};
+			\node [box-rect, right=0.5 of FFT-4, fill=RedOrange!50, text width=4.9em, draw=NavyBlue, minimum height=0.1em, very thin] (VGZc-reciprocal-space) {\fontsize{3.5pt}{0.2pt}\selectfont{$V_{\mathrm{H}}(\tilde n_{\mathrm{Zc}})$\textcolor{white}{倒空间\!(密网格)\!表示}}};
+			\node [box-rect, below=0.1 of VHG2-reciprocal-space, fill=NavyBlue!50, text width=4.8em, draw=cyan, minimum height=0.1em, very thin] (Vr1-real-space) {\fontsize{3.5pt}{0.2pt}\selectfont{$V_{\mathrm{H}}(\vec r)$\!正空间\!(密网格)\!表示}};
+			\node [box-rect, right=0.1 of Vr1-real-space, fill=NavyBlue!50, text width=4.5em, draw=cyan, minimum height=0.1em, very thin] (Vxc-real-space) {\fontsize{3.5pt}{0.2pt}\selectfont{$V_{\mathrm{xc}}(\vec r)$\!正空间\!(密网格)\!表示}};
+			\node [box-rect, below=0.8 of FFT-4, fill=purple!50, text width=0.5em, draw=cyan, minimum height=0.1em, very thin] (FFT-5) {\fontsize{3.5pt}{0.2pt}\selectfont{\textcolor{white}{\textbf{FFT}}}};
+			\node [box-rect, right=0.5 of FFT-5, fill=violet!50, text width=4.9em, draw=NavyBlue, minimum height=0.1em, very thin] (VHZc-reciprocal-space) {\fontsize{3.5pt}{0.2pt}\selectfont{$V_{\mathrm{H}}(\tilde n_{\mathrm{Zc}})$\textcolor{white}{倒空间\!(粗网格)\!表示}}};
+
+%%%%%%% ------------ 定义 虚线方框转角 -----------------  %%%%%%
+\path
+	(FFT-3.south)++(0.0, -0.3em) coordinate (FFT-3-corner)
+	(FFT-4.north)++(0.0, +0.55em) coordinate (FFT-4-corner)
+
+	(VHG2-reciprocal-space.north)++(0.0,+0.4em) coordinate (VHG2-corner)
+	(Vxc-real-space.east)++(3.05em,0.0) coordinate (Vxc-corner)
+	(nr12-real-space.east)++(8.67em,0.0) coordinate (nr12-corner)
+	(Vr1-real-space.east)++(0.02em,-1.0em) coordinate (nr1-corner) ;
+%
+	\node [box-rect, below=0.5 of nr1-corner, fill=RedOrange!50, text width=6.8em, draw=NavyBlue, minimum height=0.2em, very thin] (VHxcG2-reciprocal-space) {\fontsize{3.5pt}{0.2pt}\selectfont{$V_{\mathrm{H}}(\vec G_2)$,$V_{\mathrm{xc}}(\vec G_2)$\textcolor{white}{倒空间\!(密网格)\!表示}}};
+		\node [box-rect, below=0.15 of VHxcG2-reciprocal-space, fill=violet!50, text width=6.8em, draw=NavyBlue, minimum height=0.2em, very thin] (VHxcG1-reciprocal-space) {\fontsize{3.5pt}{0.2pt}\selectfont{$V_{\mathrm{H}}(\vec G_1)$,$V_{\mathrm{xc}}(\vec G_1)$\textcolor{white}{倒空间\!(粗网格)\!表示}}};
+%
+\path
+	(VHxcG1-reciprocal-space.south)++(0.0,-0.5em) coordinate (VHxcG1-corner)
+	(VHxcG2-reciprocal-space.east)++(3.0em,0.0) coordinate (VHxcG2-corner)
+	(VHxcG1-corner)++(7.1em, 0.0) coordinate (VHZc-corner) ;
+
+	\draw [straightline, black,very thin] (nr-real-space.east) -- (FFT-1.west);
+	\path [arrow, red,very thin] (nr-real-space.south) -- (nG1-reciprocal-space.north);
+	\path [arrow, green, very thin] (nG1-reciprocal-space.south) -- (nG2-reciprocal-space.north);
+	\draw [straightline, black,very thin] (FFT-2.east) -- (nr1-real-space.west);
+	\draw [straightline, black,very thin] (nG2-reciprocal-space.east) -- (FFT-3.west);
+
+	\path [arrow, red, very thin] (nr1-real-space.south) -- (nG22-reciprocal-space.north);
+	\path [arrow, NavyBlue, very thin] (nG2-reciprocal-space.south)++(0.0, +0.0) coordinate |- (FFT-3-corner) -| (FFT-4-corner) |- (VHG2-corner) -| (VHG2-reciprocal-space.north);
+	\path [arrow, NavyBlue, very thin] (nG22-reciprocal-space.south)++(0.0, +0.0) coordinate |- (FFT-3-corner) -| (FFT-4-corner) |- (VHG2-corner) -| (VGZc-reciprocal-space.north);
+
+	\path [arrow, red,very thin] (nG2-reciprocal-space.south) -- (nr12-real-space.north);
+
+	\path [arrow, black, very thin] (nr1-real-space.east)++(0.0, 0.0) coordinate -| (Vxc-corner) |- (Vxc-real-space.east);
+	\path [arrow, black, very thin] (nr12-real-space.east)++(0.0, 0.0) coordinate -| (nr12-corner) |- (Vxc-real-space.east);
+
+	\path [arrow, red,very thin] (VHG2-reciprocal-space.south) -- (Vr1-real-space.north);
+	\draw [straightline, black,very thin] (VHG2-reciprocal-space.east) -- (FFT-4.west);
+	\path [arrow, green, very thin] (VGZc-reciprocal-space.south) -- (VHZc-reciprocal-space.north);
+
+	\draw [straightline, black,very thin] (nr1-corner) |- (FFT-5.west);
+	\path [arrow, NavyBlue, very thin] (Vr1-real-space.south)++(0.0, +0.0) coordinate |- (nr1-corner) -| (VHxcG2-reciprocal-space.north);
+	\path [arrow, NavyBlue, very thin] (Vxc-real-space.south)++(0.0, +0.0) coordinate |- (nr1-corner) -| (VHxcG2-reciprocal-space.north);
+	\path [arrow, red,very thin] (nr1-corner) -- (VHxcG2-reciprocal-space.north);
+
+	\path [arrow, green, very thin] (VHxcG2-reciprocal-space.south) -- (VHxcG1-reciprocal-space.north);
+	\path [arrow, NavyBlue, very thin] (VHxcG1-reciprocal-space.south) -- (VHxcG1-corner);
+
+	\path [arrow, NavyBlue, very thin] (psi-G1-reciprocal-space.south) |- (VHxcG2-corner) -| (VHZc-corner);
+	\path [arrow, NavyBlue, very thin] (VHZc-reciprocal-space.south) |- (VHxcG2-corner) -| (VHZc-corner);
+%  (Modeling-Analysis.south) ++(5.0em, 0.6em) coordinate (Symmetry-fit)
+	\end{tikzpicture}
+%%	\includegraphics{<+file+>}
+%%	\caption{\tiny \textrm{Multi-FFT of Dual-Grid in VASP.}}
+\end{minipage}
+\begin{minipage}[b]{0.49\textwidth}
+{\fontsize{7.5pt}{5.2pt}\selectfont{\textrm{VASP}计算$10^2$原子量级的体系问题不大，\textcolor{red}{但计算$10^3$原子量级规模的体系异常吃力}
+%对并行系统与\textrm{VASP}结合作深度改造(如国家超算天津中心方案)，\textrm{VASP}的并行扩展可以到$10^4$核级别，这一改造需要对底层代码和计算框架作较大规模改动
+}}
+%\includegraphics[height=1.55in,width=1.95in,viewport=0 0 240 200,clip]{Figures/VASP-abinit_Li128-2.png}
+\includegraphics[height=1.55in,width=1.95in,viewport=0 0 240 200,clip]{Figures/VASP-mpi-Li128.png}
+%\caption{\tiny \textrm{The comparison of parallel scaling for ABINIT vs VASP.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\end{minipage}
+\label{ABINIT_vs_VASP-3}
+\end{figure} 
+
+}
+
+\begin{frame}
+	\frametitle{\textrm{VASP}的主要瓶颈:~矩阵-向量乘}
+在频繁的\textrm{FFT}基础上，\textrm{VASP}软件将本征值求解过程，转化和分解为基础的矩阵-向量操作:\\
+{\fontsize{7.2pt}{5.2pt}\selectfont{通过迭代对角化，依次求解矩阵的若干(近似)本征值\\
+单个本征值求解中，矩阵运算的相关度高，参与计算的\textrm{CPU}核之间存在非常频繁的通信，将产生较大的通信压力}}
+	\begin{itemize}
+		\item 如果把大量系统资源配置到单一本征值的迭代求解，则会因算法失去局部性，各\textrm{CPU}核之间计算任务耦合过重\\
+	{\fontsize{7.2pt}{5.2pt}\selectfont{可能造成系统过载}}
+		\item 如果配置较多本征值求解并行处理，则需要更多的系统资源来对多个本征值计算进行描述，模型越大，冗余开销越大\\
+			{\fontsize{7.2pt}{5.2pt}\selectfont{可能影响软件的实用性，甚至超过了现有计算机集群的处理极限}}
+	\end{itemize}
+%	\vskip 3pt 
+	{\textcolor{blue}{大模型体系的\textrm{DFT}计算面临的效率问题，根源在软件平台基础}}
+	\vskip 2pt
+	{\textcolor{purple}{传统软件平台依赖通用\textrm{MPI}接口和数学库配置，难以充分发挥硬件性能，无法为\textrm{DFT}计算软件提供高效适配与支持}}
+\end{frame}
+
+\frame
+{
+	\frametitle{\textrm{VASP}的\textrm{GPU}加速}
+\textrm{NVIDIA}多年来致力于\textrm{VASP}的\textrm{GPU}加速，取得了一定的效果，但仍比较有限
+\begin{itemize}
+	\item \textrm{GPU}加速对于分子动力学计算特别有效
+	\item 稠密的矩阵-向量乘计算，限制了\textrm{GPU}加速在第一原理计算中应用
+	\item 通用配置下，\textrm{GPU}对\textrm{VASP}计算平均加速效果，提升\textrm{4$\sim$6}倍
+\end{itemize}
+\begin{figure}[h!]
+	\vspace{-0.15in}
+\centering
+%\includegraphics[height=2.7in,width=4.0in,viewport=0 0 1180 875,clip]{Figures/dual_grid.png}
+\includegraphics[height=1.2in,width=4.05in,viewport=0 0 850 260,clip]{Figures/VASP-GPU-CPU.png}
+%\caption{\tiny \textrm{Compare of VASP calculation with GPU and CPU.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{VASP_GPU}
+\end{figure} 
+	\vspace{-0.15in}
+\textcolor{red}{\textrm{GPU}加速不是提升\textrm{VASP}计算规模的最有效方案}
+}
+
+\frame
+{
+	\frametitle{\textrm{VASP}的原子势函数:~\textrm{POTCAR}}
+	\textrm{POTCAR}是\textrm{VASP}的必备文件，提供了\textrm{VASP}计算所需的全部原子数据，也是实现\textrm{PAW}方法的主要基础
+	\begin{itemize}
+		\item \textrm{POTCAR}是\textrm{VASP}实现材料精确计算的重要保证\\
+			同样都应用\textrm{PAW}方法，\textcolor{blue}{公认\textrm{VASP}较\textrm{QE}、\textrm{ABINIT}等软件的计算精度要高}
+		\item \textrm{POTCAR}数据生成依赖较多的可调参数\\
+			包括能量参数$\varepsilon_l$、多种截断半径$r_c$、$r_{\mathrm{vloc}}$、$r_{\mathrm{shape}}$、$r_{\mathrm{core}}$
+		\item \textcolor{red}{\textrm{POTCAR}数据生成代码是\textrm{VASP}中唯一没有公开的}
+		\item 用\textrm{VASP}模拟极端条件下材料物性的能力，受到\textrm{POTCAR}数据的制约
+	\end{itemize}
+	%文献\cite{PRB59-1758_1999}介绍了\textrm{POTCAR}的主要实现思想
+
+当前研究主要尝试:~基于开源的\textrm{PAW}赝势生成软件(\textrm{atomPAW})，开发能生成\textrm{POTCAR}原子数据的功能
+}
+
+\frame
+{
+	\frametitle{\textrm{PAW}原子数据集:~\textrm{wave~function}}
+	平滑赝原子分波函数
+	\begin{displaymath}
+		\tilde\phi_{i=Lk}(\vec r)=Y_L(\widehat{\vec r-\vec R})\tilde\phi_{lk}(|\vec r-\vec R|)
+	\end{displaymath}
+	根据\textrm{RRKJ}赝势构造的思想，赝分波函数由球\textrm{Bessel}函数线性组合%\upcite{JPCM6-8245_1994}
+	\begin{displaymath}
+		\tilde\phi_{lk}(r)=\left\{
+		\begin{aligned}
+			&\sum_{i=1}^2\alpha_ij_l(q_ir)\quad &r<r_c^l\\
+			&\phi_{lk}(r)\quad&r>r_c^l
+		\end{aligned}
+		\right.
+	\end{displaymath}
+	调节系数$\alpha_i$和$q_i$赝分波函数$\phi_{lk}(r)$在截断半径$r_c^l$处两阶连续可微
+%	投影子波函数$\tilde p_i$由\textrm{Gram-Schmidt}正交条件$\langle\tilde p_i|\tilde\phi_j\rangle=\delta_{ij}$确定
+}
+
+\frame
+{
+	\frametitle{\textrm{PAW}原子数据集:~\textrm{wave~function}}
+\begin{figure}[h!]
+\centering
+\vskip -0.5in
+\includegraphics[width=1.5in,height=2.7in,viewport=0 0 350 550, angle=-90, clip]{Figures/WAE-data.eps}
+\vskip -0.2in
+\includegraphics[height=2.7in,width=1.5in,viewport=0 0 350 550, angle=-90, clip]{Figures/WPS-data.eps}
+\caption{\tiny \textrm{The partial wave function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Wave_Function}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{PAW}原子数据集:~\textrm{core~density}}
+	\textcolor{blue}{构造赝芯电荷密度$\tilde n_c$}:~在截断半径$r_{\mathrm{core}}$内的定义为
+	$$\sum_{i=1,2}B_i\dfrac{\sin(q_ir)}r\quad r<r_{\mathrm{core}}$$
+	调节系数$q_i$和$B_i$使得赝芯电荷密度$\tilde n_c(r)$在截断半径$r_{\mathrm{core}}$处的两阶导数连续
+\begin{figure}[h!]
+\vskip -0.5in
+\centering
+\hspace*{-0.1in}
+\includegraphics[width=1.5in,height=2.35in,viewport=0 0 350 550, angle=-90, clip]{Figures/CORE-data.eps}
+\hspace*{-0.7in}
+\includegraphics[height=2.35in,width=1.5in,viewport=0 0 350 550, angle=-90, clip]{Figures/PCORE-data.eps}
+\caption{\tiny \textrm{The core density.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{core_density_Function}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{PAW}原子数据集:~$\mathrm{v}_{e\!f\!f}(r)$与$\tilde{\mathrm{v}}_{e\!f\!f}(r)$}
+	\textcolor{blue}{原子局域有效势$\mathrm{v}_{e\!f\!f}^a$}
+\begin{figure}[h!]
+%\vskip -0.5in
+\vskip -0.17in
+\centering
+%\includegraphics[width=1.6in,height=2.7in,viewport=0 0 300 460, angle=-90, clip]{Figures/POTAE-data.eps}
+\includegraphics[width=2.5in,height=1.2in,viewport=0 0 1600 800, clip]{Figures/POTAE-full-dat.pdf}
+\caption{\tiny \textrm{The local atomic effective-Potential.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{local_atomic_PP}
+\end{figure}
+	\textcolor{blue}{构造原子局域赝势$\tilde v_{e\!f\!f}^a$}%(\textcolor{red}{为防止\textrm{ghost band}})
+	:%\\
+	(在截断半径$r_{\mathrm{loc}}$内的定义)
+	$$\tilde v_{e\!f\!f}^a=A\dfrac{\sin(q_{loc}r)}r\quad r<r_{\mathrm{loc}}$$
+	其中$q_{loc}$和$A$要求局域赝势在截断半径$r_{\mathrm{loc}}$处连续到一阶导数
+}
+
+\frame
+{
+	\frametitle{\textrm{PAW}原子数据集:~$\mathrm{v}_H[\tilde n_{Zc}]$}
+	局域离子赝势$v_H[\tilde n_{Zc}]$可由原子局域赝势去屏蔽得到
+	$$v_H[\tilde n_{Zc}]=\tilde v_{e\!f\!f}^a-v_H[\tilde n_a^1+\hat n_a]-v_{\mathrm{XC}}[\tilde n_a^1+\hat n_a+\tilde n_c]$$
+\begin{figure}[h!]
+\vskip -0.5in
+\centering
+\hspace*{-0.1in}
+\includegraphics[width=1.5in,height=2.35in,viewport=0 0 350 550, angle=-90, clip]{Figures/POTPS-data.eps}
+\hspace*{-0.7in}
+\includegraphics[height=2.35in,width=1.5in,viewport=0 0 350 550, angle=-90, clip]{Figures/POTPSC-data.eps}
+\caption{\tiny \textrm{The pseudo-potential and local ionic pseudo-potential.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{pseudo_potential}
+\end{figure}
+}
+
+\section{\rm{VASP}计算$10^3$原子模型的策略与方案}
+\begin{frame}
+	\frametitle{主要技术难点}
+\textrm{DFT}计算的核心数据结构的空间复杂度偏高\\
+			{\fontsize{7.2pt}{5.2pt}\selectfont{\textrm{VASP}的部分核心数据结构的空间复杂度与$n^2$或$n^3$相关，当模型规模逐步扩大达到一定程度时，对于内存储器的开销过大，即使整个集群的\textrm{CPU}核只用于处理一个本征态所需的矩阵运算，仍会面临所需内存不足的问题}}
+	\begin{itemize}
+		\item 高通量的分布式矩阵运算，会导致频繁的系统通信，在系统软件的临界区会产生严重冲突\\
+			{\fontsize{7.2pt}{5.2pt}\selectfont{例如，多个计算节点同时请求访问共享资源、传输关键数据时，频繁的竞争与等待使得数据传输延迟大幅增加}}
+%构造一种新型通讯机制，兼容\textrm{DFT}计算的高通量矩阵需求与软件环境特征
+		\item \textrm{VASP}软件底层依赖的\textrm{Intel}等通用基础库函数支持的并行计算库，在高并行度条件时，暴露出各种不适应\\
+			{\fontsize{7.2pt}{5.2pt}\selectfont{例如，某些矩阵运算算法在多核心并行计算时，数据划分与同步机制不合理，导致核心间负载不均衡，大量核心处于空闲等待状态；部分通信算法在高并发数据传输时，因协议设计缺陷引发数据拥塞}}
+%			建立科学的算法评估体系，对这类不适用于高并行度的算法进行精准识别，并结合\textrm{DFT}计算特点，设计出适合高并行度的等效实现方案，从算法层面提升\textrm{VASP}软件在大规模并行计算中的性能表现
+	\end{itemize}
+	\textcolor{red}{策略:}~提升单个本征值求解的矩阵-向量乘处理极限，最大程度集成单个本征值计算的资源投入
+\end{frame}
+
+\begin{frame}
+	\frametitle{总体技术路线}
+	自研的虚拟机技术，重新封装硬件，改变硬件呈现的特性:\\
+	{\fontsize{7.2pt}{5.2pt}\selectfont{通过一系列自研数据结构、算法与特定编程方法，\textcolor{red}{在不改动\textrm{VASP}代码基础上}，构建面向高通量数据处理的高效运行环境}}
+	\begin{figure}[ht]
+		\centering
+		\begin{minipage}[b]{0.4\textwidth}
+%	\begin{animateinline}[loop]{1} % 20 fps
+%		\multiframe{10}{rPOS = -2.0 + 0.2}{ % 72帧，每帧移动 0.05
+			\begin{tikzpicture}[
+			box-rect/.style={rectangle,draw=none,node distance=1cm,text width=4.5em,text centered,rounded corners,minimum height=0.1em,thin},
+    straightline/.style={line width = 2pt, -},
+    arrow/.style={draw,-latex', line width = 2pt},
+		]
+		\node<1-> [box-rect, text width=8.0em, minimum height=0.1em, thick](Single-Band) {\fontsize{5.5pt}{0.2pt}\selectfont{单能带\textrm{(Single-Band)计算}}};
+%		\node [box-rect, fill=NavyBlue!50, text width=9.0em, draw=cyan, minimum height=1.5em, thick, dash dot dot](Critical-Virtual-Machine) at (\rPOS, -0.4) {\fontsize{5.5pt}{0.2pt}\selectfont{\textcolor{red}{无临界虚拟机}}};
+		\node<2>[box-rect, fill=NavyBlue!50, text width=9.0em, draw=cyan, minimum height=1.5em, thick, dash dot dot](Critical-Virtual-Machine) at (0.0, -0.4) {\fontsize{5.5pt}{0.2pt}\selectfont{\textcolor{red}{无临界虚拟机}}};
+		\node<1-> [box-rect, below = 0.5 of Single-Band, fill=purple!50, text width=0.5em, draw=cyan, minimum height=0.2em, thick](VASP-process-3) {\fontsize{5.5pt}{0.2pt}\selectfont{\textrm{V\\A\\S\\P\\}计算进程}};
+		\node<1-> [box-rect, left = 0.5 of VASP-process-3, fill=purple!50, text width=0.5em, draw=cyan, minimum height=0.2em, thick](VASP-process-2) {\fontsize{5.5pt}{0.2pt}\selectfont{\textrm{V\\A\\S\\P\\}计算进程}};
+		\node<1-> [box-rect, left = 0.5 of VASP-process-2, fill=purple!50, text width=0.5em, draw=cyan, minimum height=0.2em, thick](VASP-process-1) {\fontsize{5.5pt}{0.2pt}\selectfont{\textrm{V\\A\\S\\P\\}计算进程}};
+		\node<1-> [box-rect, right = 0.5 of VASP-process-3, fill=purple!50, text width=0.5em, draw=cyan, minimum height=0.2em, thick](VASP-process-4) {\fontsize{5.5pt}{0.2pt}\selectfont{\textrm{V\\A\\S\\P\\}计算进程}};
+		\node<1-> [box-rect, right = 0.5 of VASP-process-4, fill=purple!50, text width=0.5em, draw=cyan, minimum height=0.2em, thick](VASP-process-5) {\fontsize{5.5pt}{0.2pt}\selectfont{\textrm{V\\A\\S\\P\\}计算进程}};
+		\node<1-> [box-rect, below = 0.2 of VASP-process-1, fill=violet!50, text width=0.5em, draw=cyan, minimum height=0.1em, thick](VASP-MPI-1) {\fontsize{5.5pt}{0.2pt}\selectfont{\textcolor{white}{\textrm{M\\P\\I\\}}}};
+		\node<1-> [box-rect, below = 0.2 of VASP-process-2, fill=violet!50, text width=0.5em, draw=cyan, minimum height=0.1em, thick](VASP-MPI-2) {\fontsize{5.5pt}{0.2pt}\selectfont{\textcolor{white}{\textrm{M\\P\\I\\}}}};
+		\node<1-> [box-rect, below = 0.2 of VASP-process-3, fill=violet!50, text width=0.5em, draw=cyan, minimum height=0.1em, thick](VASP-MPI-3) {\fontsize{5.5pt}{0.2pt}\selectfont{\textcolor{white}{\textrm{M\\P\\I\\}}}};
+		\node<1-> [box-rect, below = 0.2 of VASP-process-4, fill=violet!50, text width=0.5em, draw=cyan, minimum height=0.1em, thick](VASP-MPI-4) {\fontsize{5.5pt}{0.2pt}\selectfont{\textcolor{white}{\textrm{M\\P\\I\\}}}};
+		\node<1-> [box-rect, below = 0.2 of VASP-process-5, fill=violet!50, text width=0.5em, draw=cyan, minimum height=0.1em, thick](VASP-MPI-5) {\fontsize{5.5pt}{0.2pt}\selectfont{\textcolor{white}{\textrm{M\\P\\I\\}}}};
+		\node<1-> [box-rect, below = 0.3 of VASP-MPI-3, fill=green!50, text width=8.0em, draw=cyan, minimum height=2.0em, thick](Critical-MPI) {\fontsize{5.5pt}{0.2pt}\selectfont{\textrm{MPI}临界区}};
+
+		\path
+		(Critical-MPI.north)++(-4.0em, 0.0em) coordinate (Critical-MPI-1)
+		(Critical-MPI.north)++(-2.0em, 0.0em) coordinate (Critical-MPI-2)
+		(Critical-MPI.north)++(0.0em, 0.0em) coordinate (Critical-MPI-3)
+		(Critical-MPI.north)++(2.0em, 0.0em) coordinate (Critical-MPI-4)
+		(Critical-MPI.north)++(4.0em, 0.0em) coordinate (Critical-MPI-5);
+
+		\draw<1-> [straightline, black,very thick] (VASP-process-1.south) -- (VASP-MPI-1.north);
+		\draw<1-> [straightline, black,very thick] (VASP-process-2.south) -- (VASP-MPI-2.north);
+		\draw<1-> [straightline, black,very thick] (VASP-process-3.south) -- (VASP-MPI-3.north);
+		\draw<1-> [straightline, black,very thick] (VASP-process-4.south) -- (VASP-MPI-4.north);
+		\draw<1-> [straightline, black,very thick] (VASP-process-5.south) -- (VASP-MPI-5.north);
+		\path<1-> [arrow, NavyBlue, thin] (VASP-MPI-1.south) -- (Critical-MPI-1);
+		\path<1-> [arrow, NavyBlue, thin] (VASP-MPI-2.south) -- (Critical-MPI-2);
+		\path<1-> [arrow, NavyBlue, thin] (VASP-MPI-3.south) -- (Critical-MPI-3);
+		\path<1-> [arrow, NavyBlue, thin] (VASP-MPI-4.south) -- (Critical-MPI-4);
+		\path<1-> [arrow, NavyBlue, thin] (VASP-MPI-5.south) -- (Critical-MPI-5);
+			\end{tikzpicture}
+%		}
+%	\end{animateinline}
+		\end{minipage}
+		\label{fig:Single-Band-orig}
+	\end{figure}
+\end{frame}
+
+\begin{frame}[allowframebreaks]
+	\frametitle{总体技术路线}
+	\begin{itemize}
+		\item 高通量并发计算系统:~解决单一本征值计算过程中\textcolor{blue}{矩阵运算的\textrm{CPU}核之间高效配合的问题}
+			\begin{enumerate}
+		\setlength{\itemsep}{2pt}
+\fontsize{7.2pt}{5.2pt}\selectfont
+				\item 重新划分软件分层
+				\item 严格控制临界区范围
+				\item 与高通量通信硬件的深度适配
+			\end{enumerate}
+	\begin{figure}[ht]
+		\centering
+		\begin{minipage}[b]{0.4\textwidth}
+			\begin{tikzpicture}[
+			box-rect/.style={rectangle,draw=none,node distance=1cm,text width=4.5em,text centered,rounded corners,minimum height=0.1em,thin},
+    straightline/.style={line width = 2pt, -},
+    arrow/.style={draw,-latex', line width = 2pt},
+		]
+		\node [box-rect, text width=8.0em, minimum height=0.1em, thick](Single-Band) {\fontsize{5.5pt}{0.2pt}\selectfont{单能带\textrm{(Single-Band)计算}}};
+		\node [box-rect, below = 0.1 of Single-Band, fill=NavyBlue!50, text width=8.0em, draw=cyan, minimum height=1.2em, thick](Critical-Virtual-Machine) {\fontsize{4.5pt}{0.2pt}\selectfont{\textcolor{red}{无临界虚拟机}}};
+		\node [box-rect, below = 0.8 of Critical-Virtual-Machine, text width=0.5em, minimum height=0.1em, thick](VASP-process-3) {\fontsize{5.5pt}{0.2pt}\selectfont{$\cdots$}};
+		\node [box-rect, left = 0.5 of VASP-process-3, fill=purple!50, text width=0.5em, draw=cyan, minimum height=0.1em, thick](VASP-process-2) {\fontsize{4.5pt}{0.2pt}\selectfont{\textrm{V\\A\\S\\P}\\计\\算\\进\\程\\}};
+		\node [box-rect, left = 0.5 of VASP-process-2, fill=purple!50, text width=0.5em, draw=cyan, minimum height=0.1em, thick](VASP-process-1) {\fontsize{4.5pt}{0.2pt}\selectfont{\textrm{V\\A\\S\\P}\\计\\算\\进\\程\\}};
+		\node [box-rect, right = 0.5 of VASP-process-3, fill=purple!50, text width=0.5em, draw=cyan, minimum height=0.1em, thick](VASP-process-4) {\fontsize{4.5pt}{0.2pt}\selectfont{\textrm{V\\A\\S\\P}\\计\\算\\进\\程\\}};
+		\node [box-rect, right = 0.5 of VASP-process-4, fill=purple!50, text width=0.5em, draw=cyan, minimum height=0.1em, thick](VASP-process-5) {\fontsize{4.5pt}{0.2pt}\selectfont{\textrm{V\\A\\S\\P}\\计\\算\\进\\程\\}};
+		\node [box-rect, below = 0.2 of VASP-process-1, fill=violet!50, text width=0.5em, draw=cyan, minimum height=0.1em, thick](VASP-MPI-1) {\fontsize{4.5pt}{0.2pt}\selectfont{\textcolor{white}{\textrm{M\\P\\I\\}}}};
+		\node [box-rect, below = 0.2 of VASP-process-2, fill=violet!50, text width=0.5em, draw=cyan, minimum height=0.1em, thick](VASP-MPI-2) {\fontsize{4.5pt}{0.2pt}\selectfont{\textcolor{white}{\textrm{M\\P\\I\\}}}};
+		\node [box-rect, below = 1.0 of VASP-process-3, text width=0.5em, minimum height=0.1em, thick](VASP-MPI-3) {\fontsize{5.5pt}{0.2pt}\selectfont{$\cdots$}};
+		\node [box-rect, below = 0.2 of VASP-process-4, fill=violet!50, text width=0.5em, draw=cyan, minimum height=0.1em, thick](VASP-MPI-4) {\fontsize{4.5pt}{0.2pt}\selectfont{\textcolor{white}{\textrm{M\\P\\I\\}}}};
+		\node [box-rect, below = 0.2 of VASP-process-5, fill=violet!50, text width=0.5em, draw=cyan, minimum height=0.1em, thick](VASP-MPI-5) {\fontsize{4.5pt}{0.2pt}\selectfont{\textcolor{white}{\textrm{M\\P\\I\\}}}};
+		\node [box-rect, below = 0.4 of VASP-MPI-3, fill=green!50, text width=8.0em, draw=cyan, minimum height=1.5em, thick](Critical-MPI) {\fontsize{4.5pt}{0.2pt}\selectfont{\textrm{MPI}临界区}};
+
+		\path
+		(Critical-MPI.north)++(-4.0em, 0.0em) coordinate (Critical-MPI-1)
+		(Critical-MPI.north)++(-2.0em, 0.0em) coordinate (Critical-MPI-2)
+		(Critical-MPI.north)++(0.0em, 0.0em) coordinate (Critical-MPI-3)
+		(Critical-MPI.north)++(2.0em, 0.0em) coordinate (Critical-MPI-4)
+		(Critical-MPI.north)++(4.0em, 0.0em) coordinate (Critical-MPI-5);
+
+		\draw [straightline, black,very thick] (VASP-process-1.south) -- (VASP-MPI-1.north);
+		\draw [straightline, black,very thick] (VASP-process-2.south) -- (VASP-MPI-2.north);
+%		\draw [straightline, black,very thick] (VASP-process-3.south) -- (VASP-MPI-3.north);
+		\draw [straightline, black,very thick] (VASP-process-4.south) -- (VASP-MPI-4.north);
+		\draw [straightline, black,very thick] (VASP-process-5.south) -- (VASP-MPI-5.north);
+		\path [arrow, NavyBlue, thin] (VASP-MPI-1.south) -- (Critical-MPI-1);
+		\path [arrow, NavyBlue, thin] (VASP-MPI-2.south) -- (Critical-MPI-2);
+%		\path [arrow, NavyBlue, thin] (VASP-MPI-3.south) -- (Critical-MPI-3);
+		\path [arrow, NavyBlue, thin] (VASP-MPI-4.south) -- (Critical-MPI-4);
+		\path [arrow, NavyBlue, thin] (VASP-MPI-5.south) -- (Critical-MPI-5);
+%		\includegraphics{<+file+>}
+%		\caption{<+caption text+>}
+			\end{tikzpicture}
+		\end{minipage}
+		\label{fig:Single-Band-orig}
+	\end{figure}
+
+		\item 并行计算库:~\textcolor{blue}{与高通量通信硬件的深度适配的底层计算库}
+			\begin{itemize}
+\fontsize{7.2pt}{5.2pt}\selectfont
+				\item \textcolor{violet}{数据处理分层化:}~将部分计算任务的处理过程进行分层，在负载均担与实时性需求之间进行再平衡
+				\item \textcolor{violet}{计算去中心化:}~去掉各种形式的``主结点''，部分算法进行``去中心化''重写
+			\end{itemize}
+		\item 内存溢出子系统:~%在计算机集群系统中，
+			集成内存储器的规模超过一定范围后，成本会明显增加
+			\vskip 1pt
+			{\fontsize{7.2pt}{5.2pt}\selectfont{
+					针对\textrm{DFT}运算的核心数据结构访问局部性与连续性，设计了\textcolor{blue}{内外存储器联动}的算法:~%该算法
+		\\精准捕捉数据访问的规律，保证算法执行效率下降不超过\textrm{20\%}的前提下，可处理规模为内存储器\textrm{200\%$\sim$1000\%}以上的数据结构，有效突破内存容量对大规模计算的制约}}
+	\end{itemize}
+	\vskip 10pt
+	{\fontsize{15pt}{0.2pt}\selectfont{基于通用硬件搭建，优化系统基础软件层对\textrm{DFT}计算的支持，释放\textrm{VASP}软件并行计算潜力，实现更大规模\textrm{DFT}模型的高效支持}}
+\end{frame}
+
+%\begin{frame}
+%	\frametitle{总体技术路线}
+%	\begin{figure}[ht]
+%		\centering
+%		\begin{minipage}[b]{0.4\textwidth}
+%			\begin{tikzpicture}[
+%			box-rect/.style={rectangle,draw=none,node distance=1cm,text width=4.5em,text centered,rounded corners,minimum height=0.1em,thin},
+%    straightline/.style={line width = 2pt, -},
+%    arrow/.style={draw,-latex', line width = 2pt},
+%		]
+%		\node [box-rect, text width=8.0em, minimum height=0.1em, thick](Single-Band) {\fontsize{5.5pt}{0.2pt}\selectfont{单能带\textrm{(Single-Band)计算}}};
+%		\node [box-rect, below = 0.2 of Single-Band, fill=NavyBlue!50, text width=8.0em, draw=cyan, minimum height=3.0em, thick, dash dot dot](Critical-Virtual-Machine) {\fontsize{5.5pt}{0.2pt}\selectfont{\textcolor{red}{无临界虚拟机}}};
+%		\node [box-rect, below = 0.2 of Critical-Virtual-Machine, fill=purple!50, text width=0.5em, draw=cyan, minimum height=0.1em, thick](VASP-process-3) {\fontsize{5.5pt}{0.2pt}\selectfont{\textrm{V\\A\\S\\P\\}计算进程}};
+%		\node [box-rect, left = 0.5 of VASP-process-3, fill=purple!50, text width=0.5em, draw=cyan, minimum height=0.1em, thick](VASP-process-2) {\fontsize{5.5pt}{0.2pt}\selectfont{\textrm{V\\A\\S\\P\\}计算进程}};
+%		\node [box-rect, left = 0.5 of VASP-process-2, fill=purple!50, text width=0.5em, draw=cyan, minimum height=0.1em, thick](VASP-process-1) {\fontsize{5.5pt}{0.2pt}\selectfont{\textrm{V\\A\\S\\P\\}计算进程}};
+%		\node [box-rect, right = 0.5 of VASP-process-3, fill=purple!50, text width=0.5em, draw=cyan, minimum height=0.1em, thick](VASP-process-4) {\fontsize{5.5pt}{0.2pt}\selectfont{\textrm{V\\A\\S\\P\\}计算进程}};
+%		\node [box-rect, right = 0.5 of VASP-process-4, fill=purple!50, text width=0.5em, draw=cyan, minimum height=0.1em, thick](VASP-process-5) {\fontsize{5.5pt}{0.2pt}\selectfont{\textrm{V\\A\\S\\P\\}计算进程}};
+%		\node [box-rect, below = 0.2 of VASP-process-1, fill=violet!50, text width=0.5em, draw=cyan, minimum height=0.1em, thick](VASP-MPI-1) {\fontsize{5.5pt}{0.2pt}\selectfont{\textcolor{white}{\textrm{M\\P\\I\\}}}};
+%		\node [box-rect, below = 0.2 of VASP-process-2, fill=violet!50, text width=0.5em, draw=cyan, minimum height=0.1em, thick](VASP-MPI-2) {\fontsize{5.5pt}{0.2pt}\selectfont{\textcolor{white}{\textrm{M\\P\\I\\}}}};
+%		\node [box-rect, below = 0.2 of VASP-process-3, fill=violet!50, text width=0.5em, draw=cyan, minimum height=0.1em, thick](VASP-MPI-3) {\fontsize{5.5pt}{0.2pt}\selectfont{\textcolor{white}{\textrm{M\\P\\I\\}}}};
+%		\node [box-rect, below = 0.2 of VASP-process-4, fill=violet!50, text width=0.5em, draw=cyan, minimum height=0.1em, thick](VASP-MPI-4) {\fontsize{5.5pt}{0.2pt}\selectfont{\textcolor{white}{\textrm{M\\P\\I\\}}}};
+%		\node [box-rect, below = 0.2 of VASP-process-5, fill=violet!50, text width=0.5em, draw=cyan, minimum height=0.1em, thick](VASP-MPI-5) {\fontsize{5.5pt}{0.2pt}\selectfont{\textcolor{white}{\textrm{M\\P\\I\\}}}};
+%		\node [box-rect, below = 0.3 of VASP-MPI-3, fill=green!50, text width=8.0em, draw=cyan, minimum height=4.0em, thick](Critical-MPI) {\fontsize{5.5pt}{0.2pt}\selectfont{\textrm{MPI}临界区}};
+%
+%		\path
+%		(Critical-MPI.north)++(-4.0em, 0.0em) coordinate (Critical-MPI-1)
+%		(Critical-MPI.north)++(-2.0em, 0.0em) coordinate (Critical-MPI-2)
+%		(Critical-MPI.north)++(0.0em, 0.0em) coordinate (Critical-MPI-3)
+%		(Critical-MPI.north)++(2.0em, 0.0em) coordinate (Critical-MPI-4)
+%		(Critical-MPI.north)++(4.0em, 0.0em) coordinate (Critical-MPI-5);
+%
+%		\draw [straightline, black,very thick] (VASP-process-1.south) -- (VASP-MPI-1.north);
+%		\draw [straightline, black,very thick] (VASP-process-2.south) -- (VASP-MPI-2.north);
+%		\draw [straightline, black,very thick] (VASP-process-3.south) -- (VASP-MPI-3.north);
+%		\draw [straightline, black,very thick] (VASP-process-4.south) -- (VASP-MPI-4.north);
+%		\draw [straightline, black,very thick] (VASP-process-5.south) -- (VASP-MPI-5.north);
+%		\path [arrow, NavyBlue, thin] (VASP-MPI-1.south) -- (Critical-MPI-1);
+%		\path [arrow, NavyBlue, thin] (VASP-MPI-2.south) -- (Critical-MPI-2);
+%		\path [arrow, NavyBlue, thin] (VASP-MPI-3.south) -- (Critical-MPI-3);
+%		\path [arrow, NavyBlue, thin] (VASP-MPI-4.south) -- (Critical-MPI-4);
+%		\path [arrow, NavyBlue, thin] (VASP-MPI-5.south) -- (Critical-MPI-5);
+%			\end{tikzpicture}
+%		\end{minipage}
+%		\label{fig:Single-Band-orig}
+%	\end{figure}
+%\end{frame}
+%
+%\begin{frame}
+%	\frametitle{总体技术路线}
+%	\begin{figure}[ht]
+%		\centering
+%		\begin{minipage}[b]{0.4\textwidth}
+%			\begin{tikzpicture}[
+%			box-rect/.style={rectangle,draw=none,node distance=1cm,text width=4.5em,text centered,rounded corners,minimum height=0.1em,thin},
+%    straightline/.style={line width = 2pt, -},
+%    arrow/.style={draw,-latex', line width = 2pt},
+%		]
+%		\node [box-rect, text width=8.0em, minimum height=0.1em, thick](Single-Band) {\fontsize{5.5pt}{0.2pt}\selectfont{单能带\textrm{(Single-Band)计算}}};
+%		\node [box-rect, below = 0.2 of Single-Band, fill=NavyBlue!50, text width=8.0em, draw=cyan, minimum height=3.0em, thick](Critical-Virtual-Machine) {\fontsize{5.5pt}{0.2pt}\selectfont{\textcolor{red}{无临界虚拟机}}};
+%		\node [box-rect, below = 1.4 of Critical-Virtual-Machine, text width=0.5em, minimum height=0.1em, thick](VASP-process-3) {\fontsize{5.5pt}{0.2pt}\selectfont{$\cdots$}};
+%		\node [box-rect, left = 0.5 of VASP-process-3, fill=purple!50, text width=0.5em, draw=cyan, minimum height=0.1em, thick](VASP-process-2) {\fontsize{5.5pt}{0.2pt}\selectfont{\textrm{V\\A\\S\\P\\}计算进程}};
+%		\node [box-rect, left = 0.5 of VASP-process-2, fill=purple!50, text width=0.5em, draw=cyan, minimum height=0.1em, thick](VASP-process-1) {\fontsize{5.5pt}{0.2pt}\selectfont{\textrm{V\\A\\S\\P\\}计算进程}};
+%		\node [box-rect, right = 0.5 of VASP-process-3, fill=purple!50, text width=0.5em, draw=cyan, minimum height=0.1em, thick](VASP-process-4) {\fontsize{5.5pt}{0.2pt}\selectfont{\textrm{V\\A\\S\\P\\}计算进程}};
+%		\node [box-rect, right = 0.5 of VASP-process-4, fill=purple!50, text width=0.5em, draw=cyan, minimum height=0.1em, thick](VASP-process-5) {\fontsize{5.5pt}{0.2pt}\selectfont{\textrm{V\\A\\S\\P\\}计算进程}};
+%		\node [box-rect, below = 0.2 of VASP-process-1, fill=violet!50, text width=0.5em, draw=cyan, minimum height=0.1em, thick](VASP-MPI-1) {\fontsize{5.5pt}{0.2pt}\selectfont{\textcolor{white}{\textrm{M\\P\\I\\}}}};
+%		\node [box-rect, below = 0.2 of VASP-process-2, fill=violet!50, text width=0.5em, draw=cyan, minimum height=0.1em, thick](VASP-MPI-2) {\fontsize{5.5pt}{0.2pt}\selectfont{\textcolor{white}{\textrm{M\\P\\I\\}}}};
+%		\node [box-rect, below = 1.5 of VASP-process-3, text width=0.5em, minimum height=0.1em, thick](VASP-MPI-3) {\fontsize{5.5pt}{0.2pt}\selectfont{$\cdots$}};
+%		\node [box-rect, below = 0.2 of VASP-process-4, fill=violet!50, text width=0.5em, draw=cyan, minimum height=0.1em, thick](VASP-MPI-4) {\fontsize{5.5pt}{0.2pt}\selectfont{\textcolor{white}{\textrm{M\\P\\I\\}}}};
+%		\node [box-rect, below = 0.2 of VASP-process-5, fill=violet!50, text width=0.5em, draw=cyan, minimum height=0.1em, thick](VASP-MPI-5) {\fontsize{5.5pt}{0.2pt}\selectfont{\textcolor{white}{\textrm{M\\P\\I\\}}}};
+%		\node [box-rect, below = 0.4 of VASP-MPI-3, fill=green!50, text width=8.0em, draw=cyan, minimum height=4.0em, thick](Critical-MPI) {\fontsize{5.5pt}{0.2pt}\selectfont{\textrm{MPI}临界区}};
+%
+%		\path
+%		(Critical-MPI.north)++(-4.0em, 0.0em) coordinate (Critical-MPI-1)
+%		(Critical-MPI.north)++(-2.0em, 0.0em) coordinate (Critical-MPI-2)
+%		(Critical-MPI.north)++(0.0em, 0.0em) coordinate (Critical-MPI-3)
+%		(Critical-MPI.north)++(2.0em, 0.0em) coordinate (Critical-MPI-4)
+%		(Critical-MPI.north)++(4.0em, 0.0em) coordinate (Critical-MPI-5);
+%
+%		\draw [straightline, black,very thick] (VASP-process-1.south) -- (VASP-MPI-1.north);
+%		\draw [straightline, black,very thick] (VASP-process-2.south) -- (VASP-MPI-2.north);
+%%		\draw [straightline, black,very thick] (VASP-process-3.south) -- (VASP-MPI-3.north);
+%		\draw [straightline, black,very thick] (VASP-process-4.south) -- (VASP-MPI-4.north);
+%		\draw [straightline, black,very thick] (VASP-process-5.south) -- (VASP-MPI-5.north);
+%		\path [arrow, NavyBlue, thin] (VASP-MPI-1.south) -- (Critical-MPI-1);
+%		\path [arrow, NavyBlue, thin] (VASP-MPI-2.south) -- (Critical-MPI-2);
+%%		\path [arrow, NavyBlue, thin] (VASP-MPI-3.south) -- (Critical-MPI-3);
+%		\path [arrow, NavyBlue, thin] (VASP-MPI-4.south) -- (Critical-MPI-4);
+%		\path [arrow, NavyBlue, thin] (VASP-MPI-5.south) -- (Critical-MPI-5);
+%%		\includegraphics{<+file+>}
+%%		\caption{<+caption text+>}
+%			\end{tikzpicture}
+%		\end{minipage}
+%		\label{fig:Single-Band-orig}
+%	\end{figure}
+%\end{frame}
+
+\section{计算结果}
+%\frame
+%{
+%	\frametitle{对\textrm{VASP}并行优化及计算规模扩容}
+%	与其余第一原理计算软件相比，\textrm{VASP}的最大优势
+%	\begin{itemize}
+%		\item 应用\textrm{PAW}方法，有效处理含有\textit{d}、\textit{f}电子的过渡金属体系
+%		\item 提供了多种电子结构和原子受力的优化算法(\textrm{SD}、\textrm{CG}、\textrm{RMM-DIIS}等)
+%		\item 用户可通过控制文件\textcolor{blue}{\textrm{INCAR}}的参数调控来选择
+%	\end{itemize}
+%	由于\textrm{VASP}的计算特点，可以处理的模型原子数目的上限一般是百量级($10^2$)，对于复杂体系如合金、化合物和电池材料等，现有的模拟规模是制约\textrm{VASP}软件的重要因素
+%	\vskip 1.5pt
+%	我们变革了\textrm{VASP}并行方式，%在不改变\textrm{VASP}运行策略基础上
+%	实现了计算规模的数量级的扩展
+%\begin{figure}[h!]
+%\centering
+%\includegraphics[height=0.85in,width=3.05in,viewport=0 350 726 543,clip]{Figures/VASP_huge_POSCAR.png}
+%\caption{\tiny \textrm{千原子合金模型.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\label{VASP_Model}
+%\end{figure} 
+%}
+
+\frame
+{
+	\frametitle{\textrm{VASP}计算规模的扩容:~三类模型}
+\begin{figure}[h!]
+\centering
+\vskip -0.6in
+\includegraphics[height=1.45in,width=3.05in,viewport=0 100 656 429,clip]{Figures/VASP_huge_SJTU-CdHgTe_POSCAR.png}
+\vskip -0.6in
+\includegraphics[height=1.65in,width=3.05in,viewport=0 150 726 519,clip]{Figures/VASP_huge_USTB-CFeTi_POSCAR.png}
+\vskip -0.05in
+\includegraphics[height=0.95in,width=3.05in,viewport=0 320 680 543,clip]{Figures/VASP_huge_Ningde-PbONICH_POSCAR.png}
+\caption{\tiny \textrm{千原子合金模型.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{VASP-huge_Model}
+\end{figure} 
+}
+
+\frame
+{
+	\frametitle{计算算例:~控制参数}
+\begin{figure}[h!]
+\centering
+\vskip -0.15in
+\includegraphics[height=2.75in,width=3.55in,viewport=0 40 397 366,clip]{Figures/VASP_huge_INCAR.png}
+%\caption{\tiny \textrm{千原子合金模型:~控制参数\textrm{INCAR}.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{VASP_Contral}
+\end{figure} 
+}
+
+\frame
+{
+	\frametitle{计算算例:~并行规模}
+\begin{figure}[h!]
+\centering
+\vskip -0.15in
+\includegraphics[height=2.75in,width=3.55in,viewport=0 150 735 645,clip]{Figures/VASP_huge_OUTCAR.png}
+%\caption{\tiny \textrm{千原子合金模型:~并行规模($\vec k$点:~\textcolor{red}{$2\times2\times2$}).}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{VASP_Parallel}
+\end{figure} 
+}
+
+%\frame
+%{
+%	\frametitle{计算算例:~初始计算效率}
+%\begin{figure}[h!]
+%\centering
+%\vskip -0.15in
+%\includegraphics[height=2.75in,width=4.05in,viewport=0 0 1032 627,clip]{Figures/VASP_huge_Iteration-1_1.png}
+%\caption{\tiny \textrm{千原子合金模型:~计算效率(初始).}}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\label{VASP_Effectivity}
+%\end{figure} 
+%}
+%
+%\frame
+%{
+%	\frametitle{计算算例:~计算效率}
+%\begin{figure}[h!]
+%\centering
+%\vskip -0.15in
+%\includegraphics[height=2.75in,width=3.55in,viewport=0 0 1021 803,clip]{Figures/VASP_huge_Iteration-4_7.png}
+%\caption{\tiny \textrm{千原子合金模型:~计算效率(稳定).}}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\label{VASP_Effectivity-2}
+%\end{figure} 
+%}
+%
+%\frame
+%{
+%	\frametitle{计算算例:~迭代收敛}
+%\begin{figure}[h!]
+%\centering
+%\vskip -0.15in
+%\includegraphics[height=2.75in,width=3.55in,viewport=0 0 928 803,clip]{Figures/VASP_huge_OSZICAR.png}
+%\caption{\tiny \textrm{千原子合金模型:~迭代收敛.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\label{VASP_Convergence}
+%\end{figure} 
+%}
+%
+%\frame
+%{
+%	\frametitle{计算算例}
+%\begin{figure}[h!]
+%\centering
+%\vskip -0.18in
+%\includegraphics[height=1.35in,width=2.90in,viewport=0 570 589 806,clip]{Figures/VASP_huge_Iteration-1_24.png}
+%\includegraphics[height=1.35in,width=2.90in,viewport=0 560 568 803,clip]{Figures/VASP_huge_Iteration-1_24-2.png}
+%\caption{\tiny \textrm{千原子合金模型($\vec k$点:~\textcolor{red}{$2\times2\times2$} vs~\textcolor{red}{$1\times1\times1$}).}}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\label{VASP_Model-2}
+%\end{figure} 
+%}
+
+\begin{frame}
+	\frametitle{计算算例:~\textrm{CdHgTe}}
+\begin{figure}[h!]
+\centering
+\vskip -0.41in
+\includegraphics[height=1.05in,width=1.30in,viewport=0 0 1268 805,clip]{Figures/VASP_huge_SJTU-CdHgTe_OUTCAR-1.png}
+\includegraphics[height=1.55in,width=1.30in,viewport=0 0 1268 1490,clip]{Figures/VASP_huge_SJTU-CdHgTe_OUTCAR-2.png}
+\includegraphics[height=1.55in,width=1.30in,viewport=0 0 1268 1359,clip]{Figures/VASP_huge_SJTU-CdHgTe_OUTCAR-3.png}
+\includegraphics[height=1.55in,width=3.90in,viewport=0 50 1200 650,clip]{Figures/VASP_huge_SJTU-CdHgTe_OSZICAR.png}
+%\includegraphics[height=1.35in,width=2.90in,viewport=0 560 568 803,clip]{Figures/VASP_huge_Iteration-1_24-2.png}
+%\caption{\tiny \textrm{千原子合金模型($\vec k$点:~\textcolor{red}{$2\times2\times2$} vs~\textcolor{red}{$1\times1\times1$}).}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{VASP_Model-1}
+\end{figure} 
+\end{frame}
+
+\begin{frame}
+	\frametitle{计算算例:~\textrm{CFeTi}}
+\begin{figure}[h!]
+\centering
+\vskip -0.41in
+\includegraphics[height=2.15in,width=1.90in,viewport=0 0 1268 1465,clip]{Figures/VASP_huge_USTB-CFeTi_OUTCAR-2.png}
+\includegraphics[height=2.15in,width=1.90in,viewport=0 0 1346 1517,clip]{Figures/VASP_huge_USTB-CFeTi_OUTCAR-1.png}
+\includegraphics[height=1.05in,width=3.60in,viewport=0 150 1238 500,clip]{Figures/VASP_huge_USTB-CFeTi_OSZICAR.png}
+%\includegraphics[height=1.35in,width=2.90in,viewport=0 560 568 803,clip]{Figures/VASP_huge_Iteration-1_24-2.png}
+%\caption{\tiny \textrm{千原子合金模型($\vec k$点:~\textcolor{red}{$2\times2\times2$} vs~\textcolor{red}{$1\times1\times1$}).}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{VASP_Model-2}
+\end{figure} 
+\end{frame}
+
+\begin{frame}
+	\frametitle{计算算例:~\textrm{PbONICH}}
+\begin{figure}[h!]
+\centering
+\vskip -0.21in
+\includegraphics[height=3.05in,width=3.00in,viewport=0 0 1000 1152,clip]{Figures/VASP_huge_Ningde-PbONICH_OUTCAR.png}
+%\includegraphics[height=1.35in,width=2.90in,viewport=0 560 568 803,clip]{Figures/VASP_huge_Iteration-1_24-2.png}
+%\caption{\tiny \textrm{千原子合金模型($\vec k$点:~\textcolor{red}{$2\times2\times2$} vs~\textcolor{red}{$1\times1\times1$}).}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{VASP_Model-3}
+\end{figure} 
+\end{frame}
+
+\begin{frame}
+	\frametitle{计算算例:~\textrm{High Entropy Alloy}}
+\begin{figure}[h!]
+\centering
+\vskip -0.18in
+\includegraphics[height=1.05in,width=1.30in,viewport=0 0 350 250,clip]{Figures/HighEntropy-Alloys-POSCAR.png}
+\includegraphics[height=0.95in,width=2.65in,viewport=0 0 1000 320,clip]{Figures/HighEntropy-Alloys-OSZICAR.png}
+\includegraphics[height=2.05in,width=3.95in,viewport=0 0 2300 1180,clip]{Figures/HighEntropy-Alloys-OUTCAR-2.png}
+%\caption{\tiny \textrm{千原子合金模型($\vec k$点:~\textcolor{red}{$2\times2\times2$} vs~\textcolor{red}{$1\times1\times1$}).}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{VASP_Model-HighEntropy-OUTCAR-1}
+\end{figure} 
+\end{frame}
+
+\begin{frame}
+	\frametitle{计算算例:~\textrm{High Entropy Alloy}}
+\begin{figure}[h!]
+\centering
+\vskip -0.10in
+\includegraphics[height=2.60in,width=4.05in,viewport=0 0 2180 1220,clip]{Figures/HighEntropy-Alloys-OUTCAR-5.png}
+\label{VASP_Model-HighEntropy-OUTCAR-2}
+\end{figure} 
+\end{frame}
+
+\begin{frame}
+	\frametitle{计算验证算例:~有缺陷的\textrm{Zr}}
+\begin{figure}[h!]
+\centering
+\vskip -0.10in
+\includegraphics[height=1.45in,width=1.95in,viewport=0 0 735 549,clip]{Figures/VASP_huge_USTB-Zr_POSCAR.png}
+\includegraphics[height=1.45in,width=1.95in,viewport=0 0 1246 1053,clip]{Figures/VASP_huge_USTB-Zr_POSCAR-view.png}
+\includegraphics[height=1.45in,width=1.95in,viewport=0 0 1100 900,clip]{Figures/VASP_huge_USTB-Zr_INCAR.png}
+\includegraphics[height=1.45in,width=1.95in,viewport=0 0 990 685,clip]{Figures/VASP_huge_USTB-Zr_OSZICAR.png}
+%\includegraphics[height=1.35in,width=2.90in,viewport=0 560 568 803,clip]{Figures/VASP_huge_Iteration-1_24-2.png}
+%\caption{\tiny \textrm{千原子合金模型($\vec k$点:~\textcolor{red}{$2\times2\times2$} vs~\textcolor{red}{$1\times1\times1$}).}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{VASP_Zr-POSCAR}
+\end{figure} 
+\end{frame}
+
+\begin{frame}
+	\frametitle{计算验证算例:~有缺陷的\textrm{Zr}}
+\begin{figure}[h!]
+\centering
+\vskip -0.10in
+\includegraphics[height=0.35in,width=1.95in,viewport=0 20 1000 200,clip]{Figures/VASP_huge_USTB-Zr_OUTCAR-Init.png}
+\includegraphics[height=1.45in,width=1.95in,viewport=0 0 803 681,clip]{Figures/VASP_huge_USTB-Zr_OUTCAR-Fini.png}
+\includegraphics[height=1.45in,width=1.95in,viewport=0 0 1000 868,clip]{Figures/VASP_huge_USTB-Zr_OUTCAR-SCF.png}
+\includegraphics[height=1.15in,width=1.95in,viewport=0 0 359 250,clip]{Figures/VASP_huge_USTB-Zr-NEP_energy.png}
+%\includegraphics[height=1.35in,width=2.90in,viewport=0 560 568 803,clip]{Figures/VASP_huge_Iteration-1_24-2.png}
+%\caption{\tiny \textrm{千原子合金模型($\vec k$点:~\textcolor{red}{$2\times2\times2$} vs~\textcolor{red}{$1\times1\times1$}).}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{VASP_Zr-OUTCAR}
+\end{figure} 
+\end{frame}
+
+\begin{frame}
+	\frametitle{计算算例:~\textrm{YbOPCH}}
+\begin{figure}[h!]
+\centering
+\vskip -0.18in
+\includegraphics[height=1.05in,width=1.30in,viewport=0 0 350 250,clip]{Figures/YbOPCH-POSCAR.png}
+\includegraphics[height=0.95in,width=2.65in,viewport=0 0 1000 320,clip]{Figures/YbOPCH-OSZICAR.png}
+\includegraphics[height=2.05in,width=3.95in,viewport=0 0 2300 1180,clip]{Figures/YbOPCH-OUTCAR-2.png}
+%\caption{\tiny \textrm{千原子合金模型($\vec k$点:~\textcolor{red}{$2\times2\times2$} vs~\textcolor{red}{$1\times1\times1$}).}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{VASP_Model-YbOPCH-OUTCAR-1}
+\end{figure} 
+\end{frame}
+
+\begin{frame}
+	\frametitle{计算算例:~\textrm{YbOPCH}}
+\begin{figure}[h!]
+\centering
+\vskip -0.10in
+\includegraphics[height=2.60in,width=4.05in,viewport=0 0 2180 1220,clip]{Figures/YbOPCH-OUTCAR-5.png}
+\label{VASP_Model-YbOPCH-OUTCAR-2}
+\end{figure} 
+\end{frame}
+
+%\section{主要问题}
+\frame
+{
+	\frametitle{软件价值与评估}
+\textrm{VASP}支持的\textcolor{red}{$10^3$-$10^4$原子量级}模型\\
+\underline{潜在的应用需求}
+\begin{itemize}
+		\setlength{\itemsep}{10pt}
+		\item 	对机器学习势完成的分子动力学计算的数值检验:\\
+			{\fontsize{7.2pt}{5.2pt}\selectfont{是否可以彻底摆脱对第一原理大规模计算的约束}}
+		\item 电池材料、高熵合金的微观性质高精度计算:\\
+			{\fontsize{7.2pt}{5.2pt}\selectfont{高精度的应用级模拟}}
+		\item 结构材料微观缺陷的高精度模拟:\\
+			{\fontsize{7.2pt}{5.2pt}\selectfont{高精度的材料可观测实验组数据对照}}
+	\end{itemize}
+	\vskip 5pt
+	\textcolor{red}{当前算例与测试目标}:~
+	\begin{itemize}
+		\item 当前\textrm{VASP}支持原子规模的技术方案\underline{可靠性检验}
+		\item 调研用户对$10^3$原子量级模型的\underline{计算效率预期}
+	\end{itemize}
+}
+
+
+\section{第一原理分子动力学的加速}
+\frame
+{
+	\frametitle{第一原理分子动力学\textrm{(AIMD)}中的基本近似}
+	由于分子动力学模拟的复杂性，必须做出适当的近似。具体到第一原理分子动力学，一般有两类重要的近似:
+	\begin{itemize}
+		\item \textcolor{blue}{绝热近似\textrm{(adiabatic approximation)}}\\
+			{\fontsize{6.2pt}{4.2pt}\selectfont{假设电子-原子核在能量层面上完全分离，彼此间没有能量传递}}
+		\item \textcolor{blue}{\textrm{Born-Oppenheimer}近似}\\
+			{\fontsize{6.2pt}{4.2pt}\selectfont{假设电子和原子核的运动完全解耦，对应每个时间步长的原子构型，电子可以实时处于基态\footnote{\fontsize{5.2pt}{4.2pt}\selectfont{\textrm{B-O}近似也是一种绝热近似，\textcolor{red}{但\textrm{B-O}近似下的绝热强调电子对核运动的瞬时响应}。讨论电子计算时，\textrm{B-O}近似下假设原子核是固定不动的;~在分子动力学讨论中，绝热近似强调的是电子-核运动在能量上的完整分离，而\textrm{B-O}近似则明确要求电子-核运动彼此完全解耦，且电子实时处于基态}}}}
+	\end{itemize}
+\begin{figure}[h!]
+\centering
+\vspace*{-0.25in}
+%\hspace*{-10pt}
+\includegraphics[height=1.55in,width=2.6in,viewport=0 0 440 230,clip]{Figures/Molecular-dynamics_Claaified.png}
+%\caption{\fontsize{5.2pt}{4.2pt}\selectfont{\textrm{The major differences between the methods of aiMD simulations.}}}%
+\label{Molecular-dynamics_Classified}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{第一原理分子动力学}
+	\begin{itemize}
+		\item \textrm{AIMD}将电子结构与原子和经典轨迹计算在同一基础上完成
+		\item 每个原子运动步的受力都是在电子结构计算基础上获得的
+		\item 基于\textrm{B-O}方法:\\\textcolor{purple}{在计算原子运动径迹的每一步，都要求电子态都收敛到基态}
+		\item 扩展的\textrm{Lagrangian}方法:~\textcolor{purple}{根据体系几何结构构造体系波函数}\\
+			\textcolor{blue}{\textrm{Car-Parinello}}:\\
+			平面波基，构成分子轨道\\
+			\textcolor{blue}{\textrm{Atom-centered Density Matrix Progation~(ADMP)}}:\\
+			原子中心基，构成密度矩阵
+	\end{itemize}
+	\textrm{AIMD}计算内容
+	\begin{itemize}
+		\item 可用于复杂体系的电子结构计算
+		\item 几何结构优化(能量最小化)
+		\item 描述系统演化
+		\item 模拟时长规模$\approx{\mathrm{ps}}(10^{-12}\mathrm{s})$~(经典分子动力学 $\approx\mathrm{ns}(10^{-9}\mathrm{s})$)
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{分子动力学与反应动力学}
+\begin{figure}[h!]
+\centering
+%\vspace*{-0.10in}
+%\hspace*{-10pt}
+\includegraphics[height=2.7in,width=4.00in,viewport=0 0 503 410,clip]{Figures/NEB_CI-NEB.png}
+%\caption{\fontsize{5.2pt}{4.2pt}\selectfont{\textrm{Comparison of NEB and Climbing Image NEB (cNEB).}}}%
+\label{Comparison-NEB_CI-NEB}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{第一原理分子动力学可能的加速策略}
+	自\textrm{2018}年起，针对\textrm{VASP}的计算加速方案，曾和团队和高校老师做过一点探索，这些探索是否可以放到\textrm{AIMD}的加速
+\begin{figure}[h!]
+\centering
+\vspace*{-0.05in}
+%\hspace*{-10pt}
+\includegraphics[height=1.8in,width=1.28in,viewport=0 0 534 800,clip]{Figures/BCC-Paper_2019.png}
+\includegraphics[height=1.8in,width=1.35in,viewport=0 0 689 819,clip]{Figures/BCC_THU-Paper_2019.png}
+\includegraphics[height=1.8in,width=1.30in,viewport=0 0 612 794,clip]{Figures/BCC_THU-Paper_2020.png}
+%\caption{\fontsize{5.2pt}{4.2pt}\selectfont{\textrm{The major differences between the methods of aiMD simulations.}}}%
+\label{Molecular-dynamics_Accurate}
+\end{figure}
+}
+%\frame
+%{
+%	\frametitle{第一原理分子动力学的分类}
+%\begin{figure}[h!]
+%\centering
+%\vspace*{-0.05in}
+%%\hspace*{-10pt}
+%\includegraphics[height=2.3in,width=4.0in,viewport=0 0 440 230,clip]{Figures/Molecular-dynamics_Claaified.png}
+%\caption{\fontsize{5.2pt}{4.2pt}\selectfont{\textrm{The major differences between the methods of aiMD simulations.}}}%
+%\label{Molecular-dynamics_Claaified}
+%\end{figure}
+%}
+%
