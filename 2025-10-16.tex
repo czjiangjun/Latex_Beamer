@@ -354,111 +354,111 @@
 \textcolor{red}{\textrm{GPU}加速不是提升\textrm{VASP}计算规模的最有效方案}
 }
 
-\frame
-{
-	\frametitle{\textrm{VASP}的原子势函数:~\textrm{POTCAR}}
-	\textrm{POTCAR}是\textrm{VASP}的必备文件，提供了\textrm{VASP}计算所需的全部原子数据，也是实现\textrm{PAW}方法的主要基础
-	\begin{itemize}
-		\item \textrm{POTCAR}是\textrm{VASP}实现材料精确计算的重要保证\\
-			同样都应用\textrm{PAW}方法，\textcolor{blue}{公认\textrm{VASP}较\textrm{QE}、\textrm{ABINIT}等软件的计算精度要高}
-		\item \textrm{POTCAR}数据生成依赖较多的可调参数\\
-			包括能量参数$\varepsilon_l$、多种截断半径$r_c$、$r_{\mathrm{vloc}}$、$r_{\mathrm{shape}}$、$r_{\mathrm{core}}$
-		\item \textcolor{red}{\textrm{POTCAR}数据生成代码是\textrm{VASP}中唯一没有公开的}
-		\item 用\textrm{VASP}模拟极端条件下材料物性的能力，受到\textrm{POTCAR}数据的制约
-	\end{itemize}
-	%文献\cite{PRB59-1758_1999}介绍了\textrm{POTCAR}的主要实现思想
-
-当前研究主要尝试:~基于开源的\textrm{PAW}赝势生成软件(\textrm{atomPAW})，开发能生成\textrm{POTCAR}原子数据的功能
-}
-
-\frame
-{
-	\frametitle{\textrm{PAW}原子数据集:~\textrm{wave~function}}
-	平滑赝原子分波函数
-	\begin{displaymath}
-		\tilde\phi_{i=Lk}(\vec r)=Y_L(\widehat{\vec r-\vec R})\tilde\phi_{lk}(|\vec r-\vec R|)
-	\end{displaymath}
-	根据\textrm{RRKJ}赝势构造的思想，赝分波函数由球\textrm{Bessel}函数线性组合%\upcite{JPCM6-8245_1994}
-	\begin{displaymath}
-		\tilde\phi_{lk}(r)=\left\{
-		\begin{aligned}
-			&\sum_{i=1}^2\alpha_ij_l(q_ir)\quad &r<r_c^l\\
-			&\phi_{lk}(r)\quad&r>r_c^l
-		\end{aligned}
-		\right.
-	\end{displaymath}
-	调节系数$\alpha_i$和$q_i$赝分波函数$\phi_{lk}(r)$在截断半径$r_c^l$处两阶连续可微
-%	投影子波函数$\tilde p_i$由\textrm{Gram-Schmidt}正交条件$\langle\tilde p_i|\tilde\phi_j\rangle=\delta_{ij}$确定
-}
-
-\frame
-{
-	\frametitle{\textrm{PAW}原子数据集:~\textrm{wave~function}}
-\begin{figure}[h!]
-\centering
-\vskip -0.5in
-\includegraphics[width=1.5in,height=2.7in,viewport=0 0 350 550, angle=-90, clip]{Figures/WAE-data.eps}
-\vskip -0.2in
-\includegraphics[height=2.7in,width=1.5in,viewport=0 0 350 550, angle=-90, clip]{Figures/WPS-data.eps}
-\caption{\tiny \textrm{The partial wave function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{Wave_Function}
-\end{figure}
-}
-
-\frame
-{
-	\frametitle{\textrm{PAW}原子数据集:~\textrm{core~density}}
-	\textcolor{blue}{构造赝芯电荷密度$\tilde n_c$}:~在截断半径$r_{\mathrm{core}}$内的定义为
-	$$\sum_{i=1,2}B_i\dfrac{\sin(q_ir)}r\quad r<r_{\mathrm{core}}$$
-	调节系数$q_i$和$B_i$使得赝芯电荷密度$\tilde n_c(r)$在截断半径$r_{\mathrm{core}}$处的两阶导数连续
-\begin{figure}[h!]
-\vskip -0.5in
-\centering
-\hspace*{-0.1in}
-\includegraphics[width=1.5in,height=2.35in,viewport=0 0 350 550, angle=-90, clip]{Figures/CORE-data.eps}
-\hspace*{-0.7in}
-\includegraphics[height=2.35in,width=1.5in,viewport=0 0 350 550, angle=-90, clip]{Figures/PCORE-data.eps}
-\caption{\tiny \textrm{The core density.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{core_density_Function}
-\end{figure}
-}
-
-\frame
-{
-	\frametitle{\textrm{PAW}原子数据集:~$\mathrm{v}_{e\!f\!f}(r)$与$\tilde{\mathrm{v}}_{e\!f\!f}(r)$}
-	\textcolor{blue}{原子局域有效势$\mathrm{v}_{e\!f\!f}^a$}
-\begin{figure}[h!]
+%\frame
+%{
+%	\frametitle{\textrm{VASP}的原子势函数:~\textrm{POTCAR}}
+%	\textrm{POTCAR}是\textrm{VASP}的必备文件，提供了\textrm{VASP}计算所需的全部原子数据，也是实现\textrm{PAW}方法的主要基础
+%	\begin{itemize}
+%		\item \textrm{POTCAR}是\textrm{VASP}实现材料精确计算的重要保证\\
+%			同样都应用\textrm{PAW}方法，\textcolor{blue}{公认\textrm{VASP}较\textrm{QE}、\textrm{ABINIT}等软件的计算精度要高}
+%		\item \textrm{POTCAR}数据生成依赖较多的可调参数\\
+%			包括能量参数$\varepsilon_l$、多种截断半径$r_c$、$r_{\mathrm{vloc}}$、$r_{\mathrm{shape}}$、$r_{\mathrm{core}}$
+%		\item \textcolor{red}{\textrm{POTCAR}数据生成代码是\textrm{VASP}中唯一没有公开的}
+%		\item 用\textrm{VASP}模拟极端条件下材料物性的能力，受到\textrm{POTCAR}数据的制约
+%	\end{itemize}
+%	%文献\cite{PRB59-1758_1999}介绍了\textrm{POTCAR}的主要实现思想
+%
+%当前研究主要尝试:~基于开源的\textrm{PAW}赝势生成软件(\textrm{atomPAW})，开发能生成\textrm{POTCAR}原子数据的功能
+%}
+%
+%\frame
+%{
+%	\frametitle{\textrm{PAW}原子数据集:~\textrm{wave~function}}
+%	平滑赝原子分波函数
+%	\begin{displaymath}
+%		\tilde\phi_{i=Lk}(\vec r)=Y_L(\widehat{\vec r-\vec R})\tilde\phi_{lk}(|\vec r-\vec R|)
+%	\end{displaymath}
+%	根据\textrm{RRKJ}赝势构造的思想，赝分波函数由球\textrm{Bessel}函数线性组合%\upcite{JPCM6-8245_1994}
+%	\begin{displaymath}
+%		\tilde\phi_{lk}(r)=\left\{
+%		\begin{aligned}
+%			&\sum_{i=1}^2\alpha_ij_l(q_ir)\quad &r<r_c^l\\
+%			&\phi_{lk}(r)\quad&r>r_c^l
+%		\end{aligned}
+%		\right.
+%	\end{displaymath}
+%	调节系数$\alpha_i$和$q_i$赝分波函数$\phi_{lk}(r)$在截断半径$r_c^l$处两阶连续可微
+%%	投影子波函数$\tilde p_i$由\textrm{Gram-Schmidt}正交条件$\langle\tilde p_i|\tilde\phi_j\rangle=\delta_{ij}$确定
+%}
+%
+%\frame
+%{
+%	\frametitle{\textrm{PAW}原子数据集:~\textrm{wave~function}}
+%\begin{figure}[h!]
+%\centering
 %\vskip -0.5in
-\vskip -0.17in
-\centering
-%\includegraphics[width=1.6in,height=2.7in,viewport=0 0 300 460, angle=-90, clip]{Figures/POTAE-data.eps}
-\includegraphics[width=2.5in,height=1.2in,viewport=0 0 1600 800, clip]{Figures/POTAE-full-dat.pdf}
-\caption{\tiny \textrm{The local atomic effective-Potential.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{local_atomic_PP}
-\end{figure}
-	\textcolor{blue}{构造原子局域赝势$\tilde v_{e\!f\!f}^a$}%(\textcolor{red}{为防止\textrm{ghost band}})
-	:%\\
-	(在截断半径$r_{\mathrm{loc}}$内的定义)
-	$$\tilde v_{e\!f\!f}^a=A\dfrac{\sin(q_{loc}r)}r\quad r<r_{\mathrm{loc}}$$
-	其中$q_{loc}$和$A$要求局域赝势在截断半径$r_{\mathrm{loc}}$处连续到一阶导数
-}
-
-\frame
-{
-	\frametitle{\textrm{PAW}原子数据集:~$\mathrm{v}_H[\tilde n_{Zc}]$}
-	局域离子赝势$v_H[\tilde n_{Zc}]$可由原子局域赝势去屏蔽得到
-	$$v_H[\tilde n_{Zc}]=\tilde v_{e\!f\!f}^a-v_H[\tilde n_a^1+\hat n_a]-v_{\mathrm{XC}}[\tilde n_a^1+\hat n_a+\tilde n_c]$$
-\begin{figure}[h!]
-\vskip -0.5in
-\centering
-\hspace*{-0.1in}
-\includegraphics[width=1.5in,height=2.35in,viewport=0 0 350 550, angle=-90, clip]{Figures/POTPS-data.eps}
-\hspace*{-0.7in}
-\includegraphics[height=2.35in,width=1.5in,viewport=0 0 350 550, angle=-90, clip]{Figures/POTPSC-data.eps}
-\caption{\tiny \textrm{The pseudo-potential and local ionic pseudo-potential.}}%(与文献\cite{EPJB33-47_2003}图1对比)
-\label{pseudo_potential}
-\end{figure}
-}
+%\includegraphics[width=1.5in,height=2.7in,viewport=0 0 350 550, angle=-90, clip]{Figures/WAE-data.eps}
+%\vskip -0.2in
+%\includegraphics[height=2.7in,width=1.5in,viewport=0 0 350 550, angle=-90, clip]{Figures/WPS-data.eps}
+%\caption{\tiny \textrm{The partial wave function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\label{Wave_Function}
+%\end{figure}
+%}
+%
+%\frame
+%{
+%	\frametitle{\textrm{PAW}原子数据集:~\textrm{core~density}}
+%	\textcolor{blue}{构造赝芯电荷密度$\tilde n_c$}:~在截断半径$r_{\mathrm{core}}$内的定义为
+%	$$\sum_{i=1,2}B_i\dfrac{\sin(q_ir)}r\quad r<r_{\mathrm{core}}$$
+%	调节系数$q_i$和$B_i$使得赝芯电荷密度$\tilde n_c(r)$在截断半径$r_{\mathrm{core}}$处的两阶导数连续
+%\begin{figure}[h!]
+%\vskip -0.5in
+%\centering
+%\hspace*{-0.1in}
+%\includegraphics[width=1.5in,height=2.35in,viewport=0 0 350 550, angle=-90, clip]{Figures/CORE-data.eps}
+%\hspace*{-0.7in}
+%\includegraphics[height=2.35in,width=1.5in,viewport=0 0 350 550, angle=-90, clip]{Figures/PCORE-data.eps}
+%\caption{\tiny \textrm{The core density.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\label{core_density_Function}
+%\end{figure}
+%}
+%
+%\frame
+%{
+%	\frametitle{\textrm{PAW}原子数据集:~$\mathrm{v}_{e\!f\!f}(r)$与$\tilde{\mathrm{v}}_{e\!f\!f}(r)$}
+%	\textcolor{blue}{原子局域有效势$\mathrm{v}_{e\!f\!f}^a$}
+%\begin{figure}[h!]
+%%\vskip -0.5in
+%\vskip -0.17in
+%\centering
+%%\includegraphics[width=1.6in,height=2.7in,viewport=0 0 300 460, angle=-90, clip]{Figures/POTAE-data.eps}
+%\includegraphics[width=2.5in,height=1.2in,viewport=0 0 1600 800, clip]{Figures/POTAE-full-dat.pdf}
+%\caption{\tiny \textrm{The local atomic effective-Potential.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\label{local_atomic_PP}
+%\end{figure}
+%	\textcolor{blue}{构造原子局域赝势$\tilde v_{e\!f\!f}^a$}%(\textcolor{red}{为防止\textrm{ghost band}})
+%	:%\\
+%	(在截断半径$r_{\mathrm{loc}}$内的定义)
+%	$$\tilde v_{e\!f\!f}^a=A\dfrac{\sin(q_{loc}r)}r\quad r<r_{\mathrm{loc}}$$
+%	其中$q_{loc}$和$A$要求局域赝势在截断半径$r_{\mathrm{loc}}$处连续到一阶导数
+%}
+%
+%\frame
+%{
+%	\frametitle{\textrm{PAW}原子数据集:~$\mathrm{v}_H[\tilde n_{Zc}]$}
+%	局域离子赝势$v_H[\tilde n_{Zc}]$可由原子局域赝势去屏蔽得到
+%	$$v_H[\tilde n_{Zc}]=\tilde v_{e\!f\!f}^a-v_H[\tilde n_a^1+\hat n_a]-v_{\mathrm{XC}}[\tilde n_a^1+\hat n_a+\tilde n_c]$$
+%\begin{figure}[h!]
+%\vskip -0.5in
+%\centering
+%\hspace*{-0.1in}
+%\includegraphics[width=1.5in,height=2.35in,viewport=0 0 350 550, angle=-90, clip]{Figures/POTPS-data.eps}
+%\hspace*{-0.7in}
+%\includegraphics[height=2.35in,width=1.5in,viewport=0 0 350 550, angle=-90, clip]{Figures/POTPSC-data.eps}
+%\caption{\tiny \textrm{The pseudo-potential and local ionic pseudo-potential.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\label{pseudo_potential}
+%\end{figure}
+%}
 
 \section{\rm{VASP}计算$10^3$原子模型的策略与方案}
 \begin{frame}
@@ -954,77 +954,77 @@
 }
 
 
-\section{第一原理分子动力学的加速}
-\frame
-{
-	\frametitle{第一原理分子动力学\textrm{(AIMD)}中的基本近似}
-	由于分子动力学模拟的复杂性，必须做出适当的近似。具体到第一原理分子动力学，一般有两类重要的近似:
-	\begin{itemize}
-		\item \textcolor{blue}{绝热近似\textrm{(adiabatic approximation)}}\\
-			{\fontsize{6.2pt}{4.2pt}\selectfont{假设电子-原子核在能量层面上完全分离，彼此间没有能量传递}}
-		\item \textcolor{blue}{\textrm{Born-Oppenheimer}近似}\\
-			{\fontsize{6.2pt}{4.2pt}\selectfont{假设电子和原子核的运动完全解耦，对应每个时间步长的原子构型，电子可以实时处于基态\footnote{\fontsize{5.2pt}{4.2pt}\selectfont{\textrm{B-O}近似也是一种绝热近似，\textcolor{red}{但\textrm{B-O}近似下的绝热强调电子对核运动的瞬时响应}。讨论电子计算时，\textrm{B-O}近似下假设原子核是固定不动的;~在分子动力学讨论中，绝热近似强调的是电子-核运动在能量上的完整分离，而\textrm{B-O}近似则明确要求电子-核运动彼此完全解耦，且电子实时处于基态}}}}
-	\end{itemize}
-\begin{figure}[h!]
-\centering
-\vspace*{-0.25in}
-%\hspace*{-10pt}
-\includegraphics[height=1.55in,width=2.6in,viewport=0 0 440 230,clip]{Figures/Molecular-dynamics_Claaified.png}
-%\caption{\fontsize{5.2pt}{4.2pt}\selectfont{\textrm{The major differences between the methods of aiMD simulations.}}}%
-\label{Molecular-dynamics_Classified}
-\end{figure}
-}
-
-\frame
-{
-	\frametitle{第一原理分子动力学}
-	\begin{itemize}
-		\item \textrm{AIMD}将电子结构与原子和经典轨迹计算在同一基础上完成
-		\item 每个原子运动步的受力都是在电子结构计算基础上获得的
-		\item 基于\textrm{B-O}方法:\\\textcolor{purple}{在计算原子运动径迹的每一步，都要求电子态都收敛到基态}
-		\item 扩展的\textrm{Lagrangian}方法:~\textcolor{purple}{根据体系几何结构构造体系波函数}\\
-			\textcolor{blue}{\textrm{Car-Parinello}}:\\
-			平面波基，构成分子轨道\\
-			\textcolor{blue}{\textrm{Atom-centered Density Matrix Progation~(ADMP)}}:\\
-			原子中心基，构成密度矩阵
-	\end{itemize}
-	\textrm{AIMD}计算内容
-	\begin{itemize}
-		\item 可用于复杂体系的电子结构计算
-		\item 几何结构优化(能量最小化)
-		\item 描述系统演化
-		\item 模拟时长规模$\approx{\mathrm{ps}}(10^{-12}\mathrm{s})$~(经典分子动力学 $\approx\mathrm{ns}(10^{-9}\mathrm{s})$)
-	\end{itemize}
-}
-
-\frame
-{
-	\frametitle{分子动力学与反应动力学}
-\begin{figure}[h!]
-\centering
-%\vspace*{-0.10in}
-%\hspace*{-10pt}
-\includegraphics[height=2.7in,width=4.00in,viewport=0 0 503 410,clip]{Figures/NEB_CI-NEB.png}
-%\caption{\fontsize{5.2pt}{4.2pt}\selectfont{\textrm{Comparison of NEB and Climbing Image NEB (cNEB).}}}%
-\label{Comparison-NEB_CI-NEB}
-\end{figure}
-}
-
-\frame
-{
-	\frametitle{第一原理分子动力学可能的加速策略}
-	自\textrm{2018}年起，针对\textrm{VASP}的计算加速方案，曾和团队和高校老师做过一点探索，这些探索是否可以放到\textrm{AIMD}的加速
-\begin{figure}[h!]
-\centering
-\vspace*{-0.05in}
-%\hspace*{-10pt}
-\includegraphics[height=1.8in,width=1.28in,viewport=0 0 534 800,clip]{Figures/BCC-Paper_2019.png}
-\includegraphics[height=1.8in,width=1.35in,viewport=0 0 689 819,clip]{Figures/BCC_THU-Paper_2019.png}
-\includegraphics[height=1.8in,width=1.30in,viewport=0 0 612 794,clip]{Figures/BCC_THU-Paper_2020.png}
-%\caption{\fontsize{5.2pt}{4.2pt}\selectfont{\textrm{The major differences between the methods of aiMD simulations.}}}%
-\label{Molecular-dynamics_Accurate}
-\end{figure}
-}
+%\section{第一原理分子动力学的加速}
+%\frame
+%{
+%	\frametitle{第一原理分子动力学\textrm{(AIMD)}中的基本近似}
+%	由于分子动力学模拟的复杂性，必须做出适当的近似。具体到第一原理分子动力学，一般有两类重要的近似:
+%	\begin{itemize}
+%		\item \textcolor{blue}{绝热近似\textrm{(adiabatic approximation)}}\\
+%			{\fontsize{6.2pt}{4.2pt}\selectfont{假设电子-原子核在能量层面上完全分离，彼此间没有能量传递}}
+%		\item \textcolor{blue}{\textrm{Born-Oppenheimer}近似}\\
+%			{\fontsize{6.2pt}{4.2pt}\selectfont{假设电子和原子核的运动完全解耦，对应每个时间步长的原子构型，电子可以实时处于基态\footnote{\fontsize{5.2pt}{4.2pt}\selectfont{\textrm{B-O}近似也是一种绝热近似，\textcolor{red}{但\textrm{B-O}近似下的绝热强调电子对核运动的瞬时响应}。讨论电子计算时，\textrm{B-O}近似下假设原子核是固定不动的;~在分子动力学讨论中，绝热近似强调的是电子-核运动在能量上的完整分离，而\textrm{B-O}近似则明确要求电子-核运动彼此完全解耦，且电子实时处于基态}}}}
+%	\end{itemize}
+%\begin{figure}[h!]
+%\centering
+%\vspace*{-0.25in}
+%%\hspace*{-10pt}
+%\includegraphics[height=1.55in,width=2.6in,viewport=0 0 440 230,clip]{Figures/Molecular-dynamics_Claaified.png}
+%%\caption{\fontsize{5.2pt}{4.2pt}\selectfont{\textrm{The major differences between the methods of aiMD simulations.}}}%
+%\label{Molecular-dynamics_Classified}
+%\end{figure}
+%}
+%
+%\frame
+%{
+%	\frametitle{第一原理分子动力学}
+%	\begin{itemize}
+%		\item \textrm{AIMD}将电子结构与原子和经典轨迹计算在同一基础上完成
+%		\item 每个原子运动步的受力都是在电子结构计算基础上获得的
+%		\item 基于\textrm{B-O}方法:\\\textcolor{purple}{在计算原子运动径迹的每一步，都要求电子态都收敛到基态}
+%		\item 扩展的\textrm{Lagrangian}方法:~\textcolor{purple}{根据体系几何结构构造体系波函数}\\
+%			\textcolor{blue}{\textrm{Car-Parinello}}:\\
+%			平面波基，构成分子轨道\\
+%			\textcolor{blue}{\textrm{Atom-centered Density Matrix Progation~(ADMP)}}:\\
+%			原子中心基，构成密度矩阵
+%	\end{itemize}
+%	\textrm{AIMD}计算内容
+%	\begin{itemize}
+%		\item 可用于复杂体系的电子结构计算
+%		\item 几何结构优化(能量最小化)
+%		\item 描述系统演化
+%		\item 模拟时长规模$\approx{\mathrm{ps}}(10^{-12}\mathrm{s})$~(经典分子动力学 $\approx\mathrm{ns}(10^{-9}\mathrm{s})$)
+%	\end{itemize}
+%}
+%
+%\frame
+%{
+%	\frametitle{分子动力学与反应动力学}
+%\begin{figure}[h!]
+%\centering
+%%\vspace*{-0.10in}
+%%\hspace*{-10pt}
+%\includegraphics[height=2.7in,width=4.00in,viewport=0 0 503 410,clip]{Figures/NEB_CI-NEB.png}
+%%\caption{\fontsize{5.2pt}{4.2pt}\selectfont{\textrm{Comparison of NEB and Climbing Image NEB (cNEB).}}}%
+%\label{Comparison-NEB_CI-NEB}
+%\end{figure}
+%}
+%
+%\frame
+%{
+%	\frametitle{第一原理分子动力学可能的加速策略}
+%	自\textrm{2018}年起，针对\textrm{VASP}的计算加速方案，曾和团队和高校老师做过一点探索，这些探索是否可以放到\textrm{AIMD}的加速
+%\begin{figure}[h!]
+%\centering
+%\vspace*{-0.05in}
+%%\hspace*{-10pt}
+%\includegraphics[height=1.8in,width=1.28in,viewport=0 0 534 800,clip]{Figures/BCC-Paper_2019.png}
+%\includegraphics[height=1.8in,width=1.35in,viewport=0 0 689 819,clip]{Figures/BCC_THU-Paper_2019.png}
+%\includegraphics[height=1.8in,width=1.30in,viewport=0 0 612 794,clip]{Figures/BCC_THU-Paper_2020.png}
+%%\caption{\fontsize{5.2pt}{4.2pt}\selectfont{\textrm{The major differences between the methods of aiMD simulations.}}}%
+%\label{Molecular-dynamics_Accurate}
+%\end{figure}
+%}
 %\frame
 %{
 %	\frametitle{第一原理分子动力学的分类}
