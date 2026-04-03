@@ -1,0 +1,236 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  不使用 authblk 包制作标题  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%-------------------------------PPT Title-------------------------------------
+\title{\rm{VASP}的基础原子数据集构造与参数优化}
+%-----------------------------------------------------------------------------
+
+%----------------------------Author & Date------------------------------------
+%\author[]{\vskip +10pt 姜\;\;骏\inst{}} %[]{} (optional, use only with lots of authors)
+%% - Give the names in the same order as the appear in the paper.
+%% - Use the \inst{?} command only if the authors have different
+%%   affiliation.
+\institute[BCC]{\inst{}%
+%\institute[Gain~Strong]{\inst{}%
+\vskip -15pt 北京市计算中心有限公司~~~姜骏
+\vskip 3pt 清华大学~物理系~\fbox{王崇愚}}
+%\vskip -20pt {\large 格致斯创~科技}}
+\date[\today] % (optional, should be abbreviation of conference name)
+{	%{\fontsize{6.2pt}{4.2pt}\selectfont{\textcolor{blue}{E-mail:~}\url{jiangjun@bcc.ac.cn}}}
+\vskip 40 pt {\fontsize{7.2pt}{6.2pt}\selectfont{广州~~南沙国际会展中心%清华大学\;\;物理系% 报告地点
+	\vskip -20 pt \textrm{2026.~04.~11}}} %日期在报告地点之上
+%	\vskip 5 pt \textrm{2026.~04.~11}     %日期在报告地点之下
+}
+
+%% - Either use conference name or its abbreviation
+%% - Not really information to the audience, more for people (including
+%%   yourself) who are reading the slides onlin%%   yourself) who are reading the slides onlin%%   yourself) who are reading the slides onlineee
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subject{}
+% This is only inserted into the PDF information catalog. Can be left
+% out.
+%\maketitle
+\frame
+{
+\frametitle{\textcolor{orange}{\fontsize{11.5pt}{5.2pt}\selectfont{首届“\textrm{AI}+新材料”大会}}}
+~~\fontsize{9.5pt}{5.2pt}\selectfont{论坛一:~\textrm{AI}智能材料设计}
+\vskip 15pt
+\titlepage
+}
+%-----------------------------------------------------------------------------
+
+%------------------------------------------------------------------------------列出全文 outline ---------------------------------------------------------------------------------
+\section*{}
+\frame[allowframebreaks]
+{
+	\frametitle{\textrm{Outline}}
+%  \frametitle{\textcolor{mycolor}{\secname}}
+  \tableofcontents%[current,currentsection,currentsubsection]
+}
+%在每个section之前列出全部Outline
+%类似的在每个subsection之前列出全部Outline是\AtBeginSubsection[]
+%\AtBeginSection[]
+%{
+%  \frame<handout:0>%[allowframebreaks]
+%  {
+%    \frametitle{Outline}
+%%全部Outline中，本部分加亮
+%    \tableofcontents[current,currentsection]
+%  }
+%}
+
+%-----------------------------------------------PPT main Body------------------------------------------------------------------------------------
+\small
+\section{\rm{POTCAR}是\rm{VASP}软件的数据基础}
+\frame
+{
+	\frametitle{\textrm{VASP}中的\textrm{PAW}方法}
+\begin{figure}[h!]
+\centering
+\includegraphics[height=2.3in,width=4.0in,viewport=0 0 1280 745,clip]{Figures/PAW-baseset.png}
+\caption{\tiny \textrm{The Augmentation of PAW.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{PAW_baseset}
+\end{figure}
+}
+
+\frame
+{
+\frametitle{电荷密度的重新分解}
+\textrm{PAW}方法提出后有很长一段时间没有能够得到广泛应用\\
+\textrm{G. Kresse}等将%\textrm{Bl\"ochl}的原始方案中电荷密度计算方案重新组合后，
+\begin{itemize}
+	\item 芯层电荷与核电荷构成离子实电荷:~$n_{Zc}=n_Z+n_c$
+\begin{figure}[h!]
+\centering
+\vspace{-10.5pt}
+\includegraphics[height=1.5in,width=3.0in,viewport=0 0 380 190,clip]{Figures/Pseudo-potential_charge.png}
+\caption{\tiny \textrm{The difference of the electron-density distributing from P.~Bl\"ochl  and from G.~Kresse.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{PAW_Pseudo-Charge}
+\end{figure}
+	\item \textrm{POTCAR}数据:~成为\textrm{PAW}方法与\textrm{USPP}方法的内在联系\\
+\end{itemize}
+}
+
+\section{\rm{VASP}计算的原子数据重建}
+\frame
+{
+	\frametitle{\textrm{VASP}计算的原子数据基础}
+	\textrm{POTCAR}是\textrm{VASP}的必备文件，提供了\textrm{VASP}计算所需的全部原子数据，也是实现\textrm{PAW}方法的主要基础
+	\begin{itemize}
+		\item \textrm{POTCAR}是\textrm{VASP}实现材料精确计算的重要保证\\
+			同样都应用\textrm{PAW}方法，\textcolor{blue}{公认\textrm{VASP}较\textrm{QE}、\textrm{ABINIT}等软件的计算精度要高}
+		\item \textrm{POTCAR}数据生成依赖较多的可调参数\\
+			包括能量参数$\varepsilon_l$、多种截断半径$r_c$、$r_{\mathrm{vloc}}$、$r_{\mathrm{shape}}$、$r_{\mathrm{core}}$
+		\item \textcolor{red}{\textrm{POTCAR}数据生成代码是\textrm{VASP}中唯一没有公开的}
+		\item 用\textrm{VASP}模拟极端条件下材料物性的能力，受到\textrm{POTCAR}数据的制约
+	\end{itemize}
+	%文献\cite{PRB59-1758_1999}介绍了\textrm{POTCAR}的主要实现思想
+
+当前研究主要尝试:~基于开源的\textrm{PAW}赝势生成软件(\textrm{atomPAW})，开发能生成\textrm{POTCAR}原子数据的功能
+}
+
+\frame
+{
+	\frametitle{\textrm{PAW}原子数据集:~\textrm{wave~function}}
+	平滑赝原子分波函数
+	\begin{displaymath}
+		\tilde\phi_{i=Lk}(\vec r)=Y_L(\widehat{\vec r-\vec R})\tilde\phi_{lk}(|\vec r-\vec R|)
+	\end{displaymath}
+	根据\textrm{RRKJ}赝势构造的思想，赝分波函数由球\textrm{Bessel}函数线性组合%\upcite{JPCM6-8245_1994}
+	\begin{displaymath}
+		\tilde\phi_{lk}(r)=\left\{
+		\begin{aligned}
+			&\sum_{i=1}^2\alpha_ij_l(q_ir)\quad &r<r_c^l\\
+			&\phi_{lk}(r)\quad&r>r_c^l
+		\end{aligned}
+		\right.
+	\end{displaymath}
+	调节系数$\alpha_i$和$q_i$赝分波函数$\phi_{lk}(r)$在截断半径$r_c^l$处两阶连续可微
+%	投影子波函数$\tilde p_i$由\textrm{Gram-Schmidt}正交条件$\langle\tilde p_i|\tilde\phi_j\rangle=\delta_{ij}$确定
+}
+
+\frame
+{
+	\frametitle{\textrm{PAW}原子数据集:~\textrm{wave~function}}
+\begin{figure}[h!]
+\centering
+\vskip -0.5in
+\includegraphics[width=1.5in,height=2.7in,viewport=0 0 350 550, angle=-90, clip]{Figures/WAE-data.eps}
+\vskip -0.2in
+\includegraphics[height=2.7in,width=1.5in,viewport=0 0 350 550, angle=-90, clip]{Figures/WPS-data.eps}
+\caption{\tiny \textrm{The partial wave function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Wave_Function}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{PAW}原子数据集:~\textrm{core~density}}
+	\textcolor{blue}{构造赝芯电荷密度$\tilde n_c$}:~在截断半径$r_{\mathrm{core}}$内的定义为
+	$$\sum_{i=1,2}B_i\dfrac{\sin(q_ir)}r\quad r<r_{\mathrm{core}}$$
+	调节系数$q_i$和$B_i$使得赝芯电荷密度$\tilde n_c(r)$在截断半径$r_{\mathrm{core}}$处的两阶导数连续
+\begin{figure}[h!]
+\vskip -0.5in
+\centering
+\hspace*{-0.1in}
+\includegraphics[width=1.5in,height=2.35in,viewport=0 0 350 550, angle=-90, clip]{Figures/CORE-data.eps}
+\hspace*{-0.7in}
+\includegraphics[height=2.35in,width=1.5in,viewport=0 0 350 550, angle=-90, clip]{Figures/PCORE-data.eps}
+\caption{\tiny \textrm{The core density.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{core_density_Function}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{PAW}原子数据集:~$\mathrm{v}_{e\!f\!f}(r)$与$\tilde{\mathrm{v}}_{e\!f\!f}(r)$}
+	\textcolor{blue}{原子局域有效势$\mathrm{v}_{e\!f\!f}^a$}
+\begin{figure}[h!]
+%\vskip -0.5in
+\vskip -0.17in
+\centering
+%\includegraphics[width=1.6in,height=2.7in,viewport=0 0 300 460, angle=-90, clip]{Figures/POTAE-data.eps}
+\includegraphics[width=2.5in,height=1.2in,viewport=0 0 1600 800, clip]{Figures/POTAE-full-dat.pdf}
+\caption{\tiny \textrm{The local atomic effective-Potential.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{local_atomic_PP}
+\end{figure}
+	\textcolor{blue}{构造原子局域赝势$\tilde v_{e\!f\!f}^a$}%(\textcolor{red}{为防止\textrm{ghost band}})
+	:%\\
+	(在截断半径$r_{\mathrm{loc}}$内的定义)
+	$$\tilde v_{e\!f\!f}^a=A\dfrac{\sin(q_{loc}r)}r\quad r<r_{\mathrm{loc}}$$
+	其中$q_{loc}$和$A$要求局域赝势在截断半径$r_{\mathrm{loc}}$处连续到一阶导数
+}
+
+\frame
+{
+	\frametitle{\textrm{PAW}原子数据集:~$\mathrm{v}_H[\tilde n_{Zc}]$}
+	局域离子赝势$v_H[\tilde n_{Zc}]$可由原子局域赝势去屏蔽得到
+	$$v_H[\tilde n_{Zc}]=\tilde v_{e\!f\!f}^a-v_H[\tilde n_a^1+\hat n_a]-v_{\mathrm{XC}}[\tilde n_a^1+\hat n_a+\tilde n_c]$$
+\begin{figure}[h!]
+\vskip -0.5in
+\centering
+\hspace*{-0.1in}
+\includegraphics[width=1.5in,height=2.35in,viewport=0 0 350 550, angle=-90, clip]{Figures/POTPS-data.eps}
+\hspace*{-0.7in}
+\includegraphics[height=2.35in,width=1.5in,viewport=0 0 350 550, angle=-90, clip]{Figures/POTPSC-data.eps}
+\caption{\tiny \textrm{The pseudo-potential and local ionic pseudo-potential.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{pseudo_potential}
+\end{figure}
+}
+
+%------------------------------------------------------------------------Reference----------------------------------------------------------------------------------------------
+%\begin{thebibliography}{99}
+%-----------------------------------------------------------------------------------------------------------------------------------------------------------------------%
+%\frame
+%{
+%\frametitle{主要参考文献}
+%{\small
+%\bibitem{Singh_Book}\textrm{D. J. Singh. \textit{Plane Wave, PseudoPotential and the LAPW method} (Kluwer Academic, Boston,USA, 1994)}					%
+%  \nocite{*}																				%
+%}
+%}
+%\end{thebibliography}
+
+%{\small
+%-----------------------------------------------------------Beamer下不建议使用bib,因为涉及分页--------------------------------------------------------------------------%
+%{\small
+%\phantomsection\addcontentsline{toc}{section}{Bibliography}	 %直接调用\addcontentsline命令可能导致超链指向不准确,一般需要在之前调用一次\phantomsection命令加以修正	%
+%\bibliography{Myref}																			%
+%\bibliographystyle{mybib}																		%
+%  \nocite{*}																				%
+%}
+
+%------------------------------------------------------------------------------------------------------------------------------------------------------------------------------%
+
+%-------------------------------------------------------------------------Thanks------------------------------------------------------------------------------------------------
+%\section{致谢}
+%\frame
+%{
+%\frametitle{致$\quad$谢}
+%\begin{itemize}
+%    \setlength{\itemsep}{20pt}
+%  \item 感谢本团队高兴誉、吴泉生、宋红州等各位老师参与的讨论
+%  \item 感谢莫所长、宋主任以及软件中心各位老师和同事
+%  \item 感谢王崇愚先生的帮助
+%\end{itemize}
+%}
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
