@@ -83,18 +83,18 @@
 \begin{figure}[h!]
 \centering
 \vspace{-10.5pt}
-\includegraphics[height=1.5in,width=3.0in,viewport=0 0 380 190,clip]{Figures/Pseudo-potential_charge.png}
+\includegraphics[height=1.4in,width=2.8in,viewport=0 0 380 190,clip]{Figures/Pseudo-potential_charge.png}
 \caption{\tiny \textrm{The difference of the electron-density distributing from P.~Bl\"ochl  and from G.~Kresse.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{PAW_Pseudo-Charge}
 \end{figure}
-	\item 组织\textrm{POTCAR}数据:~成为\textrm{PAW}方法与\textrm{USPP}方法的内在联系\\
+	\item 构建\textrm{POTCAR}数据:~将\textrm{PAW}方法与\textrm{USPP}方法关联起来
 \end{itemize}
 }
 
 \section{\rm{VASP}计算的原子数据重建}
 \frame
 {
-	\frametitle{\textrm{VASP}计算的原子数据基础}
+	\frametitle{\textrm{VASP}计算的原子数据}
 	\textrm{POTCAR}是\textrm{VASP}的必备文件，提供了\textrm{VASP}计算所需的全部原子数据，也是实现\textrm{PAW}方法的主要基础
 	\begin{itemize}
 		\item \textrm{POTCAR}是\textrm{VASP}实现材料精确计算的重要保证\\
@@ -106,7 +106,8 @@
 	\end{itemize}
 	%文献\cite{PRB59-1758_1999}介绍了\textrm{POTCAR}的主要实现思想
 
-当前研究主要尝试:~基于开源的\textrm{PAW}赝势生成软件(\textrm{atomPAW})，开发能生成\textrm{POTCAR}原子数据的功能
+%当前研究主要尝试:~
+	基于开源的\textrm{PAW}赝势数据生成软件(\textrm{atomPAW})，开发生成\textrm{POTCAR}原子数据的功能
 }
 
 \frame
@@ -198,6 +199,17 @@
 \end{figure}
 }
 
+\appendix
+\frame
+{
+	\frametitle{\fontsize{20.0pt}{5.2pt}\selectfont{\textcolor{black}{~~~~~~~~~深切缅怀~王崇愚~院士}}}
+\begin{figure}[ht]											      %
+\centering
+\vspace{-0.15in}
+\includegraphics[height=0.66\textwidth,width=0.47\textwidth,viewport=0 0 2164 3272,clip]{Figures/Portrait-Chongyu_Wang.jpg}
+\caption{\fbox{王崇愚}~院士}											      %
+\end{figure}												      %
+}
 %------------------------------------------------------------------------Reference----------------------------------------------------------------------------------------------
 %\begin{thebibliography}{99}
 %-----------------------------------------------------------------------------------------------------------------------------------------------------------------------%
