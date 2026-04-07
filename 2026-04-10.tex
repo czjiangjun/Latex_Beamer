@@ -63,7 +63,7 @@
 \section{\rm{POTCAR}是\rm{VASP}软件的数据基础}
 \frame
 {
-	\frametitle{\textrm{VASP}中的\textrm{PAW}方法}
+	\frametitle{\textrm{PAW}方法的核心思想}
 \begin{figure}[h!]
 \centering
 \includegraphics[height=2.3in,width=4.0in,viewport=0 0 1280 745,clip]{Figures/PAW-baseset.png}
@@ -84,22 +84,21 @@
 \centering
 \vspace{-10.5pt}
 \includegraphics[height=1.4in,width=2.8in,viewport=0 0 380 190,clip]{Figures/Pseudo-potential_charge.png}
-\caption{\tiny \textrm{The difference of the electron-density distributing from P.~Bl\"ochl  and from G.~Kresse.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\caption{\tiny \textrm{The difference of the electron-density distributing from P. Bl\"ochl  and from G. Kresse.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{PAW_Pseudo-Charge}
 \end{figure}
-	\item 构建\textrm{POTCAR}数据:~将\textrm{PAW}方法与\textrm{USPP}方法关联起来
+	\item \textrm{VASP}的实现方案:~将\textrm{PAW}方法与\textrm{USPP}方法关联起来
 \end{itemize}
 }
 
-\section{\rm{VASP}计算的原子数据重建}
 \frame
 {
-	\frametitle{\textrm{VASP}计算的原子数据}
-	\textrm{POTCAR}是\textrm{VASP}的必备文件，提供了\textrm{VASP}计算所需的全部原子数据，也是实现\textrm{PAW}方法的主要基础
+	\frametitle{\textrm{VASP}计算中的原子数据}
+	\textrm{POTCAR}是\textrm{VASP}的必要文件，提供了\textrm{VASP}计算所需的全部原子数据，也是\textrm{VASP}完成\textrm{PAW}方法的主要基础
 	\begin{itemize}
 		\item \textrm{POTCAR}是\textrm{VASP}实现材料精确计算的重要保证\\
 			同样都应用\textrm{PAW}方法，\textcolor{blue}{公认\textrm{VASP}较\textrm{QE}、\textrm{ABINIT}等软件的计算精度要高}
-		\item \textrm{POTCAR}数据生成依赖较多的可调参数\\
+		\item \textrm{POTCAR}数据 生成依赖较多的可调参数\\
 			包括能量参数$\varepsilon_l$、多种截断半径$r_c$、$r_{\mathrm{vloc}}$、$r_{\mathrm{shape}}$、$r_{\mathrm{core}}$
 		\item \textcolor{red}{\textrm{POTCAR}数据生成代码是\textrm{VASP}中唯一没有公开的}
 		\item 用\textrm{VASP}模拟极端条件下材料物性的能力，受到\textrm{POTCAR}数据的制约
@@ -107,9 +106,10 @@
 	%文献\cite{PRB59-1758_1999}介绍了\textrm{POTCAR}的主要实现思想
 
 %当前研究主要尝试:~
-	基于开源的\textrm{PAW}赝势数据生成软件(\textrm{atomPAW})，开发生成\textrm{POTCAR}原子数据的功能
+	基于开源的\textrm{PAW}原子数据生成软件(\textrm{atomPAW})，开发生成\textrm{POTCAR}原子数据的功能
 }
 
+\section{\rm{VASP}的原子数据重建}
 \frame
 {
 	\frametitle{\textrm{PAW}原子数据集:~\textrm{wave~function}}
@@ -117,17 +117,30 @@
 	\begin{displaymath}
 		\tilde\phi_{i=Lk}(\vec r)=Y_L(\widehat{\vec r-\vec R})\tilde\phi_{lk}(|\vec r-\vec R|)
 	\end{displaymath}
-	根据\textrm{RRKJ}赝势构造的思想，赝分波函数由球\textrm{Bessel}函数线性组合%\upcite{JPCM6-8245_1994}
+	\vskip -3pt
+	\begin{itemize}
+		\item \textrm{Vanderbilt}赝分波函数构建
+			\begin{displaymath}
+		\tilde\phi_{lk}(r)=\left\{
+			\begin{aligned}
+				&r^{l+1}\sum_{m=0}^4C_mr^{2m}\quad &r\leqslant r_c^l\\
+			&\phi_{lk}(r)\quad&r>r_c^l
+			\end{aligned}
+		\right.
+			\end{displaymath}
+			{\fontsize{7.5pt}{5.2pt}\selectfont{系数$C_m$由赝分波函数$\tilde\phi_{lk}(r)$在截断半径$r_c^l$临近5点平滑连续确定}}
+		\item \textrm{RRKJ}赝分波函数构建:~由球\textrm{Bessel}函数线性组合%\upcite{JPCM6-8245_1994}
 	\begin{displaymath}
 		\tilde\phi_{lk}(r)=\left\{
-		\begin{aligned}
-			&\sum_{i=1}^2\alpha_ij_l(q_ir)\quad &r<r_c^l\\
+		\begin{aligned} 
+			&\sum_{i=1}^2\alpha_ij_l(q_ir)\quad &r\leqslant r_c^l\\
 			&\phi_{lk}(r)\quad&r>r_c^l
 		\end{aligned}
 		\right.
 	\end{displaymath}
-	调节系数$\alpha_i$和$q_i$赝分波函数$\phi_{lk}(r)$在截断半径$r_c^l$处两阶连续可微
+	{\fontsize{7.5pt}{5.2pt}\selectfont{调节系数$\alpha_i$和$q_i$赝分波函数$\tilde\phi_{lk}(r)$在截断半径$r_c^l$处两阶连续可微}}
 %	投影子波函数$\tilde p_i$由\textrm{Gram-Schmidt}正交条件$\langle\tilde p_i|\tilde\phi_j\rangle=\delta_{ij}$确定
+	\end{itemize}
 }
 
 \frame
@@ -137,19 +150,21 @@
 \centering
 \vskip -0.5in
 \includegraphics[width=1.5in,height=2.7in,viewport=0 0 350 550, angle=-90, clip]{Figures/WAE-data.eps}
-\vskip -0.2in
+\vskip -0.4in
 \includegraphics[height=2.7in,width=1.5in,viewport=0 0 350 550, angle=-90, clip]{Figures/WPS-data.eps}
+\vskip -0.2in
 \caption{\tiny \textrm{The partial wave function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
 \label{Wave_Function}
 \end{figure}
+依据文献的解析形式的确定赝分波函数，对能量参数$\varepsilon_l$、截断半径$r_c^l$包括径向步长的依赖都比较敏感
 }
 
 \frame
 {
 	\frametitle{\textrm{PAW}原子数据集:~\textrm{core~density}}
-	\textcolor{blue}{构造赝芯电荷密度$\tilde n_c$}:~在截断半径$r_{\mathrm{core}}$内的定义为
+	赝芯电荷密度$\tilde n_c$构造:%~在截断半径$r_{\mathrm{core}}$内的定义为
 	$$\sum_{i=1,2}B_i\dfrac{\sin(q_ir)}r\quad r<r_{\mathrm{core}}$$
-	调节系数$q_i$和$B_i$使得赝芯电荷密度$\tilde n_c(r)$在截断半径$r_{\mathrm{core}}$处的两阶导数连续
+	{\fontsize{7.5pt}{5.2pt}\selectfont{调节系数$q_i$和$B_i$使得赝芯电荷密度$\tilde n_c(r)$在截断半径$r_{\mathrm{core}}$处的两阶导数连续}}
 \begin{figure}[h!]
 \vskip -0.5in
 \centering
@@ -199,17 +214,95 @@
 \end{figure}
 }
 
-\appendix
 \frame
 {
-	\frametitle{\fontsize{20.0pt}{5.2pt}\selectfont{\textcolor{black}{~~~~~~~~~深切缅怀~王崇愚~院士}}}
-\begin{figure}[ht]											      %
+	\frametitle{\textrm{PAW}原子数据集:~$\mathrm{v}_G[\tilde n_{Zc}]$}
+	局域离子赝势的倒空间表示$v_G[\tilde n_{Zc}]$可由$v_H[\tilde n_{Zc}]$的变换得到
+	\begin{displaymath}
+		\begin{aligned}
+%			\tilde{V}(q)=&\frac{4\pi}{q}\int\sin(q\cdot r)\tilde{V}(r)\cdot r\mathrm{d}r\\
+			\tilde{V}(q)\cdot q=&4\pi\int_0^{\infty}\sin(q\cdot r)\tilde{V}(r)\cdot r\mathrm{d}r\\
+			\tilde{V}_{\mathrm{ion}}(q)=&-\frac{4\pi Z_{\mathrm{ion}}(1-\mathrm{e}^{-q^2/4\alpha})}{q^2}, \quad\tilde{V}(q=0)=0
+		\end{aligned}
+\end{displaymath} 
+\begin{figure}[h!]
 \centering
-\vspace{-0.15in}
-\includegraphics[height=0.66\textwidth,width=0.47\textwidth,viewport=0 0 2164 3272,clip]{Figures/Portrait-Chongyu_Wang.jpg}
-\caption{\fbox{王崇愚}~院士}											      %
-\end{figure}												      %
+\vspace{-0.25in}
+\includegraphics[width=2.3in,height=1.75in,viewport=0 0 1150 650, clip]{Figures/POT_G-dat.pdf}
+\vskip -2pt
+\caption{\tiny \textrm{The pseudo local ionic pseudo-potential in reciprocal space.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{local-potential}
+\end{figure}
 }
+
+\section{机器学习方法提升参数优化}
+\frame
+{
+	\frametitle{赝化函数的参数优化}
+\begin{figure}[h!]
+\vspace*{-0.15in}
+\centering
+%\includegraphics[height=0.60in,width=3.05in]{Figures/MGE-2.png}
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+%\vskip 0.05pt
+\includegraphics[height=2.50in,width=3.40in]{Figures/Pseudowave_GNN.jpg}
+%\caption{\tiny \textrm{Pseudopotential for metallic sodium, based on the empty core model and screened by the Thomas-Fermi dielectric function.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{MLP-GNN}
+\end{figure}
+基于\textrm{GNN}，无需更多的物理知识，引入更多的可调控参数，逼近精确的赝波函数
+}
+
+\frame
+{
+	\frametitle{\textrm{GNN}优化的赝分波函数}
+\begin{figure}[h!]
+\centering
+\vskip -0.15in
+\includegraphics[width=3.6in,height=2.3in,viewport=0 0 2156 1144, clip]{Figures/WPS-data-GNN.png}
+\caption{\tiny \textrm{The partial wave function from GNN.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{Wave_Function-GNN}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textrm{GNN}优化的倒空间局域赝势函数}
+\begin{figure}[h!]
+\centering
+\vskip -0.15in
+\includegraphics[width=3.6in,height=2.3in,viewport=0 0 2156 1144, clip]{Figures/POTGLOC-data-GNN.png}
+\caption{\tiny \textrm{The psedudo local potential function in reciprocal space from GNN.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{POT-G-LOC-GNN}
+\end{figure}
+}
+
+\frame
+{
+	\frametitle{\textcolor{red}{失败}:~\textrm{GNN}优化的投影函数}
+\begin{figure}[h!]
+\centering
+\vskip -0.15in
+\includegraphics[width=3.6in,height=2.3in,viewport=0 0 2156 1144, clip]{Figures/PROJECT-data.png}
+\caption{\tiny \textrm{The project function from vasp and from Atompaw.}}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{PROJECT}
+\end{figure}
+}
+
+\frame
+{
+
+}
+%\appendix
+%\frame
+%{
+%	\frametitle{\fontsize{20.0pt}{5.2pt}\selectfont{\textcolor{black}{~~~~~~~~~深切缅怀~王崇愚~院士}}}
+%\begin{figure}[ht]											      %
+%\centering
+%\vspace{-0.12in}
+%\includegraphics[height=0.66\textwidth,width=0.45\textwidth,viewport=0 0 2164 3272,clip]{Figures/Portrait-Chongyu_Wang.jpg}
+%\caption{\fbox{王崇愚}~院士}											      %
+%\end{figure}												      %
+%}
 %------------------------------------------------------------------------Reference----------------------------------------------------------------------------------------------
 %\begin{thebibliography}{99}
 %-----------------------------------------------------------------------------------------------------------------------------------------------------------------------%
