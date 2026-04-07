@@ -290,13 +290,42 @@
 
 \frame
 {
-	\frametitle{机器学习构建\textrm{POTCAR}文件}
+	\frametitle{小结:~机器学习构建\textrm{POTCAR}文件}
+	引入\textrm{GNN}方法的优点
+	\begin{itemize}
+		\item 克服了原有文献和参数生成\textrm{POTCAR}解析函数的调控困难\\
+			参数调控的难度大大降低
+		\item 两到三层的神经网络即可获得较为理想的波函数、局域赝势等数据\\
+			可以通过一套神经网络获得较为满意的数据
+		\item 提升开源软件的原子数据，扩展\textrm{PAW}方法的应用场景的条件初步具备\\
+			如增加径向布点，保留更多近核的波函数信息
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{小结:~机器学习构建\textrm{POTCAR}文件}
+	引入\textrm{GNN}方法的不足
+	\begin{itemize}
+		\item 参数的物理信息缺失\\
+			参数本身的复杂度增加，参数的物理含义变得模糊
+		\item 投影函数的构造
+		\item 对原始\textrm{POTCAR}数据的依赖还没有完全脱离\\
+			数据的可靠性验证，还依赖\textrm{POTCAR}数据，适合极端条件模拟的\textrm{POTCAR}生成方案，还有待合理的检验数据
+	\end{itemize}
 }
 
 \section{展望:~\rm{AI}技术助力赝势与原子数据的重建}
 \frame
 {
 	\frametitle{应用\rm{AI}认识赝势函数和投影函数}
+	应用\textrm{AI}技术，投喂足够的原子数据信息，
+	\begin{itemize}
+		\item 获得物理含义更清晰的参数化赝波函数生成方案
+		\item 获得适应不同环境的\textrm{POTCAR}数据
+		\item 系统的\textrm{PAW}原子数据集生成方案
+		\item 构建真正意义的赝势-全势计算的通用\textrm{POTCAR}数据集
+	\end{itemize}
 }
 %\appendix
 %\frame
