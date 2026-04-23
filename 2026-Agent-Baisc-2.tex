@@ -1,0 +1,828 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  不使用 authblk 包制作标题  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%-------------------------------PPT Title-------------------------------------
+\title{\textrm{AI for Science:~}数据驱动下的\材料模拟与技术服务}
+%\subtitle{两弹元勋与核弹原理}
+%-----------------------------------------------------------------------------
+
+%----------------------------Author & Date------------------------------------
+%\author[]{\vskip +10pt 姜\;\;骏\inst{}} %[]{} (optional, use only with lots of authors)
+%% - Give the names in the same order as the appear in the paper.
+%% - Use the \inst{?} command only if the authors have different
+%%   affiliation.
+\institute[BCC]{\inst{}%
+%\institute[Gain~Strong]{\inst{}%
+\vskip -5pt 北京市计算中心有限公司~材料计算团队}
+%\vskip -20pt {\large 格致斯创~科技}}
+\date[\today] % (optional, should be abbreviation of conference name)
+{	%{\fontsize{6.2pt}{4.2pt}\selectfont{\textcolor{blue}{E-mail:~}\url{jiangjun@bcc.ac.cn}}}
+\vskip 25 pt {\fontsize{8.2pt}{6.2pt}\selectfont{%清华大学\;\;物理系% 报告地点
+	\vskip 5 pt \textrm{2026.~04.~17}}}
+}
+
+%% - Either use conference name or its abbreviation
+%% - Not really information to the audience, more for people (including
+%%   yourself) who are reading the slides onlin%%   yourself) who are reading the slides onlin%%   yourself) who are reading the slides onlineee
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subject{}
+% This is only inserted into the PDF information catalog. Can be left
+% out.
+%\maketitle
+\frame
+{
+%	\frametitle{\fontsize{9.5pt}{5.2pt}\selectfont{\textcolor{orange}{“高通量并发式材料计算算法与软件”年度检查}}}
+\titlepage
+}
+%-----------------------------------------------------------------------------
+
+%------------------------------------------------------------------------------列出全文 outline ---------------------------------------------------------------------------------
+\section*{}
+\frame[allowframebreaks]
+{
+	\frametitle{\textrm{Outline}}
+%  \frametitle{\textcolor{mycolor}{\secname}}
+  \tableofcontents%[current,currentsection,currentsubsection]
+}
+%在每个section之前列出全部Outline
+%类似的在每个subsection之前列出全部Outline是\AtBeginSubsection[]
+%\AtBeginSection[]
+%{
+%  \frame<handout:0>%[allowframebreaks]
+%  {
+%    \frametitle{Outline}
+%%全部Outline中，本部分加亮
+%    \tableofcontents[current,currentsection]
+%  }
+%}
+
+%-----------------------------------------------PPT main Body------------------------------------------------------------------------------------
+\small
+\section{人工智能概述}
+
+\begin{frame}{学习目标}
+\begin{itemize}
+    \item 理解判别式与生成式AI的核心区别
+    \item 掌握机器学习三要素
+    \item 熟悉深度学习基础架构
+    \item 学会设计有效提示词
+\end{itemize}
+\end{frame}
+
+\begin{frame}{关键词}
+\begin{multicols}{2}
+\begin{itemize}
+    \item 判别式 AI
+    \item 生成式 AI
+    \item 机器学习
+    \item 深度学习
+    \item Transformer
+    \item 提示词工程
+    \item RAG
+    \item 微调
+    \item 函数调用
+    \item 智能体
+\end{itemize}
+\end{multicols}
+\end{frame}
+
+\begin{frame}{AI定义与分层}
+\begin{block}{强/弱/超人工智能}
+\begin{itemize}
+    \item 弱AI：专用于特定任务（如人脸识别）
+    \item 强AI：通用智能（尚未实现）
+    \item 超AI：超越人类智能（理论）
+\end{itemize}
+\end{block}
+\begin{block}{三大主义}
+\begin{itemize}
+    \item 符号主义：逻辑推理
+    \item 联结主义：神经网络
+    \item 行为主义：强化学习
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{判别式 vs 生成式}
+\begin{figure}
+\centering
+\framebox{\parbox{0.9\textwidth}{\centering 判别式：学习类别边界 \\ 生成式：学习数据分布}}
+\caption{概念对比图}
+\end{figure}
+\begin{itemize}
+    \item 判别式：分类、回归
+    \item 生成式：创造新样本
+\end{itemize}
+\end{frame}
+
+\begin{frame}{机器学习三要素}
+\begin{itemize}
+    \item \textbf{数据}：特征、标签
+    \item \textbf{模型}：线性回归、决策树、神经网络
+    \item \textbf{算法}：梯度下降、反向传播
+\end{itemize}
+\begin{center}
+\framebox{\parbox{0.5\textwidth}{数据 + 模型 + 算法 = 学习系统}}
+\end{center}
+\end{frame}
+
+\begin{frame}{监督/无监督/强化学习}
+\begin{tabular}{p{0.3\textwidth}p{0.6\textwidth}}
+\toprule
+类型 & 说明 \\
+\midrule
+监督学习 & 有标签，分类/回归 \\
+无监督学习 & 无标签，聚类/降维 \\
+强化学习 & 奖励信号，策略优化 \\
+\bottomrule
+\end{tabular}
+\end{frame}
+
+\begin{frame}{经典算法1：线性回归}
+\begin{itemize}
+    \item 建模线性关系 \(y = wx + b\)
+    \item 损失函数：均方误差
+    \item 优化：最小二乘法 / 梯度下降
+\end{itemize}
+\end{frame}
+
+\begin{frame}{经典算法2：决策树}
+\begin{itemize}
+    \item 树状结构，可解释性强
+    \item 分裂准则：信息增益、基尼系数
+    \item 集成方法：随机森林、XGBoost
+\end{itemize}
+\end{frame}
+
+\begin{frame}{经典算法3：SVM}
+\begin{itemize}
+    \item 最大化分类间隔
+    \item 核技巧处理非线性
+    \item 支持向量决定决策边界
+\end{itemize}
+\end{frame}
+
+\begin{frame}{经典算法4：KNN}
+\begin{itemize}
+    \item 懒惰学习，无显式训练
+    \item 距离度量（欧氏、曼哈顿）
+    \item 需要k值选择
+\end{itemize}
+\end{frame}
+
+\begin{frame}{深度学习兴起}
+\begin{itemize}
+    \item 神经网络基础：神经元、激活函数（ReLU, Sigmoid）
+    \item 多层结构自动提取特征
+    \item 大数据+GPU推动爆发
+\end{itemize}
+\end{frame}
+
+\begin{frame}{CNN：卷积神经网络}
+\begin{itemize}
+    \item 卷积层：提取局部特征
+    \item 池化层：降维、平移不变性
+    \item 感受野：逐层扩大
+    \item 应用：图像分类、目标检测
+\end{itemize}
+\end{frame}
+
+\begin{frame}{RNN/LSTM}
+\begin{itemize}
+    \item 循环神经网络处理序列
+    \item 梯度消失/爆炸问题
+    \item LSTM引入门控机制（输入门、遗忘门、输出门）
+\end{itemize}
+\end{frame}
+
+\begin{frame}{生成式AI核心}
+\begin{itemize}
+    \item 学习联合分布 \(P(X,Y)\) 或 \(P(X)\)
+    \item 采样生成新数据
+    \item 典型模型：VAE、GAN、扩散模型、自回归模型
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Transformer架构概览}
+\begin{itemize}
+    \item 自注意力机制（Self-Attention）
+    \item 多头注意力（Multi-Head）
+    \item 位置编码（Positional Encoding）
+    \item Encoder-Decoder结构
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Transformer详解1：自注意力}
+\[
+\text{Attention}(Q,K,V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V
+\]
+\begin{itemize}
+    \item Q：查询，K：键，V：值
+    \item 缩放点积注意力
+    \item 捕获长距离依赖
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Transformer详解2：残差与归一化}
+\begin{itemize}
+    \item 残差连接：缓解梯度消失
+    \item 层归一化（LayerNorm）：稳定训练
+    \item 前馈网络（FFN）：非线性变换
+\end{itemize}
+\end{frame}
+
+\begin{frame}{提示词工程基础}
+\begin{block}{提示词要素}
+\begin{itemize}
+    \item 角色扮演
+    \item 明确任务
+    \item 约束条件
+    \item 输出格式
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{提示词技巧}
+\begin{itemize}
+    \item 零样本（Zero-shot）：直接提问
+    \item 少样本（Few-shot）：给示例
+    \item 思维链（Chain-of-Thought）：逐步推理
+    \item 思维树（Tree-of-Thoughts）：探索多条路径
+\end{itemize}
+\end{frame}
+
+\begin{frame}{提示词案例对比}
+\begin{block}{糟糕提示词}
+“写一篇关于气候的文章”
+\end{block}
+\begin{block}{优秀提示词}
+“你是一位气候科学家，请写一篇面向高中生的500字短文，解释温室效应的三个主要原因，并用生活化比喻。”
+\end{block}
+\end{frame}
+
+\begin{frame}{判别式与生成式融合}
+\begin{itemize}
+    \item CLIP：图文对比学习
+    \item Stable Diffusion：文本生成图像
+    \item 多模态模型：GPT-4V, Gemini
+\end{itemize}
+\end{frame}
+
+% 小案例5页（此处简化为每页一个案例标题）
+\begin{frame}{案例1：图像分类}
+使用ResNet对CIFAR-10分类，准确率95\%。
+\end{frame}
+\begin{frame}{案例2：情感分析}
+基于LSTM的IMDB影评二分类。
+\end{frame}
+\begin{frame}{案例3：文本生成图像}
+提示词：“一只穿西装的柴犬，油画风格”。
+\end{frame}
+\begin{frame}{案例4：机器翻译}
+Transformer英译中，BLEU得分提升。
+\end{frame}
+\begin{frame}{案例5：语音合成}
+Tacotron2 + WaveGlow生成自然语音。
+\end{frame}
+
+\begin{frame}{第一部分小结}
+\begin{itemize}
+    \item 判别式擅长分类/回归
+    \item 生成式擅长创造新内容
+    \item Transformer是当前大模型基石
+    \item 提示词是控制生成质量的关键
+\end{itemize}
+\end{frame}
+% 可继续扩展更多互动题页，但限于篇幅，此处跳过5页互动题
+
+\section{生成式大模型概述}
+
+\begin{frame}{大模型定义}
+\begin{itemize}
+    \item 参数规模通常>10亿
+    \item 涌现能力：上下文学习、推理、代码生成
+    \item 预训练+微调范式
+\end{itemize}
+\end{frame}
+
+\begin{frame}{发展历程时间轴}
+2018 GPT-1 → 2019 GPT-2 → 2020 GPT-3 → 2021 ChatGPT → 2022 GPT-4, Llama → 2023 Gemini, Claude 3 → 2024 GPT-4o, 混元, Kimi ...
+\end{frame}
+
+\begin{frame}{生活中的应用}
+\begin{multicols}{2}
+\begin{itemize}
+    \item 智能写作助手
+    \item 旅行规划
+    \item 健身计划
+    \item 心理陪伴
+    \item 食谱生成
+    \item 语言学习
+\end{itemize}
+\end{multicols}
+\end{frame}
+
+\begin{frame}{工作中的应用}
+\begin{itemize}
+    \item 代码生成（GitHub Copilot）
+    \item 会议纪要（Fireflies.ai）
+    \item 邮件起草
+    \item 数据分析（生成SQL/Python）
+    \item 法律文书审阅
+    \item 医疗报告辅助
+\end{itemize}
+\end{frame}
+
+\begin{frame}{行业案例：法律}
+使用GPT-4分析合同风险点，识别率超90\%。
+\end{frame}
+\begin{frame}{行业案例：医疗}
+辅助诊断：根据症状描述推荐检查项目。
+\end{frame}
+\begin{frame}{行业案例：金融}
+财报摘要生成，舆情监控。
+\end{frame}
+\begin{frame}{行业案例：教育}
+个性化习题生成与讲解。
+\end{frame}
+
+\begin{frame}{大模型应用开发技术}
+\begin{itemize}
+    \item 模型选型：开源(Llama, Qwen) vs 闭源(GPT, Gemini)
+    \item API调用：REST, SDK
+    \item 成本估算：Token用量
+    \item 延迟优化：流式输出、缓存
+\end{itemize}
+\end{frame}
+
+\begin{frame}{上下文管理}
+\begin{itemize}
+    \item Token限制（例如8K, 128K, 1M）
+    \item 滑动窗口：只保留最近N轮
+    \item 摘要压缩：定期总结历史
+    \item 向量检索：外挂记忆
+\end{itemize}
+\end{frame}
+
+\begin{frame}{输出解析}
+\begin{itemize}
+    \item JSON模式强制结构
+    \item 正则提取
+    \item 函数调用（tool\_calls）
+    \item 流式解析逐字输出
+\end{itemize}
+\end{frame}
+
+\begin{frame}{大模型应用技术全景图}
+\begin{center}
+\framebox{\parbox{0.8\textwidth}{
+RAG | 微调 | 提示词工程 | 函数调用 | 智能体
+}}
+\end{center}
+\end{frame}
+
+\begin{frame}{RAG详解1：索引}
+\begin{itemize}
+    \item 文档分块（Chunking）
+    \item 嵌入模型（text-embedding-3-small）
+    \item 向量数据库（Pinecone, Milvus, FAISS）
+\end{itemize}
+\end{frame}
+\begin{frame}{RAG详解2：检索}
+\begin{itemize}
+    \item 相似度搜索（余弦、点积）
+    \item 混合检索（关键词+向量）
+    \item 重排序（Re-ranking）
+\end{itemize}
+\end{frame}
+\begin{frame}{RAG详解3：生成}
+\begin{itemize}
+    \item 将检索上下文注入提示词
+    \item 处理“未找到答案”情况
+    \item 引用来源
+\end{itemize}
+\end{frame}
+
+\begin{frame}{微调详解1：全量微调}
+\begin{itemize}
+    \item 更新所有模型参数
+    \item 需要大量GPU内存
+    \item 灾难性遗忘风险
+\end{itemize}
+\end{frame}
+\begin{frame}{微调详解2：参数高效微调（PEFT）}
+\begin{itemize}
+    \item LoRA：低秩适配器
+    \item QLoRA：4bit量化+LoRA
+    \item Adapter, Prefix Tuning
+    \item 节省内存，训练快
+\end{itemize}
+\end{frame}
+\begin{frame}{微调详解3：数据准备与过拟合防范}
+\begin{itemize}
+    \item 数据质量 > 数据数量
+    \item 指令-回答格式
+    \item 验证集监控
+    \item 早停、正则化
+\end{itemize}
+\end{frame}
+
+\begin{frame}{函数调用详解1：声明}
+```json
+{
+  "name": "get_weather",
+  "description": "获取城市天气",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "city": {"type": "string"}
+    }
+  }
+}
+```
+
+\end{frame}
+\begin{frame}{函数调用详解2：执行与回填}
+\begin{enumerate}
+\item 模型输出tool\_calls
+\item 程序执行对应函数
+\item 结果作为assistant消息回填
+\item 模型生成最终回复
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{前沿工具总览}
+\begin{table}
+\small
+\begin{tabular}{lll}
+\toprule
+模型 & 厂商 & 特点 \\
+\midrule
+Gemini 3 Flash & Google & 速度极快，1M上下文 \\
+混元图像3.0 & 腾讯 & 中文理解，多分辨率 \\
+Kimi K2.5 & 月之暗面 & 长上下文，文件处理 \\
+PaddleOCR-VL-1.5 & 百度 & 文档理解，表格公式 \\
+GLM-4.7 & 智谱AI & 工具调用强 \\
+QwQ-32B & 阿里 & 推理，数学 \\
+Qwen3-TTS & 阿里 & 语音合成 \\
+Qwen2.5-Max & 阿里 & 通用对话 \\
+Qwen3-Max-Thinking & 阿里 & 推理增强 \\
+\bottomrule
+\end{tabular}
+\end{table}
+\end{frame}
+
+% 每个工具深入1页，此处简化为每页标题+要点
+\begin{frame}{Gemini 3 Flash 深入}
+\begin{itemize}
+\item 多模态：文本、图像、视频、音频
+\item 1M token上下文（相当于《三体》三部曲）
+\item 极低延迟，适合实时对话
+\item API示例：genai.configure(api_key)
+\end{itemize}
+\end{frame}
+\begin{frame}{混元图像3.0 深入}
+\begin{itemize}
+\item 中文指令遵循优秀
+\item 支持1K~2K分辨率
+\item 风格控制（国风、油画、3D）
+\item 集成于腾讯云
+\end{itemize}
+\end{frame}
+\begin{frame}{Kimi K2.5 深入}
+\begin{itemize}
+\item 200万token上下文
+\item 支持PDF, Word, Excel, 图片
+\item 擅长长文档总结、多步推理
+\end{itemize}
+\end{frame}
+\begin{frame}{PaddleOCR-VL-1.5 深入}
+\begin{itemize}
+\item 视觉文档理解
+\item 精准识别公式、表格、图表
+\item 支持80+语言
+\end{itemize}
+\end{frame}
+\begin{frame}{GLM-4.7 深入}
+\begin{itemize}
+\item 自动调用外部工具（搜索、计算器）
+\item 代码解释器
+\item 智能体框架集成
+\end{itemize}
+\end{frame}
+\begin{frame}{QwQ-32B 深入}
+\begin{itemize}
+\item 开源（HuggingFace下载）
+\item 思维链显式输出
+\item 数学竞赛表现优异
+\end{itemize}
+\end{frame}
+\begin{frame}{Qwen3-TTS 深入}
+\begin{itemize}
+\item 自然语音合成
+\item 情感控制（高兴、悲伤）
+\item 多音色、多语言
+\end{itemize}
+\end{frame}
+\begin{frame}{Qwen2.5-Max 深入}
+\begin{itemize}
+\item 72B参数，MoE架构
+\item 支持128K上下文
+\item 中英文最佳平衡
+\end{itemize}
+\end{frame}
+\begin{frame}{Qwen3-Max-Thinking 深入}
+\begin{itemize}
+\item 推理过程可视化
+\item 适用于数学、逻辑、代码
+\item 可配置推理深度
+\end{itemize}
+\end{frame}
+
+% 第二部分剩余页按需扩展，这里跳过部分重复内容，直接进入第三部分
+
+\section{智能体概述}
+
+\begin{frame}{智能体定义}
+\begin{center}
+\framebox{\parbox{0.8\textwidth}{感知 → 规划 → 行动 → 记忆 循环}}
+\end{center}
+\begin{itemize}
+\item 自主性：无需人工干预
+\item 反应性：对环境变化做出响应
+\item 主动性：为达成目标采取行动
+\item 社会性：可与其他智能体协作
+\end{itemize}
+\end{frame}
+
+\begin{frame}{智能体历史}
+\begin{itemize}
+\item 1960s Shakey机器人：首个通用移动机器人
+\item 1990s 专家系统、BDI模型
+\item 2016 AlphaGo：强化学习智能体
+\item 2023 LLM智能体爆发（AutoGPT, BabyAGI）
+\end{itemize}
+\end{frame}
+
+\begin{frame}{智能体 vs 大模型}
+\begin{tabular}{p{0.4\textwidth}p{0.5\textwidth}}
+\toprule
+大模型 & 智能体 \\
+\midrule
+被动回答 & 主动行动 \\
+无长期目标 & 目标驱动 \\
+单一对话 & 多轮工具调用 \\
+无记忆或有限 & 长期+短期记忆 \\
+\bottomrule
+\end{tabular}
+\end{frame}
+
+\begin{frame}{智能体 vs RAG}
+\begin{itemize}
+\item RAG：一次性检索+生成，无决策循环
+\item 智能体：可多步检索、调用工具、修正计划
+\end{itemize}
+\end{frame}
+
+\begin{frame}{智能体 vs 工作流}
+\begin{itemize}
+\item 工作流：确定性流程（if-else, DAG）
+\item 智能体：动态选择下一步，可探索分支
+\item 两者可结合：工作流作为智能体技能
+\end{itemize}
+\end{frame}
+
+\begin{frame}{AI智能体产业图谱（1/2）}
+基础设施层：模型（OpenAI, Anthropic）、云（AWS, Azure）、向量数据库
+\end{frame}
+\begin{frame}{AI智能体产业图谱（2/2）}
+框架层：LangChain, AutoGen, CrewAI, Semantic Kernel \\
+平台层：Coze, Dify, 钉钉智能体 \\
+应用层：客服、代码、财税、HR \\
+终端层：自动驾驶、机器人
+\end{frame}
+
+\begin{frame}{能力级别 L0-L5}
+\begin{tabular}{ll}
+\toprule
+级别 & 描述 \\
+\midrule
+L0 & 无智能，简单规则 \\
+L1 & 辅助决策，建议行动 \\
+L2 & 部分执行，需确认 \\
+L3 & 条件自主，特定场景 \\
+L4 & 高度自主，极少干预 \\
+L5 & 完全自主，通用智能 \\
+\bottomrule
+\end{tabular}
+\end{frame}
+
+\begin{frame}{L0-L2举例}
+\begin{itemize}
+\item L0：空调恒温器
+\item L1：邮件分类助手（建议归档）
+\item L2：智能家居“离家模式”需确认后执行
+\end{itemize}
+\end{frame}
+\begin{frame}{L3-L5举例}
+\begin{itemize}
+\item L3：自动旅行规划（预订酒店，但无法处理取消）
+\item L4：跨系统操作员（自动处理报销单）
+\item L5：完全委托的私人助理（理论）
+\end{itemize}
+\end{frame}
+
+\begin{frame}{智能体技术栈预览}
+\begin{multicols}{2}
+\begin{itemize}
+\item Agentic AI
+\item 工作流
+\item RAG
+\item 微调
+\item 函数调用
+\item MCP
+\item Agent Skills
+\item A2A
+\item AG-UI
+\end{itemize}
+\end{multicols}
+\end{frame}
+
+% 每一项技术一句话简介（10页）
+\begin{frame}{Agentic AI}
+使智能体具备主动规划、自主决策、反思能力。
+\end{frame}
+\begin{frame}{工作流}
+预定义的步骤序列，如审批流、数据ETL。
+\end{frame}
+\begin{frame}{RAG}
+检索增强生成，外挂知识库。
+\end{frame}
+\begin{frame}{微调}
+领域适配，让模型更懂专业工具。
+\end{frame}
+\begin{frame}{函数调用}
+模型输出结构化指令，调用外部API。
+\end{frame}
+\begin{frame}{MCP}
+模型上下文协议，标准化连接数据源。
+\end{frame}
+\begin{frame}{Agent Skills}
+可复用的技能包（发送邮件、创建日历）。
+\end{frame}
+\begin{frame}{A2A}
+Agent-to-Agent通信协议。
+\end{frame}
+\begin{frame}{AG-UI}
+面向智能体的用户界面协议。
+\end{frame}
+
+\section{智能体核心技术详解}
+
+\begin{frame}{Agentic AI深度}
+\begin{itemize}
+\item 区别：不是“按指令回答”，而是“主动实现目标”
+\item 典型框架：ReAct（推理+行动），Plan-and-Solve
+\item 反思机制：自我批评、重规划
+\end{itemize}
+\end{frame}
+\begin{frame}{工作流+智能体}
+\begin{center}
+\framebox{\parbox{0.7\textwidth}{人类预置骨架 + 智能体动态填充}}
+\end{center}
+\begin{itemize}
+\item 例如：智能客服流程中，判断转人工还是自动解决
+\end{itemize}
+\end{frame}
+\begin{frame}{RAG在智能体中}
+作为长期记忆模块，智能体主动检索并利用。
+\end{frame}
+\begin{frame}{微调在智能体中}
+训练智能体学会调用特定工具的格式和逻辑。
+\end{frame}
+\begin{frame}{函数调用深度1：并行调用}
+模型一次输出多个tool\_calls，并发执行。
+\end{frame}
+\begin{frame}{函数调用深度2：依赖链}
+调用B需要A的结果，智能体自动排序。
+\end{frame}
+\begin{frame}{函数调用深度3：错误处理}
+API失败时，智能体可重试、换工具或向用户提问。
+\end{frame}
+\begin{frame}{MCP（模型上下文协议）}
+\begin{itemize}
+\item 开源标准，由Anthropic提出
+\item 统一接口访问文件系统、数据库、API
+\item MCP服务器：暴露资源，MCP客户端：智能体
+\end{itemize}
+\end{frame}
+\begin{frame}{Agent Skills}
+\begin{itemize}
+\item 预定义技能描述+示例
+\item 例如：send_email技能包含收件人、主题、正文模板
+\item 动态加载，节省上下文
+\end{itemize}
+\end{frame}
+\begin{frame}{A2A（Agent-to-Agent）}
+\begin{itemize}
+\item 不同厂商智能体互相通信
+\item 任务委托：A请求B完成子任务
+\item 标准消息格式（JSON-LD）
+\end{itemize}
+\end{frame}
+\begin{frame}{AG-UI}
+\begin{itemize}
+\item 智能体驱动的UI组件
+\item 例如：动态生成表单、按钮、图表
+\item 用户交互直接触发智能体动作
+\end{itemize}
+\end{frame}
+\begin{frame}{综合案例：智能体如何使用全部技术}
+\begin{itemize}
+\item 用户：“帮我总结上周销售数据，并发邮件给团队”
+\item 智能体：RAG获取数据源 → 函数调用SQL查询 → 生成报告 → 调用邮件技能 → A2A询问日历智能体发送时间 → AG-UI显示发送确认
+\end{itemize}
+\end{frame}
+% 后续代码示例页省略，可按需补充
+
+\section{智能体应用场景}
+
+\begin{frame}{办公自动化}
+自动排程、跨应用操作（Outlook+Excel+Teams）。
+\end{frame}
+\begin{frame}{客户关系管理}
+自动跟进、情感分析、报价生成。
+\end{frame}
+\begin{frame}{市场分析预测}
+爬取舆情+生成报告+推送建议。
+\end{frame}
+\begin{frame}{科研}
+文献检索+实验设计+数据分析。
+\end{frame}
+\begin{frame}{医疗}
+用药提醒、病历摘要、初步分诊。
+\end{frame}
+\begin{frame}{教育}
+个性化辅导、作业批改、学习路径规划。
+\end{frame}
+\begin{frame}{自动驾驶}
+多智能体协作（车-路-云）。
+\end{frame}
+\begin{frame}{金融}
+实时风控、智能投顾、反欺诈。
+\end{frame}
+% 每个场景配一个真实案例或架构图（7页）
+\begin{frame}{案例：办公自动化}
+某公司使用AutoGPT自动处理报销单，效率提升70\%。
+\end{frame}
+\begin{frame}{案例：医疗分诊}
+基于GPT-4的智能体，准确推荐科室达90\%。
+\end{frame}
+
+\section{智能体开发流程与演示}
+
+\begin{frame}{开发流程总览}
+需求分析 → 设计 → 编码 → 测试 → 部署
+\end{frame}
+\begin{frame}{需求分析}
+用户故事、能力边界、评估指标（成功率、延迟）。
+\end{frame}
+\begin{frame}{设计}
+单Agent vs 多Agent，工具集定义，提示词模板。
+\end{frame}
+\begin{frame}{编码}
+使用LangChain / CrewAI 框架。
+\end{frame}
+\begin{frame}{测试}
+单元测试、集成测试、对抗性测试（注入攻击）。
+\end{frame}
+\begin{frame}{部署}
+云端/边缘端，监控，日志，版本更新。
+\end{frame}
+\begin{frame}{演示1：智能客服}
+流程：用户问 → 检索FAQ → 调用订单API → 生成回答。
+\end{frame}
+\begin{frame}{演示2：智能家居控制}
+语音输入 → 意图识别 → 调用设备API → 多设备联动。
+\end{frame}
+
+\section{总结与Q&A}
+
+\begin{frame}{总结}
+\begin{itemize}
+\item 大模型是智能体的“大脑”
+\item 智能体让AI从“聊天”走向“行动”
+\item 技术栈（RAG, 微调, 函数调用, MCP等）是神经系统
+\item 开发流程遵循软件工程最佳实践
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Q\&A}
+欢迎提问！
+\vspace{1cm}
+参考文献：\\
+
+· OpenAI Function Calling\\
+· Anthropic MCP\\
+· LangChain文档
+  \end{frame}
+
