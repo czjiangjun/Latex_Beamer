@@ -1,0 +1,471 @@
+\documentclass{beamer}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{listings}
+\usepackage{ctex} % 导入ctex宏包以支持中文
+\usepackage{multirow}
+\usepackage{geometry}
+\usepackage{xcolor}
+
+% 设置代码高亮样式
+\lstset{
+    language=bash,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue},
+    commentstyle=\color{green!60!black},
+    stringstyle=\color{red},
+    frame=single,
+    breaklines=true,
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    backgroundcolor=\color{gray!10},
+    showstringspaces=false
+}
+
+% 设置Beamer主题
+\usetheme{Madrid}
+\usecolortheme{seahorse}
+
+% 设置标题
+\title{LAMMPS深度解析与GPUMD对比分析}
+\subtitle{分子动力学软件专题报告}
+\author{[请填写姓名]}
+\date{2026年6月}
+
+\begin{document}
+
+% 封面页
+\begin{frame}
+    \titlepage
+\end{frame}
+
+% 目录页
+\begin{frame}{报告目录}
+    \tableofcontents
+\end{frame}
+
+% Part 1: 引言与背景
+\section{引言与背景}
+
+\begin{frame}{分子动力学模拟简介}
+    \begin{block}{基本定义}
+        分子动力学（Molecular Dynamics, MD）是一种基于牛顿运动定律，通过计算机模拟原子和分子运动轨迹，从而研究物质宏观性质的计算方法。
+    \end{block}
+    \begin{block}{核心思想与原理}
+        通过求解系统中每个原子的运动方程，得到原子随时间变化的位置和速度，进而通过统计平均得到体系的宏观性质。
+    \end{block}
+    \begin{block}{跨学科应用领域}
+        \begin{itemize}
+            \item 材料科学：力学性能、相变、扩散
+            \item 物理化学：反应动力学
+            \item 生物物理：蛋白质折叠、生物膜特性
+        \end{itemize}
+    \end{block}
+    % 此处应插入分子动力学模拟示意图
+    % \includegraphics[width=0.4\textwidth]{path/to/your/md_simulation_image.png}
+\end{frame}
+
+\begin{frame}{LAMMPS简介}
+    \begin{columns}
+        \column{0.5\textwidth}
+        \textbf{权威开发背景}
+        \begin{itemize}
+            \item 由美国能源部桑迪亚国家实验室主导开发。
+            \item 依托顶级科研机构，确保了软件的权威性和前沿性。
+        \end{itemize}
+        \textbf{“分子动力学界的瑞士军刀”}
+        \begin{itemize}
+            \item 具备并行计算能力和高度模块化设计。
+            \item 支持多种势函数，覆盖材料、化工、生物等多个科学领域。
+        \end{itemize}
+        \textbf{卓越的生态与可扩展性}
+        \begin{itemize}
+            \item 拥有完善的文档体系和活跃的第三方开发工具。
+            \item 支持用户定制和贡献新功能。
+        \end{itemize}
+        \column{0.5\textwidth}
+        % 此处应插入LAMMPS Logo和桑迪亚国家实验室图片
+        % \includegraphics[width=0.8\textwidth]{path/to/your/lammps_logo.png}\\
+        % \includegraphics[width=0.8\textwidth]{path/to/your/sandia_lab.png}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{GPUMD简介}
+    \begin{columns}
+        \column{0.5\textwidth}
+        \textbf{核心研发团队}
+        \begin{itemize}
+            \item 由渤海大学樊哲勇教授团队领衔开发。
+            \item 汇聚了众多计算物理领域的优秀开发者。
+        \end{itemize}
+        \textbf{GPU原生架构设计}
+        \begin{itemize}
+            \item 从底层硬件层面为GPU并行计算进行深度优化。
+            \item 摆脱了传统CPU代码的束缚，实现了卓越的计算性能。
+        \end{itemize}
+        \textbf{极致效率与NEP势函数}
+        \begin{itemize}
+            \item 速度远超基于传统势函数的模拟工具。
+            \item 实现了接近第一性原理精度的高效模拟。
+        \end{itemize}
+        \column{0.5\textwidth}
+        % 此处应插入渤海大学图片和GPUMD软件截图
+        % \includegraphics[width=0.8\textwidth]{path/to/your/bohai_university.png}\\
+        % \includegraphics[width=0.8\textwidth]{path/to/your/gpumd_screenshot.png}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{本次报告的核心内容}
+    \begin{block}{01. 力学性能模拟模块}
+        深入解析如何计算材料内部的应力场、施加如拉伸、剪切、压缩等复杂力学边界条件，并获取材料的应力-应变关系等关键力学参数。
+    \end{block}
+    \begin{block}{02. 原子沉积与材料生长模拟模块}
+        探究原子/分子在衬底表面成膜的微观过程，分析沉积过程中的能量演化、界面形成等关键物理机制，揭示材料薄膜中的微观动力学机制。
+    \end{block}
+    \begin{block}{LAMMPS 与 GPUMD 深度对比分析}
+        剖析两款软件在核心功能上的底层实现原理与算法差异，对比其在相同模拟任务下的性能表现，结合具体的实验场景和科研目标给出选型策略。
+    \end{block}
+    % 此处应插入GPUMD引用增长图
+    % \includegraphics[width=0.4\textwidth]{path/to/your/gpumd_citations.png}
+\end{frame}
+
+% Part 2: LAMMPS力学性能模拟模块详解
+\section{LAMMPS力学性能模拟模块详解}
+
+\begin{frame}{核心原理：应力计算与应变施加}
+    \begin{block}{01. 应力计算：微观尺度的力学基石}
+        基于维里定理 (Virial Theorem) 计算原子尺度的应力张量。通过 `compute stress/atom` 命令，LAMMPS可以获取原子级及体系的应力张量。
+    \end{block}
+    \begin{block}{02. 应变施加：动态调控模拟体系}
+        通过灵活调整模拟盒子的尺寸和形状来实现外界的应变加载，可模拟拉伸、压缩、剪切等多种力学过程。核心命令 `fix deform` 支持多种应变模式，支持均匀、线性或自定义的应变路径加载。
+    \end{block}
+\end{frame}
+
+\begin{frame}{应力计算：基于维里定理}
+    \begin{block}{核心物理概念}
+        在原子尺度下，系统的总应力主要由两部分构成：原子的动能和原子间相互作用产生的维里应力。这构成了分子动力学模拟应力分析的物理基础。
+    \end{block}
+    \begin{block}{数值模拟实现}
+        LAMMPS通过 `compute stress/atom` 命令计算原子的应力张量 $S_{\alpha\beta} = -mv_{\alpha}v_{\beta} - W_{\alpha\beta}$。其中，维里项 $W_{\alpha\beta}$ 是核心，反映了原子间相互作用力对体系应力的贡献。
+    \end{block}
+    \begin{block}{结果解析与转换}
+        计算输出为对称的六分量二阶张量 (xx, yy, zz, xy, xz, yz)。需注意其单位为 `pressure*volume`，需除以原子体积（如通过Voronoi方法估算）才能得到真正的应力（Pressure）值。
+    \end{block}
+\end{frame}
+
+\begin{frame}{应变施加：`fix deform` 命令}
+    \begin{block}{基本概念}
+        在分子动力学模拟过程中，通过动态改变模拟盒子（Simulation Box）的尺寸与形状，从而对体系外部施加力学约束，实现材料的拉伸、相变及力学行为的分子级模拟。
+    \end{block}
+    \begin{block}{LAMMPS核心实现：`fix deform` 命令}
+        该命令不仅支持对x、y、z方向进行拉伸/压缩，也可对xy、xz、yz平面施加剪切变形，配合参数可实现更复杂的多轴加载路径与边界条件。
+    \end{block}
+    \begin{block}{多样化变形模式与原子坐标重映射 (`remap`) 机制}
+        \begin{itemize}
+            \item `remap x`: 原子坐标随盒子同步变形，适用于固体材料模拟。
+            \item `remap v`: 仅调整原子速度而坐标保持不变，适用于流体体系模拟。
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}{模拟单轴拉伸的典型流程}
+    \begin{enumerate}
+        \item \textbf{能量最小化}: 使用 `minimize` 命令，消除原子间不合理的初始重叠，获得稳定的初始结构。
+        \item \textbf{平衡态弛豫}: 使用 `fix npt` 命令，在特定温度和压力下进行动力学模拟，使系统达到热力学平衡状态。
+        \item \textbf{施加单向应变 (fix deform)}: 使用 `fix deform` 命令，沿特定方向（如x轴）以恒定应变率拉伸体系。
+        \item \textbf{动力学演化}: 使用 `fix nve` 或 `fix nvt` 命令，在应变加载下进行动力学模拟，记录原子运动轨迹和体系能量变化。
+        \item \textbf{结果数据提取}: 通过 `thermo_style custom` 和 `compute` 命令，提取应力、应变等关键数据，用于后续分析。
+    \end{enumerate}
+    % 此处应插入单轴拉伸示意图
+    % \includegraphics[width=0.6\textwidth]{path/to/your/tensile_test_schematic.png}
+\end{frame}
+
+\begin{frame}{模拟剪切的典型流程}
+    \begin{columns}
+        \column{0.5\textwidth}
+        % 此处应插入剪切变形示意图
+        % \includegraphics[width=\textwidth]{path/to/your/shear_deformation_schematic.png}
+        \column{0.5\textwidth}
+        \begin{block}{核心原理：参数化的剪切控制}
+            通过指定`xy`, `xz`, 或 `yz` 平面剪切应变率，对体系施加剪切变形，从而实现对材料屈服强度与塑性的研究。
+        \end{block}
+        \begin{block}{命令解析}
+\begin{lstlisting}
+# 在xy平面以0.0005/ps的工程剪切应变率进行剪切
+fix 1 all deform 1 xy erate 0.0005 remap x
+\end{lstlisting}
+            该命令实现了对原子坐标的仿射变换，`erate` 设置剪切应变率，`remap x` 确保原子坐标随剪切变形而调整。
+        \end{block}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{代码结构简析: `compute_stress_atom.cpp`}
+    \begin{block}{核心入口函数: `compute_peratom()`}
+        该函数是应力计算的核心逻辑载体，负责完成初始化、相互作用累加、动能修正与并行通信的全过程调度。
+    \end{block}
+    \begin{enumerate}
+        \item \textbf{应力数组初始化}: 为每个原子分配内存，初始化应力张量数组，并为后续计算做好准备。
+        \item \textbf{累加相互作用维里项}: 遍历所有原子对，逐一计算并累加各类相互作用（如键、角、二面角等）对维里应力的具体贡献。
+        \item \textbf{动能项的修正与合成}: 读取原子速度，计算动能对总应力的贡献项，并完成最终应力张量的合成。
+        \item \textbf{并行域的幽灵原子通信}: 通过 `pack_reverse_comm` 和 `unpack_reverse_comm` 接口，在并行计算中实现处理器间“幽灵原子”的应力数据同步。
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}{代码结构简析: `fix_deform.cpp`}
+    \begin{block}{核心函数: `end_of_step()`}
+        该函数在每个模拟步长结束时被调用，执行盒子变形、维度更新与原子坐标/速度映射的关键逻辑，是控制体系形变的核心入口。
+    \end{block}
+    \begin{enumerate}
+        \item \textbf{计算目标尺寸}: 根据用户指定的变形模式（如`erate`, `scale`等），结合当前模拟时间，精确计算出当前步长模拟盒子应达到的目标尺寸。
+        \item \textbf{更新模拟域 (Domain)}: 将计算出的目标尺寸更新到模拟域的维度信息中，确保后续计算基于新的盒子尺寸进行。
+        \item \textbf{原子坐标/速度重映射}: 根据用户设定的 `remap` 选项（`x` 或 `v`），将原子的坐标或速度按照新的盒子尺寸进行相应的变换，保证模拟的物理一致性。
+        \item \textbf{触发邻域列表重建}: 当盒子变形过大时，设置 `flipflag` 标志，触发邻域（neighbor）列表的重新划分，确保短程相互作用计算的准确无误。
+    \end{enumerate}
+\end{frame}
+
+% Part 3: LAMMPS原子沉积与材料生长模拟模块详解
+\section{LAMMPS原子沉积与材料生长模拟模块详解}
+
+\begin{frame}{核心原理：动态插入原子}
+    \begin{columns}
+        \column{0.5\textwidth}
+        % 此处应插入PVD设备图
+        % \includegraphics[width=\textwidth]{path/to/your/pvd_device.png}
+        \column{0.5\textwidth}
+        \begin{block}{基本概念：受控的原子添加机制}
+            在分子动力学模拟进程中，遵循设定的速率与规则，将原子或分子按序插入到模拟体系的特定区域，从而模拟物理气相沉积（PVD）、化学气相沉积（CVD）等薄膜生长过程。
+        \end{block}
+        \begin{block}{模拟引擎：LAMMPS `fix deposit` 命令}
+            该命令是实现原子动态沉积的核心工具，支持灵活配置沉积原子的种类、数量、速率、位置、初始速度等关键参数。
+        \end{block}
+        \begin{block}{典型科学与工程应用场景}
+            \begin{itemize}
+                \item 气相沉积工艺
+                \item 薄膜制备技术
+                \item 材料表面合成
+            \end{itemize}
+        \end{block}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{实现方法与参数详解}
+    \begin{block}{核心语法定义}
+\begin{lstlisting}
+fix ID group-ID deposit N type M seed keyword values ...
+\end{lstlisting}
+        \begin{itemize}
+            \item \textbf{参数N}: 指定总共需要沉积的原子/分子总数。
+            \item \textbf{参数M与Seed}: 定义沉积频率（每M个时间步沉积一个粒子）和随机数种子，保证模拟的可重复性。
+        \end{itemize}
+    \end{block}
+    \begin{block}{关键参数详解}
+        \begin{itemize}
+            \item \textbf{空间限定 `region`}: 限定原子沉积的空间范围。
+            \item \textbf{防重叠 `near R`}: 确保新沉积原子与已有原子间的距离大于R，避免原子重叠。
+            \item \textbf{初速度 `vx vy vz`}: 设定沉积原子的初始速度矢量。
+            \item \textbf{高度控制 `global`/`local`}: 定义沉积原子相对于全局最高原子或局域最高原子的高度。
+            \item \textbf{分子沉积 `mol`}: 支持沉积预定义的分子模板。
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}{模拟薄膜生长的典型流程}
+    \begin{enumerate}
+        \item \textbf{构建基底}: 通过 `create_box` 和 `create_atoms` 命令定义模拟盒子，并使用 `read_data` 命令读取预先生成的基底原子构型文件，建立模拟体系的初始结构。
+        \item \textbf{基底弛豫}: 使用 `fix nvt` 或 `fix npt` 对基底进行动力学弛豫，使其在目标温度和压力下达到热力学平衡状态。
+        \item \textbf{设置沉积区域}: 利用 `region` 命令定义原子沉积的空间范围，如 `region deposit_region block INF INF INF INF 10.0 15.0`，通常设定在基底表面上方的特定高度区间。
+        \item \textbf{施加原子沉积}: 执行 `fix deposit` 命令在指定区域按设定速率和参数注入原子。
+        \item \textbf{并行动力学模拟}: 在沉积过程中，使用 `fix nve` 或 `fix nvt` 进行分子动力学模拟，记录沉积原子在基底表面发生碰撞、迁移、吸附与成核的全过程。
+        \item \textbf{结果数据输出}: 使用 `dump` 命令周期性输出原子坐标、速度等轨迹信息，生成可供可视化软件（如OVITO）读取的文件。
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}{代码结构简析: `fix_deposit.cpp`}
+    \begin{block}{核心函数: `pre_exchange()`}
+        该函数在原子交换阶段前被执行，是沉积逻辑的核心入口，负责判断粒子插入的时机，并执行具体的插入操作。
+    \end{block}
+    \begin{enumerate}
+        \item \textbf{判断沉积时机}: 根据用户设定的沉积频率，检查当前时间步是否满足原子插入条件。
+        \item \textbf{生成并调整候选位置}: 在指定沉积区域内随机生成一个初始候选位置，并根据`global`或`local`规则精确调整其z坐标，确保沉积在正确的高度。
+        \item \textbf{尝试添加原子与冲突探测}: 调用`atom->add_atom()`函数尝试添加新原子。该函数内部会调用`near`条件，检查候选位置是否与已有原子过于接近（避免重叠）。
+        \item \textbf{多次重试保障成功率}: 若因位置冲突导致插入失败，系统会自动进行多次（由`attempt`参数指定）重试，直至成功或达到最大尝试次数。
+        \item \textbf{赋予原子初始物理属性}: 为成功添加的原子赋予用户指定的初始速度、类型等参数，使其符合模拟设定。
+        \item \textbf{完成沉积与状态更新}: 完成单个原子的沉积操作后，更新体系的原子总数等状态信息，为下一步的动力学计算做好准备。
+    \end{enumerate}
+\end{frame}
+
+% Part 4: GPUMD软件功能与对比分析
+\section{GPUMD软件功能与对比分析}
+
+\begin{frame}{GPUMD简介与核心特点}
+    \begin{columns}
+        \column{0.5\textwidth}
+        % 此处应插入NVIDIA A100 GPU图片和NEP神经网络示意图
+        % \includegraphics[width=0.8\textwidth]{path/to/your/nvidia_a100.png}\\
+        % \includegraphics[width=0.8\textwidth]{path/to/your/nep_neural_network.png}
+        \column{0.5\textwidth}
+        \begin{block}{深度优化的底层架构}
+            专为NVIDIA GPU量身打造，采用CUDA C++进行底层编写，充分挖掘硬件的并行计算能力，实现了计算速度与指令执行效率的极致优化，为大规模分子动力学模拟奠定基础。
+        \end{block}
+        \begin{block}{创新的NEP机器学习势函数}
+            引入Neuroevolution Potential (NEP) 核心算法，融合神经网络与进化策略，在保持第一性原理精度的同时，大幅提升计算效率，完美解决了精度与速度之间的权衡难题。
+        \end{block}
+        \begin{block}{卓越的并行计算性能}
+            2025年最新论文数据显示，在V100/A100 GPU上，GPUMD的计算速度相较于主流GPU机器学习势函数（如DeePMD-kit）快1-2个数量级，性能优势显著。
+        \end{block}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{力学性能模拟对比：LAMMPS vs. GPUMD}
+    \begin{tabular}{|l|l|l|}
+        \hline
+        \textbf{对比维度} & \textbf{LAMMPS} & \textbf{GPUMD} \\
+        \hline
+        \textbf{核心命令} & `fix deform` + `compute stress/atom` & `deform` (关键字) + `dump_thermo` \\
+        \hline
+        \textbf{功能与易用性} & 支持`erate`, `trate`, `wiggle`等多种复杂加载路径，功能强大，但学习曲线较陡。 & 脚本式操作，上手门槛低，但复杂加载路径的实现灵活性相对有限。 \\
+        \hline
+        \textbf{性能瓶颈} & 原生基于CPU架构，GPU加速版本（如KOKKOS）可提升性能，但在大规模原子模拟中，计算效率不如专用GPU代码。 & 专为GPU架构设计，内存访问和计算并行化效率极高，使用NEP机器学习势函数时，性能远超LAMMPS（含GPU版）。 \\
+        \hline
+    \end{tabular}
+\end{frame}
+
+\begin{frame}{力学性能模拟对比：结论}
+    \begin{block}{LAMMPS：功能灵活的综合模拟工具}
+        \begin{itemize}
+            \item \textbf{核心优势}: 在功能的灵活性和多样性上表现突出，支持自定义复杂加载路径和边界条件，能够实现非标准的力学测试需求，模拟的可控性极高。
+            \item \textbf{适用场景}: 适用于展示、研究分子行为、或是需要精确控制的复杂连续介质力学行为分析。
+        \end{itemize}
+    \end{block}
+    \begin{block}{GPUMD：高性能的动力学模拟引擎}
+        \begin{itemize}
+            \item \textbf{核心优势}: 依托GPU并行计算架构，在计算效率上拥有绝对优势，能够大幅缩短模拟周期，特别适用于原子数量庞大、时间尺度长的动力学演化过程。
+            \item \textbf{适用场景}: 更侧重于模拟动力学、辐射扩展、材料动态响应计算等需要大规模原子并行计算的场景。
+        \end{itemize}
+    \end{block}
+    \textbf{总结：两者各有所长，互为补充。研究复杂力学行为时首选LAMMPS，面对大尺度、长时间的动力学过程模拟，GPUMD是更优的选择。}
+\end{frame}
+
+\begin{frame}{原子沉积模拟对比：LAMMPS vs. GPUMD}
+    \begin{tabular}{|l|l|l|}
+        \hline
+        \textbf{对比维度} & \textbf{LAMMPS} & \textbf{GPUMD} \\
+        \hline
+        \textbf{核心命令} & 内置的`fix deposit`命令，无需额外开发即可实现自动化沉积。 & 无直接对应的内置功能，无法通过单条命令完成沉积操作。 \\
+        \hline
+        \textbf{实现逻辑与易用性} & 内置的参数化控制逻辑，支持多种沉积模式，自动化程度高，易用性强。 & 需要通过“暂停-修改-重启”的系列操作来手动添加原子，流程繁琐，对用户编程能力要求较高。 \\
+        \hline
+        \textbf{性能瓶颈} & 沉积操作本身存在一定计算开销，但流程全自动化，性能稳定可控。 & 模拟的启停会造成额外计算开销，大量的文件读写操作也会降低整体模拟效率。 \\
+        \hline
+    \end{tabular}
+\end{frame}
+
+\begin{frame}{原子沉积模拟对比：结论}
+    \begin{block}{LAMMPS：成熟便捷的首选方案}
+        内置的 `fix deposit` 命令极大地简化了原子沉积的实现，无需复杂的二次开发，只需通过简单的参数配置，即可实现对沉积过程的精准控制，是该领域模拟的首选工具。
+    \end{block}
+    \begin{block}{GPUMD：功能缺失带来的高门槛}
+        目前缺乏原子沉积的内置功能支持，实现相同模拟需用户从底层自行编写复杂的脚本逻辑，对编程能力、物理模型理解和实现能力要求极高，模拟实现难度大。
+    \end{block}
+    \textbf{核心结论：对于需要精确模拟原子沉积和薄膜生长过程的科研工作，LAMMPS凭借其成熟的工具集和便捷的命令支持，是当前阶段更高效、更可靠的选择。}
+\end{frame}
+
+\begin{frame}{综合对比与选择建议}
+    \begin{columns}
+        \column{0.5\textwidth}
+        % 此处应插入CPU服务器集群图片
+        % \includegraphics[width=\textwidth]{path/to/your/cpu_cluster.png}
+        \textbf{LAMMPS}
+        \begin{block}{核心优势}
+            \begin{itemize}
+                \item 功能全面，支持各种复杂模拟场景。
+                \item 灵活性高，支持用户深度定制和扩展。
+                \item 生态成熟，拥有庞大的用户社区和完善的文档支持。
+            \end{itemize}
+        \end{block}
+        \begin{block}{主要局限}
+            \begin{itemize}
+                \item CPU串行计算性能存在瓶颈。
+                \item 功能繁多导致学习曲线较为陡峭。
+            \end{itemize}
+        \end{block}
+        \column{0.5\textwidth}
+        % 此处应插入NVIDIA GPU图片
+        % \includegraphics[width=\textwidth]{path/to/your/gpu_card.png}
+        \textbf{GPUMD}
+        \begin{block}{核心优势}
+            \begin{itemize}
+                \item 性能卓越，依托GPU实现极致的计算效率。
+                \item NEP势函数，兼具高精度与高效率。
+                \item 代码简洁，专为GPU架构设计，易于理解和维护。
+            \end{itemize}
+        \end{block}
+        \begin{block}{主要局限}
+            \begin{itemize}
+                \item 功能相对有限，缺乏部分高级模拟功能。
+                \item 生态系统尚在发展，社区规模相对较小，特定问题可能难以找到现成解决方案。
+                \item 强依赖GPU硬件。
+            \end{itemize}
+        \end{block}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{综合对比与选择建议}
+    \begin{block}{选择 LAMMPS 的适用场景}
+        \begin{itemize}
+            \item \textbf{复杂模拟需求}: 适用于模拟原子沉积、特定约束下的动力学等非标准、复杂的模拟任务。
+            \item \textbf{CPU集群环境}: 主要依托CPU集群进行模拟计算。
+            \item \textbf{生态与支持考量}: 看重软件的成熟度、庞大的用户社区以及丰富的文档和教程资源。
+        \end{itemize}
+    \end{block}
+    \begin{block}{选择 GPUMD 的适用场景}
+        \begin{itemize}
+            \item \textbf{大规模模拟需求}: 适用于需要处理海量原子体系、长时间尺度的分子动力学模拟。
+            \item \textbf{宏观性质研究}: 主要研究体系的宏观性质（如热导率、力学性能），而非追踪复杂的微观动态过程。
+            \item \textbf{机器学习势函数应用}: 希望使用机器学习势函数（特别是NEP）进行高精度、高效率的模拟。
+            \item \textbf{GPU硬件资源}: 具备NVIDIA GPU硬件资源。
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+% Part 5: 总结与展望
+\section{总结与展望}
+
+\begin{frame}{核心总结}
+    \begin{block}{LAMMPS：功能全面的“分子模拟瑞士军刀”}
+        作为一款经典的分子动力学模拟软件，其功能覆盖广，在力学性能模拟和原子沉积等特定应用上表现出色，拥有极高的灵活性和可扩展性。
+    \end{block}
+    \begin{block}{GPUMD：专注性能的“GPU加速跑车”}
+        一款新兴的、以GPU为核心的高性能分子动力学软件，其最大优势在于卓越的计算速度和高效的NEP机器学习势函数，特别适合大规模模拟。
+    \end{block}
+    \begin{block}{场景一：力学性能的差异化表现}
+        两者原理相似，但LAMMPS功能更丰富灵活，GPUMD性能更优越，适合不同类型的力学研究。
+    \end{block}
+    \begin{block}{场景二：原子沉积模拟的便利性差异}
+        LAMMPS拥有成熟的内置自动化方案，而GPUMD目前需通过外部脚本实现，便利性差距较大。
+    \end{block}
+\end{frame}
+
+\begin{frame}{未来展望}
+    \begin{block}{LAMMPS持续演进}
+        将继续保持其通用性和全面性，不断整合新的算法和方法，并持续优化其GPU加速后端（如KOKKOS），平衡其在CPU和GPU平台上的性能表现。
+    \end{block}
+    \begin{block}{GPUMD崛起挑战}
+        随着其社区的不断壮大和功能的持续完善，有望在更多领域挑战LAMMPS的地位。未来可能会加入更多高级功能，如内置的原子沉积模块，进一步提升其易用性。
+    \end{block}
+    \begin{block}{机器学习势函数 (MLP) 趋势}
+        MLP已成为分子动力学模拟的主流工具，深度整合MLP的软件将拥有更大的发展潜力。LAMMPS也在通过灵活的接口积极集成各种MLP。
+    \end{block}
+\end{frame}
+
+% 结束页
+\begin{frame}
+    \centering
+    \Huge Q \& A \\
+    \vspace{1cm}
+    \Large 感谢聆听
+\end{frame}
+
+\end{document}
